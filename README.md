@@ -1,0 +1,1 @@
+# plugins-tier-pricing-table
