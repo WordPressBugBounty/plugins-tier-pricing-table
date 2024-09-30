@@ -362,7 +362,7 @@ input[type="checkbox"].tpt-toggle-switch:checked + label > [data-tpt-toggle-swit
 }
 
 .tpt-display-template-label {
-	padding: 7px 27px;
+	padding: 7px 20px;
 	border: 1px solid #935687;
 	border-right: none;
 	color: #646970;

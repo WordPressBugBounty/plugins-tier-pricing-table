@@ -37,7 +37,12 @@ class TieredPricingTab {
         $productTabs['tiered-pricing-tab'] = array(
             'label'  => __( 'Tiered Pricing', 'tier-pricing-table' ),
             'target' => 'tiered-pricing-data',
-            'class'  => array('show_if_simple', 'show_if_variable'),
+            'class'  => (function () {
+                $types = array_merge( TierPricingTablePlugin::getSupportedSimpleProductTypes(), TierPricingTablePlugin::getSupportedVariableProductTypes() );
+                return array_map( function ( $type ) {
+                    return 'show_if_' . $type;
+                }, $types );
+            })(),
         );
         return $productTabs;
     }

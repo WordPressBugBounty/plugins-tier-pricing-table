@@ -43,7 +43,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '5.0.2';
+    const VERSION = '5.0.3';
 
     /**
      * TierPricingTablePlugin constructor.
@@ -174,16 +174,16 @@ class TierPricingTablePlugin {
         delete_option( 'tpt_plugin_activation_timestamp' );
     }
 
-    public static function getSupportedSimpleProductTypes() {
-        return apply_filters( 'tiered_pricing_table/supported_simple_product_types', array('simple', 'subscription', 'variation') );
+    public static function getSupportedSimpleProductTypes() : array {
+        return (array) apply_filters( 'tiered_pricing_table/supported_simple_product_types', array('simple', 'subscription', 'variation') );
     }
 
-    public static function getSupportedVariableProductTypes() {
-        return apply_filters( 'tiered_pricing_table/supported_variable_product_types', array('variable', 'variable-subscription') );
+    public static function getSupportedVariableProductTypes() : array {
+        return (array) apply_filters( 'tiered_pricing_table/supported_variable_product_types', array('variable', 'variable-subscription') );
     }
 
-    public static function getSupportedVariationProductTypes() {
-        return apply_filters( 'tiered_pricing_table/supported_variable_product_types', array('variation', 'subscription-variation') );
+    public static function getSupportedVariationProductTypes() : array {
+        return (array) apply_filters( 'tiered_pricing_table/supported_variation_product_types', array('variation', 'subscription-variation') );
     }
 
     public static function isSimpleProductSupported( WC_Product $product ) : bool {

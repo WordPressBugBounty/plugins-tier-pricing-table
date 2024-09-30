@@ -24,12 +24,12 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 	public function getSettings() {
 		return array(
 			array(
-				'title'   => __( 'Format price', 'tier-pricing-table' ),
+				'title'   => __( 'Price behaviour', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'product_page_price_format',
 				'type'    => TPTDisplayType::FIELD_TYPE,
 				'options' => array(
 					'same_as_catalog' => __( 'Same as on catalog', 'tier-pricing-table' ),
-					'custom'          => __( 'Custom', 'tier-pricing-table' ),
+					'custom'          => __( 'Dynamic', 'tier-pricing-table' ),
 				),
 				'default' => ServiceContainer::getInstance()->getSettings()->get( 'tiered_price_at_product_page',
 					'no' ) === 'yes' ? 'same_as_catalog' : 'custom',

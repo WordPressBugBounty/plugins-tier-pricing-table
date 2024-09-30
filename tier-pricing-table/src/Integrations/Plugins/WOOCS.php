@@ -1,22 +1,28 @@
 <?php namespace TierPricingTable\Integrations\Plugins;
 
 use TierPricingTable\PriceManager;
+use TierPricingTable\PricingRule;
 
 class WOOCS extends PluginIntegrationAbstract {
 	
 	public function run() {
 		add_filter( 'tiered_pricing_table/price/price_by_rules',
-			function ( $product_price, $quantity, $product_id, $context ) {
+			function ( $productPrice, $quantity, $productId, $context, $place, PricingRule $pricingRule ) {
+			
 				global $WOOCS_STARTER;
 				
-				if ( $WOOCS_STARTER  && $product_price ) {
+				if ( $pricingRule->isPercentage() ) {
+					return $productPrice;
+				}
+				
+				if ( $WOOCS_STARTER && $productPrice ) {
 					if ( 'view' === $context ) {
-						return (float) $WOOCS_STARTER->get_actual_obj()->raw_woocommerce_price( $product_price,
-							wc_get_product( $product_id ) );
+						return (float) $WOOCS_STARTER->get_actual_obj()->raw_woocommerce_price( $productPrice,
+							wc_get_product( $productId ) );
 					}
 				}
 				
-				return $product_price;
+				return $productPrice;
 				
 			}, 10, 10 );
 		
@@ -47,27 +53,27 @@ class WOOCS extends PluginIntegrationAbstract {
 		return __( 'WooCommerce Currency Switcher (FOX)', 'tier-pricing-table' );
 	}
 	
-	public function getIconURL() {
+	public function getIconURL(): string {
 		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/fox-icon.png' );
 	}
 	
-	public function getAuthorURL() {
+	public function getAuthorURL(): string {
 		return 'https://wordpress.org/plugins/woocommerce-currency-switcher/';
 	}
 	
-	public function getDescription() {
+	public function getDescription(): string {
 		return __( 'Make the tiered pricing properly work with multiple currencies.', 'tier-pricing-table' );
 	}
 	
-	public function getSlug() {
+	public function getSlug(): string {
 		return 'woocs';
 	}
 	
-	public function getIntegrationCategory() {
+	public function getIntegrationCategory(): string {
 		return 'multicurrency';
 	}
 	
-	protected function isActiveByDefault() {
+	protected function isActiveByDefault(): bool {
 		return false;
 	}
 }

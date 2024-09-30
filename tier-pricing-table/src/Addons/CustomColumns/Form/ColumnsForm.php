@@ -250,9 +250,9 @@ class ColumnsForm {
 							const val = jQuery(this).val();
 
 							if (val !== 'custom') {
-								container.find('[name=tiered_pricing_custom_column_data_type]').hide();
+								container.find('[name=tiered_pricing_custom_column_data_type]').parent().hide();
 							} else {
-								container.find('[name=tiered_pricing_custom_column_data_type]').show();
+								container.find('[name=tiered_pricing_custom_column_data_type]').parent().show();
 							}
 						}).trigger('change');
 					}
@@ -311,56 +311,60 @@ class ColumnsForm {
 		<div class="tiered-pricing-custom-columns-table tiered-pricing-custom-columns-table--hidden"
 			 data-add-new-url="<?php echo esc_attr( $addNewURL ); ?>"
 			 data-update-url=" <?php echo esc_attr( $updateURL ); ?>">
-			<table class="wp-list-table widefat fixed striped">
-				<thead>
-				<tr style="text-align: center">
-					<th><?php esc_html_e( 'Column name', 'tier-pricing-table' ); ?></th>
-					<th><?php esc_html_e( 'Column content', 'tier-pricing-table' ); ?></th>
-					<th><?php esc_html_e( 'Content type', 'tier-pricing-table' ); ?></th>
-					<th><?php esc_html_e( 'Actions', 'tier-pricing-table' ); ?></th>
-				</tr>
-				</thead>
-				<tbody>
+            <table class="wp-list-table widefat fixed striped">
+                <thead>
+                <tr style="text-align: center">
+                    <th><?php esc_html_e( 'Column name', 'tier-pricing-table' ); ?></th>
+                    <th><?php esc_html_e( 'Column content', 'tier-pricing-table' ); ?></th>
+                    <th><?php esc_html_e( 'Content type', 'tier-pricing-table' ); ?></th>
+                    <th><?php esc_html_e( 'Actions', 'tier-pricing-table' ); ?></th>
+                </tr>
+                </thead>
+                <tbody>
 				<?php foreach ( $this->addon->columnsManager->getColumns() as $column ) : ?>
-					<tr data-slug="<?php echo esc_attr( $column->getSlug() ); ?>">
-						<td>
-							<input name="tiered_pricing_custom_column_name"
-								   type="text"
-								   value="<?php echo esc_attr( $column->getName() ); ?>">
-						</td>
-						<td>
-							<select name="tiered_pricing_custom_column_type">
+                    <tr data-slug="<?php echo esc_attr( $column->getSlug() ); ?>">
+                        <td>
+                            <input style="width: 100%"
+                                   name="tiered_pricing_custom_column_name"
+                                   type="text"
+                                   value="<?php echo esc_attr( $column->getName() ); ?>">
+                        </td>
+                        <td>
+                            <select style="width: 100%"
+                                    name="tiered_pricing_custom_column_type">
 								<?php foreach ( Schema::getAvailableCustomColumnsTypes() as $key => $label ) : ?>
-									<option value="<?php echo esc_attr( $key ); ?>" 
-															  <?php 
-									selected( $column->getType(),
-										$key ); 
-																?>
-										>
+                                    <option value="<?php echo esc_attr( $key ); ?>"
+										<?php
+											selected( $column->getType(), $key );
+										?>
+                                    >
 										<?php echo esc_html( $label ); ?>
-									</option>
+                                    </option>
 								<?php endforeach; ?>
-							</select>
-						</td>
-						<td>
-							<select name="tiered_pricing_custom_column_data_type">
-								<?php foreach ( Schema::getAvailableDataTypes() as $key => $label ) : ?>
-									<option
-										value="<?php echo esc_attr( $key ); ?>" 
-														  <?php 
-										selected( $column->getDataType(),
-										$key ); 
-															?>
-										>
-										<?php echo esc_html( $label ); ?>
-									</option>
-								<?php endforeach; ?>
-							</select>
-						</td>
-						<td>
-							<button class="button button-tpt-button tiered-pricing-custom-columns-table__edit-button">
+                            </select>
+                        </td>
+                        <td>
+                            <div>
+                                <select style="width: 100%"
+                                        name="tiered_pricing_custom_column_data_type">
+									<?php foreach ( Schema::getAvailableDataTypes() as $key => $label ) : ?>
+                                        <option
+                                                value="<?php echo esc_attr( $key ); ?>"
+											<?php
+												selected( $column->getDataType(), $key );
+											?>
+                                        >
+											<?php echo esc_html( $label ); ?>
+                                        </option>
+									<?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        </td>
+                        <td>
+                            <button class="button button-tpt-button tiered-pricing-custom-columns-table__edit-button">
 								<?php esc_html_e( 'Update', 'tier-pricing-table' ); ?>
-							</button>
+                            </button>
 							<?php
 								$removeURL = add_query_arg( array(
 									'nonce'  => wp_create_nonce( self::REMOVE_COLUMN_ACTION ),
@@ -368,55 +372,130 @@ class ColumnsForm {
 									'slug'   => $column->getSlug(),
 								), admin_url( 'admin-post.php' ) );
 							?>
-							
-							<a class="button"
-							   type="button"
-							   href="<?php echo esc_attr( $removeURL ); ?>"
-							   onclick="return confirm('Are you sure? All column\'s data will be deleted.');"
-							   data-slug="<?php echo esc_attr( $column->getSlug() ); ?>" style="color: red !important;
+
+                            <a class="button"
+                               type="button"
+                               href="<?php echo esc_attr( $removeURL ); ?>"
+                               onclick="return confirm('Are you sure? All column\'s data will be deleted.');"
+                               data-slug="<?php echo esc_attr( $column->getSlug() ); ?>" style="color: red !important;
 				border-color: red !important;">
 								<?php esc_html_e( 'Delete', 'tier-pricing-table' ); ?>
-							</a>
-						</td>
-					</tr>
+                            </a>
+                        </td>
+                    </tr>
 				<?php endforeach; ?>
-				</tbody>
-				<tfoot>
-				<tr class="tiered-pricing-custom-columns-table__new-column-row" style="background: #e9e6ed;">
-					<td>
-						<input type="text"
-							   placeholder="<?php esc_attr_e( 'Enter column name', 'tier-pricing-table' ); ?>"
-							   name="tiered_pricing_custom_column_name">
-					</td>
-					<td>
-						<select name="tiered_pricing_custom_column_type">
+                </tbody>
+                <tfoot>
+                <tr class="tiered-pricing-custom-columns-table__new-column-row" style="background: #e9e6ed;">
+                    <td style="vertical-align: top">
+                        <input type="text"
+                               style="width: 100%"
+                               placeholder="<?php esc_attr_e( 'Enter column name', 'tier-pricing-table' ); ?>"
+                               name="tiered_pricing_custom_column_name">
+                        <div style="margin-top: 5px;">
+                            <ul>
+                                <li>
+									<?php
+										esc_html_e( 'Enter a name of the column that will be displayed in the table.',
+											'tier-pricing-table' );
+									?>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td style="vertical-align: top">
+                        <select name="tiered_pricing_custom_column_type" style="width: 100%">
 							<?php foreach ( Schema::getAvailableCustomColumnsTypes() as $key => $label ) : ?>
-								<option value="<?php echo esc_attr( $key ); ?>">
+                                <option value="<?php echo esc_attr( $key ); ?>">
 									<?php echo esc_html( $label ); ?>
-								</option>
+                                </option>
 							<?php endforeach; ?>
-						</select>
-					</td>
-					<td>
-						<select name="tiered_pricing_custom_column_data_type">
-							<?php foreach ( Schema::getAvailableDataTypes() as $key => $label ) : ?>
-								<option value="<?php echo esc_attr( $key ); ?>">
-									<?php echo esc_html( $label ); ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-					</td>
-					<td>
-						<button class="button button-tpt-button" type="button">
+                        </select>
+                        <div style="margin-top: 5px;">
+                            <ul>
+                                <li>
+                                    <b><?php esc_html_e( 'Custom column', 'tier-pricing-table' ); ?></b>
+									<?php
+										esc_html_e( 'adds additional input to tiered pricing form where you can  input custom content for each tier.',
+											'tier-pricing-table' );
+									?>
+                                </li>
+                                <li>
+                                    <b><?php esc_html_e( 'Price excluding taxes', 'tier-pricing-table' ); ?></b>
+									<?php
+										esc_html_e( 'shows the price excluding taxes for each tier.',
+											'tier-pricing-table' );
+									?>
+                                </li>
+                                <li>
+                                    <b><?php esc_html_e( 'Price including taxes', 'tier-pricing-table' ); ?></b>
+									<?php
+										esc_html_e( 'shows the price including taxes for each tier.',
+											'tier-pricing-table' );
+									?>
+                                </li>
+                                <li>
+                                    <b><?php esc_html_e( 'Total row price', 'tier-pricing-table' ); ?></b>
+									<?php
+										esc_html_e( 'shows the total price for each tier.', 'tier-pricing-table' );
+									?>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td style="vertical-align: top">
+
+                        <div>
+                            <select name="tiered_pricing_custom_column_data_type" style="width: 100%">
+								<?php foreach ( Schema::getAvailableDataTypes() as $key => $label ) : ?>
+                                    <option value="<?php echo esc_attr( $key ); ?>">
+										<?php echo esc_html( $label ); ?>
+                                    </option>
+								<?php endforeach; ?>
+                            </select>
+                            <div style="margin-top: 5px;">
+								<?php
+									esc_html_e( 'Choose how to format content from your custom column:',
+										'tier-pricing-table' );
+								?>
+                                <ul>
+                                    <li>
+                                        <b><?php esc_html_e( 'Price', 'tier-pricing-table' ); ?>:</b>
+										<?php
+											esc_html_e( 'format the content as a price.', 'tier-pricing-table' );
+										?>
+                                    </li>
+                                    <li>
+                                        <b><?php esc_html_e( 'Number', 'tier-pricing-table' ); ?>:</b>
+										<?php
+											esc_html_e( 'format the content as a number.', 'tier-pricing-table' );
+										?>
+                                    </li>
+                                    <li>
+                                        <b><?php esc_html_e( 'Text', 'tier-pricing-table' ); ?>:</b>
+										<?php
+											esc_html_e( 'don\'t format the content. Display it as is.',
+												'tier-pricing-table' );
+										?>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </td>
+
+
+                    <td style="vertical-align: top">
+                        <button class="button button-tpt-button" type="button">
 							<span style="font-size: 1.2em; line-height: 28px;" class="dashicons dashicons-plus-alt">
 							</span>
 							<?php esc_html_e( 'Add new column', 'tier-pricing-table' ); ?>
-						</button>
-					</td>
-				</tr>
-				</tfoot>
-			</table>
-			
+                        </button>
+                    </td>
+                </tr>
+
+                </tfoot>
+            </table>
 			<?php if ( ! tpt_fs()->can_use_premium_code() ) : ?>
 				<div style="margin-top: 10px">
 					<span style="color:red">

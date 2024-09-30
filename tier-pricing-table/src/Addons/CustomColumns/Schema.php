@@ -18,8 +18,8 @@ class Schema {
 	public static function getAvailableDataTypes() {
 		return apply_filters( 'tiered_pricing_table/custom_columns/available_data_types', array(
 			'price'  => __( 'Price', 'tier-pricing-table' ),
-			'text'   => __( 'Text', 'tier-pricing-table' ),
 			'number' => __( 'Number', 'tier-pricing-table' ),
+			'text'   => __( 'Text', 'tier-pricing-table' ),
 		) );
 	}
 	

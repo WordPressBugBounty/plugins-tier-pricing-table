@@ -44,7 +44,7 @@ class Form {
 	
 	protected function includeAssets() {
 		?>
-		<style>
+        <style>
 			/**
 			* Externals
 			 */
@@ -150,8 +150,28 @@ class Form {
 				border: 1px solid #e8e8e8;
 				box-shadow: 0 0 8px rgba(0, 0, 0, .1);
 			}
-		</style>
-		<script>
+
+			@media screen and (max-width: 1024px) {
+				.tpt-global-pricing-rule-form {
+					flex-wrap: wrap;
+				}
+
+				.tpt-global-pricing-rule-form__tabs {
+					display: flex;
+					max-width: 100%;
+					width: 100%;
+				}
+
+				.tpt-global-pricing-rule-form-tab__icon {
+					display: none;
+				}
+
+				.tpt-global-pricing-rule-form-tab--active {
+					border-bottom: 3px solid #814c77;
+				}
+			}
+        </style>
+        <script>
 			jQuery(document).ready(function () {
 				let tabs = jQuery('.tpt-global-pricing-rule-form-tab');
 				let tabsContent = jQuery('.tpt-global-pricing-rule-form-tab-content');
@@ -169,7 +189,7 @@ class Form {
 					jQuery('#' + target).addClass('tpt-global-pricing-rule-form-tab-content--active');
 				});
 			});
-		</script>
+        </script>
 		<?php
 	}
 	
@@ -189,41 +209,41 @@ class Form {
 		}
 		
 		?>
-		<div class="tpt-global-pricing-rule-form">
-			
-			<div class="tpt-global-pricing-rule-form__tabs">
+        <div class="tpt-global-pricing-rule-form">
+
+            <div class="tpt-global-pricing-rule-form__tabs">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-					<div
-						class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
-						data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
-						
-						<div class="tpt-global-pricing-rule-form-tab__icon">
-							<span class="dashicons dashicons-arrow-right-alt2"></span>
-						</div>
-						
-						<div class="tpt-global-pricing-rule-form-tab__title">
-							<h3><?php echo esc_html( $tab->getTitle() ); ?></h3>
-							<div><?php echo esc_html( $tab->getDescription() ); ?></div>
-						</div>
-					</div>
+                    <div
+                            class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
+                            data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+
+                        <div class="tpt-global-pricing-rule-form-tab__icon">
+                            <span class="dashicons dashicons-arrow-right-alt2"></span>
+                        </div>
+
+                        <div class="tpt-global-pricing-rule-form-tab__title">
+                            <h3><?php echo esc_html( $tab->getTitle() ); ?></h3>
+                            <div><?php echo esc_html( $tab->getDescription() ); ?></div>
+                        </div>
+                    </div>
 				<?php endforeach; ?>
-			</div>
-			
-			<div class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
+            </div>
+
+            <div class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-					<div
-						class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
-						id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+                    <div
+                            class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
+                            id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 						<?php
 							$tab->render( $this->getPricingRuleInstance( $post ) );
 							
 							do_action( 'tiered_pricing_table/global_pricing/form/tab_end', $tab,
 								$this->getPricingRuleInstance( $post ) );
 						?>
-					</div>
+                    </div>
 				<?php endforeach; ?>
-			</div>
-		</div>
+            </div>
+        </div>
 		<?php
 	}
 	
@@ -259,22 +279,22 @@ class Form {
 		}
 		
 		?>
-		<div class="tpt-global-pricing-rule-hint <?php echo esc_attr( $args['custom_class'] ); ?>">
+        <div class="tpt-global-pricing-rule-hint <?php echo esc_attr( $args['custom_class'] ); ?>">
 			<?php if ( $args['show_icon'] ) : ?>
-				<div class="tpt-global-pricing-rule-hint__icon">
-					<span class="dashicons dashicons-info"></span>
-				</div>
+                <div class="tpt-global-pricing-rule-hint__icon">
+                    <span class="dashicons dashicons-info"></span>
+                </div>
 			<?php endif; ?>
-			<div class="tpt-global-pricing-rule-hint__content">
+            <div class="tpt-global-pricing-rule-hint__content">
 				<?php echo wp_kses_post( $hint ); ?>
-			</div>
-		</div>
+            </div>
+        </div>
 		<?php
 	}
 	
 	public function renderHelpingSteps() {
 		?>
-		<style>
+        <style>
 			.tpt-global-pricing-rule-helping {
 				background: #fff;
 				border: 1px solid #e8e8e8;
@@ -343,14 +363,14 @@ class Form {
 				font-weight: bold;
 				line-height: 50px;
 			}
-		</style>
-		<script>
+        </style>
+        <script>
 			jQuery(document).ready(function () {
 				jQuery('.tpt-global-pricing-rule-helping__close').click(function () {
 					jQuery(this).parent().hide();
 				})
 			})
-		</script>
+        </script>
 		<?php
 		$steps = array(
 			array(
@@ -379,57 +399,57 @@ class Form {
 			),
 		)
 		?>
-		<div class="tpt-global-pricing-rule-helping">
-			<div class="tpt-global-pricing-rule-helping__title">
+        <div class="tpt-global-pricing-rule-helping">
+            <div class="tpt-global-pricing-rule-helping__title">
 				<?php esc_html_e( 'How global pricing rules work', 'tier-pricing-table' ); ?>
-			</div>
-			<p>
+            </div>
+            <p>
 				<?php
 					esc_html_e( 'Global rules are useful when you need to provide custom pricing for a bunch of products and apply it to a specific group of users. ',
 						'tier-pricing-table' );
 				?>
-			</p>
-			
-			<div class="tpt-global-pricing-rule-helping__steps">
+            </p>
+
+            <div class="tpt-global-pricing-rule-helping__steps">
 				
 				<?php foreach ( $steps as $step ) : ?>
-					
-					<div class="tpt-global-pricing-rule-helping-step">
-						<div class="tpt-global-pricing-rule-helping-step__icon">
+
+                    <div class="tpt-global-pricing-rule-helping-step">
+                        <div class="tpt-global-pricing-rule-helping-step__icon">
 							<?php echo wp_kses_post( $step['icon'] ); ?>
-						</div>
-						
-						<div class="tpt-global-pricing-rule-helping-step__title">
+                        </div>
+
+                        <div class="tpt-global-pricing-rule-helping-step__title">
 							<?php echo esc_html( $step['title'] ); ?>
-						</div>
-						
-						<div class="tpt-global-pricing-rule-helping-step__description">
+                        </div>
+
+                        <div class="tpt-global-pricing-rule-helping-step__description">
 							<?php echo esc_html( $step['description'] ); ?>
-						</div>
-					</div>
+                        </div>
+                    </div>
 					
 					<?php if ( $step['has_next_step'] ) : ?>
-						<div class="tpt-global-pricing-rule-helping-step tpt-global-pricing-rule-helping-step--arrow">
-							<span class="dashicons dashicons-arrow-right-alt"></span>
-						</div>
+                        <div class="tpt-global-pricing-rule-helping-step tpt-global-pricing-rule-helping-step--arrow">
+                            <span class="dashicons dashicons-arrow-right-alt"></span>
+                        </div>
 					<?php endif; ?>
 				<?php endforeach; ?>
-			</div>
-			<div class="tpt-global-pricing-rule-helping__close">
-				&times;
-			</div>
-		</div>
+            </div>
+            <div class="tpt-global-pricing-rule-helping__close">
+                &times;
+            </div>
+        </div>
 		<?php
 	}
 	
 	public function renderUpgradingNotice() {
 		?>
-		<p style="color: red;">
+        <p style="color: red;">
 			<?php esc_html_e( 'This feature is available only in the premium version.', 'tier-pricing-table' ); ?>
-			<a target="_blank" href="<?php echo esc_url( tpt_fs_activation_url() ); ?>">
+            <a target="_blank" href="<?php echo esc_url( tpt_fs_activation_url() ); ?>">
 				<?php esc_html_e( 'Upgrade your plan', 'tier-pricing-table' ); ?>
-			</a>
-		</p>
+            </a>
+        </p>
 		<?php
 	}
 	

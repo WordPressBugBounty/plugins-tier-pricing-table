@@ -121,7 +121,7 @@ class Settings {
 				font-size: 1.45em;
 			}
 		</style>
-		<ul class="subsubsub">
+		<ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
         foreach ( $this->sections as $section ) {
             ?>
@@ -196,11 +196,12 @@ class Settings {
     /**
      * Add own settings tab
      *
-     * @param  array  $settingsTabs
+     * @param $settingsTabs
      *
      * @return array
      */
-    public static function addSettingsTab( array $settingsTabs ) : array {
+    public static function addSettingsTab( $settingsTabs ) : array {
+        $settingsTabs = ( is_array( $settingsTabs ) ? $settingsTabs : array() );
         $settingsTabs[self::SETTINGS_PAGE] = __( 'Tiered Pricing', 'tier-pricing-table' );
         return $settingsTabs;
     }
