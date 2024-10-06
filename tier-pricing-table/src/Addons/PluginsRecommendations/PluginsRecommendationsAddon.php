@@ -18,5 +18,6 @@ class PluginsRecommendationsAddon extends AbstractAddon {
 	
 	public function run() {
 		new ConditionalLogicForProductAddons();
+		new CancellationSurveysPlugin();
 	}
 }

@@ -142,4 +142,8 @@ class GeneralSection extends SectionAbstract {
 	public static function isShowOptionTotal(): bool {
 		return ServiceContainer::getInstance()->getSettings()->get( 'options_show_total', 'yes' ) === 'yes';
 	}
+	
+	public static function getPricingBlocksStyle(): string {
+		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_blocks_style', 'default' );
+	}
 }

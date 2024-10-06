@@ -43,7 +43,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '5.0.3';
+    const VERSION = '5.0.4';
 
     /**
      * TierPricingTablePlugin constructor.

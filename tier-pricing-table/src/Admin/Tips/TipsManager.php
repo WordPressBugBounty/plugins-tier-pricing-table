@@ -1,5 +1,6 @@
 <?php namespace TierPricingTable\Admin\Tips;
 
+use TierPricingTable\Admin\Tips\Tips\DefaultVariationTip;
 use TierPricingTable\Admin\Tips\Tips\VariationsPricingCalculationTip;
 
 /**
@@ -16,6 +17,7 @@ class TipsManager {
 	public function __construct() {
 		self::$tips = array(
 			new VariationsPricingCalculationTip(),
+			new DefaultVariationTip(),
 		);
 	}
 	
@@ -34,6 +36,12 @@ class TipsManager {
 			if ( $slug === $tip->getSlug() ) {
 				return $tip;
 			}
+		}
+		
+		$tipBySlug = apply_filters( 'tiered_pricing_table/admin/tips/get_tip_by_slug', null, $slug );
+		
+		if ( $tipBySlug instanceof Tip ) {
+			return $tipBySlug;
 		}
 		
 		return null;

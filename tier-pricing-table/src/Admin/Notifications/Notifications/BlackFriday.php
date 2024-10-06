@@ -23,7 +23,8 @@ abstract class BlackFriday extends Notification {
     public function isBlackFriday() : bool {
         $blackFriday = $this->getBlackFridayDate();
         $start = strtotime( "{$blackFriday} - 3 days" );
-        return time() > $start;
+        $end = strtotime( "{$blackFriday} + 7 days" );
+        return time() > $start && time() < $end;
     }
 
     public function passedRequirements() : bool {

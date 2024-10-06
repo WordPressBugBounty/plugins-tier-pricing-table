@@ -452,6 +452,10 @@ input[type="checkbox"].tpt-toggle-switch:checked + label > [data-tpt-toggle-swit
 
 .tiered_pricing_tab_product_advance_options__header:hover {
 	color: #555;
+	background: #fafafa;
+}
+.tiered_pricing_tab_product_advance_options--open .tiered_pricing_tab_product_advance_options__header {
+	background: #fafafa;
 }
 
 .tiered_pricing_tab_product_advance_options__content {

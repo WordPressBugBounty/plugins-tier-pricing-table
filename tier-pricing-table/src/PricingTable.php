@@ -81,15 +81,15 @@ class PricingTable {
 		do_action( 'tiered_pricing_table/before_rendering_tiered_pricing', $parentProduct, $variationID, $settings );
 		
 		?>
-		<div class="clear"></div>
-		<div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
-			 data-settings="<?php echo esc_attr( json_encode( $settings ) ); ?>"
-			 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
-			 data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
-			 data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
-			 data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>">
+        <div class="clear"></div>
+        <div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
+             data-settings="<?php echo esc_attr( json_encode( $settings ) ); ?>"
+             data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
+             data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
+             data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
+             data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>">
 			<?php $this->renderPricingTableHTML( $parentProduct, $product, $settings ); ?>
-		</div>
+        </div>
 		<?php
 	}
 	
@@ -129,6 +129,16 @@ class PricingTable {
 				$templateType = 'table';
 			}
 			
+			if ( 'blocks' === $displayType ) {
+				$style = $settings['blocks_style'];
+				
+				if ( $style !== 'default' ) {
+					$templateType = 'blocks-' . $style;
+				} else {
+					$templateType = 'blocks';
+				}
+			}
+			
 			$template = "tiered-pricing-$templateType.php";
 			
 			do_action( 'tiered_pricing_table/before_rendering_tiered_pricing/inner', $priceRule, $product, $settings );
@@ -142,7 +152,7 @@ class PricingTable {
 				'product_name' => $product->get_name(),
 				'product_id'   => $product->get_id(),
 				'product'      => $product,
-				'minimum'      => $priceRule->getMinimum(true),
+				'minimum'      => $priceRule->getMinimum( true ),
 				'settings'     => $settings,
 				'pricing_type' => $priceRule->getType(),
 				'id'           => $this->getUniqueTieredPricingId(),
@@ -171,6 +181,8 @@ class PricingTable {
 			'active_tier_color'     => $this->getContainer()->getSettings()->get( 'selected_quantity_color',
 				'#96598A' ),
 			'tooltip_border'        => $this->getContainer()->getSettings()->get( 'tooltip_border', 'yes' ) === 'yes',
+			
+			'blocks_style' => GeneralSection::getPricingBlocksStyle(),
 			
 			'options_show_total'                  => GeneralSection::isShowOptionTotal(),
 			'options_show_original_product_price' => GeneralSection::isShowOriginalProductPrice(),
@@ -322,34 +334,34 @@ class PricingTable {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$minimum           = $pricingRule->getMinimum(true);
+		$minimum           = $pricingRule->getMinimum( true );
 		$pricingRules      = $pricingRule->getRules();
 		$firstRuleQuantity = ! empty( $pricingRules ) ? array_keys( $pricingRules )[0] : false;
 		
 		if ( $firstRuleQuantity && $firstRuleQuantity <= $minimum ) {
 			?>
 
-			<div style="font-size: .8em;">
-				<div class="woocommerce-error" role="alert" style="margin-bottom: 0">
-					Duplicated quantities detected. Minimum order quantity is equal or higher than the first tiered
-					pricing.
-				</div>
-				<div style="color: #555;
+            <div style="font-size: .8em;">
+                <div class="woocommerce-error" role="alert" style="margin-bottom: 0">
+                    Duplicated quantities detected. Minimum order quantity is equal or higher than the first tiered
+                    pricing.
+                </div>
+                <div style="color: #555;
 	padding: 10px 12px;
 	border: 1px solid #b32c2e;
 	background: #fff5f5;">
-					<p style="padding: 0; margin: 0">
-						The minimum order quantity must be less than the first tiered pricing rule quantity.
-					</p>
-					<p style="padding: 0; margin: 0"> The first tier always uses woocommerce price and is applied to
-						quantities between minimum order
-						quantity and
-						the first tiered pricing rule quantity.
-					</p>
-					<br>
-					<b>This notice shown only for administrators.</b>
-				</div>
-			</div>
+                    <p style="padding: 0; margin: 0">
+                        The minimum order quantity must be less than the first tiered pricing rule quantity.
+                    </p>
+                    <p style="padding: 0; margin: 0"> The first tier always uses woocommerce price and is applied to
+                        quantities between minimum order
+                        quantity and
+                        the first tiered pricing rule quantity.
+                    </p>
+                    <br>
+                    <b>This notice shown only for administrators.</b>
+                </div>
+            </div>
 			<?php
 		}
 	}

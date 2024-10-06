@@ -86,8 +86,7 @@ class TieredPricingTab {
         do_action( 'tiered_pricing_table/admin/after_minimum_order_quantity_field', $post->ID, null );
         ?>
             </div>
-			
-			
+            
 			<?php 
         do_action( 'tiered_pricing_table/admin/before_advance_product_options', $post->ID );
         ?>
@@ -95,8 +94,9 @@ class TieredPricingTab {
             <div class="tiered_pricing_tab_product_advance_options">
                 <div class="tiered_pricing_tab_product_advance_options__header">
                     <h4>
-						<?php 
-        esc_html_e( 'Advanced options', 'tier-pricing-table' );
+                        <span class="dashicons dashicons-admin-settings"></span>
+                        <?php 
+        esc_html_e( 'Additional options', 'tier-pricing-table' );
         ?>
                     </h4>
                     <div>
@@ -180,9 +180,9 @@ class TieredPricingTab {
                 style="display:flex; align-items:center; justify-content: space-between; background: #fafafa; padding: 10px; margin: 0 0 20px;border-bottom: 1px solid #eee;">
             <div>
             <span style="color: red;">
-          
+            🚀
                 	<?php 
-        esc_html_e( 'Upgrade you plan to unlock all great features.', 'tier-pricing-table' );
+        esc_html_e( 'Upgrade your plan to unlock all great features.', 'tier-pricing-table' );
         ?>
                  
 			</span>
@@ -196,7 +196,6 @@ class TieredPricingTab {
 					<?php 
         esc_html_e( 'Upgrade', 'tier-pricing-table' );
         ?>
-                    🚀
                 </a>
             </div>
 

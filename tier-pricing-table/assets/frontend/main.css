@@ -64,7 +64,6 @@
 /**
  * Tiered Pricing Tooltip
  */
-
 .tiered-pricing-tooltip {
 	padding: 0;
 	position: relative;
@@ -104,7 +103,6 @@
 /**
  * Tiered Pricing Blocks
  */
-
 .tiered-pricing-blocks {
 	display: flex;
 	flex-wrap: wrap;
@@ -123,7 +121,7 @@
 }
 
 .tiered-pricing-block__quantity {
-	font-size: .8em;
+	font-size: .9em;
 }
 
 .tiered-pricing-block {
@@ -136,6 +134,31 @@
 .tiered-pricing-blocks .tiered-pricing--active {
 	transform: scale(1.06);
 }
+/** Styles **/
+.tiered-pricing-blocks--style-1 .tiered-pricing-block {
+	overflow: hidden;
+	padding: 0;
+}
+
+.tiered-pricing-blocks--style-1 .tiered-pricing-block .tiered-pricing-block__quantity {
+	color: #fff;
+	padding: 3px 10px;
+	text-align: center;
+}
+.tiered-pricing-blocks--style-1 .tiered-pricing-block .tiered-pricing-block__price {
+	text-align: center;
+	padding: 5px 10px;
+}
+
+.tiered-pricing-blocks--style-2 .tiered-pricing-block {
+	padding: 5px 10px;
+	background: #f7f7f7;
+	border-color: #cccccc;
+}
+.tiered-pricing-blocks--style-2 .tiered-pricing-block__price {
+	font-size: 1em;
+}
+
 
 /**
  * Tiered Pricing Options
@@ -210,7 +233,6 @@
 /**
 * Tiered pricing select
  */
-
 .tiered-pricing-dropdown {
 	margin: 20px 0;
 	width: 100%;
@@ -286,11 +308,6 @@
 }
 
 /**
-End tiered pricing select styles
- */
-
-
-/**
 * Summary table
 */
 .tier-pricing-summary-table {
@@ -328,13 +345,7 @@ End tiered pricing select styles
 	display: inline-block;
 }
 
-/**
-* End summary table
-*/
-
-/**
-You save
- */
+/** You save */
 .tiered-pricing-you-save--hidden {
 	display: none !important;
 }
@@ -343,9 +354,7 @@ You save
 	color: red;
 }
 
-/**
-* Shop Loop Adjustments
-*/
+/** Shop Loop Adjustments */
 .tiered-pricing-shop-loop {
 	margin: 10px 0;
 	width: 100%;
@@ -400,7 +409,7 @@ You save
 	padding: 0 5px;
 }
 
-.tiered-pricing-shop-loop--reduced .tiered-pricing-block {
+.tiered-pricing-shop-loop--reduced .tiered-pricing-blocks:not(.tiered-pricing-blocks--styled) .tiered-pricing-block {
 	padding: 0 5px;
 }
 
