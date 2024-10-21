@@ -33,6 +33,14 @@
 				margin-top: 15px;
 				margin-bottom: 15px;
 			}
+   
+			.remove-price-rule {
+				display: inline-block;
+				position: relative;
+				padding: 2px 0 2px 5px;
+				outline: none;
+				cursor: pointer;
+			}
 		</style>
 		
 		<div class="tpt-category-tiered-pricing">

@@ -10,6 +10,15 @@
 
 $prefix = 'category';
 ?>
+<style>
+	.remove-price-rule {
+		display: inline-block;
+		position: relative;
+		padding: 2px 0 2px 5px;
+		outline: none;
+		cursor: pointer;
+	}
+</style>
 
 <tr class="form-field">
 	<th scope="row" valign="top">
@@ -30,6 +39,13 @@ $prefix = 'category';
 			.tpt-category-tiered-pricing-add-new {
 				margin-top: 15px;
 				margin-bottom: 15px;
+			}
+			.remove-price-rule {
+				display: inline-block;
+				position: relative;
+				padding: 2px 0 2px 5px;
+				outline: none;
+				cursor: pointer;
 			}
 		</style>
 

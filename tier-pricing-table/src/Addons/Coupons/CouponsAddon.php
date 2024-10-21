@@ -5,7 +5,7 @@ use WC_Cart;
 
 class CouponsAddon extends AbstractAddon {
 	
-	public function getName() {
+	public function getName(): string {
 		return __( 'Coupons management', 'tier-pricing-table' );
 	}
 	
@@ -63,12 +63,12 @@ class CouponsAddon extends AbstractAddon {
 		) );
 	}
 	
-	public function getDescription() {
-		return __( 'Allows you to manage which coupons will allow tiered pricing and which ones will not.',
+	public function getDescription(): string {
+		return __( 'It allows you to manage which coupons will allow tiered pricing and which will not.',
 			'tier-pricing-table' );
 	}
 	
-	public function getSlug() {
+	public function getSlug(): string {
 		return 'coupons';
 	}
 }

@@ -24,7 +24,7 @@ class CustomColumnsAddon extends AbstractAddon {
 	}
 
 	public function getDescription(): string {
-		return __( 'Add custom columns to your pricing table.', 'tier-pricing-table' );
+		return __( 'This feature allows you to add custom columns to your pricing table.', 'tier-pricing-table' );
 	}
 
 	public function getSlug(): string {

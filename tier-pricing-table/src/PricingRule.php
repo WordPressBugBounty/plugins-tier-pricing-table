@@ -10,6 +10,8 @@ class PricingRule {
 	public $provider = 'product';
 	public $providerData = array();
 	
+	protected $modificationLog = array();
+	
 	public $data = array();
 	
 	public $customColumnsData = array();
@@ -18,7 +20,7 @@ class PricingRule {
 		'regular_price' => null,
 		'sale_price'    => null,
 		'discount'      => null,
-		// fixed or percentage
+		/* fixed or percentage */
 		'pricing_type'  => null,
 	);
 	
@@ -70,5 +72,13 @@ class PricingRule {
 	public function getTierPrice( $quantity, $withTaxes = true, $place = 'shop', $round = false ) {
 		return PriceManager::getPriceByRules( $quantity, $this->getProductId(), 'view', $place, $withTaxes, $this,
 			$round );
+	}
+	
+	public function logPricingModification( string $modification ) {
+		$this->modificationLog[] = $modification;
+	}
+	
+	public function getPricingLog() {
+		return $this->modificationLog;
 	}
 }

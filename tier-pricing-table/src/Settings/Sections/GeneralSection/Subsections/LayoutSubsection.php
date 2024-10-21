@@ -13,11 +13,11 @@ use TierPricingTable\TierPricingTablePlugin;
 class LayoutSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Tiered pricing layout', 'tier-pricing-table' );
+		return __( 'Template options', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'How the tiered pricing will look and behave in your store.', 'tier-pricing-table' );
+		return __( 'Choose a tiered pricing template and customize its look and behavior.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -27,20 +27,20 @@ class LayoutSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'    => __( 'Show tiered pricing on product page', 'tier-pricing-table' ),
+				'title'    => __( 'Show tiered pricing', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display',
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'yes',
-				'desc'     => __( 'Display tiered pricing on the product page? Prices remain dynamic even if the tiered pricing is not displayed. You can also display tiered pricing via shortcode, Gutenberg block or Elementor widget.',
+				'desc'     => __( 'Automatically display tiered pricing on the product page. Prices remain dynamic even if the tiered pricing is not displayed. You can also display tiered pricing via shortcode, Gutenberg block, or Elementor widget.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Default layout', 'tier-pricing-table' ),
+				'title'    => __( 'Default template', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => TierPricingTablePlugin::getAvailablePricingLayouts(),
-				'desc'     => __( 'Default layout for tiered pricing on the product page. The layout can be customized individually per product.',
+				'desc'     => __( 'Default tiered pricing template. The template can be customized individually per product.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 				'default'  => 'table',
@@ -62,11 +62,11 @@ class LayoutSubsection extends SubsectionAbstract {
 				'id'       => Settings::SETTINGS_PREFIX . 'table_title',
 				'type'     => 'text',
 				'default'  => '',
-				'desc'     => __( 'The name is displaying above the tiered pricing.', 'tier-pricing-table' ),
+				'desc'     => __( 'The title is shown above the tiered pricing.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Position on product page', 'tier-pricing-table' ),
+				'title'    => __( 'Position on the product page', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'position_hook',
 				'type'     => 'select',
 				'options'  => array(
@@ -77,7 +77,7 @@ class LayoutSubsection extends SubsectionAbstract {
 					'woocommerce_single_product_summary'        => __( 'Above product title', 'tier-pricing-table' ),
 					'woocommerce_before_single_product_summary' => __( 'Before product summary', 'tier-pricing-table' ),
 					'woocommerce_after_single_product_summary'  => __( 'After product summary', 'tier-pricing-table' ),
-					'____none____'                              => __( 'I display table via shortcode/gutenberg/elementor',
+					'____none____'                              => __( 'I display tiered pricing via shortcode/gutenberg/elementor',
 						'tier-pricing-table' ),
 				),
 				'desc'     => __( 'Where tiered pricing should be displayed on the product page.',
@@ -171,7 +171,7 @@ class LayoutSubsection extends SubsectionAbstract {
 						'default' => __( 'Price', 'tier-pricing-table' ),
 					),
 				),
-				'desc'    => __( 'Leave a column title empty to not show that column.' ),
+				'desc'    => __( 'Leave a column title empty so as not to show that column.', 'tier-pricing-table' ),
 				'type'    => TPTTableColumnsField::FIELD_TYPE,
 			),
 			array(
@@ -179,26 +179,29 @@ class LayoutSubsection extends SubsectionAbstract {
 				'id'      => Settings::SETTINGS_PREFIX . 'show_discount_column',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
+				'desc'    => __( 'Show the percentage discount in pricing blocks (that provide a discount).',
+					'tier-pricing-table' ),
 			),
 			array(
 				'title'   => __( 'Show regular product price', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'options_show_original_product_price',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'Show the crossed out regular price in options.', 'tier-pricing-table' ),
+				'desc'    => __( 'Pricing options will show a crossed-out regular product price near the actual tier price.',
+					'tier-pricing-table' ),
 			),
 			
 			array(
-				'title'             => __( 'Show total pricing in option', 'tier-pricing-table' ),
+				'title'             => __( 'Show totals in a selected option', 'tier-pricing-table' ),
 				'id'                => Settings::SETTINGS_PREFIX . 'options_show_total',
 				'type'              => TPTSwitchOption::FIELD_TYPE,
 				'default'           => 'yes',
-				'desc'              => __( 'Show the total price in an active option.', 'tier-pricing-table' ),
+				'desc'              => __( 'The selected pricing option will include totals.', 'tier-pricing-table' ),
 				'custom_attributes' => [ 'data-tiered-pricing-premium-option' => true ],
 			),
 			
 			array(
-				'title'        => __( 'Option template', 'tier-pricing-table' ),
+				'title'        => __( 'Pricing option template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'options_option_text',
 				'default'      => __( '<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>',
 					'tier-pricing-table' ),
@@ -208,25 +211,30 @@ class LayoutSubsection extends SubsectionAbstract {
 					'tp_rounded_discount',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
+				'desc'         => __( 'Use the variables above to build the template for the pricing option.',
+					'tier-pricing-table' ),
 			),
 			array(
-				'title'   => __( 'Show the "no discount" option', 'tier-pricing-table' ),
+				'title'   => __( 'Show first tier pricing option', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'options_show_default_option',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'Show the option with a regular product price.', 'tier-pricing-table' ),
+				'desc'    => __( 'Show the option with a regular product price. This is the first pricing tier where no discount is offered.',
+					'tier-pricing-table' ),
 			),
 			array(
-				'title'        => __( '"No discount" option template', 'tier-pricing-table' ),
+				'title'        => __( 'First tier pricing option template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'options_default_option_text',
 				'default'      => __( '<strong>Buy {tp_quantity} pieces</strong>', 'tier-pricing-table' ),
 				'placeholders' => array(
 					'tp_quantity',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
+				'desc'         => __( 'Set up the first pricing tier template where a discount is not offered.',
+					'tier-pricing-table' ),
 			),
 			array(
-				'title'        => __( 'Template', 'tier-pricing-table' ),
+				'title'        => __( 'Pricing string template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'plain_text_template',
 				'default'      => __( '<strong>Buy {tp_quantity} pieces for {tp_price} each and save {tp_rounded_discount}%</strong>',
 					'tier-pricing-table' ),
@@ -237,17 +245,20 @@ class LayoutSubsection extends SubsectionAbstract {
 					'tp_rounded_discount',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
+				'desc'         => __( 'Use the variables above to build the template for the pricing string.',
+					'tier-pricing-table' ),
 			),
 			array(
-				'title'   => __( 'Show the "no discount" tier', 'tier-pricing-table' ),
+				'title'   => __( 'Show first tier pricing string', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'plain_text_show_first_tier',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'Show the tier with a regular product price.', 'tier-pricing-table' ),
+				'desc'    => __( 'Show the tier with a regular product price. This is the first pricing tier where no discount is offered.',
+					'tier-pricing-table' ),
 			),
 			
 			array(
-				'title'        => __( '"No discount" template', 'tier-pricing-table' ),
+				'title'        => __( 'First tier pricing string template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'plain_text_first_tier_template',
 				'default'      => __( '<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>',
 					'tier-pricing-table' ),
@@ -256,13 +267,15 @@ class LayoutSubsection extends SubsectionAbstract {
 					'tp_price',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
+				'desc'         => __( 'Set up the first pricing tier template where a discount is not offered.',
+					'tier-pricing-table' ),
 			),
 			array(
 				'title'             => __( 'Clickable tiered pricing', 'tier-pricing-table' ),
 				'id'                => Settings::SETTINGS_PREFIX . 'clickable_table_rows',
 				'type'              => TPTSwitchOption::FIELD_TYPE,
 				'default'           => 'yes',
-				'desc'              => __( 'Makes tiered pricing (table rows, blocks, options, etc) clickable.',
+				'desc'              => __( 'To select the quantity, tiered pricing becomes clickable (table rows, blocks, options).',
 					'tier-pricing-table' ),
 				'custom_attributes' => [ 'data-tiered-pricing-premium-option' => true ],
 			),

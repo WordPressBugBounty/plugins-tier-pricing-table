@@ -33,6 +33,30 @@ class Freemius {
 	
 	public function hooks() {
 		add_action( 'admin_menu', [ $this, 'initPages' ] );
+		$this->instance->add_filter( 'templates/pricing.php', function ( $template ) {
+			
+			ob_start();
+			?>
+
+            <style>
+				#fs_pricing_app {
+					--fs-ds-blue-300: #faf6f9;
+					--fs-ds-blue-500: #814c77;
+					--fs-ds-blue-600: #814c77;
+					--fs-ds-blue-700: #814c77;
+					--fs-ds-blue-800: #814c77;
+					--fs-ds-blue-900: #814c77;
+
+					--fs-ds-theme-background-shade11: #faf6f9;
+					--fs-ds-theme-background-color: #faf6f9;
+				}
+            </style>
+			<?php
+			
+			$style = ob_get_clean();
+			
+			return $style . $template;
+		} );
 	}
 	
 	public function isValid(): bool {

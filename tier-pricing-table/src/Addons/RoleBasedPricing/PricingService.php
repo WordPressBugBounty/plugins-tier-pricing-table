@@ -55,6 +55,8 @@ class PricingService {
 		$pricingRule->provider             = 'role-based';
 		$pricingRule->providerData['role'] = $roleBasedRule->getRole();
 		
+		$pricingRule->logPricingModification( '[role-based]: Pricing rule is overridden by the rule for: ' . $roleBasedRule->getRole() );
+		
 		do_action( 'tiered_pricing_table/role_based_pricing/after_adjusting_pricing_rule', $pricingRule, $roleBasedRule,
 			$productId );
 		

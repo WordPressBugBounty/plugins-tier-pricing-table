@@ -81,7 +81,6 @@ class MinQuantity extends AbstractAddon {
 			return $args;
 		}, 10, 3 );
 		
-		
 		add_filter( 'woocommerce_add_to_cart_validation', function ( $passed, $productId, $quantity ) {
 			$productId = intval( $productId );
 			$quantity  = intval( $quantity );
@@ -178,7 +177,6 @@ class MinQuantity extends AbstractAddon {
             </script>
 			<?php
 		} );
-		
 	}
 	
 	protected function getProductCartQuantity( $productId, $type = 'product', $cart = null ) {

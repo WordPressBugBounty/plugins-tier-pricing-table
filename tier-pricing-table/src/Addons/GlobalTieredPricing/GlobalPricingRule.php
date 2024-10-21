@@ -2,8 +2,9 @@
 
 namespace TierPricingTable\Addons\GlobalTieredPricing;
 
-use Exception;
+use TierPricingTable\Addons\GlobalTieredPricing\PricingRule\RuleSettings;
 use TierPricingTable\Forms\Form;
+use Exception;
 use WC_Product;
 use WP_User;
 class GlobalPricingRule {
@@ -147,6 +148,8 @@ class GlobalPricingRule {
      */
     public $minimum;
 
+    public $priorityOptions;
+
     /**
      * Array with custom data from 3rd-party addons
      *
@@ -284,6 +287,7 @@ class GlobalPricingRule {
         $valid = $valid || !empty( $this->getTieredPricingRules() );
         $valid = $valid || !Form::isEmpty( $this->getMinimum() );
         $valid = $valid || !Form::isEmpty( $this->getDiscount() );
+        $valid = $valid || $this->getSettings()->getPriorityType() === 'flexible';
         $valid = apply_filters( 'tiered_pricing_table/global_pricing/validation', $valid, $this );
         if ( !$valid ) {
             throw new Exception(esc_html__( 'The pricing rule does not affect either prices or product quantity. The rule will be skipped.', 'tier-pricing-table' ));
@@ -369,6 +373,13 @@ class GlobalPricingRule {
 
     public function setExcludedUsers( array $excludedUsers ) {
         $this->excludedUsers = $excludedUsers;
+    }
+
+    public function getSettings() : RuleSettings {
+        if ( !$this->priorityOptions ) {
+            $this->priorityOptions = new RuleSettings($this);
+        }
+        return $this->priorityOptions;
     }
 
     public function asArray() : array {

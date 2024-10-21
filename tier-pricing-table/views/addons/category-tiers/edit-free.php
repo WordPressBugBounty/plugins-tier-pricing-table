@@ -11,7 +11,15 @@
 $prefix = 'category';
 
 ?>
-
+<style>
+	.remove-price-rule {
+		display: inline-block;
+		position: relative;
+		padding: 2px 0 2px 5px;
+		outline: none;
+		cursor: pointer;
+	}
+</style>
 <tr class="form-field">
 	<th scope="row" valign="top">
 		<label for="attribute_label">Tiered pricing</label>

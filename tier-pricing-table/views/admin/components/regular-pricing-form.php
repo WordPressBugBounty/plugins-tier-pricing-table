@@ -52,7 +52,6 @@ if ( ! defined( 'WPINC' ) ) {
 				<?php esc_attr_e( 'Flat prices', 'tier-pricing-table' ); ?>
 			</label>
 			
-			
 			<label for="<?php echo esc_attr( Form::getFieldName( 'pricing_type', $role, $loop ) ); ?>-percentage"
 				   style="padding: 0; float: none; width: auto; margin: 0 5px 0 20px;">
 				<input type="radio"

@@ -99,6 +99,11 @@ class ProductEditor {
 	}
 	
 	public function registerBlocks() {
+		
+		if ( ! class_exists( 'Automattic\WooCommerce\Admin\Features\ProductBlockEditor\BlockRegistry' ) ) {
+			return;
+		}
+		
 		if ( isset( $_GET['page'] ) && 'wc-admin' === $_GET['page'] ) {
 			foreach ( $this->blocks as $block ) {
 				$block->register();

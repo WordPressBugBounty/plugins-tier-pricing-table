@@ -26,7 +26,7 @@ class ManualOrdersAddon extends AbstractAddon {
 	public function getItemPrice( WC_Order_Item_Product $item ) {
 		$productPrice      = $item->get_product()->get_price();
 		$tieredPricingRule = PriceManager::getPricingRule( $item->get_product()->get_id() );
-
+		
 		// Item has no tiered pricing rule. Return regular price (which also can be adjusted by pricing rule, but on get_price hook)
 		if ( ! $tieredPricingRule->getRules() ) {
 			return $productPrice;
@@ -141,8 +141,8 @@ class ManualOrdersAddon extends AbstractAddon {
 				}
 				
 				// translators: %1$s: item name, %2$s: original price, %3$s: new price
-				$note = sprintf( __( 'Tiered pricing recalculations for %1$s: %2$s → %3$s', 'tier-pricing-table' ), $item->get_name(),
-					wc_price( $item->get_total() / $item->get_quantity() ), wc_price( $itemPrice ) );
+				$note = sprintf( __( 'Tiered pricing recalculations for %1$s: %2$s → %3$s', 'tier-pricing-table' ),
+					$item->get_name(), wc_price( $item->get_total() / $item->get_quantity() ), wc_price( $itemPrice ) );
 				
 				$item->set_subtotal( $itemTotal );
 				$item->set_total( $itemTotal );
@@ -156,17 +156,17 @@ class ManualOrdersAddon extends AbstractAddon {
 		
 		add_action( 'woocommerce_admin_order_items_after_line_items', function () {
 			?>
-			<tr style="display: none;">
-				<td>
-					<input type="checkbox" name="calculate_tiered_pricing">
-				</td>
-			</tr>
+            <tr style="display: none;">
+                <td>
+                    <input type="checkbox" name="calculate_tiered_pricing">
+                </td>
+            </tr>
 			<?php
 		} );
 		
 		add_action( 'admin_head', function () {
 			?>
-			<script>
+            <script>
 				jQuery(document).ready(function ($) {
 					$('#woocommerce-order-items').on('click', '.calculate-tiered-pricing', function () {
 						jQuery('[name=calculate_tiered_pricing]').prop('checked', true);
@@ -178,16 +178,16 @@ class ManualOrdersAddon extends AbstractAddon {
 				jQuery(document.body).on('order-totals-recalculate-complete', function () {
 					jQuery('[name=calculate_tiered_pricing]').prop('checked', false);
 				});
-			</script>
+            </script>
 			<?php
 		} );
 		
 		add_action( 'woocommerce_order_item_add_action_buttons', function ( WC_Order $order ) {
 			if ( $order->is_editable() ) {
 				?>
-				<button type="button" class="button button-primary calculate-tiered-pricing">
-					<?php esc_html_e( 'Recalculate with tiered pricing', 'tier-pricing-table' ); ?>
-				</button>
+                <button type="button" class="button button-primary calculate-tiered-pricing">
+					<?php esc_html_e( 'Re-calculate with tiered pricing', 'tier-pricing-table' ); ?>
+                </button>
 				<?php
 			}
 		} );

@@ -2,7 +2,6 @@
 
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\PriceManager;
-use TierPricingTable\PricingRule;
 
 class GlobalTieredPricingCartManager {
 	

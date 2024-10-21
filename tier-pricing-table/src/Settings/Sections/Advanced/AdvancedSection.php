@@ -15,7 +15,7 @@ class AdvancedSection extends SectionAbstract {
 		
 		$sectionTitle = array(
 			'title' => __( 'Features', 'tier-pricing-table' ),
-			'desc'  => __( 'You can disable or enable specific tiered pricing features.', 'tier-pricing-table' ),
+			'desc'  => __( 'You can disable or enable specific plugin features.', 'tier-pricing-table' ),
 			'id'    => Settings::SETTINGS_PREFIX . 'advanced',
 			'type'  => 'title',
 		);

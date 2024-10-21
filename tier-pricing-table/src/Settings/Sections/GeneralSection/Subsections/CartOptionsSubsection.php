@@ -7,11 +7,11 @@ use TierPricingTable\Settings\Settings;
 class CartOptionsSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Tiered pricing in cart', 'tier-pricing-table' );
+		return __( 'Tiered pricing in the cart', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'How tiered pricing will be shown in the cart.', 'tier-pricing-table' );
+		return __( 'Control how tiered pricing will be shown in the cart.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -21,20 +21,20 @@ class CartOptionsSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'                => __( 'Show cart item price as a discount', 'tier-pricing-table' ),
-				'id'                   => Settings::SETTINGS_PREFIX . 'show_discount_in_cart',
-				'desc' => __( 'Show the crossed-out original price with a discounted price beside it. For example: ',
+				'title'   => __( 'Show cart item price as a discount', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'show_discount_in_cart',
+				'desc'    => __( 'When a product in the cart has a tiered price, show it as a discount with a crossed-out original price near it. For example: ',
 						'tier-pricing-table' ) . ' <b><del>$10.00</del> <ins>$8.00</ins><b>',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'default'              => 'yes',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'yes',
 			),
 			array(
-				'title'                => __( 'Show original cart item subtotal as a discount', 'tier-pricing-table' ),
-				'id'                   => Settings::SETTINGS_PREFIX . 'show_subtotal_as_discount_in_cart',
-				'desc' => __( 'Show the crossed-out subtotal based on original price with a discounted subtotal beside it.',
-						'tier-pricing-table' ),
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'default'              => 'yes',
+				'title'   => __( 'Show cart item subtotal as a discount', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'show_subtotal_as_discount_in_cart',
+				'desc'    => __( 'When a product in the cart has a tiered price, show its subtotal as a discount, similar to the option above.',
+					'tier-pricing-table' ),
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'yes',
 			),
 		);
 	}

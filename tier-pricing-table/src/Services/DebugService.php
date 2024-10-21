@@ -5,6 +5,7 @@
  *
  * @package TierPricingTable/Services
  */
+
 use TierPricingTable\Core\ServiceContainer;
 use TierPricingTable\PriceManager;
 use TierPricingTable\PricingRule;
@@ -58,10 +59,10 @@ class DebugService {
 				$provider         = $pricingRule->provider ?? 'N\A';
 				$data['provider'] = "Undefined provider ($provider)";
 		}
-		
-		$data['minimum']  = $pricingRule->getMinimum() ? $pricingRule->getMinimum() : 'N/A';
-		$data['maximum']  = ! empty( $pricingRule->data['maximum_quantity'] ) ? $pricingRule->data['maximum_quantity'] : '-';
-		$data['group_of'] = ! empty( $pricingRule->data['group_of'] ) ? $pricingRule->data['group_of'] : '-';
+
+		$data['minimum']       = $pricingRule->getMinimum() ? $pricingRule->getMinimum() : 'N/A';
+		$data['maximum']       = ! empty( $pricingRule->data['maximum_quantity'] ) ? $pricingRule->data['maximum_quantity'] : 'N/A';
+		$data['quantity_step'] = ! empty( $pricingRule->data['group_of_quantity'] ) ? $pricingRule->data['group_of_quantity'] : 'N/A';
 		
 		$data['pricing_type'] = $pricingRule->getType();
 		$data['rules']        = '-';
@@ -79,7 +80,7 @@ class DebugService {
 		} else {
 			$data['total_in_cart'] = 'N\A';
 		}
-  
+		
 		$data['custom_regular_price'] = ! empty( $pricingRule->pricingData['regular_price'] ) ? $pricingRule->pricingData['regular_price'] : 'N\A';
 		$data['custom_sale_price']    = ! empty( $pricingRule->pricingData['sale_price'] ) ? $pricingRule->pricingData['sale_price'] : 'N\A';
 		$data['discount']             = ! empty( $pricingRule->pricingData['discount'] ) ? $pricingRule->pricingData['discount'] : 'N\A';
@@ -92,27 +93,40 @@ class DebugService {
 		
 		$data = $this->getPricingRuleData( $pricingRule, $cartItem );
 		?>
-		<div>
-			<table style="font-size: .7em">
-				<thead>
-				<tr>
-					<th colspan="2" style="padding: 10px">Debug info</th>
-				</tr>
-				</thead>
-				<tbody>
+
+        <div>
+            <table style="font-size: .7em">
+                <thead>
+                <tr>
+                    <th colspan="2" style="padding: 10px">Debug info</th>
+                </tr>
+                </thead>
+                <tbody>
 				<?php foreach ( $data as $key => $value ) : ?>
-					<tr>
-						<td style="padding: 0">
+                    <tr>
+                        <td style="padding: 0">
 							<?php echo esc_html( $key . ':' ); ?>
-						</td>
-						<td style="padding: 0">
+                        </td>
+                        <td style="padding: 0">
 							<?php echo wp_kses_post( $value ); ?>
-						</td>
-					</tr>
+                        </td>
+                    </tr>
 				<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
+                </tbody>
+            </table>
+        </div>
+		
+		<?php if ( ! empty( $pricingRule->getPricingLog() ) ): ?>
+            <small>
+                Pricing Log
+                <ol>
+					<?php foreach ( $pricingRule->getPricingLog() as $log ): ?>
+                        <li><?php echo $log; ?></>
+					<?php endforeach; ?>
+                </ol>
+            </small>
+		<?php endif; ?>
+		
 		<?php
 	}
 }

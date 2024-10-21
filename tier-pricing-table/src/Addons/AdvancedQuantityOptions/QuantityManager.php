@@ -77,7 +77,11 @@ class QuantityManager {
 				$groupOf = $pricingRule->data['group_of_quantity'] ?? null;
 				
 				if ( $max ) {
-					$max = max( 1, $max - $this->getProductCartQuantity( $product->get_id() ) );
+					
+					if ( ! is_cart() && ! is_checkout() ) {
+						$max = max( 1, $max - $this->getProductCartQuantity( $product->get_id() ) );
+					}
+					
 					$max = max( $groupOf, $max );
 					
 					$args['max_value'] = $max;
@@ -139,7 +143,7 @@ class QuantityManager {
 		add_action( 'wp_head', function () {
 			if ( is_product() ) {
 				?>
-				<script>
+                <script>
 					jQuery(document).ready(function () {
 
 						let $quantity = jQuery('.single_variation_wrap').find('[name=quantity]');
@@ -170,13 +174,13 @@ class QuantityManager {
 							$quantity.removeAttr('max');
 						});
 					});
-				</script>
+                </script>
 				<?php
 			}
 		} );
 		
 		add_filter( 'woocommerce_update_cart_validation', function ( $passed, $cart_item_key, $values, $quantity ) {
-			$productId = $values['variation_id'] ? intval($values['variation_id']) : $values['product_id'];
+			$productId = $values['variation_id'] ? intval( $values['variation_id'] ) : $values['product_id'];
 			
 			$pricingRule = PriceManager::getPricingRule( $productId );
 			

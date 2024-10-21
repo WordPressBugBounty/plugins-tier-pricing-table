@@ -10,35 +10,6 @@
 	text-decoration: none;
 }
 
-.remove-price-rule {
-	display: inline-block;
-	position: relative;
-	padding: 2px 0 2px 5px;
-	outline: none;
-	cursor: pointer;
-}
-
-.remove-price-rule:focus {
-	box-shadow: none !important;
-}
-
-.price-quantity-rule {
-	margin-right: 2% !important;
-	height: auto !important;
-}
-
-.price-quantity-rule--variation:first-child {
-	margin-right: 1.6% !important;
-}
-
-.price-quantity-rule--simple {
-	width: 24% !important;
-}
-
-.price-quantity-rule--variation {
-	width: 23% !important;
-}
-
 /** Variations **/
 .variable_pricing .tiered_pricing_fixed_rules > label,
 .variable_pricing .tiered_pricing_percentage_rules > label,
@@ -52,6 +23,10 @@
 	margin: 9px 0;
 }
 
+.tiered-pricing-form-block label {
+	font-size: 12px;
+}
+
 .tiered-pricing-form-block select {
 	width: 50%;
 	max-width: 50%;
@@ -60,7 +35,6 @@
 .tiered-pricing-form-variation-block {
 	margin: 15px 0;
 }
-
 
 .tiered-pricing-form-variation-block input, .tiered-pricing-form-variation-block select {
 	width: 100% !important;
@@ -176,15 +150,24 @@
 }
 
 /** GLOBAL PRICING **/
-.tpt-global-pricing-notice-list {
-	list-style: auto;
-	margin: 5px;
-	margin-left: 15px;
-}
+
 
 .tpt-global-pricing-title {
-	margin: 40px 0;
-	position: relative;
+	margin: 20px 0;
+	border-bottom: 1px solid #e8e8e8;
+	font-size: 1.35em;
+	font-weight: 300;
+	padding: 10px 10px 15px;
+}
+
+.tpt-global-pricing-title .woocommerce-help-tip {
+	margin: 0 !important;
+	color: #814b77;
+	font-size: 1em !important;
+}
+
+.tpt-global-pricing-rule-form-tab-content .tpt-global-pricing-title:first-child {
+	margin-top: 5px;
 }
 
 .tpt-global-pricing-title h4 {
@@ -194,7 +177,10 @@
 	left: 50%;
 	margin: 0;
 	background: #ffffff;
-	padding: 10px 20px;
+	letter-spacing: 1px;
+	font-weight: 300;
+	padding: 0 15px;
+	font-size: 14px;
 	transform: translate(-50%, -50%);
 }
 
@@ -257,7 +243,6 @@
 }
 
 /** SETTINGS **/
-
 .wc-settings-row-tpt_hidden_option {
 	display: none !important;
 }
@@ -454,6 +439,7 @@ input[type="checkbox"].tpt-toggle-switch:checked + label > [data-tpt-toggle-swit
 	color: #555;
 	background: #fafafa;
 }
+
 .tiered_pricing_tab_product_advance_options--open .tiered_pricing_tab_product_advance_options__header {
 	background: #fafafa;
 }
@@ -715,6 +701,31 @@ input[type="checkbox"].tpt-toggle-switch:checked + label > [data-tpt-toggle-swit
 	60% {
 		transform: translateY(-2px);
 	}
+}
+
+@keyframes heartbeat-animation {
+	0% {
+		transform: scale(1);
+	}
+	20% {
+		transform: scale(1.1);
+	}
+	40% {
+		transform: scale(1);
+	}
+	60% {
+		transform: scale(1.1);
+	}
+	80% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.tpt-heartbeat {
+	animation: heartbeat-animation .5s;
 }
 
 

@@ -22,23 +22,11 @@ class SummarySubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'    => __( 'Enabled', 'tier-pricing-table' ),
+				'title'    => __( 'Show totals on the product page', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display_summary',
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'yes',
 				'desc_tip' => true,
-			),
-			array(
-				'title'    => __( 'Layout', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'summary_type',
-				'type'     => TPTDisplayType::FIELD_TYPE,
-				'options'  => array(
-					'table'  => __( 'Default', 'tier-pricing-table' ),
-					'inline' => __( 'Inline', 'tier-pricing-table' ),
-				),
-				'desc'     => __( 'Type of totals layout to display on the product page.', 'tier-pricing-table' ),
-				'desc_tip' => true,
-				'default'  => 'table',
 			),
 			array(
 				'title'    => __( 'Title', 'tier-pricing-table' ),
@@ -47,22 +35,6 @@ class SummarySubsection extends SubsectionAbstract {
 				'desc'     => __( 'The name is displaying above the summary block.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 				'default'  => '',
-			),
-			array(
-				'title'    => __( '"Total" label', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'summary_total_label',
-				'type'     => 'text',
-				'default'  => __( 'Total:', 'tier-pricing-table' ),
-				'desc'     => __( 'Label for the "total" line.', 'tier-pricing-table' ),
-				'desc_tip' => true,
-			),
-			array(
-				'title'    => __( '"Each" label', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'summary_each_label',
-				'type'     => 'text',
-				'default'  => __( 'Each: ', 'tier-pricing-table' ),
-				'desc'     => __( 'Label for the "each" line.', 'tier-pricing-table' ),
-				'desc_tip' => true,
 			),
 			array(
 				'title'    => __( 'Position on the product page', 'tier-pricing-table' ),
@@ -79,6 +51,32 @@ class SummarySubsection extends SubsectionAbstract {
 				),
 				'default'  => 'woocommerce_after_add_to_cart_button',
 				'desc'     => __( 'Where to display the summary block.', 'tier-pricing-table' ),
+				'desc_tip' => true,
+			),
+			array(
+				'title'    => __( 'Totals template', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'summary_type',
+				'type'     => TPTDisplayType::FIELD_TYPE,
+				'options'  => array(
+					'table'  => __( 'Default', 'tier-pricing-table' ),
+					'inline' => __( 'Labels', 'tier-pricing-table' ),
+				),
+				'default'  => 'table',
+			),
+			array(
+				'title'    => __( '"Total" label', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'summary_total_label',
+				'type'     => 'text',
+				'default'  => __( 'Total:', 'tier-pricing-table' ),
+				'desc'     => __( 'Label for the "total" line.', 'tier-pricing-table' ),
+				'desc_tip' => true,
+			),
+			array(
+				'title'    => __( '"Each" label', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'summary_each_label',
+				'type'     => 'text',
+				'default'  => __( 'Each: ', 'tier-pricing-table' ),
+				'desc'     => __( 'Label for the "each" line.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 		);

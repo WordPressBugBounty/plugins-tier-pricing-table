@@ -5,7 +5,7 @@ use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 class AppliedQuantityRules {
 
 	public function getName(): string {
-		return __( 'Order Quantity Rules', 'tier-pricing-table' );
+		return __( 'Quantity limits', 'tier-pricing-table' );
 	}
 
 	public function render( GlobalPricingRule $rule ) {

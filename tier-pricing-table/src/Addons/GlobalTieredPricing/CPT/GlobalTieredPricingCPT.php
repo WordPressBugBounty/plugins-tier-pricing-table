@@ -10,9 +10,11 @@ use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedPricingType;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedProducts;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedQuantityRules;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Pricing;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Settings;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Status;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Form;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
+use TierPricingTable\Addons\GlobalTieredPricing\PricingRule\RuleSettings;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Forms\MinimumOrderQuantityForm;
 use TierPricingTable\Forms\RegularPricingForm;
@@ -70,7 +72,7 @@ class GlobalTieredPricingCPT {
         add_filter(
             'post_row_actions',
             function ( $actions, WP_Post $post ) {
-                if ( GlobalTieredPricingCPT::SLUG !== $post->post_type ) {
+                if ( self::SLUG !== $post->post_type ) {
                     return $actions;
                 }
                 unset($actions['inline hide-if-no-js']);
@@ -102,26 +104,21 @@ class GlobalTieredPricingCPT {
         new ReactivateAction();
     }
 
-    public function getColumns() {
+    public function getColumns() : array {
         if ( is_null( $this->columns ) ) {
             $this->columns = array(
                 'pricing'                => new Pricing(),
                 'applied_products'       => new AppliedProducts(),
-                'applied_pricing_type'   => new AppliedPricingType(),
                 'applied_customers'      => new AppliedCustomers(),
                 'applied_quantity_rules' => new AppliedQuantityRules(),
+                'settings'               => new Settings(),
                 'status'                 => new Status(),
             );
         }
         return $this->columns;
     }
 
-    /**
-     * Get pricing rule instance
-     *
-     * @return GlobalPricingRule
-     */
-    public function getPricingRuleInstance() {
+    public function getPricingRuleInstance() : ?GlobalPricingRule {
         if ( empty( $this->pricingRuleInstance ) ) {
             global $post;
             if ( $post ) {
@@ -143,17 +140,15 @@ class GlobalTieredPricingCPT {
         add_meta_box(
             'tpt_notice_metabox',
             __( 'Pricing notice', 'tier-pricing-table' ),
-            array($this, 'renderNoticeMetabox'),
+            function () {
+                $this->getContainer()->getFileManager()->includeTemplate( 'addons/global-rules/pricing-notice.php', array(
+                    'fileManager' => $this->getContainer()->getFileManager(),
+                    'priceRule'   => $this->getPricingRuleInstance(),
+                ) );
+            },
             self::SLUG,
             'side'
         );
-    }
-
-    public function renderNoticeMetabox() {
-        $this->getContainer()->getFileManager()->includeTemplate( 'addons/global-rules/pricing-notice.php', array(
-            'fileManager' => $this->getContainer()->getFileManager(),
-            'priceRule'   => $this->getPricingRuleInstance(),
-        ) );
     }
 
     public function savePricingRule( $ruleId ) {
@@ -197,6 +192,7 @@ class GlobalTieredPricingCPT {
         $pricingRule->setExcludedUsers( $excludedUsers );
         $pricingRule->setExcludedUsersRole( $excludedUsersRole );
         $pricingRule->setExcludedProducts( $excludedProductsIds );
+        RuleSettings::updateFromPOST( $ruleId );
         do_action( 'tiered_pricing_table/global_pricing/before_updating', $pricingRule, $ruleId );
         $pricingRule->save();
         $this->getContainer()->getCache()->purge();
@@ -212,40 +208,40 @@ class GlobalTieredPricingCPT {
                 return;
             }
             ?>
-			
-			<div class="woocommerce-BlankState" style="padding: 0;  ">
-				<img width="250px" style="filter: drop-shadow(1px 10px 10px #ccc);"
-					 src="<?php 
+
+            <div class="woocommerce-BlankState" style="padding: 0;  ">
+                <img width="250px" style="filter: drop-shadow(1px 10px 10px #ccc);"
+                     src="<?php 
             echo esc_attr( $this->getContainer()->getFileManager()->locateAsset( 'admin/pricing-logo.png' ) );
             ?>">
                 <h2 class="woocommerce-BlankState-message">
 					<?php 
             esc_html_e( 'There are no pricing rules yet. To create the first pricing rule click on the button below.', 'tier-pricing-table' );
             ?>
-				</h2>
-			
-				<div class="woocommerce-BlankState-buttons">
-					<a class="woocommerce-BlankState-cta button-primary button"
-					   href="<?php 
+                </h2>
+
+                <div class="woocommerce-BlankState-buttons">
+                    <a class="woocommerce-BlankState-cta button-primary button"
+                       href="<?php 
             echo esc_url( admin_url( 'post-new.php?post_type=' . self::SLUG ) );
             ?>">
 						<?php 
             esc_html_e( 'Create pricing rule', 'tier-pricing-table
 ' );
             ?>
-					</a>
-				</div>
-			</div>
-			
-			<style
-				type="text/css">#posts-filter .wp-list-table, #posts-filter .tablenav.top, .tablenav.bottom .actions, .wrap .subsubsub {
+                    </a>
+                </div>
+            </div>
+
+            <style
+                    type="text/css">#posts-filter .wp-list-table, #posts-filter .tablenav.top, .tablenav.bottom .actions, .wrap .subsubsub {
 					display: none;
 				}
 
 				#posts-filter .tablenav.bottom {
 					height: auto;
 				}
-			</style>
+            </style>
 			<?php 
         }
     }
@@ -258,7 +254,7 @@ class GlobalTieredPricingCPT {
                 'screen_id' => self::SLUG,
             ) );
         }
-        $postType = register_post_type( self::SLUG, array(
+        register_post_type( self::SLUG, array(
             'labels'             => array(
                 'name'               => __( 'Pricing rule', 'tier-pricing-table' ),
                 'singular_name'      => __( 'Pricing rule', 'tier-pricing-table' ),

@@ -10,6 +10,6 @@ use TierPricingTable\Core\ServiceContainerTrait;
 class BlackFriday2028 extends BlackFriday {
 	
 	public function getBlackFridayDate(): string {
-		return '2024-11-24';
+		return '2028-11-24';
 	}
 }

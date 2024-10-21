@@ -20,11 +20,11 @@ class VariationsPricingCalculationTip extends Tip {
 	}
 	
 	public function render() {
-		
+
 		if ( $this->isSeen() ) {
 			return;
 		}
-		
+
 		$calculationSettingsURL = add_query_arg( array(
 			'section' => 'calculation_logic',
 		), $this->getContainer()->getSettings()->getLink() );
@@ -81,6 +81,5 @@ class VariationsPricingCalculationTip extends Tip {
             </div>
         </div>
 		<?php
-		
 	}
 }

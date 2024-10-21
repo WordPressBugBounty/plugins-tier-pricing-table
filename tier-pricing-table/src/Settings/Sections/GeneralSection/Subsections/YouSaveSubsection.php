@@ -6,19 +6,20 @@ use TierPricingTable\Settings\Sections\SubsectionAbstract;
 use TierPricingTable\Settings\Settings;
 
 class YouSaveSubsection extends SubsectionAbstract {
-
+	
 	public function getTitle(): string {
-		return __( '"You save" on product page', 'tier-pricing-table' );
+		return __( '"You save" on the product page', 'tier-pricing-table' );
 	}
-
+	
 	public function getDescription(): string {
-		return __( 'Show amount customer save when they buy products with a discounted price.', 'tier-pricing-table' );
+		return __( 'Show the amount customers save when they buy products at a discounted price.',
+			'tier-pricing-table' );
 	}
-
+	
 	public function getSlug(): string {
 		return 'you_save';
 	}
-
+	
 	public function getSettings(): array {
 		return array(
 			array(
@@ -34,7 +35,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_consider_sale_price',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'Difference between regular and sale price will also be considered as discount.',
+				'desc'    => __( 'The difference between regular and sale woocommerce prices will also be considered a "you save" discount.',
 					'tier-pricing-table' ),
 			),
 			array(
@@ -48,7 +49,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 			),
 			array(
-				'title'   => __( 'Text color', 'tier-pricing-table' ),
+				'title'   => __( '"You save" price color', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_text_color',
 				'type'    => 'color',
 				'css'     => 'width:6em;',

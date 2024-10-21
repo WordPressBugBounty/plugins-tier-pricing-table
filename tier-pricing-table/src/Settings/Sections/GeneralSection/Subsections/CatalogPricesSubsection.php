@@ -8,11 +8,13 @@ use TierPricingTable\Settings\Settings;
 class CatalogPricesSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Price format for products with tiered pricing (in the catalog, widgets, etc.)', 'tier-pricing-table' );
+		return __( 'Price format for products with tiered pricing (in the catalog, widgets, etc.)',
+			'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'How products with tiered pricing will show their prices over the site.', 'tier-pricing-table' );
+		return __( 'Control how products with tiered pricing will show their prices outside their product pages.',
+			'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -45,19 +47,17 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => [
 					'range'  => __( 'Range (from lowest to highest)', 'tier-pricing-table' ),
-					'lowest' => __( 'Lowest price', 'tier-pricing-table' ),
+					'lowest' => __( 'The lowest price', 'tier-pricing-table' ),
 				],
 				'desc'     => __( 'How to display prices for products with tiered pricing.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Lowest price prefix', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'lowest_prefix',
-				'type'     => 'text',
-				'default'  => __( 'From', 'tier-pricing-table' ),
-				'desc'     => __( 'Prefix Before Lowest Tiered Product Price at the Catalog. Example: <b>From 10$</b>',
-					'tier-pricing-table' ),
-				'desc_tip' => true,
+				'title'   => __( 'The lowest price prefix', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'lowest_prefix',
+				'type'    => 'text',
+				'default' => __( 'From', 'tier-pricing-table' ),
+				'desc'    => __( 'Enter a prefix that will be shown before the lowest price. For example, it can look like this: <b>From $10.00</b>', 'tier-pricing-table' ),
 			),
 		);
 	}

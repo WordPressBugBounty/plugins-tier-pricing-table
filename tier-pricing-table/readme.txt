@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.6.5
 Requires PHP: 7.2
-Stable tag: 5.0.4
+Stable tag: 5.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,8 @@ Set different prices for different quantities of products.
 ✅ **Role-based pricing**
 Set different prices for user roles or specific customers, including quantity-based prices.
 
-✅ **Minimum\Maximum\Group of order quantity**
-Control the minimum, maximum, and group quantities of a product that users can purchase of a specific product.
+✅ **Minimum \ Maximum \ Quantity step**
+Control the minimum, maximum, and quantity step of a product that users can purchase of a specific product.
 
 ✅ **Multiple display templates for pricing on the product page \ product catalog**
  You can show the tiered prices via:
@@ -158,6 +158,18 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.1.2 [2024-10-20] =
+* Update: Update Freemius SDK to the latest version of 2.9.0.
+
+= 5.1.1 [2024-10-20] =
+* Enhance: Minor improvements.
+
+= 5.1.0 [2024-10-19] =
+* New: Priority options for global pricing rules.
+* New: Redesign global pricing rules form.
+* Fix: Maximum order quantity in the cart.
+* Enhance: Additional tips over the plugin.
 
 = 5.0.4 [2024-10-06] =
 * New: Two additional layouts for blocks.

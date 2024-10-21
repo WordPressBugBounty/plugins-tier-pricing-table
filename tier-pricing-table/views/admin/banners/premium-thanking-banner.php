@@ -14,7 +14,7 @@
 	<div class="tpt-alert__text">
 		<div class="tpt-alert__inner">
 			<?php
-				esc_html_e( 'You are running premium version of the plugin!', 'tier-pricing-table' );
+				esc_html_e( 'You are running the premium version of the plugin!', 'tier-pricing-table' );
 			?>
 			<?php
 			if ( ! tpt_fs()->can_use_premium_code() ) {

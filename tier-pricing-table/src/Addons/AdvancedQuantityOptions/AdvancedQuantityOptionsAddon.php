@@ -16,7 +16,7 @@ class AdvancedQuantityOptionsAddon extends AbstractAddon {
     }
 
     public function getDescription() : string {
-        return __( 'Manage maximum quantity and quantity step.', 'tier-pricing-table' );
+        return __( 'Manage maximum quantity and quantity step for products.', 'tier-pricing-table' );
     }
 
     public function getSlug() : string {

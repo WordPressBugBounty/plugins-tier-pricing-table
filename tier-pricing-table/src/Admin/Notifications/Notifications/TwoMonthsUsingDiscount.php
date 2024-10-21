@@ -24,6 +24,9 @@ class TwoMonthsUsingDiscount extends Notification {
     }
 
     public function passedRequirements() : bool {
+        if ( !$this->isPluginPage() ) {
+            return false;
+        }
         $activationDate = TierPricingTablePlugin::getPluginActivationDate();
         if ( !$activationDate ) {
             return false;

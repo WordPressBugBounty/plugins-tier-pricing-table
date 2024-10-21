@@ -3,6 +3,7 @@
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\ProductAndCategories;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Quantity;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Pricing;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Settings;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\UsersAndRoles;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
@@ -30,6 +31,7 @@ class Form {
 				new ProductAndCategories( $this ),
 				new UsersAndRoles( $this ),
 				new Quantity( $this ),
+				new Settings( $this ),
 			) );
 		} );
 		
@@ -40,6 +42,8 @@ class Form {
 			
 			$this->render( $post );
 		} );
+		
+		new UpgradeTip();
 	}
 	
 	protected function includeAssets() {
@@ -61,8 +65,8 @@ class Form {
 			.tpt-global-pricing-rule-hint {
 				display: flex;
 				align-items: center;
-				padding: 10px;
-				border: 1px solid #e8e8e8;
+				padding: 10px 10px;
+				border: 1px solid #eee5ed;
 				background: #faf6f9;
 				color: #814c77 !important;
 				margin-bottom: 20px;
@@ -70,6 +74,7 @@ class Form {
 
 			.tpt-global-pricing-rule-hint--top-level {
 				margin-top: 10px;
+				border: 1px solid #888;
 			}
 
 			.tpt-global-pricing-rule-hint__icon {
@@ -117,6 +122,17 @@ class Form {
 			.tpt-global-pricing-rule-form-tab__icon {
 				transition: all .1s;
 				margin-right: 10px;
+				height: 40px;
+				aspect-ratio: 1/1;
+				border-radius: 50%;
+				background: #faf6f9;
+				text-align: center;
+				color: #814c77;
+				font-size: 20px;
+				font-weight: bold;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 
 			.tpt-global-pricing-rule-form-tab--active h3,
@@ -151,7 +167,31 @@ class Form {
 				box-shadow: 0 0 8px rgba(0, 0, 0, .1);
 			}
 
-			@media screen and (max-width: 1024px) {
+			.tpt-global-pricing-rule-form input[type="text"],
+			.tpt-global-pricing-rule-form input[type="number"],
+			.tpt-global-pricing-rule-form .tiered-pricing-pricing-rules-form-row__inputs {
+				width: 75% !important;
+			}
+
+			.tpt-global-pricing-rule-form #tiered_pricing_type {
+				max-width: 75%;
+				width: 75% !important;
+			}
+
+			@media screen and (max-width: 1248px) {
+
+				.tpt-global-pricing-rule-form input[type="text"],
+				.tpt-global-pricing-rule-form input[type="number"],
+				.tpt-global-pricing-rule-form .tiered-pricing-pricing-rules-form-row__inputs {
+					width: 100% !important;
+				}
+
+				.tpt-global-pricing-rule-form #tiered_pricing_type {
+					max-width: 100%;
+					width: 100% !important;
+				}
+
+
 				.tpt-global-pricing-rule-form {
 					flex-wrap: wrap;
 				}
@@ -168,6 +208,12 @@ class Form {
 
 				.tpt-global-pricing-rule-form-tab--active {
 					border-bottom: 3px solid #814c77;
+				}
+			}
+
+			@media screen and (max-width: 500px) {
+				.tiered-pricing-form-block {
+					padding: 5px 20px !important;
 				}
 			}
         </style>
@@ -204,32 +250,37 @@ class Form {
 		}
 		
 		if ( ! $this->isNewRule() && ! $this->getPricingRuleInstance( $post )->isValidPricing() ) {
-			$this->renderHint( __( 'The pricing rule does not affect either prices or product quantity. The rule will be skipped.',
+			$this->tabs[0]->renderHint( __( 'The pricing rule does not affect either prices or product quantity limits. The rule will be skipped.',
 				'tier-pricing-table' ), array( 'custom_class' => 'tpt-global-pricing-rule-hint--top-level' ) );
 		}
 		
 		?>
         <div class="tpt-global-pricing-rule-form">
 
-            <div class="tpt-global-pricing-rule-form__tabs">
+            <nav class="tpt-global-pricing-rule-form__tabs">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-                    <div
-                            class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
-                            data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+                    <div class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
+                         data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 
-                        <div class="tpt-global-pricing-rule-form-tab__icon">
-                            <span class="dashicons dashicons-arrow-right-alt2"></span>
+                        <div class="tpt-global-pricing-rule-form-tab__icon" style="">
+							<?php if ( $tab->getIcon() === '$' ): ?>
+                                <span>$</span>
+							<?php else: ?>
+                                <span class="dashicons <?php echo esc_attr( $tab->getIcon() ) ?>"></span>
+							<?php endif; ?>
                         </div>
 
                         <div class="tpt-global-pricing-rule-form-tab__title">
-                            <h3><?php echo esc_html( $tab->getTitle() ); ?></h3>
+                            <h3>
+								<?php echo esc_html( $tab->getTitle() ); ?>
+                            </h3>
                             <div><?php echo esc_html( $tab->getDescription() ); ?></div>
                         </div>
                     </div>
 				<?php endforeach; ?>
-            </div>
+            </nav>
 
-            <div class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
+            <section class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
 				<?php foreach ( $this->tabs as $tab ) : ?>
                     <div
                             class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
@@ -242,7 +293,7 @@ class Form {
 						?>
                     </div>
 				<?php endforeach; ?>
-            </div>
+            </section>
         </div>
 		<?php
 	}
@@ -260,36 +311,6 @@ class Form {
 		}
 		
 		return $this->pricingRuleInstance;
-	}
-	
-	public function renderHint( $hint, $args = array() ) {
-		
-		$args = wp_parse_args( $args, array(
-			'only_for_new_rules' => false,
-			'show_icon'          => true,
-			'custom_class'       => '',
-		) );
-		
-		if ( ! $hint ) {
-			return;
-		}
-		
-		if ( $args['only_for_new_rules'] && ! $this->isNewRule() ) {
-			return;
-		}
-		
-		?>
-        <div class="tpt-global-pricing-rule-hint <?php echo esc_attr( $args['custom_class'] ); ?>">
-			<?php if ( $args['show_icon'] ) : ?>
-                <div class="tpt-global-pricing-rule-hint__icon">
-                    <span class="dashicons dashicons-info"></span>
-                </div>
-			<?php endif; ?>
-            <div class="tpt-global-pricing-rule-hint__content">
-				<?php echo wp_kses_post( $hint ); ?>
-            </div>
-        </div>
-		<?php
 	}
 	
 	public function renderHelpingSteps() {
@@ -439,17 +460,6 @@ class Form {
                 &times;
             </div>
         </div>
-		<?php
-	}
-	
-	public function renderUpgradingNotice() {
-		?>
-        <p style="color: red;">
-			<?php esc_html_e( 'This feature is available only in the premium version.', 'tier-pricing-table' ); ?>
-            <a target="_blank" href="<?php echo esc_url( tpt_fs_activation_url() ); ?>">
-				<?php esc_html_e( 'Upgrade your plan', 'tier-pricing-table' ); ?>
-            </a>
-        </p>
 		<?php
 	}
 	

@@ -6,6 +6,7 @@
  * @package TierPricingTable/Services
  */
 
+use TierPricingTable\Admin\Tips\Tip;
 use TierPricingTable\Admin\Tips\TipsManager;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\TierPricingTablePlugin;
@@ -68,7 +69,7 @@ class SystemStatusReportService {
 
                 <td>
 					<?php
-						echo esc_html( implode( ', ', TipsManager::getSeenTips() ) );
+						echo esc_html( implode( ', ', Tip::getSeenTips() ) );
 					?>
                 </td>
             </tr>
