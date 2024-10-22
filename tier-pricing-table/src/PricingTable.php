@@ -64,12 +64,12 @@ class PricingTable {
 		
 		$supportedTypes = array_merge( TierPricingTablePlugin::getSupportedSimpleProductTypes(),
 			TierPricingTablePlugin::getSupportedVariableProductTypes() );
-		
+
 		// Exit if product is not valid
 		if ( ! $product || ! in_array( $parentProduct->get_type(), $supportedTypes ) ) {
 			return;
 		}
-		
+
 		$settings = apply_filters( 'tiered_pricing_table/display_settings', $settings, $productId );
 		
 		if ( 'tooltip' === $settings['display_type'] ) {
@@ -79,7 +79,7 @@ class PricingTable {
 		$hidden = ( 'tooltip' === $settings['display_type'] || ! $settings['display'] );
 		
 		do_action( 'tiered_pricing_table/before_rendering_tiered_pricing', $parentProduct, $variationID, $settings );
-		
+	
 		?>
         <div class="clear"></div>
         <div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
@@ -144,7 +144,7 @@ class PricingTable {
 			do_action( 'tiered_pricing_table/before_rendering_tiered_pricing/inner', $priceRule, $product, $settings );
 			
 			$this->checkForDuplicateQuantities( $priceRule );
-			
+
 			$this->getContainer()->getFileManager()->includeTemplate( 'frontend/' . $template, array(
 				'pricing_rule' => $priceRule,
 				'price_rules'  => $priceRule->getRules(),

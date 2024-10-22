@@ -42,6 +42,9 @@ class PricingService {
                     if ( !empty( $pricingRule->getRules() ) || 'role-based' === $pricingRule->provider ) {
                         $pricingRule->logPricingModification( '[global rule]: There is pricing at product-level - do not modify the rule' );
                         return $pricingRule;
+                    } else {
+                        $pricingRule = $this->addPricing( $pricingRule, $globalPricingRule );
+                        $pricingRule->logPricingModification( '[global rule]: Pricing rule was fully overridden by global pricing rule data.' );
                     }
                 } else {
                     $pricingRule->logPricingModification( '[global rule]: Pricing rule was fully overridden by global pricing rule data.' );
