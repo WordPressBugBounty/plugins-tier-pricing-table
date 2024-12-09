@@ -6,19 +6,19 @@ use TierPricingTable\Settings\Sections\SubsectionAbstract;
 use TierPricingTable\Settings\Settings;
 
 class SummarySubsection extends SubsectionAbstract {
-
+	
 	public function getTitle(): string {
 		return __( 'Totals on the product page', 'tier-pricing-table' );
 	}
-
+	
 	public function getDescription(): string {
 		return __( 'Totals show information about the total and price per piece.', 'tier-pricing-table' );
 	}
-
+	
 	public function getSlug(): string {
 		return 'summary';
 	}
-
+	
 	public function getSettings(): array {
 		return array(
 			array(
@@ -54,21 +54,21 @@ class SummarySubsection extends SubsectionAbstract {
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Totals template', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'summary_type',
-				'type'     => TPTDisplayType::FIELD_TYPE,
-				'options'  => array(
-					'table'  => __( 'Default', 'tier-pricing-table' ),
-					'inline' => __( 'Labels', 'tier-pricing-table' ),
+				'title'   => __( 'Totals template', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'summary_type',
+				'type'    => TPTDisplayType::FIELD_TYPE,
+				'options' => array(
+					'detailed' => __( 'Detailed', 'tier-pricing-table' ),
+					'table'    => __( 'Reduced', 'tier-pricing-table' ),
+					'inline'   => __( 'Labels', 'tier-pricing-table' ),
 				),
-				'default'  => 'table',
+				'default' => 'detailed',
 			),
 			array(
 				'title'    => __( '"Total" label', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'summary_total_label',
 				'type'     => 'text',
 				'default'  => __( 'Total:', 'tier-pricing-table' ),
-				'desc'     => __( 'Label for the "total" line.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
@@ -76,7 +76,6 @@ class SummarySubsection extends SubsectionAbstract {
 				'id'       => Settings::SETTINGS_PREFIX . 'summary_each_label',
 				'type'     => 'text',
 				'default'  => __( 'Each: ', 'tier-pricing-table' ),
-				'desc'     => __( 'Label for the "each" line.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 		);

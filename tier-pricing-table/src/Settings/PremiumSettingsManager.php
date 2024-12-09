@@ -44,7 +44,7 @@ class PremiumSettingsManager {
 					}
 					const $premiumLabel = jQuery('<span>');
 					$premiumLabel.addClass('tpt_premium_option_label');
-					$premiumLabel.text('Only for premium version');
+					$premiumLabel.text('Available in premium version');
 
 					row.find('th').append($premiumLabel);
 					row.find('td').addClass('tpt_premium_option');
@@ -58,7 +58,7 @@ class PremiumSettingsManager {
 
 					const $premiumLabel = jQuery('<span>');
 					$premiumLabel.addClass('tpt_premium_subsection_label');
-					$premiumLabel.text('Only for premium version');
+					$premiumLabel.text('Available in premium version');
 
 					$title.append($premiumLabel);
 

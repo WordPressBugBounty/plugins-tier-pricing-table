@@ -61,6 +61,11 @@ class Settings {
                 ] );
             } );
         }
+        if ( tpt_fs()->can_use_premium_code() && !tpt_fs()->is_premium() ) {
+            add_action( 'woocommerce_settings_' . self::SETTINGS_PAGE, function () {
+                $this->getContainer()->getFileManager()->includeTemplate( 'admin/banners/free-version-used-premium-available.php' );
+            } );
+        }
     }
 
     protected function initCustomOptions() {
@@ -115,27 +120,27 @@ class Settings {
 
     public function renderSections() {
         ?>
-		<style>
+        <style>
 			h2 {
 				margin-top: 2em;
 				font-size: 1.45em;
 			}
-		</style>
-		<ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
+        </style>
+        <ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
         foreach ( $this->sections as $section ) {
             ?>
-				<li>
+                <li>
 					<?php 
             if ( !$section->isActive() ) {
                 ?>
-						<a href="<?php 
+                        <a href="<?php 
                 echo esc_attr( $section->getURL() );
                 ?>">
 							<?php 
                 echo esc_html( $section->getName() );
                 ?>
-						</a>
+                        </a>
 					<?php 
             } else {
                 ?>
@@ -143,53 +148,53 @@ class Settings {
 						<?php 
                 if ( $section->getSectionCSS() ) {
                     ?>
-							<style>
-								<?php 
+                            <style>
+                                <?php 
                     echo esc_html( $section->getSectionCSS() );
                     ?>
-							</style>
+                            </style>
 						<?php 
                 }
                 ?>
 
-						<a class="current" href="#">
+                        <a class="current" href="#">
 							<?php 
                 echo esc_html( $section->getName() );
                 ?>
-						</a>
+                        </a>
 					<?php 
             }
             ?>
-					|
-				</li>
+                    |
+                </li>
 			<?php 
         }
         ?>
-			<li>
-				<a href="<?php 
+            <li>
+                <a href="<?php 
         echo esc_attr( TierPricingTablePlugin::getDocumentationURL() );
         ?>" target="_blank">
 					<?php 
         esc_html_e( 'Documentation', 'tier-pricing-table' );
         ?>
-					<svg
-							style="
+                    <svg
+                            style="
 							width: 0.8rem;
 							height: 0.8rem;
 							stroke: currentColor;
 							fill: none;"
-							xmlns='http://www.w3.org/2000/svg'
-							stroke-width='10' stroke-dashoffset='0'
-							stroke-dasharray='0' stroke-linecap='round'
-							stroke-linejoin='round' viewBox='0 0 100 100'>
-						<polyline fill="none" points="40 20 20 20 20 90 80 90 80 60"/>
-						<polyline fill="none" points="60 10 90 10 90 40"/>
-						<line fill="none" x1="89" y1="11" x2="50" y2="50"/>
-					</svg>
-				</a>
-			</li>
-		</ul>
-		<br>
+                            xmlns='http://www.w3.org/2000/svg'
+                            stroke-width='10' stroke-dashoffset='0'
+                            stroke-dasharray='0' stroke-linecap='round'
+                            stroke-linejoin='round' viewBox='0 0 100 100'>
+                        <polyline fill="none" points="40 20 20 20 20 90 80 90 80 60"/>
+                        <polyline fill="none" points="60 10 90 10 90 40"/>
+                        <line fill="none" x1="89" y1="11" x2="50" y2="50"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+        <br>
 		<?php 
     }
 

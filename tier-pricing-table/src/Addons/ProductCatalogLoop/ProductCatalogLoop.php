@@ -108,6 +108,9 @@ class ProductCatalogLoop extends AbstractAddon {
             if ( !$product ) {
                 return;
             }
+            if ( !$product->is_purchasable() ) {
+                return;
+            }
             if ( $closeLink ) {
                 echo '</a>';
             }

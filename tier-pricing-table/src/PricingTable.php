@@ -5,6 +5,7 @@ use TierPricingTable\Admin\ProductPage\TieredPricingTab;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use WC_Product;
+use WC_Product_Data_Store_CPT;
 use WC_Product_Variable;
 use WC_Product_Variation;
 
@@ -50,26 +51,23 @@ class PricingTable {
 		
 		$settings = wp_parse_args( $settings, $this->getDefaultSettings( $parentProductID ) );
 		
-		// If the product is variable, but no concrete variation is passed - check for default
-		if ( ! $variationID && in_array( $parentProduct->get_type(),
-				TierPricingTablePlugin::getSupportedVariableProductTypes() ) ) {
-			$defaultVariationId = $this->getDefaultVariation( $parentProduct );
-			
-			$variationID = $defaultVariationId ? $defaultVariationId : null;
+		// If the product is variable, but no specific variation is passed - check for default
+		if ( ! $variationID && TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ) {
+			$variationID = $this->getDefaultVariation( $parentProduct );
 		}
 		
-		// Variation if exists. If not the parent product should be used
+		// Use variation if exists. If not the parent product used
 		$productId = $variationID ? $variationID : $parentProduct->get_id();
 		$product   = wc_get_product( $productId );
 		
 		$supportedTypes = array_merge( TierPricingTablePlugin::getSupportedSimpleProductTypes(),
 			TierPricingTablePlugin::getSupportedVariableProductTypes() );
-
+		
 		// Exit if product is not valid
 		if ( ! $product || ! in_array( $parentProduct->get_type(), $supportedTypes ) ) {
 			return;
 		}
-
+		
 		$settings = apply_filters( 'tiered_pricing_table/display_settings', $settings, $productId );
 		
 		if ( 'tooltip' === $settings['display_type'] ) {
@@ -79,7 +77,7 @@ class PricingTable {
 		$hidden = ( 'tooltip' === $settings['display_type'] || ! $settings['display'] );
 		
 		do_action( 'tiered_pricing_table/before_rendering_tiered_pricing', $parentProduct, $variationID, $settings );
-	
+		
 		?>
         <div class="clear"></div>
         <div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
@@ -144,7 +142,7 @@ class PricingTable {
 			do_action( 'tiered_pricing_table/before_rendering_tiered_pricing/inner', $priceRule, $product, $settings );
 			
 			$this->checkForDuplicateQuantities( $priceRule );
-
+			
 			$this->getContainer()->getFileManager()->includeTemplate( 'frontend/' . $template, array(
 				'pricing_rule' => $priceRule,
 				'price_rules'  => $priceRule->getRules(),
@@ -247,43 +245,28 @@ class PricingTable {
 		return preg_replace( '/[0-9]+/', '', strtolower( wp_generate_password( 20, false ) ) );
 	}
 	
-	protected function getDefaultVariation( WC_Product_Variable $product ) {
-		
+	protected function getDefaultVariation( WC_Product_Variable $product ): ?int {
+  
 		$defaultVariation = AdvanceOptionsForVariableProduct::getDefaultVariation( $product->get_id() );
 		
 		if ( $defaultVariation ) {
 			return $defaultVariation->get_id();
 		}
 		
-		$cached = $this->getContainer()->getCache()->getProductData( $product, 'default_variation_id' );
+		$defaultAttributes = $product->get_default_attributes();
 		
-		if ( false !== $cached ) {
-			return $cached;
+		if ( ! empty( $defaultAttributes ) ) {
+			
+			$defaultAttributesKeys = array_map( function ( $attribute ) {
+				return 'attribute_' . $attribute;
+			}, array_keys( $defaultAttributes ) );
+			
+			$defaultAttributes = array_combine( $defaultAttributesKeys, $defaultAttributes );
+			
+			return ( new WC_Product_Data_Store_CPT() )->find_matching_product_variation( $product, $defaultAttributes );
 		}
-		
-		$variation_id         = 0;
-		$is_default_variation = false;
-		
-		foreach ( $product->get_available_variations() as $variation_values ) {
-			foreach ( $variation_values['attributes'] as $key => $attribute_value ) {
-				$attribute_name = str_replace( 'attribute_', '', $key );
-				$default_value  = $product->get_variation_default_attribute( $attribute_name );
-				if ( $default_value == $attribute_value ) {
-					$is_default_variation = true;
-				} else {
-					$is_default_variation = false;
-					break;
-				}
-			}
-			if ( $is_default_variation ) {
-				$variation_id = $variation_values['variation_id'];
-				break;
-			}
-		}
-		
-		$this->getContainer()->getCache()->setProductData( $product, 'default_variation_id', $variation_id );
-		
-		return $variation_id ? $variation_id : false;
+
+		return null;
 	}
 	
 	public function productHasPricingRules( WC_Product $product ): bool {

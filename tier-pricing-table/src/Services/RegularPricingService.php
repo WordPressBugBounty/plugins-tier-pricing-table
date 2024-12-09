@@ -17,6 +17,12 @@ use WC_Product;
 
 class RegularPricingService {
 	
+	protected $cachedPrices = array(
+		'regular' => array(),
+		'sale'    => array(),
+		'price'   => array(),
+	);
+	
 	public function __construct() {
 		
 		// The service should be enabled by addons. This is useful to do not run this services when all pricing addons are disabled
@@ -70,7 +76,6 @@ class RegularPricingService {
 	}
 	
 	protected function getPrice( ?WC_Product $product, $specific = false, $originalPrice = false ) {
-		
 		if ( ! $product ) {
 			return null;
 		}
@@ -102,7 +107,6 @@ class RegularPricingService {
 				$originalPrice = $product->get_regular_price( 'edit' );
 			} else {
 				$originalPrice = $originalPrice ? $originalPrice : $product->get_price( 'edit' );
-				
 			}
 			
 			// Calculate price based on percentage discount
@@ -117,11 +121,9 @@ class RegularPricingService {
 			}
 		} else {
 			if ( $specific ) {
-				
 				if ( 'sale' === $specific && ! Form::isEmpty( $salePrice ) ) {
 					return $salePrice;
 				} elseif ( 'regular' === $specific && ! Form::isEmpty( $regularPrice ) ) {
-					
 					return $regularPrice;
 				}
 			} else {
@@ -137,6 +139,10 @@ class RegularPricingService {
 	}
 	
 	public function adjustPrice( $originalPrice, ?WC_Product $product ) {
+		
+		if ( ! TierPricingTablePlugin::isSimpleProductSupported( $product ) ) {
+			return $originalPrice;
+		}
 		
 		if ( ! $product ) {
 			return $originalPrice;

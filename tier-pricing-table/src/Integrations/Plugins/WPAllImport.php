@@ -522,9 +522,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 			
 			$this->processImport( $post_id, $data, $importData['import'], $importData['articleData'] );
 		}
-		
 	}
-	
 	
 	public function wpai_api_metabox( $post_type, $current_values ) {
 		
@@ -843,14 +841,14 @@ class WPAllImport extends PluginIntegrationAbstract {
 		
 		$import_options = $import_options['options'];
 		
+		if ( 'yes' == $import_options['update_all_data'] ) {
+			return true;
+		}
+		
 		if ( ! $import_options['update_tiered_pricing'] ) {
 			$this->log( 'Tiered Pricing is disabled' );
 			
 			return false;
-		}
-		
-		if ( 'yes' == $import_options['update_all_data'] ) {
-			return true;
 		}
 		
 		if ( 'full_update' == $import_options['update_custom_fields_logic'] ) {

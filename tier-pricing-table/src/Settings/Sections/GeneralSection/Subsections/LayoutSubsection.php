@@ -84,7 +84,6 @@ class LayoutSubsection extends SubsectionAbstract {
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
-			
 			array(
 				'title'    => __( 'Quantity displaying type', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'quantity_type',

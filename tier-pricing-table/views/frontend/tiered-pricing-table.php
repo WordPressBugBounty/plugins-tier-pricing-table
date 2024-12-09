@@ -13,6 +13,7 @@
 	 * @var int $minimum
 	 * @var array $settings
 	 */
+	
 	use TierPricingTable\CalculationLogic;
 	use TierPricingTable\PriceManager;
 	use TierPricingTable\PricingRule;
@@ -113,7 +114,7 @@
 									<?php echo esc_attr( number_format_i18n( $minimum ) ); ?>
 								</span>
 								<span>
-									<?php echo esc_attr( ' ' . $settings['quantity_measurement_singular'] ); ?>
+									<?php echo esc_attr( ' ' . $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] ); ?>
 								</span>
 							</span>
 						<?php else : ?>

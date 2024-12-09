@@ -6,10 +6,6 @@ class RoleBasedPriceManager {
 	
 	public static function roleHasRules( string $role, int $productId, string $context = 'view' ): bool {
 		
-		$product = wc_get_product( $productId );
-		
-		$parentRoleRulesExists = false;
-		
 		$metadataToCheck = apply_filters( 'tiered_pricing_table/role_based_rules/rule_exists_meta', array(
 			'_tiered_price_rules_type',
 			'_tiered_price_pricing_type',
@@ -25,19 +21,7 @@ class RoleBasedPriceManager {
 			}
 		}
 		
-		if ( $product && $product->is_type( 'variation' ) && 'edit' !== $context ) {
-			
-			foreach ( $metadataToCheck as $metaKey ) {
-				if ( metadata_exists( 'post', $product->get_parent_id(), "_{$role}{$metaKey}" ) ) {
-					$parentRoleRulesExists = true;
-					
-					break;
-				}
-			}
-			
-		}
-		
-		return $productRoleRulesExists || $parentRoleRulesExists;
+		return $productRoleRulesExists;
 	}
 	
 	public static function deleteAllDataForRole( $productId, $role ) {
@@ -98,25 +82,6 @@ class RoleBasedPriceManager {
 		}
 		
 		$rules = ! empty( $rules ) ? array_filter( $rules ) : array();
-		
-		// If no rules for variation check for product level rules.
-		if ( 'edit' !== $context && self::variationHasNoOwnRules( $productId, $role, $rules ) ) {
-			
-			$product = wc_get_product( $productId );
-			
-			$productId = $product->get_parent_id();
-			
-			$type = self::getPricingType( $productId, $role );
-			
-			if ( 'fixed' === $type ) {
-				$rules = (array) get_post_meta( $productId, "_{$role}_fixed_price_rules", true );
-			} else {
-				$rules = (array) get_post_meta( $productId, "_{$role}_percentage_price_rules", true );
-			}
-		}
-		
-		$rules = ! empty( $rules ) ? array_filter( $rules ) : array();
-		
 		ksort( $rules );
 		
 		if ( 'edit' !== $context ) {
@@ -137,13 +102,6 @@ class RoleBasedPriceManager {
 		
 		$type = get_post_meta( $productId, "_{$role}_tiered_price_rules_type", true );
 		
-		// think about it
-		if ( 'view' === $context && self::variationHasNoOwnRules( $productId, $role ) ) {
-			$product = wc_get_product( $productId );
-			
-			$type = get_post_meta( $product->get_parent_id(), "_{$role}_tiered_price_rules_type", true );
-		}
-		
 		$type = in_array( $type, array( 'fixed', 'percentage' ) ) ? $type : $default;
 		
 		if ( 'edit' !== $context ) {
@@ -155,22 +113,11 @@ class RoleBasedPriceManager {
 	
 	public static function getProductQtyMin( int $productId, string $role, string $context = 'view' ): ?int {
 		
-		$currentProductId = $productId;
-		$parentId         = false;
-		
-		if ( 'view' === $context && self::variationHasNoOwnRules( $productId, $role ) ) {
-			$product          = wc_get_product( $productId );
-			$parentId         = $product->get_parent_id();
-			$currentProductId = $parentId;
-		}
-		
-		$minimum = get_post_meta( $currentProductId, "_{$role}_tiered_price_minimum_qty", true );
-		
+		$minimum = get_post_meta( $productId, "_{$role}_tiered_price_minimum_qty", true );
 		$minimum = ! Form::isEmpty( $minimum ) ? intval( $minimum ) : null;
 		
 		if ( 'view' === $context ) {
-			return apply_filters( 'tiered_pricing_table/role_based_rules/price/minimum', $minimum, $role, $productId,
-				$parentId );
+			return apply_filters( 'tiered_pricing_table/role_based_rules/price/minimum', $minimum, $role, $productId );
 		}
 		
 		return $minimum;
@@ -201,8 +148,7 @@ class RoleBasedPriceManager {
 		$price = ! Form::isEmpty( $price ) ? floatval( $price ) : null;
 		
 		if ( 'edit' !== $context ) {
-			return apply_filters( 'tiered_pricing_table/role_based_rules/price/sale_price', $price, $role,
-				$productId );
+			return apply_filters( 'tiered_pricing_table/role_based_rules/price/sale_price', $price, $role, $productId );
 		}
 		
 		return $price;
@@ -243,22 +189,5 @@ class RoleBasedPriceManager {
 		}
 		
 		return $pricingType;
-	}
-	
-	/**
-	 * Check if variation has no own rules
-	 */
-	protected static function variationHasNoOwnRules( int $productId, string $role, array $rules = null ): bool {
-		
-		$rules = $rules ? $rules : self::getPriceRules( $productId, $role, false, 'edit' );
-		
-		if ( empty( $rules ) ) {
-			
-			$product = wc_get_product( $productId );
-			
-			return $product->is_type( 'variation' );
-		}
-		
-		return false;
 	}
 }

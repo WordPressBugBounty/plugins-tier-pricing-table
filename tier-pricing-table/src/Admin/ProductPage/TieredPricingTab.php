@@ -59,6 +59,11 @@ class TieredPricingTab {
         if ( !tpt_fs()->can_use_premium_code() ) {
             $this->renderUpgradeNotice();
         }
+        if ( tpt_fs()->can_use_premium_code() && !tpt_fs()->is_premium() ) {
+            $this->getContainer()->getFileManager()->includeTemplate( 'admin/banners/free-version-used-premium-available.php', array(
+                'is_product' => true,
+            ) );
+        }
         do_action( 'tiered_pricing_table/admin/pricing_tab_begin', $post->ID );
         ?>
 
@@ -86,7 +91,7 @@ class TieredPricingTab {
         do_action( 'tiered_pricing_table/admin/after_minimum_order_quantity_field', $post->ID, null );
         ?>
             </div>
-            
+			
 			<?php 
         do_action( 'tiered_pricing_table/admin/before_advance_product_options', $post->ID );
         ?>
@@ -95,7 +100,7 @@ class TieredPricingTab {
                 <div class="tiered_pricing_tab_product_advance_options__header">
                     <h4>
                         <span class="dashicons dashicons-admin-settings"></span>
-                        <?php 
+						<?php 
         esc_html_e( 'Additional options', 'tier-pricing-table' );
         ?>
                     </h4>

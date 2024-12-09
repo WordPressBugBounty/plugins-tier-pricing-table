@@ -196,8 +196,8 @@ class ProductPageService {
         PricingTable::getInstance()->renderPricingTable( $post->ID, $variationId );
     }
 
-    public function getVariationIdFromURL( $productId ) {
-        $attributes = [];
+    public function getVariationIdFromURL( $productId ) : ?int {
+        $attributes = array();
         $attributeWordLen = strlen( 'attribute_' );
         foreach ( $_REQUEST as $key => $value ) {
             if ( strlen( $key ) < $attributeWordLen ) {
@@ -212,11 +212,13 @@ class ProductPageService {
             return null;
         }
         $product = wc_get_product( $productId );
-        if ( !$product || !in_array( $product->get_type(), TierPricingTablePlugin::getSupportedVariableProductTypes() ) ) {
+        if ( !$product ) {
             return null;
         }
-        $productDataStore = new WC_Product_Data_Store_CPT();
-        return $productDataStore->find_matching_product_variation( $product, $attributes );
+        if ( !TierPricingTablePlugin::isVariableProductSupported( $product ) ) {
+            return null;
+        }
+        return ( new WC_Product_Data_Store_CPT() )->find_matching_product_variation( $product, $attributes );
     }
 
     /**
@@ -280,7 +282,7 @@ class ProductPageService {
         // Checking nonce is not critical here.
         $verifyNonce = apply_filters(
             'tiered_pricing_table/frontend/load_variation/verify_nonce',
-            true,
+            false,
             $nonce,
             'get_pricing_table'
         );

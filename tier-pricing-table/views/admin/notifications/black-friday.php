@@ -11,83 +11,169 @@
 	 *
 	 * @var TwoMonthsUsingDiscount $notification
 	 */
-?>
-<div class="notice" style="border: 1px solid #c3c4c7;
-	padding: 0;
-	background: #6d419c;
-	color: #fff;
-	border-radius: 5px;
-	overflow: hidden;">
 	
-	<div style="display: flex; gap: 20px">
+	$premiumFeatures = array(
+		'Percentage-based discounts',
+		'Role-based pricing',
+		'Upsells in the cart',
+		'Additional columns for pricing table',
+		'Clickable pricing table',
+		'Minimum and maximum order quantity',
 		
-		<div style="max-width: 200px;
-	display: flex;
-	padding: -3px 30px;
-	background: #845EC2;" class="tpt-two-months-using-notification__image">
-			<div class="tpt-two-months-using-notification__image-inner">
-				<img width="100%" src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/pricing-logo.png' ) ); ?>"
-					 alt="">
-				<h4 style="
-	color: #fff;
-	text-align: center;
-	margin: 0;
-">Tiered Pricing Table for WooCommerce</h4>
-			</div>
-		</div>
-		
-		<div style="padding: 15px">
-			<h2 style="font-size:2.2em; color: #fff; line-height: 1.2em; margin: 10px 0 20px 0;">
-				🔥 Black Friday Deal 🔥
-			</h2>
-			
-			<div style="margin: 10px 0">
-				
-				<p style="font-size: 1.2em">
-					Get a
-					<b style="color: #8cff00; font-size: 1.15em; background: #000; padding: 3px 8px; border-radius: 4px">25%
-						discount</b>
-					for the premium version by using the <code
-						style="color: #8cff00; font-size: 1.15em; background: #000; padding: 3px 8px; border-radius: 4px">BF25%OFF</code>
-					coupon.
-				</p>
-				
-				<p>
-					<a href="https://tiered-pricing.com"
-					   style="color: #fff !important;" target="_blank">Check our website</a>
-					to get more information about the premium features.
-				</p>
-				<p>Have a question? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>"
-									   target="_blank"
-									   style="color: #fff !important;">Feel free to contact us!</a></p>
-			</div>
-			<div>
-				<a href="<?php echo esc_attr( tpt_fs_activation_url() ); ?>"
-				   class="tpt-button tpt-button--green" style="margin: 0; font-size: 1.2em">Upgrade 🚀</a>
-				
-				<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>" style="color: #fff; margin-left: 10px"
-				   style=" font-size: 1.2em"><?php esc_html_e( "I'm not interested", 'tier-pricing-table' ); ?></a>
-			</div>
-			<div style="margin-top: 5px">
-				<small>Limited-time offer. Valid only this week.</small>
-			</div>
+		'Instant totals on the product page',
+		'Hide prices for non-logged users',
+		'Show product\'s lowest price in the product list',
+	);
+	
+	$upgradeUrl = add_query_arg( array(
+		'coupon' => 'BF25OFF',
+	), tpt_fs_activation_url() );
 
-		</div>
-		
-		<div class="tpt-two-months-using-notification__close" style="margin-left: auto;
-	text-align: right;padding: 15px;
-	font-size: 1.5em;">
-			<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>"
-			   style="color: #fff;">Close</a>
-		</div>
-	</div>
-</div>
+?>
 
 <style>
-	@media screen and (max-width: 600px) {
-		.tpt-two-months-using-notification__image,
-		.tpt-two-months-using-notification__close {
-			display: none !important;
+	.tpt__admin__black-friday-banner {
+		border: 1px solid #c3c4c7;
+		padding: 10px;
+		border-radius: 5px;
+		overflow: hidden;
+		display: flex;
+	}
+
+	.tpt__admin__black-friday-banner__inner {
+		display: flex;
+		flex-grow: 1;
+		gap: 15px;
+	}
+
+	.tpt__admin__black-friday-banner__close-button {
+		font-size: 1.5em;
+		margin-left: 10px;
+	}
+
+	.tpt__admin__black-friday-banner__close-button a {
+		text-decoration: none;
+	}
+
+	.tpt__admin__black-friday-banner__premium-features {
+		width: 60%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.tpt__admin__black-friday-banner__premium-feature {
+		padding: 5px 10px;
+		background: #f5f5f5;
+		border-radius: 5px;
+		flex-grow: 1;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		gap: 5px;
+		border: 1px solid #f1f1f1;
+	}
+
+	.tpt__admin__black-friday-banner__main-text {
+		flex-grow: 1;
+		padding: 10px;
+	}
+
+	.tpt__admin__black-friday-banner__main-text__title {
+		font-size: 16px;
+		margin-bottom: 20px;
+	}
+
+	.tpt__admin__black-friday-banner__coupon {
+		color: #fff;
+		background: #000;
+		padding: 2px 6px;
+		border-radius: 3px;
+	}
+
+	.tpt__admin__black-friday-banner__main-text__upgrade-buttons {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+	}
+
+	@media screen and (max-width: 768px) {
+
+		.tpt__admin__black-friday-banner__inner {
+			flex-direction: column;
 		}
+
+		.tpt__admin__black-friday-banner__premium-features {
+			width: 100%;
+		}
+
+		.tpt__admin__black-friday-banner__main-text {
+			width: 100%;
+			text-align: center;
+		}
+
+		.tpt__admin__black-friday-banner__main-text__upgrade-buttons {
+			justify-content: center;
+		}
+
 	}
 </style>
+
+<div class="notice tpt__admin__black-friday-banner">
+    <div class="tpt__admin__black-friday-banner__inner">
+
+        <div class="tpt__admin__black-friday-banner__main-text">
+            <div class="tpt__admin__black-friday-banner__main-text__title">
+                🎉 <b>Tiered Pricing Table</b> Black Friday Sale: <b style="color: #b51a00;">Save 25%!</b>
+            </div>
+
+            <div style="margin: 10px 0">
+
+                <p style="font-size: 1.2em">
+                    Use <b class="tpt__admin__black-friday-banner__coupon">BF25OFF</b>
+                    coupon code and get the <b>25% discount</b>!
+                </p>
+
+                <div>Have a question? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>"
+                                         target="_blank"
+                    >Feel free to contact us!</a> or <a target="_blank" href="https://tiered-pricing.com">check our
+                        website</a></div>
+            </div>
+
+            <div class="tpt__admin__black-friday-banner__main-text__upgrade-buttons">
+
+                <a href="<?php echo esc_attr( $upgradeUrl ); ?>"
+                   class="button button-primary button-large">
+                    Upgrade 🚀
+                </a>
+
+                <span>
+                    •
+                </span>
+
+                <a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">
+                    I'm not interested, close the banner
+                </a>
+            </div>
+
+            <div style="margin-top: 5px">
+                <small>Limited-time offer. Valid only this week.</small>
+            </div>
+
+        </div>
+        <div class="tpt__admin__black-friday-banner__premium-features">
+			
+			<?php foreach ( $premiumFeatures as $feature ) : ?>
+                <div class="tpt__admin__black-friday-banner__premium-feature">
+                    ✅ <b><?php echo esc_html( $feature ) ?></b>
+                </div>
+			<?php endforeach; ?>
+
+        </div>
+    </div>
+
+
+    <div class="tpt__admin__black-friday-banner__close-button">
+        <a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">&times;</a>
+    </div>
+</div>

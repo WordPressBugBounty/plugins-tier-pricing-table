@@ -14,7 +14,6 @@ class PricingService {
 			$this,
 			'addPricing',
 		), 20, 2 );
-		
 	}
 	
 	/**
@@ -50,7 +49,6 @@ class PricingService {
 		
 		$pricingRule->pricingData['discount']      = $roleBasedRule->getDiscount();
 		$pricingRule->pricingData['discount_type'] = $roleBasedRule->getDiscountType();
-		
 		
 		$pricingRule->provider             = 'role-based';
 		$pricingRule->providerData['role'] = $roleBasedRule->getRole();

@@ -4,10 +4,6 @@ namespace TierPricingTable;
 
 use WC_Product;
 class PriceManager {
-    protected static $types = array();
-
-    protected static $rules = array();
-
     protected static $pricingRules = array();
 
     public static function getFixedPriceRules( $productId, string $context = 'view' ) : array {
@@ -19,40 +15,21 @@ class PriceManager {
     }
 
     public static function getPriceRules( $productId, ?string $type = null, string $context = 'view' ) : array {
-        if ( 'edit' !== $context && array_key_exists( $productId, self::$rules ) ) {
-            return self::$rules[$productId];
-        }
         $type = ( $type ? $type : self::getPricingType( $productId, 'fixed', $context ) );
         if ( 'fixed' === $type ) {
             $rules = (array) get_post_meta( $productId, '_fixed_price_rules', true );
         } else {
             $rules = (array) get_post_meta( $productId, '_percentage_price_rules', true );
         }
-        $parent_id = $productId;
-        // If no rules for variation check for product level rules.
-        if ( 'edit' !== $context && self::variationHasNoOwnRules( $productId, $rules ) ) {
-            $product = wc_get_product( $productId );
-            $parent_id = $product->get_parent_id();
-            $type = self::getPricingType( $parent_id );
-            if ( 'fixed' === $type ) {
-                $rules = get_post_meta( $parent_id, '_fixed_price_rules', true );
-            } else {
-                $rules = get_post_meta( $parent_id, '_percentage_price_rules', true );
-            }
-        }
-        $rules = ( !empty( $rules ) ? $rules : array() );
-        $rules = ( is_array( $rules ) ? array_filter( $rules ) : array() );
+        $rules = ( !empty( $rules ) ? array_filter( $rules ) : array() );
         ksort( $rules );
         if ( 'edit' !== $context ) {
             $rules = apply_filters(
                 'tiered_pricing_table/price/product_price_rules',
                 $rules,
                 $productId,
-                $type,
-                $parent_id
+                $type
             );
-            // Cache
-            self::$rules[$productId] = $rules;
         }
         return array_filter( $rules, function ( $quantity ) {
             return intval( $quantity ) > 1;
@@ -167,15 +144,13 @@ class PriceManager {
     }
 
     public static function getPricingType( $productId, string $default = 'fixed', string $context = 'view' ) : string {
-        if ( 'edit' !== $context && array_key_exists( $productId, self::$types ) ) {
-            return self::$types[$productId];
+        if ( !tpt_fs()->can_use_premium_code() ) {
+            return 'fixed';
         }
-        $type = 'fixed';
+        $type = get_post_meta( $productId, '_tiered_price_rules_type', true );
         $type = ( in_array( $type, array('fixed', 'percentage') ) ? $type : $default );
         if ( 'edit' !== $context ) {
-            $type = apply_filters( 'tiered_pricing_table/price/type', $type, $productId );
-            // Cache
-            self::$types[$productId] = $type;
+            return apply_filters( 'tiered_pricing_table/price/type', $type, $productId );
         }
         return $type;
     }
@@ -202,25 +177,6 @@ class PriceManager {
      */
     public static function getProductQtyMin( $productId, ?string $context = 'view' ) : ?int {
         return null;
-    }
-
-    /**
-     * Check if variation has no own rules
-     *
-     * @param  int  $productId
-     * @param  ?array  $rules
-     *
-     * @return bool
-     */
-    protected static function variationHasNoOwnRules( $productId, ?array $rules = array() ) : bool {
-        $rules = ( !empty( $rules ) ? $rules : self::getPriceRules( $productId, false, 'edit' ) );
-        if ( empty( $rules ) ) {
-            $product = wc_get_product( $productId );
-            if ( $product ) {
-                return $product->is_type( 'variation' );
-            }
-        }
-        return false;
     }
 
     /**
@@ -253,32 +209,68 @@ class PriceManager {
      * @return PricingRule
      */
     public static function getPricingRule( $productId, ?string $tieredPricingType = null ) : PricingRule {
-        // Object cache
+        /****************************************
+         *
+         * Object cache
+         *
+         ****************************************/
         if ( array_key_exists( $productId, self::$pricingRules ) && !$tieredPricingType ) {
             return self::$pricingRules[$productId];
         }
+        /****************************************
+         *
+         * Initialize variables
+         *
+         ****************************************/
+        $product = null;
         $pricingRule = new PricingRule($productId);
-        if ( $tieredPricingType ) {
-            if ( 'percentage' === $tieredPricingType ) {
-                $pricingRule->setRules( self::getPercentagePriceRules( $productId ) );
-                $pricingRule->setType( 'percentage' );
-            } else {
-                $pricingRule->setRules( self::getFixedPriceRules( $productId ) );
-                $pricingRule->setType( 'fixed' );
+        $tieredPricingType = ( $tieredPricingType ? $tieredPricingType : self::getPricingType( $productId ) );
+        /****************************************
+         *
+         * Set tiered pricing for the product
+         *
+         ****************************************/
+        $tieredPricingRules = self::getPriceRules( $productId, $tieredPricingType );
+        // If product does not have rules, check parent product
+        if ( empty( $tieredPricingRules ) ) {
+            $product = wc_get_product( $productId );
+            if ( $product && TierPricingTablePlugin::isVariationProductSupported( $product ) ) {
+                $tieredPricingType = self::getPricingType( $product->get_parent_id() );
+                $tieredPricingRules = self::getPriceRules( $product->get_parent_id(), $tieredPricingType );
+                if ( !empty( $tieredPricingRules ) ) {
+                    $pricingRule->logPricingModification( 'Using parent product pricing rules' );
+                }
             }
-        } else {
-            $pricingRule->setRules( self::getPriceRules( $productId ) );
-            $pricingRule->setType( self::getPricingType( $productId ) );
         }
-        $pricingRule->setMinimum( self::getProductQtyMin( $productId ) );
-        /**
+        $pricingRule->setRules( $tieredPricingRules );
+        $pricingRule->setType( $tieredPricingType );
+        /****************************************
+         *
+         * Set minimum quantity for the product
+         *
+         ****************************************/
+        $minimum = self::getProductQtyMin( $productId );
+        // If product does not have minimum quantity, check parent product
+        if ( !$minimum ) {
+            $product = ( $product ? $product : wc_get_product( $productId ) );
+            if ( $product && TierPricingTablePlugin::isVariationProductSupported( $product ) ) {
+                $minimum = self::getProductQtyMin( $product->get_parent_id() );
+                if ( $minimum ) {
+                    $pricingRule->logPricingModification( 'Using parent product minimum quantity' );
+                }
+            }
+        }
+        $pricingRule->setMinimum( $minimum );
+        /*****************************************
+         *
          * Services that modify pricing rule
          *
          * @hooked QuantityManager - 1:  Added maximum and quantity step information.
          * @hooked CategoryTierAddon - 10:  Filter with category-based rules
          * @hooked RoleBasedPricingAddon - 20:  Filter with role-based rules
          * @hooked GlobalPricingService - 30:  Filter with global rules
-         */
+         *
+         *****************************************/
         $pricingRule = apply_filters( 'tiered_pricing_table/price/pricing_rule', $pricingRule, $productId );
         self::$pricingRules[$productId] = $pricingRule;
         return $pricingRule;

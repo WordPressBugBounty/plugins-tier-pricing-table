@@ -43,7 +43,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '5.1.3';
+    const VERSION = '5.1.4';
 
     /**
      * TierPricingTablePlugin constructor.
@@ -175,7 +175,12 @@ class TierPricingTablePlugin {
     }
 
     public static function getSupportedSimpleProductTypes() : array {
-        return (array) apply_filters( 'tiered_pricing_table/supported_simple_product_types', array('simple', 'subscription', 'variation') );
+        return (array) apply_filters( 'tiered_pricing_table/supported_simple_product_types', array(
+            'simple',
+            'variation',
+            'subscription',
+            'subscription-variation'
+        ) );
     }
 
     public static function getSupportedVariableProductTypes() : array {

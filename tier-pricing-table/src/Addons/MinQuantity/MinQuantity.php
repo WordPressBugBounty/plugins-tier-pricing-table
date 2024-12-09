@@ -108,18 +108,22 @@ class MinQuantity extends AbstractAddon {
 		}, 10, 3 );
 		
 		add_filter( 'woocommerce_update_cart_validation', function ( $passed, $cart_item_key, $values, $quantity ) {
-			$productId = intval( $values['variation_id'] ? $values['variation_id'] : $values['product_id'] );
 			
-			$pricingRule = PriceManager::getPricingRule( $productId );
-			$min         = $pricingRule->getMinimum();
+			$product = $values['data'] ?? null;
 			
-			if ( ! $min ) {
+			if ( ! ( $product instanceof WC_Product ) ) {
 				return $passed;
 			}
 			
-			$min = max( 1, $min - $this->getProductCartQuantity( $values['product_id'] ) );
+			$pricingRule = PriceManager::getPricingRule( $product->get_id() );
 			
-			if ( $quantity && $quantity < $min ) {
+			if ( ! $pricingRule->getMinimum() ) {
+				return $passed;
+			}
+			
+			$min = max( 1, $pricingRule->getMinimum() - $this->getProductCartQuantity( $values['product_id'] ) );
+			
+			if ( $quantity && $quantity < $pricingRule->getMinimum() ) {
 				
 				// translators: %s: minimum quantity
 				wc_add_notice( sprintf( __( 'Minimum quantity for the product is %s', 'tier-pricing-table' ), $min ),
@@ -173,7 +177,6 @@ class MinQuantity extends AbstractAddon {
 					});
 
 				})(jQuery);
-
             </script>
 			<?php
 		} );

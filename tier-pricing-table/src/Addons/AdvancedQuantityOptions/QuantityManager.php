@@ -4,7 +4,6 @@ use TierPricingTable\PriceManager;
 use TierPricingTable\PricingRule;
 use TierPricingTable\TierPricingTablePlugin;
 use WC_Product;
-use WC_Product_Simple;
 
 class QuantityManager {
 	
@@ -180,9 +179,13 @@ class QuantityManager {
 		} );
 		
 		add_filter( 'woocommerce_update_cart_validation', function ( $passed, $cart_item_key, $values, $quantity ) {
-			$productId = $values['variation_id'] ? intval( $values['variation_id'] ) : $values['product_id'];
+			$product = $values['data'] ?? null;
 			
-			$pricingRule = PriceManager::getPricingRule( $productId );
+			if ( ! ( $product instanceof WC_Product ) ) {
+				return $passed;
+			}
+			
+			$pricingRule = PriceManager::getPricingRule( $product->get_id() );
 			
 			$max     = $pricingRule->data['maximum_quantity'] ? intval( $pricingRule->data['maximum_quantity'] ) : null;
 			$groupOf = $pricingRule->data['group_of_quantity'] ? intval( $pricingRule->data['group_of_quantity'] ) : null;

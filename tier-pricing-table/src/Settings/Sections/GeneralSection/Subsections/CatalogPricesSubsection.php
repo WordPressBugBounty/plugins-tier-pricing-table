@@ -46,9 +46,10 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 				'id'       => Settings::SETTINGS_PREFIX . 'tiered_price_at_catalog_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => [
-					'range'  => __( 'Range (from lowest to highest)', 'tier-pricing-table' ),
 					'lowest' => __( 'The lowest price', 'tier-pricing-table' ),
+					'range'  => __( 'Range (from lowest to highest)', 'tier-pricing-table' ),
 				],
+				'default'  => 'lowest',
 				'desc'     => __( 'How to display prices for products with tiered pricing.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
@@ -57,7 +58,8 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 				'id'      => Settings::SETTINGS_PREFIX . 'lowest_prefix',
 				'type'    => 'text',
 				'default' => __( 'From', 'tier-pricing-table' ),
-				'desc'    => __( 'Enter a prefix that will be shown before the lowest price. For example, it can look like this: <b>From $10.00</b>', 'tier-pricing-table' ),
+				'desc'    => __( 'Enter a prefix that will be shown before the lowest price. For example, it can look like this: <b>From $10.00</b>',
+					'tier-pricing-table' ),
 			),
 		);
 	}

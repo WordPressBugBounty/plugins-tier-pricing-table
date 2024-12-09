@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.6.5
 Requires PHP: 7.2
-Stable tag: 5.1.3
+Stable tag: 5.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,6 +158,14 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.1.4 [2024-12-05] =
+* New: New template for the totals on the product page.
+* Enhance: Speed optimization
+* Enhance: Notice when the free version is active but the premium version is available.
+* Update: Minimum required characters to find products and categories in the global pricing rules set to 1.
+* Update: Promotion banners updated.
+* Update: Minor improvements and fixes.
 
 = 5.1.3 [2024-10-22] =
 * Fix: Global pricing rules issue.

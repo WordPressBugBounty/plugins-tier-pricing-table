@@ -157,16 +157,17 @@ abstract class FormTab {
 	public function renderSelect2( $args = array() ) {
 		
 		$args = wp_parse_args( $args, array(
-			'id'            => '',
-			'search_action' => '',
-			'value'         => '',
-			'options'       => null,
-			'placeholder'   => '',
-			'multiple'      => true,
-			'width'         => '100%',
-			'description'   => '',
-			'desc_tip'      => true,
-			'css_class'     => 'wc-product-search',
+			'id'                   => '',
+			'search_action'        => '',
+			'value'                => '',
+			'options'              => null,
+			'placeholder'          => '',
+			'multiple'             => true,
+			'width'                => '100%',
+			'description'          => '',
+			'desc_tip'             => true,
+			'minimum_input_length' => 1,
+			'css_class'            => 'wc-product-search',
 		) );
 		
 		?>
@@ -180,7 +181,9 @@ abstract class FormTab {
                     id="<?php echo esc_attr( $args['id'] ); ?>"
                     name="<?php echo esc_attr( $args['multiple'] ? $args['id'] . '[]' : $args['id'] ); ?>"
                     data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"
-                    data-action="<?php echo esc_attr( $args['search_action'] ); ?>">
+                    data-action="<?php echo esc_attr( $args['search_action'] ); ?>"
+                    data-minimum_input_length="<?php echo esc_attr( $args['minimum_input_length'] ); ?>">
+                >
 				
 				<?php if ( $args['options'] ): ?>
 					

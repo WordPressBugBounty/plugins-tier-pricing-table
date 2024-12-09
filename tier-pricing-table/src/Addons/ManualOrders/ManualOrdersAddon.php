@@ -27,7 +27,7 @@ class ManualOrdersAddon extends AbstractAddon {
 		$productPrice      = $item->get_product()->get_price();
 		$tieredPricingRule = PriceManager::getPricingRule( $item->get_product()->get_id() );
 		
-		// Item has no tiered pricing rule. Return regular price (which also can be adjusted by pricing rule, but on get_price hook)
+		// Item has no tiered pricing rule. Return regular price (which also can be adjusted by pricing rule, but on the get_price hook)
 		if ( ! $tieredPricingRule->getRules() ) {
 			return $productPrice;
 		}
