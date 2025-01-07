@@ -72,7 +72,7 @@ class Integrations {
 				new $theme();
 			}
 		}
-		
+
 		foreach ( $plugins as $plugin ) {
 			new $plugin();
 		}

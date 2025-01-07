@@ -70,12 +70,12 @@ class PriceManager {
                 }
                 if ( 'view' === $context && $withTaxes ) {
                     $product = wc_get_product( $productId );
-                    $productPrice = self::getPriceWithTaxes( $productPrice, $product, $place );
+                    $productPrice = self::getPriceToDisplay( $productPrice, $product, $place );
                 }
                 break;
             }
         }
-        $productPrice = ( isset( $productPrice ) ? $productPrice : false );
+        $productPrice = $productPrice ?? false;
         if ( $productPrice && apply_filters( 'tiered_pricing_table/price/round_price', $roundPrice ) ) {
             $productPrice = round( $productPrice, max( 2, wc_get_price_decimals() ) );
         }
@@ -98,26 +98,17 @@ class PriceManager {
      *
      * @param  float  $price
      * @param  WC_Product  $product
-     * @param  ?string  $place
+     * @param  ?string  $displayContext
      *
      * @return ?float
      */
-    public static function getPriceWithTaxes( $price, WC_Product $product, ?string $place = 'shop' ) : ?float {
+    public static function getPriceToDisplay( $price, WC_Product $product, ?string $displayContext = 'shop' ) : ?float {
         if ( wc_tax_enabled() ) {
-            if ( 'cart' === $place ) {
-                $price = ( 'incl' === get_option( 'woocommerce_tax_display_cart' ) ? wc_get_price_including_tax( $product, array(
-                    'qty'   => 1,
-                    'price' => $price,
-                ) ) : wc_get_price_excluding_tax( $product, array(
-                    'qty'   => 1,
-                    'price' => $price,
-                ) ) );
-            } else {
-                $price = wc_get_price_to_display( $product, array(
-                    'price' => $price,
-                    'qty'   => 1,
-                ) );
-            }
+            $price = wc_get_price_to_display( $product, array(
+                'price'           => $price,
+                'qty'             => 1,
+                'display_context' => $displayContext,
+            ) );
         }
         return floatval( $price );
     }

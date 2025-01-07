@@ -2,14 +2,12 @@
 
 namespace TierPricingTable\Admin\Notifications\Notifications;
 
-use TierPricingTable\Core\ServiceContainerTrait;
 /**
  * Class Notifications
  *
  * @package TierPricingTable\Admin\Notifications
  */
 abstract class BlackFriday extends Notification {
-    use ServiceContainerTrait;
     public function getTemplate() : string {
         return 'admin/notifications/black-friday.php';
     }

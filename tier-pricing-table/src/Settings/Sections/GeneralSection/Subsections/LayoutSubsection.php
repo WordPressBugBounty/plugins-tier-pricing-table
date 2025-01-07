@@ -198,7 +198,6 @@ class LayoutSubsection extends SubsectionAbstract {
 				'desc'              => __( 'The selected pricing option will include totals.', 'tier-pricing-table' ),
 				'custom_attributes' => [ 'data-tiered-pricing-premium-option' => true ],
 			),
-			
 			array(
 				'title'        => __( 'Pricing option template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'options_option_text',
@@ -208,6 +207,7 @@ class LayoutSubsection extends SubsectionAbstract {
 					'tp_quantity',
 					'tp_discount',
 					'tp_rounded_discount',
+					'tp_base_unit_name',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 				'desc'         => __( 'Use the variables above to build the template for the pricing option.',
@@ -227,6 +227,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'default'      => __( '<strong>Buy {tp_quantity} pieces</strong>', 'tier-pricing-table' ),
 				'placeholders' => array(
 					'tp_quantity',
+					'tp_base_unit_name',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 				'desc'         => __( 'Set up the first pricing tier template where a discount is not offered.',
@@ -242,6 +243,7 @@ class LayoutSubsection extends SubsectionAbstract {
 					'tp_discount',
 					'tp_price',
 					'tp_rounded_discount',
+					'tp_base_unit_name',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 				'desc'         => __( 'Use the variables above to build the template for the pricing string.',
@@ -264,6 +266,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'placeholders' => array(
 					'tp_quantity',
 					'tp_price',
+					'tp_base_unit_name',
 				),
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 				'desc'         => __( 'Set up the first pricing tier template where a discount is not offered.',

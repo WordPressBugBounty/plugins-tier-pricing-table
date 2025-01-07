@@ -5,24 +5,19 @@ class DiscountRulesForWooCommerce extends PluginIntegrationAbstract {
 	public function run() {
 		
 		add_filter( 'tiered_pricing_table/cart/need_price_recalculation', function ( $recalculate, $cartItem ) {
-			
 			if ( isset( $cartItem['wdr_free_product'] ) ) {
 				return false;
 			}
 			
 			return $recalculate;
-			
-			
 		}, 10, 2 );
 		
 		add_filter( 'tiered_pricing_table/cart/need_price_recalculation/item', function ( $recalculate, $cartItem ) {
-			
 			if ( isset( $cartItem['wdr_free_product'] ) ) {
 				return false;
 			}
 			
 			return $recalculate;
-			
 		}, 10, 2 );
 	}
 	

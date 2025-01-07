@@ -6,7 +6,6 @@ use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use TierPricingTable\Addons\Addons;
 use TierPricingTable\Admin\Admin;
 use TierPricingTable\Admin\Notifications\Notifications;
-use TierPricingTable\Admin\Notifications\Notifications\ActivationNotification;
 use TierPricingTable\Blocks\GutenbergBlocks;
 use TierPricingTable\Core\AdminNotifier;
 use TierPricingTable\Core\Cache;
@@ -43,7 +42,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '5.1.4';
+    const VERSION = '5.1.5';
 
     /**
      * TierPricingTablePlugin constructor.
@@ -170,7 +169,6 @@ class TierPricingTablePlugin {
      * Fired during plugin uninstall
      */
     public static function uninstall() {
-        // Settings::deleteOptions();
         delete_option( 'tpt_plugin_activation_timestamp' );
     }
 
@@ -207,7 +205,6 @@ class TierPricingTablePlugin {
      * Plugin activation
      */
     public function activate() {
-        ActivationNotification::setActive();
     }
 
     public static function getDocumentationURL() : string {

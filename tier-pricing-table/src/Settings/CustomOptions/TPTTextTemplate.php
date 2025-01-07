@@ -201,6 +201,12 @@ class TPTTextTemplate {
 				'description' => __( '{tp_price} - Tier price for one piece', 'tier-pricing-table' ),
 				'variableKey' => '{tp_price}',
 			),
+			'tp_base_unit_name'  => array(
+				'name'        => __( 'Base unit name', 'tier-pricing-table' ),
+				'description' => __( 'It will use base unit name from products if you set it.', 'tier-pricing-table' ),
+				'variableKey' => '{tp_base_unit_name}',
+			),
+		
 		);
 	}
 }

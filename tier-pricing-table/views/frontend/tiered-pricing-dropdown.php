@@ -5,9 +5,9 @@
 	use TierPricingTable\PricingRule;
 	use TierPricingTable\Settings\Settings;
 	
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+	if ( ! defined( 'WPINC' ) ) {
+		die;
+	}
 	
 	/**
 	 * Available variables
@@ -24,23 +24,24 @@ if ( ! defined( 'WPINC' ) ) {
 	 * @var array $settings
 	 */
 	
-if ( ! function_exists( 'tptParseOptionText' ) ) {
-	function tptParseOptionText( $text, $quantity, $discount = null ) {
-		return strtr( $text, array(
-			'{tp_quantity}'         => $quantity,
-			'{tp_discount}'         => $discount,
-			'{tp_rounded_discount}' => ! is_null( $discount ) ? round( $discount ) : 0,
-		) );
+	if ( ! function_exists( 'tptParseOptionText' ) ) {
+		function tptParseOptionText( $text, $quantity, $discount = null, $base_unit_name = null ) {
+			return strtr( $text, array(
+				'{tp_quantity}'         => $quantity,
+				'{tp_discount}'         => $discount,
+				'{tp_rounded_discount}' => ! is_null( $discount ) ? round( $discount ) : 0,
+				'{tp_base_unit_name}'   => $base_unit_name,
+			) );
+		}
 	}
-}
 	
 	$sale_price = $product->get_sale_price();
 	
-if ( $sale_price ) {
-	$sale_price = wc_get_price_to_display( $product, array(
-		'price' => $sale_price,
-	) );
-}
+	if ( $sale_price ) {
+		$sale_price = wc_get_price_to_display( $product, array(
+			'price' => $sale_price,
+		) );
+	}
 	
 	$regular_price = wc_get_price_to_display( $product, array(
 		'price' => $product->get_regular_price(),
@@ -59,14 +60,14 @@ if ( $sale_price ) {
 	) );
 
 
-	?>
+?>
 <?php if ( ! empty( $price_rules ) ) : ?>
-	
+
 	<div class="tiered-pricing-wrapper">
 		<?php if ( ! empty( $settings['title'] ) ) : ?>
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
-		
+
 		<div class="tiered-pricing-dropdown"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
@@ -78,34 +79,39 @@ if ( $sale_price ) {
 			 data-price="<?php echo esc_attr( $price ); ?>"
 			 data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
-			
 			<?php
 				$discountAmount = 0;
-			if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
-				$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
-					$product->get_sale_price() );
-			}
+				if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
+					$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
+						$product->get_sale_price() );
+				}
 			?>
-			
+
 			<div class="tiered-pricing-dropdown__select-box" tabindex="0">
 				<div class="tiered-pricing-dropdown-option">
 					<div class="tiered-pricing-dropdown-option__quantity">
 						
 						<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
-							<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' ); ?>
+							<?php
+							$quantity     = esc_attr( number_format_i18n( $minimum ) . ' ' );
+							$baseUnitName = $settings['quantity_measurement_singular'];
+							?>
 						<?php else : ?>
-							<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' ); ?>
+							<?php
+							$quantity     = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' );
+							$baseUnitName = $settings['quantity_measurement_plural'];
+							?>
 						<?php endif; ?>
 						
 						<?php if ( $discountAmount > 0 ) : ?>
 							<?php
 							echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity,
-								$discountAmount ) );
+								$discountAmount, $baseUnitName ) );
 							?>
 						<?php else : ?>
-							<?php 
-							echo wp_kses_post( tptParseOptionText( $settings['options_default_option_text'],
-								$quantity ) ); 
+							<?php
+							echo wp_kses_post( tptParseOptionText( $settings['options_default_option_text'], $quantity,
+								null, $baseUnitName ) );
 							?>
 						<?php endif; ?>
 					</div>
@@ -123,7 +129,7 @@ if ( $sale_price ) {
 									</del>
 								</div>
 							<?php endif; ?>
-							
+
 							<div class="tiered-pricing-dropdown-option-price__discounted">
 								<?php
 									echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ),
@@ -142,7 +148,7 @@ if ( $sale_price ) {
 					</svg>
 				</div>
 			</div>
-			
+
 			<div class="tiered-pricing-dropdown__list">
 				<ul>
 					<li class="tiered-pricing-dropdown-option tiered-pricing-dropdown-option--active tiered-pricing-dropdown-option--default"
@@ -150,27 +156,33 @@ if ( $sale_price ) {
 						data-tiered-price="<?php echo esc_attr( $price ); ?>"
 						data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
 						data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>">
-						
+
 						<div class="tiered-pricing-dropdown-option__quantity">
 							<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
-								<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' ); ?>
+								<?php
+								$quantity     = esc_attr( number_format_i18n( $minimum ) . ' ' );
+								$baseUnitName = $settings['quantity_measurement_singular'];
+								?>
 							<?php else : ?>
-								<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' ); ?>
+								<?php
+								$quantity     = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' );
+								$baseUnitName = $settings['quantity_measurement_plural'];
+								?>
 							<?php endif; ?>
 							
 							<?php if ( $discountAmount > 0 ) : ?>
 								<?php
 								echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity,
-									$discountAmount ) );
+									$discountAmount, $baseUnitName ) );
 								?>
 							<?php else : ?>
-								<?php 
-								echo wp_kses_post( tptParseOptionText( $settings['options_option_text'],
-									$quantity ) ); 
+								<?php
+								echo wp_kses_post( tptParseOptionText( $settings['options_default_option_text'],
+									$quantity, null, $baseUnitName ) );
 								?>
 							<?php endif; ?>
 						</div>
-						
+
 						<div class="tiered-pricing-dropdown-option__pricing">
 							<div class="tiered-pricing-option-price">
 								
@@ -185,7 +197,7 @@ if ( $sale_price ) {
 										</del>
 									</div>
 								<?php endif; ?>
-								
+
 								<div class="tiered-pricing-dropdown-option-price__discounted">
 									<?php
 										echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ),
@@ -208,7 +220,8 @@ if ( $sale_price ) {
 							$discountAmount = $currentPrice;
 						} else {
 							$discountAmount = PriceManager::calculateDiscount( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price(),
-								$pricing_rule->getTierPrice( $currentQuantity, false ) );						}
+								$pricing_rule->getTierPrice( $currentQuantity, false ) );
+						}
 						
 						$iterator->next();
 						
@@ -244,17 +257,17 @@ if ( $sale_price ) {
 									false ),
 							) );
 						?>
-						
+
 						<li class="tiered-pricing-dropdown-option"
 							data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
 							data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
 							data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 							data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
-							
+
 							<div class="tiered-pricing-dropdown-option__quantity">
 								<?php
 									echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity,
-										round( $discountAmount, 2 ) ) );
+										round( $discountAmount, 2 ), $settings['quantity_measurement_plural'] ) );
 								?>
 							</div>
 							<div class="tiered-pricing-dropdown-option__pricing">
@@ -285,7 +298,7 @@ if ( $sale_price ) {
 			</div>
 		</div>
 	</div>
-	
+
 	<style>
 		<?php
 		$backgroundColor = Settings::hex2rgba($settings['active_tier_color'], 0.05);

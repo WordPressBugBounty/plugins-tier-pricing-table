@@ -1,7 +1,5 @@
 <?php namespace TierPricingTable\Admin\Notifications\Notifications;
 
-use TierPricingTable\Core\ServiceContainerTrait;
-
 /**
  * Class Notifications
  *

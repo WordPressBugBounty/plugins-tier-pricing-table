@@ -11,7 +11,7 @@ class AddifyRequestAQuote extends PluginIntegrationAbstract {
 			
 			$pricingRule = PriceManager::getPricingRule( $product->get_id() );
 			
-			$price = $pricingRule->getTierPrice( $quantity, false, 'cart', false );
+			$price = $pricingRule->getTierPrice( $quantity, false, 'cart' );
 			
 			if ( $price ) {
 				$product->set_price( $price );

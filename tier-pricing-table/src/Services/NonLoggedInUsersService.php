@@ -47,7 +47,7 @@ class NonLoggedInUsersService {
 		
 		$label = $this->getAddToCartLabel();
 		
-		if ( $label ) {
+		if ( $label && $this->isPreventPurchase() ) {
 			add_filter( 'woocommerce_product_single_add_to_cart_text', function () use ( $label ) {
 				return $label;
 			} );

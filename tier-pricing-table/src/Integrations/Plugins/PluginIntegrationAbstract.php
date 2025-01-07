@@ -2,33 +2,32 @@
 
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Settings\CustomOptions\TPTIntegrationOption;
-use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
 use TierPricingTable\Settings\Settings;
 
 abstract class PluginIntegrationAbstract {
-
+	
 	use ServiceContainerTrait;
-
-	abstract public function getTitle();
-
-	abstract public function getDescription();
-
-	abstract public function getSlug();
-
+	
+	abstract public function getTitle(): string;
+	
+	abstract public function getDescription(): string;
+	
+	abstract public function getSlug(): string;
+	
 	abstract public function run();
-
+	
 	public function __construct() {
-
+		
 		add_filter( 'tiered_pricing_table/settings/integrations_settings', array(
 			$this,
 			'addToIntegrationsSettings',
 		) );
-
+		
 		if ( $this->isEnabled() ) {
 			$this->run();
 		}
 	}
-
+	
 	public function addToIntegrationsSettings( $integrations ) {
 		$integrations[] = array(
 			'title'                => $this->getTitle(),
@@ -40,27 +39,27 @@ abstract class PluginIntegrationAbstract {
 			'author_url'           => $this->getAuthorURL(),
 			'integration_category' => $this->getIntegrationCategory(),
 		);
-
+		
 		return $integrations;
 	}
-
-	public function getIconURL() {
+	
+	public function getIconURL(): ?string {
 		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/placeholder.png' );
 	}
-
-	public function getAuthorURL() {
+	
+	public function getAuthorURL(): ?string {
 		return null;
 	}
-
-	public function isEnabled() {
+	
+	public function isEnabled(): bool {
 		return $this->getContainer()->getSettings()->get( '_integration_' . $this->getSlug(), 'yes' ) === 'yes';
 	}
-
-	protected function isActiveByDefault() {
+	
+	protected function isActiveByDefault(): bool {
 		return true;
 	}
-
-	public function getIntegrationCategory() {
+	
+	public function getIntegrationCategory(): string {
 		return 'other';
 	}
 }

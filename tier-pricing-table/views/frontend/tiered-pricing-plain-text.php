@@ -39,52 +39,53 @@
 	) );
 	
 	if ( ! function_exists( 'tptParsePlainText' ) ) {
-		function tptParsePlainText( $text, $quantity, $discount = null, $price ) {
+		function tptParsePlainText( $text, $quantity, $discount = null, $price, $base_unit_name ) {
 			return strtr( $text, array(
 				'{tp_quantity}'         => $quantity,
 				'{tp_discount}'         => $discount,
 				'{tp_rounded_discount}' => ! is_null( $discount ) ? round( $discount ) : 0,
 				'{tp_price}'            => $price ? wc_price( $price ) : '',
+				'{tp_base_unit_name}'   => $base_unit_name,
 			) );
 		}
 	}
 ?>
 <?php if ( ! empty( $price_rules ) ) : ?>
 
-    <div class="tiered-pricing-wrapper">
+	<div class="tiered-pricing-wrapper">
 		<?php if ( ! empty( $settings['title'] ) ) : ?>
-            <h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
+			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
 
-        <ul class="tiered-pricing-plain-texts"
-            id="<?php echo esc_attr( $id ); ?>"
-            data-product-id="<?php echo esc_attr( $product_id ); ?>"
-            data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"
-            data-minimum="<?php echo esc_attr( $minimum ); ?>"
-            data-product-name="<?php echo esc_attr( $product_name ); ?>"
-            data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
-            data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
-            data-price="<?php echo esc_attr( $price ); ?>"
-            data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
-        >
-            <li class="tiered-pricing-plain-text tiered-pricing--active tiered-pricing-plain-text--default"
-                data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
-                data-tiered-price="<?php echo esc_attr( $price ); ?>"
-                data-tiered-price-exclude-taxes="
+		<ul class="tiered-pricing-plain-texts"
+			id="<?php echo esc_attr( $id ); ?>"
+			data-product-id="<?php echo esc_attr( $product_id ); ?>"
+			data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"
+			data-minimum="<?php echo esc_attr( $minimum ); ?>"
+			data-product-name="<?php echo esc_attr( $product_name ); ?>"
+			data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
+			data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
+			data-price="<?php echo esc_attr( $price ); ?>"
+			data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
+		>
+			<li class="tiered-pricing-plain-text tiered-pricing--active tiered-pricing-plain-text--default"
+				data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
+				data-tiered-price="<?php echo esc_attr( $price ); ?>"
+				data-tiered-price-exclude-taxes="
 				<?php
-				    echo esc_attr( wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
-					    'price' => $real_price,
-				    ) ) );
-			    ?>
+					echo esc_attr( wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
+						'price' => $real_price,
+					) ) );
+				?>
 				 "
-                data-tiered-price-include-taxes="
+				data-tiered-price-include-taxes="
 				<?php
-				    echo esc_attr( wc_get_price_including_tax( wc_get_product( $product_id ), array(
-					    'price' => $real_price,
-				    ) ) );
-			    ?>
+					echo esc_attr( wc_get_price_including_tax( wc_get_product( $product_id ), array(
+						'price' => $real_price,
+					) ) );
+				?>
 				 "
-            >
+			>
 				<?php
 					$discountAmount = 0;
 					if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
@@ -94,25 +95,30 @@
 				?>
 				
 				<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
-					<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' ); ?>
+					<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
+					$baseUnitName   = $settings['quantity_measurement_singular'];
+					?>
 				<?php else : ?>
-					<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' ); ?>
+					<?php
+					$quantity     = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' );
+					$baseUnitName = $settings['quantity_measurement_plural'];
+					?>
 				<?php endif; ?>
 				
 				<?php if ( $discountAmount > 0 ) : ?>
 					<?php
 					echo wp_kses_post( tptParsePlainText( $settings['plain_text_option_text'], $quantity,
-						$discountAmount, $price ) );
+						$discountAmount, $price, $baseUnitName ) );
 					?>
 				<?php else : ?>
 					<?php
 					echo wp_kses_post( tptParsePlainText( $settings['plain_text_default_option_text'], $quantity, null,
-						$price ) );
+						$price, $baseUnitName ) );
 					?>
 				<?php endif; ?>
 
 
-            </li>
+			</li>
 			
 			<?php $iterator = new ArrayIterator( $price_rules ); ?>
 			
@@ -160,28 +166,29 @@
 				
 				?>
 
-                <li class="tiered-pricing-plain-text"
-                    data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
-                    data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
-                    data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
-                    data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
+				<li class="tiered-pricing-plain-text"
+					data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
+					data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
+					data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
+					data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
 					
 					<?php
 						
 						echo wp_kses_post( tptParsePlainText( $settings['plain_text_option_text'], $quantity,
-							round( $discountAmount, 2 ), $currentProductPrice ) );
+							round( $discountAmount, 2 ), $currentProductPrice,
+							$settings['quantity_measurement_plural'] ) );
 					?>
-                </li>
+				</li>
 			<?php endwhile; ?>
 			
 			<?php do_action( 'tiered_pricing_table/options/options', $pricing_rule ); ?>
-        </ul>
+		</ul>
 		
 		<?php do_action( 'tiered_pricing_table/options/after_options', $pricing_rule ); ?>
-    </div>
+	</div>
 
-    <style>
-        <?php
+	<style>
+		<?php
 		if ( $settings['clickable_rows'] && tpt_fs()->can_use_premium_code() ) {
 				echo esc_html("#{$id} .tiered-pricing-plain-text {cursor: pointer; }");
 		}
@@ -196,5 +203,5 @@
 		
 		?>
 
-    </style>
+	</style>
 <?php endif; ?>

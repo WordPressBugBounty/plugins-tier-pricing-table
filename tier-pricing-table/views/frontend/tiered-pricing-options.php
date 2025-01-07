@@ -34,11 +34,17 @@ $price = wc_get_price_to_display( $product, array(
     'price' => $product->get_price(),
 ) );
 if ( !function_exists( 'tptParseOptionText' ) ) {
-    function tptParseOptionText(  $text, $quantity, $discount = null  ) {
+    function tptParseOptionText(
+        $text,
+        $quantity,
+        $discount = null,
+        $base_unit_name = null
+    ) {
         return strtr( $text, array(
             '{tp_quantity}'         => $quantity,
             '{tp_discount}'         => $discount,
             '{tp_rounded_discount}' => ( !is_null( $discount ) ? round( $discount ) : 0 ),
+            '{tp_base_unit_name}'   => $base_unit_name,
         ) );
     }
 
@@ -125,12 +131,14 @@ if ( !empty( $price_rules ) ) {
         ?>
 						<?php 
         $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
+        $baseUnitName = $settings['quantity_measurement_singular'];
         ?>
 					<?php 
     } else {
         ?>
 						<?php 
         $quantity = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' );
+        $baseUnitName = $settings['quantity_measurement_plural'];
         ?>
 					<?php 
     }
@@ -140,13 +148,23 @@ if ( !empty( $price_rules ) ) {
     if ( $discountAmount > 0 ) {
         ?>
 						<?php 
-        echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity, $discountAmount ) );
+        echo wp_kses_post( tptParseOptionText(
+            $settings['options_option_text'],
+            $quantity,
+            $discountAmount,
+            $baseUnitName
+        ) );
         ?>
 					<?php 
     } else {
         ?>
 						<?php 
-        echo wp_kses_post( tptParseOptionText( $settings['options_default_option_text'], $quantity ) );
+        echo wp_kses_post( tptParseOptionText(
+            $settings['options_default_option_text'],
+            $quantity,
+            null,
+            $baseUnitName
+        ) );
         ?>
 					<?php 
     }
@@ -260,7 +278,12 @@ if ( !empty( $price_rules ) ) {
 					</div>
 					<div class="tiered-pricing-option__quantity">
 						<?php 
-        echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity, round( $discountAmount, 2 ) ) );
+        echo wp_kses_post( tptParseOptionText(
+            $settings['options_option_text'],
+            $quantity,
+            round( $discountAmount, 2 ),
+            $settings['quantity_measurement_plural']
+        ) );
         ?>
 					</div>
 					<div class="tiered-pricing-option__pricing">

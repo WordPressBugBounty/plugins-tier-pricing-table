@@ -3,9 +3,9 @@
 Contributors: bycrik, freemius
 Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
-Tested up to: 6.6.5
+Tested up to: 6.7.1
 Requires PHP: 7.2
-Stable tag: 5.1.4
+Stable tag: 5.1.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ The plugin enables you to set quantity-based discounts and display these prices 
 
 **All-in-one and most complete dynamic pricing plugin for WooCommerce.**
 
-[youtube https://www.youtube.com/watch?v=fQKv3Z9DtE4]
+[youtube https://www.youtube.com/watch?v=wRyPr6VQHZM]
 
 [**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Plugin Demo**](https://demo.tiered-pricing.com/) | [**Visit plugin website**](https://tiered-pricing.com/) | [**Contact us**](https://tiered-pricing.com/contact-us/)
 
@@ -158,6 +158,13 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.1.5 [2025-01-06] =
+* New: Welcome page.
+* New: Base unit name variable for pricing templates.
+* Update: Freemius SDK to the latest version.
+* Update: Declared compatibility with the latest WP and WC versions.
+* Fix: Non-logged-in service.
 
 = 5.1.4 [2024-12-05] =
 * New: New template for the totals on the product page.

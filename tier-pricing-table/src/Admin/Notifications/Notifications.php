@@ -109,7 +109,8 @@ class Notifications {
 		return array(
 			new TwoMonthsUsingDiscount(),
 			new YearUsingDiscount(),
-			new ActivationNotification(),
+			// The activation notification was changed to welcome page.
+			// new ActivationNotification(),
 			new BlackFriday2024(),
 			new BlackFriday2025(),
 			new BlackFriday2026(),

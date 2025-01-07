@@ -1,5 +1,8 @@
 <?php namespace TierPricingTable\Integrations\Plugins;
 
+use WC_Bundled_Item_Data;
+use WC_Product_Bundle;
+
 class ProductBundles extends PluginIntegrationAbstract {
 
 	public function run() {
@@ -30,10 +33,10 @@ class ProductBundles extends PluginIntegrationAbstract {
 				$currentProductId = get_queried_object_id();
 				$currentProduct   = wc_get_product( $currentProductId );
 
-				if ( $currentProduct && $currentProduct instanceof \WC_Product_Bundle ) {
+				if ( $currentProduct instanceof WC_Product_Bundle ) {
 					foreach ( $currentProduct->get_bundled_data_items() as $dataItem ) {
 						// Do not modify prices for bundle items
-						if ( $dataItem instanceof \WC_Bundled_Item_Data && $dataItem->get_product_id() === $product->get_id() ) {
+						if ( $dataItem instanceof WC_Bundled_Item_Data && $dataItem->get_product_id() === $product->get_id() ) {
 							return $originalPriceHTML;
 						}
 					}
@@ -89,28 +92,28 @@ class ProductBundles extends PluginIntegrationAbstract {
 		add_filter( 'tiered_pricing_table/services/pricing/override_zero_prices', '__return_false' );
 	}
 
-	public function getAuthorURL() {
+	public function getAuthorURL(): string  {
 		return 'https://woocommerce.com/products/product-bundles/';
 	}
 
-	public function getIconURL() {
+	public function getIconURL(): string  {
 		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/woocommerce-develop.jpeg' );
 	}
 
-	public function getTitle() {
+	public function getTitle(): string  {
 		return __( 'Product Bundles (by WooCommerce)', 'tier-pricing-table' );
 	}
 
-	public function getDescription() {
+	public function getDescription(): string  {
 		return __( 'Integration provides compatibility with Product Bundles for WooCommerce to support bundle product type.',
 			'tier-pricing-table' );
 	}
 
-	public function getSlug() {
+	public function getSlug(): string  {
 		return 'product-bundles-for-woocommerce';
 	}
 
-	public function getIntegrationCategory() {
+	public function getIntegrationCategory(): string  {
 		return 'custom_product_types';
 	}
 }

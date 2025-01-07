@@ -5,9 +5,9 @@
 	use TierPricingTable\Core\ServiceContainer;
 	use TierPricingTable\TierPricingTablePlugin;
 	
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+	if ( ! defined( 'WPINC' ) ) {
+		die;
+	}
 	
 	ActivationNotification::setInactive();
 ?>
@@ -15,10 +15,9 @@ if ( ! defined( 'WPINC' ) ) {
 <div class="updated notice is-dismissible" style="border: 1px solid #c3c4c7; padding: 15px 20px">
 	<div style="display: flex; gap: 10px; align-items: center">
 		<div>
-			<img
-				height="100px"
-				src="<?php echo esc_attr( ServiceContainer::getInstance()->getFileManager()->locateAsset( 'admin/pricing-logo.png' ) ); ?>"
-				alt="">
+			<img height="100px"
+				 src="<?php echo esc_attr( ServiceContainer::getInstance()->getFileManager()->locateAsset( 'admin/pricing-logo.png' ) ); ?>"
+				 alt="">
 		</div>
 		<div>
 			<p>
@@ -38,15 +37,16 @@ if ( ! defined( 'WPINC' ) ) {
 							'post_type' => GlobalTieredPricingCPT::SLUG,
 						), admin_url( 'edit.php' ) );
 						
-						$productsLink           = sprintf( '<b><a target="_blank" href="%s">%s</a></b>', $productsURL,
+						$productsLink = sprintf( '<b><a target="_blank" href="%s">%s</a></b>', $productsURL,
 							__( 'products', 'tier-pricing-table' ) );
+						
 						$globalPricingRulesLink = sprintf( '<a target="_blank" href="%s"><b>%s</b></a>',
 							$globalRulesURL, __( 'a global pricing rule', 'tier-pricing-table' ) );
 						
 						// translators: %1$s: product links, %2$s: categories
 						echo wp_kses_post( sprintf( __( 'Add quantity-based pricing rules directly in the %1$s or create %2$s that will work for product categories and user roles.',
 							'tier-pricing-table' ), $productsLink, $globalPricingRulesLink ) );
-						?>
+					?>
 				</span>
 			</p>
 			<p style="margin-top: 10px">

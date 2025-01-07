@@ -85,8 +85,8 @@ class CartUpsellsService {
                             $nextPrice = PriceManager::getProductPriceWithPercentageDiscount( $product, $prevPrice );
                             $currentPrice = PriceManager::getProductPriceWithPercentageDiscount( $product, $iterator->current() );
                         }
-                        $currentPrice = PriceManager::getPriceWithTaxes( $currentPrice, $product, 'cart' );
-                        $nextPrice = PriceManager::getPriceWithTaxes( $nextPrice, $product, 'cart' );
+                        $currentPrice = PriceManager::getPriceToDisplay( $currentPrice, $product, 'cart' );
+                        $nextPrice = PriceManager::getPriceToDisplay( $nextPrice, $product, 'cart' );
                         return array(
                             'next_price'      => $nextPrice,
                             'next_discount'   => PriceManager::calculateDiscount( $currentPrice, $nextPrice ),
@@ -102,7 +102,7 @@ class CartUpsellsService {
                             $nextPrice = PriceManager::getProductPriceWithPercentageDiscount( $product, $prevPrice );
                             $currentPrice = $product->get_price();
                         }
-                        $nextPrice = PriceManager::getPriceWithTaxes( $nextPrice, $product, 'cart' );
+                        $nextPrice = PriceManager::getPriceToDisplay( $nextPrice, $product, 'cart' );
                         return array(
                             'next_price'      => $nextPrice,
                             'next_discount'   => PriceManager::calculateDiscount( $currentPrice, $nextPrice ),
