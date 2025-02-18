@@ -34,48 +34,49 @@ class AdvanceOptionsForVariableProduct {
 			}
 			?>
 
-            <p class="form-field _tiered_pricing_default_variation show_if_variable">
-                <label for="_tiered_pricing_default_variation_id">
+			<p class="form-field _tiered_pricing_default_variation show_if_variable">
+				<label for="_tiered_pricing_default_variation_id">
 					<?php
 						esc_html_e( 'Default variation', 'tier-pricing-table' );
 					?>
-                </label>
+				</label>
 
-                <select class="wc-product-search" style="width: 50%;"
-                        id="_tiered_pricing_default_variation_id"
-                        data-allow_clear="true"
-                        name="_tiered_pricing_default_variation_id"
-                        data-include="<?php echo esc_attr( $productId ); ?>"
-                        data-placeholder="
+				<select class="wc-product-search" style="width: 50%;"
+						id="_tiered_pricing_default_variation_id"
+						data-allow_clear="true"
+						name="_tiered_pricing_default_variation_id"
+						data-include="<?php echo esc_attr( $productId ); ?>"
+						data-placeholder="
 						<?php
-					        esc_attr_e( 'Search for a variation&hellip;', 'tier-pricing-table' );
-				        ?>
+							esc_attr_e( 'Search for a variation&hellip;', 'tier-pricing-table' );
+						?>
 							"
-                        data-action="woocommerce_json_search_tpt_product_variations">
+						data-action="woocommerce_json_search_tpt_product_variations">
 					
 					<?php $default = self::getDefaultVariation( $productId, 'edit' ); ?>
 					
 					<?php if ( $default ) : ?>
-                        <option selected value="<?php echo esc_attr( $default->get_id() ); ?>">
+						<option selected value="<?php echo esc_attr( $default->get_id() ); ?>">
 							<?php echo esc_attr( $default->get_attribute_summary() ); ?>
-                        </option>
+						</option>
 					<?php endif; ?>
-                </select>
+				</select>
 
-                <span class="description" style="clear: left; display: block; margin-top: 35px; margin-left: 0">
+				<span class="description" style="clear: left; display: block; margin-top: 35px; margin-left: 0">
 					<?php
 						esc_html_e( 'The pricing for the selected variation will be shown before the attributes are selected on the product page. Attributes will not be pre-selected.',
 							'tier-pricing-table' );
 					?>
 				</span>
-            </p>
-			<?php
+			</p>
 			
-			/**
-			 * Product type clarification
-			 *
-			 * @var WC_Product_Variable $product
-			 */
+			<?php woocommerce_wp_checkbox( array(
+				'id'          => '_tiered_pricing_variable_product_same_prices',
+				'value'       => wc_bool_to_string( self::isVariableProductSamePrices( $productId ) ),
+				'label'       => __( 'Variations have the same prices', 'tier-pricing-table' ),
+				'description' => __( 'Do not load prices or reset the pricing table when selecting attributes. The default variation has the same prices as all variations. Selecting default variation is required.',
+					'tier-pricing-table' ),
+			) );
 		} );
 	}
 	
@@ -94,8 +95,22 @@ class AdvanceOptionsForVariableProduct {
 		$data = $_POST;
 		
 		$defaultVariation = ! empty( $data['_tiered_pricing_default_variation_id'] ) ? intval( $data['_tiered_pricing_default_variation_id'] ) : null;
+		$samePrices       = ! empty( $data['_tiered_pricing_variable_product_same_prices'] );
 		
 		self::updateDefaultVariation( $productId, $defaultVariation );
+		self::updateVariableProductSamePrices( $productId, $samePrices );
+	}
+	
+	public static function isVariableProductSamePrices( $productId ): bool {
+		return 'yes' === get_post_meta( $productId, '_tiered_pricing_variable_product_same_prices', true );
+	}
+	
+	public static function updateVariableProductSamePrices( $productId, bool $samePrices = false ) {
+		if ( $samePrices ) {
+			update_post_meta( $productId, '_tiered_pricing_variable_product_same_prices', 'yes' );
+		} else {
+			delete_post_meta( $productId, '_tiered_pricing_variable_product_same_prices' );
+		}
 	}
 	
 	public static function updateDefaultVariation( $variableProductId, $defaultVariationId = null ) {

@@ -78,16 +78,21 @@ class PricingTable {
 		
 		do_action( 'tiered_pricing_table/before_rendering_tiered_pricing', $parentProduct, $variationID, $settings );
 		
+		$variableProductSamePrices = AdvanceOptionsForVariableProduct::isVariableProductSamePrices( $parentProduct->get_id() );
+		
 		?>
-        <div class="clear"></div>
-        <div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
-             data-settings="<?php echo esc_attr( json_encode( $settings ) ); ?>"
-             data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
-             data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
-             data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
-             data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>">
+		<div class="clear"></div>
+		<div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
+			 data-settings="<?php echo esc_attr( json_encode( $settings ) ); ?>"
+			 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
+			 data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
+			 data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
+			<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ): ?>
+				data-variable-product-same-prices="<?php echo esc_attr( $variableProductSamePrices ? 'yes' : 'no' ); ?>"
+			<?php endif; ?>
+			 data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>">
 			<?php $this->renderPricingTableHTML( $parentProduct, $product, $settings ); ?>
-        </div>
+		</div>
 		<?php
 	}
 	
@@ -246,7 +251,7 @@ class PricingTable {
 	}
 	
 	protected function getDefaultVariation( WC_Product_Variable $product ): ?int {
-  
+		
 		$defaultVariation = AdvanceOptionsForVariableProduct::getDefaultVariation( $product->get_id() );
 		
 		if ( $defaultVariation ) {
@@ -265,7 +270,7 @@ class PricingTable {
 			
 			return ( new WC_Product_Data_Store_CPT() )->find_matching_product_variation( $product, $defaultAttributes );
 		}
-
+		
 		return null;
 	}
 	
@@ -324,27 +329,27 @@ class PricingTable {
 		if ( $firstRuleQuantity && $firstRuleQuantity <= $minimum ) {
 			?>
 
-            <div style="font-size: .8em;">
-                <div class="woocommerce-error" role="alert" style="margin-bottom: 0">
-                    Duplicated quantities detected. Minimum order quantity is equal or higher than the first tiered
-                    pricing.
-                </div>
-                <div style="color: #555;
+			<div style="font-size: .8em;">
+				<div class="woocommerce-error" role="alert" style="margin-bottom: 0">
+					Duplicated quantities detected. Minimum order quantity is equal or higher than the first tiered
+					pricing.
+				</div>
+				<div style="color: #555;
 	padding: 10px 12px;
 	border: 1px solid #b32c2e;
 	background: #fff5f5;">
-                    <p style="padding: 0; margin: 0">
-                        The minimum order quantity must be less than the first tiered pricing rule quantity.
-                    </p>
-                    <p style="padding: 0; margin: 0"> The first tier always uses woocommerce price and is applied to
-                        quantities between minimum order
-                        quantity and
-                        the first tiered pricing rule quantity.
-                    </p>
-                    <br>
-                    <b>This notice shown only for administrators.</b>
-                </div>
-            </div>
+					<p style="padding: 0; margin: 0">
+						The minimum order quantity must be less than the first tiered pricing rule quantity.
+					</p>
+					<p style="padding: 0; margin: 0"> The first tier always uses woocommerce price and is applied to
+						quantities between minimum order
+						quantity and
+						the first tiered pricing rule quantity.
+					</p>
+					<br>
+					<b>This notice shown only for administrators.</b>
+				</div>
+			</div>
 			<?php
 		}
 	}

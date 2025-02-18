@@ -233,6 +233,5 @@
 		.tiered-pricing--active .tiered-pricing-block__quantity {
 			background: <?php echo esc_html($settings['active_tier_color'])?> !important;
 		}
-
     </style>
 <?php endif; ?>

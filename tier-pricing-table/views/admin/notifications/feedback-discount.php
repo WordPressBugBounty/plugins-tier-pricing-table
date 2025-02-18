@@ -32,7 +32,7 @@
 <style>
 	.tpt__admin__feedback-discount-banner {
 		border: 1px solid #c3c4c7;
-		padding: 10px;
+		padding: 20px 10px !important;
 		border-radius: 5px;
 		overflow: hidden;
 		display: flex;

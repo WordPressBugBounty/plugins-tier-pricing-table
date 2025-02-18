@@ -53,7 +53,7 @@ class Form {
 			* Externals
 			 */
 			/* do not display any notices on rule creation */
-			.wrap .notice:not(.notice-success) {
+			.wrap .notice:not(.notice-success, .tpt__admin__feedback-discount-banner) {
 				display: none
 			}
 
