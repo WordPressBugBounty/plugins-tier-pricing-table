@@ -61,13 +61,20 @@ class TieredPricingCartService {
         if ( !$recalculateCartItemSubtotal ) {
             return $subtotal;
         }
+        $considerSalePriceAsDiscount = apply_filters(
+            'tiered_pricing_table/cart/subtotal/consider_sale_price_as_discount',
+            false,
+            $cartItem,
+            $cartItemKey
+        );
         // Reset product instance because prices is already modified in the "woocommerce_before_calculate_totals" hook.
         // We will not be able to get the original price
         $product = wc_get_product( $cartItem['data']->get_id() );
         if ( $product->is_taxable() ) {
             if ( wc()->cart->display_prices_including_tax() ) {
                 $originalCartItemPrice = wc_get_price_including_tax( $product, array(
-                    'qty' => $cartItem['quantity'],
+                    'qty'   => $cartItem['quantity'],
+                    'price' => ( $considerSalePriceAsDiscount ? $product->get_regular_price() : $product->get_price() ),
                 ) );
                 $newCartItemPrice = wc_get_price_including_tax( $product, array(
                     'qty'   => $cartItem['quantity'],
@@ -80,7 +87,8 @@ class TieredPricingCartService {
                 }
             } else {
                 $originalCartItemPrice = wc_get_price_excluding_tax( $product, array(
-                    'qty' => $cartItem['quantity'],
+                    'qty'   => $cartItem['quantity'],
+                    'price' => ( $considerSalePriceAsDiscount ? $product->get_regular_price() : $product->get_price() ),
                 ) );
                 $newCartItemPrice = wc_get_price_excluding_tax( $product, array(
                     'qty'   => $cartItem['quantity'],
@@ -93,7 +101,8 @@ class TieredPricingCartService {
                 }
             }
         } else {
-            $originalCartItemPrice = (float) $product->get_price() * (float) $cartItem['quantity'];
+            $_originalItemPrice = ( $considerSalePriceAsDiscount ? $product->get_regular_price() : $product->get_price() );
+            $originalCartItemPrice = (float) $_originalItemPrice * (float) $cartItem['quantity'];
             $newCartItemPrice = (float) $newPrice * (float) $cartItem['quantity'];
             $originalProductSubtotal = wc_price( $originalCartItemPrice );
             $newProductSubtotal = wc_price( $newCartItemPrice );

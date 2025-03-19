@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.7.1
 Requires PHP: 7.2
-Stable tag: 5.1.6
+Stable tag: 5.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,6 +158,11 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.1.7 [2025-02-21] =
+* New: CURCY compatibility
+* Update: Yith RaQ integration
+* Update: WPML config
 
 = 5.1.6 [2025-02-08] =
 * New: Do not reload pricing table for variable product when all prices are the same.

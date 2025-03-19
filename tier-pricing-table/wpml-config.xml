@@ -9,6 +9,8 @@
         <key name="tier_pricing_table_summary_total_label"/>
         <key name="tier_pricing_table_summary_each_label"/>
 
+        <key name="tier_pricing_table_lowest_prefix"/>
+
         <key name="tier_pricing_table_options_option_text"/>
         <key name="tier_pricing_table_options_default_option_text"/>
         <key name="tier_pricing_table_options_cart_upsell_template"/>
@@ -23,6 +25,8 @@
         <custom-field action="copy">_percentage_price_rules</custom-field>
         <custom-field action="copy">_tiered_price_rules_type</custom-field>
         <custom-field action="copy">_tiered_price_minimum_qty</custom-field>
+        <custom-field action="copy">_tiered_pricing_maximum_quantity</custom-field>
+        <custom-field action="copy">_tiered_pricing_group_of_quantity</custom-field>
     </custom-fields>
 
 </wpml-config>

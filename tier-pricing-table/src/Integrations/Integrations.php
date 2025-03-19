@@ -2,6 +2,7 @@
 
 use TierPricingTable\Integrations\Plugins\AddifyRequestAQuote;
 use TierPricingTable\Integrations\Plugins\AeliaMulticurrency;
+use TierPricingTable\Integrations\Plugins\Curcy;
 use TierPricingTable\Integrations\Plugins\DiscountRulesForWooCommerce;
 use TierPricingTable\Integrations\Plugins\Elementor\ElementorIntegration;
 use TierPricingTable\Integrations\Plugins\MixMatch;
@@ -63,6 +64,7 @@ class Integrations {
 			WombatProductAddons::class,
 			
 			DiscountRulesForWooCommerce::class,
+			Curcy::class,
 		) );
 		
 		foreach ( $themes as $themeName => $theme ) {

@@ -93,29 +93,31 @@ class ProductCatalogLoop extends AbstractAddon {
             10,
             4
         );
-        $position = ProductCatalogLoopSettingsSection::getPosition();
-        $closeLink = false;
-        if ( 'woocommerce_shop_loop_item_title' === $position['hook'] ) {
-            $closeLink = true;
-            remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
-        }
-        add_action( $position['hook'], function () use($closeLink) {
-            global $product, $post;
-            if ( !$product instanceof WC_Product ) {
-                $productID = ( isset( $post ) ? $post->ID : null );
-                $product = wc_get_product( $productID );
+        add_action( 'init', function () {
+            $position = ProductCatalogLoopSettingsSection::getPosition();
+            $closeLink = false;
+            if ( 'woocommerce_shop_loop_item_title' === $position['hook'] ) {
+                $closeLink = true;
+                remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
             }
-            if ( !$product ) {
-                return;
-            }
-            if ( !$product->is_purchasable() ) {
-                return;
-            }
-            if ( $closeLink ) {
-                echo '</a>';
-            }
-            $this->render( $product, ProductCatalogLoopSettingsSection::useReducedStyles() );
-        }, $position['priority'] );
+            add_action( $position['hook'], function () use($closeLink) {
+                global $product, $post;
+                if ( !$product instanceof WC_Product ) {
+                    $productID = ( isset( $post ) ? $post->ID : null );
+                    $product = wc_get_product( $productID );
+                }
+                if ( !$product ) {
+                    return;
+                }
+                if ( !$product->is_purchasable() ) {
+                    return;
+                }
+                if ( $closeLink ) {
+                    echo '</a>';
+                }
+                $this->render( $product, ProductCatalogLoopSettingsSection::useReducedStyles() );
+            }, $position['priority'] );
+        } );
     }
 
     public function render( WC_product $product, $useReducedStyles = false ) {
