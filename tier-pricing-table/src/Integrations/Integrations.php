@@ -9,6 +9,7 @@ use TierPricingTable\Integrations\Plugins\MixMatch;
 use TierPricingTable\Integrations\Plugins\ProductBundles;
 use TierPricingTable\Integrations\Plugins\WCCS;
 use TierPricingTable\Integrations\Plugins\WCPA;
+use TierPricingTable\Integrations\Plugins\WCPProductBundles;
 use TierPricingTable\Integrations\Plugins\WombatProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceDeposits;
@@ -65,6 +66,8 @@ class Integrations {
 			
 			DiscountRulesForWooCommerce::class,
 			Curcy::class,
+			
+			WCPProductBundles::class,
 		) );
 		
 		foreach ( $themes as $themeName => $theme ) {
@@ -74,7 +77,7 @@ class Integrations {
 				new $theme();
 			}
 		}
-
+		
 		foreach ( $plugins as $plugin ) {
 			new $plugin();
 		}

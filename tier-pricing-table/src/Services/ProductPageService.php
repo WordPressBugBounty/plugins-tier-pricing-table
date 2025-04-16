@@ -163,19 +163,19 @@ class ProductPageService {
         if ( in_array( $product->get_type(), $supportedTypes ) ) {
             ob_start();
             ?>
-        <span class="tiered-pricing-dynamic-price-wrapper<?php 
+		<span class="tiered-pricing-dynamic-price-wrapper<?php 
             echo ( $isVariable ? ' tiered-pricing-dynamic-price-wrapper--variable' : '' );
             ?>"
-              data-display-context="<?php 
+			  data-display-context="<?php 
             echo esc_attr( $priceDisplayContext );
             ?>"
-              data-price-type="<?php 
+			  data-price-type="<?php 
             echo esc_attr( $priceType );
             ?>"
-              data-product-id="<?php 
+			  data-product-id="<?php 
             echo esc_attr( $product->get_id() );
             ?>"
-              data-parent-id="<?php 
+			  data-parent-id="<?php 
             echo esc_attr( ( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id() ) );
             ?>">
 			<?php 
@@ -292,7 +292,9 @@ class ProductPageService {
         $product = wc_get_product( $product_id );
         if ( $product ) {
             $parentProduct = wc_get_product( $product->get_parent_id() );
-            PricingTable::getInstance()->renderPricingTableHTML( $parentProduct, $product, $renderSettings );
+            if ( $product ) {
+                PricingTable::getInstance()->renderPricingTableHTML( $parentProduct, $product, $renderSettings );
+            }
         }
     }
 

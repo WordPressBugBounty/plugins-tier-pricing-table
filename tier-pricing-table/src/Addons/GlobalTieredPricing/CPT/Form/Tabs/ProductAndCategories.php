@@ -108,6 +108,10 @@ class ProductAndCategories extends FormTab {
 				foreach ( $pricingRule->getExcludedProducts() as $productId ) {
 					$product = wc_get_product( $productId );
 					
+					if ( ! $product ) {
+						continue;
+					}
+					
 					if ( ! $product->get_sku() ) {
 						$options[ $productId ] = $product->get_name();
 					} else {
