@@ -9,9 +9,9 @@ class WombatProductAddons extends PluginIntegrationAbstract {
 		if ( ! $price ) {
 			return $price;
 		}
-  
+		
 		// Premium version
-		if ( $price && ! empty( $cart_item['wapf_item_price']['options_total'] ) ) {
+		if ( ! empty( $cart_item['wapf_item_price']['options_total'] ) ) {
 			$price += $cart_item['wapf_item_price']['options_total'];
 		}
 		
@@ -31,7 +31,7 @@ class WombatProductAddons extends PluginIntegrationAbstract {
 					}
 				}
 			}
-   
+			
 			$price += $optionsTotal;
 		}
 		
@@ -98,7 +98,7 @@ class WombatProductAddons extends PluginIntegrationAbstract {
 					$('[data-product_variations]').data('product_variations', variationData);
 				};
 
-				$('.tpt__tiered-pricing').on('tiered_price_update', function (event, data) {
+				$(document).on('tiered_price_update', function (event, data) {
 
 					if (typeof WAPF !== 'undefined') {
 						// the variable is defined
@@ -126,7 +126,7 @@ class WombatProductAddons extends PluginIntegrationAbstract {
 	
 	public function run() {
 		
-		add_action( 'wp_head', array( $this, 'addCompatibilityScript' ) );
+		add_action( 'wp_footer', array( $this, 'addCompatibilityScript' ) );
 		
 		add_filter( 'tiered_pricing_table/cart/product_cart_price', array( $this, 'addAddonsPriceToItem' ), 20, 2 );
 		

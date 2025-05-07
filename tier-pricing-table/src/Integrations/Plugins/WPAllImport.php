@@ -14,8 +14,6 @@ class WPAllImport extends PluginIntegrationAbstract {
 	
 	public $options = array();
 	
-	public $notice_text;
-	
 	public $logger = null;
 	
 	protected $isWizard = false;
@@ -32,9 +30,16 @@ class WPAllImport extends PluginIntegrationAbstract {
 	
 	public function run() {
 		
-		$this->name = __( 'Tiered Pricing Table', 'tier-pricing-table' );
+		$this->name = 'Tiered Pricing Table';
 		
 		$this->slug = 'tier-pricing-table';
+		
+		$this->add_option( 'update_tiered_pricing', '1' );
+		
+		$this->process();
+	}
+	
+	public function addFields() {
 		
 		foreach ( $this->getFieldsToImport() as $slug => $field ) {
 			
@@ -45,10 +50,6 @@ class WPAllImport extends PluginIntegrationAbstract {
 			$this->add_field( $slug, $field['title'], $field['type'], null, $field['description'], true, '',
 				isset( $field['role'] ) ? $field['role'] : '' );
 		}
-		
-		$this->add_option( 'update_tiered_pricing', '1' );
-		
-		$this->process();
 	}
 	
 	public function processImport( $post_id, $data, $import_options, $article ) {
@@ -310,6 +311,8 @@ class WPAllImport extends PluginIntegrationAbstract {
 		
 		$this->active_post_types = array( 'product', 'variation' );
 		
+		add_action( 'init', array( $this, 'addFields' ), 10 );
+		
 		add_filter( 'pmxi_addons', array( $this, 'wpai_api_register' ) );
 		add_filter( 'wp_all_import_addon_parse', array( $this, 'wpai_api_parse' ) );
 		add_filter( 'wp_all_import_addon_import', array( $this, 'wpai_api_import' ) );
@@ -568,7 +571,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 				global $wp_roles;
 				$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
 				?>
-				
+
 				<div class="tiered-pricing-import-role-block">
 					<div class="tiered-pricing-import-role-block__header">
 						<h4>
@@ -576,7 +579,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 								<input type="checkbox" data-role-based-import
 									
 									<?php checked( ! empty( $current_values[ $this->slug ][ '__' . $WPRole . '_enabled' ] ) ); ?>
-									   
+
 									   id="<?php echo esc_attr( $WPRole . '__enabled' ); ?>"
 									   name="<?php echo esc_attr( $this->slug . '[__' . $WPRole . '_enabled]' ); ?>">
 								<?php echo esc_attr( $roleName ); ?>
@@ -585,13 +588,13 @@ class WPAllImport extends PluginIntegrationAbstract {
 					</div>
 					<div class="tiered-pricing-import-role-block__body">
 						<?php
-						foreach ( $this->fields as $field_slug => $field_params ) {
+							foreach ( $this->fields as $field_slug => $field_params ) {
 								
-							if ( 'role_field' === $field_params['type'] && $field_params['role'] === $WPRole ) {
-								$this->render_field( $field_params, $field_slug, $current_values,
-									$visible_fields == $counter, $WPRole );
+								if ( 'role_field' === $field_params['type'] && $field_params['role'] === $WPRole ) {
+									$this->render_field( $field_params, $field_slug, $current_values,
+										$visible_fields == $counter, $WPRole );
+								}
 							}
-						}
 						
 						?>
 					</div>
@@ -616,8 +619,8 @@ class WPAllImport extends PluginIntegrationAbstract {
 		) );
 	}
 
-	public function helper_metabox_top( $name ) {
-		?>
+public function helper_metabox_top( $name ) {
+	?>
 	<style type="text/css">
 
 		.wpallimport-plugin .tiered-pricing-import-role-block__header {
@@ -752,9 +755,9 @@ class WPAllImport extends PluginIntegrationAbstract {
 				}
 			}).trigger('change');
 		});
-	
+
 	</script>
-	
+
 	<div class="wpallimport-collapsed wpallimport-section wpallimport-addon ' . $this->slug . ' closed">
 		<div class="wpallimport-content-section">
 			<div class="wpallimport-collapsed-header">
@@ -766,11 +769,11 @@ class WPAllImport extends PluginIntegrationAbstract {
 						<tr>
 							<td colspan="3">
 								<?php
-	}
+									}
 									
 									
-	public function helper_metabox_bottom() {
-		?>
+									public function helper_metabox_bottom() {
+								?>
 							</td>
 						</tr>
 					</table>
@@ -779,7 +782,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 		</div>
 	</div>
 	<?php
-	}
+}
 	
 	public function helper_parse( $parsingData, $options ) {
 		$data = array(); // parsed data
