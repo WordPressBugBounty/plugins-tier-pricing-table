@@ -150,6 +150,31 @@
 }
 
 /** GLOBAL PRICING **/
+
+.post-type-tpt-global-rule .wp-list-table tfoot th,
+.post-type-tpt-global-rule .wp-list-table thead th {
+	padding: .75em 1em
+}
+
+.post-type-tpt-global-rule .wp-list-table tbody tr {
+	border-top: 1px solid #f5f5f5
+}
+
+.post-type-tpt-global-rule .wp-list-table td p,
+.post-type-tpt-global-rule .wp-list-table th p {
+	margin: 0
+}
+
+.post-type-tpt-global-rule .wp-list-table .check-column {
+	width: 1px;
+	white-space: nowrap;
+	padding: 1em 2em 1em 1em !important;
+}
+
+.post-type-tpt-global-rule .wp-list-table .check-column .locked-indicator {
+	margin-left: 0
+}
+
 .tpt-global-pricing-title {
 	margin: 20px 0;
 	border-bottom: 1px solid #e8e8e8;
@@ -187,12 +212,14 @@
 	line-height: 2.5em;
 	color: #777;
 	background: #e5e5e5;
-	border-radius: 4px;
 	border-bottom: 1px solid rgba(0, 0, 0, .05);
 	margin: -.25em 0;
-	cursor: inherit !important;
 	white-space: nowrap;
 	max-width: 100%;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	cursor: help;
 }
 
 .tpt-rule-suspend-status span {
@@ -202,8 +229,7 @@
 }
 
 .tpt-rule-suspend-status--active {
-	background: #c6e1c6;
-	color: #5b841b;
+	background: #50860f;
 }
 
 .tpt-rule-suspend-status--suspended {
@@ -214,9 +240,13 @@
 .tpt-global-rule-pricing-table tbody {
 	font-weight: bold;
 }
+.tpt-global-rule-pricing-table tbody td {
+	padding: 5px 10px !important;
+}
 
 .tpt-global-rule-pricing-table thead tr th {
 	background: #c8d7e1;
+	padding: 5px 10px !important;
 }
 
 .tpt-rule-status {
@@ -466,7 +496,11 @@ input[type="checkbox"].tpt-toggle-switch:checked + label > [data-tpt-toggle-swit
 
 /** Global pricing rule columns **/
 .post-type-tpt-global-rule .column-status {
-	width: 70px;
+	width: 15px;
+	text-align: center;
+}
+.post-type-tpt-global-rule .column-applied_quantity_rules {
+	width: 100px;
 }
 
 /** Alert **/

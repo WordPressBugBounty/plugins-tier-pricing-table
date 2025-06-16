@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.8.0
 Requires PHP: 7.2
-Stable tag: 5.1.9
+Stable tag: 5.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,7 +23,7 @@ The plugin enables you to set quantity-based discounts and display these prices 
 
 The plugin allows you to fine-tune your pricing to meet the needs of your diverse customer base, whether you're a retailer, wholesaler, or service provider.
 
-💡 **Key features**:
+🧩 **Core features**:
 
 ✅ **Quantity-based pricing (Volume pricing)**
 Set different prices for different quantities of products.
@@ -65,7 +65,7 @@ The clean interface and powerful functionality allow you to make any custom pric
 *  Debug mode
 *  Many other little useful features
 
-**Premium features**:
+💎 **Premium features**:
 
 *   Percentage quantity-based discounts
 *   Role-based pricing (including base prices and min/max order quantity rules)
@@ -159,6 +159,17 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 
 == Changelog ==
 
+= 5.2.0 [2025-06-16] =
+* New: always use regular price to show a crossed-out price in the cart.
+* Update: CSS and texts updates
+* Fix: Minor issues
+
+= 5.1.10 [2025-05-16] =
+* Update: Freemius SDK to the latest version.
+* Update: Texts over the plugin.
+* New: Bulk Price Editor plugin suggestion.
+* Fix: Settings floating title issue with the latest WooCommerce version.
+
 = 5.1.9 [2025-05-07] =
 * Fix: WP All Import integration translation issue
 * Fix: Woombat Product Addons integration fix
@@ -179,7 +190,7 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 
 = 5.1.5 [2025-01-06] =
 * New: Welcome page.
-* New: Base unit name variable for pricing templates.
+* New: Unit label variable for pricing templates.
 * Update: Freemius SDK to the latest version.
 * Update: Declared compatibility with the latest WP and WC versions.
 * Fix: Non-logged-in service.
@@ -327,7 +338,7 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * New: Maximum and "group of quantity" quantity options
 * New: Percentage discounts for regular prices for role-based pricing rules
 * New: Gutenberg blocks for tiered pricing
-* New: Base unit name per product
+* New: Unit label per product
 * New: Custom columns for pricing table
 * New: "You save" feature
 * New: Notice when tiered pricing is set incorrectly

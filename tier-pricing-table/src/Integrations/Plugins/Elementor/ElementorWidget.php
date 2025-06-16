@@ -119,7 +119,7 @@ class ElementorWidget extends Widget_Base {
             'plural'   => '',
         ) );
         $this->add_control( 'quantity_measurement_singular', [
-            'label'       => __( 'Base unit name (singular)', 'tier-pricing-table' ),
+            'label'       => __( 'Unit label (singular)', 'tier-pricing-table' ),
             'type'        => Controls_Manager::TEXT,
             'label_block' => true,
             'description' => __( 'Leave empty to use default', 'tier-pricing-table' ),
@@ -129,7 +129,7 @@ class ElementorWidget extends Widget_Base {
             'default'     => $quantity_measurement['singular'],
         ] );
         $this->add_control( 'quantity_measurement_plural', [
-            'label'       => __( 'Base unit name (plural)', 'tier-pricing-table' ),
+            'label'       => __( 'Unit label (plural)', 'tier-pricing-table' ),
             'type'        => Controls_Manager::TEXT,
             'label_block' => true,
             'description' => __( 'Leave empty to use default', 'tier-pricing-table' ),

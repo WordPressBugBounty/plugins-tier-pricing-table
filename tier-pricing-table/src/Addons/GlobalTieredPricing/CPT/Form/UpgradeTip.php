@@ -45,11 +45,27 @@ class UpgradeTip extends Tip {
             return;
         }
         ?>
+		<style>
+			@keyframes pulse-animation {
+				0% {
+					box-shadow: 0 0 0 0 rgb(189, 217, 255);
+				}
+				100% {
+					box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+				}
+			}
+			
+			.tiered-pricing-upgrade-tip {
+				border-radius: 5px;
+				animation: pulse-animation 2s infinite;
+			}
+		</style>
+			
         <div>
-            <div class="tiered-pricing-tip"
+            <div class="tiered-pricing-tip tiered-pricing-upgrade-tip"
                  style="margin-bottom: 20px; position: relative; padding: 20px 10px;  background: #fff; border: 1px solid #c3c4c7;">
 
-                <div style="text-align: center">
+                <div style="text-align: center" >
 
                     <div style="white-space: nowrap;position: absolute;right: 10px;top: 5px;">
                         <a role="button" title="Close the tip"
@@ -70,7 +86,7 @@ class UpgradeTip extends Tip {
 
                     <div style="margin-top: 10px;">
 						<?php 
-        esc_html_e( 'You\'ve been using the free version for a while now, and we\'d like to offer you a discount on the premium version!', 'tier-pricing-table' );
+        esc_html_e( 'You\'ve been using the free version for a while now, and we\'d like to offer you an exclusive discount on the premium version!', 'tier-pricing-table' );
         ?>
                     </div>
 

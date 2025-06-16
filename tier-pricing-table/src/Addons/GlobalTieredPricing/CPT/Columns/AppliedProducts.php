@@ -13,21 +13,21 @@ class AppliedProducts {
 	
 	public function render( GlobalPricingRule $rule ) {
 		
-		$hasProducts = $this->showProducts( $rule->getIncludedProducts() );
-		$hasCategories     = $this->showCategories( $rule->getIncludedProductCategories() );
+		$hasProducts   = $this->showProducts( $rule->getIncludedProducts() );
+		$hasCategories = $this->showCategories( $rule->getIncludedProductCategories() );
 		
 		if ( ! $hasProducts && ! $hasCategories ) {
 			?>
-			<b style="color:#d63638">
-				<?php esc_html_e( 'Applied to every product', 'tier-pricing-table' ); ?>
-			</b>
-			<br>
-			<br>
+			<mark class="order-status status-processing tips">
+				<span>
+					<?php esc_html_e( 'Applied to every product', 'tier-pricing-table' ); ?>
+				</span>
+			</mark>
 			<?php
+		} else {
+			$this->showProducts( $rule->getExcludedProducts(), false );
+			$this->showCategories( $rule->getExcludedProductCategories(), false );
 		}
-		
-		$this->showProducts( $rule->getExcludedProducts(), false );
-		$this->showCategories( $rule->getExcludedProductCategories(), false );
 	}
 	
 	public function showProducts( array $productsIds, $included = true ): bool {
@@ -90,7 +90,7 @@ class AppliedProducts {
 			}, $categories );
 			
 			echo wp_kses_post( implode( ', ',
-					$categoriesString ) . ( $moreThanCanBeShown ? '<span> ...</span>' : '' )  );
+					$categoriesString ) . ( $moreThanCanBeShown ? '<span> ...</span>' : '' ) );
 			
 			echo '<br><br>';
 			

@@ -12,7 +12,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Show the amount customers save when they buy products at a discounted price.',
+		return __( 'Display the amount saved when a discount is applied.',
 			'tier-pricing-table' );
 	}
 	
@@ -35,7 +35,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_consider_sale_price',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'The difference between regular and sale woocommerce prices will also be considered a "you save" discount.',
+				'desc'    => __( 'The difference between the regular and sale price will be included in the “you save” calculation.',
 					'tier-pricing-table' ),
 			),
 			array(

@@ -6,7 +6,7 @@ use TierPricingTable\CalculationLogic;
 class Settings {
 	
 	public function getName(): string {
-		return __( 'Settings', 'tier-pricing-table' );
+		return __( 'Priority Settings', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $rule ) {

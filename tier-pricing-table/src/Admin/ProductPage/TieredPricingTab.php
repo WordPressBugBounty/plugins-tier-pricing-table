@@ -131,7 +131,7 @@ class TieredPricingTab {
                     <p class="form-field">
                         <label>
 							<?php 
-        esc_html_e( 'Base unit name', 'tier-pricing-table' );
+        esc_html_e( 'Unit label', 'tier-pricing-table' );
         ?>
                         </label>
 						

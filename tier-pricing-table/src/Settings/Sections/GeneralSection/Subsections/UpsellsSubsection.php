@@ -12,7 +12,7 @@ class UpsellsSubsection extends SubsectionAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Cart upsell feature can boost your sales by triggering customers to purchase more in the cart by showing possible discounts.',
+		return __( 'Use cart upsell messages to encourage customers to buy more by displaying available discounts.',
 			'tier-pricing-table' );
 	}
 	
@@ -43,7 +43,7 @@ class UpsellsSubsection extends SubsectionAbstract {
 				'default'      => __( 'Buy <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each',
 					'tier-pricing-table' ),
 				'desc_tip'     => false,
-				'desc'         => __( 'Please note, that this feature does not work the "Gutenberg Cart&Checkout blocks"',
+				'desc'         => __( 'Note: This feature is not compatible with the Gutenberg Cart/Checkout blocks.',
 					'tier-pricing-table' ),
 			),
 			

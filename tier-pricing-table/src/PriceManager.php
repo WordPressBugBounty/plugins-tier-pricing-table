@@ -44,6 +44,8 @@ class PriceManager {
      * @param  ?string  $context
      * @param  ?string  $place
      * @param  bool  $withTaxes
+     * @param  ?PricingRule  $pricingRule
+     * @param  bool  $roundPrice
      *
      * @return bool|float|int
      */
@@ -77,7 +79,8 @@ class PriceManager {
         }
         $productPrice = $productPrice ?? false;
         if ( $productPrice && apply_filters( 'tiered_pricing_table/price/round_price', $roundPrice ) ) {
-            $productPrice = round( $productPrice, max( 2, wc_get_price_decimals() ) );
+            $roundPrecision = (int) apply_filters( "tiered_pricing_table/price/round_precision", max( 2, wc_get_price_decimals() ) );
+            $productPrice = round( $productPrice, $roundPrecision );
         }
         if ( 'edit' !== $context ) {
             return apply_filters(

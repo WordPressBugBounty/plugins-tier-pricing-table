@@ -6,7 +6,8 @@
 	width: 100%;
 }
 
-.sticky-add-to-cart .tpt__tiered-pricing {
+.sticky-add-to-cart .tpt__tiered-pricing,
+.ast-sticky-add-to-cart .tpt__tiered-pricing {
 	display: none;
 }
 

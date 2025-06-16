@@ -34,7 +34,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 		return array(
 			array(
 				'title' => __( 'Tiered Pricing on the shop page', 'tier-pricing-table' ),
-				'desc'  => __( 'This section controls how tiered pricing is works for product catalog.',
+				'desc'  => __( 'This section controls how tiered pricing works for product catalog.',
 					'tier-pricing-table' ),
 				'type'  => 'title',
 			),
@@ -48,14 +48,14 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					?>
                     <p>
 						<?php
-							esc_html_e( 'Enable this option to show tiered pricing in the product catalog.',
+							esc_html_e( 'Enable this option to show tiered pricing in the products catalog.',
 								'tier-pricing-table' );
 						?>
                         <br>
                         <br>
                         <b><?php esc_html_e( 'Note:', 'tier-pricing-table' ); ?></b>
                         <br>
-						<?php esc_html_e( 'Some themes may display it incorrectly.', 'tier-pricing-table' ); ?>
+						<?php esc_html_e( 'Some themes could display it incorrectly.', 'tier-pricing-table' ); ?>
                     </p>
 					<?php
 					return ob_get_clean();
@@ -176,14 +176,14 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'   => __( 'Quantity displaying type', 'tier-pricing-table' ),
+				'title'   => __( 'Quantity display type', 'tier-pricing-table' ),
 				'id'      => self::getOptionID( 'quantity_type' ),
 				'type'    => TPTDisplayType::FIELD_TYPE,
 				'options' => array(
 					'range'  => __( 'Range', 'tier-pricing-table' ),
 					'static' => __( 'Static values', 'tier-pricing-table' ),
 				),
-				'desc'    => __( 'Range: Displays a range of quantities that a tiered price applies to. Static: Displays a minimum quantity that a tiered price applies to.',
+				'desc'    => __( '"Range" displays the quantity range a tier applies to. "Static" displays only the minimum quantity required.',
 					'tier-pricing-table' ),
 				'default' => 'range',
 			),
@@ -195,25 +195,25 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'default' => '#96598A',
 			),
 			array(
-				'title'   => __( 'Base unit name', 'tier-pricing-table' ),
+				'title'   => __( 'Unit label', 'tier-pricing-table' ),
 				'id'      => self::getOptionID( 'table_quantity_measurement' ),
 				'type'    => TPTQuantityMeasurementField::FIELD_TYPE,
 				'default' => array(
 					'singular' => '',
 					'plural'   => '',
 				),
-				'desc'    => __( 'For example: pieces, boxes, bottles, packs, etc. It will be shown next to quantities. Leave empty to not add any.',
+				'desc'    => __( 'For example: pieces, boxes, bottles, packs, etc. This will be shown next to quantity values. Leave blank to skip adding a unit label.',
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'   => __( 'Base unit name', 'tier-pricing-table' ),
+				'title'   => __( 'Unit label', 'tier-pricing-table' ),
 				'id'      => self::getOptionID( 'blocks_quantity_measurement' ),
 				'type'    => TPTQuantityMeasurementField::FIELD_TYPE,
 				'default' => array(
 					'singular' => _n( 'piece', 'pieces', 1, 'tier-pricing-table' ),
 					'plural'   => _n( 'piece', 'pieces', 2, 'tier-pricing-table' ),
 				),
-				'desc'    => __( 'For example: pieces, boxes, bottles, packs, etc. It will be shown next to quantities. Leave empty to not add any.',
+				'desc'    => __( 'For example: pieces, boxes, bottles, packs, etc. This will be shown next to quantity values. Leave blank to skip adding a unit label.',
 					'tier-pricing-table' ),
 			),
 			array(

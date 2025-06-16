@@ -126,6 +126,7 @@ class Settings {
 				font-size: 1.45em;
 			}
         </style>
+		
         <ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
         foreach ( $this->sections as $section ) {
@@ -194,7 +195,7 @@ class Settings {
                 </a>
             </li>
         </ul>
-        <br>
+        <br class="clear">
 		<?php 
     }
 

@@ -15,7 +15,7 @@ class RoleBasedPricingAddon extends AbstractAddon {
     }
 
     public function getDescription() : string {
-        return __( 'Role-based pricing rules at product level. Turning off will not disable role-based functionality for global pricing rules.', 'tier-pricing-table' );
+        return __( 'Enable role-based pricing rules at the product level. Disabling this will not affect role-based functionality for global pricing rules.', 'tier-pricing-table' );
     }
 
     public function getSlug() : string {

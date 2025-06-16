@@ -36,12 +36,20 @@ class CartOptionsSubsection extends SubsectionAbstract {
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
 			),
+			array(
+				'title'   => __( 'Always cross out the regular price', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'consider_sale_price_as_discount_in_cart',
+				'desc'    => __( 'When showing a crossed-out price, always use the regular price.',
+					'tier-pricing-table' ),
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'no',
+			),
 		);
 	}
 	
 	
 	/**
-	 * When cart item has a tiered price, show its subtotal as a discount with the original subtotal crossed out.
+	 * When a cart item has a tiered price, show its subtotal as a discount with the original subtotal crossed out.
 	 *
 	 * @return bool
 	 */
@@ -50,7 +58,7 @@ class CartOptionsSubsection extends SubsectionAbstract {
 	}
 	
 	/**
-	 * Do global pricing rules have a higher priority than product level rules.
+	 * Do global pricing rules have a higher priority than product level rules?
 	 *
 	 * @return bool
 	 */

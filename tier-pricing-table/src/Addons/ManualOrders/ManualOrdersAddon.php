@@ -16,7 +16,7 @@ class ManualOrdersAddon extends AbstractAddon {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Tiered pricing for admin-made orders from the administrator panel.', 'tier-pricing-table' );
+		return __( 'Enable tiered pricing for admin-created orders from the administrator panel.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

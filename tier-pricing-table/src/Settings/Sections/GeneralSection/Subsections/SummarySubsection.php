@@ -12,7 +12,7 @@ class SummarySubsection extends SubsectionAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Totals show information about the total and price per piece.', 'tier-pricing-table' );
+		return __( 'Display additional information such as total cost and unit price.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -62,7 +62,7 @@ class SummarySubsection extends SubsectionAbstract {
 					'table'    => __( 'Reduced', 'tier-pricing-table' ),
 					'inline'   => __( 'Labels', 'tier-pricing-table' ),
 				),
-				'default' => 'detailed',
+				'default' => 'table',
 			),
 			array(
 				'title'    => __( '"Total" label', 'tier-pricing-table' ),

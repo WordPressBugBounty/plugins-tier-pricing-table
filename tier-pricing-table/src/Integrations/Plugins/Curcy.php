@@ -47,6 +47,20 @@ class Curcy extends PluginIntegrationAbstract {
 			
 			return $state;
 		} );
+		
+		// Add currency dependency to variable product price
+		add_filter( 'woocommerce_get_variation_prices_hash', function ( $hash ) {
+			
+			if ( ! class_exists( 'WOOMULTI_CURRENCY_F_Data' ) ) {
+				return $hash;
+			}
+			
+			$setting = \WOOMULTI_CURRENCY_F_Data::get_ins();
+			
+			$hash[] = $setting->get_current_currency();
+			
+			return $hash;
+		}, 10, 2 );
 	}
 	
 	public function getTitle(): string {

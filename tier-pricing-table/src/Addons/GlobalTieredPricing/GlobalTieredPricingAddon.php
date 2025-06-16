@@ -36,7 +36,7 @@ class GlobalTieredPricingAddon extends AbstractAddon {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Global pricing rules allow you to create pricing rules for user roles or for a specific user and apply the rules to specific products or a product category.',
+		return __( 'Create pricing rules for user roles or specific users, and apply them to selected products or product categories.',
 			'tier-pricing-table' );
 	}
 	

@@ -44,12 +44,6 @@ class GlobalTieredPricingCPT {
         new Form();
         add_action( 'init', array($this, 'register') );
         add_action( 'manage_posts_extra_tablenav', array($this, 'renderBlankState') );
-        add_action(
-            'add_meta_boxes',
-            array($this, 'registerMetaboxes'),
-            10,
-            3
-        );
         add_filter( 'woocommerce_navigation_screen_ids', array($this, 'addPageToWooCommerceScreen') );
         add_filter( 'woocommerce_screen_ids', array($this, 'addPageToWooCommerceScreen') );
         add_action( 'save_post_' . self::SLUG, array($this, 'savePricingRule') );
@@ -134,21 +128,6 @@ class GlobalTieredPricingCPT {
         $ids[] = self::SLUG;
         $ids[] = 'edit-' . self::SLUG;
         return $ids;
-    }
-
-    public function registerMetaboxes() {
-        add_meta_box(
-            'tpt_notice_metabox',
-            __( 'Pricing notice', 'tier-pricing-table' ),
-            function () {
-                $this->getContainer()->getFileManager()->includeTemplate( 'addons/global-rules/pricing-notice.php', array(
-                    'fileManager' => $this->getContainer()->getFileManager(),
-                    'priceRule'   => $this->getPricingRuleInstance(),
-                ) );
-            },
-            self::SLUG,
-            'side'
-        );
     }
 
     public function savePricingRule( $ruleId ) {

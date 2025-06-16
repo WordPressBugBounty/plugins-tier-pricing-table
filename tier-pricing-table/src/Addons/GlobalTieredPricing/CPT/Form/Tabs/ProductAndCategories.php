@@ -21,12 +21,12 @@ class ProductAndCategories extends FormTab {
 	public function render( GlobalPricingRule $pricingRule ) {
 		
 		$this->renderSectionTitle( __( 'Included Products', 'tier-pricing-table' ), array(
-			'description' => __( 'Select products or product categories the rule will work for. The rule will work for all products in the selected categories.',
+			'description' => __( 'Select products or product categories that the rule will apply to. The rule will work for all products in the selected categories.',
 				'tier-pricing-table' ),
 		) );
 		
 		if ( empty( $pricingRule->getIncludedProductCategories() ) && empty( $pricingRule->getIncludedProducts() ) ) {
-			$this->renderHint( __( 'If you do not specify products or product categories, the rule will work for all products in your store. (excluding products selected in the exclusions section)',
+			$this->renderHint( __( 'If you do not specify products or product categories, the rule will apply to all products in your store (excluding those selected in the exclusions section).',
 				'tier-pricing-table' ) );
 		}
 		

@@ -61,9 +61,10 @@ class TieredPricingCartService {
         if ( !$recalculateCartItemSubtotal ) {
             return $subtotal;
         }
+        $considerSalePriceAsDiscount = $this->getContainer()->getSettings()->get( 'consider_sale_price_as_discount_in_cart', 'no' ) === 'yes';
         $considerSalePriceAsDiscount = apply_filters(
             'tiered_pricing_table/cart/subtotal/consider_sale_price_as_discount',
-            false,
+            $considerSalePriceAsDiscount,
             $cartItem,
             $cartItemKey
         );
@@ -195,7 +196,7 @@ class TieredPricingCartService {
     }
 
     /**
-     * Get total product count depend on user's settings
+     * Get total product count depends on user's settings
      *
      * @param  ?array  $cartItem
      *

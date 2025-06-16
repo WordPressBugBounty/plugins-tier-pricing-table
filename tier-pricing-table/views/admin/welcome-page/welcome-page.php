@@ -199,7 +199,7 @@
 						'tier-pricing-table' ); ?>
 				</p>
 				<p>
-					<?php esc_html_e( 'Various pricing templates, flexible pricing rules, and advanced features make the plugin a perfect solution for your store.',
+					<?php esc_html_e( 'With intuitive templates, flexible pricing rules, and advanced features, this plugin is a perfect fit for any type of store.',
 						'tier-pricing-table' ); ?>
 				</p>
 			</div>
@@ -217,7 +217,7 @@
 			</div>
 
 			<div class="tpt-welcome-page-hero__additional" style="font-size: 1.2em; margin-top: 20px;">
-				Have a question?
+				Questions? We're here to help.
 				<a style="color: #fff"
 				   href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ) ?>"
 				   target="_blank">Contact Us</a>
@@ -445,7 +445,7 @@
 					'features' => array(
 						'Cart upsell to motivate customers to purchase more.',
 						'Customize cart upsells template.',
-						'Tiered price in the cart is shown as a discount.',
+						'Tiered price in the cart appears as a discount.',
 					),
 				),
 				array(
@@ -526,7 +526,7 @@
 				'icon'  => '🧱',
 			),
 			array(
-				'title' => __( 'Hide prices for unlogged-in users', 'tier-pricing-table' ),
+				'title' => __( 'Hide prices for logged-out users', 'tier-pricing-table' ),
 				'icon'  => '🔑',
 			),
 			array(

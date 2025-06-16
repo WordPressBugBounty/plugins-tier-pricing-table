@@ -11,22 +11,22 @@ class UsersAndRoles extends FormTab {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Users & roles', 'tier-pricing-table' );
+		return __( 'Users & Roles', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Select users or user roles the rule will work for.', 'tier-pricing-table' );
+		return __( 'Select users or user roles that the rule will apply to.', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
 		
 		$this->renderSectionTitle( __( 'Included Users', 'tier-pricing-table' ), array(
-			'description' => __( 'Select users or user roles the rule will work for. The rule will work for all users with the selected roles.',
+			'description' => __( 'Select users or user roles that the rule will apply to. The rule will work for all users with the selected roles.',
 				'tier-pricing-table' ),
 		) );
 		
 		if ( empty( $pricingRule->getIncludedUserRoles() ) && empty( $pricingRule->getIncludedUsers() ) ) {
-			$this->renderHint( __( 'The rule will work for all users if you do not specify user roles or specific customers. (excluding users selected in the exclusions section)',
+			$this->renderHint( __( 'The rule will apply to all users if you do not specify user roles or specific customers (excluding those selected in the exclusions section).',
 				'tier-pricing-table' ) );
 		}
 		

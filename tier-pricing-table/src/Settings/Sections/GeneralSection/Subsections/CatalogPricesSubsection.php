@@ -46,11 +46,11 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 				'id'       => Settings::SETTINGS_PREFIX . 'tiered_price_at_catalog_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => [
-					'lowest' => __( 'The lowest price', 'tier-pricing-table' ),
-					'range'  => __( 'Range (from lowest to highest)', 'tier-pricing-table' ),
+					'lowest' => __( 'Show lowest price', 'tier-pricing-table' ),
+					'range'  => __( 'Show range (lowest to highest)', 'tier-pricing-table' ),
 				],
 				'default'  => 'lowest',
-				'desc'     => __( 'How to display prices for products with tiered pricing.', 'tier-pricing-table' ),
+				'desc'     => __( 'Choose how to display tiered pricing: show only the lowest price or the full price range.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(

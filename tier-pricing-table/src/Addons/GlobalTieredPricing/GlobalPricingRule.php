@@ -527,8 +527,6 @@ class GlobalPricingRule {
 
     protected function _matchRequirements( WP_User $user, WC_Product $product ) : bool {
         $parentProduct = ( $product->is_type( array('variation', 'subscription-variation') ) ? wc_get_product( $product->get_parent_id() ) : $product );
-        $productMatched = false;
-        $productLimitations = false;
         /**
          * 1. Check for product exclusion
          *
@@ -545,7 +543,7 @@ class GlobalPricingRule {
             }
         }
         /**
-         * 2. Check for users exclusion
+         * 2. Check for user exclusion
          *
          * If users in exclusion - pricing rule does not match immediately
          */
@@ -562,6 +560,8 @@ class GlobalPricingRule {
          *
          * If yes - match rule only for selected product/product categories
          */
+        $productMatched = false;
+        $productLimitations = false;
         if ( !empty( $this->getIncludedProducts() ) ) {
             $productLimitations = true;
             if ( in_array( $product->get_id(), $this->getIncludedProducts() ) || in_array( $parentProduct->get_id(), $this->getIncludedProducts() ) ) {
@@ -579,13 +579,13 @@ class GlobalPricingRule {
             return false;
         }
         /**
-         * 4. If there is no users limits - match the rule immediately
+         * 4. If there are no user limits - match the rule immediately
          */
         if ( empty( $this->getIncludedUserRoles() ) && empty( $this->getIncludedUsers() ) ) {
             return true;
         }
         /**
-         * 4. If there is users limits - check for user ID and user role.
+         * 5. If there are user limits - check for user ID and user role.
          */
         if ( in_array( $user->ID, $this->getIncludedUsers() ) ) {
             return true;

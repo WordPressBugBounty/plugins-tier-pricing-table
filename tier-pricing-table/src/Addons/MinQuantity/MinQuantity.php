@@ -126,7 +126,7 @@ class MinQuantity extends AbstractAddon {
 			if ( $quantity && $quantity < $pricingRule->getMinimum() ) {
 				
 				// translators: %s: minimum quantity
-				wc_add_notice( sprintf( __( 'Minimum quantity for the product is %s', 'tier-pricing-table' ), $min ),
+				wc_add_notice( sprintf( __( 'Minimum quantity for the product is %s', 'tier-pricing-table' ), $pricingRule->getMinimum() ),
 					'error' );
 				
 				return false;

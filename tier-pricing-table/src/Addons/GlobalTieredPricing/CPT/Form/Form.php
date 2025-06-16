@@ -48,7 +48,7 @@ class Form {
 	
 	protected function includeAssets() {
 		?>
-        <style>
+		<style>
 			/**
 			* Externals
 			 */
@@ -140,6 +140,10 @@ class Form {
 				color: #814c77 !important;
 			}
 
+			.tpt-global-pricing-rule-form-tab--active .tpt-global-pricing-rule-form-tab__icon {
+				background: #fff;
+			}
+
 			.tpt-global-pricing-rule-form-tab__title h3 {
 				font-size: 1.1em;
 				margin: 0;
@@ -216,8 +220,8 @@ class Form {
 					padding: 5px 20px !important;
 				}
 			}
-        </style>
-        <script>
+		</style>
+		<script>
 			jQuery(document).ready(function () {
 				let tabs = jQuery('.tpt-global-pricing-rule-form-tab');
 				let tabsContent = jQuery('.tpt-global-pricing-rule-form-tab-content');
@@ -235,7 +239,7 @@ class Form {
 					jQuery('#' + target).addClass('tpt-global-pricing-rule-form-tab-content--active');
 				});
 			});
-        </script>
+		</script>
 		<?php
 	}
 	
@@ -255,46 +259,45 @@ class Form {
 		}
 		
 		?>
-        <div class="tpt-global-pricing-rule-form">
+		<div class="tpt-global-pricing-rule-form">
 
-            <nav class="tpt-global-pricing-rule-form__tabs">
+			<nav class="tpt-global-pricing-rule-form__tabs">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-                    <div class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
-                         data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+					<div class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
+						 data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 
-                        <div class="tpt-global-pricing-rule-form-tab__icon" style="">
+						<div class="tpt-global-pricing-rule-form-tab__icon" style="">
 							<?php if ( $tab->getIcon() === '$' ): ?>
-                                <span>$</span>
+								<span>$</span>
 							<?php else: ?>
-                                <span class="dashicons <?php echo esc_attr( $tab->getIcon() ) ?>"></span>
+								<span class="dashicons <?php echo esc_attr( $tab->getIcon() ) ?>"></span>
 							<?php endif; ?>
-                        </div>
+						</div>
 
-                        <div class="tpt-global-pricing-rule-form-tab__title">
-                            <h3>
+						<div class="tpt-global-pricing-rule-form-tab__title">
+							<h3>
 								<?php echo esc_html( $tab->getTitle() ); ?>
-                            </h3>
-                            <div><?php echo esc_html( $tab->getDescription() ); ?></div>
-                        </div>
-                    </div>
+							</h3>
+							<div><?php echo esc_html( $tab->getDescription() ); ?></div>
+						</div>
+					</div>
 				<?php endforeach; ?>
-            </nav>
+			</nav>
 
-            <section class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
+			<section class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-                    <div
-                            class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
-                            id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+					<div class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
+						 id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 						<?php
 							$tab->render( $this->getPricingRuleInstance( $post ) );
 							
 							do_action( 'tiered_pricing_table/global_pricing/form/tab_end', $tab,
 								$this->getPricingRuleInstance( $post ) );
 						?>
-                    </div>
+					</div>
 				<?php endforeach; ?>
-            </section>
-        </div>
+			</section>
+		</div>
 		<?php
 	}
 	
@@ -315,7 +318,7 @@ class Form {
 	
 	public function renderHelpingSteps() {
 		?>
-        <style>
+		<style>
 			.tpt-global-pricing-rule-helping {
 				background: #fff;
 				border: 1px solid #e8e8e8;
@@ -359,6 +362,9 @@ class Form {
 			}
 
 			.tpt-global-pricing-rule-helping-step--arrow {
+				padding: 5px;
+				border-radius: 50%;
+				background: #faf6f9;
 				color: #814c77;
 			}
 
@@ -384,82 +390,89 @@ class Form {
 				font-weight: bold;
 				line-height: 50px;
 			}
-        </style>
-        <script>
+		</style>
+		<script>
 			jQuery(document).ready(function () {
 				jQuery('.tpt-global-pricing-rule-helping__close').click(function () {
 					jQuery(this).parent().hide();
 				})
 			})
-        </script>
+		</script>
 		<?php
 		$steps = array(
 			array(
 				'title'         => 'Add pricing',
-				'description'   => 'Set up custom regular or\and tiered pricing.',
+				'description'   => 'Set up custom regular and/or tiered pricing.',
 				'icon'          => '$',
 				'has_next_step' => true,
 			),
 			array(
 				'title'         => 'Select products',
-				'description'   => 'Select products or product categories the rule will work for.',
+				'description'   => 'Select products or product categories that the rule will apply to.',
 				'icon'          => '<span class="dashicons dashicons-archive"></span>',
 				'has_next_step' => true,
 			),
 			array(
 				'title'         => 'Select users',
-				'description'   => 'Select users or user roles the rule will work for.',
+				'description'   => 'Select users or user roles that the rule will apply to.',
 				'icon'          => '<span class="dashicons dashicons-admin-users"></span>',
 				'has_next_step' => true,
 			),
 			array(
 				'title'         => 'Specify quantity',
-				'description'   => 'Specify minimum, maximum and quantity step for products.',
+				'description'   => 'Specify the minimum, maximum, and quantity step for products.',
 				'icon'          => '<span class="dashicons dashicons-database"></span>',
 				'has_next_step' => false,
 			),
 		)
 		?>
-        <div class="tpt-global-pricing-rule-helping">
-            <div class="tpt-global-pricing-rule-helping__title">
+		<div class="tpt-global-pricing-rule-helping">
+			<div class="tpt-global-pricing-rule-helping__title">
 				<?php esc_html_e( 'How global pricing rules work', 'tier-pricing-table' ); ?>
-            </div>
-            <p>
+			</div>
+			<p>
 				<?php
-					esc_html_e( 'Global rules are useful when you need to provide custom pricing for a bunch of products and apply it to a specific group of users. ',
+					esc_html_e( 'Global rules are useful when you need to set custom pricing for multiple products and apply it to a specific group of users.',
 						'tier-pricing-table' );
 				?>
-            </p>
+			</p>
 
-            <div class="tpt-global-pricing-rule-helping__steps">
+			<p>
+				<?php
+					esc_html_e( 'Please note that depending on the priority settings, the global pricing rule may override product-level tiered pricing or quantity limits.',
+						'tier-pricing-table' );
+				?>
+			</p>
+
+			<div class="tpt-global-pricing-rule-helping__steps">
 				
 				<?php foreach ( $steps as $step ) : ?>
 
-                    <div class="tpt-global-pricing-rule-helping-step">
-                        <div class="tpt-global-pricing-rule-helping-step__icon">
+					<div class="tpt-global-pricing-rule-helping-step">
+						<div class="tpt-global-pricing-rule-helping-step__icon">
 							<?php echo wp_kses_post( $step['icon'] ); ?>
-                        </div>
+						</div>
 
-                        <div class="tpt-global-pricing-rule-helping-step__title">
+						<div class="tpt-global-pricing-rule-helping-step__title">
 							<?php echo esc_html( $step['title'] ); ?>
-                        </div>
+						</div>
 
-                        <div class="tpt-global-pricing-rule-helping-step__description">
+						<div class="tpt-global-pricing-rule-helping-step__description">
 							<?php echo esc_html( $step['description'] ); ?>
-                        </div>
-                    </div>
+						</div>
+					</div>
 					
 					<?php if ( $step['has_next_step'] ) : ?>
-                        <div class="tpt-global-pricing-rule-helping-step tpt-global-pricing-rule-helping-step--arrow">
-                            <span class="dashicons dashicons-arrow-right-alt"></span>
-                        </div>
+						<div class="tpt-global-pricing-rule-helping-step tpt-global-pricing-rule-helping-step--arrow">
+							<span class="dashicons dashicons-arrow-right-alt"></span>
+						</div>
 					<?php endif; ?>
 				<?php endforeach; ?>
-            </div>
-            <div class="tpt-global-pricing-rule-helping__close">
-                &times;
-            </div>
-        </div>
+			</div>
+			<div class="tpt-global-pricing-rule-helping__close">
+				&times;
+			</div>
+		</div>
 		<?php
 	}
 	

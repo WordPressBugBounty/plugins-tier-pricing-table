@@ -8,7 +8,7 @@ use WC_Customer;
 class AppliedCustomers {
 	
 	public function getName(): string {
-		return __( 'Customers', 'tier-pricing-table' );
+		return __( 'Users & Roles', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $rule ) {
@@ -18,11 +18,11 @@ class AppliedCustomers {
 		
 		if ( ! $hasRoles && ! $hasCustomers ) {
 			?>
-			<b style="color:#d63638">
-				<?php esc_html_e( 'Applied to every user', 'tier-pricing-table' ); ?>
-            </b>
-			<br>
-			<br>
+			<mark class="order-status status-processing tips">
+				<span>
+					<?php esc_html_e( 'Applied to every user', 'tier-pricing-table' ); ?>
+				</span>
+			</mark>
 			<?php
 		}
 	

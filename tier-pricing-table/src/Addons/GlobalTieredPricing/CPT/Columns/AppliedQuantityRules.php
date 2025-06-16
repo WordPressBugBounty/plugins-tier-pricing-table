@@ -10,7 +10,7 @@ class AppliedQuantityRules {
 
 	public function render( GlobalPricingRule $rule ) {
 
-		$notSetLabel = __( 'Not set', 'tier-pricing-table' );
+		$notSetLabel = __( 'N/A', 'tier-pricing-table' );
 
 		$minimum = $rule->getMinimum() ? $rule->getMinimum() : $notSetLabel;
 

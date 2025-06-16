@@ -40,7 +40,7 @@ class GlobalPricingRulesRepository {
 	 * @param  WC_Product  $product
 	 * @param  ?WP_User  $user
 	 *
-	 * @return GlobalPricingRule|null
+	 * @return ?GlobalPricingRule
 	 */
 	public function getMatchedPricingRule( WC_Product $product, WP_User $user = null ): ?GlobalPricingRule {
 		

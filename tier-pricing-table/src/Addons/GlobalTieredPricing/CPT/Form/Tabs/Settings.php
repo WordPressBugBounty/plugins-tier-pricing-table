@@ -10,16 +10,16 @@ class Settings extends FormTab {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Settings', 'tier-pricing-table' );
+		return __( 'Priority Settings', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Control pricing rule priority', 'tier-pricing-table' );
+		return __( 'Handle pricing collisions with product-level prices.', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
 		
-		$this->renderSectionTitle( __( 'Settings', 'tier-pricing-table' ) );
+		$this->renderSectionTitle( __( 'Priority Settings', 'tier-pricing-table' ) );
 		
 		$this->renderHint( __( 'Control how this global pricing rule behaves in case of collisions with product-level rules.',
 			'tier-pricing-table' ) );
@@ -41,17 +41,17 @@ class Settings extends FormTab {
 		
 		?>
 
-        <div class="tpt_settings_advanced_priority_settings hidden">
+		<div class="tpt_settings_advanced_priority_settings hidden">
 			<?php
 				$this->renderSectionTitle( __( 'Regular prices priority', 'tier-pricing-table' ) );
 			?>
-            <div class="tpt_settings_regular_pricing">
+			<div class="tpt_settings_regular_pricing">
 				<?php
 					$this->renderRadioOptions( array(
 						'id'      => '_tpt_settings_regular_pricing_priority_type',
 						'title'   => __( 'Regular prices priority', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-role-based-product' => __( 'Prefer role-based product-level regular prices if they exists.',
+							'prefer-role-based-product' => __( 'Prefer role-based product-level regular prices if they exist.',
 								'tier-pricing-table' ),
 							'override'                  => __( 'Override any product-level regular prices with the prices set in this rule.',
 								'tier-pricing-table' ),
@@ -62,13 +62,13 @@ class Settings extends FormTab {
 					$this->renderHint( __( 'If a product has role-based pricing set at the product level, you can prefer those regular prices over the ones set in this global rule.',
 						'tier-pricing-table' ) );
 				?>
-            </div>
+			</div>
 			
 			<?php
 				$this->renderSectionTitle( __( 'Tiered pricing priority', 'tier-pricing-table' ) );
 			?>
 
-            <div class="tpt_settings_tiered_pricing">
+			<div class="tpt_settings_tiered_pricing">
 				<?php
 					$this->renderRadioOptions( array(
 						'id'      => '_tpt_settings_tiered_pricing_priority_type',
@@ -95,13 +95,13 @@ class Settings extends FormTab {
 					$this->renderHint( __( 'If a product has tiered pricing set at the product level, you can prefer those tiered prices over the ones set in this global rule. You can also enable the "Mix and Match" pricing strategy for tiered prices inherited from the product level.',
 						'tier-pricing-table' ) );
 				?>
-            </div>
+			</div>
 			
 			<?php
 				$this->renderSectionTitle( __( 'Quantity limits priority', 'tier-pricing-table' ) );
 			?>
 
-            <div class="tpt_settings_quantity_limits">
+			<div class="tpt_settings_quantity_limits">
 				<?php
 					$this->renderRadioOptions( array(
 						'id'      => '_tpt_settings_quantity_limits_priority_type',
@@ -111,7 +111,7 @@ class Settings extends FormTab {
 								'tier-pricing-table' ),
 							'prefer-role-based-product' => __( 'Prefer only role-based product-level quantity limits if they exist.',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override any product-level quantity limits with the prices set in this rule.',
+							'override'                  => __( 'Override any product-level quantity limits with the limits set in this rule.',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getQuantityLimitsPriority(),
@@ -120,10 +120,10 @@ class Settings extends FormTab {
 					$this->renderHint( __( 'If a product has quantity limits set at the product level, you can prefer those quantity limits over the ones set in this global rule.',
 						'tier-pricing-table' ) );
 				?>
-            </div>
-        </div>
+			</div>
+		</div>
 
-        <script>
+		<script>
 			jQuery(document).ready(function (jQuery) {
 				jQuery('[name=_tpt_settings_priority_type]').on('change', function () {
 
@@ -134,12 +134,12 @@ class Settings extends FormTab {
 					}
 				}).filter(':checked').trigger('change');
 			});
-        </script>
+		</script>
 		
 		<?php
 	}
 	
 	public function getIcon(): string {
-	    return 'dashicons-admin-settings';
+		return 'dashicons-admin-settings';
 	}
 }
