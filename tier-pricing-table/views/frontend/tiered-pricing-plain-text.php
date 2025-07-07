@@ -39,7 +39,7 @@
 	) );
 	
 	if ( ! function_exists( 'tptParsePlainText' ) ) {
-		function tptParsePlainText( $text, $quantity, $discount = null, $price, $base_unit_name ) {
+		function tptParsePlainText( $text, $quantity, $discount = null, $price = null, $base_unit_name = null ) {
 			return strtr( $text, array(
 				'{tp_quantity}'         => $quantity,
 				'{tp_discount}'         => $discount,

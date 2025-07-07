@@ -39,6 +39,15 @@ class CouponsAddon extends AbstractAddon {
 		}
 		
 		foreach ( $coupons as $coupon ) {
+			
+			if ( ! $coupon instanceof \WC_Coupon ) {
+				continue;
+			}
+			
+			if ( ! $coupon->is_valid_for_product( $item['data'] ) ) {
+				continue;
+			}
+			
 			if ( get_post_meta( $coupon->get_id(), '_disable_tiered_pricing', true ) === 'yes' ) {
 				return false;
 			}

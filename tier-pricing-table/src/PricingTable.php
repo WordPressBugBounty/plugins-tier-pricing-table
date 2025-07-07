@@ -56,7 +56,9 @@ class PricingTable {
 			$variationID = $this->getDefaultVariation( $parentProduct );
 		}
 		
-		// Use variation if exists. If not the parent product used
+		$ajaxVariationsThreshold = apply_filters( 'tiered_pricing_table/ajax_variations_threshold', 10 );
+		
+		// Use variation if exists, otherwise the parent product is used
 		$productId = $variationID ? $variationID : $parentProduct->get_id();
 		$product   = wc_get_product( $productId );
 		
@@ -78,7 +80,7 @@ class PricingTable {
 		
 		do_action( 'tiered_pricing_table/before_rendering_tiered_pricing', $parentProduct, $variationID, $settings );
 		
-		$variableProductSamePrices = AdvanceOptionsForVariableProduct::isVariableProductSamePrices( $parentProduct->get_id() );
+		$loadVariationByAjax = true;
 		
 		?>
 		<div class="clear"></div>
@@ -87,12 +89,31 @@ class PricingTable {
 			 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
 			 data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
 			 data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
+			 data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>"
+			
 			<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ): ?>
-				data-variable-product-same-prices="<?php echo esc_attr( $variableProductSamePrices ? 'yes' : 'no' ); ?>"
-			<?php endif; ?>
-			 data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>">
+				<?php
+				$loadVariationByAjax       = count( $parentProduct->get_children() ) > $ajaxVariationsThreshold;
+				$variableProductSamePrices = AdvanceOptionsForVariableProduct::isVariableProductSamePrices( $parentProduct->get_id() );
+				?>
+				data-load-variation-by-ajax="<?php echo esc_attr( wc_bool_to_string( $loadVariationByAjax ) ); ?>"
+				data-variable-product-same-prices="<?php echo esc_attr( wc_bool_to_string( $variableProductSamePrices ) ); ?>"
+			<?php endif; ?>>
+			
 			<?php $this->renderPricingTableHTML( $parentProduct, $product, $settings ); ?>
 		</div>
+		
+		<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) && ! $loadVariationByAjax ): ?>
+			<div class="tpt__tiered-pricing-preloaded-variations" style="display:none">
+				<?php foreach ( $parentProduct->get_available_variations( 'objects' ) as $childProduct ): ?>
+					<div class="tiered-pricing-preloaded-variation"
+						 data-variation-id="<?php echo esc_attr( $childProduct->get_id() ); ?>"
+						 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>">
+						<?php $this->renderPricingTableHTML( $parentProduct, $childProduct, $settings ); ?>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 		<?php
 	}
 	
@@ -285,8 +306,8 @@ class PricingTable {
 		if ( TierPricingTablePlugin::isVariableProductSupported( $product ) && $product instanceof WC_Product_Variable ) {
 			
 			// Do not check if product has tiered pricing for variable product by default.
-			// If variable product has many variation - it can take many resources to check every variation for rules existing.
-			// The downside is that the plugin will send an AJAX request for each variant selection on the product page even if product does not have any tiered pricing
+			// If a variable product has many variations, it can take many resources to check every variation for rules existing.
+			// The downside is that the plugin will send an AJAX request for each variant selection on the product page even if a product does not have any tiered pricing
 			if ( ! apply_filters( 'tiered_pricing_table/check_if_variable_product_has_rules', false, $product ) ) {
 				return true;
 			}

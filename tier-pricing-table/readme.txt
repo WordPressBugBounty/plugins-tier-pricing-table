@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.8.0
 Requires PHP: 7.2
-Stable tag: 5.2.0
+Stable tag: 5.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,6 +158,12 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.3.0 [2025-06-30] =
+* New: variable product cache - preload tiered pricing if there are less than 10 variations.
+* Fix: If a coupon is applied only to a specific products, "disable tiered pricing" option affected the whole cart.
+* Fix: Plain text template - warning with the latest PHP versions.
+* Update: Bump WooCommerce compatibility to 10.0.0
 
 = 5.2.0 [2025-06-16] =
 * New: always use regular price to show a crossed-out price in the cart.
