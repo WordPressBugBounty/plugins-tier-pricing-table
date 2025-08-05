@@ -42,7 +42,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '5.3.0';
+    const VERSION = '5.4.0';
 
     /**
      * TierPricingTablePlugin constructor.
@@ -166,7 +166,8 @@ class TierPricingTablePlugin {
     }
 
     /**
-     * Fired during plugin uninstall
+     * Fired after plugin uninstallation.
+     * This function is used to remove the activation timestamp option.
      */
     public static function uninstall() {
         delete_option( 'tpt_plugin_activation_timestamp' );

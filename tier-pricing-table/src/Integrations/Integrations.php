@@ -7,16 +7,18 @@ use TierPricingTable\Integrations\Plugins\DiscountRulesForWooCommerce;
 use TierPricingTable\Integrations\Plugins\Elementor\ElementorIntegration;
 use TierPricingTable\Integrations\Plugins\MixMatch;
 use TierPricingTable\Integrations\Plugins\ProductBundles;
+use TierPricingTable\Integrations\Plugins\RankMath\RankMath;
 use TierPricingTable\Integrations\Plugins\WCCS;
 use TierPricingTable\Integrations\Plugins\WCPA;
 use TierPricingTable\Integrations\Plugins\WCPProductBundles;
 use TierPricingTable\Integrations\Plugins\WombatProductAddons;
-use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceDeposits;
+use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
 use TierPricingTable\Integrations\Plugins\WOOCS;
 use TierPricingTable\Integrations\Plugins\WPAllImport;
 use TierPricingTable\Integrations\Plugins\WPMLMulticurrency;
 use TierPricingTable\Integrations\Plugins\YithRequestAQuote;
+use TierPricingTable\Integrations\Plugins\Yoast\Yoast;
 use TierPricingTable\Integrations\Themes\Astra;
 use TierPricingTable\Integrations\Themes\Avada;
 use TierPricingTable\Integrations\Themes\Divi;
@@ -68,6 +70,9 @@ class Integrations {
 			Curcy::class,
 			
 			WCPProductBundles::class,
+			
+			Yoast::class,
+			RankMath::class,
 		) );
 		
 		foreach ( $themes as $themeName => $theme ) {

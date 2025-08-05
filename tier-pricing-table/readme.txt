@@ -5,15 +5,15 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.8.0
 Requires PHP: 7.2
-Stable tag: 5.3.0
+Stable tag: 5.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The plugin enables you to set quantity-based discounts and display these prices on the product page using various templates.
+Enable quantity-based discounts and display these prices on the product page via various templates. Boost your sales with role-based pricing, min\max product quantity limits, cart upsells, and many other features.
 
 == Description ==
 
-**All-in-one and most complete dynamic pricing plugin for WooCommerce.**
+**Role-based pricing, Minimum\Maximum product quantity limits, Cart Upsells, and many other features make Tiered Pricing Table an all-in-one wholesale pricing solution.**
 
 [youtube https://www.youtube.com/watch?v=wRyPr6VQHZM]
 
@@ -37,7 +37,7 @@ Control the minimum, maximum, and quantity step of a product that users can purc
 ✅ **Multiple display templates for pricing on the product page \ product catalog**
  You can show the tiered prices via:
 ➖ **Table**
-➖ **Blocks**
+➖ **Blocks (3 different types)**
 ➖ **Options**
 ➖ **Dropdown**
 ➖ **Horizontal Table**
@@ -56,11 +56,9 @@ The clean interface and powerful functionality allow you to make any custom pric
 
 **All features**:
 
-*  Show tiered pricing at different places on the product page and product catalog
 *  Show saving amount to users (difference between original and discounted price)
 *  Various customization (titles, colors, positions, and many others)
 *  Built-in cache to provide the best performance
-*  Import\Export
 *  REST API
 *  Debug mode
 *  Many other little useful features
@@ -96,12 +94,13 @@ The clean interface and powerful functionality allow you to make any custom pric
 ✔️  **Product Fields** (Product Addons by StudioWombat)
 ✔️  **WooCommerce Deposits**
 ✔️  **Mix&Match for WooCommerce**
+✔️  **Yith and Math Rank SEO plugins**
 
-**Check out our site to get more information about the [Tiered Pricing Table for WooCommerce](https://tiered-pricing.com/)**
+**Get more information about the [Tiered Pricing Table for WooCommerce](https://tiered-pricing.com/)**
 
 Feel free to **[Contact us](https://tiered-pricing.com/contact-us/)** if you have any questions.
 
-Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin's features work.
+Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin works in action.
 
 == Screenshots ==
 
@@ -158,6 +157,13 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.4.0 [2025-07-29] =
+* New: Rank Math and Yith SEO integration
+* Update: Improvements for formatting prices in the product catalog
+* Update: Freemius SDK to the latest version.
+* Fix: Minor issues with the latest WooCommerce version.
+* Update: WooCommerce compatibility to 10.1.0
 
 = 5.3.0 [2025-06-30] =
 * New: variable product cache - preload tiered pricing if there are less than 10 variations.

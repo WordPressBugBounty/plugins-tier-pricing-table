@@ -1,53 +1,53 @@
 <?php namespace TierPricingTable\Settings\CustomOptions;
 
 class TPTQuantityMeasurementField {
-
+	
 	const FIELD_TYPE = 'tpt_quantity_measurement_option';
-
+	
 	public function __construct() {
 		add_action( 'woocommerce_admin_field_' . self::FIELD_TYPE, array( $this, 'render' ) );
-
+		
 		add_action( 'woocommerce_admin_settings_sanitize_option', function ( $value, $option, $rawValue ) {
-
+			
 			if ( self::FIELD_TYPE === $option['type'] ) {
 				$value = is_array( $value ) ? $value : array();
-
+				
 				$_value['singular'] = isset( $value['singular'] ) ? sanitize_text_field( $value['singular'] ) : '';
 				$_value['plural']   = isset( $value['plural'] ) ? sanitize_text_field( $value['plural'] ) : '';
-
+				
 				$value = $_value;
 			}
-
+			
 			return $value;
 		}, 10, 3 );
 	}
-
+	
 	public function render( $value ) {
 		if ( ! isset( $value['id'] ) ) {
 			$value['id'] = '';
 		}
-
+		
 		if ( ! isset( $value['title'] ) ) {
 			$value['title'] = isset( $value['name'] ) ? $value['name'] : '';
 		}
-
+		
 		if ( ! isset( $value['default'] ) ) {
 			$value['default'] = array( 'singular' => '', 'plural' => '' );
 		}
-
+		
 		if ( ! isset( $value['value'] ) ) {
 			$value['value'] = \WC_Admin_Settings::get_option( $value['id'], $value['default'] );
 		}
-
+		
 		if ( ! isset( $value['desc'] ) ) {
 			$value['desc'] = '';
 		}
-
-		$value['value']     = isset( $value['value'] ) ? (array) $value['value'] : array();
-
+		
+		$value['value'] = isset( $value['value'] ) ? (array) $value['value'] : array();
+		
 		$_value['singular'] = isset( $value['value']['singular'] ) ? sanitize_text_field( $value['value']['singular'] ) : '';
 		$_value['plural']   = isset( $value['value']['plural'] ) ? sanitize_text_field( $value['value']['plural'] ) : '';
-
+		
 		?>
 		<tr valign="top">
 			<th scope="row" class="titledesc">
@@ -82,7 +82,11 @@ class TPTQuantityMeasurementField {
 						</div>
 					</div>
 				</div>
-				<p class="description"><?php echo wp_kses_post( $value['desc'] ); ?></p>
+				<p class="description">
+					<?php
+						echo wp_kses_post( $value['desc'] ); // audit.php.wp.security.xss.shortcode-attr ignore
+					?>
+				</p>
 			</td>
 		</tr>
 		<?php

@@ -48,42 +48,46 @@ class TPTIntegrationOption {
 		
 		?>
 
-            <tr class="tpt-integration-item" style="display: flex; width: 33%; min-width: 400px">
-            <td>
-                <div style="display: flex; gap: 20px;">
-                    <div class="tpt-integration-item__image" style="width:100px;">
-                        <img src="<?php echo esc_attr( $value['icon_url'] ); ?>" width="100px" height="100px"
-                             alt="<?php echo esc_html( $value['title'] ); ?>">
-                    </div>
-                    <div class="tpt-integration-item__description">
+		<tr class="tpt-integration-item" style="display: flex; width: 50%; min-width: 400px;">
+			<td>
+				<div style="display: flex; gap: 20px;">
+					<div class="tpt-integration-item__image" style="width:100px;">
+						<img src="<?php echo esc_attr( $value['icon_url'] ); ?>" width="100px" height="100px"
+							 alt="<?php echo esc_html( $value['title'] ); ?>">
+					</div>
+					<div class="tpt-integration-item__description">
 						
 						<?php if ( $value['author_url'] ) : ?>
-                            <a target="_blank" href="<?php echo esc_attr( $value['author_url'] ); ?>">
-                                <h4 style="margin-top: 0; margin-bottom: 10px"><?php echo esc_html( $value['title'] ); ?></h4>
-                            </a>
+							<a target="_blank" href="<?php echo esc_attr( $value['author_url'] ); ?>">
+								<h4 style="margin-top: 0; margin-bottom: 10px"><?php echo esc_html( $value['title'] ); ?></h4>
+							</a>
 						<?php else : ?>
-                            <h4 style="margin-top: 0; margin-bottom: 10px"><?php echo esc_html( $value['title'] ); ?></h4>
+							<h4 style="margin-top: 0; margin-bottom: 10px"><?php echo esc_html( $value['title'] ); ?></h4>
 						<?php endif; ?>
 
-                        <p class="description"><?php echo wp_kses_post( $value['desc'] ); ?></p>
-                        <div class="tpt-integration-item-checkbox" style="margin-top: 10px">
-                            <input
-                                    name="<?php echo esc_attr( $value['id'] ); ?>"
-                                    id="<?php echo esc_attr( $value['id'] ); ?>"
-                                    type="checkbox"
-                                    value="1"
+						<p class="description">
+							<?php
+								echo wp_kses_post( $value['desc'] ); // audit.php.wp.security.xss.shortcode-attr ignore
+							?>
+						</p>
+						<div class="tpt-integration-item-checkbox" style="margin-top: 10px">
+							<input
+									name="<?php echo esc_attr( $value['id'] ); ?>"
+									id="<?php echo esc_attr( $value['id'] ); ?>"
+									type="checkbox"
+									value="1"
 								<?php checked( $option_value, 'yes' ); ?>
-                                    class="tpt-toggle-switch"
-                            />
-                            <label for="<?php echo esc_attr( $value['id'] ); ?>">
-                                <span data-tpt-toggle-switch-on><?php echo esc_attr( $value['on_label'] ); ?></span>
-                                <span data-tpt-toggle-switch-off><?php echo esc_attr( $value['off_label'] ); ?></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
+									class="tpt-toggle-switch"
+							/>
+							<label for="<?php echo esc_attr( $value['id'] ); ?>">
+								<span data-tpt-toggle-switch-on><?php echo esc_attr( $value['on_label'] ); ?></span>
+								<span data-tpt-toggle-switch-off><?php echo esc_attr( $value['off_label'] ); ?></span>
+							</label>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
 		<?php
 	}
 }

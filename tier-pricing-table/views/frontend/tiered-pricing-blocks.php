@@ -39,16 +39,16 @@ if ( $sale_price ) {
 	?>
 
 <?php if ( ! empty( $price_rules ) ) : ?>
-	
+
 	<div class="tiered-pricing-wrapper">
 		<?php if ( ! empty( $settings['title'] ) ) : ?>
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
-		
+
 		<div class="tiered-pricing-blocks"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
-			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"
+			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ), ENT_QUOTES ) ); ?>"
 			 data-minimum="<?php echo esc_attr( $minimum ); ?>"
 			 data-product-name="<?php echo esc_attr( $product_name ); ?>"
 			 data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
@@ -56,7 +56,7 @@ if ( $sale_price ) {
 			 data-price="<?php echo esc_attr( $price ); ?>"
 			 data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
-			
+
 			<div class="tiered-pricing-block tiered-pricing--active"
 				 data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
 				 data-tiered-price="
@@ -106,7 +106,7 @@ if ( $sale_price ) {
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
-				
+
 				<span class="tiered-pricing-block__quantity">
 						<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
 							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
@@ -169,7 +169,7 @@ if ( $sale_price ) {
 				) );
 				
 				?>
-				
+
 				<div class="tiered-pricing-block"
 					 data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
 					 data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
@@ -202,14 +202,14 @@ if ( $sale_price ) {
 		
 		<?php do_action( 'tiered_pricing_table/blocks/after_blocks', $pricing_rule ); ?>
 	</div>
-	
+
 	<style>
 		<?php
-		if ( $settings['clickable_rows'] && tpt_fs()->can_use_premium_code()) {
+		if ( $settings['clickable_rows']) {
 			echo esc_attr('#' . $id) . ' .tiered-pricing-block {cursor: pointer; }';
 		}
 		?>
-		
+
 		<?php echo esc_attr('#' . $id); ?>
 		.tiered-pricing--active {
 			border-color: <?php echo esc_attr($settings['active_tier_color']); ?> !important;

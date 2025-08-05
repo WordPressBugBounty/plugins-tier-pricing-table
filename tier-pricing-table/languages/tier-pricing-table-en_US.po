@@ -1,0 +1,1663 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tiered Pricing Table for WooCommerce\n"
+"POT-Creation-Date: 2023-07-05 17:52+0300\n"
+"PO-Revision-Date: 2023-07-05 17:52+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: esc_attr_e;esc_attr__;__;_e;_x;_n;esc_html__;"
+"esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+
+#: src/API/WooCommerceRESTAPI.php:32 src/API/WooCommerceRESTAPI.php:111
+msgid "Tiered Pricing type. can be either \"percentage\" or \"fixed\""
+msgstr ""
+
+#: src/API/WooCommerceRESTAPI.php:53 src/API/WooCommerceRESTAPI.php:129
+msgid ""
+"Tiered Pricing fixed rules. The format is the following: \"quantity:price\". "
+"For example, \"10:20,5:40\" means 10$ per piece if users buy 20pcs and 5$ "
+"per piece if users buy 40pcs"
+msgstr ""
+
+#: src/API/WooCommerceRESTAPI.php:75 src/API/WooCommerceRESTAPI.php:148
+#, no-php-format
+msgid ""
+"Tiered Pricing percentage rules. The format is the following: \"quantity:"
+"percentage_discount\". For example, \"10:20,20:40\" means 10% off per piece "
+"if users buy 20pcs and 20% off per piece if users buy 40pcs"
+msgstr ""
+
+#: src/API/WooCommerceRESTAPI.php:91 src/API/WooCommerceRESTAPI.php:165
+msgid "Minimum order quantity. Goes from Tiered Pricing Table plugin."
+msgstr ""
+
+#: src/Addons/CategoryTiers/CategoryTierAddon.php:15
+msgid "Tiered pricing for product categories"
+msgstr ""
+
+#: src/Addons/CategoryTiers/CategoryTierAddon.php:44
+msgid "Skip category rules"
+msgstr ""
+
+#: src/Addons/CategoryTiers/CategoryTierAddon.php:45
+msgid "Don't take into account tiered pricing rules from categories. "
+msgstr ""
+
+#: src/Addons/CategoryTiers/CategoryTierAddon.php:231
+msgid "Allows to set tiered pricing for a particular product category."
+msgstr ""
+
+#: src/Addons/Coupons/Coupons.php:9
+msgid "Coupons management"
+msgstr ""
+
+#: src/Addons/Coupons/Coupons.php:59
+msgid "Disable tiered pricing when the coupon is applied"
+msgstr ""
+
+#: src/Addons/Coupons/Coupons.php:60
+msgid ""
+"Check this option to don't  apply tiered pricing in the cart when users have "
+"applied this coupon."
+msgstr ""
+
+#: src/Addons/Coupons/Coupons.php:67
+msgid ""
+"Allows you to manage which coupon will allow tiered pricing and whick not."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Actions/ReactivateAction.php:36
+msgid "Reactivate"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Actions/ReactivateAction.php:55
+msgid "The rule reactivated successfully."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:36
+msgid "Suspend"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:54
+msgid "The rule suspended successfully."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedCustomers.php:11
+msgid "Customers"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedCustomers.php:31
+msgid "Roles: "
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedCustomers.php:43
+msgid "Customers: "
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedCustomers.php:54
+msgid "Applied to every user"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedPricingType.php:8
+msgid "Pricing Applying As"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedPricingType.php:12
+msgid "Individually for products"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedPricingType.php:12
+msgid "Cross all the products"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedProducts.php:10
+msgid "Products"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedProducts.php:36
+msgid "Categories: "
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedProducts.php:47
+msgid "Products: "
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedProducts.php:59
+msgid "Applied to every product"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedQuantityRules.php:8
+#: views/addons/global-rules/role-specific-pricing/pricing.php:133
+msgid "Minimum Order Quantity"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliedQuantityRules.php:13
+msgid "Not set"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:13
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:174
+#: views/addons/global-rules/role-specific-pricing/pricing.php:32
+msgid "Pricing"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:24
+msgid "Product regular price"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:40
+#, php-format
+msgid "Regular Price: <b>%s</b>"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:44
+#, php-format
+msgid "Sale Price: <b>%s</b>"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:48
+#, php-format
+msgid "Discount: <b>%s%%</b>"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:60
+#: src/PricingTable.php:143 src/Settings/CustomOptions/TPTTextTemplate.php:137
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:145
+#: views/addons/category-tiers/add-free.php:23
+#: views/addons/category-tiers/add.php:41
+#: views/addons/category-tiers/edit-free.php:24
+#: views/addons/category-tiers/edit.php:43
+#: views/addons/category-tiers/edit.php:66
+#: views/addons/role-based-pricing/simple/add-price-rules.php:93
+#: views/addons/role-based-pricing/simple/add-price-rules.php:113
+#: views/addons/role-based-pricing/simple/add-price-rules.php:141
+#: views/addons/role-based-pricing/simple/add-price-rules.php:163
+#: views/addons/role-based-pricing/variation/add-price-rules.php:89
+#: views/addons/role-based-pricing/variation/add-price-rules.php:107
+#: views/addons/role-based-pricing/variation/add-price-rules.php:132
+#: views/addons/role-based-pricing/variation/add-price-rules.php:151
+#: views/admin/add-price-rules-variation.php:78
+#: views/admin/add-price-rules-variation.php:99
+#: views/admin/add-price-rules-variation.php:127
+#: views/admin/add-price-rules-variation.php:150
+#: views/admin/add-price-rules.php:48 views/admin/add-price-rules.php:66
+#: views/admin/add-price-rules.php:90 views/admin/add-price-rules.php:108
+msgid "Quantity"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:64
+msgid "Discount"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:66
+#: src/PricingTable.php:144
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
+#: views/addons/role-based-pricing/simple/add-price-rules.php:98
+#: views/addons/role-based-pricing/simple/add-price-rules.php:117
+#: views/addons/role-based-pricing/variation/add-price-rules.php:93
+#: views/addons/role-based-pricing/variation/add-price-rules.php:110
+#: views/admin/add-price-rules-variation.php:82
+#: views/admin/add-price-rules-variation.php:102
+#: views/admin/add-price-rules.php:52 views/admin/add-price-rules.php:69
+msgid "Price"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Status.php:9
+msgid "Status"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Status.php:17
+msgid "Suspended"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Status.php:24
+msgid "Active"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:169
+msgid "Rules"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:179
+msgid "Pricing notice"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:332
+msgid ""
+"There are no pricing rules yet. To create the first pricing rule click on "
+"the button below."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:339
+msgid "Create a pricing rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:369
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:370
+msgid "Pricing rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:371
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:372
+msgid "Add Pricing Rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:373
+msgid "Edit Pricing Rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:374
+msgid "New Pricing Rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:375
+msgid "View Pricing Rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:376
+msgid "Find Pricing Rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:377
+msgid "No pricing rules ware found"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:378
+msgid "No pricing rule in trash"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:380
+msgid "Pricing rules"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:339
+msgid ""
+"The pricing rule does not affect either prices or minimum quantity. The rule "
+"will be skipped."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:19
+msgid "Global tiered pricing"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:235
+msgid ""
+"Global tiered pricing rules allow you create pricing rules for a user role "
+"or particular user and apply them to specific products or a whole product "
+"category"
+msgstr ""
+
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:12
+msgid "Tiered pricing for manual orders"
+msgstr ""
+
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:118
+msgid ""
+"Tiered pricing for admin-made orders from administrator panel. Please note "
+"that this may cause some issue if you use 3rd-party plugins that modify the "
+"product price. For example Product Addons"
+msgstr ""
+
+#: src/Addons/MinQuantity/MinQuantity.php:12
+msgid "Minimum quantity validation"
+msgstr ""
+
+#: src/Addons/MinQuantity/MinQuantity.php:27
+#, php-format
+msgid "Minimum quantity for the %s is %d"
+msgstr ""
+
+#: src/Addons/MinQuantity/MinQuantity.php:55
+#: src/Addons/MinQuantity/MinQuantity.php:72
+#, php-format
+msgid "Minimum quantity for the product is %s"
+msgstr ""
+
+#: src/Addons/MinQuantity/MinQuantity.php:150
+msgid ""
+"Minimum quantity validation. Turning off might be useful in case you use a "
+"3rd-party plugin for MOQ"
+msgstr ""
+
+#: src/Addons/RoleBasedPricing/RoleBasedPricingAddon.php:18
+msgid "Role based tiered pricing"
+msgstr ""
+
+#: src/Addons/RoleBasedPricing/RoleBasedPricingAddon.php:544
+msgid "Invalid role"
+msgstr ""
+
+#: src/Addons/RoleBasedPricing/RoleBasedPricingAddon.php:550
+msgid "Invalid nonce"
+msgstr ""
+
+#: src/Addons/RoleBasedPricing/RoleBasedPricingAddon.php:583
+msgid ""
+"Role-based tiered pricing for a specific product. Turning off will not "
+"disable role-base for global tiered pricing rules"
+msgstr ""
+
+#: src/Admin/Export/Woocommerce.php:40
+msgid "Fixed Tiered Prices"
+msgstr ""
+
+#: src/Admin/Export/Woocommerce.php:43 src/Admin/Import/Woocommerce.php:27
+#: src/Admin/Import/Woocommerce.php:41 src/Admin/Import/Woocommerce.php:65
+#: src/Admin/Import/Woocommerce.php:76
+#: src/Integrations/Plugins/WPAllImport.php:110
+#: src/Integrations/Plugins/WPAllImport.php:162
+#: views/addons/role-based-pricing/simple/add-price-rules.php:61
+#: views/addons/role-based-pricing/variation/add-price-rules.php:58
+#: views/admin/add-price-rules-variation.php:27
+#: views/admin/add-price-rules.php:24
+msgid "Tiered pricing type"
+msgstr ""
+
+#: src/Admin/Export/Woocommerce.php:44 src/Admin/Import/Woocommerce.php:28
+#: src/Admin/Import/Woocommerce.php:42 src/Admin/Import/Woocommerce.php:66
+#: src/Admin/Import/Woocommerce.php:77
+msgid "Tiered pricing minimum product quantity"
+msgstr ""
+
+#: src/Admin/Export/Woocommerce.php:45 src/Admin/Import/Woocommerce.php:30
+#: src/Admin/Import/Woocommerce.php:44
+msgid "Percentage Tiered Prices"
+msgstr ""
+
+#: src/Admin/Import/Woocommerce.php:29 src/Admin/Import/Woocommerce.php:43
+#: src/Admin/Import/Woocommerce.php:63 src/Admin/Import/Woocommerce.php:74
+#: src/Integrations/Plugins/WPAllImport.php:96
+#: src/Integrations/Plugins/WPAllImport.php:142
+msgid "Fixed Tiered prices"
+msgstr ""
+
+#: src/Admin/Import/Woocommerce.php:64 src/Admin/Import/Woocommerce.php:75
+#: src/Integrations/Plugins/WPAllImport.php:103
+#: src/Integrations/Plugins/WPAllImport.php:152
+msgid "Percentage Tiered prices"
+msgstr ""
+
+#: src/Admin/ProductManagers/AdvanceOptionsForVariableProduct.php:49
+msgid "Default variation"
+msgstr ""
+
+#: src/Admin/ProductManagers/AdvanceOptionsForVariableProduct.php:56
+msgid "Search for a variation&hellip;"
+msgstr ""
+
+#: src/Admin/ProductManagers/AdvanceOptionsForVariableProduct.php:69
+msgid ""
+"The pricing will be shown for the selected variation before the attributes "
+"are selected on the product page"
+msgstr ""
+
+#: src/Admin/ProductManagers/AdvanceOptionsForVariableProduct.php:82
+msgid "Product does not have tiered pricing rules"
+msgstr ""
+
+#: src/Admin/ProductManagers/AdvanceOptionsForVariableProduct.php:83
+msgid ""
+"Check this if the product does not have tiered pricing rules. This will "
+"increase performance as the plugin will not check every variation for rules"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:47
+#: src/Integrations/Plugins/WPAllImport.php:259 src/Settings/Settings.php:164
+#: views/addons/global-rules/role-specific-pricing/pricing.php:100
+msgid "Tiered Pricing"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:64
+#: views/addons/global-rules/role-specific-pricing/pricing.php:21
+msgid ""
+"Set if you sell the product only from a specific quantity that is more than 1"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:75
+msgid "Available only in the premium version"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:77
+#: views/addons/category-tiers/add-free.php:36
+#: views/addons/category-tiers/edit-free.php:49
+#: views/addons/role-based-pricing/simple/add-price-rules.php:20
+#: views/admin/add-price-rules-variation.php:64
+msgid "Upgrade"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:94
+#: views/addons/global-rules/role-specific-pricing/pricing.php:152
+#: views/addons/role-based-pricing/simple/add-price-rules.php:45
+msgid "Minimum quantity"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:122
+msgid "Default"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:123
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:54
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:42
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:45
+msgid "Table"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:124
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:55
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:43
+msgid "Blocks"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:125
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:56
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:44
+msgid "Options"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:126
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:57
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:45
+msgid "Dropdown"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:127
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:46
+msgid "Tooltip"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:129
+msgid "Layout"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:130
+msgid ""
+"Specify a tiered pricing layout for the product. Leave the default to use "
+"the default layout from the settings"
+msgstr ""
+
+#: src/Admin/ProductManagers/ProductManager.php:143
+msgid "Advanced settings"
+msgstr ""
+
+#: src/Cache.php:52
+msgid "Cache has been purged successfully"
+msgstr ""
+
+#: src/Freemius.php:66 src/Freemius.php:67
+msgid "Freemius Account"
+msgstr ""
+
+#: src/Freemius.php:70 src/TierPricingTablePlugin.php:90
+msgid "Contact Us"
+msgstr ""
+
+#: src/Frontend/CartUpsellManager.php:149
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:64
+msgid ""
+"Buy <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each"
+msgstr ""
+
+#: src/Frontend/CatalogPriceManager.php:271
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:60
+msgid "From"
+msgstr ""
+
+#: src/Integrations/Plugins/AeliaMulticurrency.php:34
+msgid "Aelia Multicurrency"
+msgstr ""
+
+#: src/Integrations/Plugins/AeliaMulticurrency.php:38
+msgid ""
+"Integration provides compatibility with Aelia Multicurrency to properly work "
+"with multiple currencies."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorIntegration.php:9
+msgid "Elementor"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorIntegration.php:13
+msgid ""
+"Integration provides three tiered pricing widgets (table, blocks and "
+"options) with a bunch of settings."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:16
+#: src/Integrations/Plugins/WPAllImport.php:29
+msgid "Tiered Pricing Table"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:38
+msgid "Main"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:43
+msgid "Product ID"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:46
+msgid "Leave empty to use the current product."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:50
+msgid "Display type"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:63
+msgid "Title"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:66
+msgid "Tiered pricing title. Leave empty to use default title."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:71
+msgid "Show total"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:75
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:190
+msgid "Show total for each option when an option is active."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:81
+msgid "Show prices without a discount"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:85
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:182
+msgid "Show price with no discount in the option."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:89
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:208
+msgid "Show the default option"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:93
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:212
+msgid ""
+"Show the option without a discount (option with a regular product price)"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:99
+msgid "Active tier color"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:102
+msgid "Leave empty to use the default color."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:106
+msgid "Quantity column text"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:109
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:117
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:125
+msgid "Leave empty to use default title."
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:114
+msgid "Discount column text"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:122
+msgid "Price column text"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:136
+msgid "Quantity measurement (singular)"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:139
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:147
+msgid "Leave empty to use default"
+msgstr ""
+
+#: src/Integrations/Plugins/Elementor/ElementorWidget.php:144
+msgid "Quantity measurement (plural)"
+msgstr ""
+
+#: src/Integrations/Plugins/MixMatch.php:18
+msgid "Mix&Match for WooCommerce"
+msgstr ""
+
+#: src/Integrations/Plugins/MixMatch.php:22
+msgid ""
+"Integration provides compatibility with Mix&Match for WooCommerce to "
+"properly work with this type of product."
+msgstr ""
+
+#: src/Integrations/Plugins/ProductBundles.php:89
+msgid "Product Bundles for WooCommerce"
+msgstr ""
+
+#: src/Integrations/Plugins/ProductBundles.php:93
+msgid ""
+"Integration provides compatibility with Product Bundles for WooCommerce to "
+"support bundle product type."
+msgstr ""
+
+#: src/Integrations/Plugins/WCCS.php:27
+msgid "WooCommerce Currency Switcher by WP Experts (WCCS)"
+msgstr ""
+
+#: src/Integrations/Plugins/WCCS.php:31
+msgid ""
+"Integration provides compatibility with WooCommerce Currency Switcher by WP "
+"Experts to properly work with multiple currencies."
+msgstr ""
+
+#: src/Integrations/Plugins/WCPA.php:15
+msgid "WooCommerce Custom Product Addons (WCPA)"
+msgstr ""
+
+#: src/Integrations/Plugins/WCPA.php:19
+msgid ""
+"Integration provides compatibility with WCPA to work properly with custom "
+"product options."
+msgstr ""
+
+#: src/Integrations/Plugins/WOOCS.php:39
+msgid "WooCommerce Currency Switcher (FOX)"
+msgstr ""
+
+#: src/Integrations/Plugins/WOOCS.php:43
+msgid ""
+"Integration provides compatibility with WooCommerce Currency Switcher to "
+"properly work with multiple currencies."
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:99
+#: src/Integrations/Plugins/WPAllImport.php:147
+msgid ""
+"The format for the rules must be the following: quantity:price,quantity:"
+"price. For example: \"10:5,20:15\" where 10 and 20 are quantities and 5 and "
+"15 are prices for those quantities."
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:106
+#: src/Integrations/Plugins/WPAllImport.php:157
+msgid ""
+"Format for the rules must be the following: quantity:percent_discount,"
+"quantity:percent_discount. For example: \"10:5,20:15\" where 10 and 20 are "
+"quantities and 5 and 15 are amounts of discount."
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:119
+#: src/Integrations/Plugins/WPAllImport.php:173
+msgid "The field must be either \"fixed\" or \"percentage\"."
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:122
+#: src/Integrations/Plugins/WPAllImport.php:177
+msgid "Minimum product quantity"
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:127
+#: src/Integrations/Plugins/WPAllImport.php:184
+msgid "The field must contain an integer value."
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:483
+msgid "Role-based import"
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:805
+msgid "WP All Import"
+msgstr ""
+
+#: src/Integrations/Plugins/WPAllImport.php:809
+msgid ""
+"Integration provides compatibility with WP All Import plugin and allows you "
+"to import tiered pricing data (including role-based rules) via the plugin"
+msgstr ""
+
+#: src/Integrations/Plugins/WooCommerceDeposits.php:6
+msgid "WooCommerce Deposits"
+msgstr ""
+
+#: src/Integrations/Plugins/WooCommerceDeposits.php:10
+msgid ""
+"Integration provides compatibility with WooCommerce Deposits to work "
+"properly with deposit purchases."
+msgstr ""
+
+#: src/Integrations/Plugins/WooCommerceProductAddons.php:59
+msgid "WooCommerce Product Add-ons (by WooCommerce)"
+msgstr ""
+
+#: src/Integrations/Plugins/WooCommerceProductAddons.php:63
+msgid ""
+"Integration provides compatibility with WooCommerce Product Add-ons to work "
+"properly with custom product options."
+msgstr ""
+
+#: src/PricingTable.php:145
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:172
+#: views/addons/global-rules/role-specific-pricing/pricing.php:57
+msgid "Discount (%)"
+msgstr ""
+
+#: src/PricingTable.php:176 src/PricingTable.php:177
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:135
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:136
+msgid "piece"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:62
+msgid "Singular"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:69
+msgid "e.g., piece"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:74
+msgid "Plural"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:81
+msgid "e.g., pieces"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTSwitchOption.php:43
+msgid "On"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTSwitchOption.php:47
+msgid "Off"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:138
+msgid "{tp_quantity} - range or a static quantity of the current pricing tier."
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:143
+#: views/addons/category-tiers/add.php:47
+#: views/addons/category-tiers/edit.php:51
+#: views/addons/category-tiers/edit.php:72
+#: views/addons/global-rules/role-specific-pricing/pricing.php:50
+msgid "Percentage discount"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:144
+msgid "{tp_discount} - current tier`s percentage discount."
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:149
+msgid "Rounded percentage discount"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:150
+msgid "{tp_rounded_discount} - current tier`s rounded percentage discount."
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:155
+msgid "Required quantity"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:156
+msgid ""
+"{tp_required_quantity} - required quantity to add a next tiered pricing."
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:161
+msgid "Next price"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:162
+msgid ""
+"{tp_next_price} - next tiered pricing price user can get if they add "
+"required quantity."
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:167
+msgid "Next discount"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:168
+msgid "{tp_next_discount} - next discount if they add required quantity."
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:173
+msgid "Next actual discount"
+msgstr ""
+
+#: src/Settings/CustomOptions/TPTTextTemplate.php:174
+msgid "{tp_actual_discount} - discount based on the original product price."
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:17
+msgid "Additional features"
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:18
+msgid "This section controls all advanced tiered pricing features"
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:43
+msgid "Advanced"
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:59
+msgid "Cache"
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:60
+msgid ""
+"Cache improves performance making the plugin not calculate data on each "
+"request. Disable to debug issues."
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:65
+msgid "Enabled"
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:71
+msgid "Purge"
+msgstr ""
+
+#: src/Settings/Sections/Advanced/AdvancedSection.php:72
+msgid "Purge cache"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:92
+msgid "General"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:96
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:198
+msgid ""
+"<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:102
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:218
+msgid "<strong>Buy {tp_quantity} pieces</strong>"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:11
+msgid "Tiered pricing in the cart and checkout pages"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:15
+msgid ""
+"This section controls how the tiered pricing will look and behave on the "
+"cart and checkout pages"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:26
+msgid ""
+"Consider different product variations as the same product during calculation "
+"tiered pricing"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:31
+msgid ""
+"For the same variable product, the plugin will consider all its variations "
+"as the same product when calculating a discount."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:36
+msgid "Show tiered price in the cart as a discount"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:38
+msgid ""
+"Show the crossed-out original price with a discounted price beside it. "
+"Example: "
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:46
+msgid "Cart upsells"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:55
+msgid "Cart upsell template"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CartSubsection.php:70
+msgid "Cart upsell color"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:11
+msgid "Tiered pricing catalog prices"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:15
+msgid ""
+"This section controls how the tiered pricing will look on catalog, widgets "
+"and everywhere where a product price is displayed"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:26
+msgid "Price formatting on the catalog page, widgets, etc"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:31
+msgid "Change price formatting on the whole site (show range or minimal price)"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:36
+msgid "Enable catalog, widget price formatting for variable products"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:41
+msgid ""
+"Show tiered price at the catalog for variable products. Uses the lowest and "
+"the highest prices from all variations"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:46
+msgid "Display Tiered Price as"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:50
+msgid "Range (from lowest to highest)"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:51
+msgid "Lowest price"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:53
+msgid "How to Display Tiered Price at The Catalog"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:57
+msgid "Lowest price prefix"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/CatalogPricesSubsection.php:61
+msgid ""
+"Prefix Before Lowest Tiered Product Price at the Catalog. Example: <b>From "
+"10$</b>"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:14
+msgid "Tiered pricing layout"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:18
+msgid ""
+"This section controls how the tiered pricing layout will look and behave on "
+"the store."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:29
+msgid "Show tiered pricing"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:33
+msgid ""
+"Display a tiered pricing on the product page? Prices will be changing even "
+"if the tiered pricing is not displaying."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:38
+msgid "Display tiered pricing as"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:48
+msgid "Type of displaying tiered pricing on the product page."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:53
+msgid "Quantity displaying type"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:57
+msgid "Range"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:58
+msgid "Static values"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:60
+msgid ""
+"How to display quantities in the tiered pricing. Range for a range of "
+"quantities that a tiered price will apply for or static for a minimum "
+"quantity that a tiered price will apply for."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:66
+msgid "Tooltip icon color"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:71
+msgid "Color of the icon"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:75
+msgid "Tooltip icon size (px)"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:79
+msgid "Size of the icon"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:83
+msgid "Tooltip border"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:89
+msgid "Pricing title"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:93
+msgid "The name is displaying above the tiered pricing."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:97
+msgid "Tiered pricing position"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:101
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:73
+msgid "Above buy button"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:102
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:74
+msgid "Below buy button"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:103
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:75
+msgid "Above add to cart form"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:104
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:76
+msgid "Below add to cart form"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:105
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:77
+msgid "Above product title"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:106
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:78
+msgid "Before product summary"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:107
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:79
+msgid "After product summary"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:109
+msgid "Where to display the tiered pricing."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:113
+msgid "Active pricing tier color"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:120
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:131
+msgid "Quantity measurement"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:127
+msgid ""
+"For example:, pieces, boxes, bottles, packs, etc. It will be added next to "
+"quantities in the table. Leave empty to not add any."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:138
+msgid ""
+"For example:, pieces, boxes, bottles, packs, etc. It will be added next to "
+"quantities in a block. Leave empty to not add any."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:142
+msgid "Quantity column title"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:146
+msgid ""
+"Name of the quantity column. Set price column and quantity column name blank "
+"to do not show table heading."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:151
+msgid "Price column title"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:155
+msgid ""
+"Name of the price column. Let price column and quantity column names blank "
+"to do not show table heading."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:160
+msgid "Show percentage discount"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:163
+msgid "Show a percentage discount as column for table or for pricing blocks"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:169
+msgid "Discount column title"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:173
+msgid "Name of discount column."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:178
+msgid "Show original product price"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:186
+msgid "Show total in each option"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:196
+msgid "Option text"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:216
+msgid "Default option text"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:225
+msgid "Update tiered price on a click"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:229
+msgid "Change product quantity on click at table pricing row or pricing block"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:13
+msgid "Price on the product page"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:17
+msgid ""
+"This section controls how the product price with tiered pricing will look "
+"and behave on the product page."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:28
+msgid "Format price"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:32
+msgid "Custom"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:33
+msgid "Same as on catalog"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:38
+msgid "Show actual price"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:42
+msgid "The product price will be updated when a new price is reached"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:45
+msgid "Show tiered price as a discount"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:49
+msgid ""
+"Selected tiered price will be shown as a discount. The original product "
+"price will be crossed out"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:52
+msgid "Show total price"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:56
+msgid "Calculate and show total price on the product page"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:10
+msgid "Totals"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:14
+msgid "Section controls how totals block at a product page."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:24
+msgid "Show totals"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:28
+msgid ""
+"Show totals on the product page. Display information about actual unit "
+"price, product quantity and total"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:33
+msgid "Totals title"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:36
+msgid "The name is displaying above the summary block."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:41
+msgid "Totals type"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:46
+msgid "Inline"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:48
+msgid "Type of displaying."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:53
+msgid "\"Total\" label"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:56
+#: views/frontend/tiered-pricing-options.php:116
+#: views/frontend/tiered-pricing-options.php:204
+msgid "Total:"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:57
+msgid "Label for the \"total\" line."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:61
+msgid "\"Each\" label"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:64
+msgid "Each: "
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:65
+msgid "Label for the \"each\" line."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:69
+msgid "Totals position"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/SummarySubsection.php:82
+msgid "Where to display the summary block."
+msgstr ""
+
+#: src/Settings/Sections/Integrations/IntegrationSection.php:17
+#: src/Settings/Sections/Integrations/IntegrationSection.php:42
+msgid "Integrations"
+msgstr ""
+
+#: src/Settings/Sections/Integrations/IntegrationSection.php:18
+msgid "This section controls all tiered pricing build-in integrations"
+msgstr ""
+
+#: src/Settings/Settings.php:133 src/TierPricingTablePlugin.php:82
+#: views/admin/alerts/activation-alert.php:21
+msgid "Documentation"
+msgstr ""
+
+#: src/TierPricingTablePlugin.php:79 views/admin/alerts/activation-alert.php:19
+msgid "Settings"
+msgstr ""
+
+#: src/TierPricingTablePlugin.php:86
+msgid "Account"
+msgstr ""
+
+#: src/TierPricingTablePlugin.php:94
+msgid "Go Premium"
+msgstr ""
+
+#: src/TierPricingTablePlugin.php:161
+#, php-format
+msgid "The Tiered Pricing Table plugin requires %s plugin to be active!"
+msgstr ""
+
+#: views/addons/category-tiers/add-free.php:26
+#: views/addons/category-tiers/edit-free.php:27
+#: views/addons/role-based-pricing/simple/add-price-rules.php:147
+#: views/addons/role-based-pricing/simple/add-price-rules.php:167
+#: views/addons/role-based-pricing/variation/add-price-rules.php:136
+#: views/addons/role-based-pricing/variation/add-price-rules.php:155
+#: views/admin/add-price-rules-variation.php:131
+#: views/admin/add-price-rules-variation.php:153
+#: views/admin/add-price-rules.php:94 views/admin/add-price-rules.php:111
+msgid "Percent discount"
+msgstr ""
+
+#: views/addons/category-tiers/add-free.php:34
+msgid ""
+"Available only in the premium version (You can disable this block in the "
+"settings)"
+msgstr ""
+
+#: views/addons/category-tiers/add.php:59
+#: views/addons/category-tiers/edit-free.php:36
+#: views/addons/category-tiers/edit.php:84
+#: views/addons/role-based-pricing/simple/add-price-rules.php:125
+#: views/addons/role-based-pricing/simple/add-price-rules.php:176
+#: views/addons/role-based-pricing/variation/add-price-rules.php:118
+#: views/addons/role-based-pricing/variation/add-price-rules.php:164
+#: views/admin/add-price-rules-variation.php:111
+#: views/admin/add-price-rules-variation.php:162
+#: views/admin/add-price-rules.php:77 views/admin/add-price-rules.php:119
+msgid "New tier"
+msgstr ""
+
+#: views/addons/category-tiers/add.php:65
+msgid ""
+"Assign percentage discounts for products that have this category. Rules can "
+"be overridden\n"
+"                in product."
+msgstr ""
+
+#: views/addons/category-tiers/edit.php:119
+msgid ""
+"Assign percentage discounts for products that have this category. Rules can "
+"be overridden in product."
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing-notice.php:17
+msgid ""
+"Please note that rules in products have higher priority overriding the "
+"pricing rules you set here.\n"
+"Priorities are the following:"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing-notice.php:22
+msgid "Priorities are the following:"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing-notice.php:26
+msgid "Single product rules (single variation)"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing-notice.php:27
+msgid "Variable product rules (if a product is a variable)"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing-notice.php:28
+msgid "Global rules"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:36
+#: views/addons/global-rules/role-specific-pricing/pricing.php:137
+#: views/admin/only-in-premium-script.php:28
+msgid "Only in premium version"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:39
+#: views/addons/global-rules/role-specific-pricing/pricing.php:140
+msgid "Upgrade your plan"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:46
+msgid "Pricing type"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:49
+msgid "Flat prices"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:65
+msgid "Leave empty to don't apply any"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:73
+#: views/addons/role-based-pricing/simple/add-price-rules.php:25
+#: views/addons/role-based-pricing/variation/add-price-rules.php:19
+msgid "Regular price"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:78
+#: views/addons/global-rules/role-specific-pricing/pricing.php:92
+#: views/addons/role-based-pricing/simple/add-price-rules.php:29
+#: views/addons/role-based-pricing/simple/add-price-rules.php:39
+#: views/addons/role-based-pricing/variation/add-price-rules.php:22
+#: views/addons/role-based-pricing/variation/add-price-rules.php:32
+msgid "Leave empty to don't change it"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:87
+#: views/addons/role-based-pricing/simple/add-price-rules.php:35
+#: views/addons/role-based-pricing/variation/add-price-rules.php:29
+msgid "Sale price"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:104
+msgid "Applying pricing as"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:108
+msgid ""
+"Cross the products (calculate discounts based on\n"
+"            quantity of any product in this rule)"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/pricing.php:112
+msgid ""
+"Per individual product (calculate discounts based on quantity of a "
+"particular product)"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:29
+msgid "Choose the products and/or categories to apply the pricing rule"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:33
+msgid "Apply for categories"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:37
+msgid "Search for a category&hellip;"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:51
+msgid ""
+"Choose the categories for which this pricing rule will apply. The rule "
+"applies to all products in the category."
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:55
+msgid "Apply for specific products"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:59
+msgid "Search for a product&hellip;"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:74
+msgid "Pick up products for which you want to apply the pricing rule."
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:79
+msgid ""
+"Choose the user role and/or customers' accounts to apply the pricing rule"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:83
+msgid "Include user roles"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:87
+msgid "Select for a customer role&hellip;"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:100
+msgid ""
+"Choose to what user roles this rule will be relevant. Applies to all users "
+"with those roles."
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:104
+msgid "Include specific customers"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:110
+msgid "Select for a customer&hellip;"
+msgstr ""
+
+#: views/addons/global-rules/role-specific-pricing/rules.php:122
+msgid "Pick up separate user accounts, which will be affected by this rule. "
+msgstr ""
+
+#: views/addons/global-rules/tiered-pricing-tab.php:56
+msgid ""
+"Looking for setting pricing rules for product categories/users roles or "
+"specific customers?"
+msgstr ""
+
+#: views/addons/global-rules/tiered-pricing-tab.php:62
+msgid "Create your first global pricing rule"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/add-price-rules.php:18
+msgid "Available only in the premium version."
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/add-price-rules.php:49
+#: views/addons/role-based-pricing/variation/add-price-rules.php:43
+#, php-format
+msgid ""
+"Set if you sell the product <b>for %s</b> only from a specific quantity that "
+"is more than 1"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/add-price-rules.php:68
+#: views/addons/role-based-pricing/variation/add-price-rules.php:65
+#: views/admin/add-price-rules-variation.php:31
+#: views/admin/add-price-rules.php:27
+msgid "Fixed"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/add-price-rules.php:74
+#: views/addons/role-based-pricing/variation/add-price-rules.php:71
+#: views/admin/add-price-rules-variation.php:37
+#: views/admin/add-price-rules.php:32
+msgid "Percentage"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/add-price-rules.php:84
+#: views/addons/role-based-pricing/simple/add-price-rules.php:132
+#: views/addons/role-based-pricing/variation/add-price-rules.php:82
+#: views/addons/role-based-pricing/variation/add-price-rules.php:125
+#: views/admin/add-price-rules-variation.php:70
+#: views/admin/add-price-rules-variation.php:116
+#: views/admin/add-price-rules.php:41 views/admin/add-price-rules.php:83
+msgid "Tiered price"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/role-based-block.php:20
+#: views/addons/role-based-pricing/variation/role-based-block.php:25
+msgid "Role based pricing"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/role-based-block.php:52
+msgid ""
+"Set up separate rules for different roles of customers. Choose a role and "
+"click the \"Setup for role\" button."
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/role-based-block.php:54
+msgid ""
+"If you do not use this feature, you can disable this functionality at the "
+"settings to not complicate the interface. "
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/role-based-block.php:66
+#: views/addons/role-based-pricing/variation/role-based-block.php:71
+msgid "Setup for role"
+msgstr ""
+
+#: views/addons/role-based-pricing/simple/role.php:32
+#: views/addons/role-based-pricing/variation/role.php:33
+msgid "Remove"
+msgstr ""
+
+#: views/addons/role-based-pricing/variation/add-price-rules.php:39
+#: views/admin/add-price-rules-variation.php:47
+msgid "Tiered pricing minimum quantity"
+msgstr ""
+
+#: views/addons/role-based-pricing/variation/role-based-block.php:57
+msgid ""
+"Set up separate rules for different roles of customers. Choose role and "
+"click \"Setup for role\" button."
+msgstr ""
+
+#: views/admin/add-price-rules-variation.php:35
+#: views/admin/add-price-rules.php:30
+msgid "Percentage (Only in premium version)"
+msgstr ""
+
+#: views/admin/add-price-rules-variation.php:52
+msgid ""
+"Please note that it uses just for building a table. For real restriction use "
+"specialized plugins."
+msgstr ""
+
+#: views/admin/alerts/activation-alert.php:15
+msgid ""
+"Thanks for installing the Tiered Pricing Table. We hope you will enjoy using "
+"it!"
+msgstr ""
+
+#: views/admin/alerts/premium-thanking-alert.php:14
+msgid "You are running premium version of the plugin!"
+msgstr ""
+
+#: views/admin/alerts/premium-thanking-alert.php:21
+msgid "My Account"
+msgstr ""
+
+#: views/admin/alerts/premium-thanking-alert.php:23
+msgid "Contact us"
+msgstr ""
+
+#: views/admin/alerts/upgrade-alert.php:14
+msgid "Upgrade your plan to unlock the great premium features."
+msgstr ""
+
+#: views/admin/alerts/upgrade-alert.php:22
+msgid "Upgrade to Premium!"
+msgstr ""
+
+#: views/admin/alerts/upgrade-alert.php:26
+msgid "Try trial"
+msgstr ""
+
+#: views/admin/alerts/upgrade-alert.php:29
+msgid "Contact Us!"
+msgstr ""
+
+#: views/frontend/tiered-pricing-blocks.php:131
+#, php-format
+msgid "%s %s"
+msgstr ""
+
+#: views/frontend/tiered-pricing-blocks.php:162
+#, php-format
+msgid "(%d%% off)"
+msgstr ""

@@ -135,13 +135,29 @@ class Settings {
 					<?php 
             if ( !$section->isActive() ) {
                 ?>
-                        <a href="<?php 
+						<a href="<?php 
                 echo esc_attr( $section->getURL() );
                 ?>">
 							<?php 
-                echo esc_html( $section->getName() );
+                if ( $section->isIntegration() ) {
+                    ?>
+								<small style="width: 10px; height: 10px; display: inline-block; margin-right: 10px;">
+									<span class="dashicons dashicons-admin-plugins"></span>
+								</small>
+								<b><?php 
+                    echo esc_html( $section->getName() );
+                    ?></b>
+							<?php 
+                } else {
+                    ?>
+								<?php 
+                    echo esc_html( $section->getName() );
+                    ?>
+							<?php 
+                }
                 ?>
-                        </a>
+
+						</a>
 					<?php 
             } else {
                 ?>

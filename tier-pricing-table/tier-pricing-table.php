@@ -4,7 +4,7 @@
  * Plugin Name:       WooCommerce Tiered Price Table
  * Requires Plugins:  woocommerce
  * Description:       Quantity-based discounts with nice-looking reflection on the product page.
- * Version:           5.3.0
+ * Version:           5.4.0
  * Author:            U2Code
  * Author URI:        https://u2code.com
  * Plugin URI:        https://tiered-pricing.com/
@@ -14,7 +14,7 @@
  * Domain Path:       /languages/
  *
  * WC requires at least: 7.0
- * WC tested up to: 10.0
+ * WC tested up to: 10.1
  */
 use TierPricingTable\TierPricingTablePlugin;
 // If this file is called directly, abort.
@@ -45,24 +45,25 @@ if ( !function_exists( 'tpt_initFreemius' ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/freemius/start.php';
                 $tpt_fs = fs_dynamic_init( array(
-                    'id'             => '3433',
-                    'slug'           => 'tier-pricing-table',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_d9f80d20e4c964001b87a062cd2b7',
-                    'is_premium'     => false,
-                    'premium_suffix' => 'Premium',
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'trial'          => array(
+                    'id'               => '3433',
+                    'slug'             => 'tier-pricing-table',
+                    'type'             => 'plugin',
+                    'public_key'       => 'pk_d9f80d20e4c964001b87a062cd2b7',
+                    'is_premium'       => false,
+                    'premium_suffix'   => 'Premium',
+                    'has_addons'       => false,
+                    'has_paid_plans'   => true,
+                    'trial'            => array(
                         'days'               => 7,
                         'is_require_payment' => true,
                     ),
-                    'menu'           => array(
+                    'menu'             => array(
                         'first-path' => 'admin.php?page=tiered-pricing-table-welcome',
                         'contact'    => false,
                         'support'    => false,
                     ),
-                    'is_live'        => true,
+                    'is_org_compliant' => true,
+                    'is_live'          => true,
                 ) );
             }
             return $tpt_fs;

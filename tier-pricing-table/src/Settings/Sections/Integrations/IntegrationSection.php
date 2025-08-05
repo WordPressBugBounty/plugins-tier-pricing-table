@@ -15,7 +15,8 @@ class IntegrationSection extends SectionAbstract {
 		$categories = array(
 			'other'                => array(
 				'title'       => __( 'General integrations', 'tier-pricing-table' ),
-				'description' => '',
+				'description' => __( 'Integrations with most popular plugins that are not related to a specific category.' ),
+				'tier-pricing-table',
 			),
 			'multicurrency'        => array(
 				'title'       => __( 'Multicurrency integrations', 'tier-pricing-table' ),
@@ -26,6 +27,10 @@ class IntegrationSection extends SectionAbstract {
 				'description' => __( 'Integrations with product add-ons (custom fields) plugins.',
 					'tier-pricing-table' ),
 			),
+			'seo'                  => array(
+				'title'       => __( 'SEO', 'tier-pricing-table' ),
+				'description' => __( 'Integrations with SEO plugins.', 'tier-pricing-table' ),
+			),
 			'custom_product_types' => array(
 				'title'       => __( 'Custom Product Types', 'tier-pricing-table' ),
 				'description' => __( 'Integrations plugins that provides custom product types.', 'tier-pricing-table' ),
@@ -33,7 +38,7 @@ class IntegrationSection extends SectionAbstract {
 		);
 		
 		/**
-		 * Integrations categories
+		 * Integration categories
 		 *
 		 * @since 5.5.0
 		 */
@@ -76,7 +81,7 @@ class IntegrationSection extends SectionAbstract {
 	}
 	
 	public function getSectionCSS(): string {
-		return '.form-table tbody { display: flex; flex-wrap: wrap}';
+		return '.form-table tbody { display: flex; flex-wrap: wrap; margin: 10px 0 20px 0; }';
 	}
 	
 	public function getSlug(): string {

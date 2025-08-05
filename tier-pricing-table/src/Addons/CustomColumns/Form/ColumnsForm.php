@@ -396,7 +396,7 @@ class ColumnsForm {
                             <ul>
                                 <li>
 									<?php
-										esc_html_e( 'Enter a name of the column that will be displayed in the table.',
+										esc_html_e( 'Enter the name of the column.',
 											'tier-pricing-table' );
 									?>
                                 </li>

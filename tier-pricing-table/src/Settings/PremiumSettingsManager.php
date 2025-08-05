@@ -17,6 +17,8 @@ class PremiumSettingsManager {
 		'tier_pricing_table__subsection_cart-description',
 		'tier_pricing_table__subsection_cart-upsells-description',
 		'tier_pricing_table__subsection_non-logged-in-users-description',
+		'tier_pricing_table__subsection_rank_math-description',
+		'tier_pricing_table__subsection_yoast-seo-description',
 	);
 	
 	public function __construct() {

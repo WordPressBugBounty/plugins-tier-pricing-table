@@ -50,26 +50,30 @@ if ( $sale_price ) {
 
 <?php if ( ! empty( $pricing_rule->getRules() ) ) : ?>
 	<div class="clear"></div>
-	
+
 	<div class="tiered-pricing-wrapper">
 		<?php if ( ! empty( $settings['title'] ) ) : ?>
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
 		
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/before', $pricing_rule ); ?>
-		
+
 		<div class="tiered-pricing-horizontal-table"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-tiered-pricing-table
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
-			 data-price-rules="<?php echo esc_attr( json_encode( $pricing_rule->getRules() ) ); ?>"
+			 data-price-rules="
+			 <?php
+				 echo esc_attr( htmlspecialchars( json_encode( $pricing_rule->getRules() ), ENT_QUOTES ) );
+				?>
+				 "
 			 data-minimum="<?php echo esc_attr( $minimum ); ?>"
 			 data-product-name="<?php echo esc_attr( $product_name ); ?>"
 			 data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
 			 data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
 			 data-price="<?php echo esc_attr( $price ); ?>"
 			 data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>">
-			
+
 			<div class="tiered-pricing-horizontal-table-column tiered-pricing-horizontal-table__labels">
 				
 				<?php if ( $settings['quantity_column_title'] ) : ?>
@@ -95,14 +99,13 @@ if ( $sale_price ) {
 						</strong>
 					</div>
 				<?php endif; ?>
-			
+
 			</div>
-			<div
-				class="tiered-pricing-horizontal-table-column tiered-pricing-horizontal-table__values tiered-pricing--active"
-				data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
-				data-tiered-price="<?php echo esc_attr( $price ); ?>"
-				data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
-				data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>">
+			<div class="tiered-pricing-horizontal-table-column tiered-pricing-horizontal-table__values tiered-pricing--active"
+				 data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
+				 data-tiered-price="<?php echo esc_attr( $price ); ?>"
+				 data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
+				 data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>">
 				
 				<?php if ( $settings['quantity_column_title'] ) : ?>
 					<div class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--quantity">
@@ -137,7 +140,7 @@ if ( $sale_price ) {
 							$product->get_sale_price() );
 					}
 					?>
-					
+
 					<div class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--discount">
 						<?php if ( $discountAmount > 0 ) : ?>
 							<span><?php echo esc_attr( round( $discountAmount, 2 ) ); ?> %</span>
@@ -207,14 +210,14 @@ if ( $sale_price ) {
 					
 					<?php if ( $settings['quantity_column_title'] ) : ?>
 						<div
-							class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--quantity">
+								class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--quantity">
 							<span><?php echo esc_attr( $quantity ); ?></span>
 						</div>
 					<?php endif; ?>
 					
 					<?php if ( $settings['discount_column_title'] ) : ?>
 						<div
-							class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--discount">
+								class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--discount">
 							<?php if ( $discountAmount > 0 ) : ?>
 								<span><?php echo esc_attr( round( $discountAmount, 2 ) ); ?> %</span>
 							<?php else : ?>
@@ -235,43 +238,16 @@ if ( $sale_price ) {
 		</div>
 		
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/after', $pricing_rule ); ?>
-		
-		<script>
-			(function () {
-
-				function setHighestHeight($el) {
-
-					if ($el.length < 1) {
-						return;
-					}
-
-					let highestHeight = parseInt($el.first().css('height'));
-
-					$el.each(function () {
-
-						if (parseInt(jQuery(this).css('height')) > highestHeight) {
-							highestHeight = parseInt(jQuery(this).css('height'));
-						}
-					});
-
-					$el.css('height', highestHeight + 'px');
-				}
-
-				setHighestHeight(jQuery('.tiered-pricing-horizontal-table-cell--quantity'))
-				setHighestHeight(jQuery('.tiered-pricing-horizontal-table-cell--discount'));
-				setHighestHeight(jQuery('.tiered-pricing-horizontal-table-cell--price'));
-			})();
-		</script>
 	</div>
-	
+
 	<style>
 		<?php
-		if ( $settings['clickable_rows'] && tpt_fs()->can_use_premium_code()) {
+		if ( $settings['clickable_rows']) {
 			echo esc_attr('#' . $id) . ' .tiered-pricing-horizontal-table__values {cursor: pointer; }';
 			echo esc_attr('#' . $id) . ' .tiered-pricing-horizontal-table__values:hover { background: #f5f5f5; }';
 		}
 		?>
-		
+
 		<?php echo esc_attr('#' . $id); ?>
 		.tiered-pricing--active, .tiered-pricing--active td {
 			background-color: <?php echo esc_attr($settings['active_tier_color']); ?> !important;

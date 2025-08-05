@@ -59,7 +59,9 @@ class TPTDisplayType {
 					</p>
 					<?php if ( isset( $value['extended_description'] ) ) : ?>
 						<div class="tpt-toggle-extended-description">
-							<?php echo wp_kses_post( $value['extended_description'] ); ?>
+							<?php
+								echo wp_kses_post( $value['extended_description'] ); // audit.php.wp.security.xss.shortcode-attr ignore
+							?>
 						</div>
 					<?php endif; ?>
 				</fieldset>

@@ -27,4 +27,8 @@ abstract class SectionAbstract {
 		return add_query_arg( array( 'section' => $this->getSlug() ) );
 	}
 	
+	public function isIntegration(): bool {
+		return false;
+	}
+	
 }

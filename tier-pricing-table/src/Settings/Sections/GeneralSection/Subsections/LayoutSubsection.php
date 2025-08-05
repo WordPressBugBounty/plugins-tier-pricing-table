@@ -40,7 +40,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'id'       => Settings::SETTINGS_PREFIX . 'display_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => TierPricingTablePlugin::getAvailablePricingLayouts(),
-				'desc'     => __( 'Default tiered pricing template. The template can be customized individually per product.',
+				'desc'     => __( 'Default tiered pricing template. Template can be customized individually per product.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 				'default'  => 'table',
