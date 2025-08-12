@@ -70,7 +70,8 @@ class AdvanceOptionsForVariableProduct {
 				</span>
 			</p>
 			
-			<?php woocommerce_wp_checkbox( array(
+			<?php 
+			woocommerce_wp_checkbox( array(
 				'id'          => '_tiered_pricing_variable_product_same_prices',
 				'value'       => wc_bool_to_string( self::isVariableProductSamePrices( $productId ) ),
 				'label'       => __( 'Variations have the same prices', 'tier-pricing-table' ),

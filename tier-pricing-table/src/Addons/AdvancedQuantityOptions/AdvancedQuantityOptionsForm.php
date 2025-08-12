@@ -10,7 +10,7 @@ class AdvancedQuantityOptionsForm {
 	
 	public function includeAssets() {
 		?>
-        <style>
+		<style>
 			.tiered_pricing_advanced_quantity_options {
 				overflow: hidden;
 			}
@@ -58,8 +58,8 @@ class AdvancedQuantityOptionsForm {
 			.variable_pricing .tiered_pricing_advanced_quantity_options__toggle-advanced-options {
 				padding-left: 0;
 			}
-        </style>
-        <script>
+		</style>
+		<script>
 			jQuery(document).ready(function ($) {
 				jQuery(document).on('click', '.tiered_pricing_advanced_quantity_options__toggle-advanced-options > a', function (e) {
 					e.preventDefault();
@@ -67,7 +67,7 @@ class AdvancedQuantityOptionsForm {
 					$(this).closest('.tiered_pricing_advanced_quantity_options').find('.tiered_pricing_advanced_quantity_options__advanced-options').toggleClass('tiered_pricing_advanced_quantity_options__advanced-options--visible')
 				});
 			});
-        </script>
+		</script>
 		<?php
 	}
 	
@@ -79,7 +79,7 @@ class AdvancedQuantityOptionsForm {
 			$loop );
 		?>
 
-        <div class="tiered_pricing_advanced_quantity_options">
+		<div class="tiered_pricing_advanced_quantity_options">
 			<?php
 				
 				$maximum = DataProvider::getMaximumQuantity( $productId, $role, 'edit' );
@@ -101,22 +101,22 @@ class AdvancedQuantityOptionsForm {
 					$maximumFieldAttributes['disabled'] = true;
 					$groupOfFieldAttributes['disabled'] = true;
 				}
-			?>
+				?>
 			
 			<?php if ( $showToggle ) : ?>
-                <div
-                        class="tiered_pricing_advanced_quantity_options__toggle-advanced-options <?php echo esc_attr( $isVisible ? 'tiered_pricing_advanced_quantity_options__toggle-advanced-options--open' : '' ); ?>">
-                    <a href="#" role="button">
+				<div
+						class="tiered_pricing_advanced_quantity_options__toggle-advanced-options <?php echo esc_attr( $isVisible ? 'tiered_pricing_advanced_quantity_options__toggle-advanced-options--open' : '' ); ?>">
+					<a href="#" role="button">
 						<?php
 							esc_html_e( 'Additional quantity options', 'tier-pricing-table' );
 						?>
-                        <span class="dashicons dashicons-arrow-down-alt2"></span>
-                    </a>
-                </div>
+						<span class="dashicons dashicons-arrow-down-alt2"></span>
+					</a>
+				</div>
 			<?php endif; ?>
 
-            <div
-                    class="tiered_pricing_advanced_quantity_options__advanced-options
+			<div
+					class="tiered_pricing_advanced_quantity_options__advanced-options
 				<?php echo esc_attr( $isVisible ? 'tiered_pricing_advanced_quantity_options__advanced-options--visible' : '' ); ?>
 				<?php echo esc_attr( ! is_null( $loop ) ? 'form-row' : '' ); ?>
 			">
@@ -151,9 +151,9 @@ class AdvancedQuantityOptionsForm {
 						'desc_tip'          => true,
 					) );
 				?>
-            </div>
+			</div>
 
-        </div>
+		</div>
 		<?php
 	}
 }

@@ -4,9 +4,9 @@
 	use TierPricingTable\PriceManager;
 	use TierPricingTable\PricingRule;
 	
-	if ( ! defined( 'WPINC' ) ) {
-		die;
-	}
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 	/**
 	 * Available variables
 	 *
@@ -24,11 +24,11 @@
 	
 	$sale_price = $product->get_sale_price();
 	
-	if ( $sale_price ) {
-		$sale_price = wc_get_price_to_display( $product, array(
-			'price' => $sale_price,
-		) );
-	}
+if ( $sale_price ) {
+	$sale_price = wc_get_price_to_display( $product, array(
+		'price' => $sale_price,
+	) );
+}
 	
 	$regular_price = wc_get_price_to_display( $product, array(
 		'price' => $product->get_regular_price(),
@@ -49,7 +49,7 @@
 			) );
 		}
 	}
-?>
+	?>
 <?php if ( ! empty( $price_rules ) ) : ?>
 
 	<div class="tiered-pricing-wrapper">
@@ -88,14 +88,15 @@
 			>
 				<?php
 					$discountAmount = 0;
-					if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
-						$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
-							$product->get_sale_price() );
-					}
+				if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
+					$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
+						$product->get_sale_price() );
+				}
 				?>
 				
 				<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
-					<?php $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
+					<?php 
+					$quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
 					$baseUnitName   = $settings['quantity_measurement_singular'];
 					?>
 				<?php else : ?>

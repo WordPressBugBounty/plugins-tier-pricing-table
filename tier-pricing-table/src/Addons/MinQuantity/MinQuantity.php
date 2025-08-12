@@ -160,7 +160,7 @@ class MinQuantity extends AbstractAddon {
 			}
 			
 			?>
-            <script>
+			<script>
 				// Handle Minimum Quantities by Tiered Pricing Table
 				(function ($) {
 
@@ -177,7 +177,7 @@ class MinQuantity extends AbstractAddon {
 					});
 
 				})(jQuery);
-            </script>
+			</script>
 			<?php
 		} );
 	}

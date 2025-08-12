@@ -36,9 +36,7 @@ if ( $sale_price ) {
 	$price = wc_get_price_to_display( $product, array(
 		'price' => $product->get_price(),
 	) );
-	
-	$backgroundColor = Settings::hex2rgba( $settings['active_tier_color'], 0.8 );
-
+ 
 	?>
 <?php if ( ! empty( $price_rules ) ) : ?>
 
@@ -47,7 +45,7 @@ if ( $sale_price ) {
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
 
-		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-1"
+		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-4"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
 			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"
@@ -58,7 +56,6 @@ if ( $sale_price ) {
 			 data-price="<?php echo esc_attr( $price ); ?>"
 			 data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
-
 			<div class="tiered-pricing-block tiered-pricing--active"
 				 data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
 				 data-tiered-price="
@@ -82,20 +79,6 @@ if ( $sale_price ) {
 					 ) ) );
 				?>
 				 ">
-
-				<div class="tiered-pricing-block__quantity">
-					<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
-						<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
-						<?php if ( $minimum > 1 ) : ?>
-							<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
-						<?php else : ?>
-							<?php echo esc_html( $settings['quantity_measurement_singular'] ); ?>
-						<?php endif; ?>
-					<?php else : ?>
-						<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?> - <?php echo esc_attr( number_format_i18n( array_keys( $price_rules )[0] - 1 ) ); ?></span>
-						<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
-					<?php endif; ?>
-				</div>
 
 				<div class="tiered-pricing-block__price">
 					<?php
@@ -123,6 +106,21 @@ if ( $sale_price ) {
 						<?php endif; ?>
 					<?php endif; ?>
 				</div>
+				
+				<div class="tiered-pricing-block__quantity">
+						<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
+							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
+							<?php if ( $minimum > 1 ) : ?>
+								<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
+							<?php else : ?>
+								<?php echo esc_html( $settings['quantity_measurement_singular'] ); ?>
+							<?php endif; ?>
+						<?php else : ?>
+							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?> - <?php echo esc_attr( number_format_i18n( array_keys( $price_rules )[0] - 1 ) ); ?></span>
+							<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
+						<?php endif; ?>
+				</div>
+				
 			</div>
 			
 			<?php $iterator = new ArrayIterator( $price_rules ); ?>
@@ -179,7 +177,6 @@ if ( $sale_price ) {
 					 data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 					 data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
 
-					<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
 					<div class="tiered-pricing-block__price">
 						<span>
 							<?php
@@ -198,6 +195,9 @@ if ( $sale_price ) {
 							</span>
 						<?php endif; ?>
 					</div>
+					
+					<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
+	
 				</div>
 			<?php endwhile; ?>
 			
@@ -208,16 +208,6 @@ if ( $sale_price ) {
 	</div>
 
 	<style>
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing-block {
-			border-color: <?php echo esc_html($backgroundColor); ?>;
-		}
-
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing-block .tiered-pricing-block__quantity {
-			background: <?php echo esc_html($backgroundColor); ?>;
-		}
-
 		<?php
 		if ( $settings['clickable_rows'] && tpt_fs()->can_use_premium_code()) {
 			echo esc_attr('#' . $id) . ' .tiered-pricing-block {cursor: pointer; }';
@@ -229,9 +219,25 @@ if ( $sale_price ) {
 			border-color: <?php echo esc_attr($settings['active_tier_color']); ?> !important;
 		}
 
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing--active .tiered-pricing-block__quantity {
-			background: <?php echo esc_html($settings['active_tier_color']); ?> !important;
+		.tiered-pricing-blocks--style-4 .tiered-pricing-block {
+			padding: 10px 15px;
+			border-color: <?php echo esc_html(Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.3 )); ?>;
 		}
+
+		.tiered-pricing-blocks--style-4 .tiered-pricing-block__quantity {
+			line-height: normal;
+			font-size: .8em;
+			margin-top: 5px;
+		}
+
+		.tiered-pricing-blocks--style-4 .tiered-pricing-block__price {
+			line-height: normal;
+			font-weight: 600;
+		}
+
+		.tiered-pricing-blocks--style-4 .tiered-pricing--active {
+			background: <?php echo esc_html(Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.08 )); ?>;
+		}
+
 	</style>
 <?php endif; ?>

@@ -1,6 +1,6 @@
 <?php use TierPricingTable\Core\ServiceContainer;
 	
-	defined( "ABSPATH" ) || die();
+	defined( 'ABSPATH' ) || die();
 	
 	$fileManager = ServiceContainer::getInstance()->getFileManager();
 ?>
@@ -20,7 +20,7 @@
 	}
 
 	.tpt-checkmark::before {
-		content: url(<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/checkmark.svg' ) ) ?>);
+		content: url(<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/checkmark.svg' ) ); ?>);
 		width: 1.3em;
 		display: inline-block;
 		padding: 0;
@@ -195,12 +195,16 @@
 
 			<div class="tpt-welcome-page-hero__description">
 				<p>
-					<?php esc_html_e( 'Tiered Pricing Table is a powerful tool that allows you to create quantity-based pricing for your WooCommerce products.',
-						'tier-pricing-table' ); ?>
+					<?php 
+					esc_html_e( 'Tiered Pricing Table is a powerful tool that allows you to create quantity-based pricing for your WooCommerce products.',
+						'tier-pricing-table' ); 
+					?>
 				</p>
 				<p>
-					<?php esc_html_e( 'With intuitive templates, flexible pricing rules, and advanced features, this plugin is a perfect fit for any type of store.',
-						'tier-pricing-table' ); ?>
+					<?php 
+					esc_html_e( 'With intuitive templates, flexible pricing rules, and advanced features, this plugin is a perfect fit for any type of store.',
+						'tier-pricing-table' ); 
+					?>
 				</p>
 			</div>
 			<div class="tpt-welcome-page-hero__actions">
@@ -219,7 +223,7 @@
 			<div class="tpt-welcome-page-hero__additional" style="font-size: 1.2em; margin-top: 20px;">
 				Questions? We're here to help.
 				<a style="color: #fff"
-				   href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ) ?>"
+				   href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ); ?>"
 				   target="_blank">Contact Us</a>
 			</div>
 		</div>
@@ -245,7 +249,7 @@
 
 			<div class="tpt-welcome-page-feature__inner">
 				<div class="tpt-welcome-page-feature__image">
-					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/product-level-rules.png' ) ) ?>">
+					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/product-level-rules.png' ) ); ?>">
 					<div class="tpt-welcome-page-feature__image-description">Product edit page</div>
 				</div>
 				<div class="tpt-welcome-page-feature__description">
@@ -265,7 +269,7 @@
 
 			<div class="tpt-welcome-page-feature__inner">
 				<div class="tpt-welcome-page-feature__image">
-					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/product-page.png' ) ) ?>">
+					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/product-page.png' ) ); ?>">
 					<div class="tpt-welcome-page-feature__image-description">Product page</div>
 				</div>
 
@@ -344,12 +348,12 @@
 
 		
 		);
-	?>
+		?>
 
 
 	<section class="tpt-welcome-page-features tpt-welcome-page-features--templates">
 		
-		<?php foreach ( $templates as $template ): ?>
+		<?php foreach ( $templates as $template ) : ?>
 
 			<div class="tpt-welcome-page-feature tpt-welcome-page-feature--template">
 				<div class="tpt-welcome-page-feature__title">
@@ -358,11 +362,11 @@
 
 				<div class="tpt-welcome-page-feature__inner">
 					<div class="tpt-welcome-page-feature__image">
-						<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/templates/' . $template['image'] ) ) ?>">
+						<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/templates/' . $template['image'] ) ); ?>">
 					</div>
 					<div class="tpt-welcome-page-feature__description">
 						
-						<?php foreach ( $template['features'] as $feature ): ?>
+						<?php foreach ( $template['features'] as $feature ) : ?>
 							<span class="tpt-checkmark"><?php echo esc_html( $feature ); ?></span>
 						<?php endforeach; ?>
 					</div>
@@ -387,7 +391,7 @@
 
 			<div class="tpt-welcome-page-feature__inner">
 				<div class="tpt-welcome-page-feature__image">
-					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/role-based.png' ) ) ?>">
+					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/role-based.png' ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-feature__description">
 					<span class="tpt-checkmark"> Add unlimited role-based pricing.</span>
@@ -402,13 +406,15 @@
 		<div class="tpt-welcome-page-feature">
 
 			<div class="tpt-welcome-page-feature__title">
-				<?php esc_html_e( 'Apply custom prices in bulk for selected categories and users:',
-					'tier-pricing-table' ); ?>
+				<?php 
+				esc_html_e( 'Apply custom prices in bulk for selected categories and users:',
+					'tier-pricing-table' ); 
+				?>
 			</div>
 
 			<div class="tpt-welcome-page-feature__inner">
 				<div class="tpt-welcome-page-feature__image">
-					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/global-rules	.png' ) ) ?>">
+					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/global-rules	.png' ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-feature__description">
 					<span class="tpt-checkmark"> Control regular prices, tiered pricing and quantity limits in one place.</span>
@@ -466,9 +472,9 @@
 					),
 				),
 			);
-		?>
+			?>
 		
-		<?php foreach ( $mainFeatures as $feature ): ?>
+		<?php foreach ( $mainFeatures as $feature ) : ?>
 			<div class="tpt-welcome-page-feature">
 
 				<div class="tpt-welcome-page-feature__title">
@@ -478,12 +484,12 @@
 				<div class="tpt-welcome-page-feature__inner">
 
 					<div class="tpt-welcome-page-feature__image">
-						<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/' . $feature['image'] ) ) ?>">
+						<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/' . $feature['image'] ) ); ?>">
 						<div class="tpt-welcome-page-feature__image-description">Product catalog</div>
 					</div>
 
 					<div class="tpt-welcome-page-feature__description">
-						<?php foreach ( $feature['features'] as $featureItem ): ?>
+						<?php foreach ( $feature['features'] as $featureItem ) : ?>
 							<span class="tpt-checkmark"><?php echo esc_html( $featureItem ); ?></span>
 						<?php endforeach; ?>
 					</div>
@@ -538,7 +544,7 @@
 				'icon'  => '⚙️',
 			),
 		)
-	?>
+		?>
 
 	<style>
 		.tpt-welcome-page-side-features {
@@ -560,7 +566,7 @@
 
 	<section class="tpt-welcome-page-side-features">
 		
-		<?php foreach ( $otherFeatures as $feature ): ?>
+		<?php foreach ( $otherFeatures as $feature ) : ?>
 
 			<div class="tpt-welcome-page-side-feature">
 				<?php echo esc_html( $feature['icon'] ); ?><?php echo esc_html( ' ' . $feature['title'] ); ?>
@@ -639,7 +645,7 @@
 				),
 			)
 		
-		?>
+			?>
 		<style>
 			.tpt-welcome-page-integrations {
 				padding: 40px 0;
@@ -666,10 +672,10 @@
 			}
 
 		</style>
-		<?php foreach ( $integrations as $integration ): ?>
+		<?php foreach ( $integrations as $integration ) : ?>
 			<div class="tpt-welcome-page-integration">
 				<div class="tpt-welcome-page-integrations__image">
-					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/integrations/' . $integration['image'] ) ) ?>">
+					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/integrations/' . $integration['image'] ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-integrations__name">
 					<b><?php echo esc_html( $integration['title'] ); ?></b>
@@ -697,7 +703,7 @@
 	<section class="tpt-welcome-page-contact-us">
 		<div class="tpt-welcome-page-contact-us__title">Have a question?</div>
 		<div class="tpt-welcome-page-contact-us__button">
-			<a href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ) ?>"
+			<a href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ); ?>"
 			   target="_blank"
 			   class="tpt-welcome-page-button tpt-welcome-page-button-primary">Contact Us</a>
 		</div>

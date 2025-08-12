@@ -83,7 +83,7 @@ class BulkPriceEditorPlugin extends Tip {
 				</div>
 
 				<div style="white-space: nowrap;">
-					<a role="button" href="<?php echo esc_attr( $this->getMarkAsSeenURL() ) ?>"
+					<a role="button" href="<?php echo esc_attr( $this->getMarkAsSeenURL() ); ?>"
 					   class="tiered-pricing-tip-close-button">
 						&times; <?php esc_html_e( 'Hide this tip', 'tier-pricing-table' ); ?>
 					</a>

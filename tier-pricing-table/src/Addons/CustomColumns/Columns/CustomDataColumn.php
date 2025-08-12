@@ -114,8 +114,8 @@ class CustomDataColumn extends AbstractCustomColumn {
                     return $pricingRule;
                 }
                 if ( $product->get_parent_id() ) {
-                    $percentageValues = $this->getValue( $product->get_parent_id(), 'percentage', $role );
-                    $fixedValues = $this->getValue( $product->get_parent_id(), 'fixed', $role );
+                    $percentageValues = ( $percentageValues ? $percentageValues : $this->getValue( $product->get_parent_id(), 'percentage', $role ) );
+                    $fixedValues = ( $fixedValues ? $fixedValues : $this->getValue( $product->get_parent_id(), 'fixed', $role ) );
                 }
             }
         }
@@ -156,19 +156,19 @@ class CustomDataColumn extends AbstractCustomColumn {
 			<?php 
         echo esc_attr( ( tpt_fs()->can_use_premium_code() ? '' : 'disabled' ) );
         ?>
-			type="<?php 
+				type="<?php 
         echo ( esc_attr( $this->getDataType() === 'number' ) ? 'number' : 'text' );
         ?>"
-			class="<?php 
+				class="<?php 
         echo esc_attr( $class );
         ?>"
-			value="<?php 
+				value="<?php 
         echo esc_attr( $value );
         ?>"
-			placeholder="<?php 
+				placeholder="<?php 
         echo esc_attr( $this->getName() );
         ?>"
-			name="<?php 
+				name="<?php 
         echo esc_attr( $name );
         ?>[]"
 		>

@@ -5,25 +5,25 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
 Tested up to: 6.8.0
 Requires PHP: 7.2
-Stable tag: 5.4.0
+Stable tag: 5.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Enable quantity-based discounts and display these prices on the product page via various templates. Boost your sales with role-based pricing, min\max product quantity limits, cart upsells, and many other features.
+Offer quantity-based discounts with flexible display templates. Boost sales using role-based pricing, quantity limits, cart upsells, and more.
 
 == Description ==
 
-**Role-based pricing, Minimum\Maximum product quantity limits, Cart Upsells, and many other features make Tiered Pricing Table an all-in-one wholesale pricing solution.**
+**Tiered Pricing Table for WooCommerce** is your all-in-one wholesale & retail pricing solution — with role-based pricing, min/max quantity limits, cart upsells, and more.
 
 [youtube https://www.youtube.com/watch?v=wRyPr6VQHZM]
 
-[**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Plugin Demo**](https://demo.tiered-pricing.com/) | [**Visit plugin website**](https://tiered-pricing.com/) | [**Contact us**](https://tiered-pricing.com/contact-us/)
+[**Live Demo**](https://demo.tiered-pricing.com/) | [**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Contact Us**](https://tiered-pricing.com/contact-us/) | [**Plugin Website**](https://tiered-pricing.com/)
 
 **Tiered Pricing Table for WooCommerce** lets you easily set flexible pricing rules based on product quantity. You can apply custom pricing to individual products or categories, all users, specific user roles, or customer accounts.
 
-The plugin allows you to fine-tune your pricing to meet the needs of your diverse customer base, whether you're a retailer, wholesaler, or service provider.
+Fine-tune pricing for any business model — from retail to wholesale — to serve different customer groups effortlessly.
 
-🧩 **Core features**:
+📌 **Key features**:
 
 ✅ **Quantity-based pricing (Volume pricing)**
 Set different prices for different quantities of products.
@@ -32,12 +32,12 @@ Set different prices for different quantities of products.
 Set different prices for user roles or specific customers, including quantity-based prices.
 
 ✅ **Minimum \ Maximum \ Quantity step**
-Control the minimum, maximum, and quantity step of a product that users can purchase of a specific product.
+Limit minimum, maximum, and quantity step a product can be purchased in.
 
-✅ **Multiple display templates for pricing on the product page \ product catalog**
+✅ **Multiple pricing templates on the product page \ product catalog**
  You can show the tiered prices via:
 ➖ **Table**
-➖ **Blocks (3 different types)**
+➖ **Blocks (5 different types)**
 ➖ **Options**
 ➖ **Dropdown**
 ➖ **Horizontal Table**
@@ -46,7 +46,7 @@ Control the minimum, maximum, and quantity step of a product that users can purc
 *See screenshots for examples*
 -
 
-✅ **Import\Export (WP All Import supported)**
+✅ **Import & Export (WP All Import supported)**
 Import tiered prices in bulk, including role-based and minimum order quantity rules.
 
 ✅ **Format your prices on the product catalog with discounts in mind**
@@ -54,47 +54,46 @@ Show the lowest price or range from the lowest to the highest price.
 
 The clean interface and powerful functionality allow you to make any custom pricing without a headache.
 
-**All features**:
+**Other features**:
 
 *  Show saving amount to users (difference between original and discounted price)
 *  Various customization (titles, colors, positions, and many others)
 *  Built-in cache to provide the best performance
 *  REST API
 *  Debug mode
-*  Many other little useful features
+And many more!
 
-💎 **Premium features**:
+💎 **Premium Extras**:
 
 *   Percentage quantity-based discounts
-*   Role-based pricing (including base prices and min/max order quantity rules)
+*   Role-based pricing (including base prices and min/max order quantity)
 *   Custom columns for pricing table
-*   Hide prices and prevent purchasing for non-logged-in users
-*   Min\max order quantity control per product or category
+*   Option to hide prices and prevent purchasing for non-logged-in users
+*   Min\Max order quantity control per product or category
 *   Cart upsells (motivates users to purchase more to get a discount)
 *   Totals on the product page
 *   Clickable tiered pricing options
 *   Show the lowest price or a range of prices instead of default product price
 *   Show the tiered price in the cart as a discount
-*   Show the total price (multiplied by selected quantity) on the product page instead of the default price
 
-🔌 **Integration with 3rd-party plugins**:
+**Works Seamlessly with 3rd-party plugins**:
 
-✔️  **WP All Import**
-✔️  **Elementor**
-✔️  **WPML**
-✔️  **WPML Multicurrency**
-✔️  **WooCommerce Product Add-ons**
-✔️  **Aelia Multicurrency**
-✔️  **Yith Request a Quote**
-✔️  **Request a Quote by Addify**
-✔️  **Product Bundles for WooCommerce**
-✔️  **WOOCS** (WooCommerce Currency Switcher by FOX)
-✔️  **WCCS** (WooCommerce Currency Switcher by WP Experts)
-✔️  **WCPA** (WooCommerce Custom Product Addons)
-✔️  **Product Fields** (Product Addons by StudioWombat)
-✔️  **WooCommerce Deposits**
-✔️  **Mix&Match for WooCommerce**
-✔️  **Yith and Math Rank SEO plugins**
+⭐  **WP All Import**
+⭐  **Elementor**
+⭐️  **WPML**
+⭐️  **WPML Multicurrency**
+⭐️  **WooCommerce Product Add-ons**
+⭐️  **Aelia Multicurrency**
+⭐️  **Yith Request a Quote**
+⭐️  **Request a Quote by Addify**
+⭐️  **Product Bundles for WooCommerce**
+⭐️  **WOOCS** (WooCommerce Currency Switcher by FOX)
+⭐️  **WCCS** (WooCommerce Currency Switcher by WP Experts)
+⭐️  **WCPA** (WooCommerce Custom Product Addons)
+⭐️  **Product Fields** (Product Addons by StudioWombat)
+⭐️  **WooCommerce Deposits**
+⭐️  **Mix&Match for WooCommerce**
+⭐️  **Yoast and Rank Math SEO plugins**
 
 **Get more information about the [Tiered Pricing Table for WooCommerce](https://tiered-pricing.com/)**
 
@@ -157,6 +156,10 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.4.1 [2025-08-11] =
+* New: Two new styles for pricing blocks
+* Fix: Fix issue with the PHP 8.2 and above
 
 = 5.4.0 [2025-07-29] =
 * New: Rank Math and Yith SEO integration

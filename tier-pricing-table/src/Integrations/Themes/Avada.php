@@ -4,9 +4,9 @@ class Avada {
 	
 	public function __construct() {
 		add_action( 'wp_head', function () {
-            ?>
-            <!--Compatibility with Avada theme-->
-            <style>
+			?>
+			<!--Compatibility with Avada theme-->
+			<style>
 				.tiered-pricing-table tbody tr {
 					height: inherit !important;
 				}
@@ -18,7 +18,7 @@ class Avada {
 				.tiered-pricing-table th {
 					padding-left: 10px !important;
 				}
-            </style>
+			</style>
 			<?php
 		} );
 	}

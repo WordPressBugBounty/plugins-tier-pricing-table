@@ -33,34 +33,34 @@ class Settings {
 		}
 		
 		?>
-        <div>
-            <p>
+		<div>
+			<p>
 				<?php esc_html_e( 'Priority type', 'tier-pricing-table' ); ?>:
-                <b><?php echo esc_html( $priorities[ $realPriority ] ); ?></b>
+				<b><?php echo esc_html( $priorities[ $realPriority ] ); ?></b>
 				
-				<?php if ( $prioritySlug === 'flexible' ): ?>
-                    <br>
-                    <br>
+				<?php if ( $prioritySlug === 'flexible' ) : ?>
+					<br>
+					<br>
 					<?php esc_html_e( 'Regular prices priority' ); ?>:
-                    <br>
-                    <b>
+					<br>
+					<b>
 						<?php echo esc_html( $priorities[ $rule->getSettings()->getRegularPricingPriority() ] ); ?>
-                    </b>
-                    <br>
-                    <br>
+					</b>
+					<br>
+					<br>
 					<?php esc_html_e( 'Tiered pricing priority' ); ?>:
-                    <b>
+					<b>
 						<?php echo esc_html( $priorities[ $rule->getSettings()->getTieredPricingPriority() ] ); ?>
-                    </b>
-                    <br>
-                    <br>
+					</b>
+					<br>
+					<br>
 					<?php esc_html_e( 'Quantity Limits Priority' ); ?>:
-                    <b>
+					<b>
 						<?php echo esc_html( $priorities[ $rule->getSettings()->getQuantityLimitsPriority() ] ); ?>
-                    </b>
+					</b>
 				<?php endif; ?>
-            </p>
-        </div>
+			</p>
+		</div>
 		
 		<?php
 	}

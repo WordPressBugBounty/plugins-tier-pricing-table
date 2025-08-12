@@ -91,7 +91,7 @@ class PricingTable {
 			 data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
 			 data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>"
 			
-			<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ): ?>
+			<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ) : ?>
 				<?php
 				$loadVariationByAjax       = count( $parentProduct->get_children() ) > $ajaxVariationsThreshold;
 				$variableProductSamePrices = AdvanceOptionsForVariableProduct::isVariableProductSamePrices( $parentProduct->get_id() );
@@ -103,9 +103,9 @@ class PricingTable {
 			<?php $this->renderPricingTableHTML( $parentProduct, $product, $settings ); ?>
 		</div>
 		
-		<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) && ! $loadVariationByAjax ): ?>
+		<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) && ! $loadVariationByAjax ) : ?>
 			<div class="tpt__tiered-pricing-preloaded-variations" style="display:none">
-				<?php foreach ( $parentProduct->get_available_variations( 'objects' ) as $childProduct ): ?>
+				<?php foreach ( $parentProduct->get_available_variations( 'objects' ) as $childProduct ) : ?>
 					<div class="tiered-pricing-preloaded-variation"
 						 data-variation-id="<?php echo esc_attr( $childProduct->get_id() ); ?>"
 						 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>">

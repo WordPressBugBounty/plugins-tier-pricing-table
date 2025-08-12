@@ -156,17 +156,17 @@ class ManualOrdersAddon extends AbstractAddon {
 		
 		add_action( 'woocommerce_admin_order_items_after_line_items', function () {
 			?>
-            <tr style="display: none;">
-                <td>
-                    <input type="checkbox" name="calculate_tiered_pricing">
-                </td>
-            </tr>
+			<tr style="display: none;">
+				<td>
+					<input type="checkbox" name="calculate_tiered_pricing">
+				</td>
+			</tr>
 			<?php
 		} );
 		
 		add_action( 'admin_head', function () {
 			?>
-            <script>
+			<script>
 				jQuery(document).ready(function ($) {
 					$('#woocommerce-order-items').on('click', '.calculate-tiered-pricing', function () {
 						jQuery('[name=calculate_tiered_pricing]').prop('checked', true);
@@ -178,16 +178,16 @@ class ManualOrdersAddon extends AbstractAddon {
 				jQuery(document.body).on('order-totals-recalculate-complete', function () {
 					jQuery('[name=calculate_tiered_pricing]').prop('checked', false);
 				});
-            </script>
+			</script>
 			<?php
 		} );
 		
 		add_action( 'woocommerce_order_item_add_action_buttons', function ( WC_Order $order ) {
 			if ( $order->is_editable() ) {
 				?>
-                <button type="button" class="button button-primary calculate-tiered-pricing">
+				<button type="button" class="button button-primary calculate-tiered-pricing">
 					<?php esc_html_e( 'Re-calculate with tiered pricing', 'tier-pricing-table' ); ?>
-                </button>
+				</button>
 				<?php
 			}
 		} );

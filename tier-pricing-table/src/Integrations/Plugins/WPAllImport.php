@@ -588,13 +588,13 @@ class WPAllImport extends PluginIntegrationAbstract {
 					</div>
 					<div class="tiered-pricing-import-role-block__body">
 						<?php
-							foreach ( $this->fields as $field_slug => $field_params ) {
+						foreach ( $this->fields as $field_slug => $field_params ) {
 								
-								if ( 'role_field' === $field_params['type'] && $field_params['role'] === $WPRole ) {
-									$this->render_field( $field_params, $field_slug, $current_values,
-										$visible_fields == $counter, $WPRole );
-								}
+							if ( 'role_field' === $field_params['type'] && $field_params['role'] === $WPRole ) {
+								$this->render_field( $field_params, $field_slug, $current_values,
+									$visible_fields == $counter, $WPRole );
 							}
+						}
 						
 						?>
 					</div>
@@ -619,8 +619,8 @@ class WPAllImport extends PluginIntegrationAbstract {
 		) );
 	}
 
-public function helper_metabox_top( $name ) {
-	?>
+	public function helper_metabox_top( $name ) {
+		?>
 	<style type="text/css">
 
 		.wpallimport-plugin .tiered-pricing-import-role-block__header {
@@ -769,11 +769,11 @@ public function helper_metabox_top( $name ) {
 						<tr>
 							<td colspan="3">
 								<?php
-									}
+	}
 									
 									
-									public function helper_metabox_bottom() {
-								?>
+	public function helper_metabox_bottom() {
+		?>
 							</td>
 						</tr>
 					</table>
@@ -782,7 +782,7 @@ public function helper_metabox_top( $name ) {
 		</div>
 	</div>
 	<?php
-}
+	}
 	
 	public function helper_parse( $parsingData, $options ) {
 		$data = array(); // parsed data

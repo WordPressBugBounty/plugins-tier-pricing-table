@@ -120,18 +120,18 @@ class Settings {
 
     public function renderSections() {
         ?>
-        <style>
+		<style>
 			h2 {
 				margin-top: 2em;
 				font-size: 1.45em;
 			}
-        </style>
+		</style>
 		
-        <ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
+		<ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
         foreach ( $this->sections as $section ) {
             ?>
-                <li>
+				<li>
 					<?php 
             if ( !$section->isActive() ) {
                 ?>
@@ -165,53 +165,53 @@ class Settings {
 						<?php 
                 if ( $section->getSectionCSS() ) {
                     ?>
-                            <style>
-                                <?php 
+							<style>
+								<?php 
                     echo esc_html( $section->getSectionCSS() );
                     ?>
-                            </style>
+							</style>
 						<?php 
                 }
                 ?>
 
-                        <a class="current" href="#">
+						<a class="current" href="#">
 							<?php 
                 echo esc_html( $section->getName() );
                 ?>
-                        </a>
+						</a>
 					<?php 
             }
             ?>
-                    |
-                </li>
+					|
+				</li>
 			<?php 
         }
         ?>
-            <li>
-                <a href="<?php 
+			<li>
+				<a href="<?php 
         echo esc_attr( TierPricingTablePlugin::getDocumentationURL() );
         ?>" target="_blank">
 					<?php 
         esc_html_e( 'Documentation', 'tier-pricing-table' );
         ?>
-                    <svg
-                            style="
+					<svg
+							style="
 							width: 0.8rem;
 							height: 0.8rem;
 							stroke: currentColor;
 							fill: none;"
-                            xmlns='http://www.w3.org/2000/svg'
-                            stroke-width='10' stroke-dashoffset='0'
-                            stroke-dasharray='0' stroke-linecap='round'
-                            stroke-linejoin='round' viewBox='0 0 100 100'>
-                        <polyline fill="none" points="40 20 20 20 20 90 80 90 80 60"/>
-                        <polyline fill="none" points="60 10 90 10 90 40"/>
-                        <line fill="none" x1="89" y1="11" x2="50" y2="50"/>
-                    </svg>
-                </a>
-            </li>
-        </ul>
-        <br class="clear">
+							xmlns='http://www.w3.org/2000/svg'
+							stroke-width='10' stroke-dashoffset='0'
+							stroke-dasharray='0' stroke-linecap='round'
+							stroke-linejoin='round' viewBox='0 0 100 100'>
+						<polyline fill="none" points="40 20 20 20 20 90 80 90 80 60"/>
+						<polyline fill="none" points="60 10 90 10 90 40"/>
+						<line fill="none" x1="89" y1="11" x2="50" y2="50"/>
+					</svg>
+				</a>
+			</li>
+		</ul>
+		<br class="clear">
 		<?php 
     }
 
@@ -293,6 +293,45 @@ class Settings {
             $output = 'rgb(' . implode( ',', $rgb ) . ')';
         }
         return $output;
+    }
+
+    public static function shadeHexWithOpacity( $hex, $opacity, $bgHex = '#FFFFFF' ) {
+        // Normalize and parse the foreground hex
+        $hex = ltrim( $hex, '#' );
+        if ( strlen( $hex ) === 3 ) {
+            $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+        }
+        if ( strlen( $hex ) !== 6 ) {
+            return false;
+        }
+        // Normalize and parse the background hex
+        $bgHex = ltrim( $bgHex, '#' );
+        if ( strlen( $bgHex ) === 3 ) {
+            $bgHex = $bgHex[0] . $bgHex[0] . $bgHex[1] . $bgHex[1] . $bgHex[2] . $bgHex[2];
+        }
+        if ( strlen( $bgHex ) !== 6 ) {
+            return false;
+        }
+        // Clamp opacity
+        $opacity = max( 0, min( 1, $opacity ) );
+        // Extract RGB
+        $r = hexdec( substr( $hex, 0, 2 ) );
+        $g = hexdec( substr( $hex, 2, 2 ) );
+        $b = hexdec( substr( $hex, 4, 2 ) );
+        $bgR = hexdec( substr( $bgHex, 0, 2 ) );
+        $bgG = hexdec( substr( $bgHex, 2, 2 ) );
+        $bgB = hexdec( substr( $bgHex, 4, 2 ) );
+        // Blend with background using alpha compositing
+        $newR = round( $opacity * $r + (1 - $opacity) * $bgR );
+        $newG = round( $opacity * $g + (1 - $opacity) * $bgG );
+        $newB = round( $opacity * $b + (1 - $opacity) * $bgB );
+        // Return final hex
+        return sprintf(
+            '#%02X%02X%02X',
+            $newR,
+            $newG,
+            $newB
+        );
     }
 
 }

@@ -5,9 +5,9 @@
 	use TierPricingTable\PricingRule;
 	use TierPricingTable\Settings\Settings;
 	
-	if ( ! defined( 'WPINC' ) ) {
-		die;
-	}
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 	
 	/**
 	 * Available variables
@@ -24,24 +24,24 @@
 	 * @var array $settings
 	 */
 	
-	if ( ! function_exists( 'tptParseOptionText' ) ) {
-		function tptParseOptionText( $text, $quantity, $discount = null, $base_unit_name = null ) {
-			return strtr( $text, array(
-				'{tp_quantity}'         => $quantity,
-				'{tp_discount}'         => $discount,
-				'{tp_rounded_discount}' => ! is_null( $discount ) ? round( $discount ) : 0,
-				'{tp_base_unit_name}'   => $base_unit_name,
-			) );
-		}
+if ( ! function_exists( 'tptParseOptionText' ) ) {
+	function tptParseOptionText( $text, $quantity, $discount = null, $base_unit_name = null ) {
+		return strtr( $text, array(
+			'{tp_quantity}'         => $quantity,
+			'{tp_discount}'         => $discount,
+			'{tp_rounded_discount}' => ! is_null( $discount ) ? round( $discount ) : 0,
+			'{tp_base_unit_name}'   => $base_unit_name,
+		) );
 	}
+}
 	
 	$sale_price = $product->get_sale_price();
 	
-	if ( $sale_price ) {
-		$sale_price = wc_get_price_to_display( $product, array(
-			'price' => $sale_price,
-		) );
-	}
+if ( $sale_price ) {
+	$sale_price = wc_get_price_to_display( $product, array(
+		'price' => $sale_price,
+	) );
+}
 	
 	$regular_price = wc_get_price_to_display( $product, array(
 		'price' => $product->get_regular_price(),
@@ -60,7 +60,7 @@
 	) );
 
 
-?>
+	?>
 <?php if ( ! empty( $price_rules ) ) : ?>
 
 	<div class="tiered-pricing-wrapper">
@@ -81,10 +81,10 @@
 		>
 			<?php
 				$discountAmount = 0;
-				if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
-					$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
-						$product->get_sale_price() );
-				}
+			if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
+				$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
+					$product->get_sale_price() );
+			}
 			?>
 
 			<div class="tiered-pricing-dropdown__select-box" tabindex="0">

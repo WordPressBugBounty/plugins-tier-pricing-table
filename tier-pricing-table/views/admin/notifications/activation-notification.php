@@ -5,9 +5,9 @@
 	use TierPricingTable\Core\ServiceContainer;
 	use TierPricingTable\TierPricingTablePlugin;
 	
-	if ( ! defined( 'WPINC' ) ) {
-		die;
-	}
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 	
 	ActivationNotification::setInactive();
 ?>
@@ -46,7 +46,7 @@
 						// translators: %1$s: product links, %2$s: categories
 						echo wp_kses_post( sprintf( __( 'Add quantity-based pricing rules directly in the %1$s or create %2$s that will work for product categories and user roles.',
 							'tier-pricing-table' ), $productsLink, $globalPricingRulesLink ) );
-					?>
+						?>
 				</span>
 			</p>
 			<p style="margin-top: 10px">

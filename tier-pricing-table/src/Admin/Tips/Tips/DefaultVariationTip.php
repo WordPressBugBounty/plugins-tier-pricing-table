@@ -26,37 +26,41 @@ class DefaultVariationTip extends Tip {
 		}
 		
 		?>
-        <div class="hidden show_if_variable show_if_variable-subscription">
-            <div class="tiered-pricing-tip"
-                 style="margin: 12px; padding: 10px; background: #fafafa; border: 1px solid #eeeeee; display: flex; gap: 10px; justify-content: space-between">
-                <div style="display:flex; gap: 10px; ">
-                    <div style="color: #2272b1; margin: 0 5px;">
-                        <span class="dashicons dashicons-admin-post"></span>
-                    </div>
-                    <div>
-                        <strong>
+		<div class="hidden show_if_variable show_if_variable-subscription">
+			<div class="tiered-pricing-tip"
+				 style="margin: 12px; padding: 10px; background: #fafafa; border: 1px solid #eeeeee; display: flex; gap: 10px; justify-content: space-between">
+				<div style="display:flex; gap: 10px; ">
+					<div style="color: #2272b1; margin: 0 5px;">
+						<span class="dashicons dashicons-admin-post"></span>
+					</div>
+					<div>
+						<strong>
 							<?php esc_html_e( 'Tip', 'tier-pricing-table' ); ?>:
-                        </strong>
+						</strong>
 						
-						<?php esc_html_e( 'You can show tiered pricing even if a variation is not selected.',
-							'tier-pricing-table' ); ?>
+						<?php 
+						esc_html_e( 'You can show tiered pricing even if a variation is not selected.',
+							'tier-pricing-table' ); 
+						?>
 
-                        <div style="margin-top: 10px;">
-							<?php echo wp_kses_post( __( 'Tiered pricing is related to each variation, so a variation must be selected to show the pricing table. However, you can show the tiered pricing before users choose a variation by enabling the <strong>default variation</strong> option in the <strong>Additional Options</strong> section below.',
-								'tier-pricing-table' ) ); ?>
-                        </div>
-                        
-                    </div>
-                </div>
+						<div style="margin-top: 10px;">
+							<?php 
+							echo wp_kses_post( __( 'Tiered pricing is related to each variation, so a variation must be selected to show the pricing table. However, you can show the tiered pricing before users choose a variation by enabling the <strong>default variation</strong> option in the <strong>Additional Options</strong> section below.',
+								'tier-pricing-table' ) ); 
+							?>
+						</div>
+						
+					</div>
+				</div>
 
-                <div style="white-space: nowrap; ">
-                    <a role="button" href="<?php echo esc_attr( $this->getMarkAsSeenURL() ) ?>"
-                       class="tiered-pricing-tip-close-button">
-                        &times; <?php esc_html_e( 'Hide this tip', 'tier-pricing-table' ); ?>
-                    </a>
-                </div>
-            </div>
-        </div>
+				<div style="white-space: nowrap; ">
+					<a role="button" href="<?php echo esc_attr( $this->getMarkAsSeenURL() ); ?>"
+					   class="tiered-pricing-tip-close-button">
+						&times; <?php esc_html_e( 'Hide this tip', 'tier-pricing-table' ); ?>
+					</a>
+				</div>
+			</div>
+		</div>
 		<?php
 		
 	}

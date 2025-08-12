@@ -8,8 +8,8 @@
 	 * @var string $upgradeUrl
 	 * @var string $contactUsUrl
 	 */
-    
-    $accountURL = tpt_fs()->get_account_url();
+	
+	$accountURL = tpt_fs()->get_account_url();
 ?>
 <div class="tpt-alert">
 	
@@ -56,7 +56,7 @@
 				   href="<?php echo esc_attr( tpt_fs()->get_activation_url() ); ?>">
 					Opt-in
 				</a>
-			<?php elseif( tpt_fs()->get_user() ) : ?>
+			<?php elseif ( tpt_fs()->get_user() ) : ?>
 				<a target="_blank" class="tpt-button tpt-button--default"
 				   href="<?php echo esc_attr( admin_url( 'admin.php?page=tiered-pricing-table-account' ) ); ?>">
 					Your account

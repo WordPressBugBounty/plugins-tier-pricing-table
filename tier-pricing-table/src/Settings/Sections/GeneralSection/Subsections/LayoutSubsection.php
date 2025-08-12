@@ -53,6 +53,8 @@ class LayoutSubsection extends SubsectionAbstract {
 					'default' => __( 'Default', 'tier-pricing-table' ),
 					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
 					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
+					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
+					'style-4' => __( 'Style #4', 'tier-pricing-table' ),
 				),
 				'desc_tip' => true,
 				'default'  => 'default',

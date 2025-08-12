@@ -36,10 +36,9 @@ if ( $sale_price ) {
 	$price = wc_get_price_to_display( $product, array(
 		'price' => $product->get_price(),
 	) );
-	
-	$backgroundColor = Settings::hex2rgba( $settings['active_tier_color'], 0.8 );
 
 	?>
+
 <?php if ( ! empty( $price_rules ) ) : ?>
 
 	<div class="tiered-pricing-wrapper">
@@ -47,7 +46,7 @@ if ( $sale_price ) {
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
 
-		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-1"
+		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-3"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
 			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"
@@ -82,46 +81,49 @@ if ( $sale_price ) {
 					 ) ) );
 				?>
 				 ">
-
-				<div class="tiered-pricing-block__quantity">
-					<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
-						<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
-						<?php if ( $minimum > 1 ) : ?>
-							<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
-						<?php else : ?>
-							<?php echo esc_html( $settings['quantity_measurement_singular'] ); ?>
-						<?php endif; ?>
-					<?php else : ?>
-						<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?> - <?php echo esc_attr( number_format_i18n( array_keys( $price_rules )[0] - 1 ) ); ?></span>
-						<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
-					<?php endif; ?>
-				</div>
-
-				<div class="tiered-pricing-block__price">
+				
+				<?php if ( $settings['show_discount_column'] ) : ?>
 					<?php
-						echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array(
-							'price' => $real_price,
-						) ) ) );
+					$discountAmount = 0;
+					if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
+						$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
+							$product->get_sale_price() );
+					}
 					?>
-					
-					<?php if ( $settings['show_discount_column'] ) : ?>
-						<?php
-						$discountAmount = 0;
-						if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
-							$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
-								$product->get_sale_price() );
-						}
-						?>
-						<?php if ( $discountAmount > 0 ) : ?>
+					<?php if ( $discountAmount > 0 ) : ?>
+						<div class="tiered-pricing-block__discount">
 							<span class="tiered-pricing-block__price-discount">
-						<?php
-							// translators: %d: discount amount
-							echo esc_html( sprintf( __( '(%d%% off)', 'tier-pricing-table' ),
-								round( $discountAmount, 2 ) ) );
-						?>
-						</span>
-						<?php endif; ?>
+								<?php
+									// translators: %d: discount amount
+									echo esc_html( sprintf( __( '%d%% off', 'tier-pricing-table' ),
+										round( $discountAmount, 2 ) ) );
+								?>
+							</span>
+						</div>
 					<?php endif; ?>
+				<?php endif; ?>
+				<div class="tiered-pricing-block-inner">
+					<div class="tiered-pricing-block__price">
+						<?php
+							echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array(
+								'price' => $real_price,
+							) ) ) );
+						?>
+					</div>
+					<div class="tiered-pricing-block__quantity">
+						<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
+							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
+							<?php if ( $minimum > 1 ) : ?>
+								<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
+							<?php else : ?>
+								<?php echo esc_html( $settings['quantity_measurement_singular'] ); ?>
+							<?php endif; ?>
+						<?php else : ?>
+							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?> - <?php echo esc_attr( number_format_i18n( array_keys( $price_rules )[0] - 1 ) ); ?></span>
+							<?php echo esc_html( $settings['quantity_measurement_plural'] ); ?>
+						<?php endif; ?>
+					</div>
+
 				</div>
 			</div>
 			
@@ -178,26 +180,32 @@ if ( $sale_price ) {
 					 data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
 					 data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 					 data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
+					
+					<?php if ( $settings['show_discount_column'] ) : ?>
+						<div class="tiered-pricing-block__discount">
+			
+							<span class="tiered-pricing-block__price-discount">
+								<?php
+									// translators: %d: discount amount
+									echo esc_html( sprintf( __( '%d%% off', 'tier-pricing-table' ),
+										round( $discountAmount, 2 ) ) );
+								?>
+							</span>
+						</div>
+					<?php endif; ?>
 
-					<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
-					<div class="tiered-pricing-block__price">
+					<div class="tiered-pricing-block-inner">
+						<div class="tiered-pricing-block__price">
 						<span>
 							<?php
 								echo wp_kses_post( wc_price( PriceManager::getPriceByRules( $currentQuantity,
 									$product_id ) ) );
 							?>
 						</span>
-						
-						<?php if ( $settings['show_discount_column'] ) : ?>
-							<span class="tiered-pricing-block__price-discount">
-								<?php
-									// translators: %d: discount amount
-									echo esc_html( sprintf( __( '(%d%% off)', 'tier-pricing-table' ),
-										round( $discountAmount, 2 ) ) );
-								?>
-							</span>
-						<?php endif; ?>
+						</div>
+						<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
 					</div>
+
 				</div>
 			<?php endwhile; ?>
 			
@@ -208,16 +216,6 @@ if ( $sale_price ) {
 	</div>
 
 	<style>
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing-block {
-			border-color: <?php echo esc_html($backgroundColor); ?>;
-		}
-
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing-block .tiered-pricing-block__quantity {
-			background: <?php echo esc_html($backgroundColor); ?>;
-		}
-
 		<?php
 		if ( $settings['clickable_rows'] && tpt_fs()->can_use_premium_code()) {
 			echo esc_attr('#' . $id) . ' .tiered-pricing-block {cursor: pointer; }';
@@ -229,9 +227,39 @@ if ( $sale_price ) {
 			border-color: <?php echo esc_attr($settings['active_tier_color']); ?> !important;
 		}
 
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing--active .tiered-pricing-block__quantity {
-			background: <?php echo esc_html($settings['active_tier_color']); ?> !important;
+		.tiered-pricing-blocks--style-3 .tiered-pricing-block {
+			border-color: <?php echo esc_html(Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.3 )); ?>;
 		}
+
+		.tiered-pricing-blocks--style-3 .tiered-pricing-block__quantity {
+			line-height: normal;
+			font-size: .8em;
+		}
+
+		.tiered-pricing-blocks--style-3 .tiered-pricing-block__price {
+			line-height: normal;
+			font-weight: 600;
+		}
+
+		.tiered-pricing-blocks--style-3 .tiered-pricing-block__discount {
+			position: absolute;
+			background: <?php echo esc_html(Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.85 )); ?>;
+			color: #fff;
+			top: 0;
+			left: 50%;
+			translate: -50% -50%;
+			font-weight: 600;
+			padding: 0 8px;
+			white-space: nowrap;
+			border-radius: 3px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.tiered-pricing-blocks--style-3 .tiered-pricing--active .tiered-pricing-block__discount {
+			background: <?php echo esc_html( $settings['active_tier_color']); ?>;
+		}
+
 	</style>
 <?php endif; ?>

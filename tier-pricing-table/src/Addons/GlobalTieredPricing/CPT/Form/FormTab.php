@@ -30,47 +30,47 @@ abstract class FormTab {
 	
 	public function renderRadioOptions( $args = array(), $inline = false ) {
 		?>
-        <div class="tiered-pricing-form-block">
-            <label for="tpt_tiered_pricing_type">
+		<div class="tiered-pricing-form-block">
+			<label for="tpt_tiered_pricing_type">
 				<?php echo esc_html( $args['title'] ); ?>
-            </label>
-            <div style="min-height: 25px">
-				<?php if ( $inline ): ?>
+			</label>
+			<div style="min-height: 25px">
+				<?php if ( $inline ) : ?>
 					
 					<?php foreach ( $args['options'] as $optionId => $optionLabel ) : ?>
-                        <span style="margin-right:15px">
-                        <label style="margin:0; float:none; font-size: 12px;">
-                            <input style="margin-right:3px;"
-                                   type="radio"
-                                   name="<?php echo esc_attr( $args['id'] ) ?>"
-                                   value="<?php echo esc_attr( $optionId ) ?>"
+						<span style="margin-right:15px">
+						<label style="margin:0; float:none; font-size: 12px;">
+							<input style="margin-right:3px;"
+								   type="radio"
+								   name="<?php echo esc_attr( $args['id'] ); ?>"
+								   value="<?php echo esc_attr( $optionId ); ?>"
 								<?php checked( $optionId, $args['value'] ); ?>
-                            >
+							>
 							<?php echo esc_html( $optionLabel ); ?>
-                        </label>
-                    </span>
+						</label>
+					</span>
 					<?php endforeach; ?>
 				
-				<?php else: ?>
-                    <ul style="margin:0">
+				<?php else : ?>
+					<ul style="margin:0">
 						<?php foreach ( $args['options'] as $optionId => $optionLabel ) : ?>
-                            <li style="margin-bottom: 10px">
-                                <label style="margin:0;float:none;font-size: 12px;">
-                                    <input style="margin-right:3px;"
-                                           type="radio"
-                                           name="<?php echo esc_attr( $args['id'] ) ?>"
-                                           value="<?php echo esc_attr( $optionId ) ?>"
+							<li style="margin-bottom: 10px">
+								<label style="margin:0;float:none;font-size: 12px;">
+									<input style="margin-right:3px;"
+										   type="radio"
+										   name="<?php echo esc_attr( $args['id'] ); ?>"
+										   value="<?php echo esc_attr( $optionId ); ?>"
 										<?php checked( $optionId, $args['value'] ); ?>
-                                    >
+									>
 									<?php echo esc_html( $optionLabel ); ?>
-                                </label>
-                            </li>
+								</label>
+							</li>
 						<?php endforeach; ?>
-                    </ul>
+					</ul>
 				<?php endif; ?>
-            </div>
+			</div>
 
-        </div>
+		</div>
 		<?php
 	}
 	
@@ -85,28 +85,28 @@ abstract class FormTab {
 		) );
 		
 		?>
-        <div class="tiered-pricing-form-block">
-            <label for="tpt_tiered_pricing_type">
+		<div class="tiered-pricing-form-block">
+			<label for="tpt_tiered_pricing_type">
 				<?php echo esc_html( $args['title'] ); ?>
-            </label>
-            <div style="min-height: 25px">
-                <label style="margin:0; float:none; font-size: 12px;">
-                    <input style="margin-right:3px;"
-                           type="checkbox"
-                           name="<?php echo esc_attr( $args['id'] ) ?>"
-                           value="<?php echo esc_attr( $args['value'] ) ?>"
+			</label>
+			<div style="min-height: 25px">
+				<label style="margin:0; float:none; font-size: 12px;">
+					<input style="margin-right:3px;"
+						   type="checkbox"
+						   name="<?php echo esc_attr( $args['id'] ); ?>"
+						   value="<?php echo esc_attr( $args['value'] ); ?>"
 						<?php checked( $args['value'] ); ?>
-                    >
+					>
 					<?php echo esc_html( $args['label'] ); ?>
-                </label>
-            </div>
+				</label>
+			</div>
 			
-			<?php if ( $args['description'] ): ?>
-                <p class="description" style="margin:0">
+			<?php if ( $args['description'] ) : ?>
+				<p class="description" style="margin:0">
 					<?php echo esc_html( $args['description'] ); ?>
-                </p>
+				</p>
 			<?php endif; ?>
-        </div>
+		</div>
 		<?php
 	}
 	
@@ -119,38 +119,38 @@ abstract class FormTab {
 		
 		?>
 
-        <div class="tpt-global-pricing-title">
+		<div class="tpt-global-pricing-title">
 			<?php echo esc_attr( $sectionTitle ); ?>
 			<?php
-				if ( $args['description'] ) {
-					echo wc_help_tip( $args['description'] );
-				}
+			if ( $args['description'] ) {
+				echo wc_help_tip( $args['description'] );
+			}
 				
-				if ( $args['only_for_premium'] && ! tpt_fs()->can_use_premium_code() ) {
-					?>
-                    <a href="<?php echo esc_attr( tpt_fs_activation_url() ) ?>" target="_blank" style="text-decoration: none; margin-left: 5px;
-                        vertical-align: text-top;">
-                        <span style="
-                        background: #d63638;
-                        color: #fff;
-                        padding: 3px 8px;
-                        border-radius: 3px;
-                        letter-spacing: normal;
-                        font-weight: 500;
-                        font-size: 10px;">
-                            <?php esc_html_e( 'Premium feature', 'tier-pricing-table' ); ?>
-                        </span>
-                    </a>
-                    <span style="margin-left:6px;">•</span>
-                    <a href="<?php echo esc_attr( tpt_fs_activation_url() ) ?>"
-                       target="_blank"
-                       style="letter-spacing: normal; font-weight: normal; font-size: 13px;">
-						<?php esc_html_e( 'Upgrade plan', 'tier-pricing-table' ); ?>
-                    </a>
+			if ( $args['only_for_premium'] && ! tpt_fs()->can_use_premium_code() ) {
+				?>
+					<a href="<?php echo esc_attr( tpt_fs_activation_url() ); ?>" target="_blank" style="text-decoration: none; margin-left: 5px;
+						vertical-align: text-top;">
+						<span style="
+						background: #d63638;
+						color: #fff;
+						padding: 3px 8px;
+						border-radius: 3px;
+						letter-spacing: normal;
+						font-weight: 500;
+						font-size: 10px;">
+						<?php esc_html_e( 'Premium feature', 'tier-pricing-table' ); ?>
+						</span>
+					</a>
+					<span style="margin-left:6px;">•</span>
+					<a href="<?php echo esc_attr( tpt_fs_activation_url() ); ?>"
+					   target="_blank"
+					   style="letter-spacing: normal; font-weight: normal; font-size: 13px;">
+					<?php esc_html_e( 'Upgrade plan', 'tier-pricing-table' ); ?>
+					</a>
 					<?php
-				}
+			}
 			?>
-        </div>
+		</div>
 		<?php
 	}
 	
@@ -171,51 +171,51 @@ abstract class FormTab {
 		) );
 		
 		?>
-        <div class="tiered-pricing-form-block">
-            <label for="<?php echo esc_attr( $args['id'] ); ?>">
+		<div class="tiered-pricing-form-block">
+			<label for="<?php echo esc_attr( $args['id'] ); ?>">
 				<?php echo esc_html( $args['label'] ); ?>
-            </label>
+			</label>
 
-            <select class="<?php echo esc_attr( $args['css_class'] ); ?>" <?php echo esc_attr( $args['multiple'] ? 'multiple="multiple"' : '' ); ?>
-                    style="width: <?php echo esc_attr( $args['width'] ); ?>"
-                    id="<?php echo esc_attr( $args['id'] ); ?>"
-                    name="<?php echo esc_attr( $args['multiple'] ? $args['id'] . '[]' : $args['id'] ); ?>"
-                    data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"
-                    data-action="<?php echo esc_attr( $args['search_action'] ); ?>"
-                    data-minimum_input_length="<?php echo esc_attr( $args['minimum_input_length'] ); ?>">
-                >
+			<select class="<?php echo esc_attr( $args['css_class'] ); ?>" <?php echo esc_attr( $args['multiple'] ? 'multiple="multiple"' : '' ); ?>
+					style="width: <?php echo esc_attr( $args['width'] ); ?>"
+					id="<?php echo esc_attr( $args['id'] ); ?>"
+					name="<?php echo esc_attr( $args['multiple'] ? $args['id'] . '[]' : $args['id'] ); ?>"
+					data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"
+					data-action="<?php echo esc_attr( $args['search_action'] ); ?>"
+					data-minimum_input_length="<?php echo esc_attr( $args['minimum_input_length'] ); ?>">
+				>
 				
-				<?php if ( $args['options'] ): ?>
+				<?php if ( $args['options'] ) : ?>
 					
 					<?php foreach ( $args['options'] as $optionId => $label ) : ?>
-                        <option
+						<option
 							<?php selected( in_array( $optionId, $args['value'] ) ); ?>
-                                value="<?php echo esc_attr( $optionId ); ?>">
+								value="<?php echo esc_attr( $optionId ); ?>">
 							<?php echo esc_attr( $label ); ?>
-                        </option>
+						</option>
 					<?php endforeach; ?>
 				
-				<?php else: ?>
+				<?php else : ?>
 					
 					<?php foreach ( $args['value'] as $optionId => $label ) : ?>
-                        <option selected
-                                value="<?php echo esc_attr( $optionId ); ?>">
+						<option selected
+								value="<?php echo esc_attr( $optionId ); ?>">
 							<?php echo esc_attr( $label ); ?>
-                        </option>
+						</option>
 					<?php endforeach; ?>
 				<?php endif; ?>
-            </select>
+			</select>
 			
 			<?php if ( $args['description'] ) : ?>
 				<?php if ( $args['desc_tip'] ) : ?>
 					<?php echo wp_kses_post( wc_help_tip( $args['description'] ) ); ?>
-				<?php else: ?>
-                    <p class="description" style="margin:0">
+				<?php else : ?>
+					<p class="description" style="margin:0">
 						<?php echo esc_html( $args['description'] ); ?>
-                    </p>
+					</p>
 				<?php endif; ?>
 			<?php endif; ?>
-        </div>
+		</div>
 		<?php
 	}
 	
@@ -236,16 +236,16 @@ abstract class FormTab {
 		}
 		
 		?>
-        <div class="tpt-global-pricing-rule-hint <?php echo esc_attr( $args['custom_class'] ); ?>">
+		<div class="tpt-global-pricing-rule-hint <?php echo esc_attr( $args['custom_class'] ); ?>">
 			<?php if ( $args['show_icon'] ) : ?>
-                <div class="tpt-global-pricing-rule-hint__icon">
-                    <span class="dashicons dashicons-editor-help"></span>
-                </div>
+				<div class="tpt-global-pricing-rule-hint__icon">
+					<span class="dashicons dashicons-editor-help"></span>
+				</div>
 			<?php endif; ?>
-            <div class="tpt-global-pricing-rule-hint__content">
+			<div class="tpt-global-pricing-rule-hint__content">
 				<?php echo wp_kses_post( $hint ); ?>
-            </div>
-        </div>
+			</div>
+		</div>
 		<?php
 	}
 }

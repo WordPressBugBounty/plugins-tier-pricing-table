@@ -167,6 +167,18 @@
 	font-size: 1em;
 }
 
+.tiered-pricing-blocks--style-3 {
+	gap: 20px 15px;
+}
+.tiered-pricing-blocks--style-3 .tiered-pricing-block-inner {
+	padding: 15px 25px 10px 25px;
+}
+.tiered-pricing-blocks--style-3 .tiered-pricing-block {
+	position: relative;
+	padding: 0;
+	text-align: center;
+}
+
 
 /**
  * Tiered Pricing Options

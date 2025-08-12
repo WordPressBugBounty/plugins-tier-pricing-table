@@ -46,17 +46,17 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'extended_description' => ( function () {
 					ob_start();
 					?>
-                    <p>
+					<p>
 						<?php
 							esc_html_e( 'Enable this option to show tiered pricing in the products catalog.',
 								'tier-pricing-table' );
 						?>
-                        <br>
-                        <br>
-                        <b><?php esc_html_e( 'Note:', 'tier-pricing-table' ); ?></b>
-                        <br>
+						<br>
+						<br>
+						<b><?php esc_html_e( 'Note:', 'tier-pricing-table' ); ?></b>
+						<br>
 						<?php esc_html_e( 'Some themes could display it incorrectly.', 'tier-pricing-table' ); ?>
-                    </p>
+					</p>
 					<?php
 					return ob_get_clean();
 				} )(),
@@ -87,19 +87,19 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'extended_description' => ( function () {
 					ob_start();
 					?>
-                    <p>
+					<p>
 						<?php
 							esc_html_e( 'Show a quantity field on the product catalog items.', 'tier-pricing-table' );
 						?>
-                        <br>
-                        <br>
-                        <b>
+						<br>
+						<br>
+						<b>
 							<?php
 								esc_html_e( 'Enable this only if your theme does not show the quantity field already.',
 									'tier-pricing-table' );
 							?>
-                        </b>
-                    </p>
+						</b>
+					</p>
 					<?php
 					return ob_get_clean();
 				} )(),
@@ -113,12 +113,12 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'extended_description' => ( function () {
 					ob_start();
 					?>
-                    <p>
+					<p>
 						<?php
 							esc_html_e( 'Similar to the product page, the price will be updated dynamically when the user changes the quantity of a specific item.',
 								'tier-pricing-table' );
 						?>
-                    </p>
+					</p>
 					<?php
 					return ob_get_clean();
 				} )(),

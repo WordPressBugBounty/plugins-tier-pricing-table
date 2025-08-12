@@ -92,28 +92,28 @@ class ProductBundles extends PluginIntegrationAbstract {
 		add_filter( 'tiered_pricing_table/services/pricing/override_zero_prices', '__return_false' );
 	}
 
-	public function getAuthorURL(): string  {
+	public function getAuthorURL(): string {
 		return 'https://woocommerce.com/products/product-bundles/';
 	}
 
-	public function getIconURL(): string  {
+	public function getIconURL(): string {
 		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/woocommerce-develop.jpeg' );
 	}
 
-	public function getTitle(): string  {
+	public function getTitle(): string {
 		return __( 'Product Bundles (by WooCommerce)', 'tier-pricing-table' );
 	}
 
-	public function getDescription(): string  {
+	public function getDescription(): string {
 		return __( 'Integration provides compatibility with Product Bundles for WooCommerce to support bundle product type.',
 			'tier-pricing-table' );
 	}
 
-	public function getSlug(): string  {
+	public function getSlug(): string {
 		return 'product-bundles-for-woocommerce';
 	}
 
-	public function getIntegrationCategory(): string  {
+	public function getIntegrationCategory(): string {
 		return 'custom_product_types';
 	}
 }

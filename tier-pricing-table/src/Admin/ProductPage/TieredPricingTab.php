@@ -53,7 +53,7 @@ class TieredPricingTab {
     public function render() {
         global $post;
         ?>
-        <div id="tiered-pricing-data" class="panel woocommerce_options_panel">
+		<div id="tiered-pricing-data" class="panel woocommerce_options_panel">
 			
 			<?php 
         if ( !tpt_fs()->can_use_premium_code() ) {
@@ -67,7 +67,7 @@ class TieredPricingTab {
         do_action( 'tiered_pricing_table/admin/pricing_tab_begin', $post->ID );
         ?>
 
-            <div class="hidden show_if_variable options_group">
+			<div class="hidden show_if_variable options_group">
 				<?php 
         $type = PriceManager::getPricingType( $post->ID, 'fixed', 'edit' );
         $percentageRules = PriceManager::getPercentagePriceRules( $post->ID, 'edit' );
@@ -82,35 +82,35 @@ class TieredPricingTab {
             '_variable'
         );
         ?>
-            </div>
+			</div>
 
-            <div class="options_group">
+			<div class="options_group">
 				<?php 
         $min = PriceManager::getProductQtyMin( $post->ID, 'edit' );
         MinimumOrderQuantityForm::render( null, null, $min );
         do_action( 'tiered_pricing_table/admin/after_minimum_order_quantity_field', $post->ID, null );
         ?>
-            </div>
+			</div>
 			
 			<?php 
         do_action( 'tiered_pricing_table/admin/before_advance_product_options', $post->ID );
         ?>
 
-            <div class="tiered_pricing_tab_product_advance_options">
-                <div class="tiered_pricing_tab_product_advance_options__header">
-                    <h4>
-                        <span class="dashicons dashicons-admin-settings"></span>
+			<div class="tiered_pricing_tab_product_advance_options">
+				<div class="tiered_pricing_tab_product_advance_options__header">
+					<h4>
+						<span class="dashicons dashicons-admin-settings"></span>
 						<?php 
         esc_html_e( 'Additional options', 'tier-pricing-table' );
         ?>
-                    </h4>
-                    <div>
-                        <span class="tiered_pricing_arrow_down">▼</span>
-                        <span class="tiered_pricing_arrow_up">▲</span>
-                    </div>
-                </div>
+					</h4>
+					<div>
+						<span class="tiered_pricing_arrow_down">▼</span>
+						<span class="tiered_pricing_arrow_up">▲</span>
+					</div>
+				</div>
 
-                <div class="tiered_pricing_tab_product_advance_options__content">
+				<div class="tiered_pricing_tab_product_advance_options__content">
 					
 					<?php 
         $availableTemplates = TierPricingTablePlugin::getAvailablePricingLayouts();
@@ -128,83 +128,83 @@ class TieredPricingTab {
         ) );
         ?>
 
-                    <p class="form-field">
-                        <label>
+					<p class="form-field">
+						<label>
 							<?php 
         esc_html_e( 'Unit label', 'tier-pricing-table' );
         ?>
-                        </label>
+						</label>
 						
 						<?php 
         $productBaseUnitName = self::getProductBaseUnitName( $post->ID );
         ?>
 
-                        <input type="text"
-                               value="<?php 
+						<input type="text"
+							   value="<?php 
         echo esc_attr( $productBaseUnitName['singular'] );
         ?>"
-                               placeholder="<?php 
+							   placeholder="<?php 
         esc_attr_e( 'Singular (e.g. piece)', 'tier-pricing-table' );
         ?>"
-                               style="width: 24%; margin-right: 20px;"
-                               name="_tiered_pricing_base_unit_name[singular]">
+							   style="width: 24%; margin-right: 20px;"
+							   name="_tiered_pricing_base_unit_name[singular]">
 
-                        <input type="text"
-                               value="<?php 
+						<input type="text"
+							   value="<?php 
         echo esc_attr( $productBaseUnitName['plural'] );
         ?>"
-                               placeholder="<?php 
+							   placeholder="<?php 
         esc_attr_e( 'Plural (e.g. pieces)', 'tier-pricing-table' );
         ?>"
-                               style="width: 24%"
-                               name="_tiered_pricing_base_unit_name[plural]">
-                    </p>
+							   style="width: 24%"
+							   name="_tiered_pricing_base_unit_name[plural]">
+					</p>
 
-                    <div style="padding: 0 20px 10px 162px; margin-bottom: 10px">
+					<div style="padding: 0 20px 10px 162px; margin-bottom: 10px">
 						<?php 
         esc_html_e( 'For example: pieces, boxes, bottles, packs, etc. It will be shown next to quantities. Leave empty to use global settings.', 'tier-pricing-table' );
         ?>
-                    </div>
+					</div>
 					
 					<?php 
         do_action( 'tiered_pricing_table/admin/advance_product_options', $post->ID );
         ?>
-                </div>
-            </div>
+				</div>
+			</div>
 			
 			<?php 
         do_action( 'tiered_pricing_table/admin/pricing_tab_end', $post->ID );
         ?>
-        </div>
+		</div>
 		<?php 
     }
 
     protected function renderUpgradeNotice() {
         ?>
-        <div
-                style="display:flex; align-items:center; justify-content: space-between; background: #fafafa; padding: 10px; margin: 0 0 20px;border-bottom: 1px solid #eee;">
-            <div>
-            <span style="color: red;">
-            🚀
-                	<?php 
+		<div
+				style="display:flex; align-items:center; justify-content: space-between; background: #fafafa; padding: 10px; margin: 0 0 20px;border-bottom: 1px solid #eee;">
+			<div>
+			<span style="color: red;">
+			🚀
+					<?php 
         esc_html_e( 'Upgrade your plan to unlock all great features.', 'tier-pricing-table' );
         ?>
-                 
+				 
 			</span>
-            </div>
+			</div>
 
-            <div>
-                <a target="_blank" class="button button-primary"
-                   href="<?php 
+			<div>
+				<a target="_blank" class="button button-primary"
+				   href="<?php 
         echo esc_attr( tpt_fs()->get_upgrade_url() );
         ?>">
 					<?php 
         esc_html_e( 'Upgrade', 'tier-pricing-table' );
         ?>
-                </a>
-            </div>
+				</a>
+			</div>
 
-        </div>
+		</div>
 		<?php 
     }
 

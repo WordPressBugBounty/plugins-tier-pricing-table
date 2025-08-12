@@ -27,7 +27,7 @@
 	
 	$upgradeUrl = tpt_fs_activation_url()
 
-?>
+	?>
 
 <style>
 	.tpt__admin__feedback-discount-banner {
@@ -118,61 +118,61 @@
 </style>
 
 <div class="notice tpt__admin__feedback-discount-banner">
-    <div class="tpt__admin__feedback-discount-banner__inner">
+	<div class="tpt__admin__feedback-discount-banner__inner">
 
-        <div class="tpt__admin__feedback-discount-banner__main-text">
-            <div class="tpt__admin__feedback-discount-banner__main-text__title">
-                <span>🎁</span> <b>Tiered Pricing Table</b>: leave us feedback and <b
-                        class="tpt__admin__feedback-discount-banner__coupon">Save 20%</b>
-            </div>
+		<div class="tpt__admin__feedback-discount-banner__main-text">
+			<div class="tpt__admin__feedback-discount-banner__main-text__title">
+				<span>🎁</span> <b>Tiered Pricing Table</b>: leave us feedback and <b
+						class="tpt__admin__feedback-discount-banner__coupon">Save 20%</b>
+			</div>
 
-            <div style="margin: 10px 0">
+			<div style="margin: 10px 0">
 
-                <div style="margin: 10px 0">
-                    You've been using the plugin for a while now. We'd love to hear your feedback!
-                </div>
+				<div style="margin: 10px 0">
+					You've been using the plugin for a while now. We'd love to hear your feedback!
+				</div>
 
-                <div style="margin-bottom: 10px">
-                    Answer 4 little questions in our <a href="https://forms.gle/yWTt3aWuvZVQhbRZ7" target="_blank">feedback
-                        form</a> and get
-                    a coupon for <b>20% discount</b> on the premium version!
-                </div>
+				<div style="margin-bottom: 10px">
+					Answer 4 little questions in our <a href="https://forms.gle/yWTt3aWuvZVQhbRZ7" target="_blank">feedback
+						form</a> and get
+					a coupon for <b>20% discount</b> on the premium version!
+				</div>
 
-                <div>Have a question? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>"
-                                         target="_blank"
-                    >Feel free to contact us!</a> or <a target="_blank" href="https://tiered-pricing.com">check our
-                        website</a></div>
-            </div>
+				<div>Have a question? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>"
+										 target="_blank"
+					>Feel free to contact us!</a> or <a target="_blank" href="https://tiered-pricing.com">check our
+						website</a></div>
+			</div>
 
-            <div class="tpt__admin__feedback-discount-banner__main-text__upgrade-buttons">
+			<div class="tpt__admin__feedback-discount-banner__main-text__upgrade-buttons">
 
-                <a href="<?php echo esc_attr( $upgradeUrl ); ?>"
-                   class="button button-primary button-large">
-                    Upgrade 🚀
-                </a>
+				<a href="<?php echo esc_attr( $upgradeUrl ); ?>"
+				   class="button button-primary button-large">
+					Upgrade 🚀
+				</a>
 
-                <span>
-                    •
-                </span>
+				<span>
+					•
+				</span>
 
-                <a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">
-                    I'm not interested, close the banner
-                </a>
-            </div>
+				<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">
+					I'm not interested, close the banner
+				</a>
+			</div>
 
-        </div>
-        <div class="tpt__admin__feedback-discount-banner__premium-features">
+		</div>
+		<div class="tpt__admin__feedback-discount-banner__premium-features">
 			
 			<?php foreach ( $premiumFeatures as $feature ) : ?>
-                <div class="tpt__admin__feedback-discount-banner__premium-feature">
-                    ✅ <b><?php echo esc_html( $feature ) ?></b>
-                </div>
+				<div class="tpt__admin__feedback-discount-banner__premium-feature">
+					✅ <b><?php echo esc_html( $feature ); ?></b>
+				</div>
 			<?php endforeach; ?>
 
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <div class="tpt__admin__feedback-discount-banner__close-button">
-        <a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">&times;</a>
-    </div>
+	<div class="tpt__admin__feedback-discount-banner__close-button">
+		<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">&times;</a>
+	</div>
 </div>

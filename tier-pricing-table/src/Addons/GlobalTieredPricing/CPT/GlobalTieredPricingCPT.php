@@ -188,39 +188,39 @@ class GlobalTieredPricingCPT {
             }
             ?>
 
-            <div class="woocommerce-BlankState" style="padding: 0;  ">
-                <img width="250px" style="filter: drop-shadow(1px 10px 10px #ccc);"
-                     src="<?php 
+			<div class="woocommerce-BlankState" style="padding: 0;  ">
+				<img width="250px" style="filter: drop-shadow(1px 10px 10px #ccc);"
+					 src="<?php 
             echo esc_attr( $this->getContainer()->getFileManager()->locateAsset( 'admin/pricing-logo.png' ) );
             ?>">
-                <h2 class="woocommerce-BlankState-message">
+				<h2 class="woocommerce-BlankState-message">
 					<?php 
             esc_html_e( 'There are no pricing rules yet. To create the first pricing rule click on the button below.', 'tier-pricing-table' );
             ?>
-                </h2>
+				</h2>
 
-                <div class="woocommerce-BlankState-buttons">
-                    <a class="woocommerce-BlankState-cta button-primary button"
-                       href="<?php 
+				<div class="woocommerce-BlankState-buttons">
+					<a class="woocommerce-BlankState-cta button-primary button"
+					   href="<?php 
             echo esc_url( admin_url( 'post-new.php?post_type=' . self::SLUG ) );
             ?>">
 						<?php 
             esc_html_e( 'Create pricing rule', 'tier-pricing-table
 ' );
             ?>
-                    </a>
-                </div>
-            </div>
+					</a>
+				</div>
+			</div>
 
-            <style
-                    type="text/css">#posts-filter .wp-list-table, #posts-filter .tablenav.top, .tablenav.bottom .actions, .wrap .subsubsub {
+			<style
+					type="text/css">#posts-filter .wp-list-table, #posts-filter .tablenav.top, .tablenav.bottom .actions, .wrap .subsubsub {
 					display: none;
 				}
 
 				#posts-filter .tablenav.bottom {
 					height: auto;
 				}
-            </style>
+			</style>
 			<?php 
         }
     }

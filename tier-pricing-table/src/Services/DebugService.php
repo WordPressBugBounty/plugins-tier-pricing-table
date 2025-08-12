@@ -94,37 +94,37 @@ class DebugService {
 		$data = $this->getPricingRuleData( $pricingRule, $cartItem );
 		?>
 
-        <div>
-            <table style="font-size: .7em">
-                <thead>
-                <tr>
-                    <th colspan="2" style="padding: 10px">Debug info</th>
-                </tr>
-                </thead>
-                <tbody>
+		<div>
+			<table style="font-size: .7em">
+				<thead>
+				<tr>
+					<th colspan="2" style="padding: 10px">Debug info</th>
+				</tr>
+				</thead>
+				<tbody>
 				<?php foreach ( $data as $key => $value ) : ?>
-                    <tr>
-                        <td style="padding: 0">
+					<tr>
+						<td style="padding: 0">
 							<?php echo esc_html( $key . ':' ); ?>
-                        </td>
-                        <td style="padding: 0">
+						</td>
+						<td style="padding: 0">
 							<?php echo wp_kses_post( $value ); ?>
-                        </td>
-                    </tr>
+						</td>
+					</tr>
 				<?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+				</tbody>
+			</table>
+		</div>
 		
-		<?php if ( ! empty( $pricingRule->getPricingLog() ) ): ?>
-            <small>
-                Pricing Log
-                <ol>
-					<?php foreach ( $pricingRule->getPricingLog() as $log ): ?>
-                        <li><?php echo $log; ?></>
+		<?php if ( ! empty( $pricingRule->getPricingLog() ) ) : ?>
+			<small>
+				Pricing Log
+				<ol>
+					<?php foreach ( $pricingRule->getPricingLog() as $log ) : ?>
+						<li><?php echo $log; ?></>
 					<?php endforeach; ?>
-                </ol>
-            </small>
+				</ol>
+			</small>
 		<?php endif; ?>
 		
 		<?php

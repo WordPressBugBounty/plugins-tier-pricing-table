@@ -142,7 +142,7 @@ class QuantityManager {
 		add_action( 'wp_head', function () {
 			if ( is_product() ) {
 				?>
-                <script>
+				<script>
 					jQuery(document).ready(function () {
 
 						let $quantity = jQuery('.single_variation_wrap').find('[name=quantity]');
@@ -173,7 +173,7 @@ class QuantityManager {
 							$quantity.removeAttr('max');
 						});
 					});
-                </script>
+				</script>
 				<?php
 			}
 		} );

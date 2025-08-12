@@ -37,35 +37,35 @@ class Pricing {
 			
 			<?php if ( $rule->getPricingType() === 'flat' ) : ?>
 				<?php if ( $rule->getRegularPrice() ) : ?>
-                    <p>
+					<p>
 						<?php
 							echo wp_kses_post( __( 'Regular Price',
 									'tier-pricing-table' ) . ': <b>' . wc_price( $rule->getRegularPrice() ) . '</b>' );
 						?>
-                    </p>
+					</p>
 				<?php endif; ?>
 				
 				<?php if ( $rule->getSalePrice() ) : ?>
-                    <p>
+					<p>
 						<?php
 							echo wp_kses_post( __( 'Sale Price',
 									'tier-pricing-table' ) . ': <b>' . wc_price( $rule->getSalePrice() ) . '</b>' );
 						?>
-                    </p>
+					</p>
 				<?php endif; ?>
 			<?php else : ?>
 				<?php if ( $rule->getDiscount() ) : ?>
-                    <p>
+					<p>
 						<?php esc_html_e( 'Discount', 'tier-pricing-table' ); ?>
-                        :
-                        <b><?php echo esc_html( $rule->getDiscount() ); ?>%</b>
-                        <small>(
+						:
+						<b><?php echo esc_html( $rule->getDiscount() ); ?>%</b>
+						<small>(
 							<?php
 								$rule->getDiscountType() === 'sale_price' ? esc_html_e( 'Sale price',
 									'tier-pricing-table' ) : esc_html_e( 'Regular price', 'tier-pricing-table' );
 							?>
-                            )</small>
-                    </p>
+							)</small>
+					</p>
 				<?php endif; ?>
 			<?php endif; ?>
 			
@@ -74,40 +74,40 @@ class Pricing {
 				return;
 			}
 			?>
-            <table class="wp-list-table widefat fixed striped table-view-list tpt-global-rule-pricing-table">
-                <thead>
-                <tr>
-                    <th>
-                        <b><?php esc_html_e( 'Quantity', 'tier-pricing-table' ); ?></b></th>
-                    <th>
-                        <b>
+			<table class="wp-list-table widefat fixed striped table-view-list tpt-global-rule-pricing-table">
+				<thead>
+				<tr>
+					<th>
+						<b><?php esc_html_e( 'Quantity', 'tier-pricing-table' ); ?></b></th>
+					<th>
+						<b>
 							<?php if ( 'percentage' === $pricingType ) : ?>
 								<?php esc_html_e( 'Discount', 'tier-pricing-table' ); ?>
 							<?php else : ?>
 								<?php esc_html_e( 'Price', 'tier-pricing-table' ); ?>
 							<?php endif; ?>
-                        </b>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
+						</b>
+					</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>
 						<?php if ( 1 >= array_keys( $rules )[0] - $minimum ) : ?>
-                            <span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
+							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
 						<?php else : ?>
-                            <span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?> - <?php echo esc_attr( number_format_i18n( array_keys( $rules )[0] - 1 ) ); ?></span>
+							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?> - <?php echo esc_attr( number_format_i18n( array_keys( $rules )[0] - 1 ) ); ?></span>
 						<?php endif; ?>
-                    </td>
+					</td>
 
-                    <td>
+					<td>
 						<?php if ( 'percentage' === $pricingType ) : ?>
 							<?php echo wp_kses_post( $regularProductPriceString ); ?>
 						<?php else : ?>
 							<?php echo wp_kses_post( $regularProductPriceString ); ?>
 						<?php endif; ?>
-                    </td>
-                </tr>
+					</td>
+				</tr>
 				
 				<?php $iterator = new ArrayIterator( $rules ); ?>
 				
@@ -133,12 +133,12 @@ class Pricing {
 						$quantity = number_format_i18n( $currentQuantity ) . '+';
 					}
 					?>
-                    <tr>
-                        <td>
+					<tr>
+						<td>
 							<?php echo esc_attr( $quantity ); ?>
-                        </td>
+						</td>
 
-                        <td>
+						<td>
 							
 							<?php if ( 'percentage' === $pricingType ) : ?>
 								<?php echo esc_html( $currentPrice . '%' ); ?>
@@ -148,20 +148,20 @@ class Pricing {
 							
 							<?php endif; ?>
 
-                        </td>
-                    </tr>
+						</td>
+					</tr>
 				<?php endwhile; ?>
 
 
-                </tbody>
-            </table>
-            <h4 style="margin-top: 10px;">
+				</tbody>
+			</table>
+			<h4 style="margin-top: 10px;">
 				<?php
 					$applyingType = $rule->getApplyingType() === 'individual' ? __( 'Applied individually per product',
 						'tier-pricing-table' ) : __( 'Applied as Mix and Match', 'tier-pricing-table' );
 					echo esc_html( $applyingType );
 				?>
-            </h4>
+			</h4>
 			<?php
 			
 		} catch ( Exception $e ) {

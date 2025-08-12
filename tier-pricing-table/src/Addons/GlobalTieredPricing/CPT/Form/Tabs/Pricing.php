@@ -21,7 +21,7 @@ class Pricing extends FormTab {
 	
 	public function render( GlobalPricingRule $pricingRule ) {
 		?>
-        <div>
+		<div>
 			<?php
 				$this->renderSectionTitle( __( 'Regular Pricing', 'tier-pricing-table' ), array(
 					'description'      => __( 'This section controls the base product price, where tiered pricing is not applied. You can set new regular and sale prices or specify a percentage discount based on the original product price. This is useful for role-based pricing.  ',
@@ -32,9 +32,9 @@ class Pricing extends FormTab {
 				RegularPricingForm::render( null, null, $pricingRule->getRegularPrice(), $pricingRule->getSalePrice(),
 					$pricingRule->getPricingType(), $pricingRule->getDiscount(), $pricingRule->getDiscountType() );
 			?>
-        </div>
+		</div>
 
-        <div>
+		<div>
 			<?php
 				$this->renderSectionTitle( __( 'Tiered Pricing', 'tier-pricing-table' ), array(
 					'description' => __( 'Set up tiered pricing rules to apply discounts based on the quantity of products purchased. You can set up percentage or fixed discounts for each tier.',
@@ -60,7 +60,7 @@ class Pricing extends FormTab {
 				TieredPricingRulesForm::render( $post->ID, null, null, $pricingRule->getTieredPricingType(),
 					$pricingRule->getPercentageTieredPricingRules(), $pricingRule->getFixedTieredPricingRules() );
 			?>
-        </div>
+		</div>
 		<?php
 	}
 	

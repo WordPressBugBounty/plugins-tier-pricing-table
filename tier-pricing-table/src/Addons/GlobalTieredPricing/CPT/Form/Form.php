@@ -267,10 +267,10 @@ class Form {
 						 data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 
 						<div class="tpt-global-pricing-rule-form-tab__icon" style="">
-							<?php if ( $tab->getIcon() === '$' ): ?>
+							<?php if ( $tab->getIcon() === '$' ) : ?>
 								<span>$</span>
-							<?php else: ?>
-								<span class="dashicons <?php echo esc_attr( $tab->getIcon() ) ?>"></span>
+							<?php else : ?>
+								<span class="dashicons <?php echo esc_attr( $tab->getIcon() ); ?>"></span>
 							<?php endif; ?>
 						</div>
 

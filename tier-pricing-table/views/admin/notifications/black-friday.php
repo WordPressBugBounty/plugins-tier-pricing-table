@@ -29,7 +29,7 @@
 		'coupon' => 'BF25OFF',
 	), tpt_fs_activation_url() );
 
-?>
+	?>
 
 <style>
 	.tpt__admin__black-friday-banner {
@@ -120,60 +120,60 @@
 </style>
 
 <div class="notice tpt__admin__black-friday-banner">
-    <div class="tpt__admin__black-friday-banner__inner">
+	<div class="tpt__admin__black-friday-banner__inner">
 
-        <div class="tpt__admin__black-friday-banner__main-text">
-            <div class="tpt__admin__black-friday-banner__main-text__title">
-                🎉 <b>Tiered Pricing Table</b> Black Friday Sale: <b style="color: #b51a00;">Save 25%!</b>
-            </div>
+		<div class="tpt__admin__black-friday-banner__main-text">
+			<div class="tpt__admin__black-friday-banner__main-text__title">
+				🎉 <b>Tiered Pricing Table</b> Black Friday Sale: <b style="color: #b51a00;">Save 25%!</b>
+			</div>
 
-            <div style="margin: 10px 0">
+			<div style="margin: 10px 0">
 
-                <p style="font-size: 1.2em">
-                    Use <b class="tpt__admin__black-friday-banner__coupon">BF25OFF</b>
-                    coupon code and get the <b>25% discount</b>!
-                </p>
+				<p style="font-size: 1.2em">
+					Use <b class="tpt__admin__black-friday-banner__coupon">BF25OFF</b>
+					coupon code and get the <b>25% discount</b>!
+				</p>
 
-                <div>Have a question? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>"
-                                         target="_blank"
-                    >Feel free to contact us!</a> or <a target="_blank" href="https://tiered-pricing.com">check our
-                        website</a></div>
-            </div>
+				<div>Have a question? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>"
+										 target="_blank"
+					>Feel free to contact us!</a> or <a target="_blank" href="https://tiered-pricing.com">check our
+						website</a></div>
+			</div>
 
-            <div class="tpt__admin__black-friday-banner__main-text__upgrade-buttons">
+			<div class="tpt__admin__black-friday-banner__main-text__upgrade-buttons">
 
-                <a href="<?php echo esc_attr( $upgradeUrl ); ?>"
-                   class="button button-primary button-large">
-                    Upgrade 🚀
-                </a>
+				<a href="<?php echo esc_attr( $upgradeUrl ); ?>"
+				   class="button button-primary button-large">
+					Upgrade 🚀
+				</a>
 
-                <span>
-                    •
-                </span>
+				<span>
+					•
+				</span>
 
-                <a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">
-                    I'm not interested, close the banner
-                </a>
-            </div>
+				<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">
+					I'm not interested, close the banner
+				</a>
+			</div>
 
-            <div style="margin-top: 5px">
-                <small>Limited-time offer. Valid only this week.</small>
-            </div>
+			<div style="margin-top: 5px">
+				<small>Limited-time offer. Valid only this week.</small>
+			</div>
 
-        </div>
-        <div class="tpt__admin__black-friday-banner__premium-features">
+		</div>
+		<div class="tpt__admin__black-friday-banner__premium-features">
 			
 			<?php foreach ( $premiumFeatures as $feature ) : ?>
-                <div class="tpt__admin__black-friday-banner__premium-feature">
-                    ✅ <b><?php echo esc_html( $feature ) ?></b>
-                </div>
+				<div class="tpt__admin__black-friday-banner__premium-feature">
+					✅ <b><?php echo esc_html( $feature ); ?></b>
+				</div>
 			<?php endforeach; ?>
 
-        </div>
-    </div>
+		</div>
+	</div>
 
 
-    <div class="tpt__admin__black-friday-banner__close-button">
-        <a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">&times;</a>
-    </div>
+	<div class="tpt__admin__black-friday-banner__close-button">
+		<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>">&times;</a>
+	</div>
 </div>

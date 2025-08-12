@@ -60,12 +60,12 @@ class YouSaveService {
 		
 		ob_start();
 		?>
-        <small data-consider-sale-price="<?php echo esc_attr( wc_bool_to_string( $considerSalePrice ) ); ?>"
-               data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
-               data-parent-id="<?php echo esc_attr( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id() ); ?>"
-               class="tiered-pricing-you-save tiered-pricing-you-save--hidden"
-               style="color: <?php echo esc_attr( $color ); ?>"><?php echo wp_kses_post( $template ); ?>
-        </small>
+		<small data-consider-sale-price="<?php echo esc_attr( wc_bool_to_string( $considerSalePrice ) ); ?>"
+			   data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
+			   data-parent-id="<?php echo esc_attr( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id() ); ?>"
+			   class="tiered-pricing-you-save tiered-pricing-you-save--hidden"
+			   style="color: <?php echo esc_attr( $color ); ?>"><?php echo wp_kses_post( $template ); ?>
+		</small>
 		<?php
 		return ob_get_clean();
 	}

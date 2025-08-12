@@ -21,6 +21,9 @@ class PriceManager {
         } else {
             $rules = (array) get_post_meta( $productId, '_percentage_price_rules', true );
         }
+        $rules = array_map( function ( $price ) {
+            return floatval( $price );
+        }, $rules );
         $rules = ( !empty( $rules ) ? array_filter( $rules ) : array() );
         ksort( $rules );
         if ( 'edit' !== $context ) {
@@ -55,7 +58,7 @@ class PriceManager {
         $context = 'view',
         $place = 'shop',
         bool $withTaxes = true,
-        PricingRule $pricingRule = null,
+        ?PricingRule $pricingRule = null,
         bool $roundPrice = false
     ) {
         $pricingRule = ( $pricingRule ? $pricingRule : self::getPricingRule( $productId ) );
@@ -79,7 +82,7 @@ class PriceManager {
         }
         $productPrice = $productPrice ?? false;
         if ( $productPrice && apply_filters( 'tiered_pricing_table/price/round_price', $roundPrice ) ) {
-            $roundPrecision = (int) apply_filters( "tiered_pricing_table/price/round_precision", max( 2, wc_get_price_decimals() ) );
+            $roundPrecision = (int) apply_filters( 'tiered_pricing_table/price/round_precision', max( 2, wc_get_price_decimals() ) );
             $productPrice = round( $productPrice, $roundPrecision );
         }
         if ( 'edit' !== $context ) {
@@ -119,10 +122,10 @@ class PriceManager {
     /**
      * Calculate price using percentage discount
      *
-     * @param  float|int  $price
-     * @param  float|int  $discount
+     * @param  float  $price
+     * @param  float  $discount
      *
-     * @return bool|float|int
+     * @return bool|float
      */
     public static function getPriceByPercentDiscount( $price, $discount ) {
         if ( $price > 0 && $discount <= 100 ) {
@@ -132,7 +135,8 @@ class PriceManager {
         return false;
     }
 
-    public static function getProductPriceWithPercentageDiscount( WC_Product $product, float $discount ) {
+    public static function getProductPriceWithPercentageDiscount( WC_Product $product, $discount ) {
+        $discount = floatval( $discount );
         $productPrice = ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price() );
         return self::getPriceByPercentDiscount( $productPrice, $discount );
     }

@@ -6,7 +6,7 @@ class Astra {
 
 		add_action( 'wp_head', function () {
 			?>
-            <!--Compatibility with Avada theme-->
+			<!--Compatibility with Avada theme-->
 			<style>
 				.tiered-pricing-table tbody td {
 					padding-left: 15px !important;
