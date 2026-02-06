@@ -146,4 +146,7 @@ class GeneralSection extends SectionAbstract {
 	public static function getPricingBlocksStyle(): string {
 		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_blocks_style', 'default' );
 	}
+	public static function getPricingOptionsStyle(): string {
+		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_options_style', 'default' );
+	}
 }

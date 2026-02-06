@@ -3,7 +3,7 @@
         'name' => 'mynewvk/tier-pricing-table',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '1f41ec1212468d626bbf6ae59225b3900feb5601',
+        'reference' => 'e22a997de8881a3a1c04fbfef41fc6edbc44df20',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'mynewvk/tier-pricing-table' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '1f41ec1212468d626bbf6ae59225b3900feb5601',
+            'reference' => 'e22a997de8881a3a1c04fbfef41fc6edbc44df20',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

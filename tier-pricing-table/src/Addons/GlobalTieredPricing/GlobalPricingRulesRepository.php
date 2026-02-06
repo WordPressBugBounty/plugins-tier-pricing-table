@@ -42,7 +42,7 @@ class GlobalPricingRulesRepository {
 	 *
 	 * @return ?GlobalPricingRule
 	 */
-	public function getMatchedPricingRule( WC_Product $product, WP_User $user = null ): ?GlobalPricingRule {
+	public function getMatchedPricingRule( WC_Product $product, ?WP_User $user = null ): ?GlobalPricingRule {
 		
 		$user = $user ? $user : TierPricingTablePlugin::getCurrentUser();
 		

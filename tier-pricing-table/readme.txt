@@ -3,9 +3,9 @@
 Contributors: bycrik, freemius
 Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
-Tested up to: 6.8.0
+Tested up to: 6.9
 Requires PHP: 7.2
-Stable tag: 5.4.1
+Stable tag: 5.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,8 +37,8 @@ Limit minimum, maximum, and quantity step a product can be purchased in.
 ✅ **Multiple pricing templates on the product page \ product catalog**
  You can show the tiered prices via:
 ➖ **Table**
-➖ **Blocks (5 different types)**
-➖ **Options**
+➖ **Blocks (5 different styles)**
+➖ **Options (4 different styles)**
 ➖ **Dropdown**
 ➖ **Horizontal Table**
 ➖ **Plain text**
@@ -156,6 +156,18 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 5.5.0 [2025-11-26] =
+* Update: Freemius SDK updated.
+* Update: WooCommerce & WordPress compatibility bumped.
+* Update: Black friday and feedback banners.
+* Fix: (WCCS) by WP Experts integration fix.
+* Fix: Manual orders rounding fix.
+
+= 5.5.0 [2025-11-07] =
+* New: Three new styles for pricing options.
+* Update: Freemius SDK updated.
+* Update: WooCommerce & WordPress compatibility bumped.
 
 = 5.4.1 [2025-08-11] =
 * New: Two new styles for pricing blocks

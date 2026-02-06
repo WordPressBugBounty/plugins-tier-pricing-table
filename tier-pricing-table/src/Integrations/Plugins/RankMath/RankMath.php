@@ -35,6 +35,9 @@ class RankMath extends PluginIntegrationAbstract {
         } );
     }
 
+    protected function getProductJSONldOffers() : array {
+    }
+
     public function getIntegrationCategory() : string {
         return 'seo';
     }

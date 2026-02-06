@@ -59,10 +59,10 @@ class PriceManager {
         $place = 'shop',
         bool $withTaxes = true,
         ?PricingRule $pricingRule = null,
-        bool $roundPrice = false
+        ?bool $roundPrice = null
     ) {
         $pricingRule = ( $pricingRule ? $pricingRule : self::getPricingRule( $productId ) );
-        $roundPrice = ( $roundPrice ? $roundPrice : CalculationLogic::roundPrice() );
+        $roundPrice = ( !is_null( $roundPrice ) ? $roundPrice : CalculationLogic::roundPrice() );
         foreach ( array_reverse( $pricingRule->getRules(), true ) as $_amount => $price ) {
             if ( $_amount <= $quantity ) {
                 if ( $pricingRule->isPercentage() ) {

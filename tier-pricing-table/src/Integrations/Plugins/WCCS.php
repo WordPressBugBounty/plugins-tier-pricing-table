@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Integrations\Plugins;
 
+use TierPricingTable\PriceManager;
+
 class WCCS extends PluginIntegrationAbstract {
 	
 	public function run() {
@@ -21,6 +23,23 @@ class WCCS extends PluginIntegrationAbstract {
 				return $product_price;
 				
 			}, 10, 10 );
+		
+		add_filter( 'tiered_pricing_table/cart/product_cart_price',
+			function ( $price, $cartItem, $cartItemKey, $totalQuantity ) {
+				
+				global $WCCS;
+				
+				if ( ! $WCCS ) {
+					return $price;
+				}
+				
+				if ( $price ) {
+					return PriceManager::getPriceByRules( $totalQuantity, $cartItem['data']->get_id(), 'edit', 'cart',
+						false );
+				}
+				
+				return $price;
+			}, 10, 4 );
 	}
 	
 	public function getTitle(): string {

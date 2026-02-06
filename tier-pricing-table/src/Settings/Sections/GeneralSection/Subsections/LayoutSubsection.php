@@ -46,6 +46,19 @@ class LayoutSubsection extends SubsectionAbstract {
 				'default'  => 'table',
 			),
 			array(
+				'title'    => __( 'Pricing options style', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'pricing_options_style',
+				'type'     => TPTDisplayType::FIELD_TYPE,
+				'options'  => array(
+					'default' => __( 'Default', 'tier-pricing-table' ),
+					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
+					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
+					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
+				),
+				'desc_tip' => true,
+				'default'  => 'default',
+			),
+			array(
 				'title'    => __( 'Pricing blocks style', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'pricing_blocks_style',
 				'type'     => TPTDisplayType::FIELD_TYPE,

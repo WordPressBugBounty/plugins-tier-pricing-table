@@ -68,7 +68,7 @@ class PricingRule {
 		return $this->getType() === 'fixed';
 	}
 	
-	public function getTierPrice( $quantity, $withTaxes = true, $place = 'shop', $round = false ) {
+	public function getTierPrice( $quantity, bool $withTaxes = true, $place = 'shop', ?bool $round = null ) {
 		return PriceManager::getPriceByRules( $quantity, $this->getProductId(), 'view', $place, $withTaxes, $this,
 			$round );
 	}

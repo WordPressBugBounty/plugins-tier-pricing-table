@@ -32,7 +32,7 @@ class ManualOrdersAddon extends AbstractAddon {
 			return $productPrice;
 		}
 		
-		$tieredPrice = $tieredPricingRule->getTierPrice( $this->getTotalItemQuantity( $item ), false, null );
+		$tieredPrice = $tieredPricingRule->getTierPrice( $this->getTotalItemQuantity( $item ), false );
 		
 		return $tieredPrice ? $tieredPrice : $productPrice;
 	}

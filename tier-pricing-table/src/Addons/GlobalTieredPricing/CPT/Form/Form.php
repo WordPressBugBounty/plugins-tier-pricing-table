@@ -11,41 +11,43 @@ use TierPricingTable\Core\ServiceContainerTrait;
 use WP_Post;
 
 class Form {
-	
+
 	use ServiceContainerTrait;
-	
+
 	/**
 	 * Tabs
 	 *
 	 * @var FormTab[]
 	 */
 	protected $tabs;
-	
+
 	protected $defaultTab = 'pricing';
-	
+
+	protected $pricingRuleInstance = null;
+
 	public function __construct() {
-		
+
 		add_action( 'init', function () {
 			$this->tabs = apply_filters( 'tiered_pricing_table/global_pricing/form_tabs', array(
-				new Pricing( $this ),
-				new ProductAndCategories( $this ),
-				new UsersAndRoles( $this ),
-				new Quantity( $this ),
-				new Settings( $this ),
+					new Pricing( $this ),
+					new ProductAndCategories( $this ),
+					new UsersAndRoles( $this ),
+					new Quantity( $this ),
+					new Settings( $this ),
 			) );
 		} );
-		
+
 		add_action( 'edit_form_after_title', function ( WP_Post $post ) {
 			if ( GlobalTieredPricingCPT::SLUG !== $post->post_type ) {
 				return;
 			}
-			
+
 			$this->render( $post );
 		} );
-		
+
 		new UpgradeTip();
 	}
-	
+
 	protected function includeAssets() {
 		?>
 		<style>
@@ -242,22 +244,22 @@ class Form {
 		</script>
 		<?php
 	}
-	
+
 	protected function render( WP_Post $post ) {
-		
+
 		$this->includeAssets();
-		
+
 		$rulesCount = (int) wp_count_posts( GlobalTieredPricingCPT::SLUG )->publish;
-		
+
 		if ( $this->isNewRule() && $rulesCount < 1 ) {
 			$this->renderHelpingSteps();
 		}
-		
+
 		if ( ! $this->isNewRule() && ! $this->getPricingRuleInstance( $post )->isValidPricing() ) {
 			$this->tabs[0]->renderHint( __( 'The pricing rule does not affect either prices or product quantity limits. The rule will be skipped.',
-				'tier-pricing-table' ), array( 'custom_class' => 'tpt-global-pricing-rule-hint--top-level' ) );
+					'tier-pricing-table' ), array( 'custom_class' => 'tpt-global-pricing-rule-hint--top-level' ) );
 		}
-		
+
 		?>
 		<div class="tpt-global-pricing-rule-form">
 
@@ -290,9 +292,9 @@ class Form {
 						 id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 						<?php
 							$tab->render( $this->getPricingRuleInstance( $post ) );
-							
+
 							do_action( 'tiered_pricing_table/global_pricing/form/tab_end', $tab,
-								$this->getPricingRuleInstance( $post ) );
+									$this->getPricingRuleInstance( $post ) );
 						?>
 					</div>
 				<?php endforeach; ?>
@@ -300,7 +302,7 @@ class Form {
 		</div>
 		<?php
 	}
-	
+
 	/**
 	 * Get pricing rule instance
 	 *
@@ -312,10 +314,10 @@ class Form {
 		if ( empty( $this->pricingRuleInstance ) ) {
 			$this->pricingRuleInstance = GlobalPricingRule::build( $post->ID );
 		}
-		
+
 		return $this->pricingRuleInstance;
 	}
-	
+
 	public function renderHelpingSteps() {
 		?>
 		<style>
@@ -400,30 +402,30 @@ class Form {
 		</script>
 		<?php
 		$steps = array(
-			array(
-				'title'         => 'Add pricing',
-				'description'   => 'Set up custom regular and/or tiered pricing.',
-				'icon'          => '$',
-				'has_next_step' => true,
-			),
-			array(
-				'title'         => 'Select products',
-				'description'   => 'Select products or product categories that the rule will apply to.',
-				'icon'          => '<span class="dashicons dashicons-archive"></span>',
-				'has_next_step' => true,
-			),
-			array(
-				'title'         => 'Select users',
-				'description'   => 'Select users or user roles that the rule will apply to.',
-				'icon'          => '<span class="dashicons dashicons-admin-users"></span>',
-				'has_next_step' => true,
-			),
-			array(
-				'title'         => 'Specify quantity',
-				'description'   => 'Specify the minimum, maximum, and quantity step for products.',
-				'icon'          => '<span class="dashicons dashicons-database"></span>',
-				'has_next_step' => false,
-			),
+				array(
+						'title'         => 'Add pricing',
+						'description'   => 'Set up custom regular and/or tiered pricing.',
+						'icon'          => '$',
+						'has_next_step' => true,
+				),
+				array(
+						'title'         => 'Select products',
+						'description'   => 'Select products or product categories that the rule will apply to.',
+						'icon'          => '<span class="dashicons dashicons-archive"></span>',
+						'has_next_step' => true,
+				),
+				array(
+						'title'         => 'Select users',
+						'description'   => 'Select users or user roles that the rule will apply to.',
+						'icon'          => '<span class="dashicons dashicons-admin-users"></span>',
+						'has_next_step' => true,
+				),
+				array(
+						'title'         => 'Specify quantity',
+						'description'   => 'Specify the minimum, maximum, and quantity step for products.',
+						'icon'          => '<span class="dashicons dashicons-database"></span>',
+						'has_next_step' => false,
+				),
 		)
 		?>
 		<div class="tpt-global-pricing-rule-helping">
@@ -433,19 +435,19 @@ class Form {
 			<p>
 				<?php
 					esc_html_e( 'Global rules are useful when you need to set custom pricing for multiple products and apply it to a specific group of users.',
-						'tier-pricing-table' );
+							'tier-pricing-table' );
 				?>
 			</p>
 
 			<p>
 				<?php
 					esc_html_e( 'Please note that depending on the priority settings, the global pricing rule may override product-level tiered pricing or quantity limits.',
-						'tier-pricing-table' );
+							'tier-pricing-table' );
 				?>
 			</p>
 
 			<div class="tpt-global-pricing-rule-helping__steps">
-				
+
 				<?php foreach ( $steps as $step ) : ?>
 
 					<div class="tpt-global-pricing-rule-helping-step">
@@ -461,7 +463,7 @@ class Form {
 							<?php echo esc_html( $step['description'] ); ?>
 						</div>
 					</div>
-					
+
 					<?php if ( $step['has_next_step'] ) : ?>
 						<div class="tpt-global-pricing-rule-helping-step tpt-global-pricing-rule-helping-step--arrow">
 							<span class="dashicons dashicons-arrow-right-alt"></span>
@@ -475,10 +477,10 @@ class Form {
 		</div>
 		<?php
 	}
-	
+
 	public function isNewRule(): bool {
 		global $pagenow;
-		
+
 		return 'post-new.php' == $pagenow;
 	}
 }
