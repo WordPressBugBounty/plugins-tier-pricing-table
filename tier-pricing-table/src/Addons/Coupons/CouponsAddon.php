@@ -16,12 +16,12 @@ class CouponsAddon extends AbstractAddon {
 		add_action( 'tiered_pricing_table/cart/need_price_recalculation', array(
 			$this,
 			'checkAppliedCoupons',
-		), 10, 3 );
+		), 999, 3 );
 		
 		add_action( 'tiered_pricing_table/cart/need_price_recalculation/item', array(
 			$this,
 			'checkAppliedCoupons',
-		), 10, 3 );
+		), 999, 3 );
 	}
 	
 	public function checkAppliedCoupons( $recalculate, $item, $cart = null ) {

@@ -42,7 +42,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '5.5.1';
+    const VERSION = '5.6.2';
 
     /**
      * TierPricingTablePlugin constructor.
@@ -52,7 +52,7 @@ class TierPricingTablePlugin {
     public function __construct( string $mainFile ) {
         $this->licence = new Freemius($mainFile);
         // Core
-        $this->getContainer()->add( 'fileManager', new FileManager($mainFile) );
+        $this->getContainer()->add( 'fileManager', new FileManager($mainFile, 'tiered-pricing-table') );
         $this->getContainer()->add( 'adminNotifier', new AdminNotifier() );
         $this->saveActivationTime();
         $this->declareCompatibilities();

@@ -6,15 +6,15 @@ class RoleBasedPricingRule {
 	
 	protected $productId;
 	protected $role;
-	protected $pricingType;
-	protected $discount;
+	protected $pricingType = 'flat';
+	protected $discount = null;
 	protected $discountType = 'sale_price';
-	protected $salePrice;
-	protected $regularPrice;
-	protected $minimumOrderQuantity;
-	protected $tieredPricingType;
-	protected $percentageTieredPricingRules;
-	protected $fixedTieredPricingRules;
+	protected $salePrice = null;
+	protected $regularPrice = null;
+	protected $minimumOrderQuantity = null;
+	protected $tieredPricingType = 'fixed';
+	protected $percentageTieredPricingRules = array();
+	protected $fixedTieredPricingRules = array();
 	
 	public function __construct( $productId, $role ) {
 		$this->productId = $productId;

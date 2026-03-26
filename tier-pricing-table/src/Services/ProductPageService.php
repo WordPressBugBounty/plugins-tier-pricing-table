@@ -122,6 +122,10 @@ class ProductPageService {
         if ( is_admin() && !defined( 'DOING_AJAX' ) ) {
             return $priceHTML;
         }
+        // Do not wrap price in quick edit and inline edit in admin
+        if ( isset( $_POST['action'] ) && in_array( $_POST['action'], ['inline-save'], true ) ) {
+            return $priceHTML;
+        }
         // Allow 3rd-party to control this
         if ( !apply_filters(
             'tiered_pricing_table/frontend/wrap_price',

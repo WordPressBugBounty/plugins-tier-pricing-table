@@ -13,23 +13,13 @@ class Frontend {
 	
 	use ServiceContainerTrait;
 	
-	/**
-	 * Frontend constructor.
-	 *
-	 */
 	public function __construct() {
 		
 		new PricingTableShortcode();
 		
-		// Enqueue frontend assets
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueAssets' ), 10, 1 );
 	}
 	
-	/**
-	 * Enqueue assets at simple product and variation product page.
-	 *
-	 * @global WP_Post $post .
-	 */
 	public function enqueueAssets() {
 		wp_enqueue_script( 'tiered-pricing-table-front-js',
 			$this->getContainer()->getFileManager()->locateJSAsset( 'frontend/product-tiered-pricing-table' ),
@@ -40,6 +30,7 @@ class Frontend {
 			TierPricingTablePlugin::VERSION );
 		
 		wp_localize_script( 'tiered-pricing-table-front-js', 'tieredPricingGlobalData', [
+			'version'                         => TierPricingTablePlugin::VERSION,
 			'loadVariationTieredPricingNonce' => wp_create_nonce( 'get_pricing_table' ),
 			'isPremium'                       => ! tpt_fs()->can_use_premium_code() ? 'no' : 'yes',
 			'currencyOptions'                 => [

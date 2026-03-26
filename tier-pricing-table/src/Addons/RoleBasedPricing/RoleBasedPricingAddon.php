@@ -3,6 +3,8 @@
 namespace TierPricingTable\Addons\RoleBasedPricing;
 
 use TierPricingTable\Addons\AbstractAddon;
+use TierPricingTable\Addons\RoleBasedPricing\Export\RoleBasedPricingExport;
+use TierPricingTable\Addons\RoleBasedPricing\Import\RoleBasedPricingImport;
 class RoleBasedPricingAddon extends AbstractAddon {
     const SETTING_ENABLE_KEY = 'enable_role_based_pricing_addon';
 

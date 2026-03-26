@@ -53,20 +53,20 @@ class WoocommerceExportService {
     /**
      * Register the 'Fixed tiered price' column in the exporter.
      *
-     * @param array $columns
+     * @param  array  $columns
      *
      * @return array $options
      */
     public function addExportColumn( $columns ) {
-        $columns['tiered_price_fixed'] = __( 'Fixed Tiered Prices', 'tier-pricing-table' );
+        $columns['tiered_price_fixed'] = 'Tiered Pricing — ' . __( 'Fixed pricing rules', 'tier-pricing-table' );
         return $columns;
     }
 
     /**
      * Provide the data to be exported for one item in the column.
      *
-     * @param WC_Product $product
-     * @param string $type
+     * @param  WC_Product  $product
+     * @param  string  $type
      *
      * @return mixed $value
      */
@@ -86,8 +86,8 @@ class WoocommerceExportService {
     /**
      * Export fixed pricing rules
      *
-     * @param mixed $value
-     * @param WC_product $product
+     * @param  mixed  $value
+     * @param  WC_product  $product
      *
      * @return mixed
      */
@@ -98,8 +98,8 @@ class WoocommerceExportService {
     /**
      * Export percentage pricing rules
      *
-     * @param mixed $value
-     * @param WC_product $product
+     * @param  mixed  $value
+     * @param  WC_product  $product
      *
      * @return mixed
      */
@@ -110,8 +110,8 @@ class WoocommerceExportService {
     /**
      * Export tiered pricing type
      *
-     * @param mixed $value
-     * @param WC_product $product
+     * @param  mixed  $value
+     * @param  WC_product  $product
      *
      * @return mixed
      */
@@ -123,8 +123,8 @@ class WoocommerceExportService {
     /**
      * Export tiered pricing minimum product quantity
      *
-     * @param mixed $value
-     * @param WC_product $product
+     * @param  mixed  $value
+     * @param  WC_product  $product
      *
      * @return mixed
      */

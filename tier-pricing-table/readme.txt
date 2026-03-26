@@ -3,17 +3,19 @@
 Contributors: bycrik, freemius
 Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 4.2
-Tested up to: 6.9
-Requires PHP: 7.2
-Stable tag: 5.5.1
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 5.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Offer quantity-based discounts with flexible display templates. Boost sales using role-based pricing, quantity limits, cart upsells, and more.
+Create bulk, wholesale, and quantity-based pricing in WooCommerce with flexible tables, role-based pricing, and powerful upsells.
 
 == Description ==
 
-**Tiered Pricing Table for WooCommerce** is your all-in-one wholesale & retail pricing solution — with role-based pricing, min/max quantity limits, cart upsells, and more.
+**Tiered Pricing Table for WooCommerce** lets you create bulk discounts, wholesale pricing, and quantity-based offers to increase average order value.
+
+Easily set different prices based on quantity, user roles, or specific customers — and display them using beautiful, customizable pricing tables, blocks, or dropdowns.
 
 [youtube https://www.youtube.com/watch?v=wRyPr6VQHZM]
 
@@ -31,10 +33,10 @@ Set different prices for different quantities of products.
 ✅ **Role-based pricing**
 Set different prices for user roles or specific customers, including quantity-based prices.
 
-✅ **Minimum \ Maximum \ Quantity step**
+✅ ** Minimum, Maximum & Step Quantity Controls **
 Limit minimum, maximum, and quantity step a product can be purchased in.
 
-✅ **Multiple pricing templates on the product page \ product catalog**
+✅ ** Flexible pricing display (product page & catalog) **
  You can show the tiered prices via:
 ➖ **Table**
 ➖ **Blocks (5 different styles)**
@@ -44,24 +46,19 @@ Limit minimum, maximum, and quantity step a product can be purchased in.
 ➖ **Plain text**
 ➖ **Tooltip**
 *See screenshots for examples*
--
-
-✅ **Import & Export (WP All Import supported)**
-Import tiered prices in bulk, including role-based and minimum order quantity rules.
 
 ✅ **Format your prices on the product catalog with discounts in mind**
 Show the lowest price or range from the lowest to the highest price.
 
-The clean interface and powerful functionality allow you to make any custom pricing without a headache.
+The clean interface and powerful functionality allow you to create any pricing strategy without complexity.
 
-**Other features**:
+⚙️ **Advanced Features**
+✅ Import & Export (WP All Import support)
+✅ Built-in caching for performance
+✅ REST API & debug mode
+✅ Show saving amount to users with the "You save: $9.99" template. (difference between original and discounted price)
 
-*  Show saving amount to users (difference between original and discounted price)
-*  Various customization (titles, colors, positions, and many others)
-*  Built-in cache to provide the best performance
-*  REST API
-*  Debug mode
-And many more!
+And much more!
 
 💎 **Premium Extras**:
 
@@ -113,11 +110,20 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 
 1. Upload the plugin files to the `/wp-content/plugins/tier-price-table` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the WooCommerce->Settings Name screen to configure the plugin
+3. Go to **WooCommerce → Settings → Tiered Pricing** to configure the plugin
 
 After installing the plugin set up your own settings
 
 == Frequently Asked Questions ==
+
+= Does this plugin support variable products? =
+Yes, tiered pricing works with both simple and variable products.
+
+= Can I apply discounts per category? =
+Yes, you can create global pricing rules for categories.
+
+= Does it work with taxes and coupons? =
+Yes, the plugin integrates with WooCommerce taxes and coupons.
 
 = What does the import format look like? =
 
@@ -138,11 +144,10 @@ add_filter('tiered_pricing_table/rules_separator', function(){
    return '&'
 });
 
-= Can I show the pricing table/pricing blocks/pricing options using a shortcode? =
+= Can I show the tiered pricing using a shortcode? =
+Yes! The plugin provides the [tiered-pricing-table] shortcode that can be customized with various attributes.
 
-The plugin includes the [tiered-pricing-table] shortcode that can be customized with various attributes.
-
-= Can I show the pricing table/pricing blocks/pricing options via Elementor? =
+= Can I show the tiered pricing via Elementor? =
 
 Yes! Look for the "Tiered Pricing Table" widget.
 
@@ -157,10 +162,22 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 
 == Changelog ==
 
-= 5.5.0 [2025-11-26] =
+= 5.6.2 [2026-03-26] =
+* Update: Freemius SDK updated to the latest version.
+
+= 5.6.1 [2026-03-25] =
+* Fix: WooCommerce role-based import - do not require all fields to be present in the import file.
+* Fix: Quick edit action.
+
+= 5.6.0 [2026-03-18] =
+* Update: WooCommerce & WordPress compatibility bumped.
+* Update: Import/Export for role-based pricing rules.
+* Fix: Notice on PHP 8.5 and above.
+
+= 5.5.1 [2025-11-26] =
 * Update: Freemius SDK updated.
 * Update: WooCommerce & WordPress compatibility bumped.
-* Update: Black friday and feedback banners.
+* Update: Black Friday and feedback banners.
 * Fix: (WCCS) by WP Experts integration fix.
 * Fix: Manual orders rounding fix.
 

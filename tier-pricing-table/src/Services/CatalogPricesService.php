@@ -42,6 +42,10 @@ class CatalogPricesService {
         if ( is_cart() ) {
             return $defaultPriceHTML;
         }
+        // Do not modify price in quick edit and inline edit in admin
+        if ( isset( $_POST['action'] ) && in_array( $_POST['action'], ['inline-save'], true ) ) {
+            return $defaultPriceHTML;
+        }
         $currentProductPageProductId = get_queried_object_id();
         $parentProductId = ( $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id() );
         // Handle product page pricing
