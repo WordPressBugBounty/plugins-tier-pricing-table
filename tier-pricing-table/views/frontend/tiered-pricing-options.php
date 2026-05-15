@@ -64,49 +64,49 @@ if ( !empty( $price_rules ) ) {
     ?>
 
 		<div class="tiered-pricing-options"
-			 id="<?php 
+		     id="<?php 
     echo esc_attr( $id );
     ?>"
-			 data-product-id="<?php 
+		     data-product-id="<?php 
     echo esc_attr( $product_id );
     ?>"
-			 data-price-rules="<?php 
+		     data-price-rules="<?php 
     echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) );
     ?>"
-			 data-minimum="<?php 
+		     data-minimum="<?php 
     echo esc_attr( $minimum );
     ?>"
-			 data-product-name="<?php 
+		     data-product-name="<?php 
     echo esc_attr( $product_name );
     ?>"
-			 data-regular-price="<?php 
+		     data-regular-price="<?php 
     echo esc_attr( $regular_price );
     ?>"
-			 data-sale-price="<?php 
+		     data-sale-price="<?php 
     echo esc_attr( $sale_price );
     ?>"
-			 data-price="<?php 
+		     data-price="<?php 
     echo esc_attr( $price );
     ?>"
-			 data-product-price-suffix="<?php 
+		     data-product-price-suffix="<?php 
     echo esc_attr( $product->get_price_suffix() );
     ?>"
 		>
 			<div class="tiered-pricing-option tiered-pricing--active tiered-pricing-option--default"
-				 data-tiered-quantity="<?php 
+			     data-tiered-quantity="<?php 
     echo esc_attr( $minimum );
     ?>"
-				 data-tiered-price="<?php 
+			     data-tiered-price="<?php 
     echo esc_attr( $price );
     ?>"
-				 data-tiered-price-exclude-taxes="
+			     data-tiered-price-exclude-taxes="
 				<?php 
     echo esc_attr( wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
         'price' => $real_price,
     ) ) );
     ?>
 				 "
-				 data-tiered-price-include-taxes="
+			     data-tiered-price-include-taxes="
 				<?php 
     echo esc_attr( wc_get_price_including_tax( wc_get_product( $product_id ), array(
         'price' => $real_price,
@@ -117,7 +117,7 @@ if ( !empty( $price_rules ) ) {
 				<div class="tiered-pricing-option__checkbox">
 					<div class="tiered-pricing-option-checkbox tiered-pricing-option-checkbox--active"></div>
 				</div>
-				
+
 				<?php 
     $discountAmount = 0;
     if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
@@ -143,7 +143,7 @@ if ( !empty( $price_rules ) ) {
 					<?php 
     }
     ?>
-					
+
 					<?php 
     if ( $discountAmount > 0 ) {
         ?>
@@ -172,9 +172,21 @@ if ( !empty( $price_rules ) ) {
 
 				</div>
 
+				<?php 
+    do_action(
+        'tiered_pricing_table/options/label',
+        $pricing_rule,
+        $minimum,
+        array(
+            'id'    => $id,
+            'style' => 'default',
+        )
+    );
+    ?>
+
 				<div class="tiered-pricing-option__pricing">
 					<div class="tiered-pricing-option-price">
-						
+
 						<?php 
     if ( $discountAmount > 0 ) {
         ?>
@@ -198,16 +210,16 @@ if ( !empty( $price_rules ) ) {
 						</div>
 
 					</div>
-					
+
 					<?php 
     ?>
 				</div>
 			</div>
-			
+
 			<?php 
     $iterator = new ArrayIterator($price_rules);
     ?>
-			
+
 			<?php 
     while ( $iterator->valid() ) {
         ?>
@@ -260,16 +272,16 @@ if ( !empty( $price_rules ) ) {
         ?>
 
 				<div class="tiered-pricing-option"
-					 data-tiered-quantity="<?php 
+				     data-tiered-quantity="<?php 
         echo esc_attr( $currentQuantity );
         ?>"
-					 data-tiered-price="<?php 
+				     data-tiered-price="<?php 
         echo esc_attr( $currentProductPrice );
         ?>"
-					 data-tiered-price-exclude-taxes="<?php 
+				     data-tiered-price-exclude-taxes="<?php 
         echo esc_attr( $currentProductPriceExcludeTaxes );
         ?>"
-					 data-tiered-price-include-taxes="<?php 
+				     data-tiered-price-include-taxes="<?php 
         echo esc_attr( $currentProductPriceIncludeTaxes );
         ?>">
 
@@ -286,6 +298,19 @@ if ( !empty( $price_rules ) ) {
         ) );
         ?>
 					</div>
+
+					<?php 
+        do_action(
+            'tiered_pricing_table/options/label',
+            $pricing_rule,
+            $currentQuantity,
+            array(
+                'id'    => $id,
+                'style' => 'default',
+            )
+        );
+        ?>
+
 					<div class="tiered-pricing-option__pricing">
 						<div class="tiered-pricing-option-price">
 							<div class="tiered-pricing-option-price__original">
@@ -303,7 +328,7 @@ if ( !empty( $price_rules ) ) {
         ?>
 							</div>
 						</div>
-						
+
 						<?php 
         ?>
 					</div>
@@ -311,12 +336,12 @@ if ( !empty( $price_rules ) ) {
 			<?php 
     }
     ?>
-			
+
 			<?php 
     do_action( 'tiered_pricing_table/options/options', $pricing_rule );
     ?>
 		</div>
-		
+
 		<?php 
     do_action( 'tiered_pricing_table/options/after_options', $pricing_rule );
     ?>

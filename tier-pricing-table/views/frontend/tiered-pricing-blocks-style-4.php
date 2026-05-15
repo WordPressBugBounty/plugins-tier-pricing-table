@@ -80,6 +80,12 @@ if ( $sale_price ) {
 				?>
 				 ">
 
+				<?php
+					do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $minimum, array(
+							'id'    => $id,
+							'style' => '4',
+					) );
+				?>
 				<div class="tiered-pricing-block__price">
 					<?php
 						echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array(
@@ -176,6 +182,13 @@ if ( $sale_price ) {
 					 data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
 					 data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 					 data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
+
+					<?php
+						do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $currentQuantity, array(
+								'id'    => $id,
+								'style' => '4',
+						) );
+					?>
 
 					<div class="tiered-pricing-block__price">
 						<span>

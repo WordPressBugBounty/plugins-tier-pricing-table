@@ -34,7 +34,7 @@ class QuantityFieldHandler {
 			});
 
 			jQuery(".type-product").on("change input", ".quantity .qty", function() {
-				var add_to_cart_button = jQuery(this).parents(".product").find(".add_to_cart_button");
+				var add_to_cart_button = jQuery(this).closest(".product").find(".add_to_cart_button");
 
 				// For AJAX add-to-cart actions
 				add_to_cart_button.attr("data-quantity", jQuery(this).val());

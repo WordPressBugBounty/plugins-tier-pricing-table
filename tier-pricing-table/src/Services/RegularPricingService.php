@@ -76,6 +76,15 @@ class RegularPricingService {
 	}
 	
 	protected function getPrice( ?WC_Product $product, $specific = false, $originalPrice = false ) {
+		
+		$newPrice = $this->_getPrice( $product, $specific, $originalPrice );
+		
+		return apply_filters( 'tiered_pricing_table/services/regular_pricing/price', $newPrice, $product, $specific,
+			$originalPrice );
+	}
+	
+	protected function _getPrice( ?WC_Product $product, $specific = false, $originalPrice = false ) {
+		
 		if ( ! $product ) {
 			return null;
 		}

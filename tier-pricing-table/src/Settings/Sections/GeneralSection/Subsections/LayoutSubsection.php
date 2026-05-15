@@ -5,7 +5,6 @@ use TierPricingTable\Settings\CustomOptions\TPTTableColumnsField;
 use TierPricingTable\Settings\CustomOptions\TPTQuantityMeasurementField;
 use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
 use TierPricingTable\Settings\CustomOptions\TPTTextTemplate;
-use TierPricingTable\Settings\CustomOptions\TPTTwoFields;
 use TierPricingTable\Settings\Sections\SubsectionAbstract;
 use TierPricingTable\Settings\Settings;
 use TierPricingTable\TierPricingTablePlugin;

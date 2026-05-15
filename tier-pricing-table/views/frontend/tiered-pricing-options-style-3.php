@@ -170,8 +170,19 @@ if ( !empty( $price_rules ) ) {
 						<?php 
     }
     ?>
-
 					</div>
+
+					<?php 
+    do_action(
+        'tiered_pricing_table/options/label',
+        $pricing_rule,
+        $minimum,
+        array(
+            'id'    => $id,
+            'style' => '3',
+        )
+    );
+    ?>
 
 					<div class="tiered-pricing-option__pricing">
 						<div class="tiered-pricing-option-price">
@@ -315,6 +326,19 @@ if ( !empty( $price_rules ) ) {
         ) );
         ?>
 						</div>
+
+						<?php 
+        do_action(
+            'tiered_pricing_table/options/label',
+            $pricing_rule,
+            $currentQuantity,
+            array(
+                'id'    => $id,
+                'style' => '3',
+            )
+        );
+        ?>
+
 						<div class="tiered-pricing-option__pricing">
 							<div class="tiered-pricing-option-price">
 								<div class="tiered-pricing-option-price__original">

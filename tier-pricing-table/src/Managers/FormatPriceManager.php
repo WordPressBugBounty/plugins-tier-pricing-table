@@ -31,6 +31,9 @@ class FormatPriceManager {
                 return null;
             }
         }
+        if ( isset( $args['html'] ) && !$args['html'] ) {
+            $priceHTML = strip_tags( $priceHTML );
+        }
         return $priceHTML;
     }
 
@@ -123,6 +126,9 @@ class FormatPriceManager {
         $range = $lowestPrice . ' - ' . $highestPrice;
         if ( $args['with_suffix'] ) {
             $range .= $product->get_price_suffix();
+        }
+        if ( isset( $args['html'] ) && !$args['html'] ) {
+            $range = strip_tags( $range );
         }
         return $range;
     }

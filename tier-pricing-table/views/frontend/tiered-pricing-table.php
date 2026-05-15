@@ -13,40 +13,40 @@
 	 * @var int $minimum
 	 * @var array $settings
 	 */
-	
+
 	use TierPricingTable\CalculationLogic;
 	use TierPricingTable\PriceManager;
 	use TierPricingTable\PricingRule;
-	
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
-	
+
+	if ( ! defined( 'WPINC' ) ) {
+		die;
+	}
+
 	$sale_price = $product->get_sale_price();
-	
-if ( $sale_price ) {
-	$sale_price = wc_get_price_to_display( $product, array(
-		'price' => $sale_price,
-	) );
-}
-	
+
+	if ( $sale_price ) {
+		$sale_price = wc_get_price_to_display( $product, array(
+				'price' => $sale_price,
+		) );
+	}
+
 	$regular_price = wc_get_price_to_display( $product, array(
-		'price' => $product->get_regular_price(),
-	) );
-	
-	$price = wc_get_price_to_display( $product, array(
-		'price' => $product->get_price(),
-	) );
-	
-	$price_incl_taxes = wc_get_price_including_tax( wc_get_product( $product_id ), array(
-		'price' => $real_price,
-	) );
-	
-	$price_excl_taxes = wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
-		'price' => $real_price,
+			'price' => $product->get_regular_price(),
 	) );
 
-	?>
+	$price = wc_get_price_to_display( $product, array(
+			'price' => $product->get_price(),
+	) );
+
+	$price_incl_taxes = wc_get_price_including_tax( wc_get_product( $product_id ), array(
+			'price' => $real_price,
+	) );
+
+	$price_excl_taxes = wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
+			'price' => $real_price,
+	) );
+
+?>
 
 <?php if ( ! empty( $pricing_rule->getRules() ) ) : ?>
 	<div class="clear"></div>
@@ -55,20 +55,20 @@ if ( $sale_price ) {
 		<?php if ( ! empty( $settings['title'] ) ) : ?>
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
-		
+
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/before', $pricing_rule ); ?>
 
 		<table class="shop_table tiered-pricing-table"
-			   id="<?php echo esc_attr( $id ); ?>"
-			   data-tiered-pricing-table
-			   data-product-id="<?php echo esc_attr( $product_id ); ?>"
-			   data-price-rules="<?php echo esc_attr( json_encode( $pricing_rule->getRules() ) ); ?>"
-			   data-minimum="<?php echo esc_attr( $minimum ); ?>"
-			   data-product-name="<?php echo esc_attr( $product_name ); ?>"
-			   data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
-			   data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
-			   data-price="<?php echo esc_attr( $price ); ?>"
-			   data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
+		       id="<?php echo esc_attr( $id ); ?>"
+		       data-tiered-pricing-table
+		       data-product-id="<?php echo esc_attr( $product_id ); ?>"
+		       data-price-rules="<?php echo esc_attr( json_encode( $pricing_rule->getRules() ) ); ?>"
+		       data-minimum="<?php echo esc_attr( $minimum ); ?>"
+		       data-product-name="<?php echo esc_attr( $product_name ); ?>"
+		       data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
+		       data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
+		       data-price="<?php echo esc_attr( $price ); ?>"
+		       data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
 			<thead>
 			<tr>
@@ -79,7 +79,7 @@ if ( $sale_price ) {
 						</span>
 					</th>
 				<?php endif; ?>
-				
+
 				<?php if ( $settings['discount_column_title'] ) : ?>
 					<th>
 						<span class="nobr">
@@ -87,7 +87,7 @@ if ( $sale_price ) {
 						</span>
 					</th>
 				<?php endif; ?>
-				
+
 				<?php if ( $settings['price_column_title'] ) : ?>
 					<th>
 						<span class="nobr">
@@ -95,17 +95,17 @@ if ( $sale_price ) {
 						</span>
 					</th>
 				<?php endif; ?>
-				
+
 				<?php do_action( 'tiered_pricing_table/tiered_pricing/header_columns', $pricing_rule ); ?>
 			</tr>
 			</thead>
 
 			<tbody>
 			<tr class="tiered-pricing--active"
-				data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
-				data-tiered-price="<?php echo esc_attr( $price ); ?>"
-				data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
-				data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>">
+			    data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
+			    data-tiered-price="<?php echo esc_attr( $price ); ?>"
+			    data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
+			    data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>">
 				<?php if ( $settings['quantity_column_title'] ) : ?>
 					<td>
 						<?php if ( 1 >= array_keys( $pricing_rule->getRules() )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
@@ -127,16 +127,21 @@ if ( $sale_price ) {
 								</span>
 							</span>
 						<?php endif; ?>
+
+						<?php do_action( 'tiered_pricing_table/table/label', $pricing_rule, $minimum, array(
+								'id'    => $id,
+								'style' => 'default',
+						) ); ?>
 					</td>
 				<?php endif; ?>
-				
+
 				<?php if ( $settings['discount_column_title'] ) : ?>
-					
+
 					<?php
 					$discountAmount = 0;
 					if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
 						$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
-							$product->get_sale_price() );
+								$product->get_sale_price() );
 					}
 					?>
 
@@ -148,72 +153,77 @@ if ( $sale_price ) {
 						<?php endif; ?>
 					</td>
 				<?php endif; ?>
-				
+
 				<?php if ( $settings['price_column_title'] ) : ?>
 					<td>
 						<?php
 							echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ),
-								array( 'price' => $real_price, ) ) ) );
+									array( 'price' => $real_price, ) ) ) );
 						?>
 					</td>
 				<?php endif; ?>
-				
+
 				<?php do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, null ); ?>
 			</tr>
-			
+
 			<?php $iterator = new ArrayIterator( $pricing_rule->getRules() ); ?>
-			
+
 			<?php while ( $iterator->valid() ) : ?>
 				<?php
 				$currentPrice    = $iterator->current();
 				$currentQuantity = $iterator->key();
-				
+
 				$iterator->next();
-				
+
 				if ( $pricing_rule->getType() === 'percentage' ) {
 					$discountAmount = $currentPrice;
 				} else {
 					$discountAmount = PriceManager::calculateDiscount( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price(),
-						$pricing_rule->getTierPrice( $currentQuantity, false ) );
+							$pricing_rule->getTierPrice( $currentQuantity, false ) );
 				}
-				
+
 				$quantity = number_format_i18n( $currentQuantity );
-				
+
 				if ( $iterator->valid() ) {
-					
+
 					if ( intval( $iterator->key() - 1 != $currentQuantity ) && 'range' === $settings['quantity_type'] ) {
 						$quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
 					}
-					
+
 				} else {
 					$quantity .= apply_filters( 'tiered_pricing_table/tiered_pricing/last_tier_postfix', '+',
-						$currentQuantity, $pricing_rule, 'table' );
+							$currentQuantity, $pricing_rule, 'table' );
 				}
-				
+
 				$quantity .= ' ' . $settings['quantity_measurement_plural'];
-				
+
 				$currentProductPrice = $pricing_rule->getTierPrice( $currentQuantity );
-				
+
 				$currentProductPriceExcludeTaxes = wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
-					'price' => $pricing_rule->getTierPrice( $currentQuantity, false ),
+						'price' => $pricing_rule->getTierPrice( $currentQuantity, false ),
 				) );
-				
+
 				$currentProductPriceIncludeTaxes = wc_get_price_including_tax( wc_get_product( $product_id ), array(
-					'price' => $pricing_rule->getTierPrice( $currentQuantity, false ),
+						'price' => $pricing_rule->getTierPrice( $currentQuantity, false ),
 				) );
-				
+
 				?>
 				<tr data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
-					data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
-					data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
-					data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
-					
+				    data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
+				    data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
+				    data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
+
 					<?php if ( $settings['quantity_column_title'] ) : ?>
 						<td>
 							<span><?php echo esc_attr( $quantity ); ?></span>
+							<?php do_action( 'tiered_pricing_table/table/label', $pricing_rule, $currentQuantity,
+									array(
+											'id'    => $id,
+											'style' => 'default',
+									) ); ?>
 						</td>
 					<?php endif; ?>
-					
+
 					<?php if ( $settings['discount_column_title'] ) : ?>
 						<td>
 							<?php if ( $discountAmount > 0 ) : ?>
@@ -223,7 +233,7 @@ if ( $sale_price ) {
 							<?php endif; ?>
 						</td>
 					<?php endif; ?>
-					
+
 					<?php if ( $settings['price_column_title'] ) : ?>
 						<td>
 							<?php
@@ -231,18 +241,18 @@ if ( $sale_price ) {
 							?>
 						</td>
 					<?php endif; ?>
-					
+
 					<?php
 						do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, $currentQuantity );
 					?>
 				</tr>
-				
+
 				<?php do_action( 'tiered_pricing_table/tiered_pricing/rows', $pricing_rule ); ?>
-			
+
 			<?php endwhile; ?>
 			</tbody>
 		</table>
-		
+
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/after', $pricing_rule, $product_id ); ?>
 	</div>
 

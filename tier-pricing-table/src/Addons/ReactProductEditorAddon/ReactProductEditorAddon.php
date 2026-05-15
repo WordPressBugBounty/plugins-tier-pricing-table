@@ -19,4 +19,8 @@ class ReactProductEditorAddon extends AbstractAddon {
 	public function run() {
 		new ProductEditor();
 	}
+	
+	protected function isActiveByDefault(): bool {
+		return false;
+	}
 }

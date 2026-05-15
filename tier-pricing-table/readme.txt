@@ -2,10 +2,10 @@
 
 Contributors: bycrik, freemius
 Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
-Requires at least: 4.2
+Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 5.6.2
+Stable tag: 6.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,10 +33,13 @@ Set different prices for different quantities of products.
 ✅ **Role-based pricing**
 Set different prices for user roles or specific customers, including quantity-based prices.
 
-✅ ** Minimum, Maximum & Step Quantity Controls **
+✅ **Minimum, Maximum & Step Quantity Controls**
 Limit minimum, maximum, and quantity step a product can be purchased in.
 
-✅ ** Flexible pricing display (product page & catalog) **
+✅ **Format your prices on the product catalog with discounts in mind**
+Show the lowest price or range from the lowest to the highest price.
+
+✅ **Flexible pricing display (product page & catalog)**
  You can show the tiered prices via:
 ➖ **Table**
 ➖ **Blocks (5 different styles)**
@@ -46,9 +49,6 @@ Limit minimum, maximum, and quantity step a product can be purchased in.
 ➖ **Plain text**
 ➖ **Tooltip**
 *See screenshots for examples*
-
-✅ **Format your prices on the product catalog with discounts in mind**
-Show the lowest price or range from the lowest to the highest price.
 
 The clean interface and powerful functionality allow you to create any pricing strategy without complexity.
 
@@ -161,6 +161,14 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 6.0.1 [2026-05-11] =
+* Fix: Showing price range caused memory leak.
+
+= 6.0.0 [2026-05-09] =
+* New: Tier labels! Create custom labels for each pricing tier.
+* New: Integration with SEOPress plugin.
+* Update: Multiple improvements and fixes.
 
 = 5.6.2 [2026-03-26] =
 * Update: Freemius SDK updated to the latest version.

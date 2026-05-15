@@ -22,9 +22,7 @@ class GeneralSection extends SectionAbstract {
 			$settings = array_merge( $settings, ( new $subsection() )->getWrappedSettings() );
 		}
 		
-		$settings = apply_filters( 'tiered_pricing_table/settings/general_settings', $settings );
-		
-		return $settings;
+		return apply_filters( 'tiered_pricing_table/settings/general_settings', $settings );
 	}
 	
 	protected function getSubsections() {
@@ -146,6 +144,7 @@ class GeneralSection extends SectionAbstract {
 	public static function getPricingBlocksStyle(): string {
 		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_blocks_style', 'default' );
 	}
+	
 	public static function getPricingOptionsStyle(): string {
 		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_options_style', 'default' );
 	}

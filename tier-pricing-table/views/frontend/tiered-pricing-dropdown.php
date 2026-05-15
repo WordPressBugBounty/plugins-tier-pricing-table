@@ -115,6 +115,14 @@ if ( $sale_price ) {
 							?>
 						<?php endif; ?>
 					</div>
+
+					<?php
+						do_action( 'tiered_pricing_table/dropdown/label', $pricing_rule, $minimum, array(
+								'id'    => $id,
+								'style' => 'default',
+						) );
+					?>
+
 					<div class="tiered-pricing-dropdown-option__pricing">
 						<div class="tiered-pricing-option-price">
 							
@@ -182,6 +190,13 @@ if ( $sale_price ) {
 								?>
 							<?php endif; ?>
 						</div>
+
+						<?php
+							do_action( 'tiered_pricing_table/dropdown/label', $pricing_rule, $minimum, array(
+									'id'    => $id,
+									'style' => 'default',
+							) );
+						?>
 
 						<div class="tiered-pricing-dropdown-option__pricing">
 							<div class="tiered-pricing-option-price">
@@ -270,6 +285,14 @@ if ( $sale_price ) {
 										round( $discountAmount, 2 ), $settings['quantity_measurement_plural'] ) );
 								?>
 							</div>
+
+							<?php
+								do_action( 'tiered_pricing_table/dropdown/label', $pricing_rule, $currentQuantity, array(
+										'id'    => $id,
+										'style' => 'default',
+								) );
+							?>
+
 							<div class="tiered-pricing-dropdown-option__pricing">
 								<div class="tiered-pricing-option-price">
 									<div class="tiered-pricing-dropdown-option-price__original">

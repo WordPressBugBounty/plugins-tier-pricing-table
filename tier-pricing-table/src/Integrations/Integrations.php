@@ -8,6 +8,7 @@ use TierPricingTable\Integrations\Plugins\Elementor\ElementorIntegration;
 use TierPricingTable\Integrations\Plugins\MixMatch;
 use TierPricingTable\Integrations\Plugins\ProductBundles;
 use TierPricingTable\Integrations\Plugins\RankMath\RankMath;
+use TierPricingTable\Integrations\Plugins\SEOPress\SEOPress;
 use TierPricingTable\Integrations\Plugins\WCCS;
 use TierPricingTable\Integrations\Plugins\WCPA;
 use TierPricingTable\Integrations\Plugins\WCPProductBundles;
@@ -73,6 +74,7 @@ class Integrations {
 			
 			Yoast::class,
 			RankMath::class,
+			SEOPress::class,
 		) );
 		
 		foreach ( $themes as $themeName => $theme ) {

@@ -19,6 +19,7 @@ class PremiumSettingsManager {
 		'tier_pricing_table__subsection_non-logged-in-users-description',
 		'tier_pricing_table__subsection_rank_math-description',
 		'tier_pricing_table__subsection_yoast-seo-description',
+		'tier_pricing_table__subsection_seopress-description',
 	);
 	
 	public function __construct() {
