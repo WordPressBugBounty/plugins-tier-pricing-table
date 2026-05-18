@@ -52,7 +52,11 @@ abstract class PluginIntegrationAbstract {
 	}
 	
 	public function isEnabled(): bool {
-		return $this->getContainer()->getSettings()->get( '_integration_' . $this->getSlug(), 'yes' ) === 'yes';
+		
+		$isEnabledByDefault = $this->isActiveByDefault() ? 'yes' : 'no';
+		
+		return $this->getContainer()->getSettings()->get( '_integration_' . $this->getSlug(),
+				$isEnabledByDefault ) === 'yes';
 	}
 	
 	protected function isActiveByDefault(): bool {

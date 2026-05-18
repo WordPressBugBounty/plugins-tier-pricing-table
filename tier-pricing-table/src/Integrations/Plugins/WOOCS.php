@@ -73,7 +73,4 @@ class WOOCS extends PluginIntegrationAbstract {
 		return 'multicurrency';
 	}
 	
-	protected function isActiveByDefault(): bool {
-		return false;
-	}
 }

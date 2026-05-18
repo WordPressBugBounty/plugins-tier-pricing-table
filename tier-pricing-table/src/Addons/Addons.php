@@ -14,6 +14,7 @@ use TierPricingTable\Addons\ProductCatalogLoop\ProductCatalogLoop;
 use TierPricingTable\Addons\ReactProductEditorAddon\ReactProductEditorAddon;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingAddon;
 use TierPricingTable\Addons\TierLabels\TierLabelsAddon;
+use TierPricingTable\Addons\Tools\ToolsAddon;
 use TierPricingTable\Core\ServiceContainerTrait;
 class Addons {
     use ServiceContainerTrait;
@@ -37,6 +38,7 @@ class Addons {
             ProductCatalogLoop::class           => new ProductCatalogLoop(),
             ReactProductEditorAddon::class      => new ReactProductEditorAddon(),
             TierLabelsAddon::class              => new TierLabelsAddon(),
+            ToolsAddon::class                   => new ToolsAddon(),
         );
         $addons = apply_filters( 'tiered_pricing_table/addons/list', $addons );
         foreach ( $addons as $addon ) {

@@ -179,7 +179,7 @@ class GlobalTieredPricingCPT {
 
     public function renderBlankState( $which ) {
         global $post_type;
-        if ( self::SLUG === $post_type && 'bottom' === $which ) {
+        if ( self::SLUG === $post_type && 'top' === $which ) {
             $counts = (array) wp_count_posts( $post_type );
             unset($counts['auto-draft']);
             $count = array_sum( $counts );
@@ -189,8 +189,9 @@ class GlobalTieredPricingCPT {
             ?>
 
 			<div class="woocommerce-BlankState" style="padding: 0;  ">
+
 				<img width="250px" style="filter: drop-shadow(1px 10px 10px #ccc);"
-					 src="<?php 
+				     src="<?php 
             echo esc_attr( $this->getContainer()->getFileManager()->locateAsset( 'admin/pricing-logo.png' ) );
             ?>">
 				<h2 class="woocommerce-BlankState-message">
@@ -205,19 +206,21 @@ class GlobalTieredPricingCPT {
             echo esc_url( admin_url( 'post-new.php?post_type=' . self::SLUG ) );
             ?>">
 						<?php 
-            esc_html_e( 'Create pricing rule', 'tier-pricing-table
-' );
+            esc_html_e( 'Create pricing rule', 'tier-pricing-table' );
             ?>
 					</a>
 				</div>
 			</div>
 
-			<style
-					type="text/css">#posts-filter .wp-list-table, #posts-filter .tablenav.top, .tablenav.bottom .actions, .wrap .subsubsub {
+			<style>
+				#posts-filter .wp-list-table,
+				#posts-filter .tablenav.bottom,
+				.tablenav.top .actions,
+				.wrap .subsubsub {
 					display: none;
 				}
 
-				#posts-filter .tablenav.bottom {
+				#posts-filter .tablenav.top {
 					height: auto;
 				}
 			</style>

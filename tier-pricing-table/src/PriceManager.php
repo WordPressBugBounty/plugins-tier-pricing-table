@@ -68,7 +68,7 @@ class PriceManager {
                 if ( $pricingRule->isPercentage() ) {
                     $product = wc_get_product( $productId );
                     if ( $product ) {
-                        $productPrice = self::getProductPriceWithPercentageDiscount( $product, $price );
+                        $productPrice = self::getProductPriceWithPercentageDiscount( $product, $price, $context );
                     }
                 } else {
                     $productPrice = $price;
@@ -135,9 +135,9 @@ class PriceManager {
         return false;
     }
 
-    public static function getProductPriceWithPercentageDiscount( WC_Product $product, $discount ) {
+    public static function getProductPriceWithPercentageDiscount( WC_Product $product, $discount, $context = 'view' ) {
         $discount = floatval( $discount );
-        $productPrice = ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price() );
+        $productPrice = ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price( $context ) : $product->get_price( $context ) );
         return self::getPriceByPercentDiscount( $productPrice, $discount );
     }
 

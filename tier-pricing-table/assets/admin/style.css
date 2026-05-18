@@ -583,11 +583,10 @@ input[type="checkbox"].tpt-toggle-switch:checked + label > [data-tpt-toggle-swit
 }
 
 .tpt-role-based-adding-form {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 	margin: 15px 0;
-}
-
-.tpt-role-based-adding-form__add-button {
-	margin-left: 10px !important;
 }
 
 .tpt-role-based-role:last-child .tpt-role-based-role__header {
