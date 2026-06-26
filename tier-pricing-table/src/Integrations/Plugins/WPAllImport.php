@@ -881,13 +881,11 @@ class WPAllImport extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'WP All Import', 'tier-pricing-table' );
+		return 'WP All Import';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Integration allows you to import tiered pricing data (including role-based rules) via the plugin WP All Import.',
-			'tier-pricing-table' );
-		
+		return __( 'Import and update tiered pricing rules using WP All Import.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

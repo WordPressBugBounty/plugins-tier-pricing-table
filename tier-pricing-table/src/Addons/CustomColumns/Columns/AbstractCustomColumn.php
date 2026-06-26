@@ -47,7 +47,7 @@ abstract class AbstractCustomColumn {
         return $this->data;
     }
 
-    public function getSlug( string $prefix = null ) : string {
+    public function getSlug( ?string $prefix = null ) : string {
         // Prefix is used to store custom field for percentage and fixed type
         return ( $prefix ? $prefix . '_' . $this->slug : $this->slug );
     }

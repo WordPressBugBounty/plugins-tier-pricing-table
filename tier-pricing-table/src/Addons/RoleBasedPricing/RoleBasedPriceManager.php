@@ -38,6 +38,9 @@ class RoleBasedPriceManager {
 		
 		delete_post_meta( $productId, "_{$role}_tiered_price_minimum_qty" );
 		
+		delete_post_meta( $productId, "_{$role}_tiered_price_tax_status" );
+		delete_post_meta( $productId, "_{$role}_tiered_price_tax_class" );
+		
 		do_action( 'tiered_pricing_table/role_based_rules/delete_role_rule', $productId, $role );
 	}
 	
@@ -60,7 +63,7 @@ class RoleBasedPriceManager {
 	}
 	
 	/**
-	 * Return empty array if rules do not exist.
+	 * Return an empty array if rules do not exist.
 	 */
 	public static function getPercentagePriceRules( int $productId, string $role, string $context = 'view' ): array {
 		return self::getPriceRules( $productId, $role, 'percentage', $context );
@@ -189,5 +192,25 @@ class RoleBasedPriceManager {
 		}
 		
 		return $pricingType;
+	}
+	
+	public static function getProductTaxStatus( int $productId, string $role, string $context = 'view' ): string {
+		$taxStatus = get_post_meta( $productId, "_{$role}_tiered_price_tax_status", true );
+		
+		if ( 'edit' !== $context ) {
+			return apply_filters( 'tiered_pricing_table/role_based_rules/price/tax_status', $taxStatus, $role, $productId );
+		}
+		
+		return $taxStatus;
+	}
+	
+	public static function getProductTaxClass( int $productId, string $role, string $context = 'view' ): string {
+		$taxClass = get_post_meta( $productId, "_{$role}_tiered_price_tax_class", true );
+		
+		if ( 'edit' !== $context ) {
+			return apply_filters( 'tiered_pricing_table/role_based_rules/price/tax_class', $taxClass, $role, $productId );
+		}
+		
+		return $taxClass;
 	}
 }

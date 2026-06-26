@@ -6,11 +6,11 @@ use TierPricingTable\Integrations\Plugins\PluginIntegrationAbstract;
 class ElementorIntegration extends PluginIntegrationAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Elementor', 'tier-pricing-table' );
+		return 'Elementor';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Provides the tiered pricing widget with a bunch of settings, such as: display type, active tier color, etc.',
+		return __( 'Add a dedicated Elementor widget to display the tiered pricing table with customizable design options.',
 			'tier-pricing-table' );
 	}
 	

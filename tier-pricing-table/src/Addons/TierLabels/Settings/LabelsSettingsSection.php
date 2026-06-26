@@ -5,7 +5,7 @@ use TierPricingTable\Settings\Sections\SectionAbstract;
 class LabelsSettingsSection extends SectionAbstract {
 	
 	public function getName(): string {
-		return __( 'Tier Labels', 'tier-pricing-table' );
+		return __( 'Badges & Labels', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

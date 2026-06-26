@@ -50,6 +50,9 @@ class PricingService {
 		$pricingRule->pricingData['discount']      = $roleBasedRule->getDiscount();
 		$pricingRule->pricingData['discount_type'] = $roleBasedRule->getDiscountType();
 		
+		$pricingRule->pricingData['tax_status'] = $roleBasedRule->getTaxStatus();
+		$pricingRule->pricingData['tax_class']  = $roleBasedRule->getTaxClass();
+		
 		$pricingRule->provider             = 'role-based';
 		$pricingRule->providerData['role'] = $roleBasedRule->getRole();
 		

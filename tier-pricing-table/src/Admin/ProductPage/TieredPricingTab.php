@@ -101,7 +101,7 @@ class TieredPricingTab {
 					<h4>
 						<span class="dashicons dashicons-admin-settings"></span>
 						<?php 
-        esc_html_e( 'Additional options', 'tier-pricing-table' );
+        esc_html_e( 'Additional Options', 'tier-pricing-table' );
         ?>
 					</h4>
 					<div>
@@ -121,8 +121,8 @@ class TieredPricingTab {
             'id'          => '_tiered_pricing_template',
             'value'       => self::getProductTemplate( $post->ID ),
             'options'     => $availableTemplates,
-            'label'       => __( 'Display as (layout)', 'tier-pricing-table' ),
-            'description' => __( 'Specify the layout of the tiered pricing for the product. Leave the default to use global settings.', 'tier-pricing-table' ),
+            'label'       => __( 'Pricing layout', 'tier-pricing-table' ),
+            'description' => __( 'Override the global layout for this specific product.', 'tier-pricing-table' ),
             'default'     => 'default',
             'desc_tip'    => true,
         ) );
@@ -160,9 +160,13 @@ class TieredPricingTab {
 							   name="_tiered_pricing_base_unit_name[plural]">
 					</p>
 
-					<div style="padding: 0 20px 10px 162px; margin-bottom: 10px">
+					<div style="    padding: 0 20px 0px 162px;
+    margin-bottom: 10px;
+    color: #666;
+    margin-top: -10px;
+    font-size: 12px;">
 						<?php 
-        esc_html_e( 'For example: pieces, boxes, bottles, packs, etc. It will be shown next to quantities. Leave empty to use global settings.', 'tier-pricing-table' );
+        esc_html_e( 'Displayed next to quantities. Leave empty to inherit global settings.', 'tier-pricing-table' );
         ?>
 					</div>
 					

@@ -65,6 +65,20 @@ class GlobalPricingRule {
     public $applyingType;
 
     /**
+     * Tax status
+     *
+     * @var string
+     */
+    public $taxStatus = '';
+
+    /**
+     * Tax class
+     *
+     * @var string
+     */
+    public $taxClass = '';
+
+    /**
      * Tiered Pricing type
      *
      * @var string
@@ -98,6 +112,34 @@ class GlobalPricingRule {
      * @var array
      */
     public $excludedProductCategories = array();
+
+    /**
+     * Included tags
+     *
+     * @var array
+     */
+    public $includedProductTags = array();
+
+    /**
+     * Excluded tags
+     *
+     * @var array
+     */
+    public $excludedProductTags = array();
+
+    /**
+     * Included brands
+     *
+     * @var array
+     */
+    public $includedProductBrands = array();
+
+    /**
+     * Excluded brands
+     *
+     * @var array
+     */
+    public $excludedProductBrands = array();
 
     /**
      * Included products
@@ -225,6 +267,22 @@ class GlobalPricingRule {
         return $this->getFixedTieredPricingRules();
     }
 
+    public function getTaxStatus() : string {
+        return $this->taxStatus;
+    }
+
+    public function setTaxStatus( string $taxStatus ) {
+        $this->taxStatus = $taxStatus;
+    }
+
+    public function getTaxClass() : string {
+        return $this->taxClass;
+    }
+
+    public function setTaxClass( string $taxClass ) {
+        $this->taxClass = $taxClass;
+    }
+
     public function getRegularPrice() : ?float {
         return $this->regularPrice;
     }
@@ -262,7 +320,11 @@ class GlobalPricingRule {
         $discount = $data['discount'] ?? null;
         $discountType = $data['discount_type'] ?? 'sale_price';
         $minimum = $data['minimum'] ?? null;
+        $taxStatus = $data['tax_status'] ?? '';
+        $taxClass = $data['tax_class'] ?? '';
         $self = new self();
+        $self->setTaxStatus( $taxStatus );
+        $self->setTaxClass( $taxClass );
         $self->setPricingType( (string) $pricingType );
         $self->setRegularPrice( ( Form::isEmpty( $regularPrice ) ? null : (float) $regularPrice ) );
         $self->setSalePrice( ( Form::isEmpty( $salePrice ) ? null : (float) $salePrice ) );
@@ -325,6 +387,38 @@ class GlobalPricingRule {
 
     public function setExcludedProductCategories( array $excludedProductCategories ) {
         $this->excludedProductCategories = $excludedProductCategories;
+    }
+
+    public function getIncludedProductTags() : array {
+        return $this->includedProductTags;
+    }
+
+    public function getExcludedProductTags() : array {
+        return $this->excludedProductTags;
+    }
+
+    public function setIncludedProductTags( array $includedProductTags ) {
+        $this->includedProductTags = $includedProductTags;
+    }
+
+    public function setExcludedProductTags( array $excludedProductTags ) {
+        $this->excludedProductTags = $excludedProductTags;
+    }
+
+    public function getIncludedProductBrands() : array {
+        return $this->includedProductBrands;
+    }
+
+    public function getExcludedProductBrands() : array {
+        return $this->excludedProductBrands;
+    }
+
+    public function setIncludedProductBrands( array $includedProductBrands ) {
+        $this->includedProductBrands = $includedProductBrands;
+    }
+
+    public function setExcludedProductBrands( array $excludedProductBrands ) {
+        $this->excludedProductBrands = $excludedProductBrands;
     }
 
     public function getIncludedProducts() : array {
@@ -394,11 +488,17 @@ class GlobalPricingRule {
             'percentage_rules'    => $this->getPercentageTieredPricingRules(),
             'fixed_rules'         => $this->getFixedTieredPricingRules(),
             'minimum'             => $this->getMinimum(),
+            'tax_status'          => $this->getTaxStatus(),
+            'tax_class'           => $this->getTaxClass(),
             'included_categories' => $this->getIncludedProductCategories(),
+            'included_tags'       => $this->getIncludedProductTags(),
+            'included_brands'     => $this->getIncludedProductBrands(),
             'included_products'   => $this->getIncludedProducts(),
             'included_users'      => $this->getIncludedUsers(),
             'included_users_role' => $this->getIncludedUserRoles(),
             'excluded_categories' => $this->getExcludedProductCategories(),
+            'excluded_tags'       => $this->getExcludedProductTags(),
+            'excluded_brands'     => $this->getExcludedProductBrands(),
             'excluded_products'   => $this->getExcludedProducts(),
             'excluded_users'      => $this->getExcludedUsers(),
             'excluded_users_role' => $this->getExcludedUserRoles(),
@@ -419,11 +519,17 @@ class GlobalPricingRule {
             '_tpt_percentage_rules'    => $this->getPercentageTieredPricingRules(),
             '_tpt_fixed_rules'         => $this->getFixedTieredPricingRules(),
             '_tpt_minimum'             => $this->getMinimum(),
+            '_tpt_tax_status'          => $this->getTaxStatus(),
+            '_tpt_tax_class'           => $this->getTaxClass(),
             '_tpt_included_categories' => $this->getIncludedProductCategories(),
+            '_tpt_included_tags'       => $this->getIncludedProductTags(),
+            '_tpt_included_brands'     => $this->getIncludedProductBrands(),
             '_tpt_included_products'   => $this->getIncludedProducts(),
             '_tpt_included_users'      => $this->getIncludedUsers(),
             '_tpt_included_user_roles' => $this->getIncludedUserRoles(),
             '_tpt_excluded_categories' => $this->getExcludedProductCategories(),
+            '_tpt_excluded_tags'       => $this->getExcludedProductTags(),
+            '_tpt_excluded_brands'     => $this->getExcludedProductBrands(),
             '_tpt_excluded_products'   => $this->getExcludedProducts(),
             '_tpt_excluded_users'      => $this->getExcludedUsers(),
             '_tpt_excluded_user_roles' => $this->getExcludedUserRoles(),
@@ -445,6 +551,8 @@ class GlobalPricingRule {
             '_tpt_applying_type'       => 'applying_type',
             '_tpt_tiered_pricing_type' => 'tiered_pricing_type',
             '_tpt_minimum'             => 'minimum',
+            '_tpt_tax_status'          => 'tax_status',
+            '_tpt_tax_class'           => 'tax_class',
             '_tpt_is_suspended'        => 'is_suspended',
         );
         $data = array();
@@ -454,12 +562,16 @@ class GlobalPricingRule {
         $priceRule = self::fromArray( $data );
         $existingRoles = wp_roles()->roles;
         $includedCategoriesIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_categories', true ) ) );
+        $includedTagsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_tags', true ) ) );
+        $includedBrandsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_brands', true ) ) );
         $includedProductsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_products', true ) ) );
         $includedUsersRole = array_filter( (array) get_post_meta( $ruleId, '_tpt_included_user_roles', true ), function ( $role ) use($existingRoles) {
             return array_key_exists( $role, $existingRoles );
         } );
         $includedUsers = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_users', true ) ) );
         $excludedCategoriesIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_categories', true ) ) );
+        $excludedTagsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_tags', true ) ) );
+        $excludedBrandsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_brands', true ) ) );
         $excludedProductsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_products', true ) ) );
         $excludedUsersRole = array_filter( (array) get_post_meta( $ruleId, '_tpt_excluded_user_roles', true ), function ( $role ) use($existingRoles) {
             return array_key_exists( $role, $existingRoles );
@@ -469,10 +581,14 @@ class GlobalPricingRule {
         $priceRule->setPercentageTieredPricingRules( self::readPricingRules( 'percentage', $ruleId ) );
         $priceRule->setFixedTieredPricingRules( self::readPricingRules( 'fixed', $ruleId ) );
         $priceRule->setIncludedProductCategories( $includedCategoriesIds );
+        $priceRule->setIncludedProductTags( $includedTagsIds );
+        $priceRule->setIncludedProductBrands( $includedBrandsIds );
         $priceRule->setIncludedUsers( $includedUsers );
         $priceRule->setIncludedUsersRole( $includedUsersRole );
         $priceRule->setIncludedProducts( $includedProductsIds );
         $priceRule->setExcludedProductCategories( $excludedCategoriesIds );
+        $priceRule->setExcludedProductTags( $excludedTagsIds );
+        $priceRule->setExcludedProductBrands( $excludedBrandsIds );
         $priceRule->setExcludedUsers( $excludedUsers );
         $priceRule->setExcludedUsersRole( $excludedUsersRole );
         $priceRule->setExcludedProducts( $excludedProductsIds );
@@ -530,7 +646,7 @@ class GlobalPricingRule {
         /**
          * 1. Check for product exclusion
          *
-         * If product in exclusion - pricing rule does not match immediately
+         * If the product in exclusion - pricing rule does not match immediately
          */
         if ( !empty( $this->getExcludedProducts() ) ) {
             if ( in_array( $product->get_id(), $this->getExcludedProducts() ) || in_array( $parentProduct->get_id(), $this->getExcludedProducts() ) ) {
@@ -539,6 +655,22 @@ class GlobalPricingRule {
         }
         if ( !empty( $this->getExcludedProductCategories() ) ) {
             if ( !empty( array_intersect( $parentProduct->get_category_ids(), $this->getExcludedProductCategories() ) ) ) {
+                return false;
+            }
+        }
+        if ( !empty( $this->getExcludedProductTags() ) ) {
+            if ( !empty( array_intersect( $parentProduct->get_tag_ids(), $this->getExcludedProductTags() ) ) ) {
+                return false;
+            }
+        }
+        if ( !empty( $this->getExcludedProductBrands() ) ) {
+            $productBrands = wp_get_post_terms( $parentProduct->get_id(), 'product_brand', array(
+                'fields' => 'ids',
+            ) );
+            if ( is_wp_error( $productBrands ) ) {
+                $productBrands = [];
+            }
+            if ( !empty( array_intersect( $productBrands, $this->getExcludedProductBrands() ) ) ) {
                 return false;
             }
         }
@@ -571,6 +703,24 @@ class GlobalPricingRule {
         if ( !empty( $this->getIncludedProductCategories() ) ) {
             $productLimitations = true;
             if ( !empty( array_intersect( $parentProduct->get_category_ids(), $this->getIncludedProductCategories() ) ) ) {
+                $productMatched = true;
+            }
+        }
+        if ( !empty( $this->getIncludedProductTags() ) ) {
+            $productLimitations = true;
+            if ( !empty( array_intersect( $parentProduct->get_tag_ids(), $this->getIncludedProductTags() ) ) ) {
+                $productMatched = true;
+            }
+        }
+        if ( !empty( $this->getIncludedProductBrands() ) ) {
+            $productLimitations = true;
+            $productBrands = wp_get_post_terms( $parentProduct->get_id(), 'product_brand', array(
+                'fields' => 'ids',
+            ) );
+            if ( is_wp_error( $productBrands ) ) {
+                $productBrands = [];
+            }
+            if ( !empty( array_intersect( $productBrands, $this->getIncludedProductBrands() ) ) ) {
                 $productMatched = true;
             }
         }

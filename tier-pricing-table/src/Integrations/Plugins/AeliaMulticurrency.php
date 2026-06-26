@@ -31,7 +31,7 @@ class AeliaMulticurrency extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Aelia Multicurrency', 'tier-pricing-table' );
+		return 'Aelia Multicurrency';
 	}
 	
 	public function getAuthorURL(): string {
@@ -43,7 +43,7 @@ class AeliaMulticurrency extends PluginIntegrationAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make the tiered pricing properly work with multiple currencies.', 'tier-pricing-table' );
+		return __( 'Convert and display tiered pricing correctly when using the Aelia Currency Switcher.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

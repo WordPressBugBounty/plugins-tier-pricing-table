@@ -38,7 +38,7 @@ class DiscountRulesForWooCommerce extends PluginIntegrationAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Do not recalculate price for free items in the cart', 'tier-pricing-table' );
+		return __( 'Prevent price recalculations for free promotional items added to the cart by Discount Rules for WooCommerce.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

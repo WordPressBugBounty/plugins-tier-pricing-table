@@ -81,7 +81,7 @@ if ( ! defined( 'WPINC' ) ) {
 			max="100"
 			step="any"
 			value="<?php echo esc_attr( $discount ); ?>"
-			placeholder="<?php esc_attr_e( 'Leave empty to don\'t apply any', 'tier-pricing-table' ); ?>"
+			placeholder="<?php esc_attr_e( 'Leave blank to not apply any', 'tier-pricing-table' ); ?>"
 			id="<?php echo esc_attr( Form::getFieldName( 'discount', $role, $loop ) ); ?>"
 			name="<?php echo esc_attr( Form::getFieldName( 'discount', $role, $loop ) ); ?>">
 	</p>
@@ -134,7 +134,7 @@ if ( ! defined( 'WPINC' ) ) {
 		<input <?php echo ! tpt_fs()->can_use_premium_code() ? 'disabled' : ''; ?>
 			type="text"
 			value="<?php echo esc_attr( wc_format_localized_price( $regular_price ) ); ?>"
-			placeholder="<?php esc_attr_e( 'Leave empty to don\'t change it', 'tier-pricing-table' ); ?>"
+			placeholder="<?php esc_attr_e( 'Leave blank to keep unchanged', 'tier-pricing-table' ); ?>"
 			class="wc_input_price"
 			name="<?php echo esc_attr( Form::getFieldName( 'regular_price', $role, $loop ) ); ?>"
 			id="<?php echo esc_attr( Form::getFieldName( 'regular_price', $role, $loop ) ); ?>">
@@ -152,7 +152,7 @@ if ( ! defined( 'WPINC' ) ) {
 		<input <?php echo ! tpt_fs()->can_use_premium_code() ? 'disabled' : ''; ?>
 			type="text"
 			value="<?php echo esc_attr( wc_format_localized_price( $sale_price ) ); ?>"
-			placeholder="<?php esc_attr_e( 'Leave empty to don\'t change it', 'tier-pricing-table' ); ?>"
+			placeholder="<?php esc_attr_e( 'Leave blank to keep unchanged', 'tier-pricing-table' ); ?>"
 			class="wc_input_price"
 			id="<?php echo esc_attr( Form::getFieldName( 'sale_price', $role, $loop ) ); ?>"
 			name="<?php echo esc_attr( Form::getFieldName( 'sale_price', $role, $loop ) ); ?>">

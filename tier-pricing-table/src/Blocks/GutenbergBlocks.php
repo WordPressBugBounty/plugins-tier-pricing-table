@@ -12,7 +12,7 @@ class GutenbergBlocks {
 
 				$attributes = wp_parse_args( $attributes, array(
 					'displayType'         => 'table',
-					'activeTierColor'     => '#96598A',
+					'activeTierColor'     => '#3858e9',
 					'title'               => '',
 					'showDiscountColumn'  => true,
 					'quantityColumnTitle' => '',

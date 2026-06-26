@@ -45,24 +45,22 @@ class TPTIntegrationOption {
 		}
 		
 		$option_value = $value['value'];
-		
 		?>
-
-		<tr class="tpt-integration-item" style="display: flex; width: 50%; min-width: 400px;">
+		<tr class="tpt-integration-item">
 			<td>
-				<div style="display: flex; gap: 20px;">
-					<div class="tpt-integration-item__image" style="width:100px;">
-						<img src="<?php echo esc_attr( $value['icon_url'] ); ?>" width="100px" height="100px"
-							 alt="<?php echo esc_html( $value['title'] ); ?>">
+				<div class="tpt-integration-wrapper">
+					<div class="tpt-integration-item__image">
+						<img src="<?php echo esc_attr( $value['icon_url'] ); ?>"
+							 alt="<?php echo esc_attr( $value['title'] ); ?>">
 					</div>
 					<div class="tpt-integration-item__description">
 						
 						<?php if ( $value['author_url'] ) : ?>
 							<a target="_blank" href="<?php echo esc_attr( $value['author_url'] ); ?>">
-								<h4 style="margin-top: 0; margin-bottom: 10px"><?php echo esc_html( $value['title'] ); ?></h4>
+								<h4><?php echo esc_html( $value['title'] ); ?></h4>
 							</a>
 						<?php else : ?>
-							<h4 style="margin-top: 0; margin-bottom: 10px"><?php echo esc_html( $value['title'] ); ?></h4>
+							<h4><?php echo esc_html( $value['title'] ); ?></h4>
 						<?php endif; ?>
 
 						<p class="description">
@@ -70,7 +68,7 @@ class TPTIntegrationOption {
 								echo wp_kses_post( $value['desc'] ); // audit.php.wp.security.xss.shortcode-attr ignore
 							?>
 						</p>
-						<div class="tpt-integration-item-checkbox" style="margin-top: 10px">
+						<div class="tpt-integration-item-checkbox">
 							<input
 									name="<?php echo esc_attr( $value['id'] ); ?>"
 									id="<?php echo esc_attr( $value['id'] ); ?>"

@@ -21,6 +21,8 @@ class PricingRule {
 		'sale_price'    => null,
 		'discount'      => null,
 		'pricing_type'  => null, // fixed or percentage
+		'tax_status'    => null,
+		'tax_class'     => null,
 	);
 	
 	public function __construct( $productId ) {

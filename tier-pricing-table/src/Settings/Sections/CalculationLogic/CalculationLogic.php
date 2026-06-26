@@ -12,14 +12,14 @@ class CalculationLogic extends SectionAbstract {
 		$advanced = apply_filters( 'tiered_pricing_table/settings/calculation_logic', $this->getMainSettings() );
 
 		$sectionTitle = array(
-			'title' => __( 'Calculation logic', 'tier-pricing-table' ),
-			'desc'  => __( 'This section controls how tiered pricing does calculations.', 'tier-pricing-table' ),
-			'id'    => Settings::SETTINGS_PREFIX . 'calculation_logic',
-			'type'  => 'title',
+				'title' => __( 'Calculations', 'tier-pricing-table' ),
+				'desc'  => __( 'This section controls how tiered pricing does calculations.', 'tier-pricing-table' ),
+				'id'    => Settings::SETTINGS_PREFIX . 'calculation_logic',
+				'type'  => 'title',
 		);
 
 		$sectionEnd = array(
-			'type' => 'sectionend',
+				'type' => 'sectionend',
 		);
 
 		$settings[] = $sectionTitle;
@@ -31,32 +31,33 @@ class CalculationLogic extends SectionAbstract {
 
 	public function getMainSettings(): array {
 		return array(
-			array(
-				'title'                => __( 'Consider product variations as one product', 'tier-pricing-table' ),
-				'id'                   => Settings::SETTINGS_PREFIX . 'summarize_variations',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'default'              => 'no',
-				'extended_description' => __( 'For the same variable product, the plugin will consider all its variations as the same product when calculating tiered pricing.',
-					'tier-pricing-table' ),
-				'desc_tip'             => true,
-			),
-			array(
-				'title'                => __( 'Always use regular price to calculate percentage discounts',
-					'tier-pricing-table' ),
-				'id'                   => Settings::SETTINGS_PREFIX . 'calculate_discount_based_on_regular_price',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'extended_description' => $this->getCalculateDiscountDescription(),
-				'default'              => 'no',
-			),
-			array(
-				'title'                => __( 'Round price', 'tier-pricing-table' ),
-				'id'                   => Settings::SETTINGS_PREFIX . 'round_price',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'default'              => 'yes',
-				'extended_description' => __( 'WooCommerce rounds prices when showing them to users. To avoid possible rounding errors with displaying and calculation, the plugin rounds prices when calculating percentage discounts.',
-					'tier-pricing-table' ),
-				'desc_tip'             => true,
-			),
+				array(
+						'title'                => __( 'Combine variations for quantity calculation',
+								'tier-pricing-table' ),
+						'id'                   => Settings::SETTINGS_PREFIX . 'summarize_variations',
+						'type'                 => TPTSwitchOption::FIELD_TYPE,
+						'default'              => 'no',
+						'extended_description' => __( 'Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules.',
+								'tier-pricing-table' ),
+						'desc_tip'             => true,
+				),
+				array(
+						'title'                => __( 'Calculate percentage discounts from regular price',
+								'tier-pricing-table' ),
+						'id'                   => Settings::SETTINGS_PREFIX . 'calculate_discount_based_on_regular_price',
+						'type'                 => TPTSwitchOption::FIELD_TYPE,
+						'extended_description' => $this->getCalculateDiscountDescription(),
+						'default'              => 'no',
+				),
+				array(
+						'title'                => __( 'Round calculated prices', 'tier-pricing-table' ),
+						'id'                   => Settings::SETTINGS_PREFIX . 'round_price',
+						'type'                 => TPTSwitchOption::FIELD_TYPE,
+						'default'              => 'yes',
+						'extended_description' => __( 'Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing.',
+								'tier-pricing-table' ),
+						'desc_tip'             => true,
+				),
 		);
 	}
 
@@ -65,37 +66,24 @@ class CalculationLogic extends SectionAbstract {
 		?>
 		<p>
 			<?php
-			esc_html_e( 'If enabled, the plugin will always use the regular price to calculate percentage discounts. By default, the plugin uses the sale price if it exists.',
-				'tier-pricing-table' );
+				esc_html_e( 'Calculate percentage discounts using the product\'s regular price, ignoring any active sale prices.',
+						'tier-pricing-table' );
 			?>
 		</p>
-		<br>
 		<p>
 			<?php
-			esc_html_e( 'For example: if the regular product price is $100.00, the sale price is $90.00, and there is a tiered
-			pricing rule', 'tier-pricing-table' );
+				esc_html_e( 'Example: Regular price is $100.00, sale price is $90.00. Rule: 20% off.',
+						'tier-pricing-table' );
 			?>
 			<br>
-			<b>
-				<?php esc_html_e( '20 pieces → 20% off', 'tier-pricing-table' ); ?>:
-			</b>
-			<br>
-			<?php 
-			esc_html_e( 'When the option is disabled, 20% will be calculated based on the sale price, in this case — ',
-				'tier-pricing-table' ); 
+			<?php
+				esc_html_e( 'Disabled (Default): Discount applies to the sale price ($90.00 - 20% = $72.00).',
+						'tier-pricing-table' );
 			?>
-			<b>$90.00 - 20% = $72.00</b>.
 			<br>
-			<?php 
-			esc_html_e( 'When the option is enabled, 20% will be calculated based on the regular price, in this case — ',
-				'tier-pricing-table' ); 
-			?>
-			<b>$100.00 - 20% = $80.00</b>.
-			<br>
-			<br>
-			<?php 
-			esc_html_e( 'This option is also affecting discount calculation in role-based and global pricing rules.',
-				'tier-pricing-table' ); 
+			<?php
+				esc_html_e( 'Enabled: Discount applies to the regular price ($100.00 - 20% = $80.00).',
+						'tier-pricing-table' );
 			?>
 		</p>
 		<?php
@@ -108,27 +96,27 @@ class CalculationLogic extends SectionAbstract {
 	}
 
 	public function getName(): string {
-		return __( 'Calculation Logic', 'tier-pricing-table' );
+		return __( 'Calculations', 'tier-pricing-table' );
 	}
 
 	protected function getGlobalPricingRulesOptions(): array {
 		return array(
-			array(
-				'title' => __( 'Global pricing rules', 'tier-pricing-table' ),
-				'desc'  => __( 'How global pricing rules behave.', 'tier-pricing-table' ),
-				'type'  => 'title',
-			),
-			array(
-				'title'                => __( 'Override product level rules', 'tier-pricing-table' ),
-				'id'                   => Settings::SETTINGS_PREFIX . 'override_prices_by_global_rules',
-				'extended_description' => __( 'Make global rule override product level and role-based rules. When this option is disabled, product level rules will have a higher priority.',
-					'tier-pricing-table' ),
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'default'              => 'no',
-			),
-			array(
-				'type' => 'sectionend',
-			),
+				array(
+						'title' => __( 'Global pricing rules', 'tier-pricing-table' ),
+						'desc'  => __( 'How global pricing rules behave.', 'tier-pricing-table' ),
+						'type'  => 'title',
+				),
+				array(
+						'title'                => __( 'Prioritize global pricing rules', 'tier-pricing-table' ),
+						'id'                   => Settings::SETTINGS_PREFIX . 'override_prices_by_global_rules',
+						'extended_description' => __( 'Apply global pricing rules before product-level rules. If disabled, individual product rules take precedence over global rules.',
+								'tier-pricing-table' ),
+						'type'                 => TPTSwitchOption::FIELD_TYPE,
+						'default'              => 'no',
+				),
+				array(
+						'type' => 'sectionend',
+				),
 		);
 	}
 

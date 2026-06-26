@@ -153,6 +153,16 @@ class PricingTable {
 				$templateType = 'table';
 			}
 
+			if ( 'table' === $displayType ) {
+				$style = $settings['table_style'];
+
+				if ( $style !== 'default' ) {
+					$templateType = 'table-' . $style;
+				} else {
+					$templateType = 'table';
+				}
+			}
+
 			if ( 'blocks' === $displayType ) {
 				$style = $settings['blocks_style'];
 
@@ -213,12 +223,14 @@ class PricingTable {
 				'clickable_rows'        => $this->getContainer()->getSettings()->get( 'clickable_table_rows',
 								'yes' ) === 'yes',
 				'active_tier_color'     => $this->getContainer()->getSettings()->get( 'selected_quantity_color',
-						'#96598A' ),
+						'#3858e9' ),
 				'tooltip_border'        => $this->getContainer()->getSettings()->get( 'tooltip_border',
 								'yes' ) === 'yes',
 
+				'table_style'   => GeneralSection::getPricingTableStyle(),
+				'slim_design'   => $this->getContainer()->getSettings()->get( 'slim_design', 'no' ),
 				'blocks_style'  => GeneralSection::getPricingBlocksStyle(),
-				'options_style' => GeneralSection::getPricingOptionsStyle(),
+				'options_style'             => GeneralSection::getPricingOptionsStyle(),
 
 				'options_show_total'                  => GeneralSection::isShowOptionTotal(),
 				'options_show_original_product_price' => GeneralSection::isShowOriginalProductPrice(),
@@ -364,23 +376,20 @@ class PricingTable {
 
 			<div style="font-size: .8em;">
 				<div class="woocommerce-error" role="alert" style="margin-bottom: 0">
-					Duplicated quantities detected. Minimum order quantity is equal or higher than the first tiered
-					pricing.
+					<?php esc_html_e( 'Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier.', 'tier-pricing-table' ); ?>
 				</div>
 				<div style="color: #555;
 	padding: 10px 12px;
 	border: 1px solid #b32c2e;
 	background: #fff5f5;">
-					<p style="padding: 0; margin: 0">
-						The minimum order quantity must be less than the first tiered pricing rule quantity.
+					<p style="padding: 0; margin: 0 0 10px 0;">
+						<?php esc_html_e( 'To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity.', 'tier-pricing-table' ); ?>
 					</p>
-					<p style="padding: 0; margin: 0"> The first tier always uses woocommerce price and is applied to
-						quantities between minimum order
-						quantity and
-						the first tiered pricing rule quantity.
+					<p style="padding: 0; margin: 0">
+						<strong><?php esc_html_e( 'Why?', 'tier-pricing-table' ); ?></strong> <?php esc_html_e( 'The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier.', 'tier-pricing-table' ); ?>
 					</p>
 					<br>
-					<b>This notice shown only for administrators.</b>
+					<b><?php esc_html_e( 'This notice is only visible to store administrators.', 'tier-pricing-table' ); ?></b>
 				</div>
 			</div>
 			<?php

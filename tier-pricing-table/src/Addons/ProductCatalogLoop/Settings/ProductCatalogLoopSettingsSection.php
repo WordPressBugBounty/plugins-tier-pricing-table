@@ -19,7 +19,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	}
 	
 	public function getName(): string {
-		return __( 'Product Catalog', 'tier-pricing-table' );
+		return __( 'Catalog Display', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -34,12 +34,12 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 		return array(
 			array(
 				'title' => __( 'Tiered Pricing on the shop page', 'tier-pricing-table' ),
-				'desc'  => __( 'This section controls how tiered pricing works for product catalog.',
+				'desc'  => __( 'Control how tiered pricing appears on shop and category pages.',
 					'tier-pricing-table' ),
 				'type'  => 'title',
 			),
 			array(
-				'title'                => __( 'Enabled', 'tier-pricing-table' ),
+				'title'                => __( 'Enable on catalog pages', 'tier-pricing-table' ),
 				'id'                   => self::getOptionID( 'enabled' ),
 				'type'                 => TPTSwitchOption::FIELD_TYPE,
 				'default'              => 'no',
@@ -48,24 +48,23 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					?>
 					<p>
 						<?php
-							esc_html_e( 'Enable this option to show tiered pricing in the products catalog.',
+							esc_html_e( 'Turn this on to display tiered pricing directly within your product catalog.',
 								'tier-pricing-table' );
 						?>
-						<br>
-						<br>
+					</p>
+					<p>
 						<b><?php esc_html_e( 'Note:', 'tier-pricing-table' ); ?></b>
-						<br>
-						<?php esc_html_e( 'Some themes could display it incorrectly.', 'tier-pricing-table' ); ?>
+						<?php esc_html_e( 'Depending on your theme, you may need minor CSS adjustments for optimal display.', 'tier-pricing-table' ); ?>
 					</p>
 					<?php
 					return ob_get_clean();
 				} )(),
-				'desc'                 => __( 'Show tiered pricing in the product loop (product catalog page)',
+				'desc'                 => __( 'Display tiered pricing tables on shop and category pages.',
 					'tier-pricing-table' ),
 				'desc_tip'             => true,
 			),
 			array(
-				'title'    => __( 'Position on a product item', 'tier-pricing-table' ),
+				'title'    => __( 'Position on catalog item', 'tier-pricing-table' ),
 				'id'       => self::getOptionID( 'position' ),
 				'type'     => 'select',
 				'default'  => 'woocommerce_after_shop_loop_item__6',
@@ -75,12 +74,12 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					'woocommerce_shop_loop_item_title__5'  => __( 'Above product title', 'tier-pricing-table' ),
 					'woocommerce_shop_loop_item_title__15' => __( 'Below product title', 'tier-pricing-table' ),
 				),
-				'desc'     => __( 'Where tiered pricing should be displayed on the product page.',
+				'desc'     => __( 'Choose where the tiered pricing table appears relative to the product image and details.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
-				'title'                => __( 'Show quantity field', 'tier-pricing-table' ),
+				'title'                => __( 'Add quantity selector', 'tier-pricing-table' ),
 				'id'                   => self::getOptionID( 'show_quantity_field' ),
 				'type'                 => TPTSwitchOption::FIELD_TYPE,
 				'default'              => 'no',
@@ -89,13 +88,13 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					?>
 					<p>
 						<?php
-							esc_html_e( 'Show a quantity field on the product catalog items.', 'tier-pricing-table' );
+							esc_html_e( 'Add a quantity input field directly to items in the product catalog.', 'tier-pricing-table' );
 						?>
-						<br>
-						<br>
+					</p>
+					<p>
 						<b>
 							<?php
-								esc_html_e( 'Enable this only if your theme does not show the quantity field already.',
+								esc_html_e( 'Only enable this if your theme doesn\'t already provide quantity selectors on the shop page.',
 									'tier-pricing-table' );
 							?>
 						</b>
@@ -106,7 +105,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'custom_attributes'    => [ 'data-tiered-pricing-premium-option' => true ],
 			),
 			array(
-				'title'                => __( 'Dynamic price', 'tier-pricing-table' ),
+				'title'                => __( 'Dynamic total price', 'tier-pricing-table' ),
 				'id'                   => self::getOptionID( 'dynamic_price' ),
 				'type'                 => TPTSwitchOption::FIELD_TYPE,
 				'default'              => 'yes',
@@ -115,7 +114,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					?>
 					<p>
 						<?php
-							esc_html_e( 'Similar to the product page, the price will be updated dynamically when the user changes the quantity of a specific item.',
+							esc_html_e( 'Automatically update the displayed price when a customer changes the quantity from the catalog.',
 								'tier-pricing-table' );
 						?>
 					</p>
@@ -125,11 +124,11 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'desc_tip'             => true,
 			),
 			array(
-				'title'    => __( 'Use reduced styles', 'tier-pricing-table' ),
+				'title'    => __( 'Compact layout', 'tier-pricing-table' ),
 				'id'       => self::getOptionID( 'use_reduced_styles' ),
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'yes',
-				'desc'     => __( 'The plugin will apply additional CSS styles to the pricing layouts displayed in the product catalog to make them compact.',
+				'desc'     => __( 'Apply minimal styling to pricing tables to better fit the constrained space of catalog grids.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
@@ -138,32 +137,32 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 			),
 			
 			array(
-				'title' => __( 'Template options', 'tier-pricing-table' ),
-				'desc'  => __( 'Choose a tiered pricing template and customize its look and behavior.',
+				'title' => __( 'Pricing Layout Settings', 'tier-pricing-table' ),
+				'desc'  => __( 'Customize the appearance and behavior of tiered pricing on catalog pages.',
 					'tier-pricing-table' ),
 				'id'    => self::getOptionId( 'layout_settings' ),
 				'type'  => 'title',
 			),
 			
 			array(
-				'title'    => __( 'Layout settings', 'tier-pricing-table' ),
+				'title'    => __( 'Layout source', 'tier-pricing-table' ),
 				'id'       => self::getOptionID( 'layout_settings' ),
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => array(
-					'default' => __( 'Same as for product page', 'tier-pricing-table' ),
+					'default' => __( 'Same as product page', 'tier-pricing-table' ),
 					'custom'  => __( 'Custom', 'tier-pricing-table' ),
 				),
-				'desc'     => __( 'The template for tiered pricing for the catalog page. You can use the same template settings as for the product page or choose a different one.',
+				'desc'     => __( 'Choose whether to inherit the layout from the product page or use a custom layout for catalogs.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 				'default'  => 'default',
 			),
 			array(
-				'title'    => __( 'Layout', 'tier-pricing-table' ),
+				'title'    => __( 'Catalog layout', 'tier-pricing-table' ),
 				'id'       => self::getOptionID( 'layout' ),
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => $availableLayouts,
-				'desc'     => __( 'Template for tiered pricing on the catalog page.', 'tier-pricing-table' ),
+				'desc'     => __( 'Select the specific visual template for the catalog page.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 				'default'  => 'table',
 			),
@@ -172,7 +171,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'id'      => self::getOptionID( 'title' ),
 				'type'    => 'text',
 				'default' => '',
-				'desc'    => __( 'The pricing title that is displayed above the tiered pricing.',
+				'desc'    => __( 'Text displayed above the tiered pricing block.',
 					'tier-pricing-table' ),
 			),
 			array(
@@ -192,7 +191,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'id'      => self::getOptionID( 'selected_quantity_color' ),
 				'type'    => 'color',
 				'css'     => 'width:6em;',
-				'default' => '#96598A',
+				'default' => '#3858e9',
 			),
 			array(
 				'title'   => __( 'Unit label', 'tier-pricing-table' ),
@@ -366,7 +365,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	}
 	
 	public static function getSelectedQuantityColor(): string {
-		return get_option( self::getOptionID( 'selected_quantity_color' ), '#96598A' );
+		return get_option( self::getOptionID( 'selected_quantity_color' ), '#3858e9' );
 	}
 	
 	public static function getTableQuantityMeasurement(): array {

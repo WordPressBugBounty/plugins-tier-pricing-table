@@ -3,11 +3,11 @@
 class WooCommerceDeposits extends PluginIntegrationAbstract {
 	
 	public function getTitle(): string {
-		return __( 'WooCommerce Deposits (by WooCommerce)', 'tier-pricing-table' );
+		return 'WooCommerce Deposits (by WooCommerce)';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make tiered pricing properly work with deposit purchases.', 'tier-pricing-table' );
+		return __( 'Calculate deposit amounts and remaining balances correctly based on tiered pricing rules.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

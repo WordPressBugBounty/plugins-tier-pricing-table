@@ -50,7 +50,7 @@ class WOOCS extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'WooCommerce Currency Switcher (FOX)', 'tier-pricing-table' );
+		return  'WooCommerce Currency Switcher (FOX)';
 	}
 	
 	public function getIconURL(): string {
@@ -62,7 +62,7 @@ class WOOCS extends PluginIntegrationAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make the tiered pricing properly work with multiple currencies.', 'tier-pricing-table' );
+		return __( 'Convert and display tiered pricing correctly when using the FOX WooCommerce Currency Switcher.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

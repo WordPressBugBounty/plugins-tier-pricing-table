@@ -14,26 +14,26 @@ class Settings extends FormTab {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Handle pricing collisions with product-level prices.', 'tier-pricing-table' );
+		return __( 'Manage how this rule interacts with product-level settings', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
 		
 		$this->renderSectionTitle( __( 'Priority Settings', 'tier-pricing-table' ) );
 		
-		$this->renderHint( __( 'Control how this global pricing rule behaves in case of collisions with product-level rules.',
+		$this->renderHint( __( 'Determine which rules take precedence when a product has both global and individual settings.',
 			'tier-pricing-table' ) );
 		
 		$this->renderRadioOptions( array(
 			'id'      => '_tpt_settings_priority_type',
-			'title'   => __( 'Pricing rule priority', 'tier-pricing-table' ),
+			'title'   => __( 'Rule priority', 'tier-pricing-table' ),
 			'options' => array(
 				'default'        => __( 'Use global settings', 'tier-pricing-table' ),
-				'prefer-product' => __( 'Product-level rules take priority over this global rule.',
+				'prefer-product' => __( 'Prefer product-level rules',
 					'tier-pricing-table' ),
-				'override'       => __( 'This rule takes priority over any product-level pricing rules',
+				'override'       => __( 'Override product-level rules',
 					'tier-pricing-table' ),
-				'flexible'       => __( 'Flexible: set priorities for the pricing rule parts individually.',
+				'flexible'       => __( 'Custom component priorities',
 					'tier-pricing-table' ),
 			),
 			'value'   => $pricingRule->getSettings()->getPriorityType(),
@@ -43,81 +43,81 @@ class Settings extends FormTab {
 
 		<div class="tpt_settings_advanced_priority_settings hidden">
 			<?php
-				$this->renderSectionTitle( __( 'Regular prices priority', 'tier-pricing-table' ) );
+				$this->renderSectionTitle( __( 'Base Prices Priority', 'tier-pricing-table' ) );
 			?>
 			<div class="tpt_settings_regular_pricing">
 				<?php
 					$this->renderRadioOptions( array(
 						'id'      => '_tpt_settings_regular_pricing_priority_type',
-						'title'   => __( 'Regular prices priority', 'tier-pricing-table' ),
+						'title'   => __( 'Base prices', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-role-based-product' => __( 'Prefer role-based product-level regular prices if they exist.',
+							'prefer-role-based-product' => __( 'Prefer product-level role prices',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override any product-level regular prices with the prices set in this rule.',
+							'override'                  => __( 'Override all product-level prices',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getRegularPricingPriority(),
 					) );
 					
-					$this->renderHint( __( 'If a product has role-based pricing set at the product level, you can prefer those regular prices over the ones set in this global rule.',
+					$this->renderHint( __( 'Prioritize product-specific role pricing over this global rule.',
 						'tier-pricing-table' ) );
 				?>
 			</div>
 			
 			<?php
-				$this->renderSectionTitle( __( 'Tiered pricing priority', 'tier-pricing-table' ) );
+				$this->renderSectionTitle( __( 'Tiered Prices Priority', 'tier-pricing-table' ) );
 			?>
 
 			<div class="tpt_settings_tiered_pricing">
 				<?php
 					$this->renderRadioOptions( array(
 						'id'      => '_tpt_settings_tiered_pricing_priority_type',
-						'title'   => __( 'Tiered pricing priority', 'tier-pricing-table' ),
+						'title'   => __( 'Tiered prices', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-product'            => __( 'Prefer any product-level tiered prices if they exist.',
+							'prefer-product'            => __( 'Prefer product-level tiers',
 								'tier-pricing-table' ),
-							'prefer-role-based-product' => __( 'Prefer only role-based product-level tiered pricing if they exist.',
+							'prefer-role-based-product' => __( 'Prefer product-level role tiers',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override any product-level tiered prices with the prices set in this rule.',
+							'override'                  => __( 'Override all product-level tiers',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getTieredPricingPriority(),
 					) );
 					
 					$this->renderCheckbox( array(
-						'title' => __( 'Mix and Match', 'tier-pricing-table' ),
+						'title' => __( 'Mix & Match', 'tier-pricing-table' ),
 						'id'    => '_tpt_settings_tiered_pricing_allow_mix_and_match',
 						'value' => $pricingRule->getSettings()->isAllowTieredPricingMixAndMatch(),
-						'label' => __( 'Allow the "Mix and Match" pricing strategy (if selected) for tiered prices inherited from the product level.',
+						'label' => __( 'Enable Mix & Match for product-level tiers',
 							'tier-pricing-table' ),
 					) );
 					
-					$this->renderHint( __( 'If a product has tiered pricing set at the product level, you can prefer those tiered prices over the ones set in this global rule. You can also enable the "Mix and Match" pricing strategy for tiered prices inherited from the product level.',
+					$this->renderHint( __( 'Prioritize product-specific tiered pricing over this global rule, and optionally enable Mix & Match for those inherited tiers.',
 						'tier-pricing-table' ) );
 				?>
 			</div>
 			
 			<?php
-				$this->renderSectionTitle( __( 'Quantity limits priority', 'tier-pricing-table' ) );
+				$this->renderSectionTitle( __( 'Quantity Limits Priority', 'tier-pricing-table' ) );
 			?>
 
 			<div class="tpt_settings_quantity_limits">
 				<?php
 					$this->renderRadioOptions( array(
 						'id'      => '_tpt_settings_quantity_limits_priority_type',
-						'title'   => __( 'Quantity limits priority', 'tier-pricing-table' ),
+						'title'   => __( 'Quantity limits', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-product'            => __( 'Prefer any product-level quantity limits if they exist.',
+							'prefer-product'            => __( 'Prefer product-level limits',
 								'tier-pricing-table' ),
-							'prefer-role-based-product' => __( 'Prefer only role-based product-level quantity limits if they exist.',
+							'prefer-role-based-product' => __( 'Prefer product-level role limits',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override any product-level quantity limits with the limits set in this rule.',
+							'override'                  => __( 'Override all product-level limits',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getQuantityLimitsPriority(),
 					) );
 					
-					$this->renderHint( __( 'If a product has quantity limits set at the product level, you can prefer those quantity limits over the ones set in this global rule.',
+					$this->renderHint( __( 'Prioritize product-specific quantity limits over this global rule.',
 						'tier-pricing-table' ) );
 				?>
 			</div>

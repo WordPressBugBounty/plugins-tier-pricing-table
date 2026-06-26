@@ -1,15 +1,9 @@
 <?php namespace TierPricingTable\Settings\Sections\GeneralSection;
 
 use TierPricingTable\Core\ServiceContainer;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\CartOptionsSubsection;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\HiddenOptionsSubsection;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\NonLoggedInUsersSubsection;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\UpsellsSubsection;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\CatalogPricesSubsection;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\LayoutSubsection;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\ProductPagePriceSubsection;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\SummarySubsection;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\YouSaveSubsection;
 use TierPricingTable\Settings\Sections\SectionAbstract;
 use TierPricingTable\Settings\Settings;
 
@@ -30,12 +24,6 @@ class GeneralSection extends SectionAbstract {
 			HiddenOptionsSubsection::class,
 			LayoutSubsection::class,
 			ProductPagePriceSubsection::class,
-			CatalogPricesSubsection::class,
-			CartOptionsSubsection::class,
-			YouSaveSubsection::class,
-			NonLoggedInUsersSubsection::class,
-			UpsellsSubsection::class,
-			SummarySubsection::class,
 		) );
 	}
 	
@@ -147,5 +135,9 @@ class GeneralSection extends SectionAbstract {
 	
 	public static function getPricingOptionsStyle(): string {
 		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_options_style', 'default' );
+	}
+	
+	public static function getPricingTableStyle(): string {
+		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_table_style', 'default' );
 	}
 }

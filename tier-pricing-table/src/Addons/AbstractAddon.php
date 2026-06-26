@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons;
 
 use TierPricingTable\Core\ServiceContainerTrait;
+use TierPricingTable\Settings\CustomOptions\TPTFeatureFlagOption;
 use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
 use TierPricingTable\Settings\Settings;
 
@@ -21,7 +22,8 @@ abstract class AbstractAddon {
 			'id'      => Settings::SETTINGS_PREFIX . '_addon_' . $this->getSlug(),
 			'default' => $this->isActiveByDefault() ? 'yes' : 'no',
 			'desc'    => $this->getDescription(),
-			'type'    => TPTSwitchOption::FIELD_TYPE,
+			'icon'    => $this->getIcon(),
+			'type'    => TPTFeatureFlagOption::FIELD_TYPE,
 		);
 		
 		return $addons;
@@ -42,6 +44,8 @@ abstract class AbstractAddon {
 	abstract public function getName();
 	
 	abstract public function getDescription();
+	
+	abstract public function getIcon(): string;
 	
 	abstract public function getSlug();
 	

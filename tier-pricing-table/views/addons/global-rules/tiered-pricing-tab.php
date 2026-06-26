@@ -1,10 +1,10 @@
 <?php
 
-use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+	use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+	if ( ! defined( 'WPINC' ) ) {
+		die;
+	}
 
 ?>
 <style>
@@ -39,9 +39,9 @@ if ( ! defined( 'WPINC' ) ) {
 <div class="tpt-global-rules-product-notice">
 	<div class="tpt-global-rules-product-notice__icon">
 		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-			 xmlns:xlink="http://www.w3.org/1999/xlink"
-			 viewBox="0 0 416.979 416.979"
-			 xml:space="preserve">
+		     xmlns:xlink="http://www.w3.org/1999/xlink"
+		     viewBox="0 0 416.979 416.979"
+		     xml:space="preserve">
 <g>
 	<path d="M356.004,61.156c-81.37-81.47-213.377-81.551-294.848-0.182c-81.47,81.371-81.552,213.379-0.181,294.85
 		c81.369,81.47,213.378,81.551,294.849,0.181C437.293,274.636,437.375,142.626,356.004,61.156z M237.6,340.786
@@ -52,19 +52,17 @@ if ( ! defined( 'WPINC' ) ) {
 </svg>
 	</div>
 	<div class="tpt-global-rules-product-notice__text">
-		<?php 
-		esc_html_e( 'Looking to set pricing rules for product categories or custom sets of products?',
-			'tier-pricing-table' ); 
+		<?php
+			esc_html_e( 'Looking to set pricing rules for product categories or custom sets of products?',
+					'tier-pricing-table' );
 		?>
 	</div>
 	<div class="tpt-global-rules-product-notice__button">
 		<a target="_blank"
-		   href="
-		   <?php 
-		   echo esc_attr( add_query_arg( array( 'post_type' => GlobalTieredPricingCPT::SLUG ),
-			   admin_url( 'post-new.php' ) ) ) 
-			?>
-			   "
+		   href="<?php
+			   echo esc_attr( add_query_arg( array( 'post_type' => GlobalTieredPricingCPT::SLUG ),
+					   admin_url( 'post-new.php' ) ) )
+		   ?>"
 		   class="button button-primary button-large">
 			<?php esc_html_e( 'Create a global pricing rule', 'tier-pricing-table' ); ?>
 		</a>

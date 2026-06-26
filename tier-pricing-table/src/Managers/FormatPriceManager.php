@@ -58,11 +58,6 @@ class FormatPriceManager {
             ) ) : $lowest );
             return ( $args['html'] ? $product->get_price_html() : $lowestPrice );
         }
-        if ( $args['for_display'] ) {
-            $lowestPrice = wc_get_price_to_display( $product, array(
-                'price' => $lowestPrice,
-            ) );
-        }
         if ( $args['html'] ) {
             $lowestPrice = wc_price( $lowestPrice );
         }

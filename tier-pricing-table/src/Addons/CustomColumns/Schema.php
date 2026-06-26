@@ -4,6 +4,7 @@ use TierPricingTable\Addons\CustomColumns\Columns\CustomDataColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\PriceExcludingTaxesColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\PriceIncludingTaxesColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\RowTotalPriceColumn;
+use TierPricingTable\Addons\CustomColumns\Columns\SkuColumn;
 
 class Schema {
 	public static function getAvailableCustomColumnsTypes() {

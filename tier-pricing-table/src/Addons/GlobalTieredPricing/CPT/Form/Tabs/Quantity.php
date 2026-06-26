@@ -15,16 +15,15 @@ class Quantity extends FormTab {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Specify the minimum, maximum, and quantity step for products.', 'tier-pricing-table' );
+		return __( 'Set minimum, maximum, and quantity step limits', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
 		
 		$this->renderSectionTitle( __( 'Quantity Limits', 'tier-pricing-table' ), array(
 			'only_for_premium' => true,
+			'description'         => __('Applies to each product individually.', 'tier-pricing-table')
 		) );
-		
-		$this->renderHint( __( 'Quantity rules are applied to each product individually.', 'tier-pricing-table' ) );
 		
 		MinimumOrderQuantityForm::render( null, null, $pricingRule->getMinimum() );
 		

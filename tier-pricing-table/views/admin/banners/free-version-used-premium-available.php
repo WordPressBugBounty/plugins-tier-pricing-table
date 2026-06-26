@@ -9,31 +9,24 @@
 	 */
 	$is_product = isset( $is_product ) ? $is_product : false;
 ?>
-<style>
 
-</style>
-
-<div class="tpt__free-version-used-premium-available">
-	<div style=" <?php echo esc_attr( $is_product ? 'margin-bottom: 10px; border-bottom: 1px solid #eee;' : 'margin: 10px 0; border: 1px solid #eeeeee;' ); ?>  background: #fafafa; padding: 15px; display: flex; gap: 10px; justify-content: space-between">
-		<div style="display:flex; gap: 10px; ">
-
-			<div>
-				<h3 style="margin: 0">
-					<?php 
-					esc_html_e( 'The free version is active but you have a premium license',
-						'tier-pricing-table' ); 
-					?>
-				</h3>
-
-				<div style="margin-top: 10px;">
-					<?php 
-					echo wp_kses_post( __( 'You can download the premium version either from your <a href="' . esc_url( tpt_fs()->get_account_url() ) . '">account</a> or the purchase confirmation email.',
-						'tier-pricing-table' ) ); 
-					?>
-				</div>
-			</div>
+<div class="tpt-alert <?php echo esc_attr( $is_product ? 'tpt-alert--compact' : '' ); ?>">
+	<div class="tpt-alert__text">
+		<div class="tpt-alert__inner">
+			<span class="tpt-badge tpt-badge--free"><?php esc_html_e( 'Free Version', 'tier-pricing-table' ); ?></span>
+			<strong style="margin-left: 6px;">
+				<?php 
+				esc_html_e( 'Premium License Available',
+					'tier-pricing-table' ); 
+				?>
+			</strong>
+			&mdash;
+			<span style="font-weight: normal; font-size: 13px;">
+				<?php 
+				echo wp_kses_post( __( 'You are currently running the free version. Download the Pro version from your <a href="' . esc_url( tpt_fs()->get_account_url() ) . '">account</a> or purchase receipt.',
+					'tier-pricing-table' ) ); 
+				?>
+			</span>
 		</div>
 	</div>
 </div>
-
-

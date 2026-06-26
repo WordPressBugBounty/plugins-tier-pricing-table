@@ -54,6 +54,9 @@ class Settings {
 			wp_enqueue_script( 'tiered-pricing/feature/tier-labels',
 					plugins_url( 'build/index.js', dirname( __FILE__ . '../' ) ), $assetFile['dependencies'],
 					$assetFile['version'], true );
+
+			wp_set_script_translations( 'tiered-pricing/feature/tier-labels', 'tier-pricing-table',
+					dirname( __FILE__, 5 ) . '/languages' );
 		} );
 	}
 }

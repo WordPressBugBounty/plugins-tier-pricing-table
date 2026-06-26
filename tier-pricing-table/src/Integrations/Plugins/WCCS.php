@@ -43,11 +43,11 @@ class WCCS extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'WooCommerce Currency Switcher by WP Experts (WCCS)', 'tier-pricing-table' );
+		return 'WooCommerce Currency Switcher by WP Experts (WCCS)';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make the tiered pricing properly work with multiple currencies.', 'tier-pricing-table' );
+		return __( 'Convert and display tiered pricing correctly when using the WooCommerce Currency Switcher by WP Experts.', 'tier-pricing-table' );
 	}
 	
 	public function getIconURL(): string {

@@ -23,11 +23,11 @@ class MixMatch extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Mix&Match for WooCommerce', 'tier-pricing-table' );
+		return 'Mix&Match for WooCommerce';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make tiered pricing properly work with this type of product.', 'tier-pricing-table' );
+		return __( 'Apply tiered pricing rules correctly to Mix and Match products.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

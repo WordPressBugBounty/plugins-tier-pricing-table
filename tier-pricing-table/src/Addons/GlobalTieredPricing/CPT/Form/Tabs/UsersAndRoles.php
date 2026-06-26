@@ -16,15 +16,12 @@ class UsersAndRoles extends FormTab {
 	}
 
 	public function getDescription(): string {
-		return __( 'Select users or user roles that the rule will apply to.', 'tier-pricing-table' );
+		return __( 'Select the users or roles this rule applies to', 'tier-pricing-table' );
 	}
 
 	public function render( GlobalPricingRule $pricingRule ) {
 
-		$this->renderSectionTitle( __( 'Included Users', 'tier-pricing-table' ), array(
-				'description' => __( 'Select users or user roles that the rule will apply to. The rule will work for all users with the selected roles.',
-						'tier-pricing-table' ),
-		) );
+		$this->renderSectionTitle( __( 'Applies to users', 'tier-pricing-table' ) );
 
 		if ( empty( $pricingRule->getIncludedUserRoles() ) && empty( $pricingRule->getIncludedUsers() ) ) {
 			$this->renderHint( __( 'The rule will apply to all users if you do not specify user roles or specific customers (excluding those selected in the exclusions section).',
@@ -33,7 +30,7 @@ class UsersAndRoles extends FormTab {
 
 		$this->renderSelect2( array(
 				'id'            => 'tpt_included_user_roles',
-				'label'         => __( 'Include user roles', 'tier-pricing-table' ),
+				'label'         => __( 'User roles', 'tier-pricing-table' ),
 				'options'       => ( function () {
 					return array_map( function ( $WPRole ) {
 						return $WPRole['name'];
@@ -63,7 +60,7 @@ class UsersAndRoles extends FormTab {
 
 		$this->renderSelect2( array(
 				'id'            => 'tpt_included_users',
-				'label'         => __( 'Include specific customers', 'tier-pricing-table' ),
+				'label'         => __( 'Customers', 'tier-pricing-table' ),
 				'options'       => ( function () use ( $pricingRule ) {
 					$users = [];
 					foreach ( $pricingRule->getIncludedUsers() as $userId ) {
@@ -82,13 +79,20 @@ class UsersAndRoles extends FormTab {
 				'css_class'     => 'rbp-select-woo wc-product-search',
 		) );
 
-		$this->renderSectionTitle( __( 'Exclusions', 'tier-pricing-table' ), array(
-				'description' => __( 'Select users or user roles the rule will not work for.', 'tier-pricing-table' ),
-		) );
+		$hasExclusions = ! empty( $pricingRule->getExcludedUserRoles() ) ||
+		                 ! empty( $pricingRule->getExcludedUsers() );
+		?>
+		<details class="tpt-exclusions-accordion" <?php echo $hasExclusions ? 'open' : ''; ?>>
+			<summary>
+				<?php echo esc_html__( 'Exclusions', 'tier-pricing-table' ); ?>
+				<span class="dashicons dashicons-arrow-down-alt2 tpt-accordion-icon"></span>
+			</summary>
+			<div class="tpt-exclusions-accordion-content">
+		<?php
 
 		$this->renderSelect2( array(
 				'id'            => 'tpt_excluded_user_roles',
-				'label'         => __( 'Exclude user roles', 'tier-pricing-table' ),
+				'label'         => __( 'User roles', 'tier-pricing-table' ),
 				'options'       => ( function () {
 					$roles = [];
 					foreach ( wp_roles()->roles as $key => $WPRole ) {
@@ -105,7 +109,7 @@ class UsersAndRoles extends FormTab {
 
 		$this->renderSelect2( array(
 				'id'            => 'tpt_excluded_users',
-				'label'         => __( 'Exclude specific customers', 'tier-pricing-table' ),
+				'label'         => __( 'Customers', 'tier-pricing-table' ),
 				'options'       => ( function () use ( $pricingRule ) {
 					$users = [];
 					foreach ( $pricingRule->getExcludedUsers() as $userId ) {
@@ -123,6 +127,11 @@ class UsersAndRoles extends FormTab {
 				'search_action' => 'woocommerce_json_search_tpt_customers',
 				'css_class'     => 'rbp-select-woo wc-product-search',
 		) );
+
+		?>
+			</div>
+		</details>
+		<?php
 	}
 
 	public function getIcon(): string {

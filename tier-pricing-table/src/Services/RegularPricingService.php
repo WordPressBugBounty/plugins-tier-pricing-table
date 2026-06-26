@@ -25,7 +25,7 @@ class RegularPricingService {
 	
 	public function __construct() {
 		
-		// The service should be enabled by addons. This is useful to do not run this services when all pricing addons are disabled
+		// The service should be enabled by addons. This is useful to do not run those services when all pricing addons are disabled
 		if ( ! apply_filters( 'tiered_pricing_table/services/pricing_service_enabled', false ) ) {
 			return;
 		}

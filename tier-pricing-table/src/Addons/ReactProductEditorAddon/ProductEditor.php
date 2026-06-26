@@ -100,6 +100,10 @@ class ProductEditor {
 	
 	public function registerBlocks() {
 		
+		if ( version_compare( wc()->version, '10.8.0', '>' ) ) {
+			return;
+		}
+		
 		if ( ! class_exists( 'Automattic\WooCommerce\Admin\Features\ProductBlockEditor\BlockRegistry' ) ) {
 			return;
 		}

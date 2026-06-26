@@ -64,7 +64,7 @@ class Curcy extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'CURCY Multicurrency', 'tier-pricing-table' );
+		return  'CURCY Multicurrency';
 	}
 	
 	public function getIconURL(): string {
@@ -76,7 +76,7 @@ class Curcy extends PluginIntegrationAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make the tiered pricing properly work with multiple currencies.', 'tier-pricing-table' );
+		return __( 'Convert and display tiered pricing correctly when using the CURCY multicurrency plugin.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

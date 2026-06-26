@@ -66,7 +66,7 @@ class WPMLMulticurrency extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'WPML Multicurrency', 'tier-pricing-table' );
+		return  'WPML Multicurrency';
 	}
 	
 	public function getIconURL(): string {
@@ -78,7 +78,7 @@ class WPMLMulticurrency extends PluginIntegrationAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make the tiered pricing properly work with multiple currencies.', 'tier-pricing-table' );
+		return __( 'Convert and display tiered pricing correctly when using WPML Multicurrency.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

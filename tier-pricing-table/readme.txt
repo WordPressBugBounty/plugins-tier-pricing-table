@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.1.0
+Stable tag: 6.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,12 +36,12 @@ Set different prices for user roles or specific customers, including quantity-ba
 ✅ **Minimum, Maximum & Step Quantity Controls**
 Limit minimum, maximum, and quantity step a product can be purchased in.
 
-✅ **Format your prices on the product catalog with discounts in mind**
+✅ **Discount-friendly price formatting**
 Show the lowest price or range from the lowest to the highest price.
 
 ✅ **Flexible pricing display (product page & catalog)**
  You can show the tiered prices via:
-➖ **Table**
+➖ **Table (5 different styles)**
 ➖ **Blocks (5 different styles)**
 ➖ **Options (4 different styles)**
 ➖ **Dropdown**
@@ -53,10 +53,11 @@ Show the lowest price or range from the lowest to the highest price.
 The clean interface and powerful functionality allow you to create any pricing strategy without complexity.
 
 ⚙️ **Advanced Features**
-✅ Import & Export (WP All Import support)
-✅ Built-in caching for performance
-✅ REST API & debug mode
-✅ Show saving amount to users with the "You save: $9.99" template. (difference between original and discounted price)
+✅ Import & Export (WP All Import support).
+✅ Role management: create, edit, and delete user roles.
+✅ Built-in caching for performance.
+✅ REST API & debug mode.
+✅ Show saving amount to users with the "You save: $9.99" template. (difference between original and discounted price).
 
 And much more!
 
@@ -64,9 +65,10 @@ And much more!
 
 *   Percentage quantity-based discounts
 *   Role-based pricing (including base prices and min/max order quantity)
+*   Role-based tax options (Override tax options for specific user roles)
 *   Custom columns for pricing table
 *   Option to hide prices and prevent purchasing for non-logged-in users
-*   Min\Max order quantity control per product or category
+*   Min/Max order quantity control per product or category/tag/brand
 *   Cart upsells (motivates users to purchase more to get a discount)
 *   Totals on the product page
 *   Clickable tiered pricing options
@@ -104,7 +106,7 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 2. Set up Tiered Pricing
 3. Global pricing rules
 4. Tiered Pricing in the cart
-4. Tiered Pricing in the product catalog
+5. Tiered Pricing in the product catalog
 
 == Installation ==
 
@@ -112,7 +114,7 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Go to **WooCommerce → Settings → Tiered Pricing** to configure the plugin
 
-After installing the plugin set up your own settings
+After installing the plugin, configure it to your needs.
 
 == Frequently Asked Questions ==
 
@@ -127,7 +129,7 @@ Yes, the plugin integrates with WooCommerce taxes and coupons.
 
 = What does the import format look like? =
 
-"quantity:price,quantity:price"
+`quantity:price,quantity:price`
 
 For example:
 "10:20,20:18" - in this case 20.00$ at 10 pieces, $18.00 at 20 pieces or more.
@@ -141,7 +143,7 @@ You can change the rules separator (in case you use a comma as a decimal separat
 For example, the following code will change the separator to "&":
 
 add_filter('tiered_pricing_table/rules_separator', function(){
-   return '&'
+   return '&';
 });
 
 = Can I show the tiered pricing using a shortcode? =
@@ -155,12 +157,33 @@ Yes! Look for the "Tiered Pricing Table" widget.
 
 Yes! Look for the "Tiered Pricing" block.
 
-= Can I apply tiered pricing for manual (admin-made) orders? =
+= Can I apply tiered pricing for manual (admin-created) orders? =
 
 Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 6.4.0 [2026-06-21] =
+* New: 4 new styles for pricing table.
+* Enhance: custom columns work for horizontal table template.
+* Enhance: Almost everything is a module: you can disable the features you do not need.
+* Enhance: CSS is now minimized.
+* Enhance: Cart upsells work for block based cart and checkout.
+
+= 6.3.0 [2026-06-20] =
+* New: Role-based tax options.
+* Update: Translations for 10 most popular languages.
+* Update: Frontend script improvements.
+* Update: Minor improvements and fixes.
+
+= 6.2.0 [2026-06-09] =
+* New: Percentage discount for "You save" template.
+* New: Tags and Brands for global pricing rules.
+* New: Duplicate global pricing rule action.
+* Fix: Fix UI with WordPress 7.0.
+* Update: Use WordPress color theme for the plugin UI.
+* Update: Minor improvements and fixes.
 
 = 6.1.0 [2026-05-17] =
 * New: Introducing "Tools" - manage user roles and clean up tiered pricing data.
@@ -174,6 +197,7 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * New: Tier labels! Create custom labels for each pricing tier.
 * New: Integration with SEOPress plugin.
 * Update: Multiple improvements and fixes.
+* Update: Minimum PHP version is 7.4.
 
 = 5.6.2 [2026-03-26] =
 * Update: Freemius SDK updated to the latest version.
@@ -200,26 +224,26 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * Update: WooCommerce & WordPress compatibility bumped.
 
 = 5.4.1 [2025-08-11] =
-* New: Two new styles for pricing blocks
-* Fix: Fix issue with the PHP 8.2 and above
+* New: Two new styles for pricing blocks.
+* Fix: Fix issue with the PHP 8.2 and above.
 
 = 5.4.0 [2025-07-29] =
-* New: Rank Math and Yith SEO integration
-* Update: Improvements for formatting prices in the product catalog
+* New: Rank Math and Yith SEO integration.
+* Update: Improvements for formatting prices in the product catalog.
 * Update: Freemius SDK to the latest version.
 * Fix: Minor issues with the latest WooCommerce version.
-* Update: WooCommerce compatibility to 10.1.0
+* Update: WooCommerce compatibility to 10.1.0.
 
 = 5.3.0 [2025-06-30] =
-* New: variable product cache - preload tiered pricing if there are less than 10 variations.
+* New: Variable product cache - preload tiered pricing if there are less than 10 variations.
 * Fix: If a coupon is applied only to a specific products, "disable tiered pricing" option affected the whole cart.
 * Fix: Plain text template - warning with the latest PHP versions.
-* Update: Bump WooCommerce compatibility to 10.0.0
+* Update: Bump WooCommerce compatibility to 10.0.0.
 
 = 5.2.0 [2025-06-16] =
-* New: always use regular price to show a crossed-out price in the cart.
-* Update: CSS and texts updates
-* Fix: Minor issues
+* New: Always use regular price to show a crossed-out price in the cart.
+* Update: CSS and texts updates.
+* Fix: Minor issues.
 
 = 5.1.10 [2025-05-16] =
 * Update: Freemius SDK to the latest version.
@@ -228,18 +252,18 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * Fix: Settings floating title issue with the latest WooCommerce version.
 
 = 5.1.9 [2025-05-07] =
-* Fix: WP All Import integration translation issue
-* Fix: Woombat Product Addons integration fix
+* Fix: WP All Import integration translation issue.
+* Fix: Woombat Product Addons integration fix.
 
 = 5.1.8 [2025-04-16] =
-* New: WCP Product Bundles integration
-* Fix: Minor issues
-* Update: WooCommerce & WordPress compatibility
+* New: WCP Product Bundles integration.
+* Fix: Minor issues.
+* Update: WooCommerce & WordPress compatibility.
 
 = 5.1.7 [2025-02-21] =
-* New: CURCY compatibility
-* Update: Yith RaQ integration
-* Update: WPML config
+* New: CURCY compatibility.
+* Update: Yith RaQ integration.
+* Update: WPML config.
 
 = 5.1.6 [2025-02-08] =
 * New: Do not reload pricing table for variable product when all prices are the same.
@@ -254,7 +278,7 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 
 = 5.1.4 [2024-12-05] =
 * New: New template for the totals on the product page.
-* Enhance: Speed optimization
+* Enhance: Speed optimization.
 * Enhance: Notice when the free version is active but the premium version is available.
 * Update: Minimum required characters to find products and categories in the global pricing rules set to 1.
 * Update: Promotion banners updated.
@@ -301,7 +325,7 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * New: Integration with Addify Request a Quote plugin.
 * Update: Freemius updated to the latest version of 2.7.3.
 * Update: Frontend script updated.
-* Update: Hew hooks added.
+* Update: New hooks added.
 * Update: Removed the legacy hooks support.
 * Update: WooCommerce & WordPress compatibility.
 * Fix: Plaintext template variables issue.
@@ -324,16 +348,16 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 = 4.3.0 [2024-06-14] =
 * New: Non-logged-in users options: hide prices and prevent purchasing.
 * New: Prevent premium version be used without a valid license.
-* Fix: tiered pricing in the cart&checkout blocks.
-* Fix: types warnings on PHP 8.0 or above.
+* Fix: Tiered pricing in the cart&checkout blocks.
+* Fix: Types warnings on PHP 8.0 or above.
 * Fix: Wombat product addons integration.
 * Update: WooCommerce & WordPress compatibility.
 
 = 4.2.4 [2024-05-10] =
-* New: integration with Global Pricing rules for woocommerce: do not apply tiered pricing on the free items.
-* Fix: tiered pricing in the cart&checkout blocks.
-* Fix: types warnings on PHP 8.0 or above.
-* Fix: maximum and group of quantity for variations.
+* New: Integration with Global Pricing rules for woocommerce: do not apply tiered pricing on the free items.
+* Fix: Tiered pricing in the cart&checkout blocks.
+* Fix: Types warnings on PHP 8.0 or above.
+* Fix: Maximum and group of quantity for variations.
 * Update: WooCommerce & WordPress compatibility.
 
 = 4.2.3 [2024-03-25] =
@@ -362,27 +386,27 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * New: Show cart item subtotal as a discount.
 * New: Excluding products\users for global pricing rules.
 * New: Choose how to apply percentage discount: on sale or regular price.
-* Update: updated WPML.config to recognize "you save" template
+* Update: Updated WPML.config to recognize "you save" template.
 
 = 4.0.7 [2023-11-27] =
-* Update: removed "product has no rules" option.
-* Fix: issue when premium and free version are both activated.
-* Fix: case when +/- buttons on quantity field may not work correctly in some themes.
+* Update: Removed "product has no rules" option.
+* Fix: Issue when premium and free version are both activated.
+* Fix: Case when +/- buttons on quantity field may not work correctly in some themes.
 
 = 4.0.6 [2023-11-20] =
-* New: increase performance for the variable products: do not check if child have tiered pricing.
-* Update: move freemius init function to the main plugin file.
-* Fix: saving global pricing rule - save pricing type (Individual or Mix&Match)
+* New: Increase performance for the variable products: do not check if child have tiered pricing.
+* Update: Move freemius init function to the main plugin file.
+* Fix: Saving global pricing rule - save pricing type (Individual or Mix&Match).
 
 = 4.0.5 [2023-11-13] =
-* Fix: issue when comma used as a thousand separator
+* Fix: Issue when comma used as a thousand separator.
 
 = 4.0.4 [2023-11-10] =
-* Fix: cache issues
-* Fix: free version limits
+* Fix: Cache issues.
+* Fix: Free version limits.
 
 = 4.0.3 [2023-11-03] =
-* Fix: Global rules mix and match pricing strategy
+* Fix: Global rules mix and match pricing strategy.
 
 = 4.0.2 [2023-11-03] =
 * Fix: Percentage discount calculations in templates for fixed pricing rules.
@@ -391,266 +415,266 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 * Fix: Tiered fixed price cannot be higher than 99.
 
 = 4.0.0 [2023-11-02] =
-* New: New global pricing rules form
-* New: Maximum and "group of quantity" quantity options
-* New: Percentage discounts for regular prices for role-based pricing rules
-* New: Gutenberg blocks for tiered pricing
-* New: Unit label per product
-* New: Custom columns for pricing table
-* New: "You save" feature
-* New: Notice when tiered pricing is set incorrectly
-* New: Debug mode
-* New: Minimum PHP version is 7.2
-* New: Yith request a quote integration
-* New: Calculation logic settings
-* Update: Codebase redesign
-* Update: Settings page updated
-* Update: Redesigned tiered pricing for manual orders
-* Update: Cache and performance updates
-* Fix: a bunch of minor issues
+* New: New global pricing rules form.
+* New: Maximum and "group of quantity" quantity options.
+* New: Percentage discounts for regular prices for role-based pricing rules.
+* New: Gutenberg blocks for tiered pricing.
+* New: Unit label per product.
+* New: Custom columns for pricing table.
+* New: "You save" feature.
+* New: Notice when tiered pricing is set incorrectly.
+* New: Debug mode.
+* New: Minimum PHP version is 7.2.
+* New: Yith request a quote integration.
+* New: Calculation logic settings.
+* Update: Codebase redesign.
+* Update: Settings page updated.
+* Update: Redesigned tiered pricing for manual orders.
+* Update: Cache and performance updates.
+* Fix: A bunch of minor issues.
 
 = 3.6.2 [2023-09-08] =
-* Fix: WPML Multicurrency integration fatal error
+* Fix: WPML Multicurrency integration fatal error.
 
 = 3.6.1 [2023-09-07] =
-* Fix: WPML Multicurrency integration issue
+* Fix: WPML Multicurrency integration issue.
 
 = 3.6.0 [2023-09-06] =
-* Fix: Cart upsells
-* Fix: Rounding issue
+* Fix: Cart upsells.
+* Fix: Rounding issue.
 * Fix: Minimum order quantity - do not remove item from cart if the qty is less than minimum. Adjust qty instead.
-* New: WP Multicurrency integration
-* New: Rebuilt integrations tab
+* New: WP Multicurrency integration.
+* New: Rebuilt integrations tab.
 
 = 3.5.1 [2023-07-05] =
-* Fix: Clickable pricing for variable products
-* Fix: Pull right pricing when variation is specified in URL
-* Fix: CSS for dropdown
+* Fix: Clickable pricing for variable products.
+* Fix: Pull right pricing when variation is specified in URL.
+* Fix: CSS for dropdown.
 
 = 3.5.0 [2023-06-30] =
-* New: New type of displaying - dropdown
-* Fix: Issue when regular prices is replaces by 1$
-* Fix: Upsell {tp_actual_discount} variable
+* New: New type of displaying - dropdown.
+* Fix: Issue when regular prices is replaces by 1$.
+* Fix: Upsell {tp_actual_discount} variable.
 
 = 3.4.3 [2023-06-20] =
-* New: Integration with WCCS
-* Fix: Coupons potential error
-* Fix: Displaying price with taxes on product page
+* New: Integration with WCCS.
+* Fix: Coupons potential error.
+* Fix: Displaying price with taxes on product page.
 
 = 3.4.2 [2023-05-25] =
-* New: HPOS support
-* Fix: Minimum order quantity issue for user roles
-* Fix: Rounding price hook
+* New: HPOS support.
+* Fix: Minimum order quantity issue for user roles.
+* Fix: Rounding price hook.
 
 = 3.4.1 [2023-04-11] =
-* Fix: Fix default variations
+* Fix: Fix default variations.
 
 = 3.4.0 [2023-03-30] =
-* New: Cache: performance increased for large variable products
+* New: Cache: performance increased for large variable products.
 * New: Advanced settings for products: select default variation, mark products that does not use tiered pricing.
-* New: Quantity measurement fields in the settings
-* Fix: Fix role based rules for manual orders
-* Fix: Fix taxes for manual orders
+* New: Quantity measurement fields in the settings.
+* Fix: Fix role based rules for manual orders.
+* Fix: Fix taxes for manual orders.
 
 = 3.3.5 [2023-03-21] =
-* New: Freemius SDK updated to 2.5.5
-* New: Support "woocommerce_price_trim_zeros" hook
-* New: Support role-based rules for manual orders
-* New: New hook to override the rules separator during the import
-* Fix: WCPA integration
+* New: Freemius SDK updated to 2.5.5.
+* New: Support "woocommerce_price_trim_zeros" hook.
+* New: Support role-based rules for manual orders.
+* New: New hook to override the rules separator during the import.
+* Fix: WCPA integration.
 
 = 3.3.4 [2023-03-07] =
-* Fix: critical MOQ issue with variable products
+* Fix: Critical MOQ issue with variable products.
 
 = 3.3.3 [2023-03-06] =
-* Fix: Legacy hooks infinity loop
-* Fix: MOQ custom add to cart handlers
-* New: Extended WPML config
-* New: New hook for formatting variation prices
+* Fix: Legacy hooks infinity loop.
+* Fix: MOQ custom add to cart handlers.
+* New: Extended WPML config.
+* New: New hook for formatting variation prices.
 
 = 3.3.2 [2023-03-01] =
 * Fix: Show tiered pricing via shortcode/elementor widget even if the global display option is disabled.
-* Fix: Saving percentage tiered pricing rules for variation
-* New: Show parent category for selected category
-* New: Added more legacy hooks
-* New: Make MOQ validation string translatable
+* Fix: Saving percentage tiered pricing rules for variation.
+* New: Show parent category for selected category.
+* New: Added more legacy hooks.
+* New: Make MOQ validation string translatable.
 
 = 3.3.1 [2023-01-26] =
-* Fix: Tooltip layout
-* Fix: Discount calculations on tiered pricing layouts
-* Fix: Do not run frontend script on product that does not have tiered pricing
-* New: Legacy hooks
+* Fix: Tooltip layout.
+* Fix: Discount calculations on tiered pricing layouts.
+* Fix: Do not run frontend script on product that does not have tiered pricing.
+* New: Legacy hooks.
 
 = 3.3.0 [2023-01-18] =
-* New: Supports {price_excluding_tax} and {price_including_tax} price suffix variables
-* New: Showing discounted total price with original total crossed out
-* New: Cache for price manager
-* New: Trial button
-* Fix: move to tiered_pricing_table/price/pricing_rule hook
+* New: Supports {price_excluding_tax} and {price_including_tax} price suffix variables.
+* New: Showing discounted total price with original total crossed out.
+* New: Cache for price manager.
+* New: Trial button.
+* Fix: Move to tiered_pricing_table/price/pricing_rule hook.
 
 = 3.2.0 [2023-01-13] =
-* New: Cart upsell
-* Fix: CSS issues
-* Fix: typos
+* New: Cart upsell.
+* Fix: CSS issues.
+* Fix: Typos.
 
 = 3.1.1 [2023-01-10] =
-* New: Notice with global rules on tiered pricing tab
-* Fix: issue with global pricing rules
-* Fix: price without taxes issue
-* Fix: typos
+* New: Notice with global rules on tiered pricing tab.
+* Fix: Issue with global pricing rules.
+* Fix: Price without taxes issue.
+* Fix: Typos.
 
 = 3.1.0 [2023-01-07] =
-* New: new way to display the tiered pricing - options
-* New: tiered pricing template can be selected per product
-* New: little enhancements
-* Fix: Firefox JS issue
-* Fix: hidden "quick-edit" for products
+* New: New way to display the tiered pricing - options.
+* New: Tiered pricing template can be selected per product.
+* New: Little enhancements.
+* Fix: Firefox JS issue.
+* Fix: Hidden "quick-edit" for products.
 
 = 3.0.1 [2023-01-02] =
-* Fix: Default variation table
-* Fix: Manual orders are active by default (unable to change order total for admin-made orders)
+* Fix: Default variation table.
+* Fix: Manual orders are active by default (unable to change order total for admin-made orders).
 
 = 3.0.0 [2022-12-29] =
-* New: Refactoring the plugin structure
-* New: Refactoring the frontend script
-* New: Global Tiered Pricing rules
-* New: Tiered Pricing Blocks
-* New: Elementor integration
-* New: Settings redesign (added sections, many new settings, refactoring settings script)
-* New: Discount column for fixed rules
-* New: Tiered Pricing shortcode
-* New: Tiered Pricing coupons management
-* New: WOOCS integration
-* Fix: Double pricing suffix on simple products
-* Fix: Minor bugs
+* New: Refactoring the plugin structure.
+* New: Refactoring the frontend script.
+* New: Global Tiered Pricing rules.
+* New: Tiered Pricing Blocks.
+* New: Elementor integration.
+* New: Settings redesign (added sections, many new settings, refactoring settings script).
+* New: Discount column for fixed rules.
+* New: Tiered Pricing shortcode.
+* New: Tiered Pricing coupons management.
+* New: WOOCS integration.
+* Fix: Double pricing suffix on simple products.
+* Fix: Minor bugs.
 
 = 2.8.2 [2022-10-12] =
-* Fix: Premium upgrading
-* Fix: WCPA Integration
+* Fix: Premium upgrading.
+* Fix: WCPA Integration.
 
 = 2.8.1 [2022-09-23] =
-* New: Aelia Multicurrency Integration
-* New: WCPA Integration
-* New: WooCommerce Bundles Integration
-* New: Role-based rules for API
-* New: support role-based rules in WooCommerce Import
-* New: New Hooks
-* Fix: Catalog prices
-* Bugs fixes & minor improvements
+* New: Aelia Multicurrency Integration.
+* New: WCPA Integration.
+* New: WooCommerce Bundles Integration.
+* New: Role-based rules for API.
+* New: Support role-based rules in WooCommerce Import.
+* New: New Hooks.
+* Fix: Catalog prices.
+* Fix: Bugs fixes & minor improvements.
 
 = 2.8.0 [2022-05-29] =
-* New: REST API
-* New: WordPress 6.0 support
-* New: WooCommerce 6.6 support
-* Bugs fixes & minor improvements
+* New: REST API.
+* New: WordPress 6.0 support.
+* New: WooCommerce 6.6 support.
+* Fix: Bugs fixes & minor improvements.
 
 = 2.7.0 [2022-04-25] =
-* New: static quantities for the pricing table
-* New: Pricing cache for variable products
-* New: WP All Import: "tiered pricing" import option
-* Fix: Bugs fixes & minor improvements
+* New: Static quantities for the pricing table.
+* New: Pricing cache for variable products.
+* New: WP All Import: "tiered pricing" import option.
+* Fix: Bugs fixes & minor improvements.
 
 = 2.6.1 [2022-03-04] =
-* Security fix
-* Fix: WooCommerce Subscription variable products support
-* Minor improvements
+* Fix: Security fix.
+* Fix: WooCommerce Subscription variable products support.
+* Enhance: Minor improvements.
 
 = 2.6.0 [2021-10-24] =
-* Fix: Minor bugs
-* WPML extended support
+* Fix: Minor bugs.
+* Update: WPML extended support.
 
 = 2.5.0 [2021-08-09] =
-* Freemius update
-* Bugs fixes
-* Performance improvements
-* Improved role-based pricing
-* WPML support
+* Update: Freemius update.
+* Fix: Bugs fixes.
+* Enhance: Performance improvements.
+* Enhance: Improved role-based pricing.
+* Update: WPML support.
 
 = 2.4.1 [2020-12-22] =
-* Freemius update
-* Bugs fixes
-* Minor improvements
+* Update: Freemius update.
+* Fix: Bugs fixes.
+* Enhance: Minor improvements.
 
 = 2.4.0 [2020-09-19] =
-* Role-based pricing for the premium version
-* Bug fixes
-* Minor improves
+* Update: Role-based pricing for the premium version.
+* Fix: Bug fixes.
+* Enhance: Minor improves.
 
 = 2.3.7 [2020-04-22] =
-* Addon fixes
-* Price Suffix fix
-* Minor improves
+* Fix: Addon fixes.
+* Fix: Price Suffix fix.
+* Enhance: Minor improves.
 
 = 2.3.6 [2020-03-17] =
-* WooCommerce 4 variations fix
+* Fix: WooCommerce 4 variations fix.
 
 = 2.3.5 [2020-02-17] =
-* Fix issues
-* Category tiers in the premium version
+* Fix: Fix issues.
+* Update: Category tiers in the premium version.
 
 = 2.3.4 [2020-02-08] =
-* Fix Ajax issues
-* Fix assets issues
+* Fix: Fix Ajax issues.
+* Fix: Fix assets issues.
 
 = 2.3.3 [2019-11-27] =
-* Fix tax issue
-* Added ability to calculate the tiered price based on all variations
-* Added ability to set bulk rules for variable product
-* Added support minimum quantity in the PREMIUM version
-* Added summary table in PREMIUM version
-* minor fixes
-* Fixes for the popular themes
+* Fix: Fix tax issue.
+* New: Added ability to calculate the tiered price based on all variations.
+* New: Added ability to set bulk rules for variable product.
+* New: Added support minimum quantity in the PREMIUM version.
+* New: Added summary table in PREMIUM version.
+* Fix: Minor fixes.
+* Fix: Fixes for the popular themes.
 
 = 2.3.2 [2019-10-28] =
-* Fix upgrading
+* Fix: Fix upgrading.
 
 = 2.3.1 [2019-09-16] =
-* Fix the jQuery issue
+* Fix: Fix the jQuery issue.
 
 = 2.3.0 [2019-07-19] =
-* Fix critical bug
+* Fix: Fix critical bug.
 
 = 2.2.3 [2019-07-15] =
-* Fixed bugs
-* Added hooks
+* Fix: Fixed bugs.
+* New: Added hooks.
 
 = 2.2.1 [2019-06-04] =
-* Fixed bugs
-* Added total price feature
+* Fix: Fixed bugs.
+* New: Added total price feature.
 
 = 2.2.0 [2019-05-07] =
-* Added Import\Export tiered pricing
-* Clickable quantity rows (Premium)
-* Fix with some themes
-* Fix the mini-cart issue
+* New: Added Import\Export tiered pricing.
+* Update: Clickable quantity rows (Premium).
+* Fix: Fix with some themes.
+* Fix: Fix the mini-cart issue.
 
 = 2.1.2 [2019-04-04] =
-* Fixes
-* Trial mode
+* Fix: Fixes.
+* Update: Trial mode.
 
 = 2.1.1 [2019-03-26] =
-* Fixes
-* Premium variable catalog prices
+* Fix: Fixes.
+* Update: Premium variable catalog prices.
 
 = 2.1.0 [2019-03-24] =
-* Support taxes
-* Do not show the table head if column titles are blank
-* Fix Updater
-* Fix little issues
+* Update: Support taxes.
+* Update: Do not show the table head if column titles are blank.
+* Fix: Fix Updater.
+* Fix: Fix little issues.
 
 = 2.0.2 [2019-03-18] =
-* Fix JS calculation prices
-* Remove the table from variation tier tables
+* Fix: Fix JS calculation prices.
+* Update: Remove the table from variation tier tables.
 
 = 2.0.0 [2019-03-18] =
-* Fix bugs
-* JS updating prices on the product page
-* Tooltip border
-* Premium version
+* Fix: Fix bugs.
+* Update: JS updating prices on the product page.
+* Update: Tooltip border.
+* Update: Premium version.
 
 = 1.1.0 [2019-01-20] =
-* Fix bug with comma as a thousand separators.
-* Minor updates
+* Fix: Fix bug with comma as a thousand separators.
+* Update: Minor updates.
 
 = 1.0.0 [2018-08-28] =
-* Initial Release
+* Update: Initial Release.

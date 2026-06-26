@@ -114,12 +114,16 @@ class CustomColumnsManager {
 		
 		$name = $customColumn['name'] ?? false;
 		$type = $customColumn['type'] ?? false;
+		$dataType = $customColumn['data_type'] ?? 'text';
 		
 		$type = Schema::isValidColumnType( $type ) ? $type : false;
+		$dataType = Schema::isValidDataType( $dataType ) ? $dataType : 'text';
 		
 		if ( ! $name || ! $type ) {
 			return false;
 		}
+
+		$customColumn['data_type'] = $dataType;
 		
 		return $customColumn;
 	}

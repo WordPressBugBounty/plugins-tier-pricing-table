@@ -16,7 +16,7 @@ class RankMath extends PluginIntegrationAbstract {
     }
 
     public function getDescription() : string {
-        return __( 'Enhance the product schema with tiered pricing offers and adds <b>%lowest_price%</b> and <b>%price_range%</b> variables to display the lowest price and price range of products with tiered pricing.', 'tier-pricing-table' );
+        return __( 'Add tiered pricing data to the product schema and introduce <b>%lowest_price%</b> and <b>%price_range%</b> variables for SEO.', 'tier-pricing-table' );
     }
 
     public function getSlug() : string {

@@ -7,6 +7,7 @@ use TierPricingTable\Settings\CustomOptions\TPTDisplayType;
 use TierPricingTable\Settings\CustomOptions\TPTLinkButton;
 use TierPricingTable\Settings\CustomOptions\TPTTableColumnsField;
 use TierPricingTable\Settings\CustomOptions\TPTQuantityMeasurementField;
+use TierPricingTable\Settings\CustomOptions\TPTFeatureFlagOption;
 use TierPricingTable\Settings\CustomOptions\TPTIntegrationOption;
 use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
 use TierPricingTable\Settings\CustomOptions\TPTTextTemplate;
@@ -56,8 +57,9 @@ class Settings {
             $template = 'upgrade-banner.php';
             add_action( 'woocommerce_settings_' . self::SETTINGS_PAGE, function () use($template) {
                 $this->getContainer()->getFileManager()->includeTemplate( 'admin/banners/' . $template, [
-                    'upgradeUrl'   => tpt_fs_activation_url(),
-                    'contactUsUrl' => TierPricingTablePlugin::getContactUsURL(),
+                    'upgradeUrl'       => tpt_fs_activation_url(),
+                    'contactUsUrl'     => TierPricingTablePlugin::getContactUsURL(),
+                    'documentationUrl' => TierPricingTablePlugin::getDocumentationURL(),
                 ] );
             } );
         }
@@ -71,6 +73,7 @@ class Settings {
     protected function initCustomOptions() {
         $this->getContainer()->add( 'settings.tpt_switch_option', new TPTSwitchOption() );
         $this->getContainer()->add( 'settings.tpt_integration_option', new TPTIntegrationOption() );
+        $this->getContainer()->add( 'settings.tpt_feature_flag_option', new TPTFeatureFlagOption() );
         $this->getContainer()->add( 'settings.tpt_text_template', new TPTTextTemplate() );
         $this->getContainer()->add( 'settings.tpt_display_type', new TPTDisplayType() );
         $this->getContainer()->add( 'settings.tpt_link_button', new TPTLinkButton() );
@@ -129,7 +132,10 @@ class Settings {
 		
 		<ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
-        foreach ( $this->sections as $section ) {
+        $sectionsCount = count( $this->sections );
+        ?>
+			<?php 
+        foreach ( $this->sections as $index => $section ) {
             ?>
 				<li>
 					<?php 
@@ -182,34 +188,17 @@ class Settings {
 					<?php 
             }
             ?>
-					|
+					<?php 
+            if ( $index < $sectionsCount - 1 ) {
+                ?>
+						|
+					<?php 
+            }
+            ?>
 				</li>
 			<?php 
         }
         ?>
-			<li>
-				<a href="<?php 
-        echo esc_attr( TierPricingTablePlugin::getDocumentationURL() );
-        ?>" target="_blank">
-					<?php 
-        esc_html_e( 'Documentation', 'tier-pricing-table' );
-        ?>
-					<svg
-							style="
-							width: 0.8rem;
-							height: 0.8rem;
-							stroke: currentColor;
-							fill: none;"
-							xmlns='http://www.w3.org/2000/svg'
-							stroke-width='10' stroke-dashoffset='0'
-							stroke-dasharray='0' stroke-linecap='round'
-							stroke-linejoin='round' viewBox='0 0 100 100'>
-						<polyline fill="none" points="40 20 20 20 20 90 80 90 80 60"/>
-						<polyline fill="none" points="60 10 90 10 90 40"/>
-						<line fill="none" x1="89" y1="11" x2="50" y2="50"/>
-					</svg>
-				</a>
-			</li>
 		</ul>
 		<br class="clear">
 		<?php 

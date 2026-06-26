@@ -58,11 +58,11 @@ class WooCommerceProductAddons extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Product Add-ons (by WooCommerce)', 'tier-pricing-table' );
+		return  'Product Add-ons (by WooCommerce)';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make tiered pricing works properly with custom product options.', 'tier-pricing-table' );
+		return __( 'Calculate tiered pricing accurately when WooCommerce Product Add-ons are selected.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

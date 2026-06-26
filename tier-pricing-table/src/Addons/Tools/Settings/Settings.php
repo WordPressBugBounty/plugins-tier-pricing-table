@@ -8,9 +8,18 @@ class Settings {
 
 		add_filter( 'tiered_pricing_table/settings/sections', function ( $sections ) {
 
-			$sections[] = new ToolsSettingsSection();
+			$_sections = array();
 
-			return $sections;
+			foreach ( $sections as $section ) {
+
+				if ( $section->getSlug() === 'advanced' ) {
+					$_sections[] = new ToolsSettingsSection();
+				}
+
+				$_sections[] = $section;
+			}
+
+			return $_sections;
 		}, 10 );
 
 		add_action( 'woocommerce_admin_field_tiered-pricing_tools-ui', function () {
@@ -46,7 +55,10 @@ class Settings {
 			wp_enqueue_script( 'tiered-pricing/feature/tools',
 					plugins_url( 'build/index.js', dirname( __FILE__ . '../' ) ), $assetFile['dependencies'],
 					$assetFile['version'], true );
-					
+
+			wp_set_script_translations( 'tiered-pricing/feature/tools', 'tier-pricing-table',
+					dirname( __FILE__, 5 ) . '/languages' );
+
 			wp_enqueue_style( 'wp-components' );
 		} );
 	}

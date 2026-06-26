@@ -49,7 +49,7 @@ class Admin {
 			$this->getContainer()->getFileManager()->locateJSAsset( 'admin/main' ), [ 'jquery' ],
 			TierPricingTablePlugin::VERSION );
 		wp_enqueue_style( 'tiered-pricing-table-admin-css',
-			$this->getContainer()->getFileManager()->locateAsset( 'admin/style.css' ), array(),
+			$this->getContainer()->getFileManager()->locateCSSAsset( 'admin/style.css' ), array(),
 			TierPricingTablePlugin::VERSION );
 	}
 }

@@ -16,18 +16,21 @@ class AppliedCustomers {
 		$hasCustomers = $this->showCustomers( $rule->getIncludedUsers() );
 		$hasRoles     = $this->showUserRoles( $rule->getIncludedUserRoles() );
 		
+		$excludedUsers = $rule->getExcludedUsers();
+		$excludedRoles = $rule->getExcludedUserRoles();
+		$hasExceptions = ! empty( $excludedUsers ) || ! empty( $excludedRoles );
+		
 		if ( ! $hasRoles && ! $hasCustomers ) {
+			$badgeText = $hasExceptions ? __( 'Applied to every user', 'tier-pricing-table' ) : __( 'Applied to every user', 'tier-pricing-table' );
 			?>
-			<mark class="order-status status-processing tips">
-				<span>
-					<?php esc_html_e( 'Applied to every user', 'tier-pricing-table' ); ?>
-				</span>
-			</mark>
+			<span style="display: inline-block; background: #e0f0fa; color: #0070bc; border: 1px solid #bae0ff; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: 500; margin-bottom: 12px; line-height: 1.4;">
+				<?php echo esc_html( $badgeText ); ?>
+			</span>
 			<?php
 		}
 	
-		$this->showCustomers( $rule->getExcludedUsers(), false );
-		$this->showUserRoles( $rule->getExcludedUserRoles(), false );
+		$this->showCustomers( $excludedUsers, false );
+		$this->showUserRoles( $excludedRoles, false );
 	}
 	
 	public function showCustomers( array $customersIds, $included = true ): bool {
@@ -44,21 +47,24 @@ class AppliedCustomers {
 		}, $customersIds ) );
 		
 		if ( ! empty( $customers ) ) {
+			$title = $included ? __( 'Customers', 'tier-pricing-table' ) : __( 'Excluded Customers', 'tier-pricing-table' );
 			
-			if ( $included ) {
-				esc_html_e( 'Customers: ', 'tier-pricing-table' );
-			} else {
-				esc_html_e( 'Excluded customers: ', 'tier-pricing-table' );
+			echo '<div style="margin-bottom: 12px;">';
+			echo sprintf('<strong style="display: block; margin-bottom: 4px;">%s:</strong>', esc_html($title));
+			echo '<div style="display: flex; flex-wrap: wrap; gap: 4px;">';
+			
+			foreach ($customers as $customer) {
+				echo sprintf(
+					'<span style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; font-size: 12px; color: #3c434a; border: 1px solid #dcdcdc; line-height: 1.4;">%s</span>',
+					Formatter::formatCustomerString( $customer, true )
+				);
 			}
 			
-			$customersString = array_map( function ( WC_Customer $customer ) {
-				return Formatter::formatCustomerString( $customer, true );
-			}, $customers );
+			if ( $customersMoreThanCanBeShown ) {
+				echo '<span style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; font-size: 12px; color: #8c8f94; border: 1px solid #dcdcdc; line-height: 1.4;">...</span>';
+			}
 			
-			echo wp_kses_post( implode( ', ',
-					$customersString ) . ( $customersMoreThanCanBeShown ? '<span> ...</span>' : '' ) );
-			
-			echo '<br><br>';
+			echo '</div></div>';
 			
 			return true;
 		}
@@ -69,19 +75,20 @@ class AppliedCustomers {
 	public function showUserRoles( array $roles, $included = true ): bool {
 		
 		if ( ! empty( $roles ) ) {
-			if ( $included ) {
-				esc_html_e( 'Roles: ', 'tier-pricing-table' );
-			} else {
-				esc_html_e( 'Excluded roles: ', 'tier-pricing-table' );
+			$title = $included ? __( 'Roles', 'tier-pricing-table' ) : __( 'Excluded Roles', 'tier-pricing-table' );
+			
+			echo '<div style="margin-bottom: 12px;">';
+			echo sprintf('<strong style="display: block; margin-bottom: 4px;">%s:</strong>', esc_html($title));
+			echo '<div style="display: flex; flex-wrap: wrap; gap: 4px;">';
+			
+			foreach ($roles as $role) {
+				echo sprintf(
+					'<span style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; font-size: 12px; color: #3c434a; border: 1px solid #dcdcdc; line-height: 1.4;">%s</span>',
+					Formatter::formatRoleString( $role )
+				);
 			}
 			
-			$rolesString = array_map( function ( $role ) {
-				return sprintf( '<span>%s</span>', Formatter::formatRoleString( $role ) );
-			}, $roles );
-			
-			echo wp_kses_post( implode( ', ', $rolesString ) );
-			
-			echo '<br><br>';
+			echo '</div></div>';
 			
 			return true;
 		}

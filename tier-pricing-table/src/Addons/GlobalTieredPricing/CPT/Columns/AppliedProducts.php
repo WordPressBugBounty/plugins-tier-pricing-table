@@ -12,22 +12,30 @@ class AppliedProducts {
 	}
 	
 	public function render( GlobalPricingRule $rule ) {
-		
 		$hasProducts   = $this->showProducts( $rule->getIncludedProducts() );
-		$hasCategories = $this->showCategories( $rule->getIncludedProductCategories() );
+		$hasCategories = $this->showTerms( $rule->getIncludedProductCategories(), __( 'Categories', 'tier-pricing-table' ) );
+		$hasTags       = $this->showTerms( $rule->getIncludedProductTags(), __( 'Tags', 'tier-pricing-table' ) );
+		$hasBrands     = $this->showTerms( $rule->getIncludedProductBrands(), __( 'Brands', 'tier-pricing-table' ) );
 		
-		if ( ! $hasProducts && ! $hasCategories ) {
+		$excludedProducts   = $rule->getExcludedProducts();
+		$excludedCategories = $rule->getExcludedProductCategories();
+		$excludedTags       = $rule->getExcludedProductTags();
+		$excludedBrands     = $rule->getExcludedProductBrands();
+		$hasExceptions      = ! empty( $excludedProducts ) || ! empty( $excludedCategories ) || ! empty( $excludedTags ) || ! empty( $excludedBrands );
+		
+		if ( ! $hasProducts && ! $hasCategories && ! $hasTags && ! $hasBrands ) {
+			$badgeText = $hasExceptions ? __( 'Applied to every product', 'tier-pricing-table' ) : __( 'Applied to every product', 'tier-pricing-table' );
 			?>
-			<mark class="order-status status-processing tips">
-				<span>
-					<?php esc_html_e( 'Applied to every product', 'tier-pricing-table' ); ?>
-				</span>
-			</mark>
+			<span style="display: inline-block; background: #e0f0fa; color: #0070bc; border: 1px solid #bae0ff; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: 500; margin-bottom: 12px; line-height: 1.4;">
+				<?php echo esc_html( $badgeText ); ?>
+			</span>
 			<?php
-		} else {
-			$this->showProducts( $rule->getExcludedProducts(), false );
-			$this->showCategories( $rule->getExcludedProductCategories(), false );
 		}
+
+		$this->showProducts( $excludedProducts, false );
+		$this->showTerms( $excludedCategories, __( 'Excluded Categories', 'tier-pricing-table' ) );
+		$this->showTerms( $excludedTags, __( 'Excluded Tags', 'tier-pricing-table' ) );
+		$this->showTerms( $excludedBrands, __( 'Excluded Brands', 'tier-pricing-table' ) );
 	}
 	
 	public function showProducts( array $productsIds, $included = true ): bool {
@@ -41,22 +49,26 @@ class AppliedProducts {
 		}, $productsIds ) );
 		
 		if ( ! empty( $products ) ) {
+			$title = $included ? __( 'Products', 'tier-pricing-table' ) : __( 'Excluded Products', 'tier-pricing-table' );
 			
-			if ( $included ) {
-				esc_html_e( 'Products: ', 'tier-pricing-table' );
-			} else {
-				esc_html_e( 'Excluded products: ', 'tier-pricing-table' );
+			echo '<div style="margin-bottom: 12px;">';
+			echo sprintf('<strong style="display: block; margin-bottom: 4px;">%s:</strong>', esc_html($title));
+			echo '<div style="display: flex; flex-wrap: wrap; gap: 4px;">';
+			
+			foreach ($products as $product) {
+				$link = get_edit_post_link( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id() );
+				echo sprintf(
+					'<a href="%s" target="_blank" style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; text-decoration: none; font-size: 12px; color: #3c434a; border: 1px solid #dcdcdc; line-height: 1.4;">%s</a>',
+					esc_url( $link ),
+					esc_html( $product->get_name() )
+				);
 			}
 			
-			$productsString = array_map( function ( WC_Product $product ) {
-				return sprintf( '<a href="%s" target="_blank">%s</a>',
-					get_edit_post_link( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id() ),
-					$product->get_name() );
-			}, $products );
+			if ( $moreThanCanBeShown ) {
+				echo '<span style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; font-size: 12px; color: #8c8f94; border: 1px solid #dcdcdc; line-height: 1.4;">...</span>';
+			}
 			
-			echo wp_kses_post( implode( ', ', $productsString ) . ( $moreThanCanBeShown ? '<span> ...</span>' : '' ) );
-			
-			echo '<br><br>';
+			echo '</div></div>';
 			
 			return true;
 		}
@@ -64,35 +76,39 @@ class AppliedProducts {
 		return false;
 	}
 	
-	public function showCategories( array $categoriesIds, $included = true ): bool {
-		$moreThanCanBeShown = count( $categoriesIds ) > 10;
-		$categoriesIds      = array_slice( $categoriesIds, 0, 10 );
+	public function showTerms( array $termsIds, string $title ): bool {
+		$moreThanCanBeShown = count( $termsIds ) > 10;
+		$termsIds           = array_slice( $termsIds, 0, 10 );
 		
-		$categories = array_filter( array_map( function ( $categoryId ) {
-			return get_term( $categoryId );
-		}, $categoriesIds ) );
+		$terms = array_filter( array_map( function ( $termId ) {
+			return get_term( $termId );
+		}, $termsIds ) );
 		
-		$categories = array_filter( $categories, function ( $category ) {
-			return $category instanceof WP_Term;
+		$terms = array_filter( $terms, function ( $term ) {
+			return $term instanceof WP_Term;
 		} );
 		
-		if ( ! empty( $categories ) ) {
+		if ( ! empty( $terms ) ) {
 			
-			if ( $included ) {
-				esc_html_e( 'Categories: ', 'tier-pricing-table' );
-			} else {
-				esc_html_e( 'Excluded categories: ', 'tier-pricing-table' );
+			echo '<div style="margin-bottom: 12px;">';
+			echo sprintf('<strong style="display: block; margin-bottom: 4px;">%s:</strong>', esc_html($title));
+			echo '<div style="display: flex; flex-wrap: wrap; gap: 4px;">';
+			
+			foreach ($terms as $term) {
+				$link = get_edit_term_link( $term->term_id );
+				$linkHtml = $link ? esc_url( $link ) : '#';
+				echo sprintf(
+					'<a href="%s" target="_blank" style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; text-decoration: none; font-size: 12px; color: #3c434a; border: 1px solid #dcdcdc; line-height: 1.4;">%s</a>',
+					$linkHtml,
+					esc_html( $term->name )
+				);
 			}
 			
-			$categoriesString = array_map( function ( WP_Term $category ) {
-				return sprintf( '<a href="%s" target="_blank">%s</a>', get_edit_term_link( $category->term_id ),
-					$category->name );
-			}, $categories );
+			if ( $moreThanCanBeShown ) {
+				echo '<span style="display: inline-block; padding: 2px 8px; background: #f0f0f1; border-radius: 3px; font-size: 12px; color: #8c8f94; border: 1px solid #dcdcdc; line-height: 1.4;">...</span>';
+			}
 			
-			echo wp_kses_post( implode( ', ',
-					$categoriesString ) . ( $moreThanCanBeShown ? '<span> ...</span>' : '' ) );
-			
-			echo '<br><br>';
+			echo '</div></div>';
 			
 			return true;
 		}

@@ -14,17 +14,12 @@ use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Frontend\Frontend;
 use TierPricingTable\Integrations\Integrations;
 use TierPricingTable\Services\API\WooCommerceRestAPI;
-use TierPricingTable\Services\CartUpsellsService;
-use TierPricingTable\Services\CatalogPricesService;
 use TierPricingTable\Services\DebugService;
 use TierPricingTable\Services\ImportExport\WoocommerceExportService;
 use TierPricingTable\Services\ImportExport\WoocommerceImportService;
-use TierPricingTable\Services\NonLoggedInUsersService;
 use TierPricingTable\Services\ProductPageService;
 use TierPricingTable\Services\RegularPricingService;
 use TierPricingTable\Services\SystemStatusReportService;
-use TierPricingTable\Services\TieredPricingCartService;
-use TierPricingTable\Services\YouSaveService;
 use TierPricingTable\Settings\Settings;
 use WC_Product;
 use WP_User;
@@ -42,7 +37,7 @@ class TierPricingTablePlugin {
      */
     private $licence;
 
-    const VERSION = '6.1.0';
+    const VERSION = '6.4.0';
 
     /**
      * TierPricingTablePlugin constructor.
@@ -120,8 +115,6 @@ class TierPricingTablePlugin {
             $this->getContainer()->initService( DebugService::class );
             $this->getContainer()->initService( SystemStatusReportService::class );
             $this->getContainer()->initService( RegularPricingService::class );
-            $this->getContainer()->initService( TieredPricingCartService::class );
-            $this->getContainer()->initService( YouSaveService::class );
             $this->getContainer()->initService( ProductPageService::class );
             $this->getContainer()->initService( WooCommerceRestAPI::class );
             $this->getContainer()->initService( WoocommerceImportService::class );
@@ -152,7 +145,7 @@ class TierPricingTablePlugin {
         $links['docs'] = '<a target="_blank" href="' . self::getDocumentationURL() . '">' . __( 'Documentation', 'tier-pricing-table' ) . '</a>';
         $links['contact-us'] = '<a href="' . self::getContactUsURL() . '"><b style="color: green">' . __( 'Contact Us', 'tier-pricing-table' ) . '</b></a>';
         if ( !tpt_fs()->is_anonymous() && tpt_fs()->is_installed_on_site() ) {
-            $links['account'] = '<a href="' . self::getAccountPageURL() . '"><b>' . __( 'Account', 'tier-pricing-table' ) . '</b></a>';
+            $links['account'] = '<a href="' . self::getAccountPageURL() . '"><b>' . __( 'My Account', 'tier-pricing-table' ) . '</b></a>';
         }
         return $links;
     }

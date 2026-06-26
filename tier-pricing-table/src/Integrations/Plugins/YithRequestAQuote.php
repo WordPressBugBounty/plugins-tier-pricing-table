@@ -78,11 +78,11 @@ class YithRequestAQuote extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'YITH Request a Quote', 'tier-pricing-table' );
+		return 'YITH Request a Quote';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make tiered pricing properly work with request a quote form.', 'tier-pricing-table' );
+		return __( 'Apply tiered pricing discounts when users request a quote through YITH Request a Quote.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

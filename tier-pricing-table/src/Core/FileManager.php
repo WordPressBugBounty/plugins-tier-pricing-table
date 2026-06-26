@@ -157,6 +157,26 @@ class FileManager {
 	}
 	
 	/**
+	 * Locate CSS assets
+	 *
+	 * @param  string  $file
+	 *
+	 * @return string
+	 */
+	public function locateCSSAsset( $file ) {
+		
+		$file = str_replace( '.css', '', $file );
+		
+		$css = '.css';
+		
+		if ( defined( 'TIERED_PRICING_PRODUCTION' ) ) {
+			$css = '.min.css';
+		}
+		
+		return apply_filters( 'tiered_pricing_table/assets/css/url', $this->pluginUrl . 'assets/' . $file . $css, $file );
+	}
+	
+	/**
 	 * Locate template
 	 *
 	 * @param  string  $template

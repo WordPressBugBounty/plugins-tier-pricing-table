@@ -15,6 +15,8 @@ class RoleBasedPricingRule {
 	protected $tieredPricingType = 'fixed';
 	protected $percentageTieredPricingRules = array();
 	protected $fixedTieredPricingRules = array();
+	protected $taxStatus = '';
+	protected $taxClass = '';
 	
 	public function __construct( $productId, $role ) {
 		$this->productId = $productId;
@@ -115,6 +117,22 @@ class RoleBasedPricingRule {
 		return $this->getTieredPricingType() === 'percentage' ? $this->getPercentageTieredPricingRules() : $this->getFixedTieredPricingRules();
 	}
 	
+	public function getTaxStatus(): string {
+		return $this->taxStatus;
+	}
+	
+	public function setTaxStatus( string $taxStatus ) {
+		$this->taxStatus = $taxStatus;
+	}
+	
+	public function getTaxClass(): string {
+		return $this->taxClass;
+	}
+	
+	public function setTaxClass( string $taxClass ) {
+		$this->taxClass = $taxClass;
+	}
+	
 	public function asArray(): array {
 		return array(
 			// main
@@ -135,6 +153,10 @@ class RoleBasedPricingRule {
 			
 			// MOQ
 			'minimum'             => $this->getMinimumOrderQuantity(),
+			
+			// Tax
+			'tax_status'          => $this->getTaxStatus(),
+			'tax_class'           => $this->getTaxClass(),
 		);
 	}
 	
@@ -165,6 +187,10 @@ class RoleBasedPricingRule {
 			
 			// MOQ
 			'tiered_price_minimum_qty'   => $this->getMinimumOrderQuantity(),
+			
+			// Tax
+			'tiered_price_tax_status'    => $this->getTaxStatus(),
+			'tiered_price_tax_class'     => $this->getTaxClass(),
 		);
 		
 		$role = $this->getRole();
@@ -194,6 +220,10 @@ class RoleBasedPricingRule {
 		// MOQ
 		$rule->setMinimumOrderQuantity( RoleBasedPriceManager::getProductQtyMin( $productId, $role ) );
 		
+		// Tax
+		$rule->setTaxStatus( RoleBasedPriceManager::getProductTaxStatus( $productId, $role ) );
+		$rule->setTaxClass( RoleBasedPriceManager::getProductTaxClass( $productId, $role ) );
+		
 		return apply_filters( 'tiered_pricing_table/role_based/after_built_rule', $rule );
 	}
 	
@@ -214,6 +244,10 @@ class RoleBasedPricingRule {
 		
 		// MOQ
 		$rule->setMinimumOrderQuantity( isset( $data['minimum_order_quantity'] ) ? (int) $data['minimum_order_quantity'] : null );
+		
+		// Tax
+		$rule->setTaxStatus( isset( $data['tax_status'] ) ? (string) $data['tax_status'] : '' );
+		$rule->setTaxClass( isset( $data['tax_class'] ) ? (string) $data['tax_class'] : '' );
 		
 		return apply_filters( 'tiered_pricing_table/role_based/after_built_rule_from_array', $rule, $role, $data );
 	}

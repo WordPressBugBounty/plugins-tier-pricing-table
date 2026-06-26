@@ -15,7 +15,7 @@ class SEOPress extends PluginIntegrationAbstract {
     }
 
     public function getDescription() : string {
-        return __( 'Adds <b>%%lowest_price%%</b> and <b>%%price_range%%</b> variables to display the lowest and price range of products with tiered pricing.', 'tier-pricing-table' );
+        return __( 'Add tiered pricing data to SEOPress and introduce <b>%%lowest_price%%</b> and <b>%%price_range%%</b> variables for SEO.', 'tier-pricing-table' );
     }
 
     public function getSlug() : string {

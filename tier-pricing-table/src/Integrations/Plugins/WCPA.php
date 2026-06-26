@@ -12,11 +12,11 @@ class WCPA extends PluginIntegrationAbstract {
 	}
 
 	public function getTitle(): string {
-		return __( 'WooCommerce Custom Product Addons (WCPA) by Acowebs', 'tier-pricing-table' );
+		return 'WooCommerce Custom Product Addons (WCPA) by Acowebs';
 	}
 
 	public function getDescription(): string {
-		return __( 'Make tiered pricing works properly with custom product options.', 'tier-pricing-table' );
+		return __( 'Calculate tiered pricing accurately when custom product add-ons are selected.', 'tier-pricing-table' );
 	}
 
 	public function getSlug(): string {

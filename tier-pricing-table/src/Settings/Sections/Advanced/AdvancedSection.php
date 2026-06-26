@@ -14,7 +14,7 @@ class AdvancedSection extends SectionAbstract {
 		$advanced = apply_filters( 'tiered_pricing_table/settings/advanced_settings', array() );
 		
 		$sectionTitle = array(
-			'title' => __( 'Features', 'tier-pricing-table' ),
+			'title' => __( 'Modules', 'tier-pricing-table' ),
 			'desc'  => __( 'You can disable or enable specific plugin features.', 'tier-pricing-table' ),
 			'id'    => Settings::SETTINGS_PREFIX . 'advanced',
 			'type'  => 'title',
@@ -40,7 +40,14 @@ class AdvancedSection extends SectionAbstract {
 	}
 	
 	public function getName(): string {
-		return __( 'Feature Flags', 'tier-pricing-table' );
+		return __( 'Modules', 'tier-pricing-table' );
+	}
+	
+	public function getSectionCSS(): string {
+		return '.form-table:first-of-type tbody { display: flex; flex-wrap: wrap; margin: 10px 0 20px 0; }
+		.form-table:first-of-type tr { display: block; border-bottom: none; padding-bottom: 0; }
+		.form-table:first-of-type th { display: none; }
+		.form-table:first-of-type td { padding: 0 !important; width: 100%; }';
 	}
 	
 	public static function deleteOptions() {

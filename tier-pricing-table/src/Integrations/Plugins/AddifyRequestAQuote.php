@@ -30,11 +30,11 @@ class AddifyRequestAQuote extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Request a Quote for WooCommerce by Addify', 'tier-pricing-table' );
+		return 'Request a Quote for WooCommerce by Addify';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Consider tiered pricing in the request a quote form.', 'tier-pricing-table' );
+		return __( 'Apply tiered pricing discounts when users request a quote through the Addify Request a Quote form.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

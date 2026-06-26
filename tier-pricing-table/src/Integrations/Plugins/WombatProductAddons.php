@@ -39,11 +39,11 @@ class WombatProductAddons extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Product Fields (Product Addons) by StudioWombat', 'tier-pricing-table' );
+		return 'Product Fields (Product Addons) by StudioWombat';
 	}
 	
 	public function getDescription(): string {
-		return __( 'Make tiered pricing works properly with custom product options.', 'tier-pricing-table' );
+		return __( 'Calculate tiered pricing accurately when using StudioWombat Advanced Product Fields.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

@@ -15,24 +15,21 @@ class ProductAndCategories extends FormTab {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Select products or product categories the rule will work for.', 'tier-pricing-table' );
+		return __( 'Select products, categories, tags, or brands this rule applies to', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
 		
-		$this->renderSectionTitle( __( 'Included Products', 'tier-pricing-table' ), array(
-			'description' => __( 'Select products or product categories that the rule will apply to. The rule will work for all products in the selected categories.',
-				'tier-pricing-table' ),
-		) );
+		$this->renderSectionTitle( __( 'Applies to products', 'tier-pricing-table' ) );
 		
 		if ( empty( $pricingRule->getIncludedProductCategories() ) && empty( $pricingRule->getIncludedProducts() ) ) {
-			$this->renderHint( __( 'If you do not specify products or product categories, the rule will apply to all products in your store (excluding those selected in the exclusions section).',
+			$this->renderHint( __( 'If no products, categories, tags, or brands are selected, this rule will apply to all products in your store, except those listed in the Exclusions section.',
 				'tier-pricing-table' ) );
 		}
 		
 		$this->renderSelect2( array(
 			'id'            => 'tpt_included_categories',
-			'label'         => __( 'Apply for categories', 'tier-pricing-table' ),
+			'label'         => __( 'Categories', 'tier-pricing-table' ),
 			'value'         => ( function () use ( $pricingRule ) {
 				$options = [];
 				
@@ -46,13 +43,55 @@ class ProductAndCategories extends FormTab {
 				
 				return $options;
 			} )(),
-			'placeholder'   => __( 'Search for a category &hellip;', 'tier-pricing-table' ),
+			'placeholder'   => __( 'Search categories&hellip;', 'tier-pricing-table' ),
 			'search_action' => 'woocommerce_json_search_tpt_categories',
 		) );
 		
 		$this->renderSelect2( array(
+			'id'            => 'tpt_included_tags',
+			'label'         => __( 'Tags', 'tier-pricing-table' ),
+			'value'         => ( function () use ( $pricingRule ) {
+				$options = [];
+				
+				foreach ( $pricingRule->getIncludedProductTags() as $tagId ) {
+					$tag = get_term_by( 'id', $tagId, 'product_tag' );
+					
+					if ( $tag ) {
+						$options[ $tagId ] = $tag->name;
+					}
+				}
+				
+				return $options;
+			} )(),
+			'placeholder'   => __( 'Search tags&hellip;', 'tier-pricing-table' ),
+			'search_action' => 'woocommerce_json_search_tpt_tags',
+		) );
+		
+		if ( taxonomy_exists( 'product_brand' ) ) {
+			$this->renderSelect2( array(
+				'id'            => 'tpt_included_brands',
+				'label'         => __( 'Brands', 'tier-pricing-table' ),
+				'value'         => ( function () use ( $pricingRule ) {
+					$options = [];
+					
+					foreach ( $pricingRule->getIncludedProductBrands() as $brandId ) {
+						$brand = get_term_by( 'id', $brandId, 'product_brand' );
+						
+						if ( $brand && ! is_wp_error( $brand ) ) {
+							$options[ $brandId ] = $brand->name;
+						}
+					}
+					
+					return $options;
+				} )(),
+				'placeholder'   => __( 'Search brands&hellip;', 'tier-pricing-table' ),
+				'search_action' => 'woocommerce_json_search_tpt_brands',
+			) );
+		}
+		
+		$this->renderSelect2( array(
 			'id'            => 'tpt_included_products',
-			'label'         => __( 'Apply for specific products', 'tier-pricing-table' ),
+			'label'         => __( 'Products', 'tier-pricing-table' ),
 			'value'         => ( function () use ( $pricingRule ) {
 				$options = [];
 				
@@ -70,18 +109,26 @@ class ProductAndCategories extends FormTab {
 				
 				return $options;
 			} )(),
-			'placeholder'   => __( 'Search for a product &hellip;', 'tier-pricing-table' ),
+			'placeholder'   => __( 'Search products&hellip;', 'tier-pricing-table' ),
 			'search_action' => 'woocommerce_json_search_products_and_variations',
 		) );
 		
-		$this->renderSectionTitle( __( 'Exclusions', 'tier-pricing-table' ), array(
-			'description' => __( 'Select products or product categories the rule will not work for.',
-				'tier-pricing-table' ),
-		) );
+		$hasExclusions = ! empty( $pricingRule->getExcludedProductCategories() ) ||
+		                 ! empty( $pricingRule->getExcludedProductTags() ) ||
+		                 ! empty( $pricingRule->getExcludedProductBrands() ) ||
+		                 ! empty( $pricingRule->getExcludedProducts() );
+		?>
+		<details class="tpt-exclusions-accordion" <?php echo $hasExclusions ? 'open' : ''; ?>>
+			<summary>
+				<?php echo esc_html__( 'Exclusions', 'tier-pricing-table' ); ?>
+				<span class="dashicons dashicons-arrow-down-alt2 tpt-accordion-icon"></span>
+			</summary>
+			<div class="tpt-exclusions-accordion-content">
+		<?php
 		
 		$this->renderSelect2( array(
 			'id'            => 'tpt_excluded_categories',
-			'label'         => __( 'Exclude for categories', 'tier-pricing-table' ),
+			'label'         => __( 'Categories', 'tier-pricing-table' ),
 			'value'         => ( function () use ( $pricingRule ) {
 				$options = [];
 				
@@ -95,13 +142,55 @@ class ProductAndCategories extends FormTab {
 				
 				return $options;
 			} )(),
-			'placeholder'   => __( 'Search for a category &hellip;', 'tier-pricing-table' ),
+			'placeholder'   => __( 'Search categories&hellip;', 'tier-pricing-table' ),
 			'search_action' => 'woocommerce_json_search_tpt_categories',
 		) );
 		
 		$this->renderSelect2( array(
+			'id'            => 'tpt_excluded_tags',
+			'label'         => __( 'Tags', 'tier-pricing-table' ),
+			'value'         => ( function () use ( $pricingRule ) {
+				$options = [];
+				
+				foreach ( $pricingRule->getExcludedProductTags() as $tagId ) {
+					$tag = get_term_by( 'id', $tagId, 'product_tag' );
+					
+					if ( $tag ) {
+						$options[ $tagId ] = $tag->name;
+					}
+				}
+				
+				return $options;
+			} )(),
+			'placeholder'   => __( 'Search tags&hellip;', 'tier-pricing-table' ),
+			'search_action' => 'woocommerce_json_search_tpt_tags',
+		) );
+		
+		if ( taxonomy_exists( 'product_brand' ) ) {
+			$this->renderSelect2( array(
+				'id'            => 'tpt_excluded_brands',
+				'label'         => __( 'Brands', 'tier-pricing-table' ),
+				'value'         => ( function () use ( $pricingRule ) {
+					$options = [];
+					
+					foreach ( $pricingRule->getExcludedProductBrands() as $brandId ) {
+						$brand = get_term_by( 'id', $brandId, 'product_brand' );
+						
+						if ( $brand && ! is_wp_error( $brand ) ) {
+							$options[ $brandId ] = $brand->name;
+						}
+					}
+					
+					return $options;
+				} )(),
+				'placeholder'   => __( 'Search brands&hellip;', 'tier-pricing-table' ),
+				'search_action' => 'woocommerce_json_search_tpt_brands',
+			) );
+		}
+		
+		$this->renderSelect2( array(
 			'id'            => 'tpt_excluded_products',
-			'label'         => __( 'Exclude for specific products', 'tier-pricing-table' ),
+			'label'         => __( 'Products', 'tier-pricing-table' ),
 			'value'         => ( function () use ( $pricingRule ) {
 				$options = [];
 				
@@ -121,9 +210,14 @@ class ProductAndCategories extends FormTab {
 				
 				return $options;
 			} )(),
-			'placeholder'   => __( 'Search for a product &hellip;', 'tier-pricing-table' ),
+			'placeholder'   => __( 'Search products&hellip;', 'tier-pricing-table' ),
 			'search_action' => 'woocommerce_json_search_products_and_variations',
 		) );
+
+		?>
+			</div>
+		</details>
+		<?php
 	}
 	
 	public function getIcon(): string {

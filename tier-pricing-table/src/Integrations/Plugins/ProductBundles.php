@@ -101,11 +101,11 @@ class ProductBundles extends PluginIntegrationAbstract {
 	}
 
 	public function getTitle(): string {
-		return __( 'Product Bundles (by WooCommerce)', 'tier-pricing-table' );
+		return 'Product Bundles (by WooCommerce)';
 	}
 
 	public function getDescription(): string {
-		return __( 'Integration provides compatibility with Product Bundles for WooCommerce to support bundle product type.',
+		return __( 'Apply tiered pricing discounts correctly to WooCommerce Product Bundles.',
 			'tier-pricing-table' );
 	}
 

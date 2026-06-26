@@ -61,7 +61,7 @@
 		     style="<?php echo esc_attr( ! empty( $presentRoles ) ? 'display: none;' : '' ); ?>">
 			<span>
 				<?php
-					esc_attr_e( 'Set up separate rules for different roles of customers. Choose a role and click the "Setup for role" button.',
+					esc_attr_e( 'Set up specific pricing and rules for different user roles.',
 							'tier-pricing-table' );
 				?>
 			</span>
@@ -73,8 +73,8 @@
 
 					$settingsLink = sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( $settingsLink ),
 							esc_html__( 'settings', 'tier-pricing-table' ) );
-
-					echo wp_kses_post( sprintf( __( 'If you do not use this feature, you can disable it in the %s to simplify the interface.',
+					// translators: %s: settings link
+					echo wp_kses_post( sprintf( __( 'You can disable this feature in the %s if you don\'t need role-based pricing.',
 							'tier-pricing-table' ), $settingsLink ) );
 
 				?>
@@ -95,7 +95,7 @@
 
 			<button class="button tpt-role-based-adding-form__add-button">
 				<?php
-					esc_attr_e( 'Setup for role', 'tier-pricing-table' );
+					esc_attr_e( 'Add Role', 'tier-pricing-table' );
 				?>
 			</button>
 			<?php
@@ -107,7 +107,7 @@
 			?>
 			<a style="margin-left: auto" target="_blank"
 			   href="<?php echo esc_url( $roleManagementLink ); ?>">
-				<?php esc_html_e( 'Manage user roles', 'tier-pricing-table' ); ?>
+				<?php esc_html_e( 'Manage Roles', 'tier-pricing-table' ); ?>
 			</a>
 
 			<div class="clear"></div>

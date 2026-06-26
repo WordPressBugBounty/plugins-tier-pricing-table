@@ -26,7 +26,7 @@ class Frontend {
 			array( 'jquery' ), TierPricingTablePlugin::VERSION );
 		
 		wp_enqueue_style( 'tiered-pricing-table-front-css',
-			$this->getContainer()->getFileManager()->locateAsset( 'frontend/main.css' ), null,
+			$this->getContainer()->getFileManager()->locateCSSAsset( 'frontend/main.css' ), null,
 			TierPricingTablePlugin::VERSION );
 		
 		wp_localize_script( 'tiered-pricing-table-front-js', 'tieredPricingGlobalData', [

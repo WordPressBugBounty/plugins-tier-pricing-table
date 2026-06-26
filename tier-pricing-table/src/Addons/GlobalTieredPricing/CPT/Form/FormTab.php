@@ -131,17 +131,17 @@ abstract class FormTab {
 					<a href="<?php echo esc_attr( tpt_fs_activation_url() ); ?>" target="_blank" style="text-decoration: none; margin-left: 5px;
 						vertical-align: text-top;">
 						<span style="
-						background: #d63638;
-						color: #fff;
+						border: 1px solid #d63638;
+						color: #d63638;
 						padding: 3px 8px;
 						border-radius: 3px;
 						letter-spacing: normal;
 						font-weight: 500;
-						font-size: 10px;">
+						font-size: 12px;">
 						<?php esc_html_e( 'Premium feature', 'tier-pricing-table' ); ?>
 						</span>
 					</a>
-					<span style="margin-left:6px;">•</span>
+					<span>•</span>
 					<a href="<?php echo esc_attr( tpt_fs_activation_url() ); ?>"
 					   target="_blank"
 					   style="letter-spacing: normal; font-weight: normal; font-size: 13px;">
@@ -149,7 +149,50 @@ abstract class FormTab {
 					</a>
 					<?php
 				}
+
+				if ( isset( $args['subtitle'] ) ) {
+					?>
+					<div style="font-size: 12px; color: #666; margin-top: 5px;">
+						<?php echo esc_html( $args['subtitle'] ); ?>
+					</div>
+					<?php
+				}
 			?>
+		</div>
+		<?php
+	}
+
+	public function renderSelect( $args = array() ) {
+
+		$args = wp_parse_args( $args, array(
+				'title'       => '',
+				'id'          => '',
+				'value'       => '',
+				'options'     => array(),
+				'description' => '',
+				'disabled'    => false,
+		) );
+
+		?>
+		<div class="tiered-pricing-form-block">
+			<label for="<?php echo esc_attr( $args['id'] ); ?>">
+				<?php echo esc_html( $args['title'] ); ?>
+			</label>
+			<div style="min-height: 25px">
+				<select name="<?php echo esc_attr( $args['id'] ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" <?php disabled( $args['disabled'] ); ?>>
+					<?php foreach ( $args['options'] as $optionValue => $optionLabel ) : ?>
+						<option value="<?php echo esc_attr( $optionValue ); ?>" <?php selected( $args['value'], $optionValue ); ?>>
+							<?php echo esc_html( $optionLabel ); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+
+			<?php if ( $args['description'] ) : ?>
+				<p class="description" style="margin:0">
+					<?php echo esc_html( $args['description'] ); ?>
+				</p>
+			<?php endif; ?>
 		</div>
 		<?php
 	}

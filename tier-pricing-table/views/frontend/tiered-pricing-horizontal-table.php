@@ -46,6 +46,17 @@
 			'price' => $real_price,
 	) );
 
+	$num_rows = 0;
+	if ( $settings['quantity_column_title'] ) $num_rows++;
+	if ( $settings['discount_column_title'] ) $num_rows++;
+	if ( $settings['price_column_title'] ) $num_rows++;
+
+	// Detect custom columns via output buffering
+	ob_start();
+	do_action( 'tiered_pricing_table/tiered_pricing/header_columns', $pricing_rule );
+	$custom_head = ob_get_clean();
+	$custom_columns_count = substr_count($custom_head, '<th');
+	$num_rows += $custom_columns_count;
 ?>
 
 <?php if ( ! empty( $pricing_rule->getRules() ) ) : ?>
@@ -100,6 +111,7 @@
 					</div>
 				<?php endif; ?>
 
+				<?php echo str_replace(['<th', '</th>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_head); ?>
 			</div>
 			<div class="tiered-pricing-horizontal-table-column tiered-pricing-horizontal-table__values tiered-pricing--active"
 			     data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
@@ -166,6 +178,13 @@
 						?>
 					</div>
 				<?php endif; ?>
+
+				<?php 
+					ob_start();
+					do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, null ); 
+					$custom_cols = ob_get_clean();
+					echo str_replace(['<td', '</td>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_cols);
+				?>
 			</div>
 
 			<?php $iterator = new ArrayIterator( $pricing_rule->getRules() ); ?>
@@ -248,6 +267,13 @@
 							?>
 						</div>
 					<?php endif; ?>
+
+					<?php 
+						ob_start();
+						do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, $currentQuantity );
+						$custom_cols = ob_get_clean();
+						echo str_replace(['<td', '</td>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_cols);
+					?>
 				</div>
 			<?php endwhile; ?>
 		</div>
@@ -256,15 +282,25 @@
 	</div>
 
 	<style>
+		<?php echo esc_attr('#' . $id); ?>[data-tiered-pricing-table] {
+			display: grid;
+			grid-auto-flow: column;
+			grid-template-rows: repeat(<?php echo (int) $num_rows; ?>, auto);
+		}
+
+		<?php echo esc_attr('#' . $id); ?> .tiered-pricing-horizontal-table-column {
+			display: contents;
+		}
+
 		<?php
 		if ( $settings['clickable_rows']) {
-			echo esc_attr('#' . $id) . ' .tiered-pricing-horizontal-table__values {cursor: pointer; }';
-			echo esc_attr('#' . $id) . ' .tiered-pricing-horizontal-table__values:hover { background: #f5f5f5; }';
+			echo esc_attr('#' . $id) . ' .tiered-pricing-horizontal-table__values { cursor: pointer; }';
+			echo esc_attr('#' . $id) . ' .tiered-pricing-horizontal-table__values:hover .tiered-pricing-horizontal-table-cell { background: #f5f5f5; }';
 		}
 		?>
 
-		<?php echo esc_attr('#' . $id); ?>
-		.tiered-pricing--active, .tiered-pricing--active td {
+		<?php echo esc_attr('#' . $id); ?> .tiered-pricing--active .tiered-pricing-horizontal-table-cell,
+		<?php echo esc_attr('#' . $id); ?> .tiered-pricing--active td {
 			background-color: <?php echo esc_attr($settings['active_tier_color']); ?> !important;
 			color: #fff;
 		}

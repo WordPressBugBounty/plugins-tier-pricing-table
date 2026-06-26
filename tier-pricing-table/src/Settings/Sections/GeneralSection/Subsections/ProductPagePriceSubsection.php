@@ -9,11 +9,11 @@ use TierPricingTable\Settings\Settings;
 class ProductPagePriceSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Price on the product page', 'tier-pricing-table' );
+		return __( 'Product Page Pricing', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Control how the product price with tiered pricing will look and behave on the product page.',
+		return __( 'Manage how tiered prices are displayed and behave on single product pages.',
 			'tier-pricing-table' );
 	}
 	
@@ -24,7 +24,7 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'   => __( 'Price behaviour', 'tier-pricing-table' ),
+				'title'   => __( 'Price display format', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'product_page_price_format',
 				'type'    => TPTDisplayType::FIELD_TYPE,
 				'options' => array(
@@ -35,27 +35,27 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 					'no' ) === 'yes' ? 'same_as_catalog' : 'custom',
 			),
 			array(
-				'title'   => __( 'Show actual price', 'tier-pricing-table' ),
+				'title'   => __( 'Enable dynamic price updates', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'update_price_on_product_page',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'The product price is automatically updated when a new price tier is reached.',
+				'desc'    => __( 'Automatically update the main product price when a user selects a different quantity.',
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'   => __( 'Show tiered price as a discount', 'tier-pricing-table' ),
+				'title'   => __( 'Display tiered price as discount', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'show_tiered_price_as_discount',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'When a tiered price is applied, the original price will be crossed out and the discounted price shown.',
+				'desc'    => __( 'Cross out the original price and show the discounted tiered price next to it.',
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'             => __( 'Show total price', 'tier-pricing-table' ),
+				'title'             => __( 'Display total price', 'tier-pricing-table' ),
 				'id'                => Settings::SETTINGS_PREFIX . 'show_total_price',
 				'type'              => TPTSwitchOption::FIELD_TYPE,
 				'default'           => 'no',
-				'desc'              => __( 'The product price will be shown as a total price based on the selected pricing tier and quantity.',
+				'desc'              => __( 'Show the total calculated price based on the selected quantity and active tier.',
 					'tier-pricing-table' ),
 				'custom_attributes' => [ 'data-tiered-pricing-premium-option' => true ],
 			),

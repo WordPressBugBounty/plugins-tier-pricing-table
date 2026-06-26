@@ -28,13 +28,16 @@ class Form {
 	public function __construct() {
 
 		add_action( 'init', function () {
-			$this->tabs = apply_filters( 'tiered_pricing_table/global_pricing/form_tabs', array(
+			$tabs = array(
 					new Pricing( $this ),
 					new ProductAndCategories( $this ),
 					new UsersAndRoles( $this ),
 					new Quantity( $this ),
-					new Settings( $this ),
-			) );
+			);
+
+			$tabs[] = new Settings( $this );
+
+			$this->tabs = apply_filters( 'tiered_pricing_table/global_pricing/form_tabs', $tabs, $this );
 		} );
 
 		add_action( 'edit_form_after_title', function ( WP_Post $post ) {
@@ -63,14 +66,13 @@ class Form {
 				margin-left: 5px;
 			}
 
-			/* tab hint */
 			.tpt-global-pricing-rule-hint {
 				display: flex;
 				align-items: center;
-				padding: 10px 10px;
-				border: 1px solid #eee5ed;
-				background: #faf6f9;
-				color: #814c77 !important;
+				padding: 10px;
+				border-left: 3px solid var(--wp-admin-theme-color, #2271b1);
+				background: #f6f7f7;
+				color: var(--wp-admin-theme-color, #2271b1) !important;
 				margin-bottom: 20px;
 			}
 
@@ -118,7 +120,7 @@ class Form {
 
 			.tpt-global-pricing-rule-form-tab--active {
 				cursor: default;
-				background: #faf6f9;
+				background: #f6f7f7;
 			}
 
 			.tpt-global-pricing-rule-form-tab__icon {
@@ -127,9 +129,9 @@ class Form {
 				height: 40px;
 				aspect-ratio: 1/1;
 				border-radius: 50%;
-				background: #faf6f9;
+				background: #f6f7f7;
 				text-align: center;
-				color: #814c77;
+				color: var(--wp-admin-theme-color, #2271b1);
 				font-size: 20px;
 				font-weight: bold;
 				display: flex;
@@ -139,7 +141,7 @@ class Form {
 
 			.tpt-global-pricing-rule-form-tab--active h3,
 			.tpt-global-pricing-rule-form-tab--active div {
-				color: #814c77 !important;
+				color: var(--wp-admin-theme-color, #2271b1) !important;
 			}
 
 			.tpt-global-pricing-rule-form-tab--active .tpt-global-pricing-rule-form-tab__icon {
@@ -213,7 +215,7 @@ class Form {
 				}
 
 				.tpt-global-pricing-rule-form-tab--active {
-					border-bottom: 3px solid #814c77;
+					border-bottom: 3px solid var(--wp-admin-theme-color, #2271b1);
 				}
 			}
 
@@ -221,6 +223,57 @@ class Form {
 				.tiered-pricing-form-block {
 					padding: 5px 20px !important;
 				}
+			}
+
+			/* Accordion styles */
+			.tpt-exclusions-accordion {
+				margin-top: 20px;
+				background: #fff;
+			}
+
+			.tpt-exclusions-accordion summary {
+				cursor: pointer;
+				list-style: none;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 12px 15px;
+				background: #f6f7f7;
+				border: 1px solid #e8e8e8;
+				font-size: 14px;
+				font-weight: 600;
+				color: #1d2327;
+				transition: background-color 0.2s ease;
+			}
+
+			.tpt-exclusions-accordion summary::-webkit-details-marker {
+				display: none;
+			}
+
+			.tpt-exclusions-accordion summary:hover {
+				background: #f0f0f1;
+			}
+
+			.tpt-exclusions-accordion[open] summary {
+				border-bottom-left-radius: 0;
+				border-bottom-right-radius: 0;
+				border-bottom: 1px solid #e8e8e8;
+			}
+
+			.tpt-exclusions-accordion[open] summary .tpt-accordion-icon {
+				transform: rotate(180deg);
+			}
+
+			.tpt-accordion-icon {
+				transition: transform 0.3s ease;
+				color: #787c82;
+			}
+
+			.tpt-exclusions-accordion-content {
+				padding: 15px 0;
+				border: 1px solid #e8e8e8;
+				border-top: none;
+				border-radius: 0 0 4px 4px;
 			}
 		</style>
 		<script>
@@ -266,13 +319,13 @@ class Form {
 			<nav class="tpt-global-pricing-rule-form__tabs">
 				<?php foreach ( $this->tabs as $tab ) : ?>
 					<div class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
-						 data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+					     data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 
 						<div class="tpt-global-pricing-rule-form-tab__icon" style="">
-							<?php if ( $tab->getIcon() === '$' ) : ?>
-								<span>$</span>
-							<?php else : ?>
+							<?php if ( strpos( $tab->getIcon(), 'dashicons-' ) === 0 ) : ?>
 								<span class="dashicons <?php echo esc_attr( $tab->getIcon() ); ?>"></span>
+							<?php else : ?>
+								<span><?php echo esc_html( $tab->getIcon() ); ?></span>
 							<?php endif; ?>
 						</div>
 
@@ -289,7 +342,7 @@ class Form {
 			<section class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
 				<?php foreach ( $this->tabs as $tab ) : ?>
 					<div class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
-						 id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
+					     id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 						<?php
 							$tab->render( $this->getPricingRuleInstance( $post ) );
 
@@ -322,134 +375,170 @@ class Form {
 		?>
 		<style>
 			.tpt-global-pricing-rule-helping {
-				background: #fff;
-				border: 1px solid #e8e8e8;
-				padding: 20px;
+				background: #ffffff;
+				border: 1px solid #e2e4e7;
+				border-radius: 8px;
+				padding: 30px;
 				position: relative;
-				text-align: center;
 				margin: 20px 0;
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 			}
 
 			.tpt-global-pricing-rule-helping__close {
 				position: absolute;
-				top: 10px;
-				width: 26px;
-				height: 26px;
-				background: #faf6f9;
-				color: #814c77;
+				top: 15px;
+				width: 32px;
+				height: 32px;
+				background: #f0f0f1;
+				color: #3c434a;
 				text-align: center;
-				line-height: 24px;
-				right: 10px;
-				font-weight: bold;
+				line-height: 32px;
+				right: 15px;
+				font-weight: 600;
 				border-radius: 50%;
+				transition: all 0.2s ease;
 			}
 
 			.tpt-global-pricing-rule-helping__close:hover {
-				background: #f3ddee;
+				background: #dcdcdd;
 				cursor: pointer;
+				transform: scale(1.05);
+			}
+
+			.tpt-global-pricing-rule-helping__header {
+				text-align: center;
+				margin-bottom: 30px;
 			}
 
 			.tpt-global-pricing-rule-helping__title {
-				font-size: 1.5em;
-				font-weight: bold;
-				margin-bottom: 15px;
+				font-size: 22px;
+				font-weight: 600;
+				color: #1d2327;
+				margin-bottom: 20px;
+			}
+
+			.tpt-global-pricing-rule-helping__subtitle {
+				font-size: 14px;
+				color: #646970;
+				max-width: 650px;
+				margin: 0 auto;
+				line-height: 1.5;
 			}
 
 			.tpt-global-pricing-rule-helping__steps {
-				justify-content: center;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 				gap: 20px;
-				display: flex;
-				align-items: center;
-				margin-top: 30px
 			}
 
-			.tpt-global-pricing-rule-helping-step--arrow {
-				padding: 5px;
+			.tpt-global-pricing-rule-helping-step {
+				background: #ffffff;
+				border: 1px solid #e0e0e0;
+				border-radius: 8px;
+				padding: 24px 20px;
+				text-align: center;
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				position: relative;
+			}
+
+			.tpt-global-pricing-rule-helping-step:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+				border-color: #c3c4c7;
+			}
+
+			.tpt-global-pricing-rule-helping-step__icon {
+				width: 52px;
+				height: 52px;
 				border-radius: 50%;
-				background: #faf6f9;
-				color: #814c77;
+				background: #e0f0fa;
+				color: #0070bc;
+				margin: 0 auto 16px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 24px;
+				font-weight: bold;
 			}
 
 			.tpt-global-pricing-rule-helping-step__title {
-				font-size: 1.4em;
+				font-size: 15px;
 				font-weight: 600;
+				color: #1d2327;
+				margin-bottom: 8px;
 			}
 
 			.tpt-global-pricing-rule-helping-step__description {
-				margin-top: 10px;
+				font-size: 13px;
+				color: #50575e;
+				line-height: 1.5;
 			}
 
-			.tpt-global-pricing-rule-helping-step__icon,
-			.tpt-global-pricing-rule-helping-step__icon span {
-				width: 50px;
-				height: 50px;
-				border-radius: 50%;
-				background: #faf6f9;
-				margin: 0 auto 15px;
-				text-align: center;
-				color: #814c77;
-				font-size: 25px;
-				font-weight: bold;
-				line-height: 50px;
-			}
 		</style>
 		<script>
 			jQuery(document).ready(function () {
 				jQuery('.tpt-global-pricing-rule-helping__close').click(function () {
-					jQuery(this).parent().hide();
+					jQuery(this).closest('.tpt-global-pricing-rule-helping').slideUp(200);
 				})
 			})
 		</script>
 		<?php
 		$steps = array(
 				array(
-						'title'         => 'Add pricing',
-						'description'   => 'Set up custom regular and/or tiered pricing.',
-						'icon'          => '$',
-						'has_next_step' => true,
+						'title'       => __( 'Set Custom Pricing', 'tier-pricing-table' ),
+						'description' => __( 'Set custom regular and tiered pricing for matching products.',
+								'tier-pricing-table' ),
+						'icon'        => '$',
 				),
 				array(
-						'title'         => 'Select products',
-						'description'   => 'Select products or product categories that the rule will apply to.',
-						'icon'          => '<span class="dashicons dashicons-archive"></span>',
-						'has_next_step' => true,
+						'title'       => __( 'Select Products', 'tier-pricing-table' ),
+						'description' => __( 'Target specific products, categories, tags, or brands. Leave empty to apply store-wide.',
+								'tier-pricing-table' ),
+						'icon'        => '<span class="dashicons dashicons-archive"></span>',
 				),
 				array(
-						'title'         => 'Select users',
-						'description'   => 'Select users or user roles that the rule will apply to.',
-						'icon'          => '<span class="dashicons dashicons-admin-users"></span>',
-						'has_next_step' => true,
+						'title'       => __( 'Filter Users', 'tier-pricing-table' ),
+						'description' => 'Restrict this pricing to specific customers or user roles.',
+						'icon'        => '<span class="dashicons dashicons-admin-users"></span>',
 				),
 				array(
-						'title'         => 'Specify quantity',
-						'description'   => 'Specify the minimum, maximum, and quantity step for products.',
-						'icon'          => '<span class="dashicons dashicons-database"></span>',
-						'has_next_step' => false,
+						'title'       => __( 'Quantity Limits', 'tier-pricing-table' ),
+						'description' => __( 'Enforce minimum, maximum, and step increments for purchasing.',
+								'tier-pricing-table' ),
+						'icon'        => '<span class="dashicons dashicons-database"></span>',
 				),
 		)
 		?>
 		<div class="tpt-global-pricing-rule-helping">
-			<div class="tpt-global-pricing-rule-helping__title">
-				<?php esc_html_e( 'How global pricing rules work', 'tier-pricing-table' ); ?>
+			<div class="tpt-global-pricing-rule-helping__close"
+			     title="<?php esc_attr_e( 'Dismiss', 'tier-pricing-table' ); ?>">
+				&times;
 			</div>
-			<p>
-				<?php
-					esc_html_e( 'Global rules are useful when you need to set custom pricing for multiple products and apply it to a specific group of users.',
-							'tier-pricing-table' );
-				?>
-			</p>
 
-			<p>
-				<?php
-					esc_html_e( 'Please note that depending on the priority settings, the global pricing rule may override product-level tiered pricing or quantity limits.',
-							'tier-pricing-table' );
-				?>
-			</p>
+			<div class="tpt-global-pricing-rule-helping__header">
+				<div class="tpt-global-pricing-rule-helping__title">
+					<?php esc_html_e( 'How global pricing rules work', 'tier-pricing-table' ); ?>
+				</div>
+				<div class="tpt-global-pricing-rule-helping__subtitle">
+					<p style="margin: 0 0 6px;">
+						<?php
+							esc_html_e( 'Global rules enable you to bulk-apply dynamic pricing and quantity limits to selected groups of products and users simultaneously.',
+									'tier-pricing-table' );
+						?>
+					</p>
+					<p style="margin: 0;">
+						<?php
+							echo sprintf( '<strong>%s</strong> %s', esc_html__( 'Note:', 'tier-pricing-table' ),
+									esc_html__( 'Depending on your priority settings, global rules may override product-level pricing configurations.',
+											'tier-pricing-table' ) );
+						?>
+					</p>
+				</div>
+			</div>
 
 			<div class="tpt-global-pricing-rule-helping__steps">
-
-				<?php foreach ( $steps as $step ) : ?>
-
+				<?php foreach ( $steps as $index => $step ) : ?>
 					<div class="tpt-global-pricing-rule-helping-step">
 						<div class="tpt-global-pricing-rule-helping-step__icon">
 							<?php echo wp_kses_post( $step['icon'] ); ?>
@@ -463,16 +552,7 @@ class Form {
 							<?php echo esc_html( $step['description'] ); ?>
 						</div>
 					</div>
-
-					<?php if ( $step['has_next_step'] ) : ?>
-						<div class="tpt-global-pricing-rule-helping-step tpt-global-pricing-rule-helping-step--arrow">
-							<span class="dashicons dashicons-arrow-right-alt"></span>
-						</div>
-					<?php endif; ?>
 				<?php endforeach; ?>
-			</div>
-			<div class="tpt-global-pricing-rule-helping__close">
-				&times;
 			</div>
 		</div>
 		<?php

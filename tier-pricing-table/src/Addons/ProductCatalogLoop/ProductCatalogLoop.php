@@ -7,11 +7,15 @@ use TierPricingTable\Addons\ProductCatalogLoop\Settings\ProductCatalogLoopSettin
 use WC_Product;
 class ProductCatalogLoop extends AbstractAddon {
     public function getName() : string {
-        return __( 'Product Catalog Loop', 'tier-pricing-table' );
+        return __( 'Catalog display', 'tier-pricing-table' );
     }
 
     public function getDescription() : string {
-        return __( 'Display tiered pricing in the product catalog (shop page.)', 'tier-pricing-table' );
+        return __( 'Display tiered pricing tables on the shop and category pages.', 'tier-pricing-table' );
+    }
+
+    public function getIcon() : string {
+        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 10h12v2H4zm0-4h16v2H4zm0 8h8v2H4zm10 0v6l5-3z"/></svg>';
     }
 
     public function getSlug() : string {

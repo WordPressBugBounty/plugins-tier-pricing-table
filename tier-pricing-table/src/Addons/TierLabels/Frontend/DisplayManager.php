@@ -95,7 +95,7 @@ class DisplayManager {
 				$CSS .= "#{$args['id']} .tiered-pricing-block:has(#" . $label->getId() . ") .tiered-pricing-block__quantity {padding-top: 12px !important;}";
 			}
 		} elseif ( 'table' === $layout ) {
-			$CSS .= ".tiered-pricing-table .tiered-pricing-tier-label { margin-left: 5px; }";
+			$CSS .= "#{$args['id']} tbody td:has(#" . $label->getId() . ") { display: flex; align-items: center; gap: 5px; }";
 		} elseif ( 'plain-text' === $layout ) {
 			$CSS .= ".tiered-pricing-plain-text:has(#" . $label->getId() . ") {display:flex; align-items: center; gap: 5px; }";
 		}
@@ -108,6 +108,7 @@ class DisplayManager {
 			<?php
 		}
 
-		echo wp_kses_post( $label->render() );
+		// Output is escaped internally in TierLabel::render()
+		echo $label->render(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }

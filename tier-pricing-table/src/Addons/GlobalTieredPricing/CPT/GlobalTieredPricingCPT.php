@@ -3,15 +3,14 @@
 namespace TierPricingTable\Addons\GlobalTieredPricing\CPT;
 
 use Automattic\WooCommerce\Admin\PageController;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Actions\DuplicateAction;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Actions\ReactivateAction;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Actions\SuspendAction;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedCustomers;
-use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedPricingType;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedProducts;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\AppliedQuantityRules;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Pricing;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Settings;
-use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Status;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Form;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Addons\GlobalTieredPricing\PricingRule\RuleSettings;
@@ -90,12 +89,29 @@ class GlobalTieredPricingCPT {
         add_action( 'save_post_' . self::SLUG, function () {
             wc_delete_product_transients();
         } );
+        add_filter(
+            'display_post_states',
+            function ( $states, WP_Post $post ) {
+                if ( self::SLUG === $post->post_type ) {
+                    $rule = GlobalPricingRule::build( $post->ID );
+                    if ( $rule->isSuspended() ) {
+                        $states['suspended'] = __( 'Suspended', 'tier-pricing-table' );
+                    } else {
+                        $states['active'] = __( 'Active', 'tier-pricing-table' );
+                    }
+                }
+                return $states;
+            },
+            10,
+            2
+        );
         $this->initInlineActions();
     }
 
     public function initInlineActions() {
         new SuspendAction();
         new ReactivateAction();
+        new DuplicateAction();
     }
 
     public function getColumns() : array {
@@ -105,9 +121,9 @@ class GlobalTieredPricingCPT {
                 'applied_products'       => new AppliedProducts(),
                 'applied_customers'      => new AppliedCustomers(),
                 'applied_quantity_rules' => new AppliedQuantityRules(),
-                'settings'               => new Settings(),
-                'status'                 => new Status(),
             );
+            $this->columns['settings'] = new Settings();
+            $this->columns = apply_filters( 'tiered_pricing_table/global_pricing/columns', $this->columns );
         }
         return $this->columns;
     }
@@ -131,9 +147,13 @@ class GlobalTieredPricingCPT {
     }
 
     public function savePricingRule( $ruleId ) {
+        // Prevent wiping data when duplicating
+        if ( isset( $_GET['action'] ) && $_GET['action'] === DuplicateAction::ACTION ) {
+            return;
+        }
         // Save pricing
         if ( wp_verify_nonce( true, true ) ) {
-            // as phpcs comments at Woo is not available, we have to do such a trash
+            // as phpcs comments at Woo are not available, we have to do such trash
             $woo = 'Woo, please add ignoring comments to your phpcs checker';
         }
         $postedData = $_POST;
@@ -152,25 +172,33 @@ class GlobalTieredPricingCPT {
         $pricingRule->setFixedTieredPricingRules( $tieredPricingData['fixed_tiered_pricing_rules'] );
         $existingRoles = wp_roles()->roles;
         $includedCategoriesIds = ( isset( $postedData['tpt_included_categories'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_categories'] ) ) : array() );
+        $includedTagsIds = ( isset( $postedData['tpt_included_tags'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_tags'] ) ) : array() );
+        $includedBrandsIds = ( isset( $postedData['tpt_included_brands'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_brands'] ) ) : array() );
         $includedProductsIds = ( isset( $postedData['tpt_included_products'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_products'] ) ) : array() );
         $includedUsersRole = ( isset( $postedData['tpt_included_user_roles'] ) ? array_filter( (array) $postedData['tpt_included_user_roles'], function ( $role ) use($existingRoles) {
             return array_key_exists( $role, $existingRoles );
         } ) : array() );
         $includedUsers = ( isset( $postedData['tpt_included_users'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_users'] ) ) : array() );
         $excludedCategoriesIds = ( isset( $postedData['tpt_excluded_categories'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_excluded_categories'] ) ) : array() );
+        $excludedTagsIds = ( isset( $postedData['tpt_excluded_tags'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_excluded_tags'] ) ) : array() );
+        $excludedBrandsIds = ( isset( $postedData['tpt_excluded_brands'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_excluded_brands'] ) ) : array() );
         $excludedProductsIds = ( isset( $postedData['tpt_excluded_products'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_excluded_products'] ) ) : array() );
         $excludedUsersRole = ( isset( $postedData['tpt_excluded_user_roles'] ) ? array_filter( (array) $postedData['tpt_excluded_user_roles'], function ( $role ) use($existingRoles) {
             return array_key_exists( $role, $existingRoles );
         } ) : array() );
         $excludedUsers = ( isset( $postedData['tpt_excluded_users'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_excluded_users'] ) ) : array() );
         $pricingRule->setIncludedProductCategories( $includedCategoriesIds );
-        $pricingRule->setIncludedUsers( $includedUsers );
-        $pricingRule->setIncludedUsersRole( $includedUsersRole );
+        $pricingRule->setIncludedProductTags( $includedTagsIds );
+        $pricingRule->setIncludedProductBrands( $includedBrandsIds );
         $pricingRule->setIncludedProducts( $includedProductsIds );
+        $pricingRule->setIncludedUsersRole( $includedUsersRole );
+        $pricingRule->setIncludedUsers( $includedUsers );
         $pricingRule->setExcludedProductCategories( $excludedCategoriesIds );
-        $pricingRule->setExcludedUsers( $excludedUsers );
-        $pricingRule->setExcludedUsersRole( $excludedUsersRole );
+        $pricingRule->setExcludedProductTags( $excludedTagsIds );
+        $pricingRule->setExcludedProductBrands( $excludedBrandsIds );
         $pricingRule->setExcludedProducts( $excludedProductsIds );
+        $pricingRule->setExcludedUsersRole( $excludedUsersRole );
+        $pricingRule->setExcludedUsers( $excludedUsers );
         RuleSettings::updateFromPOST( $ruleId );
         do_action( 'tiered_pricing_table/global_pricing/before_updating', $pricingRule, $ruleId );
         $pricingRule->save();
@@ -188,31 +216,99 @@ class GlobalTieredPricingCPT {
             }
             ?>
 
-			<div class="woocommerce-BlankState" style="padding: 0;  ">
-
-				<img width="250px" style="filter: drop-shadow(1px 10px 10px #ccc);"
-				     src="<?php 
+			<div class="tpt-blank-state">
+				<div class="tpt-blank-state__inner">
+					<img class="tpt-blank-state__image"
+					     src="<?php 
             echo esc_attr( $this->getContainer()->getFileManager()->locateAsset( 'admin/pricing-logo.png' ) );
-            ?>">
-				<h2 class="woocommerce-BlankState-message">
-					<?php 
-            esc_html_e( 'There are no pricing rules yet. To create the first pricing rule click on the button below.', 'tier-pricing-table' );
-            ?>
-				</h2>
+            ?>"
+					     alt="Tiered Pricing Logo">
 
-				<div class="woocommerce-BlankState-buttons">
-					<a class="woocommerce-BlankState-cta button-primary button"
-					   href="<?php 
+					<h2 class="tpt-blank-state__title">
+						<?php 
+            esc_html_e( 'Create Your First Global Pricing Rule', 'tier-pricing-table' );
+            ?>
+					</h2>
+
+					<p class="tpt-blank-state__description">
+						<?php 
+            esc_html_e( 'Global rules allow you to bulk-apply custom pricing, tiered discounts, and quantity limits to multiple products or categories simultaneously.', 'tier-pricing-table' );
+            ?>
+					</p>
+
+					<div class="tpt-blank-state__actions">
+						<a class="tpt-button-primary button button-primary button-large"
+						   href="<?php 
             echo esc_url( admin_url( 'post-new.php?post_type=' . self::SLUG ) );
             ?>">
-						<?php 
-            esc_html_e( 'Create pricing rule', 'tier-pricing-table' );
-            ?>
-					</a>
+							<span style="line-height: 1; padding-top: 2px;"><?php 
+            esc_html_e( 'Create Rule', 'tier-pricing-table' );
+            ?></span>
+						</a>
+					</div>
 				</div>
 			</div>
 
 			<style>
+				.tpt-blank-state {
+					background: #ffffff;
+					border: 1px solid #e2e4e7;
+					border-radius: 8px;
+					box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+					text-align: center;
+					margin: 40px auto;
+					max-width: 600px;
+					font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+					overflow: hidden;
+				}
+
+				.tpt-blank-state__inner {
+					padding: 50px 40px;
+				}
+
+				.tpt-blank-state__image {
+					width: 140px;
+					height: auto;
+					margin: 0 auto 24px;
+					display: block;
+					filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.08));
+				}
+
+				.tpt-blank-state__title {
+					font-size: 24px;
+					font-weight: 600;
+					color: #1d2327;
+					margin: 0 0 12px 0;
+					line-height: 1.3;
+				}
+
+				.tpt-blank-state__description {
+					font-size: 15px;
+					color: #646970;
+					line-height: 1.6;
+					margin: 0 0 32px 0;
+					max-width: 480px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				.tpt-button-primary {
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+					padding: 0 24px !important;
+					height: 42px !important;
+					font-size: 14px !important;
+					font-weight: 600 !important;
+					border-radius: 4px !important;
+					transition: all 0.2s ease;
+				}
+
+				.tpt-button-primary:hover {
+					transform: translateY(-1px);
+					box-shadow: 0 4px 8px rgba(0, 112, 188, 0.2);
+				}
+
 				#posts-filter .wp-list-table,
 				#posts-filter .tablenav.bottom,
 				.tablenav.top .actions,

@@ -14,7 +14,7 @@
 	 * @var string $minimum_order_quantity
 	 */
 	
-	$placeholder = __( 'Leave empty, so don\'t add any restrictions', 'tier-pricing-table' );
+	$placeholder = __( 'Leave blank for no restrictions', 'tier-pricing-table' );
 ?>
 
 <p class="form-field tpt_minimum_order_quantity <?php echo esc_attr( ! is_null( $loop ) ? 'form-row' : '' ); ?>">

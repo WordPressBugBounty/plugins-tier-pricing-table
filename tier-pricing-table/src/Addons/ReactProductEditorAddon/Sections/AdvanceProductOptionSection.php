@@ -35,7 +35,7 @@ class AdvanceProductOptionSection {
 				'id'         => self::ID,
 				'order'      => 30,
 				'attributes' => array(
-					'title'       => __( 'Advance Options', 'tier-pricing-table' ),
+					'title'       => __( 'Advanced Options', 'tier-pricing-table' ),
 					'description' => __( 'Override global settings such as pricing layout for this product.',
 						'tier-pricing-table' ),
 					'blockGap'    => 'unit-40',

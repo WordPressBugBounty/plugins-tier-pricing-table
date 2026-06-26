@@ -27,11 +27,11 @@ class WCPProductBundles extends PluginIntegrationAbstract {
 	}
 	
 	public function getTitle(): string {
-		return __( 'WPC Product Bundles for WooCommerce', 'tier-pricing-table' );
+		return 'WPC Product Bundles for WooCommerce';
 	}
 	
 	public function getDescription(): string {
-		return '';
+		return __( 'Apply tiered pricing discounts correctly to WPC Product Bundles.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {

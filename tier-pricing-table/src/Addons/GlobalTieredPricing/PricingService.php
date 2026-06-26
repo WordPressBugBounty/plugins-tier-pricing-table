@@ -3,7 +3,8 @@
 namespace TierPricingTable\Addons\GlobalTieredPricing;
 
 use TierPricingTable\PricingRule;
-use TierPricingTable\Settings\Sections\GeneralSection\Subsections\CartOptionsSubsection;
+use TierPricingTable\Addons\TieredPricingCart\CartOptionsSubsection;
+use TierPricingTable\PriceManager;
 class PricingService {
     public function __construct() {
         /**

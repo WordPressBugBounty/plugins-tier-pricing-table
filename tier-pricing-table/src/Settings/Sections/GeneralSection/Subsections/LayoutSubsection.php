@@ -12,11 +12,11 @@ use TierPricingTable\TierPricingTablePlugin;
 class LayoutSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Template options', 'tier-pricing-table' );
+		return __( 'Pricing Layout Settings', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Choose a tiered pricing template and customize its look and behavior.', 'tier-pricing-table' );
+		return __( 'Customize the appearance and behavior of your tiered pricing tables.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -26,7 +26,7 @@ class LayoutSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'    => __( 'Show tiered pricing', 'tier-pricing-table' ),
+				'title'    => __( 'Display tiered pricing', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display',
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'yes',
@@ -35,11 +35,11 @@ class LayoutSubsection extends SubsectionAbstract {
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Default template', 'tier-pricing-table' ),
+				'title'    => __( 'Default layout', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => TierPricingTablePlugin::getAvailablePricingLayouts(),
-				'desc'     => __( 'Default tiered pricing template. Template can be customized individually per product.',
+				'desc'     => __( 'Choose the default visual layout. You can also customize this individually per product.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 				'default'  => 'table',
@@ -58,8 +58,8 @@ class LayoutSubsection extends SubsectionAbstract {
 				'default'  => 'default',
 			),
 			array(
-				'title'    => __( 'Pricing blocks style', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'pricing_blocks_style',
+				'title'    => __( 'Pricing table style', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'pricing_table_style',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => array(
 					'default' => __( 'Default', 'tier-pricing-table' ),
@@ -72,11 +72,32 @@ class LayoutSubsection extends SubsectionAbstract {
 				'default'  => 'default',
 			),
 			array(
+				'title'    => __( 'Compact layout', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'slim_design',
+				'type'     => TPTSwitchOption::FIELD_TYPE,
+				'default'  => 'no',
+				'desc'     => __( 'Apply a compact layout to the tiered pricing table or blocks.', 'tier-pricing-table' ),
+			),
+			array(
+				'title'    => __( 'Pricing blocks style', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'pricing_blocks_style',
+				'type'     => TPTDisplayType::FIELD_TYPE,
+				'options'  => array(
+					'default' => __( 'Default', 'tier-pricing-table' ),
+					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
+					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
+					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
+					'style-4' => __( 'Style #4', 'tier-pricing-table' ),
+					'style-5' => __( 'Style #5', 'tier-pricing-table' ),
+				),
+				'desc_tip' => true,
+				'default'  => 'default',
+			),
+			array(
 				'title'    => __( 'Pricing title', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'table_title',
 				'type'     => 'text',
 				'default'  => '',
-				'desc'     => __( 'The title is shown above the tiered pricing.', 'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
@@ -116,13 +137,13 @@ class LayoutSubsection extends SubsectionAbstract {
 				'id'      => Settings::SETTINGS_PREFIX . 'selected_quantity_color',
 				'type'    => 'color',
 				'css'     => 'width:6em;',
-				'default' => '#96598A',
+				'default' => '#3858e9',
 			),
 			array(
 				'title'    => __( 'Tooltip icon color', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'tooltip_color',
 				'type'     => 'color',
-				'default'  => '#96598A',
+				'default'  => '#3858e9',
 				'css'      => 'width:6em;',
 				'desc'     => __( 'Color of the icon.', 'tier-pricing-table' ),
 				'desc_tip' => true,
