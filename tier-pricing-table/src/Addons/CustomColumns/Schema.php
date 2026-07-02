@@ -4,6 +4,7 @@ use TierPricingTable\Addons\CustomColumns\Columns\CustomDataColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\PriceExcludingTaxesColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\PriceIncludingTaxesColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\RowTotalPriceColumn;
+use TierPricingTable\Addons\CustomColumns\Columns\SavingPerItemColumn;
 use TierPricingTable\Addons\CustomColumns\Columns\SkuColumn;
 
 class Schema {
@@ -13,6 +14,7 @@ class Schema {
 			'price_excl_taxes' => __( 'Price excluding taxes', 'tier-pricing-table' ),
 			'price_incl_taxes' => __( 'Price including taxes', 'tier-pricing-table' ),
 			'total_price'      => __( 'Total row price', 'tier-pricing-table' ),
+			'saving_per_item'  => __( 'Saving per item', 'tier-pricing-table' ),
 		) );
 	}
 	
@@ -38,6 +40,7 @@ class Schema {
 			'price_excl_taxes' => PriceExcludingTaxesColumn::class,
 			'price_incl_taxes' => PriceIncludingTaxesColumn::class,
 			'total_price'      => RowTotalPriceColumn::class,
+			'saving_per_item'  => SavingPerItemColumn::class,
 		) );
 		
 		return $classes[ $type ] ?? null;

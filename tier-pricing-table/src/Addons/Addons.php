@@ -17,6 +17,7 @@ use TierPricingTable\Addons\PricingSummary\PricingSummaryAddon;
 use TierPricingTable\Addons\ProductCatalogLoop\ProductCatalogLoop;
 use TierPricingTable\Addons\ReactProductEditorAddon\ReactProductEditorAddon;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingAddon;
+use TierPricingTable\Addons\UserBasedPricing\UserBasedPricingAddon;
 use TierPricingTable\Addons\TaxSettings\TaxSettingsAddon;
 use TierPricingTable\Addons\TieredPricingCart\TieredPricingCartAddon;
 use TierPricingTable\Addons\TierLabels\TierLabelsAddon;
@@ -34,25 +35,27 @@ class Addons {
 
     public function init() {
         $addons = array(
-            ManualOrdersAddon::class            => new ManualOrdersAddon(),
-            GlobalTieredPricingAddon::class     => new GlobalTieredPricingAddon(),
-            CouponsAddon::class                 => new CouponsAddon(),
-            RoleBasedPricingAddon::class        => new RoleBasedPricingAddon(),
-            CategoryTierAddon::class            => new CategoryTierAddon(),
-            AdvancedQuantityOptionsAddon::class => new AdvancedQuantityOptionsAddon(),
-            PluginsRecommendationsAddon::class  => new PluginsRecommendationsAddon(),
-            CustomColumnsAddon::class           => new CustomColumnsAddon(),
-            ProductCatalogLoop::class           => new ProductCatalogLoop(),
-            ReactProductEditorAddon::class      => new ReactProductEditorAddon(),
-            TaxSettingsAddon::class             => new TaxSettingsAddon(),
-            TierLabelsAddon::class              => new TierLabelsAddon(),
-            ToolsAddon::class                   => new ToolsAddon(),
-            CatalogPricesAddon::class           => new CatalogPricesAddon(),
-            TieredPricingCartAddon::class       => new TieredPricingCartAddon(),
-            YouSaveAddon::class                 => new YouSaveAddon(),
-            CartUpsellsAddon::class             => new CartUpsellsAddon(),
-            PricingSummaryAddon::class          => new PricingSummaryAddon(),
-            NonLoggedInUsersAddon::class        => new NonLoggedInUsersAddon(),
+            ManualOrdersAddon::class                                       => new ManualOrdersAddon(),
+            GlobalTieredPricingAddon::class                                => new GlobalTieredPricingAddon(),
+            CouponsAddon::class                                            => new CouponsAddon(),
+            RoleBasedPricingAddon::class                                   => new RoleBasedPricingAddon(),
+            UserBasedPricingAddon::class                                   => new UserBasedPricingAddon(),
+            CategoryTierAddon::class                                       => new CategoryTierAddon(),
+            AdvancedQuantityOptionsAddon::class                            => new AdvancedQuantityOptionsAddon(),
+            PluginsRecommendationsAddon::class                             => new PluginsRecommendationsAddon(),
+            CustomColumnsAddon::class                                      => new CustomColumnsAddon(),
+            ProductCatalogLoop::class                                      => new ProductCatalogLoop(),
+            ReactProductEditorAddon::class                                 => new ReactProductEditorAddon(),
+            TaxSettingsAddon::class                                        => new TaxSettingsAddon(),
+            TierLabelsAddon::class                                         => new TierLabelsAddon(),
+            ToolsAddon::class                                              => new ToolsAddon(),
+            CatalogPricesAddon::class                                      => new CatalogPricesAddon(),
+            TieredPricingCartAddon::class                                  => new TieredPricingCartAddon(),
+            YouSaveAddon::class                                            => new YouSaveAddon(),
+            CartUpsellsAddon::class                                        => new CartUpsellsAddon(),
+            PricingSummaryAddon::class                                     => new PricingSummaryAddon(),
+            NonLoggedInUsersAddon::class                                   => new NonLoggedInUsersAddon(),
+            \TierPricingTable\Addons\ImportExport\ImportExportAddon::class => new \TierPricingTable\Addons\ImportExport\ImportExportAddon(),
         );
         $addons = apply_filters( 'tiered_pricing_table/addons/list', $addons );
         foreach ( $addons as $addon ) {

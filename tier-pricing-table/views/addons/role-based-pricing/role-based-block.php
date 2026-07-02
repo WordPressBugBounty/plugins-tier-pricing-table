@@ -30,7 +30,7 @@
      data-add-action-nonce="<?php echo esc_attr( wp_create_nonce( ProductManager::GET_ROLE_ROW_HTML__ACTION ) ); ?>"
      data-product-id="<?php echo esc_attr( $product_id ); ?>"
      data-loop="<?php echo esc_attr( $loop ); ?>">
-	<label class="tpt-role-based-block__name"><?php esc_attr_e( 'Role-based pricing', 'tier-pricing-table' ); ?></label>
+	<label class="tpt-role-based-block__name" style="line-height: normal"><?php esc_attr_e( 'Role-based pricing', 'tier-pricing-table' ); ?></label>
 	<div class="tpt-role-based-block__content">
 		<div class="tpt-role-based-roles">
 			<?php
@@ -95,7 +95,7 @@
 
 			<button class="button tpt-role-based-adding-form__add-button">
 				<?php
-					esc_attr_e( 'Add Role', 'tier-pricing-table' );
+					esc_attr_e( 'Add role pricing', 'tier-pricing-table' );
 				?>
 			</button>
 			<?php

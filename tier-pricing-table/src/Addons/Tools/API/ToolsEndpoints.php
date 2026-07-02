@@ -105,7 +105,19 @@ class ToolsEndpoints {
 	
 	public function cleanupData( WP_REST_Request $request ) {
 		$cleanStandard = filter_var( $request->get_param( 'clean_standard' ), FILTER_VALIDATE_BOOLEAN );
-		$roles         = $request->get_param( 'roles' ); // array of role keys
+		$cleanUsers    = filter_var( $request->get_param( 'clean_users' ), FILTER_VALIDATE_BOOLEAN );
+		$cleanAllRoles = filter_var( $request->get_param( 'clean_all_roles' ), FILTER_VALIDATE_BOOLEAN );
+		
+		if ( $cleanAllRoles ) {
+			global $wp_roles;
+			if ( ! isset( $wp_roles ) ) {
+				$wp_roles = new \WP_Roles();
+			}
+			$roles = array_keys( $wp_roles->get_names() );
+		} else {
+			$roles = $request->get_param( 'roles' ); // array of role keys
+		}
+		
 		$categories    = $request->get_param( 'categories' ); // array of term ids
 		$products      = $request->get_param( 'products' ); // array of product ids
 		
@@ -189,6 +201,41 @@ class ToolsEndpoints {
 					'success' => false,
 					'message' => 'Database error during cleanup.',
 				) );
+			}
+		}
+		
+		if ( $cleanUsers ) {
+			global $wpdb;
+			
+			$userMetaLikeQueries = array(
+				"meta_key LIKE '\_user\_%\_tiered_price\_pricing\_type'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_regular\_price'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_sale\_price'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_discount'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_discount\_type'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_rules\_type'",
+				"meta_key LIKE '\_user\_%\_percentage\_price\_rules'",
+				"meta_key LIKE '\_user\_%\_fixed\_price\_rules'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_minimum\_qty'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_tax\_status'",
+				"meta_key LIKE '\_user\_%\_tiered_price\_tax\_class'"
+			);
+			
+			$likeQuery = implode( ' OR ', $userMetaLikeQueries );
+			
+			if ( empty( $products ) && empty( $categories ) ) {
+				$query = "DELETE FROM {$wpdb->postmeta} WHERE ($likeQuery)";
+				$userDeletedCount = $wpdb->query( $query );
+			} else {
+				if ( ! empty( $postIds ) ) {
+					$postIdsIn = implode( ',', $postIds );
+					$query = "DELETE FROM {$wpdb->postmeta} WHERE ($likeQuery) AND post_id IN ($postIdsIn)";
+					$userDeletedCount = $wpdb->query( $query );
+				}
+			}
+			
+			if ( $userDeletedCount !== false ) {
+				$deletedCount += $userDeletedCount;
 			}
 		}
 		

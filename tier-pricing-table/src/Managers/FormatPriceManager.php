@@ -23,18 +23,23 @@ class FormatPriceManager {
             'with_lowest_prefix' => true,
             'with_default_price' => true,
         ) );
-        $priceHTML = 'default';
-        if ( 'default' === $priceHTML ) {
-            if ( $args['with_default_price'] ) {
-                $priceHTML = ( $args['html'] ? $product->get_price_html() : $product->get_price() );
-            } else {
-                return null;
+        $GLOBALS['TPT_DISABLE_CATALOG_PRICE_FORMAT'] = true;
+        try {
+            $priceHTML = 'default';
+            if ( 'default' === $priceHTML ) {
+                if ( $args['with_default_price'] ) {
+                    $priceHTML = ( $args['html'] ? $product->get_price_html() : $product->get_price() );
+                } else {
+                    return null;
+                }
             }
+            if ( isset( $args['html'] ) && !$args['html'] ) {
+                $priceHTML = strip_tags( $priceHTML );
+            }
+            return $priceHTML;
+        } finally {
+            unset($GLOBALS['TPT_DISABLE_CATALOG_PRICE_FORMAT']);
         }
-        if ( isset( $args['html'] ) && !$args['html'] ) {
-            $priceHTML = strip_tags( $priceHTML );
-        }
-        return $priceHTML;
     }
 
     public static function getLowestPrice( WC_Product $product, $args = array() ) : ?string {
@@ -128,6 +133,36 @@ class FormatPriceManager {
         return $range;
     }
 
+    public static function getCustomPrice( WC_Product $product, array $args = array() ) : ?string {
+        $template = ServiceContainer::getInstance()->getSettings()->get( 'tiered_price_at_catalog_custom_template', __( 'From {tp_lowest_price} instead of {tp_original_price}', 'tier-pricing-table' ) );
+        if ( empty( $template ) ) {
+            return null;
+        }
+        $lowestPrice = self::getLowestPrice( $product, array(
+            'html'               => $args['html'],
+            'for_display'        => $args['for_display'],
+            'with_suffix'        => $args['with_suffix'],
+            'with_lowest_prefix' => false,
+            'with_default_price' => false,
+        ) );
+        if ( is_null( $lowestPrice ) ) {
+            return null;
+        }
+        $priceRange = self::getPriceRange( $product, array(
+            'for_display'        => $args['for_display'],
+            'with_suffix'        => $args['with_suffix'],
+            'with_default_price' => false,
+            'html'               => $args['html'],
+        ) );
+        $originalPrice = ( $args['html'] ? $product->get_price_html() : (( $args['for_display'] ? wc_get_price_to_display( $product ) : $product->get_price() )) );
+        $replacements = array(
+            '{tp_lowest_price}'   => $lowestPrice,
+            '{tp_prices_range}'   => ( $priceRange ? $priceRange : $lowestPrice ),
+            '{tp_original_price}' => $originalPrice,
+        );
+        return str_replace( array_keys( $replacements ), array_values( $replacements ), $template );
+    }
+
     public static function getLowestPrefix() : string {
         $settings = ServiceContainer::getInstance()->getSettings();
         return (string) $settings->get( 'lowest_prefix', __( 'From', 'tier-pricing-table' ) );
@@ -135,7 +170,11 @@ class FormatPriceManager {
 
     public static function getDisplayType() : string {
         $settings = ServiceContainer::getInstance()->getSettings();
-        return ( $settings->get( 'tiered_price_at_catalog_type', 'range' ) === 'range' ? 'range' : 'lowest' );
+        $type = $settings->get( 'tiered_price_at_catalog_type', 'range' );
+        if ( 'custom' === $type ) {
+            return 'custom';
+        }
+        return ( $type === 'range' ? 'range' : 'lowest' );
     }
 
 }

@@ -228,7 +228,7 @@ class PricingTable {
 								'yes' ) === 'yes',
 
 				'table_style'   => GeneralSection::getPricingTableStyle(),
-				'slim_design'   => $this->getContainer()->getSettings()->get( 'slim_design', 'no' ),
+				'compact_layout'   => $this->getContainer()->getSettings()->get( 'compact_layout', 'no' ),
 				'blocks_style'  => GeneralSection::getPricingBlocksStyle(),
 				'options_style'             => GeneralSection::getPricingOptionsStyle(),
 

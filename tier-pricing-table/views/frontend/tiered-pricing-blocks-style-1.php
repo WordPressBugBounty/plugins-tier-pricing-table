@@ -47,7 +47,7 @@
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
 
-		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-1"
+		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-1 <?php echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ) ? 'tiered-pricing-blocks--slim' : ''; ?>"
 		     id="<?php echo esc_attr( $id ); ?>"
 		     data-product-id="<?php echo esc_attr( $product_id ); ?>"
 		     data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"

@@ -71,7 +71,7 @@
 			$columns += $custom_columns_count;
 		?>
 
-		<div class="tiered-pricing-table tiered-pricing-table--styled tiered-pricing-table--style-4 <?php echo (isset($settings['slim_design']) && $settings['slim_design'] === 'yes') ? 'tiered-pricing-table--styled-slim' : ''; ?>"
+		<div class="tiered-pricing-table tiered-pricing-table--styled tiered-pricing-table--style-4 <?php echo (isset($settings['compact_layout']) && $settings['compact_layout'] === 'yes') ? 'tiered-pricing-table--slim' : ''; ?>"
 		       id="<?php echo esc_attr( $id ); ?>"
 		       data-tiered-pricing-table
 		       data-product-id="<?php echo esc_attr( $product_id ); ?>"

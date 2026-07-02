@@ -63,7 +63,9 @@ if ( !empty( $price_rules ) ) {
     }
     ?>
 
-		<div class="tiered-pricing-options tiered-pricing-options--styled tiered-pricing-options--style-3"
+		<div class="tiered-pricing-options tiered-pricing-options--styled tiered-pricing-options--style-3 <?php 
+    echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ? 'tiered-pricing-options--slim' : '' );
+    ?>"
 			 id="<?php 
     echo esc_attr( $id );
     ?>"

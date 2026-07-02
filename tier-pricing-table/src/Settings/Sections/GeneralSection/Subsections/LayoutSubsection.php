@@ -35,7 +35,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Default layout', 'tier-pricing-table' ),
+				'title'    => __( 'Pricing layout', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => TierPricingTablePlugin::getAvailablePricingLayouts(),
@@ -53,6 +53,7 @@ class LayoutSubsection extends SubsectionAbstract {
 					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
 					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
 					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
+					'style-4' => __( 'Style #4', 'tier-pricing-table' ),
 				),
 				'desc_tip' => true,
 				'default'  => 'default',
@@ -72,13 +73,6 @@ class LayoutSubsection extends SubsectionAbstract {
 				'default'  => 'default',
 			),
 			array(
-				'title'    => __( 'Compact layout', 'tier-pricing-table' ),
-				'id'       => Settings::SETTINGS_PREFIX . 'slim_design',
-				'type'     => TPTSwitchOption::FIELD_TYPE,
-				'default'  => 'no',
-				'desc'     => __( 'Apply a compact layout to the tiered pricing table or blocks.', 'tier-pricing-table' ),
-			),
-			array(
 				'title'    => __( 'Pricing blocks style', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'pricing_blocks_style',
 				'type'     => TPTDisplayType::FIELD_TYPE,
@@ -92,6 +86,13 @@ class LayoutSubsection extends SubsectionAbstract {
 				),
 				'desc_tip' => true,
 				'default'  => 'default',
+			),
+			array(
+				'title'    => __( 'Compact layout', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'compact_layout',
+				'type'     => TPTSwitchOption::FIELD_TYPE,
+				'default'  => 'no',
+				'desc'     => __( 'Apply a compact layout to the tiered pricing.', 'tier-pricing-table' ),
 			),
 			array(
 				'title'    => __( 'Pricing title', 'tier-pricing-table' ),

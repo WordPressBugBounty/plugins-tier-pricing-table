@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 6.4.0
+Stable tag: 6.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,29 +21,29 @@ Easily set different prices based on quantity, user roles, or specific customers
 
 [**Live Demo**](https://demo.tiered-pricing.com/) | [**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Contact Us**](https://tiered-pricing.com/contact-us/) | [**Plugin Website**](https://tiered-pricing.com/)
 
-**Tiered Pricing Table for WooCommerce** lets you easily set flexible pricing rules based on product quantity. You can apply custom pricing to individual products or categories, all users, specific user roles, or customer accounts.
+You can apply custom pricing to individual products or categories, all users, specific user roles, or customer accounts.
 
 Fine-tune pricing for any business model — from retail to wholesale — to serve different customer groups effortlessly.
 
 📌 **Key features**:
 
 ✅ **Quantity-based pricing (Volume pricing)**
-Set different prices for different quantities of products.
+Offer different prices based on the quantity purchased to encourage larger orders.
 
-✅ **Role-based pricing**
-Set different prices for user roles or specific customers, including quantity-based prices.
+✅ **Role and Customer based pricing**
+Create custom pricing for user roles or individual customers, including quantity-based discounts.
 
 ✅ **Minimum, Maximum & Step Quantity Controls**
-Limit minimum, maximum, and quantity step a product can be purchased in.
+Define minimum and maximum purchase quantities, and enforce quantity increments.
 
 ✅ **Discount-friendly price formatting**
-Show the lowest price or range from the lowest to the highest price.
+Display pricing in a way that highlights savings, including the lowest price, a price range or even a custom template.
 
 ✅ **Flexible pricing display (product page & catalog)**
- You can show the tiered prices via:
-➖ **Table (5 different styles)**
-➖ **Blocks (5 different styles)**
-➖ **Options (4 different styles)**
+ Display tiered pricing in the format that best fits your store:
+➖ **Table (5 styles)**
+➖ **Blocks (5 styles)**
+➖ **Options (4 styles)**
 ➖ **Dropdown**
 ➖ **Horizontal Table**
 ➖ **Plain text**
@@ -54,24 +54,25 @@ The clean interface and powerful functionality allow you to create any pricing s
 
 ⚙️ **Advanced Features**
 ✅ Import & Export (WP All Import support).
-✅ Role management: create, edit, and delete user roles.
-✅ Built-in caching for performance.
-✅ REST API & debug mode.
-✅ Show saving amount to users with the "You save: $9.99" template. (difference between original and discounted price).
+✅ Pricing Labels – Create labels such as “Best Value” or “Most Popular” to make key pricing tiers stand out.
+✅ Role Management – Create, edit, and delete user roles with ease.
+✅ Built-in Caching – Improve performance with integrated caching.
+✅ REST API & Debug Mode – Extend functionality through a REST API and troubleshoot issues with a dedicated debug mode.
+✅ Savings Display – Show customers how much they save with customizable messages such as “You Save: $9.99”.
 
 And much more!
 
 💎 **Premium Extras**:
 
 *   Percentage quantity-based discounts
-*   Role-based pricing (including base prices and min/max order quantity)
+*   Role-based and customer-based pricing (including base prices and min/max order quantity)
 *   Role-based tax options (Override tax options for specific user roles)
 *   Custom columns for pricing table
 *   Option to hide prices and prevent purchasing for non-logged-in users
 *   Min/Max order quantity control per product or category/tag/brand
 *   Cart upsells (motivates users to purchase more to get a discount)
 *   Totals on the product page
-*   Clickable tiered pricing options
+*   Clickable tiered pricing
 *   Show the lowest price or a range of prices instead of default product price
 *   Show the tiered price in the cart as a discount
 
@@ -163,6 +164,18 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 6.5.0 [2026-07-02] =
+* New: Product level customer based pricing.
+* New: Custom template for pricing formatting on the shop page.
+* Enhance: CSS improvements.
+
+= 6.4.1 [2026-07-01] =
+* Fix: MCE JS issue in some languages.
+* Enhance: tier labels and custom columns friendly UI.
+* Enhance: Welcome page updated.
+* Enhance: Compact layout for all pricing templates.
+* Enhance: Import/Export as a module and can be deactivated.
 
 = 6.4.0 [2026-06-21] =
 * New: 4 new styles for pricing table.

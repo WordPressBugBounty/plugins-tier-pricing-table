@@ -68,6 +68,17 @@ class Settings {
                 $this->getContainer()->getFileManager()->includeTemplate( 'admin/banners/free-version-used-premium-available.php' );
             } );
         }
+        add_action( 'admin_enqueue_scripts', function () {
+            $assetName = self::SETTINGS_PAGE . '_script';
+            wp_register_script(
+                $assetName,
+                $this->getContainer()->getFileManager()->locateJSAsset( 'admin/settings' ),
+                array('jquery'),
+                TierPricingTablePlugin::VERSION,
+                true
+            );
+            wp_enqueue_script( $assetName );
+        } );
     }
 
     protected function initCustomOptions() {
@@ -129,7 +140,7 @@ class Settings {
 				font-size: 1.45em;
 			}
 		</style>
-		
+
 		<ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
         $sectionsCount = count( $this->sections );
@@ -167,7 +178,7 @@ class Settings {
 					<?php 
             } else {
                 ?>
-						
+
 						<?php 
                 if ( $section->getSectionCSS() ) {
                     ?>
@@ -221,12 +232,6 @@ class Settings {
      * Add settings to WooCommerce
      */
     public function addTieredPricingTableSettings() {
-        wp_enqueue_script(
-            'quantity-table-settings-js',
-            $this->getContainer()->getFileManager()->locateJSAsset( 'admin/settings' ),
-            array('jquery'),
-            TierPricingTablePlugin::VERSION
-        );
         woocommerce_admin_fields( $this->settings );
     }
 

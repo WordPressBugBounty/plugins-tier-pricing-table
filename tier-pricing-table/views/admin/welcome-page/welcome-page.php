@@ -13,19 +13,37 @@
 	}
 
 	.tpt-checkmark {
-		display: block;
-		margin: 10px 0;
-		font-weight: 500;
+		display: flex;
+		align-items: center;
+		font-weight: 600;
+		background: #f1f5f9;
+		border: 1px solid #e2e8f0;
+		padding: 6px 10px;
+		border-radius: 6px;
+		color: #0f172a;
+		transition: all 0.2s ease;
+		margin: 0;
+		font-size: 0.95em;
+	}
+
+	.tpt-checkmark:hover {
+		background: #fff;
+		border-color: #cbd5e1;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+		transform: translateX(4px);
 	}
 
 	.tpt-checkmark::before {
-		content: url(<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/checkmark.svg' ) ); ?>);
-		width: 1.3em;
+		content: '';
+		background-image: url(<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/checkmark.svg' ) ); ?>);
+		background-size: 1.2em;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 1.2em;
+		height: 1.2em;
 		display: inline-block;
-		padding: 0;
-		height: 1.3em;
-		vertical-align: middle;
-		margin-right: 6px;
+		flex-shrink: 0;
+		margin-right: 8px;
 	}
 
 	/**
@@ -91,7 +109,7 @@
 	}
 
 	.tpt-welcome-page-hero__content {
-		width: 45%;
+		width: 40%;
 	}
 
 	.tpt-browser-mockup {
@@ -99,7 +117,8 @@
 		border-radius: 12px;
 		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 		width: 100%;
-		max-width: 650px;
+		max-width: 750px;
+		min-width: 600px;
 		transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
 		transition: transform 0.5s ease;
 		margin-left: auto;
@@ -152,10 +171,11 @@
 
 	.tpt-interactive-preview {
 		display: flex;
+		flex-direction: column;
 		background: #fff;
 		color: #333;
-		padding: 24px;
-		gap: 30px;
+		padding: 30px;
+		gap: 24px;
 		box-sizing: border-box;
 	}
 
@@ -163,8 +183,14 @@
 		box-sizing: border-box;
 	}
 
+	.tpt-ip-top {
+		display: flex;
+		gap: 24px;
+		align-items: flex-start;
+	}
+
 	.tpt-ip-left {
-		flex: 0 0 30%;
+		flex: 0 0 120px;
 		background: #eef2f6;
 		border-radius: 8px;
 		display: flex;
@@ -172,6 +198,7 @@
 		justify-content: center;
 		padding: 20px;
 		min-width: 0;
+		aspect-ratio: 1 / 1;
 	}
 
 	.tpt-ip-left img {
@@ -180,7 +207,7 @@
 		object-fit: contain;
 	}
 
-	.tpt-ip-right {
+	.tpt-ip-top-info {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -207,6 +234,14 @@
 		margin-right: 8px;
 	}
 
+	.tpt-ip-you-save {
+		display: block;
+		font-size: 0.9rem;
+		color: #64748b;
+		font-weight: 500;
+		margin-top: 4px;
+	}
+
 	.tpt-ip-desc {
 		color: #64748b;
 		margin-top: 0;
@@ -214,66 +249,105 @@
 		font-size: 0.95em;
 	}
 
-	.tpt-ip-blocks {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
+	.tpt-ip-table-container {
 		margin-bottom: 20px;
-	}
-
-	.tpt-hero-preview-row {
-		display: flex;
-		gap: 12px;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-	}
-
-	.tpt-hero-preview-block {
-		background: #f8fafc;
+		background: #fff;
 		border: 1px solid #cbd5e1;
 		border-radius: 6px;
-		padding: 16px 15px 12px 15px;
-		position: relative;
-		flex: 1;
-		min-width: 120px;
+		overflow: hidden;
+	}
+
+	.tpt-ip-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 14px;
+	}
+
+	.tpt-ip-table th {
+		background: #f8fafc;
+		padding: 10px 15px;
 		text-align: left;
+		font-weight: 600;
 		color: #475569;
-		box-sizing: border-box;
+		border-bottom: 1px solid #e2e8f0;
+	}
+
+	.tpt-ip-block {
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background 0.2s ease;
+		border-bottom: 1px solid #f1f5f9;
+		color: #334155;
 	}
 
-	.tpt-hero-preview-block:hover {
-		border-color: #94a3b8;
+	.tpt-ip-block:last-child {
+		border-bottom: none;
 	}
 
-	.tpt-hero-preview-block.is-selected {
-		border-color: #96598a;
-		box-shadow: 0 0 0 1px #96598a;
+	.tpt-ip-block:hover {
+		background: #f8fafc;
+	}
+
+	.tpt-ip-block.is-selected {
+		background: #faf5f8;
+	}
+
+	.tpt-ip-block.is-selected td {
+		position: relative;
+	}
+
+	.tpt-ip-block.is-selected td:first-child::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background: #96598a;
 	}
 
 	.tpt-hero-preview-qty {
+		padding: 12px 15px;
 		font-size: 0.95em;
-		margin-bottom: 6px;
-		color: #64748b;
-		white-space: nowrap;
 	}
 
 	.tpt-hero-preview-price {
-		font-size: 1.15em;
-		color: #334155;
-		white-space: nowrap;
-	}
-
-	.tpt-hero-preview-price strong {
-		font-weight: 700;
+		padding: 12px 15px;
+		font-size: 1.05em;
 	}
 
 	.tpt-hero-preview-discount {
+		padding: 12px 15px;
+		font-size: 1.05em;
+	}
+
+	.tpt-hero-preview-badge {
 		font-size: 0.75em;
+		padding: 3px 6px;
+		border-radius: 4px;
+		margin-left: 8px;
 		font-weight: 600;
-		color: #64748b;
-		margin-left: 4px;
+		text-transform: uppercase;
+		display: inline-flex;
+		align-items: center;
+		vertical-align: middle;
+		gap: 4px;
+	}
+
+	.tpt-hero-preview-badge .dashicons {
+		font-size: 14px;
+		width: 14px;
+		height: 14px;
+		line-height: 14px;
+	}
+
+	.tpt-hero-preview-badge--popular {
+		background: #96598a;
+		color: #fff;
+	}
+
+	.tpt-hero-preview-badge--value {
+		background: #eab308;
+		color: #fff;
 	}
 
 	.tpt-ip-add-to-cart {
@@ -373,7 +447,7 @@
 	}
 
 	.tpt-welcome-page-features--templates {
-		column-count: 4;
+		column-count: 2;
 		column-gap: 30px;
 	}
 
@@ -397,15 +471,19 @@
 
 	.tpt-welcome-page-feature__title {
 		font-size: 1.4rem;
-		font-weight: 600;
-		margin-bottom: 20px;
+		font-weight: 700;
+		margin-bottom: 18px;
 		line-height: 1.4;
-		color: #1e293b;
+		color: #0f172a;
 	}
 
 	.tpt-welcome-page-feature__description {
 		font-size: 1.05em;
-		color: #334155;
+		color: #1e293b;
+		line-height: 1.5;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
 	}
 
 	.tpt-welcome-page-feature img {
@@ -485,16 +563,15 @@
 <main class="tpt-welcome-page">
 
 	<div class="tpt-welcome-page-install-notice">
-		<span class="dashicons dashicons-plugins-checked"></span> Thanks for installing the plugin! Below you will find
-		a quick overview of the main features.
+		<span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e( 'Thanks for installing the plugin! Below you will find a quick overview of the main features.', 'tier-pricing-table' ); ?>
 	</div>
 
 	<header class="tpt-welcome-page-hero">
 
 		<div class="tpt-welcome-page-hero__content">
 			<div class="tpt-welcome-page-hero__title">
-				<div>Welcome to</div>
-				<div><b>Tiered Pricing Table</b></div>
+				<div><?php esc_html_e( 'Welcome to', 'tier-pricing-table' ); ?></div>
+				<div><b><?php esc_html_e( 'Tiered Pricing Table', 'tier-pricing-table' ); ?></b></div>
 			</div>
 
 			<div class="tpt-welcome-page-hero__description">
@@ -525,10 +602,10 @@
 			</div>
 
 			<div class="tpt-welcome-page-hero__additional" style="font-size: 1.2em; margin-top: 20px;">
-				Questions? We're here to help.
+				<?php esc_html_e( 'Questions? We\'re here to help.', 'tier-pricing-table' ); ?>
 				<a style="color: #fff"
 				   href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ); ?>"
-				   target="_blank">Contact Us</a>
+				   target="_blank"><?php esc_html_e( 'Contact Us', 'tier-pricing-table' ); ?></a>
 			</div>
 		</div>
 
@@ -538,69 +615,77 @@
 					<span class="dot dot-red"></span>
 					<span class="dot dot-yellow"></span>
 					<span class="dot dot-green"></span>
-					<div class="tpt-browser-mockup-address">yoursite.com/product/cap</div>
+					<div class="tpt-browser-mockup-address">yoursite.com/product/t-shirt</div>
 				</div>
 				<div class="tpt-interactive-preview" id="tpt-interactive-preview">
-					<div class="tpt-ip-left">
-						<svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"
-						     stroke-linejoin="round" style="width: 80%; height: auto; max-height: 200px;">
-							<path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
-						</svg>
+					<div class="tpt-ip-top">
+						<div class="tpt-ip-left">
+							<svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"
+							     stroke-linecap="round"
+							     stroke-linejoin="round" style="width: 80%; height: auto; max-height: 200px;">
+								<path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
+							</svg>
+						</div>
+						<div class="tpt-ip-top-info">
+							<h2 class="tpt-ip-title">T-Shirt</h2>
+							<div class="tpt-ip-main-price" id="tpt-ip-main-price">
+								<del>$100.00</del>
+								<span>$75.00</span></div>
+							<p class="tpt-ip-desc"><?php esc_html_e( 'This is a product example.', 'tier-pricing-table' ); ?></p>
+						</div>
 					</div>
-					<div class="tpt-ip-right">
-						<h2 class="tpt-ip-title">Cap</h2>
-						<div class="tpt-ip-main-price" id="tpt-ip-main-price">
-							<del>$100.00</del>
-							<span>$75.00</span></div>
-						<p class="tpt-ip-desc">This is a simple product.</p>
 
-						<div class="tpt-ip-blocks">
-							<div class="tpt-hero-preview-row">
-								<div class="tpt-hero-preview-block tpt-ip-block" data-qty="1" data-price="100.00">
-									<div class="tpt-hero-preview-qty">1 - 9 pieces</div>
-									<div class="tpt-hero-preview-price"><strong>$100.00</strong></div>
-								</div>
-								<div class="tpt-hero-preview-block tpt-ip-block" data-qty="10" data-price="90.00">
-									<div class="tpt-hero-preview-qty">10 - 19 pieces</div>
-									<div class="tpt-hero-preview-price"><strong>$90.00</strong> <span
-												class="tpt-hero-preview-discount">(10% off)</span></div>
-								</div>
-							</div>
-							<div class="tpt-hero-preview-row">
-								<div class="tpt-hero-preview-block tpt-ip-block" data-qty="20" data-price="85.00">
-									<div class="tpt-hero-preview-qty">20 - 49 pieces</div>
-									<div class="tpt-hero-preview-price"><strong>$85.00</strong> <span
-												class="tpt-hero-preview-discount">(15% off)</span></div>
-								</div>
-								<div class="tpt-hero-preview-block tpt-ip-block" data-qty="50" data-price="80.00">
-									<div class="tpt-hero-preview-qty">50 - 99 pieces</div>
-									<div class="tpt-hero-preview-price"><strong>$80.00</strong> <span
-												class="tpt-hero-preview-discount">(20% off)</span></div>
-								</div>
-							</div>
-							<div class="tpt-hero-preview-row">
-								<div class="tpt-hero-preview-block tpt-ip-block is-selected" data-qty="100"
-								     data-price="75.00" style="max-width: 200px;">
-									<div class="tpt-hero-preview-qty">100+ pieces</div>
-									<div class="tpt-hero-preview-price"><strong>$75.00</strong> <span
-												class="tpt-hero-preview-discount">(25% off)</span></div>
-								</div>
-							</div>
+					<div class="tpt-ip-bottom">
+						<div class="tpt-ip-table-container">
+							<table class="tpt-ip-table">
+								<thead>
+								<tr>
+									<th><?php esc_html_e( 'Quantity', 'tier-pricing-table' ); ?></th>
+									<th><?php esc_html_e( 'Discount', 'tier-pricing-table' ); ?></th>
+									<th><?php esc_html_e( 'Price', 'tier-pricing-table' ); ?></th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="tpt-ip-block" data-qty="1" data-price="100.00">
+									<td class="tpt-hero-preview-qty">1 - 9 pieces</td>
+									<td class="tpt-hero-preview-discount">-</td>
+									<td class="tpt-hero-preview-price"><strong>$100.00</strong></td>
+								</tr>
+								<tr class="tpt-ip-block" data-qty="10" data-price="90.00">
+									<td class="tpt-hero-preview-qty">10 - 19 pieces</td>
+									<td class="tpt-hero-preview-discount">10%</td>
+									<td class="tpt-hero-preview-price"><strong>$90.00</strong></td>
+								</tr>
+								<tr class="tpt-ip-block" data-qty="20" data-price="85.00">
+									<td class="tpt-hero-preview-qty">20 - 49 pieces <span
+												class="tpt-hero-preview-badge tpt-hero-preview-badge--popular"><span
+													class="dashicons dashicons-star-filled"></span>Most popular</span>
+									</td>
+									<td class="tpt-hero-preview-discount">15%</td>
+									<td class="tpt-hero-preview-price"><strong>$85.00</strong></td>
+								</tr>
+								<tr class="tpt-ip-block is-selected" data-qty="50" data-price="80.00">
+									<td class="tpt-hero-preview-qty">50+ pieces</td>
+									<td class="tpt-hero-preview-discount">20%</td>
+									<td class="tpt-hero-preview-price"><strong>$80.00</strong></td>
+								</tr>
+								</tbody>
+							</table>
 						</div>
 
 						<div class="tpt-ip-add-to-cart">
-							<input type="number" id="tpt-ip-qty" class="tpt-ip-qty-input" value="100" min="1">
-							<button class="tpt-ip-btn">Add to cart</button>
+							<input type="number" id="tpt-ip-qty" class="tpt-ip-qty-input" value="50" min="1">
+							<button class="tpt-ip-btn"><?php esc_html_e( 'Add to cart', 'tier-pricing-table' ); ?></button>
 						</div>
 
 						<div class="tpt-ip-summary">
 							<div class="tpt-ip-summary-row">
-								<span id="tpt-ip-summary-qty">100x</span>
-								<span id="tpt-ip-summary-each">$75.00</span>
+								<span id="tpt-ip-summary-qty">50x</span>
+								<span id="tpt-ip-summary-each">$80.00</span>
 							</div>
 							<div class="tpt-ip-summary-row tpt-ip-summary-row--total">
-								<span>Cap</span>
-								<strong id="tpt-ip-summary-total">$7,500.00</strong>
+								<span>T-Shirt</span>
+								<strong id="tpt-ip-summary-total">$4,000.00</strong>
 							</div>
 						</div>
 					</div>
@@ -618,7 +703,6 @@
 				const summaryTotal = document.getElementById('tpt-ip-summary-total');
 
 				function getPriceForQty(qty) {
-					if (qty >= 100) return 75.00;
 					if (qty >= 50) return 80.00;
 					if (qty >= 20) return 85.00;
 					if (qty >= 10) return 90.00;
@@ -635,15 +719,20 @@
 					blocks.forEach(b => b.classList.remove('is-selected'));
 
 					let selectedIndex = 0;
-					if (qty >= 100) selectedIndex = 4;
-					else if (qty >= 50) selectedIndex = 3;
+					if (qty >= 50) selectedIndex = 3;
 					else if (qty >= 20) selectedIndex = 2;
 					else if (qty >= 10) selectedIndex = 1;
 
 					if (blocks[selectedIndex]) blocks[selectedIndex].classList.add('is-selected');
 
 					if (price < 100) {
-						mainPrice.innerHTML = `<del>$100.00</del> <span>$${price.toFixed(2)}</span>`;
+						const originalPrice = 100.00;
+						const savedTotal = (originalPrice - price) * qty;
+						const savedPercent = Math.round((originalPrice - price) / originalPrice * 100);
+						mainPrice.innerHTML = `<del>$100.00</del> <span>$${price.toFixed(2)}</span> <span class="tpt-ip-you-save"><?php esc_html_e( 'You save', 'tier-pricing-table' ); ?> $${savedTotal.toLocaleString('en-US', {
+							minimumFractionDigits: 2,
+							maximumFractionDigits: 2
+						})} (${savedPercent}%)</span>`;
 					} else {
 						mainPrice.innerHTML = `<span>$100.00</span>`;
 					}
@@ -676,7 +765,7 @@
 
 	<div class="tpt-welcome-page-section-title">
 		<span>#1</span>
-		Easy Setup
+		<?php esc_html_e( 'Easy Setup', 'tier-pricing-table' ); ?>
 	</div>
 
 	<section class="tpt-welcome-page-features">
@@ -684,7 +773,7 @@
 		<div class="tpt-welcome-page-feature">
 
 			<div class="tpt-welcome-page-feature__title">
-				<?php esc_html_e( 'Apply tiered pricing to products', 'tier-pricing-table' ); ?>:
+				<?php esc_html_e( 'Add tiered pricing to products', 'tier-pricing-table' ); ?>:
 			</div>
 
 			<div class="tpt-welcome-page-feature__inner">
@@ -693,9 +782,9 @@
 					<div class="tpt-welcome-page-feature__image-description">Product edit page</div>
 				</div>
 				<div class="tpt-welcome-page-feature__description">
-					<span class="tpt-checkmark"> Add unlimited quantity-based prices.</span>
-					<span class="tpt-checkmark"> Fixed prices or percentage discounts.</span>
-					<span class="tpt-checkmark"> Works great with variable products.</span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Add unlimited quantity-based prices.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Fixed prices or percentage discounts.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Works great with variable products.', 'tier-pricing-table' ); ?></span>
 				</div>
 			</div>
 
@@ -720,7 +809,7 @@
 
 	<div class="tpt-welcome-page-section-title">
 		<span>#2</span>
-		Various Pricing Templates
+		<?php esc_html_e( 'Various Pricing Templates', 'tier-pricing-table' ); ?>
 	</div>
 
 	<?php
@@ -730,16 +819,18 @@
 						'image'    => 'table.png',
 						'features' => array(
 								__( 'Ability to add custom columns.', 'tier-pricing-table' ),
-								__( 'Customizable columns titles', 'tier-pricing-table' ),
-								__( 'Customize accent color.', 'tier-pricing-table' ),
 						),
+				),
+
+				array(
+						'title'    => __( 'Pricing Blocks #3', 'tier-pricing-table' ),
+						'image'    => 'blocks-1.png',
+						'features' => array(),
 				),
 				array(
 						'title'    => __( 'Pricing Blocks', 'tier-pricing-table' ),
 						'image'    => 'blocks-2.png',
-						'features' => array(
-								__( 'Show/hide percentage discount.', 'tier-pricing-table' ),
-						),
+						'features' => array(),
 				),
 				array(
 						'title'    => __( 'Pricing Blocks #2', 'tier-pricing-table' ),
@@ -749,18 +840,12 @@
 				array(
 						'title'    => __( 'Pricing Options', 'tier-pricing-table' ),
 						'image'    => 'options.png',
-						'features' => array(
-								__( 'Customize template with various available variables.', 'tier-pricing-table' ),
-								__( 'Show/hide total in a selected option.', 'tier-pricing-table' ),
-						),
+						'features' => array(),
 				),
-
 				array(
-						'title'    => __( 'Tooltip', 'tier-pricing-table' ),
-						'image'    => 'tooltip.png',
-						'features' => array(
-								__( 'Customizable color and size.', 'tier-pricing-table' ),
-						),
+						'title'    => __( 'Pricing Options #2', 'tier-pricing-table' ),
+						'image'    => 'options-2.png',
+						'features' => array(),
 				),
 
 				array(
@@ -771,16 +856,12 @@
 				array(
 						'title'    => __( 'Plain text', 'tier-pricing-table' ),
 						'image'    => 'plain-text.png',
-						'features' => array(
-								__( 'Customize template with various available variables.', 'tier-pricing-table' ),
-						),
+						'features' => array(),
 				),
 				array(
 						'title'    => __( 'Dropdown', 'tier-pricing-table' ),
 						'image'    => 'dropdown.png',
-						'features' => array(
-								__( 'Customizable template.', 'tier-pricing-table' ),
-						),
+						'features' => array(),
 				),
 		);
 	?>
@@ -812,7 +893,7 @@
 
 	<div class="tpt-welcome-page-section-title">
 		<span>#3</span>
-		Flexible Pricing
+		<?php esc_html_e( 'Flexible Pricing', 'tier-pricing-table' ); ?>
 	</div>
 
 	<section class="tpt-welcome-page-features tpt-welcome-page-features--flexible-pricing">
@@ -827,10 +908,10 @@
 					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/role-based.png' ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-feature__description">
-					<span class="tpt-checkmark"> Add unlimited role-based pricing.</span>
-					<span class="tpt-checkmark"> Control regular & sale price or provide a percentage discount.</span>
-					<span class="tpt-checkmark"> Control minimum, maximum and quantity step.</span>
-					<span class="tpt-checkmark"> Works great with variable products.</span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Add unlimited role-based pricing.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Control regular & sale price or provide a percentage discount.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Control minimum, maximum and quantity step.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Works great with variable products.', 'tier-pricing-table' ); ?></span>
 				</div>
 			</div>
 
@@ -850,10 +931,10 @@
 					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/global-rules	.png' ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-feature__description">
-					<span class="tpt-checkmark"> Control regular prices, tiered pricing and quantity limits in one place.</span>
-					<span class="tpt-checkmark"> Apply tiered pricing across multiple products.</span>
-					<span class="tpt-checkmark"> Select products or product categories the rule works for.</span>
-					<span class="tpt-checkmark"> Select users or user roles the rule works for.</span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Control regular prices, tiered pricing and quantity limits in one place.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Apply tiered pricing across multiple products.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Select products or product categories that the rule applies to.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Select users or user roles that the rule applies to.', 'tier-pricing-table' ); ?></span>
 				</div>
 			</div>
 		</div>
@@ -861,45 +942,52 @@
 
 	<div class="tpt-welcome-page-section-title">
 		<span>#4</span>
-		Advanced Features
+		<?php esc_html_e( 'Advanced Features', 'tier-pricing-table' ); ?>
 	</div>
 
 	<section class="tpt-welcome-page-features tpt-welcome-page-features--plugin-features">
 		<?php
 			$mainFeatures = array(
+
 					array(
-							'title'    => __( 'Instant price updating', 'tier-pricing-table' ),
-							'image'    => 'totals.png',
+							'title'    => __( 'Manage user roles', 'tier-pricing-table' ),
+							'image'    => 'user-roles.png',
 							'features' => array(
-									'Price updates instantly when customers change the quantity.',
-									'Instant totals with three different available templates.',
-									'Instant “You save” label which shows to your customers difference between original and sale price.',
+									__( 'Create and update user roles', 'tier-pricing-table' ),
+							),
+					),
+					array(
+							'title'    => __( 'Labels', 'tier-pricing-table' ),
+							'image'    => 'tiered-pricing-labels.png',
+							'features' => array(
+									__( 'Create customizable labels and attach them to a pricing tier',
+											'tier-pricing-table' ),
 							),
 					),
 					array(
 							'title'    => __( 'Cart', 'tier-pricing-table' ),
 							'image'    => 'cart.png',
 							'features' => array(
-									'Cart upsell to motivate customers to purchase more.',
-									'Customize cart upsells template.',
-									'Tiered price in the cart appears as a discount.',
+									__( 'Cart upsells to motivate customers to purchase more.', 'tier-pricing-table' ),
+									__( 'Customize cart upsells template.', 'tier-pricing-table' ),
+									__( 'Tiered price in the cart appears as a discount.', 'tier-pricing-table' ),
 							),
 					),
 					array(
 							'title'    => __( 'Catalog prices', 'tier-pricing-table' ),
 							'image'    => 'catalog.png',
 							'features' => array(
-									'Show the lowest price.',
-									'Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or whatever you want.',
-									'Show the price range based on tiered pricing.',
+									__( 'Show the lowest price.', 'tier-pricing-table' ),
+									__( 'Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or whatever you want.', 'tier-pricing-table' ),
+									__( 'Show the price range based on tiered pricing.', 'tier-pricing-table' ),
 							),
 					),
 					array(
 							'title'    => __( 'Product catalog (Category page)', 'tier-pricing-table' ),
 							'image'    => 'catalog-render.png',
 							'features' => array(
-									'Customize template (can be different from product page).',
-									'Show quantity field.',
+									__( 'Customize template (can be different from product page).', 'tier-pricing-table' ),
+									__( 'Show quantity field.', 'tier-pricing-table' ),
 							),
 					),
 			);
@@ -932,7 +1020,7 @@
 
 	<div class="tpt-welcome-page-section-title">
 		<span>#5</span>
-		Other Features That Make The Plugin Unique
+		<?php esc_html_e( 'Other Features That Make The Plugin Unique', 'tier-pricing-table' ); ?>
 	</div>
 
 	<?php
@@ -995,7 +1083,7 @@
 
 	<div class="tpt-welcome-page-section-title">
 		<span>#6</span>
-		Integrations with 3rd party plugins
+		<?php esc_html_e( 'Integrations with 3rd party plugins', 'tier-pricing-table' ); ?>
 	</div>
 
 	<section class="tpt-welcome-page-integrations">
@@ -1122,16 +1210,99 @@
 			line-height: 1.2;
 			margin-bottom: 30px;
 		}
+
+		.tpt-welcome-page-feature__image img {
+			cursor: zoom-in;
+		}
+
+		.tpt-lightbox {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(15, 23, 42, 0.85);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 999999;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.25s ease;
+			backdrop-filter: blur(4px);
+		}
+
+		.tpt-lightbox.is-active {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.tpt-lightbox img {
+			max-width: 90%;
+			max-height: 90vh;
+			border-radius: 8px;
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+			transform: scale(0.95);
+			transition: transform 0.25s ease;
+		}
+
+		.tpt-lightbox.is-active img {
+			transform: scale(1);
+		}
+
+		.tpt-lightbox-close {
+			position: absolute;
+			top: 20px;
+			right: 30px;
+			color: #fff;
+			font-size: 40px;
+			cursor: pointer;
+			opacity: 0.7;
+			transition: opacity 0.2s;
+			line-height: 1;
+		}
+
+		.tpt-lightbox-close:hover {
+			opacity: 1;
+		}
 	</style>
 
 	<section class="tpt-welcome-page-contact-us">
-		<div class="tpt-welcome-page-contact-us__title">Have a question?</div>
+		<div class="tpt-welcome-page-contact-us__title"><?php esc_html_e( 'Have a question?', 'tier-pricing-table' ); ?></div>
 		<div class="tpt-welcome-page-contact-us__button">
 			<a href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ); ?>"
 			   target="_blank"
 			   class="tpt-welcome-page-button tpt-welcome-page-button-primary">Contact Us</a>
 		</div>
 	</section>
+
+	<div id="tpt-lightbox" class="tpt-lightbox">
+		<span class="tpt-lightbox-close">&times;</span>
+		<img id="tpt-lightbox-img" src="">
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const lightbox = document.getElementById('tpt-lightbox');
+			const lightboxImg = document.getElementById('tpt-lightbox-img');
+
+			const images = document.querySelectorAll('.tpt-welcome-page-feature__image img');
+
+			images.forEach(img => {
+				img.addEventListener('click', function () {
+					lightboxImg.src = this.src;
+					lightbox.classList.add('is-active');
+				});
+			});
+
+			lightbox.addEventListener('click', function (e) {
+				if (e.target !== lightboxImg) {
+					lightbox.classList.remove('is-active');
+				}
+			});
+		});
+	</script>
+
 </main>
 
 <style>

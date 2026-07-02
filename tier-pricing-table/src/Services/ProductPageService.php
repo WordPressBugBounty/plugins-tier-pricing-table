@@ -308,7 +308,7 @@ class ProductPageService {
 		if ( $product ) {
 			$parentProduct = wc_get_product( $product->get_parent_id() );
 
-			if ( $product ) {
+			if ( $parentProduct ) {
 				PricingTable::getInstance()->renderPricingTableHTML( $parentProduct, $product, $renderSettings );
 			}
 

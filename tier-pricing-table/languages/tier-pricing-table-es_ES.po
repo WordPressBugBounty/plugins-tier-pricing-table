@@ -1,15 +1,16 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Tiered Price Table 6.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
+"POT-Creation-Date: 2026-06-17T15:54:31+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: es_ES\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-17T15:54:31+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language: es_ES\n"
 "X-Domain: tier-pricing-table\n"
 "X-Generator: WP-CLI 2.12.0\n"
 
@@ -19,24 +20,23 @@ msgid "WooCommerce Tiered Price Table"
 msgstr "Tabla de precios escalonados de WooCommerce"
 
 #. Plugin URI of the plugin
+#. Author URI of the plugin
 #: tier-pricing-table.php
 msgid "https://tiered-pricing.com/"
 msgstr "https://tiered-pricing.com/"
 
 #. Description of the plugin
 #: tier-pricing-table.php
-msgid "Quantity-based discounts with nice-looking reflection on the product page."
-msgstr "Descuentos basados ​​en cantidad con un atractivo reflejo en la página del producto."
+msgid ""
+"Quantity-based discounts with nice-looking reflection on the product page."
+msgstr ""
+"Descuentos basados ​​en cantidad con un atractivo reflejo en la página del "
+"producto."
 
 #. Author of the plugin
 #: tier-pricing-table.php
 msgid "U2Code"
 msgstr "Código U2"
-
-#. Author URI of the plugin
-#: tier-pricing-table.php
-msgid "https://u2code.com"
-msgstr "https://u2code.com"
 
 #: src/Addons/AdvancedQuantityOptions/AdvancedQuantityOptionsAddon.php:14
 msgid "Advanced product quantity options"
@@ -61,8 +61,12 @@ msgid "Maximum order quantity"
 msgstr "Cantidad máxima de pedido"
 
 #: src/Addons/AdvancedQuantityOptions/AdvancedQuantityOptionsForm.php:134
-msgid "The maximum quantity of the product a customer can order in a single transaction."
-msgstr "La cantidad máxima del producto que un cliente puede pedir en una sola transacción."
+msgid ""
+"The maximum quantity of the product a customer can order in a single "
+"transaction."
+msgstr ""
+"La cantidad máxima del producto que un cliente puede pedir en una sola "
+"transacción."
 
 #: src/Addons/AdvancedQuantityOptions/AdvancedQuantityOptionsForm.php:146
 #: src/Addons/AdvancedQuantityOptions/ProductEditor/QuantityStepBlock.php:30
@@ -128,20 +132,26 @@ msgstr "Saltar reglas de categoría"
 
 #: src/Addons/CategoryTiers/CategoryTierAddon.php:44
 msgid "Don't take into account tiered pricing rules from categories. "
-msgstr "No tenga en cuenta las reglas de precios escalonados de las categorías."
+msgstr ""
+"No tenga en cuenta las reglas de precios escalonados de las categorías."
 
 #: src/Addons/CategoryTiers/CategoryTierAddon.php:233
 msgid "Set tiered pricing at the product category level (Deprecated)."
-msgstr "Establecer precios escalonados a nivel de categoría de producto (obsoleto)."
+msgstr ""
+"Establecer precios escalonados a nivel de categoría de producto (obsoleto)."
 
 #: src/Addons/Coupons/CouponsAddon.php:9
-#: views/admin/welcome-page/welcome-page.php:965
+#: views/admin/welcome-page/welcome-page.php:1053
 msgid "Coupons management"
 msgstr "Gestión de cupones"
 
 #: src/Addons/Coupons/CouponsAddon.php:69
-msgid "Check this option to don't  apply tiered pricing in the cart when users have applied this coupon."
-msgstr "Marque esta opción para no aplicar precios escalonados en el carrito cuando los usuarios hayan aplicado este cupón."
+msgid ""
+"Check this option to don't  apply tiered pricing in the cart when users have"
+" applied this coupon."
+msgstr ""
+"Marque esta opción para no aplicar precios escalonados en el carrito cuando "
+"los usuarios hayan aplicado este cupón."
 
 #: src/Addons/Coupons/CouponsAddon.php:76
 msgid "Disable tiered pricing for specific coupons."
@@ -153,7 +163,8 @@ msgstr "(primera fila)"
 
 #: src/Addons/CustomColumns/Columns/CustomDataColumn.php:179
 msgid "Custom columns are available only in the premium version."
-msgstr "Las columnas personalizadas solo están disponibles en la versión premium."
+msgstr ""
+"Las columnas personalizadas solo están disponibles en la versión premium."
 
 #: src/Addons/CustomColumns/Columns/CustomDataColumn.php:182
 msgid "Upgrade you plan"
@@ -177,57 +188,60 @@ msgstr "Comportamiento"
 msgid "Delete"
 msgstr "Borrar"
 
-#: src/Addons/CustomColumns/Schema.php:12
+#: src/Addons/CustomColumns/Schema.php:13
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:53
 msgid "Custom column"
 msgstr "Columna personalizada"
 
-#: src/Addons/CustomColumns/Schema.php:13
+#: src/Addons/CustomColumns/Schema.php:14
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:54
 msgid "Price excluding taxes"
 msgstr "Precio sin impuestos"
 
-#: src/Addons/CustomColumns/Schema.php:14
+#: src/Addons/CustomColumns/Schema.php:15
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:55
 msgid "Price including taxes"
 msgstr "Precio con impuestos incluidos"
 
-#: src/Addons/CustomColumns/Schema.php:15
+#: src/Addons/CustomColumns/Schema.php:16
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:56
 msgid "Total row price"
 msgstr "Precio total de fila"
 
-#: src/Addons/CustomColumns/Schema.php:21
+#: src/Addons/CustomColumns/Schema.php:23
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:83
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:234
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:392
-#: src/PricingTable.php:217
-#: src/Settings/CustomOptions/TPTTextTemplate.php:205
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:203
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:205
+#: src/PricingTable.php:217 src/Settings/CustomOptions/TPTTextTemplate.php:205
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:204
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:206
 #: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/welcome-page/welcome-page.php:645
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:68
+#: src/Addons/CustomColumns/js-source/index.js:69
+#: src/Addons/CustomColumns/js-source/index.js:284
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:40
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:430
 msgid "Price"
 msgstr "Precio"
 
-#: src/Addons/CustomColumns/Schema.php:22
+#: src/Addons/CustomColumns/Schema.php:24
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:69
+#: src/Addons/CustomColumns/js-source/index.js:70
 msgid "Number"
 msgstr "Número"
 
-#: src/Addons/CustomColumns/Schema.php:23
+#: src/Addons/CustomColumns/Schema.php:25
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:70
+#: src/Addons/CustomColumns/js-source/index.js:71
 msgid "Text"
 msgstr "Texto"
 
@@ -357,8 +371,8 @@ msgstr "Precios"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:24
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:63
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:122
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:111
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:130
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:122
 #: src/Integrations/Plugins/WPAllImport.php:160
 #: views/admin/components/regular-pricing-form.php:119
 #: views/admin/components/regular-pricing-form.php:129
@@ -390,8 +404,8 @@ msgid "Discount:"
 msgstr "Descuento:"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:63
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:124
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:113
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:132
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:124
 #: src/Integrations/Plugins/WPAllImport.php:169
 #: views/admin/components/regular-pricing-form.php:106
 #: views/admin/components/regular-pricing-form.php:148
@@ -405,32 +419,39 @@ msgstr "Reglas escalonadas:"
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:82
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:220
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:388
-#: src/PricingTable.php:215
-#: src/Settings/CustomOptions/TPTTextTemplate.php:141
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:193
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:195
+#: src/PricingTable.php:215 src/Settings/CustomOptions/TPTTextTemplate.php:141
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:194
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:196
 #: views/addons/category-tiers/add-free.php:24
 #: views/addons/category-tiers/add.php:51
 #: views/addons/category-tiers/edit-free.php:34
 #: views/addons/category-tiers/edit.php:59
 #: views/addons/category-tiers/edit.php:82
 #: views/admin/components/tiered-pricing-rules-form.php:65
+#: views/admin/welcome-page/welcome-page.php:643
+#: src/Addons/CustomColumns/build/index.js:1
+#: src/Addons/CustomColumns/js-source/index.js:283
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:32
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:16
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:21
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:428
 msgid "Quantity"
 msgstr "Cantidad"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:83
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:227
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:198
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:199
+#: views/admin/welcome-page/welcome-page.php:644
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:429
 msgid "Discount"
 msgstr "Descuento"
 
@@ -470,8 +491,12 @@ msgid "Quantity limits:"
 msgstr "Límites de cantidad:"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:312
-msgid "The pricing rule does not affect either prices or product quantity limits. The rule will be skipped."
-msgstr "La regla de fijación de precios no afecta ni a los precios ni a los límites de cantidad del producto. Se saltará la regla."
+msgid ""
+"The pricing rule does not affect either prices or product quantity limits. "
+"The rule will be skipped."
+msgstr ""
+"La regla de fijación de precios no afecta ni a los precios ni a los límites "
+"de cantidad del producto. Se saltará la regla."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:515
 msgid "Dismiss"
@@ -482,8 +507,13 @@ msgid "How global pricing rules work"
 msgstr "Cómo funcionan las reglas de precios globales"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:526
-msgid "Global rules enable you to bulk-apply dynamic pricing and quantity limits to selected groups of products and users simultaneously."
-msgstr "Las reglas globales le permiten aplicar de forma masiva precios dinámicos y límites de cantidad a grupos seleccionados de productos y usuarios simultáneamente."
+msgid ""
+"Global rules enable you to bulk-apply dynamic pricing and quantity limits to"
+" selected groups of products and users simultaneously."
+msgstr ""
+"Las reglas globales le permiten aplicar de forma masiva precios dinámicos y "
+"límites de cantidad a grupos seleccionados de productos y usuarios "
+"simultáneamente."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:532
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:56
@@ -491,8 +521,12 @@ msgid "Note:"
 msgstr "Nota:"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:533
-msgid "Depending on your priority settings, global rules may override product-level pricing configurations."
-msgstr "Dependiendo de su configuración de prioridad, las reglas globales pueden anular las configuraciones de precios a nivel de producto."
+msgid ""
+"Depending on your priority settings, global rules may override product-level"
+" pricing configurations."
+msgstr ""
+"Dependiendo de su configuración de prioridad, las reglas globales pueden "
+"anular las configuraciones de precios a nivel de producto."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:141
 msgid "Premium feature"
@@ -515,13 +549,12 @@ msgid "Override the default regular product prices."
 msgstr "Anule los precios regulares predeterminados de los productos."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39
+#: src/Addons/ImportExport/WoocommerceImportService.php:24
 #: src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38
 #: src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:107
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118
 #: src/Admin/ProductPage/TieredPricingTab.php:35
-#: src/Integrations/Plugins/WPAllImport.php:335
-#: src/Services/ImportExport/WoocommerceImportService.php:24
-#: src/Settings/Settings.php:203
+#: src/Integrations/Plugins/WPAllImport.php:335 src/Settings/Settings.php:218
 msgid "Tiered Pricing"
 msgstr "Precios escalonados"
 
@@ -547,15 +580,23 @@ msgstr "Mezclar y combinar"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:18
 msgid "Select products, categories, tags, or brands this rule applies to"
-msgstr "Seleccione productos, categorías, etiquetas o marcas a las que se aplica esta regla"
+msgstr ""
+"Seleccione productos, categorías, etiquetas o marcas a las que se aplica "
+"esta regla"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:23
 msgid "Applies to products"
 msgstr "Se aplica a productos"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:26
-msgid "If no products, categories, tags, or brands are selected, this rule will apply to all products in your store, except those listed in the Exclusions section."
-msgstr "Si no se selecciona ningún producto, categoría, etiqueta o marca, esta regla se aplicará a todos los productos de su tienda, excepto a los que figuran en la sección Exclusiones."
+msgid ""
+"If no products, categories, tags, or brands are selected, this rule will "
+"apply to all products in your store, except those listed in the Exclusions "
+"section."
+msgstr ""
+"Si no se selecciona ningún producto, categoría, etiqueta o marca, esta regla"
+" se aplicará a todos los productos de su tienda, excepto a los que figuran "
+"en la sección Exclusiones."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:46
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:145
@@ -597,11 +638,17 @@ msgstr "Aplica para cada producto individualmente."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:17
 msgid "Manage how this rule interacts with product-level settings"
-msgstr "Administrar cómo esta regla interactúa con la configuración a nivel de producto"
+msgstr ""
+"Administrar cómo esta regla interactúa con la configuración a nivel de "
+"producto"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:24
-msgid "Determine which rules take precedence when a product has both global and individual settings."
-msgstr "Determine qué reglas tienen prioridad cuando un producto tiene configuraciones tanto globales como individuales."
+msgid ""
+"Determine which rules take precedence when a product has both global and "
+"individual settings."
+msgstr ""
+"Determine qué reglas tienen prioridad cuando un producto tiene "
+"configuraciones tanto globales como individuales."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:29
 msgid "Rule priority"
@@ -641,7 +688,9 @@ msgstr "Anular todos los precios a nivel de producto"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:62
 msgid "Prioritize product-specific role pricing over this global rule."
-msgstr "Priorice la fijación de precios por función específica del producto sobre esta regla global."
+msgstr ""
+"Priorice la fijación de precios por función específica del producto sobre "
+"esta regla global."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:68
 msgid "Tiered Prices Priority"
@@ -672,8 +721,12 @@ msgid "Enable Mix & Match for product-level tiers"
 msgstr "Habilite Mix & Match para niveles a nivel de producto"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
-msgid "Prioritize product-specific tiered pricing over this global rule, and optionally enable Mix & Match for those inherited tiers."
-msgstr "Priorice los precios escalonados de productos específicos sobre esta regla global y, opcionalmente, habilite Mix & Match para esos niveles heredados."
+msgid ""
+"Prioritize product-specific tiered pricing over this global rule, and "
+"optionally enable Mix & Match for those inherited tiers."
+msgstr ""
+"Priorice los precios escalonados de productos específicos sobre esta regla "
+"global y, opcionalmente, habilite Mix & Match para esos niveles heredados."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
 msgid "Quantity Limits Priority"
@@ -693,7 +746,9 @@ msgstr "Anular todos los límites a nivel de producto"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:120
 msgid "Prioritize product-specific quantity limits over this global rule."
-msgstr "Priorice los límites de cantidad específicos del producto sobre esta regla global."
+msgstr ""
+"Priorice los límites de cantidad específicos del producto sobre esta regla "
+"global."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:19
 msgid "Select the users or roles this rule applies to"
@@ -704,8 +759,13 @@ msgid "Applies to users"
 msgstr "Se aplica a los usuarios"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:27
-msgid "The rule will apply to all users if you do not specify user roles or specific customers (excluding those selected in the exclusions section)."
-msgstr "La regla se aplicará a todos los usuarios si no especifica roles de usuario o clientes específicos (excluidos los seleccionados en la sección de exclusiones)."
+msgid ""
+"The rule will apply to all users if you do not specify user roles or "
+"specific customers (excluding those selected in the exclusions section)."
+msgstr ""
+"La regla se aplicará a todos los usuarios si no especifica roles de usuario "
+"o clientes específicos (excluidos los seleccionados en la sección de "
+"exclusiones)."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:33
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:95
@@ -718,6 +778,7 @@ msgid "Select for a user role"
 msgstr "Seleccionar para un rol de usuario"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:55
+#: views/admin/welcome-page/welcome-page.php:953
 msgid "Manage user roles"
 msgstr "Administrar roles de usuario"
 
@@ -731,12 +792,19 @@ msgid "You have got a discount!"
 msgstr "¡Tienes un descuento!"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:93
-msgid "You've been using the free version for a while now, and we'd like to offer you an exclusive discount on the premium version!"
-msgstr "¡Has estado usando la versión gratuita por un tiempo y nos gustaría ofrecerte un descuento exclusivo en la versión premium!"
+msgid ""
+"You've been using the free version for a while now, and we'd like to offer "
+"you an exclusive discount on the premium version!"
+msgstr ""
+"¡Has estado usando la versión gratuita por un tiempo y nos gustaría "
+"ofrecerte un descuento exclusivo en la versión premium!"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:100
-msgid "Use the coupon code below for a <b>20%</b> discount on upgrading your plan."
-msgstr "Utilice el código de cupón a continuación para obtener un descuento del <b>20 %</b> al actualizar su plan."
+msgid ""
+"Use the coupon code below for a <b>20%</b> discount on upgrading your plan."
+msgstr ""
+"Utilice el código de cupón a continuación para obtener un descuento del "
+"<b>20 %</b> al actualizar su plan."
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:109
 msgid "Suspended"
@@ -751,8 +819,13 @@ msgid "Create Your First Global Pricing Rule"
 msgstr "Cree su primera regla de precios global"
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:300
-msgid "Global rules allow you to bulk-apply custom pricing, tiered discounts, and quantity limits to multiple products or categories simultaneously."
-msgstr "Las reglas globales le permiten aplicar precios personalizados de forma masiva, descuentos escalonados y límites de cantidad a múltiples productos o categorías simultáneamente."
+msgid ""
+"Global rules allow you to bulk-apply custom pricing, tiered discounts, and "
+"quantity limits to multiple products or categories simultaneously."
+msgstr ""
+"Las reglas globales le permiten aplicar precios personalizados de forma "
+"masiva, descuentos escalonados y límites de cantidad a múltiples productos o"
+" categorías simultáneamente."
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:308
 msgid "Create Rule"
@@ -797,8 +870,12 @@ msgid "Pricing rules"
 msgstr "Reglas de precios"
 
 #: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:392
-msgid "The pricing rule does not affect either prices or product quantity. The rule will be skipped."
-msgstr "La regla de precios no afecta ni los precios ni la cantidad del producto. Se saltará la regla."
+msgid ""
+"The pricing rule does not affect either prices or product quantity. The rule"
+" will be skipped."
+msgstr ""
+"La regla de precios no afecta ni los precios ni la cantidad del producto. Se"
+" saltará la regla."
 
 #: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:9
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:105
@@ -815,7 +892,9 @@ msgstr "Precios escalonados para pedidos manuales"
 
 #: src/Addons/ManualOrders/ManualOrdersAddon.php:19
 msgid "Apply tiered pricing to orders created manually in the admin area."
-msgstr "Aplique precios escalonados a los pedidos creados manualmente en el área de administración."
+msgstr ""
+"Aplique precios escalonados a los pedidos creados manualmente en el área de "
+"administración."
 
 #. translators: %1$s: item name, %2$s: original price, %3$s: new price
 #: src/Addons/ManualOrders/ManualOrdersAddon.php:148
@@ -845,8 +924,11 @@ msgid "Minimum quantity for the product is %s"
 msgstr "La cantidad mínima del producto es %s"
 
 #: src/Addons/MinQuantity/MinQuantity.php:209
-msgid "Enforce minimum order quantities for products based on tiered pricing rules."
-msgstr "Haga cumplir cantidades mínimas de pedido para productos según reglas de precios escalonados."
+msgid ""
+"Enforce minimum order quantities for products based on tiered pricing rules."
+msgstr ""
+"Haga cumplir cantidades mínimas de pedido para productos según reglas de "
+"precios escalonados."
 
 #: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:39
 #: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:39
@@ -892,7 +974,8 @@ msgstr "Recomendaciones de complementos"
 
 #: src/Addons/PluginsRecommendations/PluginsRecommendationsAddon.php:12
 msgid "Show recommendations for related plugins and addons."
-msgstr "Mostrar recomendaciones para complementos y complementos relacionados."
+msgstr ""
+"Mostrar recomendaciones para complementos y complementos relacionados."
 
 #: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:10
 msgid "Catalog display"
@@ -900,7 +983,8 @@ msgstr "Visualización del catálogo"
 
 #: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:14
 msgid "Display tiered pricing tables on the shop and category pages."
-msgstr "Muestre tablas de precios escalonadas en las páginas de tienda y categoría."
+msgstr ""
+"Muestre tablas de precios escalonadas en las páginas de tienda y categoría."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:22
 msgid "Catalog Display"
@@ -912,23 +996,34 @@ msgstr "Precios escalonados en la página de la tienda"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:37
 msgid "Control how tiered pricing appears on shop and category pages."
-msgstr "Controle cómo aparecen los precios escalonados en las páginas de tiendas y categorías."
+msgstr ""
+"Controle cómo aparecen los precios escalonados en las páginas de tiendas y "
+"categorías."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:42
 msgid "Enable on catalog pages"
 msgstr "Habilitar en las páginas del catálogo"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:51
-msgid "Turn this on to display tiered pricing directly within your product catalog."
-msgstr "Active esta opción para mostrar precios escalonados directamente dentro de su catálogo de productos."
+msgid ""
+"Turn this on to display tiered pricing directly within your product catalog."
+msgstr ""
+"Active esta opción para mostrar precios escalonados directamente dentro de "
+"su catálogo de productos."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:57
-msgid "Depending on your theme, you may need minor CSS adjustments for optimal display."
-msgstr "Dependiendo de su tema, es posible que necesite ajustes menores de CSS para una visualización óptima."
+msgid ""
+"Depending on your theme, you may need minor CSS adjustments for optimal "
+"display."
+msgstr ""
+"Dependiendo de su tema, es posible que necesite ajustes menores de CSS para "
+"una visualización óptima."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:62
 msgid "Display tiered pricing tables on shop and category pages."
-msgstr "Muestre tablas de precios escalonadas en las páginas de tiendas y categorías."
+msgstr ""
+"Muestre tablas de precios escalonadas en las páginas de tiendas y "
+"categorías."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:67
 msgid "Position on catalog item"
@@ -944,7 +1039,7 @@ msgstr "Debajo del botón Agregar al carrito"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:48
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:74
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:112
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:113
 msgid "Above product title"
 msgstr "Arriba del título del producto"
 
@@ -953,8 +1048,12 @@ msgid "Below product title"
 msgstr "Debajo del título del producto"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:77
-msgid "Choose where the tiered pricing table appears relative to the product image and details."
-msgstr "Elija dónde aparece la tabla de precios escalonados en relación con la imagen y los detalles del producto."
+msgid ""
+"Choose where the tiered pricing table appears relative to the product image "
+"and details."
+msgstr ""
+"Elija dónde aparece la tabla de precios escalonados en relación con la "
+"imagen y los detalles del producto."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:82
 msgid "Add quantity selector"
@@ -962,28 +1061,42 @@ msgstr "Añadir selector de cantidad"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:91
 msgid "Add a quantity input field directly to items in the product catalog."
-msgstr "Agregue un campo de entrada de cantidad directamente a los artículos del catálogo de productos."
+msgstr ""
+"Agregue un campo de entrada de cantidad directamente a los artículos del "
+"catálogo de productos."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:97
-msgid "Only enable this if your theme doesn't already provide quantity selectors on the shop page."
-msgstr "Habilite esto solo si su tema aún no proporciona selectores de cantidad en la página de la tienda."
+msgid ""
+"Only enable this if your theme doesn't already provide quantity selectors on"
+" the shop page."
+msgstr ""
+"Habilite esto solo si su tema aún no proporciona selectores de cantidad en "
+"la página de la tienda."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:108
 msgid "Dynamic total price"
 msgstr "Precio total dinámico"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:117
-msgid "Automatically update the displayed price when a customer changes the quantity from the catalog."
-msgstr "Actualiza automáticamente el precio mostrado cuando un cliente cambia la cantidad del catálogo."
+msgid ""
+"Automatically update the displayed price when a customer changes the "
+"quantity from the catalog."
+msgstr ""
+"Actualiza automáticamente el precio mostrado cuando un cliente cambia la "
+"cantidad del catálogo."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:127
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:75
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:91
 msgid "Compact layout"
 msgstr "Diseño compacto"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:131
-msgid "Apply minimal styling to pricing tables to better fit the constrained space of catalog grids."
-msgstr "Aplique un estilo mínimo a las tablas de precios para que se ajusten mejor al espacio limitado de las cuadrículas del catálogo."
+msgid ""
+"Apply minimal styling to pricing tables to better fit the constrained space "
+"of catalog grids."
+msgstr ""
+"Aplique un estilo mínimo a las tablas de precios para que se ajusten mejor "
+"al espacio limitado de las cuadrículas del catálogo."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:140
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:15
@@ -991,8 +1104,11 @@ msgid "Pricing Layout Settings"
 msgstr "Configuración de diseño de precios"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:141
-msgid "Customize the appearance and behavior of tiered pricing on catalog pages."
-msgstr "Personalice la apariencia y el comportamiento de los precios escalonados en las páginas del catálogo."
+msgid ""
+"Customize the appearance and behavior of tiered pricing on catalog pages."
+msgstr ""
+"Personalice la apariencia y el comportamiento de los precios escalonados en "
+"las páginas del catálogo."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:148
 msgid "Layout source"
@@ -1007,8 +1123,12 @@ msgid "Custom"
 msgstr "Costumbre"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:155
-msgid "Choose whether to inherit the layout from the product page or use a custom layout for catalogs."
-msgstr "Elija si desea heredar el diseño de la página del producto o utilizar un diseño personalizado para los catálogos."
+msgid ""
+"Choose whether to inherit the layout from the product page or use a custom "
+"layout for catalogs."
+msgstr ""
+"Elija si desea heredar el diseño de la página del producto o utilizar un "
+"diseño personalizado para los catálogos."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:161
 msgid "Catalog layout"
@@ -1016,10 +1136,11 @@ msgstr "Diseño del catálogo"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:165
 msgid "Select the specific visual template for the catalog page."
-msgstr "Seleccione la plantilla visual específica para la página del catálogo."
+msgstr ""
+"Seleccione la plantilla visual específica para la página del catálogo."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:170
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:97
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:98
 msgid "Pricing title"
 msgstr "Título del precio"
 
@@ -1028,27 +1149,31 @@ msgid "Text displayed above the tiered pricing block."
 msgstr "Texto que se muestra encima del bloque de precios escalonado."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:178
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:123
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:124
 msgid "Quantity display type"
 msgstr "Tipo de visualización de cantidad"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:182
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:127
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:128
 msgid "Range"
 msgstr "Rango"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:183
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:128
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:129
 msgid "Static values"
 msgstr "Valores estáticos"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:185
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:130
-msgid "\"Range\" displays the quantity range a tier applies to. \"Static\" displays only the minimum quantity required."
-msgstr "\"Rango\" muestra el rango de cantidades al que se aplica un nivel. \"Estático\" muestra sólo la cantidad mínima requerida."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:131
+msgid ""
+"\"Range\" displays the quantity range a tier applies to. \"Static\" displays"
+" only the minimum quantity required."
+msgstr ""
+"\"Rango\" muestra el rango de cantidades al que se aplica un nivel. "
+"\"Estático\" muestra sólo la cantidad mínima requerida."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:190
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:136
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:137
 msgid "Active pricing tier color"
 msgstr "Color del nivel de precios activo"
 
@@ -1056,26 +1181,30 @@ msgstr "Color del nivel de precios activo"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:208
 #: src/Admin/ProductPage/TieredPricingTab.php:126
 #: src/Settings/CustomOptions/TPTTextTemplate.php:210
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:167
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:178
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:168
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:179
 msgid "Unit label"
 msgstr "Etiqueta de unidad"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:204
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:215
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:174
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
-msgid "For example: pieces, boxes, bottles, packs, etc. This will be shown next to quantity values. Leave blank to skip adding a unit label."
-msgstr "Por ejemplo: piezas, cajas, botellas, packs, etc. Esto se mostrará junto a los valores de cantidad. Déjelo en blanco para omitir la adición de una etiqueta de unidad."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:175
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:186
+msgid ""
+"For example: pieces, boxes, bottles, packs, etc. This will be shown next to "
+"quantity values. Leave blank to skip adding a unit label."
+msgstr ""
+"Por ejemplo: piezas, cajas, botellas, packs, etc. Esto se mostrará junto a "
+"los valores de cantidad. Déjelo en blanco para omitir la adición de una "
+"etiqueta de unidad."
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:212
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:213
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:380
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:381
-#: src/PricingTable.php:268
-#: src/PricingTable.php:269
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:182
+#: src/PricingTable.php:268 src/PricingTable.php:269
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:183
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
 msgid "piece"
 msgid_plural "pieces"
 msgstr[0] "pedazo"
@@ -1109,7 +1238,7 @@ msgid "Price column title"
 msgstr "Título de la columna de precio"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:240
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:212
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:213
 #: src/Blocks/build/index.js:713
 #: src/Blocks/src/panels/ColumnsPanel/ColumnsPanel.js:45
 #: src/Blocks/build/index.js:471
@@ -1117,7 +1246,7 @@ msgid "Show percentage discount"
 msgstr "Mostrar porcentaje de descuento"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:246
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:220
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:221
 msgid "Show regular product price"
 msgstr "Mostrar precio regular del producto"
 
@@ -1139,9 +1268,12 @@ msgstr "Plantilla de opción"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:263
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:90
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:239
-msgid "<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
-msgstr "<strong>Compra {tp_quantity} piezas y ahorra un {tp_rounded_discount}%</strong>"
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:240
+msgid ""
+"<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
+msgstr ""
+"<strong>Compra {tp_quantity} piezas y ahorra un "
+"{tp_rounded_discount}%</strong>"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:273
 msgid "Show the \"no discount\" option"
@@ -1157,7 +1289,7 @@ msgstr "Plantilla de opción \"Sin descuento\""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:282
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:114
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:262
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:263
 msgid "<strong>Buy {tp_quantity} pieces</strong>"
 msgstr "<strong>Compra {tp_quantity} piezas</strong>"
 
@@ -1169,9 +1301,13 @@ msgstr "Plantilla"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:291
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:97
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:274
-msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each and save {tp_rounded_discount}%</strong>"
-msgstr "<strong>Compre {tp_quantity} piezas por {tp_price} cada una y ahorre un {tp_rounded_discount}%</strong>"
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:275
+msgid ""
+"<strong>Buy {tp_quantity} pieces for {tp_price} each and save "
+"{tp_rounded_discount}%</strong>"
+msgstr ""
+"<strong>Compre {tp_quantity} piezas por {tp_price} cada una y ahorre un "
+"{tp_rounded_discount}%</strong>"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:303
 msgid "Show the \"no discount\" tier"
@@ -1186,18 +1322,20 @@ msgid "\"No discount\" template"
 msgstr "Plantilla \"Sin descuento\""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:313
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:300
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>"
 msgstr "<strong>Compre {tp_quantity} piezas por {tp_price} cada una</strong>"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:322
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:311
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:312
 msgid "Clickable tiered pricing"
 msgstr "Precios escalonados en los que se puede hacer clic"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:326
 msgid "Makes tiered pricing (table rows, blocks, options, etc) clickable."
-msgstr "Hace que se pueda hacer clic en precios escalonados (filas de tabla, bloques, opciones, etc.)."
+msgstr ""
+"Hace que se pueda hacer clic en precios escalonados (filas de tabla, "
+"bloques, opciones, etc.)."
 
 #: src/Addons/ReactProductEditorAddon/Blocks/MinQuantity.php:30
 msgid "Minimum Order Quantity"
@@ -1209,7 +1347,9 @@ msgstr "Integración del editor de productos WooCommerce"
 
 #: src/Addons/ReactProductEditorAddon/ReactProductEditorAddon.php:12
 msgid "Enable support for WooCommerce's React-based product editor."
-msgstr "Habilite la compatibilidad con el editor de productos basado en React de WooCommerce."
+msgstr ""
+"Habilite la compatibilidad con el editor de productos basado en React de "
+"WooCommerce."
 
 #: src/Addons/ReactProductEditorAddon/Sections/AdvanceProductOptionSection.php:38
 msgid "Advanced Options"
@@ -1217,7 +1357,8 @@ msgstr "Opciones avanzadas"
 
 #: src/Addons/ReactProductEditorAddon/Sections/AdvanceProductOptionSection.php:39
 msgid "Override global settings such as pricing layout for this product."
-msgstr "Anule la configuración global, como el diseño de precios para este producto."
+msgstr ""
+"Anule la configuración global, como el diseño de precios para este producto."
 
 #: src/Addons/ReactProductEditorAddon/Sections/MainSection.php:39
 msgid "Specify tiered pricing and quantity limits."
@@ -1231,13 +1372,13 @@ msgstr "Precios basados ​​en roles"
 msgid "Set up custom pricing for specific user roles."
 msgstr "Configure precios personalizados para roles de usuario específicos."
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:120
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:109
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:128
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:120
 msgid "Regular pricing type"
 msgstr "Tipo de precio regular"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:126
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:115
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:134
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:126
 #: src/Settings/CustomOptions/TPTTextTemplate.php:148
 #: src/Settings/CustomOptions/TPTTextTemplate.php:201
 #: views/addons/category-tiers/add-free.php:28
@@ -1254,26 +1395,26 @@ msgstr "Tipo de precio regular"
 msgid "Percentage discount"
 msgstr "Descuento porcentual"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:128
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:121
-#: src/Services/ImportExport/WoocommerceExportService.php:39
-#: src/Services/ImportExport/WoocommerceImportService.php:27
+#: src/Addons/ImportExport/WoocommerceExportService.php:39
+#: src/Addons/ImportExport/WoocommerceImportService.php:27
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:136
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:132
 msgid "Fixed pricing rules"
 msgstr "Reglas de precios fijos"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:130
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:123
-#: src/Services/ImportExport/WoocommerceExportService.php:42
-#: src/Services/ImportExport/WoocommerceImportService.php:28
+#: src/Addons/ImportExport/WoocommerceExportService.php:42
+#: src/Addons/ImportExport/WoocommerceImportService.php:28
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:138
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:134
 msgid "Percentage pricing rules"
 msgstr "Reglas de precios porcentuales"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:132
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:117
+#: src/Addons/ImportExport/WoocommerceExportService.php:44
+#: src/Addons/ImportExport/WoocommerceImportService.php:26
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:140
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:128
 #: src/Integrations/Plugins/WPAllImport.php:116
 #: src/Integrations/Plugins/WPAllImport.php:222
-#: src/Services/ImportExport/WoocommerceExportService.php:44
-#: src/Services/ImportExport/WoocommerceImportService.php:26
 #: views/admin/components/tiered-pricing-rules-form.php:98
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:9
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
@@ -1281,10 +1422,10 @@ msgstr "Reglas de precios porcentuales"
 msgid "Tiered pricing type"
 msgstr "Tipo de precio escalonado"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:134
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:119
-#: src/Services/ImportExport/WoocommerceExportService.php:46
-#: src/Services/ImportExport/WoocommerceImportService.php:29
+#: src/Addons/ImportExport/WoocommerceExportService.php:46
+#: src/Addons/ImportExport/WoocommerceImportService.php:29
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:142
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:130
 #: views/admin/components/minimum-order-quantity-form.php:22
 msgid "Minimum order quantity"
 msgstr "Cantidad mínima de pedido"
@@ -1294,6 +1435,7 @@ msgid "Invalid role"
 msgstr "Rol no válido"
 
 #: src/Addons/RoleBasedPricing/ProductManager.php:177
+#: src/Addons/UserBasedPricing/ProductManager.php:182
 msgid "Invalid nonce"
 msgstr "Nonce no válido"
 
@@ -1303,7 +1445,8 @@ msgstr "Reglas de precios basadas en roles para productos individuales"
 
 #: src/Addons/RoleBasedPricing/RoleBasedPricingAddon.php:20
 msgid "Enable role-based pricing rules on individual products."
-msgstr "Habilite reglas de precios basadas en roles en productos individuales."
+msgstr ""
+"Habilite reglas de precios basadas en roles en productos individuales."
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsColumn.php:8
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:25
@@ -1327,8 +1470,11 @@ msgid "Set tax status and class"
 msgstr "Establecer estado y clase impositiva"
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:26
-msgid "Override the default tax status and class for products matching this rule."
-msgstr "Anule el estado y la clase impositiva predeterminados para los productos que coincidan con esta regla."
+msgid ""
+"Override the default tax status and class for products matching this rule."
+msgstr ""
+"Anule el estado y la clase impositiva predeterminados para los productos que"
+" coincidan con esta regla."
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:32
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:49
@@ -1340,8 +1486,8 @@ msgstr "Estado fiscal"
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:27
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:34
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:52
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:65
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:86
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:66
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:80
 msgid "Default"
 msgstr "Por defecto"
 
@@ -1375,8 +1521,12 @@ msgid "Tax Options"
 msgstr "Opciones de impuestos"
 
 #: src/Addons/TaxSettings/TaxSettingsAddon.php:17
-msgid "Manage tax overrides and display options for user roles and global pricing rules."
-msgstr "Administre anulaciones de impuestos y muestre opciones para roles de usuario y reglas de precios globales."
+msgid ""
+"Manage tax overrides and display options for user roles and global pricing "
+"rules."
+msgstr ""
+"Administre anulaciones de impuestos y muestre opciones para roles de usuario"
+" y reglas de precios globales."
 
 #: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:72
 #: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:97
@@ -1394,7 +1544,9 @@ msgstr "Insignias y etiquetas"
 
 #: src/Addons/TierLabels/TierLabelsAddon.php:16
 msgid "Add custom labels like \"Best Value\" to specific pricing tiers."
-msgstr "Agregue etiquetas personalizadas como \"Mejor valor\" a niveles de precios específicos."
+msgstr ""
+"Agregue etiquetas personalizadas como \"Mejor valor\" a niveles de precios "
+"específicos."
 
 #: src/Addons/Tools/Settings/ToolsSettingsSection.php:8
 #: src/Addons/Tools/ToolsAddon.php:10
@@ -1403,7 +1555,8 @@ msgstr "Herramientas"
 
 #: src/Addons/Tools/ToolsAddon.php:14
 msgid "Access utilities for managing and cleaning up tiered pricing data."
-msgstr "Acceda a utilidades para administrar y limpiar datos de precios escalonados."
+msgstr ""
+"Acceda a utilidades para administrar y limpiar datos de precios escalonados."
 
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:40
 msgid "Default variation"
@@ -1414,22 +1567,31 @@ msgid "Search variations&hellip;"
 msgstr "Buscar variaciones&hellip;"
 
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:69
-msgid "Display this variation's pricing before attributes are selected. The variation itself won't be pre-selected."
-msgstr "Muestre el precio de esta variación antes de seleccionar los atributos. La variación en sí no será preseleccionada."
+msgid ""
+"Display this variation's pricing before attributes are selected. The "
+"variation itself won't be pre-selected."
+msgstr ""
+"Muestre el precio de esta variación antes de seleccionar los atributos. La "
+"variación en sí no será preseleccionada."
 
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:78
 msgid "Variations share pricing"
 msgstr "Variaciones en el precio de las acciones"
 
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:79
-msgid "Use the default variation's pricing for all variations to prevent reloading the pricing table."
-msgstr "Utilice el precio de la variación predeterminada para todas las variaciones para evitar recargar la tabla de precios."
+msgid ""
+"Use the default variation's pricing for all variations to prevent reloading "
+"the pricing table."
+msgstr ""
+"Utilice el precio de la variación predeterminada para todas las variaciones "
+"para evitar recargar la tabla de precios."
 
 #: src/Admin/ProductPage/TieredPricingTab.php:98
 msgid "Additional Options"
 msgstr "Opciones adicionales"
 
 #: src/Admin/ProductPage/TieredPricingTab.php:116
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:38
 msgid "Pricing layout"
 msgstr "Diseño de precios"
 
@@ -1447,7 +1609,9 @@ msgstr "Plural (por ejemplo, piezas)"
 
 #: src/Admin/ProductPage/TieredPricingTab.php:150
 msgid "Displayed next to quantities. Leave empty to inherit global settings."
-msgstr "Se muestra junto a las cantidades. Déjelo vacío para heredar la configuración global."
+msgstr ""
+"Se muestra junto a las cantidades. Déjelo vacío para heredar la "
+"configuración global."
 
 #: src/Admin/ProductPage/TieredPricingTab.php:172
 msgid "Upgrade your plan to unlock all great features."
@@ -1461,19 +1625,40 @@ msgstr "Mejora"
 
 #: src/Admin/Tips/Tips/DefaultVariationTip.php:42
 msgid "You can show tiered pricing even if a variation is not selected."
-msgstr "Puede mostrar precios escalonados incluso si no se selecciona una variación."
+msgstr ""
+"Puede mostrar precios escalonados incluso si no se selecciona una variación."
 
 #: src/Admin/Tips/Tips/DefaultVariationTip.php:48
-msgid "Tiered pricing is related to each variation, so a variation must be selected to show the pricing table. However, you can show the tiered pricing before users choose a variation by enabling the <strong>default variation</strong> option in the <strong>Additional Options</strong> section below."
-msgstr "Los precios escalonados están relacionados con cada variación, por lo que se debe seleccionar una variación para mostrar la tabla de precios. Sin embargo, puede mostrar los precios escalonados antes de que los usuarios elijan una variación habilitando la opción <strong>variación predeterminada</strong> en la sección <strong>Opciones adicionales</strong> a continuación."
+msgid ""
+"Tiered pricing is related to each variation, so a variation must be selected"
+" to show the pricing table. However, you can show the tiered pricing before "
+"users choose a variation by enabling the <strong>default variation</strong> "
+"option in the <strong>Additional Options</strong> section below."
+msgstr ""
+"Los precios escalonados están relacionados con cada variación, por lo que se"
+" debe seleccionar una variación para mostrar la tabla de precios. Sin "
+"embargo, puede mostrar los precios escalonados antes de que los usuarios "
+"elijan una variación habilitando la opción <strong>variación "
+"predeterminada</strong> en la sección <strong>Opciones adicionales</strong> "
+"a continuación."
 
 #: src/Admin/Tips/Tips/VariationsPricingCalculationTip.php:46
-msgid "You can make tiered pricing calculations by considering all variations as one product."
-msgstr "Puede realizar cálculos de precios escalonados considerando todas las variaciones como un solo producto."
+msgid ""
+"You can make tiered pricing calculations by considering all variations as "
+"one product."
+msgstr ""
+"Puede realizar cálculos de precios escalonados considerando todas las "
+"variaciones como un solo producto."
 
 #: src/Admin/Tips/Tips/VariationsPricingCalculationTip.php:52
-msgid "For example, if you have a variable product with <strong>3 variations</strong>, the price will be calculated for <strong>a combination of those variations</strong> in the cart, not individually."
-msgstr "Por ejemplo, si tienes un producto variable con <strong>3 variaciones</strong>, el precio se calculará para <strong>una combinación de esas variaciones</strong> en el carrito, no individualmente."
+msgid ""
+"For example, if you have a variable product with <strong>3 "
+"variations</strong>, the price will be calculated for <strong>a combination "
+"of those variations</strong> in the cart, not individually."
+msgstr ""
+"Por ejemplo, si tienes un producto variable con <strong>3 "
+"variaciones</strong>, el precio se calculará para <strong>una combinación de"
+" esas variaciones</strong> en el carrito, no individualmente."
 
 #: src/Admin/Tips/Tips/VariationsPricingCalculationTip.php:60
 msgid "Find more in the settings"
@@ -1492,33 +1677,54 @@ msgid "Cache has been purged successfully"
 msgstr "La caché se ha purgado correctamente"
 
 #: src/Integrations/Plugins/AddifyRequestAQuote.php:37
-msgid "Apply tiered pricing discounts when users request a quote through the Addify Request a Quote form."
-msgstr "Aplique descuentos de precios escalonados cuando los usuarios soliciten una cotización a través del formulario Solicitar una cotización de Addify."
+msgid ""
+"Apply tiered pricing discounts when users request a quote through the Addify"
+" Request a Quote form."
+msgstr ""
+"Aplique descuentos de precios escalonados cuando los usuarios soliciten una "
+"cotización a través del formulario Solicitar una cotización de Addify."
 
 #: src/Integrations/Plugins/AeliaMulticurrency.php:46
-msgid "Convert and display tiered pricing correctly when using the Aelia Currency Switcher."
-msgstr "Convierta y muestre precios escalonados correctamente cuando utilice Aelia Currency Switcher."
+msgid ""
+"Convert and display tiered pricing correctly when using the Aelia Currency "
+"Switcher."
+msgstr ""
+"Convierta y muestre precios escalonados correctamente cuando utilice Aelia "
+"Currency Switcher."
 
 #: src/Integrations/Plugins/Curcy.php:79
-msgid "Convert and display tiered pricing correctly when using the CURCY multicurrency plugin."
-msgstr "Convierta y muestre precios escalonados correctamente cuando utilice el complemento multidivisa CURCY."
+msgid ""
+"Convert and display tiered pricing correctly when using the CURCY "
+"multicurrency plugin."
+msgstr ""
+"Convierta y muestre precios escalonados correctamente cuando utilice el "
+"complemento multidivisa CURCY."
 
 #: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:37
 msgid "Discount Rules for WooCommerce"
 msgstr "Reglas de descuento para WooCommerce"
 
 #: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:41
-msgid "Prevent price recalculations for free promotional items added to the cart by Discount Rules for WooCommerce."
-msgstr "Evite recálculos de precios para artículos promocionales gratuitos agregados al carrito mediante Reglas de descuento para WooCommerce."
+msgid ""
+"Prevent price recalculations for free promotional items added to the cart by"
+" Discount Rules for WooCommerce."
+msgstr ""
+"Evite recálculos de precios para artículos promocionales gratuitos agregados"
+" al carrito mediante Reglas de descuento para WooCommerce."
 
 #: src/Integrations/Plugins/Elementor/ElementorIntegration.php:13
-msgid "Add a dedicated Elementor widget to display the tiered pricing table with customizable design options."
-msgstr "Agregue un widget de Elementor dedicado para mostrar la tabla de precios escalonada con opciones de diseño personalizables."
+msgid ""
+"Add a dedicated Elementor widget to display the tiered pricing table with "
+"customizable design options."
+msgstr ""
+"Agregue un widget de Elementor dedicado para mostrar la tabla de precios "
+"escalonada con opciones de diseño personalizables."
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:15
 #: src/Services/SystemStatusReportService.php:28
 #: views/admin/banners/premium-thanking-banner.php:18
 #: views/admin/notifications/activation-notification.php:26
+#: views/admin/welcome-page/welcome-page.php:574
 msgid "Tiered Pricing Table"
 msgstr "Tabla de precios escalonada"
 
@@ -1534,6 +1740,7 @@ msgstr "ID del producto"
 msgid "Leave empty to use the current product."
 msgstr "Déjelo vacío para usar el producto actual."
 
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:47
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:49
 #: src/Blocks/build/index.js:768
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:35
@@ -1542,33 +1749,29 @@ msgid "Display type"
 msgstr "Tipo de pantalla"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:53
-#: src/TierPricingTablePlugin.php:278
-#: src/Blocks/build/index.js:751
+#: src/TierPricingTablePlugin.php:267 src/Blocks/build/index.js:751
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:11
 #: src/Blocks/build/index.js:489
 msgid "Table"
 msgstr "Mesa"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:54
-#: src/TierPricingTablePlugin.php:279
-#: src/Blocks/build/index.js:754
+#: src/TierPricingTablePlugin.php:268 src/Blocks/build/index.js:754
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:15
 #: src/Blocks/build/index.js:493
 msgid "Blocks"
 msgstr "Bloques"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:55
-#: src/TierPricingTablePlugin.php:280
-#: src/Blocks/build/index.js:757
+#: src/TierPricingTablePlugin.php:269 src/Blocks/build/index.js:757
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:19
 #: src/Blocks/build/index.js:497
 msgid "Options"
 msgstr "Opciones"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:56
-#: src/TierPricingTablePlugin.php:281
-#: views/admin/welcome-page/welcome-page.php:779
-#: src/Blocks/build/index.js:760
+#: src/TierPricingTablePlugin.php:270
+#: views/admin/welcome-page/welcome-page.php:862 src/Blocks/build/index.js:760
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:23
 #: src/Blocks/build/index.js:501
 msgid "Dropdown"
@@ -1581,8 +1784,7 @@ msgstr "mesa horizontal"
 #: src/Addons/PricingSummary/SummarySubsection.php:32
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:63
 #: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:116
-#: src/Blocks/build/index.js:781
+#: src/Addons/TierLabels/js-source/index.js:116 src/Blocks/build/index.js:781
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:51
 #: src/Blocks/build/index.js:529
 msgid "Title"
@@ -1590,7 +1792,9 @@ msgstr "Título"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:66
 msgid "Tiered pricing title. Leave empty to use default title."
-msgstr "Título de precios escalonados. Déjelo vacío para usar el título predeterminado."
+msgstr ""
+"Título de precios escalonados. Déjelo vacío para usar el título "
+"predeterminado."
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:71
 msgid "Show total"
@@ -1613,8 +1817,10 @@ msgid "Show the default option"
 msgstr "Mostrar la opción predeterminada"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:93
-msgid "Show the option without a discount (option with a regular product price)"
-msgstr "Mostrar la opción sin descuento (opción con precio regular del producto)"
+msgid ""
+"Show the option without a discount (option with a regular product price)"
+msgstr ""
+"Mostrar la opción sin descuento (opción con precio regular del producto)"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:99
 msgid "Active tier color"
@@ -1657,24 +1863,32 @@ msgstr "Etiqueta de unidad (plural)"
 
 #: src/Integrations/Plugins/MixMatch.php:30
 msgid "Apply tiered pricing rules correctly to Mix and Match products."
-msgstr "Aplique correctamente las reglas de precios escalonados a los productos Mix and Match."
+msgstr ""
+"Aplique correctamente las reglas de precios escalonados a los productos Mix "
+"and Match."
 
 #: src/Integrations/Plugins/ProductBundles.php:108
-msgid "Apply tiered pricing discounts correctly to WooCommerce Product Bundles."
-msgstr "Aplique correctamente los descuentos de precios escalonados a los paquetes de productos de WooCommerce."
+msgid ""
+"Apply tiered pricing discounts correctly to WooCommerce Product Bundles."
+msgstr ""
+"Aplique correctamente los descuentos de precios escalonados a los paquetes "
+"de productos de WooCommerce."
 
 #: src/Integrations/Plugins/RankMath/RankMath.php:19
-msgid "Add tiered pricing data to the product schema and introduce <b>%lowest_price%</b> and <b>%price_range%</b> variables for SEO."
-msgstr "Agregue datos de precios escalonados al esquema del producto e introduzca variables <b>%lowest_price%</b> y <b>%price_range%</b> para SEO."
-
-#: src/Integrations/Plugins/RankMath/Settings.php:9
-#: src/Integrations/Plugins/RankMath/Settings.php:19
-msgid "Rank Math SEO"
-msgstr "Clasificar SEO matemático"
+msgid ""
+"Add tiered pricing data to the product schema and introduce "
+"<b>%lowest_price%</b> and <b>%price_range%</b> variables for SEO."
+msgstr ""
+"Agregue datos de precios escalonados al esquema del producto e introduzca "
+"variables <b>%lowest_price%</b> y <b>%price_range%</b> para SEO."
 
 #: src/Integrations/Plugins/RankMath/Settings.php:21
-msgid "Configure the integration with Rank Math SEO plugin to use tiered pricing variables in your SEO metadata."
-msgstr "Configure la integración con el complemento Rank Math SEO para utilizar variables de precios escalonadas en sus metadatos de SEO."
+msgid ""
+"Configure the integration with Rank Math SEO plugin to use tiered pricing "
+"variables in your SEO metadata."
+msgstr ""
+"Configure la integración con el complemento Rank Math SEO para utilizar "
+"variables de precios escalonadas en sus metadatos de SEO."
 
 #: src/Integrations/Plugins/RankMath/Settings.php:26
 #: src/Integrations/Plugins/SEOPress/Settings.php:26
@@ -1683,8 +1897,14 @@ msgid "Enable custom variables"
 msgstr "Habilitar variables personalizadas"
 
 #: src/Integrations/Plugins/RankMath/Settings.php:30
-msgid "Enable you to use the %lowest_price% and %price_range% variables to display the lowest price and price range of products with tiered pricing in Rank Math SEO metadata."
-msgstr "Le permite utilizar las variables %lowest_price% y %price_range% para mostrar el precio más bajo y el rango de precios de productos con precios escalonados en los metadatos de Rank Math SEO."
+msgid ""
+"Enable you to use the %lowest_price% and %price_range% variables to display "
+"the lowest price and price range of products with tiered pricing in Rank "
+"Math SEO metadata."
+msgstr ""
+"Le permite utilizar las variables %lowest_price% y %price_range% para "
+"mostrar el precio más bajo y el rango de precios de productos con precios "
+"escalonados en los metadatos de Rank Math SEO."
 
 #: src/Integrations/Plugins/RankMath/Settings.php:34
 #: src/Integrations/Plugins/SEOPress/Settings.php:34
@@ -1694,13 +1914,21 @@ msgstr "Mejore el esquema de producto con ofertas de precios escalonados"
 
 #: src/Integrations/Plugins/RankMath/Settings.php:38
 #: src/Integrations/Plugins/SEOPress/Settings.php:38
-#: src/Integrations/Plugins/Yoast/Settings.php:38
-msgid "Enhance the product schema with tiered pricing offers. Adds an offer for each tier and the lowest price as the main offer."
-msgstr "Mejore el esquema del producto con ofertas de precios escalonados. Agrega una oferta para cada nivel y el precio más bajo como oferta principal."
+#: src/Integrations/Plugins/Yoast/Settings.php:39
+msgid ""
+"Enhance the product schema with tiered pricing offers. Adds an offer for "
+"each tier and the lowest price as the main offer."
+msgstr ""
+"Mejore el esquema del producto con ofertas de precios escalonados. Agrega "
+"una oferta para cada nivel y el precio más bajo como oferta principal."
 
 #: src/Integrations/Plugins/SEOPress/SEOPress.php:18
-msgid "Add tiered pricing data to SEOPress and introduce <b>%%lowest_price%%</b> and <b>%%price_range%%</b> variables for SEO."
-msgstr "Agregue datos de precios escalonados a SEOPress e introduzca variables <b>%%lowest_price%%</b> y <b>%%price_range%%</b> para SEO."
+msgid ""
+"Add tiered pricing data to SEOPress and introduce <b>%%lowest_price%%</b> "
+"and <b>%%price_range%%</b> variables for SEO."
+msgstr ""
+"Agregue datos de precios escalonados a SEOPress e introduzca variables "
+"<b>%%lowest_price%%</b> y <b>%%price_range%%</b> para SEO."
 
 #: src/Integrations/Plugins/SEOPress/SEOPressLowestPriceTag.php:12
 msgid "Displays the lowest price of the product"
@@ -1710,46 +1938,77 @@ msgstr "Muestra el precio más bajo del producto."
 msgid "Product price range"
 msgstr "rango de precios del producto"
 
-#: src/Integrations/Plugins/SEOPress/Settings.php:9
-#: src/Integrations/Plugins/SEOPress/Settings.php:19
-msgid "SEOPress"
-msgstr "SEOPrensa"
-
 #: src/Integrations/Plugins/SEOPress/Settings.php:21
-msgid "Configure the integration with SEOPress plugin to use tiered pricing variables in your SEO metadata."
-msgstr "Configure la integración con el complemento SEOPress para utilizar variables de precios escalonadas en sus metadatos de SEO."
+msgid ""
+"Configure the integration with SEOPress plugin to use tiered pricing "
+"variables in your SEO metadata."
+msgstr ""
+"Configure la integración con el complemento SEOPress para utilizar variables"
+" de precios escalonadas en sus metadatos de SEO."
 
 #: src/Integrations/Plugins/SEOPress/Settings.php:30
-msgid "Enable you to use the %%lowest_price%% and %%price_range%% variables to display the lowest price and price range of products with tiered pricing in SEOPress metadata."
-msgstr "Le permite utilizar las variables %%lowest_price%% y %%price_range%% para mostrar el precio más bajo y el rango de precios de productos con precios escalonados en los metadatos de SEOPress."
+msgid ""
+"Enable you to use the %%lowest_price%% and %%price_range%% variables to "
+"display the lowest price and price range of products with tiered pricing in "
+"SEOPress metadata."
+msgstr ""
+"Le permite utilizar las variables %%lowest_price%% y %%price_range%% para "
+"mostrar el precio más bajo y el rango de precios de productos con precios "
+"escalonados en los metadatos de SEOPress."
 
 #: src/Integrations/Plugins/WCCS.php:50
-msgid "Convert and display tiered pricing correctly when using the WooCommerce Currency Switcher by WP Experts."
-msgstr "Convierta y muestre precios escalonados correctamente cuando utilice el conmutador de divisas WooCommerce de WP Experts."
+msgid ""
+"Convert and display tiered pricing correctly when using the WooCommerce "
+"Currency Switcher by WP Experts."
+msgstr ""
+"Convierta y muestre precios escalonados correctamente cuando utilice el "
+"conmutador de divisas WooCommerce de WP Experts."
 
 #: src/Integrations/Plugins/WCPA.php:19
-msgid "Calculate tiered pricing accurately when custom product add-ons are selected."
-msgstr "Calcule los precios escalonados con precisión cuando se seleccionan complementos de productos personalizados."
+msgid ""
+"Calculate tiered pricing accurately when custom product add-ons are "
+"selected."
+msgstr ""
+"Calcule los precios escalonados con precisión cuando se seleccionan "
+"complementos de productos personalizados."
 
 #: src/Integrations/Plugins/WCPProductBundles.php:34
 msgid "Apply tiered pricing discounts correctly to WPC Product Bundles."
-msgstr "Aplique correctamente los descuentos de precios escalonados a los paquetes de productos WPC."
+msgstr ""
+"Aplique correctamente los descuentos de precios escalonados a los paquetes "
+"de productos WPC."
 
 #: src/Integrations/Plugins/WombatProductAddons.php:46
-msgid "Calculate tiered pricing accurately when using StudioWombat Advanced Product Fields."
-msgstr "Calcule los precios escalonados con precisión cuando utilice los campos de productos avanzados de StudioWombat."
+msgid ""
+"Calculate tiered pricing accurately when using StudioWombat Advanced Product"
+" Fields."
+msgstr ""
+"Calcule los precios escalonados con precisión cuando utilice los campos de "
+"productos avanzados de StudioWombat."
 
 #: src/Integrations/Plugins/WooCommerceDeposits.php:10
-msgid "Calculate deposit amounts and remaining balances correctly based on tiered pricing rules."
-msgstr "Calcule los montos de los depósitos y los saldos restantes correctamente según las reglas de precios escalonados."
+msgid ""
+"Calculate deposit amounts and remaining balances correctly based on tiered "
+"pricing rules."
+msgstr ""
+"Calcule los montos de los depósitos y los saldos restantes correctamente "
+"según las reglas de precios escalonados."
 
 #: src/Integrations/Plugins/WooCommerceProductAddons.php:65
-msgid "Calculate tiered pricing accurately when WooCommerce Product Add-ons are selected."
-msgstr "Calcule los precios escalonados con precisión cuando se seleccionen los complementos de productos WooCommerce."
+msgid ""
+"Calculate tiered pricing accurately when WooCommerce Product Add-ons are "
+"selected."
+msgstr ""
+"Calcule los precios escalonados con precisión cuando se seleccionen los "
+"complementos de productos WooCommerce."
 
 #: src/Integrations/Plugins/WOOCS.php:65
-msgid "Convert and display tiered pricing correctly when using the FOX WooCommerce Currency Switcher."
-msgstr "Convierta y muestre precios escalonados correctamente cuando utilice el conmutador de divisas FOX WooCommerce."
+msgid ""
+"Convert and display tiered pricing correctly when using the FOX WooCommerce "
+"Currency Switcher."
+msgstr ""
+"Convierta y muestre precios escalonados correctamente cuando utilice el "
+"conmutador de divisas FOX WooCommerce."
 
 #: src/Integrations/Plugins/WPAllImport.php:102
 #: src/Integrations/Plugins/WPAllImport.php:202
@@ -1758,8 +2017,14 @@ msgstr "Precios fijos escalonados"
 
 #: src/Integrations/Plugins/WPAllImport.php:105
 #: src/Integrations/Plugins/WPAllImport.php:207
-msgid "The format for the rules must be the following: quantity:price,quantity:price. For example: \"10:5,20:15\" where 10 and 20 are quantities and 5 and 15 are prices for those quantities."
-msgstr "El formato de las reglas debe ser el siguiente: cantidad:precio,cantidad:precio. Por ejemplo: \"10:5,20:15\" donde 10 y 20 son cantidades y 5 y 15 son precios de esas cantidades."
+msgid ""
+"The format for the rules must be the following: "
+"quantity:price,quantity:price. For example: \"10:5,20:15\" where 10 and 20 "
+"are quantities and 5 and 15 are prices for those quantities."
+msgstr ""
+"El formato de las reglas debe ser el siguiente: "
+"cantidad:precio,cantidad:precio. Por ejemplo: \"10:5,20:15\" donde 10 y 20 "
+"son cantidades y 5 y 15 son precios de esas cantidades."
 
 #: src/Integrations/Plugins/WPAllImport.php:109
 #: src/Integrations/Plugins/WPAllImport.php:212
@@ -1768,8 +2033,16 @@ msgstr "Precios porcentuales escalonados"
 
 #: src/Integrations/Plugins/WPAllImport.php:112
 #: src/Integrations/Plugins/WPAllImport.php:217
-msgid "Format for the rules must be the following: quantity:percent_discount,quantity:percent_discount. For example: \"10:5,20:15\" where 10 and 20 are quantities and 5 and 15 are amounts of discount."
-msgstr "El formato de las reglas debe ser el siguiente: cantidad: porcentaje_descuento, cantidad: porcentaje_descuento. Por ejemplo: \"10:5,20:15\" donde 10 y 20 son cantidades y 5 y 15 son cantidades de descuento."
+msgid ""
+"Format for the rules must be the following: "
+"quantity:percent_discount,quantity:percent_discount. For example: "
+"\"10:5,20:15\" where 10 and 20 are quantities and 5 and 15 are amounts of "
+"discount."
+msgstr ""
+"El formato de las reglas debe ser el siguiente: cantidad: "
+"porcentaje_descuento, cantidad: porcentaje_descuento. Por ejemplo: "
+"\"10:5,20:15\" donde 10 y 20 son cantidades y 5 y 15 son cantidades de "
+"descuento."
 
 #: src/Integrations/Plugins/WPAllImport.php:125
 #: src/Integrations/Plugins/WPAllImport.php:233
@@ -1792,8 +2065,14 @@ msgid "Pricing type"
 msgstr "Tipo de precio"
 
 #: src/Integrations/Plugins/WPAllImport.php:155
-msgid "The field must be either \"fixed\" or \"percentage\". This affect what fields will be used to grant a discount: sale and regular prices or percentage discount."
-msgstr "El campo debe ser \"fijo\" o \"porcentaje\". Esto afecta qué campos se utilizarán para otorgar un descuento: precios de oferta y regulares o descuento porcentual."
+msgid ""
+"The field must be either \"fixed\" or \"percentage\". This affect what "
+"fields will be used to grant a discount: sale and regular prices or "
+"percentage discount."
+msgstr ""
+"El campo debe ser \"fijo\" o \"porcentaje\". Esto afecta qué campos se "
+"utilizarán para otorgar un descuento: precios de oferta y regulares o "
+"descuento porcentual."
 
 #: src/Integrations/Plugins/WPAllImport.php:165
 msgid "Regular price for the role"
@@ -1803,9 +2082,8 @@ msgstr "Precio regular por el papel."
 msgid "Sale price for the role"
 msgstr "Precio de venta del rol."
 
-#: src/Integrations/Plugins/WPAllImport.php:178
-#: src/PricingTable.php:219
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:200
+#: src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:219
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:201
 #: views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "Descuento (%)"
@@ -1820,45 +2098,63 @@ msgstr "Importación basada en roles"
 
 #: src/Integrations/Plugins/WPAllImport.php:888
 msgid "Import and update tiered pricing rules using WP All Import."
-msgstr "Importe y actualice reglas de precios escalonados utilizando WP All Import."
+msgstr ""
+"Importe y actualice reglas de precios escalonados utilizando WP All Import."
 
 #: src/Integrations/Plugins/WPMLMulticurrency.php:81
-msgid "Convert and display tiered pricing correctly when using WPML Multicurrency."
-msgstr "Convierta y muestre precios escalonados correctamente cuando utilice WPML Multimoneda."
+msgid ""
+"Convert and display tiered pricing correctly when using WPML Multicurrency."
+msgstr ""
+"Convierta y muestre precios escalonados correctamente cuando utilice WPML "
+"Multimoneda."
 
 #: src/Integrations/Plugins/YithRequestAQuote.php:85
-msgid "Apply tiered pricing discounts when users request a quote through YITH Request a Quote."
-msgstr "Aplique descuentos de precios escalonados cuando los usuarios soliciten una cotización a través de YITH Solicitar una cotización."
-
-#: src/Integrations/Plugins/Yoast/Settings.php:9
-msgid "Yoast SEO"
-msgstr "Yoast SEO"
-
-#: src/Integrations/Plugins/Yoast/Settings.php:19
-msgid "Yoast"
-msgstr "Yoast"
+msgid ""
+"Apply tiered pricing discounts when users request a quote through YITH "
+"Request a Quote."
+msgstr ""
+"Aplique descuentos de precios escalonados cuando los usuarios soliciten una "
+"cotización a través de YITH Solicitar una cotización."
 
 #: src/Integrations/Plugins/Yoast/Settings.php:21
-msgid "Configure the integration with Yoast SEO plugin to use tiered pricing variables in your SEO metadata."
-msgstr "Configure la integración con el complemento Yoast SEO para utilizar variables de precios escalonadas en sus metadatos de SEO."
+msgid ""
+"Configure the integration with Yoast SEO plugin to use tiered pricing "
+"variables in your SEO metadata."
+msgstr ""
+"Configure la integración con el complemento Yoast SEO para utilizar "
+"variables de precios escalonadas en sus metadatos de SEO."
 
 #: src/Integrations/Plugins/Yoast/Settings.php:30
-msgid "Enable you to use the %%lowest_price%% and %%price_range%% variables to display the lowest price and price range of products with tiered pricing in Yoast SEO metadata."
-msgstr "Le permite utilizar las variables %%lowest_price%% y %%price_range%% para mostrar el precio más bajo y el rango de precios de productos con precios escalonados en los metadatos de Yoast SEO."
+msgid ""
+"Enable you to use the %%lowest_price%% and %%price_range%% variables to "
+"display the lowest price and price range of products with tiered pricing in "
+"Yoast SEO metadata."
+msgstr ""
+"Le permite utilizar las variables %%lowest_price%% y %%price_range%% para "
+"mostrar el precio más bajo y el rango de precios de productos con precios "
+"escalonados en los metadatos de Yoast SEO."
 
 #: src/Integrations/Plugins/Yoast/Yoast.php:18
-msgid "Add tiered pricing data to the Yoast product schema and introduce <b>%%lowest_price%%</b> and <b>%%price_range%%</b> variables for SEO."
-msgstr "Agregue datos de precios escalonados al esquema de producto de Yoast e introduzca variables <b>%%lowest_price%%</b> y <b>%%price_range%%</b> para SEO."
+msgid ""
+"Add tiered pricing data to the Yoast product schema and introduce "
+"<b>%%lowest_price%%</b> and <b>%%price_range%%</b> variables for SEO."
+msgstr ""
+"Agregue datos de precios escalonados al esquema de producto de Yoast e "
+"introduzca variables <b>%%lowest_price%%</b> y <b>%%price_range%%</b> para "
+"SEO."
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:60
-#: src/Managers/FormatPriceManager.php:246
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:75
+#: src/Managers/FormatPriceManager.php:292
 msgid "From"
 msgstr "De"
 
 #: src/Addons/CartUpsells/CartUpsellsService.php:202
 #: src/Addons/CartUpsells/UpsellsSubsection.php:43
-msgid "Buy <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each"
-msgstr "Compra <b>{tp_required_quantity}</b> más para obtener <b>{tp_next_price}</b> cada uno"
+msgid ""
+"Buy <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each"
+msgstr ""
+"Compra <b>{tp_required_quantity}</b> más para obtener <b>{tp_next_price}</b>"
+" cada uno"
 
 #. translators: %s: account page link
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:72
@@ -1912,7 +2208,8 @@ msgid "e.g., pieces"
 msgstr "por ejemplo, piezas"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:142
-msgid "{tp_quantity} - range or a static quantity of the current pricing tier."
+msgid ""
+"{tp_quantity} - range or a static quantity of the current pricing tier."
 msgstr "{tp_quantity}: rango o cantidad estática del nivel de precios actual."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:149
@@ -1925,23 +2222,31 @@ msgstr "Descuento porcentual redondeado"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:156
 msgid "{tp_rounded_discount} - current tier`s rounded percentage discount."
-msgstr "{tp_rounded_discount}: descuento porcentual redondeado del nivel actual."
+msgstr ""
+"{tp_rounded_discount}: descuento porcentual redondeado del nivel actual."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:162
 msgid "Required quantity"
 msgstr "Cantidad requerida"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:163
-msgid "{tp_required_quantity} - required quantity to add a next tiered pricing."
-msgstr "{tp_required_quantity}: cantidad requerida para agregar un precio del siguiente nivel."
+msgid ""
+"{tp_required_quantity} - required quantity to add a next tiered pricing."
+msgstr ""
+"{tp_required_quantity}: cantidad requerida para agregar un precio del "
+"siguiente nivel."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:169
 msgid "Next price"
 msgstr "Próximo precio"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:170
-msgid "{tp_next_price} - next tiered pricing price user can get if they add required quantity."
-msgstr "{tp_next_price}: precio del siguiente nivel que el usuario puede obtener si agrega la cantidad requerida."
+msgid ""
+"{tp_next_price} - next tiered pricing price user can get if they add "
+"required quantity."
+msgstr ""
+"{tp_next_price}: precio del siguiente nivel que el usuario puede obtener si "
+"agrega la cantidad requerida."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:176
 msgid "Next discount"
@@ -1949,7 +2254,8 @@ msgstr "Próximo descuento"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:177
 msgid "{tp_next_discount} - next discount if they add required quantity."
-msgstr "{tp_next_discount}: próximo descuento si agregan la cantidad requerida."
+msgstr ""
+"{tp_next_discount}: próximo descuento si agregan la cantidad requerida."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:183
 msgid "Next actual discount"
@@ -1957,7 +2263,8 @@ msgstr "Próximo descuento real"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:184
 msgid "{tp_actual_discount} - discount based on the original product price."
-msgstr "{tp_actual_discount}: descuento basado en el precio original del producto."
+msgstr ""
+"{tp_actual_discount}: descuento basado en el precio original del producto."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:189
 msgid "Save price"
@@ -1972,8 +2279,12 @@ msgid "Total save price"
 msgstr "Precio de ahorro total"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:196
-msgid "{tp_ys_total_price} - difference between regular and current price multiplied by quantity."
-msgstr "{tp_ys_total_price}: diferencia entre el precio normal y actual multiplicada por la cantidad."
+msgid ""
+"{tp_ys_total_price} - difference between regular and current price "
+"multiplied by quantity."
+msgstr ""
+"{tp_ys_total_price}: diferencia entre el precio normal y actual multiplicada"
+" por la cantidad."
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:206
 msgid "{tp_price} - Tier price for one piece"
@@ -1992,8 +2303,12 @@ msgid "Cache"
 msgstr "Cache"
 
 #: src/Settings/Sections/Advanced/AdvancedSection.php:67
-msgid "Cache improves performance making the plugin not calculate data on each request. Disable to debug issues."
-msgstr "La caché mejora el rendimiento haciendo que el complemento no calcule datos en cada solicitud. Desactívelo para depurar problemas."
+msgid ""
+"Cache improves performance making the plugin not calculate data on each "
+"request. Disable to debug issues."
+msgstr ""
+"La caché mejora el rendimiento haciendo que el complemento no calcule datos "
+"en cada solicitud. Desactívelo para depurar problemas."
 
 #: src/Settings/Sections/Advanced/AdvancedSection.php:72
 #: src/Settings/Sections/Advanced/AdvancedSection.php:99
@@ -2013,8 +2328,12 @@ msgid "Debug"
 msgstr "Depurar"
 
 #: src/Settings/Sections/Advanced/AdvancedSection.php:94
-msgid "Debug mode is useful when you need to track what pricing rule is applying for a cart item."
-msgstr "El modo de depuración es útil cuando necesita realizar un seguimiento de qué regla de precios se aplica a un artículo del carrito."
+msgid ""
+"Debug mode is useful when you need to track what pricing rule is applying "
+"for a cart item."
+msgstr ""
+"El modo de depuración es útil cuando necesita realizar un seguimiento de qué"
+" regla de precios se aplica a un artículo del carrito."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:15
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:99
@@ -2023,15 +2342,21 @@ msgstr "Cálculos"
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:16
 msgid "This section controls how tiered pricing does calculations."
-msgstr "Esta sección controla cómo los precios escalonados realizan los cálculos."
+msgstr ""
+"Esta sección controla cómo los precios escalonados realizan los cálculos."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:35
 msgid "Combine variations for quantity calculation"
 msgstr "Combinar variaciones para calcular la cantidad."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:40
-msgid "Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules."
-msgstr "Trate todas las variaciones de un producto variable como el mismo artículo al calcular la cantidad total del carrito para las reglas de precios escalonados."
+msgid ""
+"Treat all variations of a variable product as the same item when calculating"
+" the total cart quantity for tiered pricing rules."
+msgstr ""
+"Trate todas las variaciones de un producto variable como el mismo artículo "
+"al calcular la cantidad total del carrito para las reglas de precios "
+"escalonados."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:45
 msgid "Calculate percentage discounts from regular price"
@@ -2042,24 +2367,42 @@ msgid "Round calculated prices"
 msgstr "Precios calculados redondos"
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:57
-msgid "Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing."
-msgstr "Descuentos porcentuales calculados redondeados para evitar discrepancias menores en la visualización con los precios estándar de WooCommerce."
+msgid ""
+"Round calculated percentage discounts to prevent minor display discrepancies"
+" with standard WooCommerce pricing."
+msgstr ""
+"Descuentos porcentuales calculados redondeados para evitar discrepancias "
+"menores en la visualización con los precios estándar de WooCommerce."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:69
-msgid "Calculate percentage discounts using the product's regular price, ignoring any active sale prices."
-msgstr "Calcule los descuentos porcentuales utilizando el precio habitual del producto, ignorando los precios de venta activos."
+msgid ""
+"Calculate percentage discounts using the product's regular price, ignoring "
+"any active sale prices."
+msgstr ""
+"Calcule los descuentos porcentuales utilizando el precio habitual del "
+"producto, ignorando los precios de venta activos."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:75
-msgid "Example: Regular price is $100.00, sale price is $90.00. Rule: 20% off."
-msgstr "Ejemplo: El precio regular es $100,00, el precio de oferta es $90,00. Regla: 20% de descuento."
+msgid ""
+"Example: Regular price is $100.00, sale price is $90.00. Rule: 20% off."
+msgstr ""
+"Ejemplo: El precio regular es $100,00, el precio de oferta es $90,00. Regla:"
+" 20% de descuento."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:80
-msgid "Disabled (Default): Discount applies to the sale price ($90.00 - 20% = $72.00)."
-msgstr "Deshabilitado (Predeterminado): El descuento se aplica al precio de oferta ($90.00 - 20% = $72.00)."
+msgid ""
+"Disabled (Default): Discount applies to the sale price ($90.00 - 20% = "
+"$72.00)."
+msgstr ""
+"Deshabilitado (Predeterminado): El descuento se aplica al precio de oferta "
+"($90.00 - 20% = $72.00)."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:85
-msgid "Enabled: Discount applies to the regular price ($100.00 - 20% = $80.00)."
-msgstr "Habilitado: El descuento aplica sobre el precio regular ($100.00 - 20% = $80.00)."
+msgid ""
+"Enabled: Discount applies to the regular price ($100.00 - 20% = $80.00)."
+msgstr ""
+"Habilitado: El descuento aplica sobre el precio regular ($100.00 - 20% = "
+"$80.00)."
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:106
 msgid "How global pricing rules behave."
@@ -2070,8 +2413,13 @@ msgid "Prioritize global pricing rules"
 msgstr "Priorizar las reglas de precios globales"
 
 #: src/Settings/Sections/CalculationLogic/CalculationLogic.php:112
-msgid "Apply global pricing rules before product-level rules. If disabled, individual product rules take precedence over global rules."
-msgstr "Aplique reglas de precios globales antes que reglas a nivel de producto. Si está deshabilitada, las reglas de productos individuales tienen prioridad sobre las reglas globales."
+msgid ""
+"Apply global pricing rules before product-level rules. If disabled, "
+"individual product rules take precedence over global rules."
+msgstr ""
+"Aplique reglas de precios globales antes que reglas a nivel de producto. Si "
+"está deshabilitada, las reglas de productos individuales tienen prioridad "
+"sobre las reglas globales."
 
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:86
 msgid "General"
@@ -2088,273 +2436,331 @@ msgstr "Configuración de visualización del carrito"
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:14
 #: src/Addons/TieredPricingCart/TieredPricingCartAddon.php:12
 msgid "Manage how tiered pricing and discounts appear on the cart page."
-msgstr "Administre cómo aparecen los precios y descuentos escalonados en la página del carrito."
+msgstr ""
+"Administre cómo aparecen los precios y descuentos escalonados en la página "
+"del carrito."
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:24
 msgid "Display price as discount"
 msgstr "Mostrar precio como descuento"
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:26
-msgid "Show a crossed-out regular price next to the discounted tiered price in the cart. For example: "
-msgstr "Muestra un precio regular tachado junto al precio escalonado con descuento en el carrito. Por ejemplo:"
+msgid ""
+"Show a crossed-out regular price next to the discounted tiered price in the "
+"cart. For example: "
+msgstr ""
+"Muestra un precio regular tachado junto al precio escalonado con descuento "
+"en el carrito. Por ejemplo:"
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:32
 msgid "Display subtotal as discount"
 msgstr "Mostrar subtotal como descuento"
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:34
-msgid "Show a crossed-out regular subtotal next to the discounted subtotal in the cart."
-msgstr "Muestra un subtotal regular tachado junto al subtotal con descuento en el carrito."
+msgid ""
+"Show a crossed-out regular subtotal next to the discounted subtotal in the "
+"cart."
+msgstr ""
+"Muestra un subtotal regular tachado junto al subtotal con descuento en el "
+"carrito."
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:40
 msgid "Always use regular price"
 msgstr "Utilice siempre el precio normal"
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:42
-msgid "When crossing out a price, always display the regular price rather than a sale price."
-msgstr "Al tachar un precio, muestre siempre el precio normal en lugar del precio de oferta."
+msgid ""
+"When crossing out a price, always display the regular price rather than a "
+"sale price."
+msgstr ""
+"Al tachar un precio, muestre siempre el precio normal en lugar del precio de"
+" oferta."
 
 #: src/Addons/CatalogPrices/CatalogPricesAddon.php:8
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:11
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:13
 msgid "Catalog Price Format"
 msgstr "Formato de precio de catálogo"
 
 #: src/Addons/CatalogPrices/CatalogPricesAddon.php:12
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:16
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:18
 msgid "Manage how tiered pricing appears in catalogs, loops, and widgets."
-msgstr "Administre cómo aparecen los precios escalonados en catálogos, bucles y widgets."
+msgstr ""
+"Administre cómo aparecen los precios escalonados en catálogos, bucles y "
+"widgets."
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:27
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:29
 msgid "Enable tiered format"
 msgstr "Habilitar formato por niveles"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:31
-msgid "Display the lowest tiered price or a price range instead of the standard product price."
-msgstr "Muestre el precio escalonado más bajo o un rango de precios en lugar del precio estándar del producto."
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:33
+msgid ""
+"Display the lowest tiered price or a price range instead of the standard "
+"product price."
+msgstr ""
+"Muestre el precio escalonado más bajo o un rango de precios en lugar del "
+"precio estándar del producto."
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:36
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:38
 msgid "Enable for variable products"
 msgstr "Habilitar para productos variables"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:40
-msgid "Apply the tiered format to variable products, using the lowest and highest prices across all variations."
-msgstr "Aplique el formato escalonado a productos variables, utilizando los precios más bajos y más altos en todas las variaciones."
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:42
+msgid ""
+"Apply the tiered format to variable products, using the lowest and highest "
+"prices across all variations."
+msgstr ""
+"Aplique el formato escalonado a productos variables, utilizando los precios "
+"más bajos y más altos en todas las variaciones."
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:45
-msgid "Display format"
-msgstr "Formato de visualización"
-
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:49
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:51
 msgid "Show lowest price"
 msgstr "Mostrar precio más bajo"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:50
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:52
 msgid "Show range (lowest to highest)"
 msgstr "Mostrar rango (de menor a mayor)"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53
-msgid "Choose whether to show only the lowest available price or the full price range."
-msgstr "Elija si desea mostrar solo el precio más bajo disponible o el rango de precios completo."
-
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:57
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:72
 msgid "Lowest price prefix"
 msgstr "Prefijo de precio más bajo"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:61
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:76
 msgid "Text displayed before the lowest price (e.g., <b>From $10.00</b>)."
-msgstr "Texto que se muestra antes del precio más bajo (por ejemplo, <b>Desde $10,00</b>)."
+msgstr ""
+"Texto que se muestra antes del precio más bajo (por ejemplo, <b>Desde "
+"$10,00</b>)."
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:19
 msgid "Customize the appearance and behavior of your tiered pricing tables."
-msgstr "Personalice la apariencia y el comportamiento de sus tablas de precios escalonadas."
+msgstr ""
+"Personalice la apariencia y el comportamiento de sus tablas de precios "
+"escalonadas."
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:29
 msgid "Display tiered pricing"
 msgstr "Mostrar precios escalonados"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:33
-msgid "Automatically display tiered pricing on the product page. Prices remain dynamic even if the tiered pricing is not displayed. You can also display tiered pricing via shortcode, Gutenberg block, or Elementor widget."
-msgstr "Muestra automáticamente precios escalonados en la página del producto. Los precios siguen siendo dinámicos incluso si no se muestra el precio escalonado. También puede mostrar precios escalonados mediante un código corto, un bloque de Gutenberg o un widget de Elementor."
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:38
-msgid "Default layout"
-msgstr "Diseño predeterminado"
+msgid ""
+"Automatically display tiered pricing on the product page. Prices remain "
+"dynamic even if the tiered pricing is not displayed. You can also display "
+"tiered pricing via shortcode, Gutenberg block, or Elementor widget."
+msgstr ""
+"Muestra automáticamente precios escalonados en la página del producto. Los "
+"precios siguen siendo dinámicos incluso si no se muestra el precio "
+"escalonado. También puede mostrar precios escalonados mediante un código "
+"corto, un bloque de Gutenberg o un widget de Elementor."
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:42
-msgid "Choose the default visual layout. You can also customize this individually per product."
-msgstr "Elija el diseño visual predeterminado. También puedes personalizarlo individualmente por producto."
+msgid ""
+"Choose the default visual layout. You can also customize this individually "
+"per product."
+msgstr ""
+"Elija el diseño visual predeterminado. También puedes personalizarlo "
+"individualmente por producto."
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:48
 msgid "Pricing options style"
 msgstr "Estilo de opciones de precios"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:53
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:66
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:87
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:67
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:81
 msgid "Style #1"
 msgstr "Estilo #1"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:54
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:67
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:88
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:68
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:82
 msgid "Style #2"
 msgstr "Estilo #2"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:55
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:68
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:89
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:69
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:83
 msgid "Style #3"
 msgstr "Estilo #3"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:82
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:76
 msgid "Pricing blocks style"
 msgstr "Estilo de bloques de precios"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:69
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:90
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:56
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:70
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:84
 msgid "Style #4"
 msgstr "Estilo #4"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:104
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:105
 msgid "Position on the product page"
 msgstr "Posición en la página del producto."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:108
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:109
 msgid "Above add to cart button"
 msgstr "Arriba del botón agregar al carrito"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:109
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:110
 msgid "Below add to cart button"
 msgstr "Debajo del botón agregar al carrito"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:46
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:110
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:111
 msgid "Above add to cart form"
 msgstr "Arriba del formulario agregar al carrito"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:47
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:111
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:112
 msgid "Below add to cart form"
 msgstr "A continuación agregar al formulario de carrito"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:49
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:113
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:114
 msgid "Before product summary"
 msgstr "Antes del resumen del producto"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:50
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:114
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:115
 msgid "After product summary"
 msgstr "Después del resumen del producto"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:115
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:116
 msgid "I display tiered pricing via shortcode/gutenberg/elementor"
 msgstr "Muestro precios escalonados a través de shortcode/gutenberg/elementor"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:118
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:119
 msgid "Choose where you what tiered pricing be displayed on the product page."
-msgstr "Elija dónde se mostrarán los precios escalonados en la página del producto."
+msgstr ""
+"Elija dónde se mostrarán los precios escalonados en la página del producto."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:143
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:144
 msgid "Tooltip icon color"
 msgstr "Color del icono de información sobre herramientas"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:148
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:149
 msgid "Color of the icon."
 msgstr "Color del icono."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:152
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
 msgid "Tooltip icon size (px)"
 msgstr "Tamaño del icono de información sobre herramientas (px)"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:157
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:158
 msgid "Size of the icon."
 msgstr "Tamaño del icono."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:161
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:162
 msgid "Tooltip border"
 msgstr "Borde de información sobre herramientas"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:189
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:190
 msgid "Columns titles"
 msgstr "Títulos de columnas"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:208
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:209
 msgid "Leave a column title empty so as not to show that column."
 msgstr "Deje el título de una columna vacío para no mostrar esa columna."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:216
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:217
 msgid "Show the percentage discount in pricing blocks that offer a discount."
-msgstr "Muestra el porcentaje de descuento en bloques de precios que ofrecen un descuento."
+msgstr ""
+"Muestra el porcentaje de descuento en bloques de precios que ofrecen un "
+"descuento."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:224
-msgid "Pricing options will show a crossed-out regular product price near the actual tier price."
-msgstr "Las opciones de precios mostrarán un precio de producto regular tachado cerca del precio del nivel real."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:225
+msgid ""
+"Pricing options will show a crossed-out regular product price near the "
+"actual tier price."
+msgstr ""
+"Las opciones de precios mostrarán un precio de producto regular tachado "
+"cerca del precio del nivel real."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:229
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:230
 msgid "Show totals in a selected option"
 msgstr "Mostrar totales en una opción seleccionada"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:233
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:234
 msgid "The selected pricing option will include totals."
 msgstr "La opción de precio seleccionada incluirá los totales."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:237
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:238
 msgid "Pricing option template"
 msgstr "Plantilla de opción de precio"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:248
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:249
 msgid "Use the variables above to build the template for the pricing option."
-msgstr "Utilice las variables anteriores para crear la plantilla para la opción de precio."
+msgstr ""
+"Utilice las variables anteriores para crear la plantilla para la opción de "
+"precio."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:252
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:253
 msgid "Show first tier pricing option"
 msgstr "Mostrar opción de precio de primer nivel"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
-msgid "Show the option with a regular product price. This is the first pricing tier where no discount is offered."
-msgstr "Mostrar la opción con un precio regular del producto. Este es el primer nivel de precios donde no se ofrece ningún descuento."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:257
+msgid ""
+"Show the option with a regular product price. This is the first pricing tier"
+" where no discount is offered."
+msgstr ""
+"Mostrar la opción con un precio regular del producto. Este es el primer "
+"nivel de precios donde no se ofrece ningún descuento."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:260
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:261
 msgid "First tier pricing option template"
 msgstr "Plantilla de opción de precios de primer nivel"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:307
-msgid "Set up the first pricing tier template where a discount is not offered."
-msgstr "Configure la plantilla del primer nivel de precios donde no se ofrece un descuento."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:269
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:308
+msgid ""
+"Set up the first pricing tier template where a discount is not offered."
+msgstr ""
+"Configure la plantilla del primer nivel de precios donde no se ofrece un "
+"descuento."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:272
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
 msgid "Pricing string template"
 msgstr "Plantilla de cadena de precios"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:284
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:285
 msgid "Use the variables above to build the template for the pricing string."
-msgstr "Utilice las variables anteriores para crear la plantilla para la cadena de precios."
+msgstr ""
+"Utilice las variables anteriores para crear la plantilla para la cadena de "
+"precios."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:288
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:289
 msgid "Show first tier pricing string"
 msgstr "Mostrar cadena de precios de primer nivel"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:292
-msgid "Show the tier with a regular product price. This is the first pricing tier where no discount is offered."
-msgstr "Muestra el nivel con un precio de producto regular. Este es el primer nivel de precios donde no se ofrece ningún descuento."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:293
+msgid ""
+"Show the tier with a regular product price. This is the first pricing tier "
+"where no discount is offered."
+msgstr ""
+"Muestra el nivel con un precio de producto regular. Este es el primer nivel "
+"de precios donde no se ofrece ningún descuento."
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
 msgid "First tier pricing string template"
 msgstr "Plantilla de cadena de precios de primer nivel"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:315
-msgid "To select the quantity, tiered pricing becomes clickable (table rows, blocks, options)."
-msgstr "Para seleccionar la cantidad, se puede hacer clic en los precios escalonados (filas de tabla, bloques, opciones)."
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:316
+msgid ""
+"To select the quantity, tiered pricing becomes clickable (table rows, "
+"blocks, options)."
+msgstr ""
+"Para seleccionar la cantidad, se puede hacer clic en los precios escalonados"
+" (filas de tabla, bloques, opciones)."
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:11
 msgid "Guest Users"
 msgstr "Usuarios invitados"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:15
-msgid "Manage pricing visibility and purchasing rules for guest (non-logged-in) users."
-msgstr "Administre la visibilidad de precios y las reglas de compra para usuarios invitados (que no han iniciado sesión)."
+msgid ""
+"Manage pricing visibility and purchasing rules for guest (non-logged-in) "
+"users."
+msgstr ""
+"Administre la visibilidad de precios y las reglas de compra para usuarios "
+"invitados (que no han iniciado sesión)."
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:26
 msgid "Require login to purchase"
@@ -2366,7 +2772,9 @@ msgstr "Etiqueta de invitado para agregar al carrito"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:38
 msgid "Change the default \"Add to cart\" button text for guest users."
-msgstr "Cambie el texto predeterminado del botón \"Agregar al carrito\" para los usuarios invitados."
+msgstr ""
+"Cambie el texto predeterminado del botón \"Agregar al carrito\" para los "
+"usuarios invitados."
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:40
 msgid "Leave empty to keep default"
@@ -2391,16 +2799,22 @@ msgid "Guest price message"
 msgstr "Mensaje de precio para huéspedes"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:66
-msgid "This message will be displayed instead of the price for non-logged-in users."
-msgstr "Este mensaje se mostrará en lugar del precio para los usuarios que no hayan iniciado sesión."
+msgid ""
+"This message will be displayed instead of the price for non-logged-in users."
+msgstr ""
+"Este mensaje se mostrará en lugar del precio para los usuarios que no hayan "
+"iniciado sesión."
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:12
 msgid "Product Page Pricing"
 msgstr "Precios de la página del producto"
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:16
-msgid "Manage how tiered prices are displayed and behave on single product pages."
-msgstr "Administre cómo se muestran y se comportan los precios escalonados en páginas de productos individuales."
+msgid ""
+"Manage how tiered prices are displayed and behave on single product pages."
+msgstr ""
+"Administre cómo se muestran y se comportan los precios escalonados en "
+"páginas de productos individuales."
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:27
 msgid "Price display format"
@@ -2408,7 +2822,9 @@ msgstr "Formato de visualización de precios"
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:31
 msgid "Match catalog display (price range or lowest price)"
-msgstr "Coincidir con la visualización del catálogo (rango de precios o precio más bajo)"
+msgstr ""
+"Coincidir con la visualización del catálogo (rango de precios o precio más "
+"bajo)"
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:32
 msgid "Dynamic"
@@ -2419,24 +2835,36 @@ msgid "Enable dynamic price updates"
 msgstr "Habilitar actualizaciones dinámicas de precios"
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:42
-msgid "Automatically update the main product price when a user selects a different quantity."
-msgstr "Actualiza automáticamente el precio del producto principal cuando un usuario selecciona una cantidad diferente."
+msgid ""
+"Automatically update the main product price when a user selects a different "
+"quantity."
+msgstr ""
+"Actualiza automáticamente el precio del producto principal cuando un usuario"
+" selecciona una cantidad diferente."
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:46
 msgid "Display tiered price as discount"
 msgstr "Mostrar precio escalonado como descuento"
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:50
-msgid "Cross out the original price and show the discounted tiered price next to it."
-msgstr "Tacha el precio original y muestra el precio escalonado con descuento junto a él."
+msgid ""
+"Cross out the original price and show the discounted tiered price next to "
+"it."
+msgstr ""
+"Tacha el precio original y muestra el precio escalonado con descuento junto "
+"a él."
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:54
 msgid "Display total price"
 msgstr "Mostrar precio total"
 
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:58
-msgid "Show the total calculated price based on the selected quantity and active tier."
-msgstr "Muestra el precio total calculado según la cantidad seleccionada y el nivel activo."
+msgid ""
+"Show the total calculated price based on the selected quantity and active "
+"tier."
+msgstr ""
+"Muestra el precio total calculado según la cantidad seleccionada y el nivel "
+"activo."
 
 #: src/Addons/PricingSummary/PricingSummaryAddon.php:8
 #: src/Addons/PricingSummary/SummarySubsection.php:11
@@ -2445,7 +2873,9 @@ msgstr "Resumen de precios"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:15
 msgid "Show a summary block with total cost and unit price details."
-msgstr "Muestra un bloque de resumen con detalles del costo total y del precio unitario."
+msgstr ""
+"Muestra un bloque de resumen con detalles del costo total y del precio "
+"unitario."
 
 #: src/Addons/PricingSummary/SummarySubsection.php:25
 msgid "Enable pricing summary"
@@ -2484,6 +2914,7 @@ msgid "Reduced"
 msgstr "Reducido"
 
 #: src/Addons/PricingSummary/SummarySubsection.php:63
+#: views/admin/welcome-page/welcome-page.php:960
 msgid "Labels"
 msgstr "Etiquetas"
 
@@ -2516,16 +2947,24 @@ msgid "Cart Upsell Messages"
 msgstr "Mensajes de ventas adicionales del carrito"
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:15
-msgid "Display targeted messages in the cart to encourage customers to reach the next discount tier."
-msgstr "Muestre mensajes específicos en el carrito para alentar a los clientes a alcanzar el siguiente nivel de descuento."
+msgid ""
+"Display targeted messages in the cart to encourage customers to reach the "
+"next discount tier."
+msgstr ""
+"Muestre mensajes específicos en el carrito para alentar a los clientes a "
+"alcanzar el siguiente nivel de descuento."
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:26
 msgid "Enable cart upsells"
 msgstr "Habilitar ventas adicionales del carrito"
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:55
-msgid "Note: This feature is not compatible with the Gutenberg Cart/Checkout blocks."
-msgstr "Nota: Esta función no es compatible con los bloques de carrito/pago de Gutenberg."
+msgid ""
+"Note: This feature is not compatible with the Gutenberg Cart/Checkout "
+"blocks."
+msgstr ""
+"Nota: Esta función no es compatible con los bloques de carrito/pago de "
+"Gutenberg."
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:49
 msgid "Upsell text color"
@@ -2537,24 +2976,35 @@ msgid "\"You Save\" Badge"
 msgstr "Insignia \"Ahorras\""
 
 #: src/Addons/YouSave/YouSaveSubsection.php:15
-msgid "Show customers exactly how much they save when tiered discounts are applied."
-msgstr "Muestre a los clientes exactamente cuánto ahorran cuando se aplican descuentos escalonados."
+msgid ""
+"Show customers exactly how much they save when tiered discounts are applied."
+msgstr ""
+"Muestre a los clientes exactamente cuánto ahorran cuando se aplican "
+"descuentos escalonados."
 
 #: src/Addons/YouSave/YouSaveSubsection.php:25
 msgid "Enable \"You Save\" badge"
 msgstr "Habilitar la insignia \"Guardas\""
 
 #: src/Addons/YouSave/YouSaveSubsection.php:29
-msgid "Show the difference between the regular price and a discounted price. You can also show it via the [tiered_price_you_save] shortcode."
-msgstr "Muestra la diferencia entre el precio regular y un precio con descuento. También puedes mostrarlo a través del código corto [tiered_price_you_save]."
+msgid ""
+"Show the difference between the regular price and a discounted price. You "
+"can also show it via the [tiered_price_you_save] shortcode."
+msgstr ""
+"Muestra la diferencia entre el precio regular y un precio con descuento. "
+"También puedes mostrarlo a través del código corto [tiered_price_you_save]."
 
 #: src/Addons/YouSave/YouSaveSubsection.php:33
 msgid "Include sale price in calculation"
 msgstr "Incluir el precio de venta en el cálculo"
 
 #: src/Addons/YouSave/YouSaveSubsection.php:37
-msgid "The difference between the regular and sale price will be included in the “you save” calculation."
-msgstr "La diferencia entre el precio regular y el de oferta se incluirá en el cálculo de “ahorras”."
+msgid ""
+"The difference between the regular and sale price will be included in the "
+"“you save” calculation."
+msgstr ""
+"La diferencia entre el precio regular y el de oferta se incluirá en el "
+"cálculo de “ahorras”."
 
 #: src/Addons/YouSave/YouSaveSubsection.php:43
 msgid "You save {tp_ys_total_price} ({tp_ys_percentage_discount}%)"
@@ -2582,7 +3032,9 @@ msgstr "Complementos de productos"
 
 #: src/Settings/Sections/Integrations/IntegrationSection.php:27
 msgid "Integrations with product add-ons (custom fields) plugins."
-msgstr "Integraciones con complementos de complementos de productos (campos personalizados)."
+msgstr ""
+"Integraciones con complementos de complementos de productos (campos "
+"personalizados)."
 
 #: src/Settings/Sections/Integrations/IntegrationSection.php:31
 msgid "SEO"
@@ -2598,58 +3050,68 @@ msgstr "Tipos de productos personalizados"
 
 #: src/Settings/Sections/Integrations/IntegrationSection.php:36
 msgid "Integrations plugins that provides custom product types."
-msgstr "Complementos de integraciones que proporcionan tipos de productos personalizados."
+msgstr ""
+"Complementos de integraciones que proporcionan tipos de productos "
+"personalizados."
 
 #: src/Settings/Sections/Integrations/IntegrationSection.php:92
 msgid "Integrations"
 msgstr "Integraciones"
 
 #. translators: %s: required plugin
-#: src/TierPricingTablePlugin.php:88
+#: src/TierPricingTablePlugin.php:86
 #, php-format
-msgid "<b>Tiered Pricing Table</b> plugin requires %s to be installed and activated."
-msgstr "El complemento <b>Tabla de precios por niveles</b> requiere que %s esté instalado y activado."
+msgid ""
+"<b>Tiered Pricing Table</b> plugin requires %s to be installed and "
+"activated."
+msgstr ""
+"El complemento <b>Tabla de precios por niveles</b> requiere que %s esté "
+"instalado y activado."
 
-#: src/TierPricingTablePlugin.php:151
+#: src/TierPricingTablePlugin.php:140
 #: views/admin/notifications/activation-notification.php:56
-#: views/admin/welcome-page/welcome-page.php:517
+#: views/admin/welcome-page/welcome-page.php:594
 msgid "Settings"
 msgstr "Ajustes"
 
-#: src/TierPricingTablePlugin.php:155
+#: src/TierPricingTablePlugin.php:144
 msgid "Go Premium"
 msgstr "Ir Premium"
 
-#: src/TierPricingTablePlugin.php:168
+#: src/TierPricingTablePlugin.php:157
 #: views/admin/banners/premium-thanking-banner.php:44
 #: views/admin/banners/upgrade-banner.php:59
 #: views/admin/notifications/activation-notification.php:60
-#: views/admin/welcome-page/welcome-page.php:523
+#: views/admin/welcome-page/welcome-page.php:600
 msgid "Documentation"
 msgstr "Documentación"
 
-#: src/TierPricingTablePlugin.php:171
+#: src/TierPricingTablePlugin.php:160
+#: views/admin/welcome-page/welcome-page.php:608
 msgid "Contact Us"
 msgstr "Contáctenos"
 
-#: src/TierPricingTablePlugin.php:282
-#: views/admin/welcome-page/welcome-page.php:767
+#: src/TierPricingTablePlugin.php:271
+#: views/admin/welcome-page/welcome-page.php:852
 msgid "Horizontal table"
 msgstr "mesa horizontal"
 
-#: src/TierPricingTablePlugin.php:283
-#: views/admin/welcome-page/welcome-page.php:772
+#: src/TierPricingTablePlugin.php:272
+#: views/admin/welcome-page/welcome-page.php:857
 msgid "Plain text"
 msgstr "Texto sin formato"
 
-#: src/TierPricingTablePlugin.php:284
-#: views/admin/welcome-page/welcome-page.php:759
+#: src/TierPricingTablePlugin.php:273
 msgid "Tooltip"
 msgstr "Información sobre herramientas"
 
 #: views/addons/category-tiers/add-free.php:37
-msgid "Available only in the premium version (You can disable this block in the settings)"
-msgstr "Disponible solo en la versión premium (puedes desactivar este bloque en la configuración)"
+msgid ""
+"Available only in the premium version (You can disable this block in the "
+"settings)"
+msgstr ""
+"Disponible solo en la versión premium (puedes desactivar este bloque en la "
+"configuración)"
 
 #: views/addons/category-tiers/add.php:69
 #: views/addons/category-tiers/edit-free.php:46
@@ -2667,12 +3129,20 @@ msgstr ""
 "                en producto."
 
 #: views/addons/category-tiers/edit.php:135
-msgid "Assign percentage discounts for products that have this category. Rules can be overridden in product."
-msgstr "Asigne descuentos porcentuales para productos que tengan esta categoría. Las reglas se pueden anular en el producto."
+msgid ""
+"Assign percentage discounts for products that have this category. Rules can "
+"be overridden in product."
+msgstr ""
+"Asigne descuentos porcentuales para productos que tengan esta categoría. Las"
+" reglas se pueden anular en el producto."
 
 #: views/addons/global-rules/tiered-pricing-tab.php:56
-msgid "Looking to set pricing rules for product categories or custom sets of products?"
-msgstr "¿Quiere establecer reglas de precios para categorías de productos o conjuntos de productos personalizados?"
+msgid ""
+"Looking to set pricing rules for product categories or custom sets of "
+"products?"
+msgstr ""
+"¿Quiere establecer reglas de precios para categorías de productos o "
+"conjuntos de productos personalizados?"
 
 #: views/addons/global-rules/tiered-pricing-tab.php:67
 msgid "Create a global pricing rule"
@@ -2684,27 +3154,29 @@ msgstr "Precios basados ​​en roles"
 
 #: views/addons/role-based-pricing/role-based-block.php:64
 msgid "Set up specific pricing and rules for different user roles."
-msgstr "Configure reglas y precios específicos para diferentes roles de usuario."
+msgstr ""
+"Configure reglas y precios específicos para diferentes roles de usuario."
 
 #: views/addons/role-based-pricing/role-based-block.php:75
+#: views/addons/user-based-pricing/user-based-block.php:89
 msgid "settings"
 msgstr "ajustes"
 
 #. translators: %s: settings link
 #: views/addons/role-based-pricing/role-based-block.php:77
 #, php-format
-msgid "You can disable this feature in the %s if you don't need role-based pricing."
-msgstr "Puede desactivar esta función en %s si no necesita precios basados ​​en roles."
-
-#: views/addons/role-based-pricing/role-based-block.php:98
-msgid "Add Role"
-msgstr "Agregar rol"
+msgid ""
+"You can disable this feature in the %s if you don't need role-based pricing."
+msgstr ""
+"Puede desactivar esta función en %s si no necesita precios basados ​​en "
+"roles."
 
 #: views/addons/role-based-pricing/role-based-block.php:110
 msgid "Manage Roles"
 msgstr "Administrar roles"
 
 #: views/addons/role-based-pricing/role-pricing-form.php:30
+#: views/addons/user-based-pricing/user-pricing-form.php:32
 msgid "Premium feature."
 msgstr "Característica premium."
 
@@ -2718,8 +3190,12 @@ msgid "Premium License Available"
 msgstr "Licencia Premium disponible"
 
 #: views/admin/banners/free-version-used-premium-available.php:26
-msgid "You are currently running the free version. Download the Pro version from your <a href=\""
-msgstr "Actualmente estás ejecutando la versión gratuita. Descarga la versión Pro desde tu <a href=\""
+msgid ""
+"You are currently running the free version. Download the Pro version from "
+"your <a href=\""
+msgstr ""
+"Actualmente estás ejecutando la versión gratuita. Descarga la versión Pro "
+"desde tu <a href=\""
 
 #: views/admin/banners/premium-thanking-banner.php:20
 msgid "Premium"
@@ -2729,7 +3205,7 @@ msgstr "De primera calidad"
 msgid "License is invalid or expired. Please check your account."
 msgstr "La licencia no es válida o ha caducado. Por favor revisa tu cuenta."
 
-#: src/TierPricingTablePlugin.php:175
+#: src/TierPricingTablePlugin.php:164
 #: views/admin/banners/premium-thanking-banner.php:36
 #: views/admin/banners/upgrade-banner.php:71
 msgid "My Account"
@@ -2756,7 +3232,7 @@ msgstr "Por favor %s para actualizar."
 
 #: views/admin/banners/upgrade-banner.php:49
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:205
+#: src/Addons/CustomColumns/js-source/index.js:234
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:238
 msgid "Upgrade to Premium"
@@ -2767,8 +3243,11 @@ msgid "Opt-in"
 msgstr "Inscribirse"
 
 #: views/admin/components/minimum-order-quantity-form.php:26
-msgid "A minimum amount of a product a customer must order to fulfill the order."
-msgstr "Una cantidad mínima de un producto que un cliente debe pedir para cumplir con el pedido."
+msgid ""
+"A minimum amount of a product a customer must order to fulfill the order."
+msgstr ""
+"Una cantidad mínima de un producto que un cliente debe pedir para cumplir "
+"con el pedido."
 
 #: views/admin/components/regular-pricing-form.php:35
 #: views/admin/components/regular-pricing-form.php:52
@@ -2822,135 +3301,112 @@ msgstr "una regla de precios global"
 #. translators: %1$s: product links, %2$s: categories
 #: views/admin/notifications/activation-notification.php:47
 #, php-format
-msgid "Add quantity-based pricing rules directly in the %1$s or create %2$s that will work for product categories and user roles."
-msgstr "Agregue reglas de precios basadas en cantidad directamente en %1$s o cree %2$s que funcionarán para categorías de productos y roles de usuario."
+msgid ""
+"Add quantity-based pricing rules directly in the %1$s or create %2$s that "
+"will work for product categories and user roles."
+msgstr ""
+"Agregue reglas de precios basadas en cantidad directamente en %1$s o cree "
+"%2$s que funcionarán para categorías de productos y roles de usuario."
 
-#: views/admin/welcome-page/welcome-page.php:503
-msgid "Tiered Pricing Table is a powerful tool that allows you to create quantity-based pricing for your WooCommerce products."
-msgstr "La tabla de precios por niveles es una poderosa herramienta que le permite crear precios basados ​​en la cantidad para sus productos WooCommerce."
+#: views/admin/welcome-page/welcome-page.php:580
+msgid ""
+"Tiered Pricing Table is a powerful tool that allows you to create quantity-"
+"based pricing for your WooCommerce products."
+msgstr ""
+"La tabla de precios por niveles es una poderosa herramienta que le permite "
+"crear precios basados ​​en la cantidad para sus productos WooCommerce."
 
-#: views/admin/welcome-page/welcome-page.php:509
-msgid "With intuitive templates, flexible pricing rules, and advanced features, this plugin is a perfect fit for any type of store."
-msgstr "Con plantillas intuitivas, reglas de precios flexibles y funciones avanzadas, este complemento es perfecto para cualquier tipo de tienda."
+#: views/admin/welcome-page/welcome-page.php:586
+msgid ""
+"With intuitive templates, flexible pricing rules, and advanced features, "
+"this plugin is a perfect fit for any type of store."
+msgstr ""
+"Con plantillas intuitivas, reglas de precios flexibles y funciones "
+"avanzadas, este complemento es perfecto para cualquier tipo de tienda."
 
-#: views/admin/welcome-page/welcome-page.php:687
-msgid "Apply tiered pricing to products"
-msgstr "Aplicar precios escalonados a los productos"
-
-#: views/admin/welcome-page/welcome-page.php:707
+#: views/admin/welcome-page/welcome-page.php:796
 msgid "Prices automatically displayed on the product page:"
 msgstr "Precios mostrados automáticamente en la página del producto:"
 
-#: views/admin/welcome-page/welcome-page.php:729
+#: views/admin/welcome-page/welcome-page.php:818
 msgid "Pricing Table"
 msgstr "Tabla de precios"
 
-#: views/admin/welcome-page/welcome-page.php:732
+#: views/admin/welcome-page/welcome-page.php:821
 msgid "Ability to add custom columns."
 msgstr "Posibilidad de agregar columnas personalizadas."
 
-#: views/admin/welcome-page/welcome-page.php:733
-msgid "Customizable columns titles"
-msgstr "Títulos de columnas personalizables"
-
-#: views/admin/welcome-page/welcome-page.php:734
-msgid "Customize accent color."
-msgstr "Personaliza el color de acento."
-
-#: views/admin/welcome-page/welcome-page.php:738
+#: views/admin/welcome-page/welcome-page.php:831
 msgid "Pricing Blocks"
 msgstr "Bloques de precios"
 
-#: views/admin/welcome-page/welcome-page.php:741
-msgid "Show/hide percentage discount."
-msgstr "Mostrar/ocultar porcentaje de descuento."
-
-#: views/admin/welcome-page/welcome-page.php:745
+#: views/admin/welcome-page/welcome-page.php:836
 msgid "Pricing Blocks #2"
 msgstr "Pricing Blocks #2"
 
-#: views/admin/welcome-page/welcome-page.php:750
+#: views/admin/welcome-page/welcome-page.php:841
 msgid "Pricing Options"
 msgstr "Opciones de precios"
 
-#: views/admin/welcome-page/welcome-page.php:753
-#: views/admin/welcome-page/welcome-page.php:775
-msgid "Customize template with various available variables."
-msgstr "Personalice la plantilla con varias variables disponibles."
-
-#: views/admin/welcome-page/welcome-page.php:754
-msgid "Show/hide total in a selected option."
-msgstr "Mostrar/ocultar el total en una opción seleccionada."
-
-#: views/admin/welcome-page/welcome-page.php:762
-msgid "Customizable color and size."
-msgstr "Color y tamaño personalizables."
-
-#: views/admin/welcome-page/welcome-page.php:782
-msgid "Customizable template."
-msgstr "Plantilla personalizable."
-
-#: views/admin/welcome-page/welcome-page.php:822
+#: views/admin/welcome-page/welcome-page.php:903
 msgid "Apply custom prices to any user role"
 msgstr "Aplicar precios personalizados a cualquier rol de usuario"
 
-#: views/admin/welcome-page/welcome-page.php:843
+#: views/admin/welcome-page/welcome-page.php:924
 msgid "Apply custom prices in bulk for selected categories and users:"
-msgstr "Aplique precios personalizados de forma masiva para categorías y usuarios seleccionados:"
+msgstr ""
+"Aplique precios personalizados de forma masiva para categorías y usuarios "
+"seleccionados:"
 
-#: views/admin/welcome-page/welcome-page.php:871
-msgid "Instant price updating"
-msgstr "Actualización instantánea de precios"
-
-#: views/admin/welcome-page/welcome-page.php:880
+#: views/admin/welcome-page/welcome-page.php:968
 msgid "Cart"
 msgstr "Carro"
 
-#: views/admin/welcome-page/welcome-page.php:889
+#: views/admin/welcome-page/welcome-page.php:977
 msgid "Catalog prices"
 msgstr "Precios de catálogo"
 
-#: views/admin/welcome-page/welcome-page.php:898
+#: views/admin/welcome-page/welcome-page.php:986
 msgid "Product catalog (Category page)"
 msgstr "Catálogo de productos (página de categorías)"
 
-#: views/admin/welcome-page/welcome-page.php:941
+#: views/admin/welcome-page/welcome-page.php:1029
 msgid "Tier Labels & Badges"
 msgstr "Etiquetas e insignias de nivel"
 
-#: views/admin/welcome-page/welcome-page.php:945
+#: views/admin/welcome-page/welcome-page.php:1033
 msgid "Data Cleanup & Role Management Tools"
 msgstr "Herramientas de limpieza de datos y gestión de roles"
 
-#: views/admin/welcome-page/welcome-page.php:949
+#: views/admin/welcome-page/welcome-page.php:1037
 msgid "Import \\ Export"
 msgstr "Importar \\ Exportar"
 
-#: views/admin/welcome-page/welcome-page.php:953
+#: views/admin/welcome-page/welcome-page.php:1041
 msgid "REST API"
 msgstr "API DESCANSO"
 
-#: views/admin/welcome-page/welcome-page.php:957
+#: views/admin/welcome-page/welcome-page.php:1045
 msgid "Admin-made orders supported"
 msgstr "Se admiten pedidos realizados por administradores"
 
-#: views/admin/welcome-page/welcome-page.php:961
+#: views/admin/welcome-page/welcome-page.php:1049
 msgid "Built-in cache"
 msgstr "Caché incorporado"
 
-#: views/admin/welcome-page/welcome-page.php:969
+#: views/admin/welcome-page/welcome-page.php:1057
 msgid "Shortcode \\ Gutenberg \\ Elementor"
 msgstr "Código corto \\ Gutenberg \\ Elementor"
 
-#: views/admin/welcome-page/welcome-page.php:973
+#: views/admin/welcome-page/welcome-page.php:1061
 msgid "Hide prices for logged-out users"
 msgstr "Ocultar precios para usuarios desconectados"
 
-#: views/admin/welcome-page/welcome-page.php:977
+#: views/admin/welcome-page/welcome-page.php:1065
 msgid "Works with any theme"
 msgstr "Funciona con cualquier tema"
 
-#: views/admin/welcome-page/welcome-page.php:981
+#: views/admin/welcome-page/welcome-page.php:1069
 msgid "Debug mode"
 msgstr "Modo de depuración"
 
@@ -2961,8 +3417,6 @@ msgstr "Modo de depuración"
 #: views/frontend/tiered-pricing-blocks-style-2.php:205
 #: views/frontend/tiered-pricing-blocks-style-4.php:108
 #: views/frontend/tiered-pricing-blocks-style-4.php:205
-#: views/frontend/tiered-pricing-blocks-style-5.php:108
-#: views/frontend/tiered-pricing-blocks-style-5.php:205
 #: views/frontend/tiered-pricing-blocks.php:110
 #: views/frontend/tiered-pricing-blocks.php:206
 #, php-format
@@ -2979,252 +3433,286 @@ msgstr "%d%% de descuento"
 
 #: src/Addons/CartUpsells/CartUpsellsAddon.php:8
 msgid "Cart Upsells"
-msgstr ""
+msgstr "Ventas adicionales del carrito"
 
 #: src/Addons/CartUpsells/CartUpsellsAddon.php:12
-msgid "Display an upsell message in the cart indicating how many items are needed to reach the next pricing tier."
+msgid ""
+"Display an upsell message in the cart indicating how many items are needed "
+"to reach the next pricing tier."
 msgstr ""
-
-#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:18
-msgid "Need more data?"
-msgstr ""
-
-#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:19
-msgid "Create custom columns to display extra information like discounts or shipping times alongside your pricing tiers."
-msgstr ""
+"Muestre un mensaje de venta adicional en el carrito indicando cuántos "
+"artículos se necesitan para alcanzar el siguiente nivel de precios."
 
 #: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:22
 msgid "Add Custom Columns"
-msgstr ""
+msgstr "Agregar columnas personalizadas"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:489
 msgid "Set Custom Pricing"
-msgstr ""
+msgstr "Establecer precios personalizados"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:490
 msgid "Set custom regular and tiered pricing for matching products."
 msgstr ""
+"Establezca precios regulares y escalonados personalizados para productos "
+"coincidentes."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:495
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:280
+#: src/Addons/Tools/js-source/components/CleanupTool.js:306
 msgid "Select Products"
-msgstr ""
+msgstr "Seleccionar productos"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:496
-msgid "Target specific products, categories, tags, or brands. Leave empty to apply store-wide."
+msgid ""
+"Target specific products, categories, tags, or brands. Leave empty to apply "
+"store-wide."
 msgstr ""
+"Diríjase a productos, categorías, etiquetas o marcas específicas. Déjelo "
+"vacío para aplicar en toda la tienda."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:501
 msgid "Filter Users"
-msgstr ""
+msgstr "Filtrar usuarios"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:507
 msgid "Enforce minimum, maximum, and step increments for purchasing."
 msgstr ""
+"Haga cumplir incrementos mínimos, máximos y de pasos para las compras."
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:8
 msgid "Non-Logged-In Users"
-msgstr ""
+msgstr "Usuarios que no han iniciado sesión"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:12
 msgid "Hide prices or prevent purchasing for users who are not logged in."
 msgstr ""
+"Ocultar precios o impedir compras para usuarios que no hayan iniciado "
+"sesión."
 
 #: src/Addons/PricingSummary/PricingSummaryAddon.php:12
-msgid "Display a dynamic pricing summary showing the total cost of the selected quantity."
+msgid ""
+"Display a dynamic pricing summary showing the total cost of the selected "
+"quantity."
 msgstr ""
+"Muestre un resumen de precios dinámico que muestre el costo total de la "
+"cantidad seleccionada."
 
 #: src/Addons/TieredPricingCart/TieredPricingCartAddon.php:8
 msgid "Cart Display Options"
-msgstr ""
+msgstr "Opciones de visualización del carrito"
 
 #: src/Addons/YouSave/YouSaveAddon.php:12
-msgid "Display a badge showing customers how much they save when tiered pricing is applied."
+msgid ""
+"Display a badge showing customers how much they save when tiered pricing is "
+"applied."
 msgstr ""
+"Muestre una insignia que muestre a los clientes cuánto ahorran cuando se "
+"aplican precios escalonados."
 
 #: src/PricingTable.php:379
-msgid "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier."
+msgid ""
+"Pricing Conflict Detected: Your Minimum Order Quantity is equal to or "
+"greater than your first pricing tier."
 msgstr ""
+"Conflicto de precios detectado: la cantidad mínima de su pedido es igual o "
+"mayor que su primer nivel de precios."
 
 #: src/PricingTable.php:386
-msgid "To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity."
+msgid ""
+"To fix this, please ensure your first tiered pricing rule starts at a higher"
+" quantity than your Minimum Order Quantity."
 msgstr ""
+"Para solucionar este problema, asegúrese de que su primera regla de precios "
+"escalonados comience con una cantidad mayor que la cantidad mínima de "
+"pedido."
 
 #: src/PricingTable.php:389
 msgid "Why?"
-msgstr ""
+msgstr "¿Por qué?"
 
 #: src/PricingTable.php:389
-msgid "The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier."
+msgid ""
+"The plugin automatically creates a base tier using your standard WooCommerce"
+" product price. This base tier covers any quantities ordered between the "
+"Minimum Order Quantity and your first discounted tier."
 msgstr ""
+"El complemento crea automáticamente un nivel base utilizando el precio "
+"estándar de su producto WooCommerce. Este nivel básico cubre cualquier "
+"cantidad solicitada entre la Cantidad mínima de pedido y su primer nivel con"
+" descuento."
 
 #: src/PricingTable.php:392
 msgid "This notice is only visible to store administrators."
-msgstr ""
+msgstr "Este aviso solo es visible para los administradores de la tienda."
 
 #: src/Settings/Sections/Advanced/AdvancedSection.php:17
 #: src/Settings/Sections/Advanced/AdvancedSection.php:43
 msgid "Modules"
-msgstr ""
+msgstr "Módulos"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:61
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:62
 msgid "Pricing table style"
-msgstr ""
+msgstr "Estilo de tabla de precios"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:79
-msgid "Apply a compact layout to the tiered pricing table or blocks."
-msgstr ""
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:91
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:85
 msgid "Style #5"
-msgstr ""
+msgstr "Estilo #5"
 
 #: views/addons/role-based-pricing/role-pricing-form.php:32
+#: views/addons/user-based-pricing/user-pricing-form.php:34
 msgid "Upgrade to premium"
-msgstr ""
+msgstr "Actualizar a premium"
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:40
 msgid "Column Title"
-msgstr ""
+msgstr "Título de la columna"
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:43
 msgid "e.g., Discounted Price"
-msgstr ""
+msgstr "por ejemplo, precio con descuento"
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:49
 msgid "Column Data Type"
-msgstr ""
+msgstr "Tipo de datos de columna"
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:52
 msgid "Select column type..."
-msgstr ""
+msgstr "Seleccione el tipo de columna..."
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:65
+#: src/Addons/CustomColumns/js-source/index.js:66
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:80
+#: src/Addons/CustomColumns/js-source/index.js:81
 msgid "Remove column"
-msgstr ""
+msgstr "Quitar columna"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:201
+#: src/Addons/CustomColumns/js-source/index.js:230
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:234
 msgid "Premium Feature"
-msgstr ""
+msgstr "Característica prémium"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:201
+#: src/Addons/CustomColumns/js-source/index.js:230
 msgid "Upgrading to premium to unlock custom columns."
-msgstr ""
+msgstr "Actualizar a premium para desbloquear columnas personalizadas."
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:224
+#: src/Addons/CustomColumns/js-source/index.js:256
 msgid "No Custom Columns"
-msgstr ""
+msgstr "Sin columnas personalizadas"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:227
-msgid "Add custom columns to display extra information alongside your pricing tiers."
+#: src/Addons/CustomColumns/js-source/index.js:259
+msgid ""
+"Add custom columns to display extra information alongside your pricing "
+"tiers."
 msgstr ""
+"Agregue columnas personalizadas para mostrar información adicional junto con"
+" sus niveles de precios."
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:231
+#: src/Addons/CustomColumns/js-source/index.js:262
 msgid "Add your first column"
-msgstr ""
+msgstr "Agrega tu primera columna"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:132
+#: src/Addons/CustomColumns/js-source/index.js:165
 msgid "Columns saved successfully!"
-msgstr ""
+msgstr "¡Las columnas se guardaron correctamente!"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:121
+#: src/Addons/CustomColumns/js-source/index.js:148
 msgid "Please upgrade to the Premium version to save custom columns."
-msgstr ""
+msgstr "Actualice a la versión Premium para guardar columnas personalizadas."
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:247
+#: src/Addons/CustomColumns/js-source/index.js:337
 #: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:433
+#: src/Addons/TierLabels/js-source/index.js:482
 msgid "Saving..."
-msgstr ""
+msgstr "Ahorro..."
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:247
+#: src/Addons/CustomColumns/js-source/index.js:337
 msgid "Save Columns"
-msgstr ""
+msgstr "Guardar columnas"
 
 #: src/Addons/CustomColumns/build/index.js:1
-#: src/Addons/CustomColumns/js-source/index.js:250
+#: src/Addons/CustomColumns/js-source/index.js:340
 msgid "+ Add Column"
-msgstr ""
+msgstr "+ Agregar columna"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:7
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 msgid "Role-based pricing is a premium feature."
-msgstr ""
+msgstr "El precio basado en roles es una característica premium."
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:9
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 msgid "Upgrade to unlock"
-msgstr ""
+msgstr "Actualizar para desbloquear"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingForm.js:43
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Add tier"
-msgstr ""
+msgstr "Agregar nivel"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage"
-msgstr ""
+msgstr "Porcentaje"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage (premium feature)"
-msgstr ""
+msgstr "Porcentaje (característica premium)"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/upgrade-notice/edit.js:36
 #: src/Addons/ReactProductEditorAddon/js/upgrade-notice/index.js:1
 msgid "Upgrade Now"
-msgstr ""
+msgstr "Actualiza ahora"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:142
 msgid "Role-Based Tax Options"
-msgstr ""
+msgstr "Opciones de impuestos basadas en roles"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:144
 msgid "Override default tax options for specific user roles."
 msgstr ""
+"Anule las opciones de impuestos predeterminadas para roles de usuario "
+"específicos."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:174
 msgid "No Custom Tax Configurations"
-msgstr ""
+msgstr "Sin configuraciones de impuestos personalizadas"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:177
 msgid "Configure custom tax rules for specific user roles."
 msgstr ""
+"Configure reglas impositivas personalizadas para roles de usuario "
+"específicos."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:187
 msgid "Select a role below to create your first configuration."
-msgstr ""
+msgstr "Seleccione un rol a continuación para crear su primera configuración."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:193
@@ -3232,37 +3720,39 @@ msgstr ""
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:248
 msgid "Select a role..."
-msgstr ""
+msgstr "Seleccione un rol..."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:201
 msgid "Create Configuration"
-msgstr ""
+msgstr "Crear configuración"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:216
 msgid "Custom Tax Configuration"
-msgstr ""
+msgstr "Configuración de impuestos personalizada"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:234
 msgid "Upgrading to premium to unlock role-based tax options."
 msgstr ""
+"Actualizar a premium para desbloquear opciones de impuestos basadas en "
+"roles."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:253
 msgid "Tax Exempt"
-msgstr ""
+msgstr "Exento de impuestos"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:254
 msgid "Disable tax calculation entirely for this role."
-msgstr ""
+msgstr "Deshabilite el cálculo de impuestos por completo para esta función."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:262
 msgid "Tax Class"
-msgstr ""
+msgstr "Clase de impuesto"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:266
@@ -3270,522 +3760,544 @@ msgstr ""
 #: src/Addons/TaxSettings/js-source/App.js:310
 #: src/Addons/TaxSettings/js-source/App.js:330
 msgid "Default (Inherit)"
-msgstr ""
+msgstr "Predeterminado (Heredar)"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:274
 msgid "Reduced Rate"
-msgstr ""
+msgstr "Tarifa Reducida"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:278
 msgid "Zero Rate"
-msgstr ""
+msgstr "Tarifa Cero"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:286
 msgid "Prices Entered With Tax"
-msgstr ""
+msgstr "Precios ingresados ​​con impuestos"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:294
 msgid "Yes, I will enter prices inclusive of tax"
-msgstr ""
+msgstr "Sí, ingresaré precios con impuestos incluidos."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:298
 msgid "No, I will enter prices exclusive of tax"
-msgstr ""
+msgstr "No, ingresaré precios sin impuestos."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:306
 msgid "Display Prices in Shop"
-msgstr ""
+msgstr "Mostrar precios en la tienda"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:314
 #: src/Addons/TaxSettings/js-source/App.js:334
 msgid "Including Tax"
-msgstr ""
+msgstr "Impuestos incluidos"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:318
 #: src/Addons/TaxSettings/js-source/App.js:338
 msgid "Excluding Tax"
-msgstr ""
+msgstr "Sin impuestos"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:326
 msgid "Display Prices in Cart/Checkout"
-msgstr ""
+msgstr "Mostrar precios en el carrito/pagar"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:346
 msgid "Price Display Suffix"
-msgstr ""
+msgstr "Sufijo de visualización de precios"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:347
 msgid "Leave blank to inherit default settings."
-msgstr ""
+msgstr "Déjelo en blanco para heredar la configuración predeterminada."
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:367
 msgid "Remove Configuration"
-msgstr ""
+msgstr "Eliminar configuración"
 
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:391
 msgid "Add Configuration"
-msgstr ""
+msgstr "Agregar configuración"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:119
 msgid "Enter title"
-msgstr ""
+msgstr "Introduce el título"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:124
 msgid "Style Preset"
-msgstr ""
+msgstr "Estilo preestablecido"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:127
 msgid "Square"
-msgstr ""
+msgstr "Cuadrado"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:128
 msgid "Rounded"
-msgstr ""
+msgstr "Redondeado"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:129
 msgid "Pill"
-msgstr ""
+msgstr "Píldora"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:130
 msgid "Outline"
-msgstr ""
+msgstr "Describir"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:131
 msgid "Dashed"
-msgstr ""
+msgstr "discontinuo"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:138
 msgid "Icon"
-msgstr ""
+msgstr "Icono"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:142
 msgid "Star"
-msgstr ""
+msgstr "Estrella"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:143
 msgid "Fire"
-msgstr ""
+msgstr "Fuego"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:144
 msgid "Lightning"
-msgstr ""
+msgstr "Iluminación"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:145
 msgid "Tag"
-msgstr ""
+msgstr "Etiqueta"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:146
 msgid "Crown"
-msgstr ""
+msgstr "Corona"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:147
 msgid "Percent"
-msgstr ""
+msgstr "Por ciento"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:148
 msgid "Award"
-msgstr ""
+msgstr "Otorgar"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:157
 msgid "Bg Color"
-msgstr ""
+msgstr "Color de fondo"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:168
 msgid "Text Color"
-msgstr ""
+msgstr "Color del texto"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:179
 msgid "Border"
-msgstr ""
+msgstr "Borde"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:193
 msgid "Clear border color"
-msgstr ""
+msgstr "Color de borde claro"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:208
 msgid "Hide Advanced Settings"
-msgstr ""
+msgstr "Ocultar configuración avanzada"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:208
 msgid "Show Advanced Settings"
-msgstr ""
+msgstr "Mostrar configuración avanzada"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:215
 msgid "Font Size (px)"
-msgstr ""
+msgstr "Tamaño de fuente (px)"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:224
 msgid "Border Width (px)"
-msgstr ""
+msgstr "Ancho del borde (px)"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:233
 msgid "Padding Horizontal (px)"
-msgstr ""
+msgstr "Relleno horizontal (px)"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:242
 msgid "Padding Vertical (px)"
-msgstr ""
+msgstr "Relleno vertical (px)"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:251
 msgid "Border Radius (px)"
-msgstr ""
+msgstr "Radio del borde (px)"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:260
 msgid "Extra CSS Class"
-msgstr ""
+msgstr "Clase CSS adicional"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:263
 msgid "e.g., my-custom-class"
-msgstr ""
+msgstr "por ejemplo, mi clase personalizada"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:284
 msgid "Preview"
-msgstr ""
+msgstr "Avance"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:290
 msgid "Remove label"
-msgstr ""
+msgstr "Quitar etiqueta"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:319
 msgid "New Label"
-msgstr ""
-
-#: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:407
-msgid "No Labels Created"
-msgstr ""
+msgstr "Nueva etiqueta"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:410
-msgid "Create your first custom tier label to highlight special pricing offers."
-msgstr ""
+msgid "No Labels Created"
+msgstr "No se crearon etiquetas"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:413
-msgid "Once created, you can assign your labels to specific pricing tiers when editing a product."
+msgid ""
+"Create your first custom tier label to highlight special pricing offers."
 msgstr ""
+"Cree su primera etiqueta de nivel personalizada para resaltar ofertas de "
+"precios especiales."
 
 #: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:417
-msgid "Add your first label"
+#: src/Addons/TierLabels/js-source/index.js:416
+msgid ""
+"Once created, you can assign your labels to specific pricing tiers when "
+"editing a product."
 msgstr ""
+"Una vez creadas, puedes asignar tus etiquetas a niveles de precios "
+"específicos al editar un producto."
+
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:419
+msgid "Add your first label"
+msgstr "Añade tu primera etiqueta"
 
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:343
 msgid "Labels saved successfully!"
-msgstr ""
+msgstr "¡Etiquetas guardadas exitosamente!"
 
 #: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:433
+#: src/Addons/TierLabels/js-source/index.js:482
 msgid "Save Labels"
-msgstr ""
+msgstr "Guardar etiquetas"
 
 #: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:436
+#: src/Addons/TierLabels/js-source/index.js:485
 msgid "+ Add Label"
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:85
-msgid "Item added"
-msgstr ""
+msgstr "+ Agregar etiqueta"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/CleanupTool.js:86
-msgid "Item removed"
-msgstr ""
+msgid "Item added"
+msgstr "Artículo agregado"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/CleanupTool.js:87
+msgid "Item removed"
+msgstr "Artículo eliminado"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:88
 msgid "Remove item"
-msgstr ""
+msgstr "Quitar elemento"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:226
+#: src/Addons/Tools/js-source/components/CleanupTool.js:233
 msgid "Clean Up & Reset Options"
-msgstr ""
+msgstr "Opciones de limpieza y reinicio"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:238
+#: src/Addons/Tools/js-source/components/CleanupTool.js:245
 msgid "Warning:"
-msgstr ""
+msgstr "Advertencia:"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:238
-msgid "The actions below will permanently delete data from your database. Please make a backup before proceeding."
+#: src/Addons/Tools/js-source/components/CleanupTool.js:245
+msgid ""
+"The actions below will permanently delete data from your database. Please "
+"make a backup before proceeding."
 msgstr ""
+"Las siguientes acciones eliminarán permanentemente los datos de su base de "
+"datos. Por favor haga una copia de seguridad antes de continuar."
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:242
+#: src/Addons/Tools/js-source/components/CleanupTool.js:249
 msgid "1. Product Level Data"
-msgstr ""
+msgstr "1. Datos a nivel de producto"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:244
+#: src/Addons/Tools/js-source/components/CleanupTool.js:251
 msgid "Remove tiered pricing rules directly attached to individual products."
 msgstr ""
+"Elimine las reglas de precios escalonados directamente adjuntas a productos "
+"individuales."
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:248
+#: src/Addons/Tools/js-source/components/CleanupTool.js:255
 msgid "Clean Standard Tiered Pricing Data"
-msgstr ""
+msgstr "Limpiar datos de precios escalonados estándar"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:253
+#: src/Addons/Tools/js-source/components/CleanupTool.js:267
 msgid "Role Based Data"
-msgstr ""
+msgstr "Datos basados ​​en roles"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:269
+#: src/Addons/Tools/js-source/components/CleanupTool.js:295
 msgid "Filters (Optional)"
-msgstr ""
+msgstr "Filtros (opcional)"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:271
-msgid "Leave blank to apply the cleanup to all products. Otherwise, select specific categories or products."
+#: src/Addons/Tools/js-source/components/CleanupTool.js:297
+msgid ""
+"Leave blank to apply the cleanup to all products. Otherwise, select specific"
+" categories or products."
 msgstr ""
+"Déjelo en blanco para aplicar la limpieza a todos los productos. De lo "
+"contrario, seleccione categorías o productos específicos."
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:274
+#: src/Addons/Tools/js-source/components/CleanupTool.js:300
 msgid "Select Categories"
-msgstr ""
+msgstr "Seleccionar categorías"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:291
+#: src/Addons/Tools/js-source/components/CleanupTool.js:317
 msgid "2. Global Pricing Rules"
-msgstr ""
+msgstr "2. Reglas de precios globales"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:293
+#: src/Addons/Tools/js-source/components/CleanupTool.js:319
 msgid "Global pricing rules apply to multiple products at once."
 msgstr ""
+"Las reglas de precios globales se aplican a varios productos a la vez."
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:296
+#: src/Addons/Tools/js-source/components/CleanupTool.js:322
 msgid "Delete all Global Pricing Rules"
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:304
-msgid "3. Plugin Settings"
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:306
-msgid "Reset general settings, labels, and table column configurations."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:309
-msgid "Reset all plugin settings to defaults"
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:129
-msgid "Are you sure you want to delete the selected data? This action cannot be undone."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:154
-msgid "Product data cleaned up."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:167
-msgid "Global rules deleted."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:180
-msgid "Settings reset to default."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:207
-msgid "An unexpected error occurred."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:326
-msgid "Processing..."
-msgstr ""
-
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/CleanupTool.js:326
-msgid "Execute Cleanup"
-msgstr ""
+msgstr "Eliminar todas las reglas de precios globales"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/CleanupTool.js:330
-msgid "Select at least one option above to proceed."
+msgid "3. Plugin Settings"
+msgstr "3. Configuración del complemento"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:332
+msgid "Reset general settings, labels, and table column configurations."
 msgstr ""
+"Restablezca la configuración general, las etiquetas y las configuraciones de"
+" las columnas de la tabla."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:335
+msgid "Reset all plugin settings to defaults"
+msgstr ""
+"Restablecer todas las configuraciones del complemento a los valores "
+"predeterminados"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:132
+msgid ""
+"Are you sure you want to delete the selected data? This action cannot be "
+"undone."
+msgstr ""
+"¿Estás seguro de que deseas eliminar los datos seleccionados? Esta acción no"
+" se puede deshacer."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:159
+msgid "Product data cleaned up."
+msgstr "Se limpiaron los datos del producto."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:172
+msgid "Global rules deleted."
+msgstr "Se eliminaron las reglas globales."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:185
+msgid "Settings reset to default."
+msgstr "La configuración se restablece a los valores predeterminados."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:214
+msgid "An unexpected error occurred."
+msgstr "Se produjo un error inesperado."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:352
+msgid "Processing..."
+msgstr "Tratamiento..."
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:352
+msgid "Execute Cleanup"
+msgstr "Ejecutar limpieza"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:356
+msgid "Select at least one option above to proceed."
+msgstr "Seleccione al menos una de las opciones anteriores para continuar."
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:173
 msgid "Roles and Capabilities"
-msgstr ""
+msgstr "Roles y capacidades"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:175
 msgid "Add New Role"
-msgstr ""
+msgstr "Agregar nuevo rol"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:183
 #: src/Addons/Tools/js-source/components/RolesManagement.js:230
 msgid "Role Name"
-msgstr ""
+msgstr "Nombre del rol"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:184
 msgid "Role Key"
-msgstr ""
+msgstr "Clave de rol"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:185
 msgid "Capabilities Count"
-msgstr ""
+msgstr "Recuento de capacidades"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:202
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:224
 msgid "Edit Role Capabilities"
-msgstr ""
+msgstr "Editar capacidades de rol"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:224
 msgid "Create New Role"
-msgstr ""
+msgstr "Crear nuevo rol"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:236
 msgid "Role Key (e.g., custom_role)"
-msgstr ""
+msgstr "Clave de función (por ejemplo, función_personalizada)"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:245
 msgid "Copy capabilities from existing role"
-msgstr ""
+msgstr "Copiar capacidades de un rol existente"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:259
 msgid "Capabilities"
-msgstr ""
+msgstr "Capacidades"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:265
 msgid "Search capabilities..."
-msgstr ""
+msgstr "Capacidades de búsqueda..."
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:283
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:286
 msgid "Save Role"
-msgstr ""
+msgstr "Guardar rol"
 
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/App.js:26
+#: src/Addons/Tools/build/index.js:1 src/Addons/Tools/js-source/App.js:26
 msgid "Roles Management"
-msgstr ""
+msgstr "Gestión de roles"
 
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/App.js:31
+#: src/Addons/Tools/build/index.js:1 src/Addons/Tools/js-source/App.js:31
 msgid "Data Clean Up"
-msgstr ""
+msgstr "Limpieza de datos"
 
-#: src/Blocks/build/index.js:49
-#: src/Blocks/build/index.js:132
+#: src/Blocks/build/index.js:49 src/Blocks/build/index.js:132
 #: src/Blocks/build/index.js:195
 #: src/Blocks/src/blocks/blocks/TieredPricingBlock.js:23
 #: src/Blocks/src/blocks/dropdown/TieredPricingDropdown.js:13
 #: src/Blocks/src/blocks/options/TieredPricingOption.js:23
-#: src/Blocks/build/index.js:23
-#: src/Blocks/build/index.js:63
+#: src/Blocks/build/index.js:23 src/Blocks/build/index.js:63
 #: src/Blocks/build/index.js:108
 msgid "pieces"
-msgstr ""
+msgstr "piezas"
 
 #: src/Blocks/build/index.js:692
 #: src/Blocks/src/panels/ColumnsPanel/ColumnsPanel.js:10
 #: src/Blocks/build/index.js:436
 msgid "Columns"
-msgstr ""
+msgstr "columnas"
 
 #: src/Blocks/build/index.js:712
 #: src/Blocks/src/panels/ColumnsPanel/ColumnsPanel.js:43
 #: src/Blocks/build/index.js:469
 msgid "Discount column is showing."
-msgstr ""
+msgstr "Se muestra la columna de descuento."
 
 #: src/Blocks/build/index.js:712
 #: src/Blocks/src/panels/ColumnsPanel/ColumnsPanel.js:44
 #: src/Blocks/build/index.js:470
 msgid "Discount column is not showing."
-msgstr ""
+msgstr "La columna de descuento no se muestra."
 
 #: src/Blocks/build/index.js:765
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:32
 #: src/Blocks/build/index.js:510
 msgid "Main settings"
-msgstr ""
+msgstr "Configuraciones principales"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/premium-wrapper/block.json
 #: src/Addons/ReactProductEditorAddon/js/premium-wrapper/block.json
 msgctxt "block title"
 msgid "Woo blocks-based product editor: Premium Wrapper"
-msgstr ""
+msgstr "Editor de productos basado en bloques Woo: Premium Wrapper"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/premium-wrapper/block.json
 #: src/Addons/ReactProductEditorAddon/js-source/src/upgrade-notice/block.json
@@ -3793,34 +4305,384 @@ msgstr ""
 #: src/Addons/ReactProductEditorAddon/js/upgrade-notice/block.json
 msgctxt "block keyword"
 msgid "products"
-msgstr ""
+msgstr "productos"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/block.json
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/block.json
 msgctxt "block title"
 msgid "Woo blocks-based product editor: Tiered Pricing"
-msgstr ""
+msgstr "Editor de productos basado en bloques Woo: Precios escalonados"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/block.json
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/block.json
 msgctxt "block description"
 msgid "A block to allow users to input tiered pricing"
-msgstr ""
+msgstr "Un bloque para permitir a los usuarios ingresar precios escalonados"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/upgrade-notice/block.json
 #: src/Addons/ReactProductEditorAddon/js/upgrade-notice/block.json
 msgctxt "block title"
 msgid "Woo blocks-based product editor: Upgrade Notice"
-msgstr ""
+msgstr "Editor de productos basado en bloques Woo: Aviso de actualización"
 
-#: src/Blocks/build/block.json
-#: src/Blocks/src/block.json
+#: src/Blocks/build/block.json src/Blocks/src/block.json
 msgctxt "block title"
 msgid "Tiered Pricing"
-msgstr ""
+msgstr "Precios escalonados"
 
-#: src/Blocks/build/block.json
-#: src/Blocks/src/block.json
+#: src/Blocks/build/block.json src/Blocks/src/block.json
 msgctxt "block description"
-msgid "Tiered pricing widget. Must be used on the product page template. Find more options to customize in the plugin settings."
+msgid ""
+"Tiered pricing widget. Must be used on the product page template. Find more "
+"options to customize in the plugin settings."
 msgstr ""
+"Widget de precios escalonados. Debe usarse en la plantilla de la página del "
+"producto. Encuentre más opciones para personalizar en la configuración del "
+"complemento."
+
+#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:18
+msgid "Show More Info Next to Prices?"
+msgstr "¿Mostrar más información junto a precios?"
+
+#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:19
+msgid ""
+"Create additional columns to show exactly how much your customers save, "
+"total prices, or per-unit costs alongside each tier."
+msgstr ""
+"Cree columnas adicionales para mostrar exactamente cuánto ahorran sus "
+"clientes, los precios totales o los costos unitarios junto con cada nivel."
+
+#: src/Addons/CustomColumns/Schema.php:17
+#: src/Addons/CustomColumns/build/index.js:1
+#: src/Addons/CustomColumns/js-source/index.js:57
+msgid "Saving per item"
+msgstr "Ahorro por artículo"
+
+#: src/Addons/ImportExport/ImportExportAddon.php:8
+msgid "WooCommerce Import/Export"
+msgstr "Importación/Exportación de WooCommerce"
+
+#: src/Addons/ImportExport/ImportExportAddon.php:12
+msgid ""
+"Adds compatibility with the built-in WooCommerce product importer and "
+"exporter."
+msgstr ""
+"Agrega compatibilidad con el importador y exportador de productos integrado "
+"de WooCommerce."
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:95
+msgid "Apply a compact layout to the tiered pricing."
+msgstr "Aplique un diseño compacto a los precios escalonados."
+
+#: views/admin/welcome-page/welcome-page.php:566
+msgid ""
+"Thanks for installing the plugin! Below you will find a quick overview of "
+"the main features."
+msgstr ""
+"¡Gracias por instalar el complemento! A continuación encontrará una "
+"descripción general rápida de las características principales."
+
+#: views/admin/welcome-page/welcome-page.php:573
+msgid "Welcome to"
+msgstr "Bienvenido a"
+
+#: views/admin/welcome-page/welcome-page.php:605
+msgid "Questions? We're here to help."
+msgstr "¿Preguntas? Estamos aquí para ayudar."
+
+#: views/admin/welcome-page/welcome-page.php:634
+msgid "This is a product example."
+msgstr "Este es un ejemplo de producto."
+
+#: views/admin/welcome-page/welcome-page.php:678
+msgid "Add to cart"
+msgstr "Añadir a la cesta"
+
+#: views/admin/welcome-page/welcome-page.php:732
+msgid "You save"
+msgstr "Ahorras"
+
+#: views/admin/welcome-page/welcome-page.php:768
+msgid "Easy Setup"
+msgstr "Fácil configuración"
+
+#: views/admin/welcome-page/welcome-page.php:776
+msgid "Add tiered pricing to products"
+msgstr "Agregar precios escalonados a los productos"
+
+#: views/admin/welcome-page/welcome-page.php:785
+msgid "Add unlimited quantity-based prices."
+msgstr "Agregue precios ilimitados basados ​​en cantidades."
+
+#: views/admin/welcome-page/welcome-page.php:786
+msgid "Fixed prices or percentage discounts."
+msgstr "Precios fijos o descuentos porcentuales."
+
+#: views/admin/welcome-page/welcome-page.php:787
+#: views/admin/welcome-page/welcome-page.php:914
+msgid "Works great with variable products."
+msgstr "Funciona muy bien con productos variables."
+
+#: views/admin/welcome-page/welcome-page.php:812
+msgid "Various Pricing Templates"
+msgstr "Varias plantillas de precios"
+
+#: views/admin/welcome-page/welcome-page.php:826
+msgid "Pricing Blocks #3"
+msgstr "Bloques de precios n.° 3"
+
+#: views/admin/welcome-page/welcome-page.php:846
+msgid "Pricing Options #2"
+msgstr "Opciones de precios n.° 2"
+
+#: views/admin/welcome-page/welcome-page.php:896
+msgid "Flexible Pricing"
+msgstr "Precios flexibles"
+
+#: views/admin/welcome-page/welcome-page.php:911
+msgid "Add unlimited role-based pricing."
+msgstr "Agregue precios ilimitados basados ​​en roles."
+
+#: views/admin/welcome-page/welcome-page.php:912
+msgid "Control regular & sale price or provide a percentage discount."
+msgstr ""
+"Controle el precio regular y de oferta o proporcione un descuento "
+"porcentual."
+
+#: views/admin/welcome-page/welcome-page.php:913
+msgid "Control minimum, maximum and quantity step."
+msgstr "Controla el paso mínimo, máximo y de cantidad."
+
+#: views/admin/welcome-page/welcome-page.php:934
+msgid ""
+"Control regular prices, tiered pricing and quantity limits in one place."
+msgstr ""
+"Controle los precios regulares, los precios escalonados y los límites de "
+"cantidad en un solo lugar."
+
+#: views/admin/welcome-page/welcome-page.php:935
+msgid "Apply tiered pricing across multiple products."
+msgstr "Aplique precios escalonados en múltiples productos."
+
+#: views/admin/welcome-page/welcome-page.php:936
+msgid "Select products or product categories that the rule applies to."
+msgstr ""
+"Seleccione productos o categorías de productos a los que se aplica la regla."
+
+#: views/admin/welcome-page/welcome-page.php:937
+msgid "Select users or user roles that the rule applies to."
+msgstr ""
+"Seleccione los usuarios o roles de usuario a los que se aplica la regla."
+
+#: views/admin/welcome-page/welcome-page.php:945
+msgid "Advanced Features"
+msgstr "Funciones avanzadas"
+
+#: views/admin/welcome-page/welcome-page.php:956
+msgid "Create and update user roles"
+msgstr "Crear y actualizar roles de usuario"
+
+#: views/admin/welcome-page/welcome-page.php:963
+msgid "Create customizable labels and attach them to a pricing tier"
+msgstr "Cree etiquetas personalizables y adjúntelas a un nivel de precios"
+
+#: views/admin/welcome-page/welcome-page.php:971
+msgid "Cart upsells to motivate customers to purchase more."
+msgstr ""
+"Ventas adicionales en el carrito para motivar a los clientes a comprar más."
+
+#: views/admin/welcome-page/welcome-page.php:972
+msgid "Customize cart upsells template."
+msgstr "Personalice la plantilla de ventas adicionales del carrito."
+
+#: views/admin/welcome-page/welcome-page.php:973
+msgid "Tiered price in the cart appears as a discount."
+msgstr "El precio escalonado en el carrito aparece como un descuento."
+
+#: views/admin/welcome-page/welcome-page.php:980
+msgid "Show the lowest price."
+msgstr "Mostrar el precio más bajo."
+
+#: views/admin/welcome-page/welcome-page.php:981
+msgid ""
+"Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or "
+"whatever you want."
+msgstr ""
+"Personaliza el prefijo de precio más bajo: “desde $10,00”, “tan bajo como "
+"$10,00” o lo que quieras."
+
+#: views/admin/welcome-page/welcome-page.php:982
+msgid "Show the price range based on tiered pricing."
+msgstr "Muestra el rango de precios según los precios escalonados."
+
+#: views/admin/welcome-page/welcome-page.php:989
+msgid "Customize template (can be different from product page)."
+msgstr ""
+"Personalizar la plantilla (puede ser diferente de la página del producto)."
+
+#: views/admin/welcome-page/welcome-page.php:990
+msgid "Show quantity field."
+msgstr "Mostrar campo de cantidad."
+
+#: views/admin/welcome-page/welcome-page.php:1023
+msgid "Other Features That Make The Plugin Unique"
+msgstr "Otras características que hacen que el complemento sea único"
+
+#: views/admin/welcome-page/welcome-page.php:1086
+msgid "Integrations with 3rd party plugins"
+msgstr "Integraciones con complementos de terceros"
+
+#: views/admin/welcome-page/welcome-page.php:1271
+msgid "Have a question?"
+msgstr "¿Tiene alguna pregunta?"
+
+#: src/Addons/CustomColumns/build/index.js:1
+#: src/Addons/CustomColumns/js-source/index.js:108
+msgid "Your Saving"
+msgstr "Tu ahorro"
+
+#: src/Addons/CustomColumns/build/index.js:1
+#: src/Addons/CustomColumns/js-source/index.js:112
+msgid "Price per piece"
+msgstr "Precio por pieza"
+
+#: src/Addons/CustomColumns/build/index.js:1
+#: src/Addons/CustomColumns/js-source/index.js:117
+msgid "Price incl tax"
+msgstr "Precio IVA incluido"
+
+#: src/Addons/CustomColumns/build/index.js:1
+#: src/Addons/CustomColumns/js-source/index.js:154
+msgid "Please enter a title for all custom columns before saving."
+msgstr ""
+"Ingrese un título para todas las columnas personalizadas antes de guardar."
+
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:443
+msgid "Most Popular"
+msgstr "Más Popular"
+
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:458
+msgid "Best Value"
+msgstr "Mejor valor"
+
+#: src/Addons/CatalogPrices/CatalogPricesService.php:41
+#: src/Addons/CatalogPrices/CatalogPricesService.php:46
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:63
+#: src/Managers/FormatPriceManager.php:253
+msgid "From {tp_lowest_price} instead of {tp_original_price}"
+msgstr "Desde {tp_lowest_price} en lugar de {tp_original_price}"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:60
+msgid "Custom template"
+msgstr "Plantilla personalizada"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:56
+msgid ""
+"Choose whether to show only the lowest available price, the full price "
+"range, or a custom template."
+msgstr ""
+"Elija si desea mostrar solo el precio más bajo disponible, el rango de "
+"precios completo o una plantilla personalizada."
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:64
+msgid ""
+"Create a custom template for catalog prices. Use the available variables "
+"below to dynamically insert the lowest price, price range, or original "
+"product price."
+msgstr ""
+"Cree una plantilla personalizada para precios de catálogo. Utilice las "
+"variables disponibles a continuación para insertar dinámicamente el precio "
+"más bajo, el rango de precios o el precio original del producto."
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:84
+msgid "Lowest price"
+msgstr "Precio más bajo"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:85
+msgid "{tp_lowest_price} - lowest available tier price."
+msgstr "{tp_lowest_price}: precio de nivel más bajo disponible."
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:89
+msgid "Prices range"
+msgstr "Rango de precios"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:90
+msgid "{tp_prices_range} - price range from lowest tier to original price."
+msgstr ""
+"{tp_prices_range}: rango de precios desde el nivel más bajo hasta el precio "
+"original."
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:94
+msgid "Original price"
+msgstr "Precio original"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:95
+msgid "{tp_original_price} - product's original price without discounts."
+msgstr "{tp_original_price}: precio original del producto sin descuentos."
+
+#: src/Addons/UserBasedPricing/ProductManager.php:176
+msgid "Invalid user"
+msgstr "Usuario no válido"
+
+#: src/Addons/UserBasedPricing/UserBasedPricingAddon.php:10
+msgid "User-based pricing rules on individual products"
+msgstr "Reglas de precios basadas en el usuario para productos individuales"
+
+#: src/Addons/UserBasedPricing/UserBasedPricingAddon.php:18
+msgid "Enable customer-based pricing rules on individual products."
+msgstr ""
+"Habilite reglas de precios basadas en el cliente en productos individuales."
+
+#: views/addons/role-based-pricing/role-based-block.php:98
+msgid "Add role pricing"
+msgstr "Agregar precios de roles"
+
+#: views/addons/user-based-pricing/user-based-block.php:33
+msgid "Customer-Specific Pricing"
+msgstr "Precios específicos para el cliente"
+
+#: views/addons/user-based-pricing/user-based-block.php:78
+msgid "Set up specific pricing and rules for individual customers."
+msgstr "Configure reglas y precios específicos para clientes individuales."
+
+#. translators: %s: settings link
+#: views/addons/user-based-pricing/user-based-block.php:91
+#, php-format
+msgid ""
+"You can disable this feature in the %s if you don't need customer-based "
+"pricing."
+msgstr ""
+"Puede desactivar esta función en %s si no necesita precios basados ​​en el "
+"cliente."
+
+#: views/addons/user-based-pricing/user-based-block.php:105
+msgid "Add Customer"
+msgstr "Agregar cliente"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:260
+msgid "Customer Based Data"
+msgstr "Datos basados en el cliente"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:262
+msgid "Clean All Customer Based Pricing Data"
+msgstr "Limpiar todos los datos de precios basados en el cliente"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:271
+msgid "Do not clean role based data"
+msgstr "No limpiar datos basados ​​en roles"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:272
+msgid "Clean all roles"
+msgstr "Limpiar todos los roles"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/CleanupTool.js:273
+msgid "Select specific roles to clean"
+msgstr "Seleccionar roles específicos para limpiar"

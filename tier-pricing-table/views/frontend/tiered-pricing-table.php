@@ -58,7 +58,7 @@
 
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/before', $pricing_rule ); ?>
 
-		<table class="shop_table tiered-pricing-table"
+		<table class="shop_table tiered-pricing-table <?php echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ) ? 'tiered-pricing-table--slim' : ''; ?>"
 		       id="<?php echo esc_attr( $id ); ?>"
 		       data-tiered-pricing-table
 		       data-product-id="<?php echo esc_attr( $product_id ); ?>"

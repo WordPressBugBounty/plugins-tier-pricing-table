@@ -1,7 +1,7 @@
 <?php namespace TierPricingTable\Addons\RoleBasedPricing\Import;
 
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingRule;
-use TierPricingTable\Services\ImportExport\WoocommerceImportService;
+use TierPricingTable\Addons\ImportExport\WoocommerceImportService;
 use WC_Product;
 
 class RoleBasedPricingImport {
@@ -15,7 +15,13 @@ class RoleBasedPricingImport {
 	
 	public function processImport( WC_Product $product, array $data ): WC_Product {
 		
+		$disabled_roles = apply_filters( 'tiered_pricing_table/role_based_rules/import_export_disabled_roles', array( 'editor', 'author', 'contributor', 'shop_manager' ) );
+		
 		foreach ( wp_roles()->roles as $WPRole => $role_data ) {
+			
+			if ( in_array( $WPRole, $disabled_roles, true ) ) {
+				continue;
+			}
 			
 			$roleBasedRule = new RoleBasedPricingRule( $product->get_id(), $WPRole );
 			$needUpdate    = false;
@@ -99,8 +105,13 @@ class RoleBasedPricingImport {
 	public function addColumnsToImporter( $columns ): array {
 		
 		global $wp_roles;
+		$disabled_roles = apply_filters( 'tiered_pricing_table/role_based_rules/import_export_disabled_roles', array( 'editor', 'author', 'contributor', 'shop_manager' ) );
 		
 		foreach ( wp_roles()->roles as $WPRole => $role_data ) {
+			if ( in_array( $WPRole, $disabled_roles, true ) ) {
+				continue;
+			}
+			
 			$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
 			
 			$columns[ 'tpt_' . $WPRole ] = array(
@@ -132,8 +143,13 @@ class RoleBasedPricingImport {
 	public function addColumnsToMapper( array $columns ): array {
 		
 		global $wp_roles;
+		$disabled_roles = apply_filters( 'tiered_pricing_table/role_based_rules/import_export_disabled_roles', array( 'editor', 'author', 'contributor', 'shop_manager' ) );
 		
 		foreach ( wp_roles()->roles as $WPRole => $role_data ) {
+			if ( in_array( $WPRole, $disabled_roles, true ) ) {
+				continue;
+			}
+			
 			$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
 			
 			$columns[ 'Tiered Pricing — [' . $roleName . '] Regular pricing type' ] = $WPRole . '_tiered_price_pricing_type';

@@ -68,7 +68,7 @@ if ( $sale_price ) {
 			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
 		<?php endif; ?>
 
-		<div class="tiered-pricing-dropdown"
+		<div class="tiered-pricing-dropdown <?php echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ) ? 'tiered-pricing-dropdown--slim' : ''; ?>"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
 			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"

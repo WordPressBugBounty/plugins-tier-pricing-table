@@ -14,9 +14,9 @@ class CustomColumnsAdmin {
 			}
 			?>
 				<div style="height:0; width:100%"></div>
-			<div style="margin-top: 15px; padding: 15px; background: #f9f9f9; border-left: 4px solid #2271b1; border-radius: 4px; max-width: 575px;">
-				<p style="margin-top: 0; margin-bottom: 5px;"><strong><?php esc_html_e( 'Need more data?', 'tier-pricing-table' ); ?></strong></p>
-				<p style="margin-bottom: 15px; font-size: 13px; color: #646970;"><?php esc_html_e( 'Create custom columns to display extra information like discounts or shipping times alongside your pricing tiers.', 'tier-pricing-table' ); ?></p>
+			<div id="tpt-custom-columns-promo-block" style="margin-top: 15px; padding: 15px; background: #f9f9f9; border-left: 4px solid #2271b1; border-radius: 4px; max-width: 575px;">
+				<p style="margin-top: 0; margin-bottom: 5px;"><strong><?php esc_html_e( 'Show More Info Next to Prices?', 'tier-pricing-table' ); ?></strong></p>
+				<p style="margin-bottom: 15px; font-size: 13px; color: #646970;"><?php esc_html_e( 'Create additional columns to show exactly how much your customers save, total prices, or per-unit costs alongside each tier.', 'tier-pricing-table' ); ?></p>
 				<button type="button" id="tpt-toggle-custom-columns" class="button button-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 4px 14px 4px 10px; font-weight: 600;">
 					<span class="dashicons dashicons-plus" style=" margin-top: 4px; display: flex; align-items: center;"></span>
 					<?php esc_html_e( 'Add Custom Columns', 'tier-pricing-table' ); ?>
@@ -26,15 +26,15 @@ class CustomColumnsAdmin {
 				document.addEventListener('DOMContentLoaded', function() {
 					var toggleBtn = document.getElementById('tpt-toggle-custom-columns');
 					var customColumnsDiv = document.getElementById('tiered-pricing__feature__custom-columns');
+					var promoBlock = document.getElementById('tpt-custom-columns-promo-block');
 					if (toggleBtn && customColumnsDiv) {
 						customColumnsDiv.style.display = 'none';
 						toggleBtn.addEventListener('click', function(e) {
 							e.preventDefault();
-							if (customColumnsDiv.style.display === 'none') {
-								customColumnsDiv.style.display = 'block';
-							} else {
-								customColumnsDiv.style.display = 'none';
+							if (promoBlock) {
+								promoBlock.style.display = 'none';
 							}
+							customColumnsDiv.style.display = 'block';
 						});
 					}
 				});

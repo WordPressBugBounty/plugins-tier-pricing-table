@@ -4,9 +4,9 @@
  * Plugin Name:       WooCommerce Tiered Price Table
  * Requires Plugins:  woocommerce
  * Description:       Quantity-based discounts with nice-looking reflection on the product page.
- * Version:           6.4.0
+ * Version:           6.5.0
  * Author:            U2Code
- * Author URI:        https://u2code.com
+ * Author URI:        https://tiered-pricing.com/
  * Plugin URI:        https://tiered-pricing.com/
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

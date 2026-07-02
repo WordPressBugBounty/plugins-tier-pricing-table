@@ -21,8 +21,6 @@ class NonLoggedInUsersAddon extends AbstractAddon {
     }
 
     public function run() {
-        add_action( 'init', function () {
-        } );
         add_filter( 'tiered_pricing_table/settings/general_subsections', array($this, 'addSettingsSubsection') );
     }
 

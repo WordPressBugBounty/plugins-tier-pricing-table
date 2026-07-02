@@ -266,6 +266,7 @@ class PriceManager {
          * @hooked QuantityManager - 1:  Added maximum and quantity step information.
          * @hooked CategoryTierAddon - 10:  Filter with category-based rules
          * @hooked RoleBasedPricingAddon - 20:  Filter with role-based rules
+         * @hooked RoleBasedPricingAddon - 25:  Filter with customer-based rules
          * @hooked GlobalPricingService - 30:  Filter with global rules
          *
          *****************************************/

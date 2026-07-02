@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Settings\CustomOptions;
 
 use TierPricingTable\Core\ServiceContainerTrait;
+use TierPricingTable\Settings\Settings;
 
 class TPTTextTemplate {
 
@@ -18,14 +19,13 @@ class TPTTextTemplate {
 	public function __construct() {
 		add_action( 'woocommerce_admin_field_' . self::FIELD_TYPE, array( $this, 'render' ) );
 
-		add_action( 'admin_head', function () {
-			?>
-			<script>
-				var TPTAvailableCustomButtons = JSON.parse('<?php echo wp_kses_post( wp_json_encode( $this->getAvailableVariables() ) ); ?>');
-			</script>
+		add_action( 'admin_enqueue_scripts', function () {
+			$assetName = Settings::SETTINGS_PAGE . '_script';
 
-			<?php
-		} );
+			wp_add_inline_script( $assetName,
+					'const TPTAvailableCustomButtons = ' . wp_json_encode( $this->getAvailableVariables() ) . ';',
+					'before' );
+		}, 999 );
 
 		add_filter( 'mce_external_plugins', function ( $plugins, $editor ) {
 			if ( $this->editorId === $editor ) {
@@ -136,7 +136,7 @@ class TPTTextTemplate {
 	}
 
 	protected function getAvailableVariables() {
-		return array(
+		return apply_filters( 'tiered_pricing_table/text_template_variables', array(
 				'tp_quantity' => array(
 						'name'        => __( 'Quantity', 'tier-pricing-table' ),
 						'description' => __( '{tp_quantity} - range or a static quantity of the current pricing tier.',
@@ -213,6 +213,6 @@ class TPTTextTemplate {
 						'variableKey' => '{tp_base_unit_name}',
 				),
 
-		);
+		) );
 	}
 }

@@ -16,13 +16,6 @@ use WC_Product_Variable;
 class CatalogPricesService {
     use ServiceContainerTrait;
     /**
-     * Price hash
-     *
-     * @var string
-     */
-    private $variablePriceHash;
-
-    /**
      * CatalogPriceManager constructor.
      */
     public function __construct() {
@@ -44,6 +37,9 @@ class CatalogPricesService {
         }
         // Do not modify price in quick edit and inline edit in admin
         if ( isset( $_POST['action'] ) && in_array( $_POST['action'], ['inline-save'], true ) ) {
+            return $defaultPriceHTML;
+        }
+        if ( isset( $GLOBALS['TPT_DISABLE_CATALOG_PRICE_FORMAT'] ) ) {
             return $defaultPriceHTML;
         }
         $currentProductPageProductId = get_queried_object_id();

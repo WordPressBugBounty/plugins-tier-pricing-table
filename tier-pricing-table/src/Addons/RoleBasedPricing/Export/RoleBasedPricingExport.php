@@ -20,8 +20,12 @@ class RoleBasedPricingExport {
 			}
 			
 			$columns = array();
+			$disabled_roles = apply_filters( 'tiered_pricing_table/role_based_rules/import_export_disabled_roles', array( 'editor', 'author', 'contributor', 'shop_manager' ) );
 			
 			foreach ( wp_roles()->roles as $WPRole => $role_data ) {
+				if ( in_array( $WPRole, $disabled_roles, true ) ) {
+					continue;
+				}
 				
 				$columns[] = array(
 					'column_title'    => $WPRole . '_tiered_price_pricing_type',
@@ -112,8 +116,12 @@ class RoleBasedPricingExport {
 	public function addExportColumn( array $columns ): array {
 		
 		global $wp_roles;
+		$disabled_roles = apply_filters( 'tiered_pricing_table/role_based_rules/import_export_disabled_roles', array( 'editor', 'author', 'contributor', 'shop_manager' ) );
 		
 		foreach ( wp_roles()->roles as $WPRole => $role_data ) {
+			if ( in_array( $WPRole, $disabled_roles, true ) ) {
+				continue;
+			}
 			
 			$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
 			
