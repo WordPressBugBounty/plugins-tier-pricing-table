@@ -563,7 +563,8 @@
 <main class="tpt-welcome-page">
 
 	<div class="tpt-welcome-page-install-notice">
-		<span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e( 'Thanks for installing the plugin! Below you will find a quick overview of the main features.', 'tier-pricing-table' ); ?>
+		<span class="dashicons dashicons-plugins-checked"></span> <?php esc_html_e( 'Thanks for installing the plugin! Below you will find a quick overview of the main features.',
+				'tier-pricing-table' ); ?>
 	</div>
 
 	<header class="tpt-welcome-page-hero">
@@ -631,7 +632,8 @@
 							<div class="tpt-ip-main-price" id="tpt-ip-main-price">
 								<del>$100.00</del>
 								<span>$75.00</span></div>
-							<p class="tpt-ip-desc"><?php esc_html_e( 'This is a product example.', 'tier-pricing-table' ); ?></p>
+							<p class="tpt-ip-desc"><?php esc_html_e( 'This is a product example.',
+										'tier-pricing-table' ); ?></p>
 						</div>
 					</div>
 
@@ -675,7 +677,8 @@
 
 						<div class="tpt-ip-add-to-cart">
 							<input type="number" id="tpt-ip-qty" class="tpt-ip-qty-input" value="50" min="1">
-							<button class="tpt-ip-btn"><?php esc_html_e( 'Add to cart', 'tier-pricing-table' ); ?></button>
+							<button class="tpt-ip-btn"><?php esc_html_e( 'Add to cart',
+										'tier-pricing-table' ); ?></button>
 						</div>
 
 						<div class="tpt-ip-summary">
@@ -729,7 +732,8 @@
 						const originalPrice = 100.00;
 						const savedTotal = (originalPrice - price) * qty;
 						const savedPercent = Math.round((originalPrice - price) / originalPrice * 100);
-						mainPrice.innerHTML = `<del>$100.00</del> <span>$${price.toFixed(2)}</span> <span class="tpt-ip-you-save"><?php esc_html_e( 'You save', 'tier-pricing-table' ); ?> $${savedTotal.toLocaleString('en-US', {
+						mainPrice.innerHTML = `<del>$100.00</del> <span>$${price.toFixed(2)}</span> <span class="tpt-ip-you-save"><?php esc_html_e( 'You save',
+								'tier-pricing-table' ); ?> $${savedTotal.toLocaleString('en-US', {
 							minimumFractionDigits: 2,
 							maximumFractionDigits: 2
 						})} (${savedPercent}%)</span>`;
@@ -782,9 +786,12 @@
 					<div class="tpt-welcome-page-feature__image-description">Product edit page</div>
 				</div>
 				<div class="tpt-welcome-page-feature__description">
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Add unlimited quantity-based prices.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Fixed prices or percentage discounts.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Works great with variable products.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Add unlimited quantity-based prices.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Fixed prices or percentage discounts.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Works great with variable products.',
+								'tier-pricing-table' ); ?></span>
 				</div>
 			</div>
 
@@ -908,10 +915,14 @@
 					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/role-based.png' ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-feature__description">
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Add unlimited role-based pricing.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Control regular & sale price or provide a percentage discount.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Control minimum, maximum and quantity step.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Works great with variable products.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Add unlimited role-based pricing.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Control regular & sale price or provide a percentage discount.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Control minimum, maximum and quantity step.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Works great with variable products.',
+								'tier-pricing-table' ); ?></span>
 				</div>
 			</div>
 
@@ -931,10 +942,14 @@
 					<img src="<?php echo esc_attr( $fileManager->locateAsset( 'admin/welcome-page/global-rules	.png' ) ); ?>">
 				</div>
 				<div class="tpt-welcome-page-feature__description">
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Control regular prices, tiered pricing and quantity limits in one place.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Apply tiered pricing across multiple products.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Select products or product categories that the rule applies to.', 'tier-pricing-table' ); ?></span>
-					<span class="tpt-checkmark"> <?php esc_html_e( 'Select users or user roles that the rule applies to.', 'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Control regular prices, tiered pricing and quantity limits in one place.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Apply tiered pricing across multiple products.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Select products or product categories that the rule applies to.',
+								'tier-pricing-table' ); ?></span>
+					<span class="tpt-checkmark"> <?php esc_html_e( 'Select users or user roles that the rule applies to.',
+								'tier-pricing-table' ); ?></span>
 				</div>
 			</div>
 		</div>
@@ -948,7 +963,14 @@
 	<section class="tpt-welcome-page-features tpt-welcome-page-features--plugin-features">
 		<?php
 			$mainFeatures = array(
-
+					array(
+							'title'    => __( 'Request a Quote', 'tier-pricing-table' ),
+							'image'    => 'request-a-quote.png',
+							'features' => array(
+									__( 'Allow customers to request custom quotes via a sleek customizable popup.',
+											'tier-pricing-table' ),
+							),
+					),
 					array(
 							'title'    => __( 'Manage user roles', 'tier-pricing-table' ),
 							'image'    => 'user-roles.png',
@@ -978,7 +1000,8 @@
 							'image'    => 'catalog.png',
 							'features' => array(
 									__( 'Show the lowest price.', 'tier-pricing-table' ),
-									__( 'Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or whatever you want.', 'tier-pricing-table' ),
+									__( 'Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or whatever you want.',
+											'tier-pricing-table' ),
 									__( 'Show the price range based on tiered pricing.', 'tier-pricing-table' ),
 							),
 					),
@@ -986,7 +1009,8 @@
 							'title'    => __( 'Product catalog (Category page)', 'tier-pricing-table' ),
 							'image'    => 'catalog-render.png',
 							'features' => array(
-									__( 'Customize template (can be different from product page).', 'tier-pricing-table' ),
+									__( 'Customize template (can be different from product page).',
+											'tier-pricing-table' ),
 									__( 'Show quantity field.', 'tier-pricing-table' ),
 							),
 					),
@@ -1268,7 +1292,8 @@
 	</style>
 
 	<section class="tpt-welcome-page-contact-us">
-		<div class="tpt-welcome-page-contact-us__title"><?php esc_html_e( 'Have a question?', 'tier-pricing-table' ); ?></div>
+		<div class="tpt-welcome-page-contact-us__title"><?php esc_html_e( 'Have a question?',
+					'tier-pricing-table' ); ?></div>
 		<div class="tpt-welcome-page-contact-us__button">
 			<a href="<?php echo esc_attr( \TierPricingTable\TierPricingTablePlugin::getContactUsURL() ); ?>"
 			   target="_blank"

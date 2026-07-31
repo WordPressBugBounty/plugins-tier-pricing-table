@@ -340,7 +340,7 @@ if ( !empty( $price_rules ) ) {
     ?>
 			
 			<?php 
-    do_action( 'tiered_pricing_table/options/options', $pricing_rule );
+    do_action( 'tiered_pricing_table/options/options', $pricing_rule, $settings );
     ?>
 		</div>
 		

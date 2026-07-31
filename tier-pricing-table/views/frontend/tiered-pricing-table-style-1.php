@@ -270,9 +270,11 @@
 						?>
 					</div>
 
-					<?php do_action( 'tiered_pricing_table/tiered_pricing/rows', $pricing_rule ); ?>
-
 				<?php endwhile; ?>
+				<?php do_action( 'tiered_pricing_table/tiered_pricing/rows', $pricing_rule, $settings, 'tiered-pricing-table-style-1' ); ?>
+
+				<?php do_action( 'tiered_pricing_table/table/tfoot', $pricing_rule, $settings,
+						'tiered-pricing-table-style-1' ); ?>
 			</div>
 		</div>
 

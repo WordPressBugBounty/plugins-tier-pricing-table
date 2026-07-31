@@ -31,17 +31,13 @@ class TierPricingTablePlugin {
 	
 	/**
 	 * License instance
-	 *
-	 * @var Freemius
 	 */
-	private $licence;
+	private Freemius $licence;
 	
-	const VERSION = '6.5.0';
+	const VERSION = '7.1.1';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
-	 *
-	 * @param  string  $mainFile
 	 */
 	public function __construct( string $mainFile ) {
 		

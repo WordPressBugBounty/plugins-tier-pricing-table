@@ -4,8 +4,8 @@ use TierPricingTable\Addons\AbstractAddon;
 
 class CatalogPricesAddon extends AbstractAddon {
 	
-	public function getName() {
-		return __( 'Catalog Price Format', 'tier-pricing-table' );
+	public function getName(): string {
+		return __( 'Shop & Categories Price Format', 'tier-pricing-table' );
 	}
 	
 	public function getDescription() {

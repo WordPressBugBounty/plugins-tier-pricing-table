@@ -12,6 +12,7 @@ use TierPricingTable\Integrations\Plugins\SEOPress\SEOPress;
 use TierPricingTable\Integrations\Plugins\WCCS;
 use TierPricingTable\Integrations\Plugins\WCPA;
 use TierPricingTable\Integrations\Plugins\WCPProductBundles;
+use TierPricingTable\Integrations\Plugins\WooPaymentsMulticurrency;
 use TierPricingTable\Integrations\Plugins\WombatProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceDeposits;
 use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
@@ -62,6 +63,7 @@ class Integrations {
 			
 			WCCS::class,
 			WPMLMulticurrency::class,
+			WooPaymentsMulticurrency::class,
 			YithRequestAQuote::class,
 			AddifyRequestAQuote::class,
 			

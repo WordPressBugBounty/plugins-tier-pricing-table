@@ -7,30 +7,19 @@ use TierPricingTable\Settings\Settings;
 class CalculationLogic extends SectionAbstract {
 
 	public function getSettings() {
-
-		$settings = array();
-		$advanced = apply_filters( 'tiered_pricing_table/settings/calculation_logic', $this->getMainSettings() );
-
-		$sectionTitle = array(
-				'title' => __( 'Calculations', 'tier-pricing-table' ),
-				'desc'  => __( 'This section controls how tiered pricing does calculations.', 'tier-pricing-table' ),
-				'id'    => Settings::SETTINGS_PREFIX . 'calculation_logic',
-				'type'  => 'title',
-		);
-
-		$sectionEnd = array(
-				'type' => 'sectionend',
-		);
-
-		$settings[] = $sectionTitle;
-		$settings   = array_merge( $settings, $advanced );
-		$settings[] = $sectionEnd;
+		$settings = apply_filters( 'tiered_pricing_table/settings/calculation_logic', $this->getMainSettings() );
 
 		return array_merge( $settings, $this->getGlobalPricingRulesOptions() );
 	}
 
 	public function getMainSettings(): array {
 		return array(
+				array(
+						'title' => __( 'Variable products logic', 'tier-pricing-table' ),
+						'desc'  => __( 'Control how tiered pricing handles variable products.', 'tier-pricing-table' ),
+						'id'    => Settings::SETTINGS_PREFIX . 'variable_products_logic',
+						'type'  => 'title',
+				),
 				array(
 						'title'                => __( 'Combine variations for quantity calculation',
 								'tier-pricing-table' ),
@@ -40,6 +29,24 @@ class CalculationLogic extends SectionAbstract {
 						'extended_description' => __( 'Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules.',
 								'tier-pricing-table' ),
 						'desc_tip'             => true,
+				),
+				array(
+						'title'                => __( 'Combine variations for minimum quantity', 'tier-pricing-table' ),
+						'id'                   => Settings::SETTINGS_PREFIX . 'mix_and_match_minimum',
+						'type'                 => TPTSwitchOption::FIELD_TYPE,
+						'default'              => 'no',
+						'extended_description' => __( 'Determine whether the minimum quantity requirement applies to each variation separately, or to the combined total of all variations in the cart.', 'tier-pricing-table' ),
+						'desc_tip'             => true,
+				),
+				array(
+						'type' => 'sectionend',
+						'id'   => Settings::SETTINGS_PREFIX . 'variable_products_logic',
+				),
+				array(
+						'title' => __( 'General calculations', 'tier-pricing-table' ),
+						'desc'  => __( 'Control general calculation behavior for tiered pricing.', 'tier-pricing-table' ),
+						'id'    => Settings::SETTINGS_PREFIX . 'general_calculations',
+						'type'  => 'title',
 				),
 				array(
 						'title'                => __( 'Calculate percentage discounts from regular price',
@@ -57,6 +64,10 @@ class CalculationLogic extends SectionAbstract {
 						'extended_description' => __( 'Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing.',
 								'tier-pricing-table' ),
 						'desc_tip'             => true,
+				),
+				array(
+						'type' => 'sectionend',
+						'id'   => Settings::SETTINGS_PREFIX . 'general_calculations',
 				),
 		);
 	}

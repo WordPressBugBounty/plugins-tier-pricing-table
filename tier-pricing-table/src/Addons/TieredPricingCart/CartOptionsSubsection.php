@@ -7,7 +7,7 @@ use TierPricingTable\Settings\Settings;
 class CartOptionsSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Cart Display Settings', 'tier-pricing-table' );
+		return __( 'Cart Page Pricing', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
@@ -21,7 +21,7 @@ class CartOptionsSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'   => __( 'Display price as discount', 'tier-pricing-table' ),
+				'title'   => __( 'Show original item price crossed out', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'show_discount_in_cart',
 				'desc'    => __( 'Show a crossed-out regular price next to the discounted tiered price in the cart. For example: ',
 						'tier-pricing-table' ) . ' <b><del>$10.00</del> <ins>$8.00</ins><b>',
@@ -29,7 +29,7 @@ class CartOptionsSubsection extends SubsectionAbstract {
 				'default' => 'yes',
 			),
 			array(
-				'title'   => __( 'Display subtotal as discount', 'tier-pricing-table' ),
+				'title'   => __( 'Show original subtotal crossed out', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'show_subtotal_as_discount_in_cart',
 				'desc'    => __( 'Show a crossed-out regular subtotal next to the discounted subtotal in the cart.',
 					'tier-pricing-table' ),
@@ -37,7 +37,7 @@ class CartOptionsSubsection extends SubsectionAbstract {
 				'default' => 'yes',
 			),
 			array(
-				'title'   => __( 'Always use regular price', 'tier-pricing-table' ),
+				'title'   => __( 'Cross out regular price instead of sale price', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'consider_sale_price_as_discount_in_cart',
 				'desc'    => __( 'When crossing out a price, always display the regular price rather than a sale price.',
 					'tier-pricing-table' ),

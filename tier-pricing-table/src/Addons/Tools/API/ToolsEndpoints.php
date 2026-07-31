@@ -239,6 +239,8 @@ class ToolsEndpoints {
 			}
 		}
 		
+		delete_option( \TierPricingTable\Admin\Tips\Tip::SEEN_TIPS_OPTION_KEY );
+		
 		$message = sprintf( 'Successfully cleaned up %d product records.', $deletedCount );
 		
 		return rest_ensure_response( array(

@@ -7,7 +7,7 @@ use TierPricingTable\Addons\ProductCatalogLoop\Settings\ProductCatalogLoopSettin
 use WC_Product;
 class ProductCatalogLoop extends AbstractAddon {
     public function getName() : string {
-        return __( 'Catalog display', 'tier-pricing-table' );
+        return __( 'Shop & Categories', 'tier-pricing-table' );
     }
 
     public function getDescription() : string {
@@ -66,7 +66,7 @@ class ProductCatalogLoop extends AbstractAddon {
     }
 
     public function run() {
-        add_filter( 'tiered_pricing_table/settings/sections', array($this, 'addSettingSection') );
+        add_filter( 'tiered_pricing_table/settings/sections', array($this, 'addSettingSection'), 5 );
         if ( !ProductCatalogLoopSettingsSection::isEnabled() ) {
             return;
         }
@@ -137,14 +137,14 @@ class ProductCatalogLoop extends AbstractAddon {
     }
 
     public function addSettingSection( $sections ) : array {
-        $newSections = [];
-        for ($i = 0; $i < count( $sections ); $i++) {
-            if ( 1 === $i ) {
-                $newSections[] = new ProductCatalogLoopSettingsSection();
+        $_sections = array();
+        foreach ( $sections as $section ) {
+            $_sections[] = $section;
+            if ( $section->getSlug() === 'general' ) {
+                $_sections[] = new ProductCatalogLoopSettingsSection();
             }
-            $newSections[] = $sections[$i];
         }
-        return $newSections;
+        return $_sections;
     }
 
 }

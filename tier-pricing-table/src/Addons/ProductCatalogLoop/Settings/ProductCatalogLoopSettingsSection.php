@@ -19,7 +19,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	}
 	
 	public function getName(): string {
-		return __( 'Catalog Display', 'tier-pricing-table' );
+		return __( 'Shop & Categories', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -33,13 +33,13 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 		
 		return array(
 			array(
-				'title' => __( 'Tiered Pricing on the shop page', 'tier-pricing-table' ),
+				'title' => __( 'Tiered Pricing on Shop & Category Pages', 'tier-pricing-table' ),
 				'desc'  => __( 'Control how tiered pricing appears on shop and category pages.',
 					'tier-pricing-table' ),
 				'type'  => 'title',
 			),
 			array(
-				'title'                => __( 'Enable on catalog pages', 'tier-pricing-table' ),
+				'title'                => __( 'Enable on Shop & Categories', 'tier-pricing-table' ),
 				'id'                   => self::getOptionID( 'enabled' ),
 				'type'                 => TPTSwitchOption::FIELD_TYPE,
 				'default'              => 'no',
@@ -48,7 +48,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					?>
 					<p>
 						<?php
-							esc_html_e( 'Turn this on to display tiered pricing directly within your product catalog.',
+							esc_html_e( 'Turn this on to display tiered pricing directly within your shop and category pages.',
 								'tier-pricing-table' );
 						?>
 					</p>
@@ -64,7 +64,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'desc_tip'             => true,
 			),
 			array(
-				'title'    => __( 'Position on catalog item', 'tier-pricing-table' ),
+				'title'    => __( 'Position on product grid item', 'tier-pricing-table' ),
 				'id'       => self::getOptionID( 'position' ),
 				'type'     => 'select',
 				'default'  => 'woocommerce_after_shop_loop_item__6',
@@ -79,7 +79,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'desc_tip' => true,
 			),
 			array(
-				'title'                => __( 'Add quantity selector', 'tier-pricing-table' ),
+				'title'                => __( 'Add quantity selector to grids', 'tier-pricing-table' ),
 				'id'                   => self::getOptionID( 'show_quantity_field' ),
 				'type'                 => TPTSwitchOption::FIELD_TYPE,
 				'default'              => 'no',
@@ -88,7 +88,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 					?>
 					<p>
 						<?php
-							esc_html_e( 'Add a quantity input field directly to items in the product catalog.', 'tier-pricing-table' );
+							esc_html_e( 'Add a quantity input field directly to items on the shop and category pages.', 'tier-pricing-table' );
 						?>
 					</p>
 					<p>

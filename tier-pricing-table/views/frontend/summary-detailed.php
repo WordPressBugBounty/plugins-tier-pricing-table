@@ -6,6 +6,7 @@
 	 * @var string $title
 	 * @var string $totalLabel
 	 * @var string $eachLabel
+	 * @var string $showNonTiered
 	 */
 	
 if ( ! defined( 'WPINC' ) ) {
@@ -17,8 +18,9 @@ if ( ! defined( 'WPINC' ) ) {
 ?>
 <div class="clear"></div>
 
-<div class="tier-pricing-summary-table tier-pricing-summary-table--hidden"
+<div class="tier-pricing-summary-table tier-pricing-summary-table--hidden tier-pricing-summary-table--detailed"
 	 data-tier-pricing-table-summary
+	 data-show-non-tiered="<?php echo esc_attr( isset( $showNonTiered ) ? $showNonTiered : 'no' ); ?>"
 	 data-product-id="<?php echo esc_attr( $productId ); ?>">
 	
 	<?php if ( $title ) : ?>

@@ -45,10 +45,6 @@ class PricingTable {
 			return;
 		}
 
-		if ( ! $this->productHasPricingRules( $parentProduct ) ) {
-			return;
-		}
-
 		$settings = wp_parse_args( $settings, $this->getDefaultSettings( $parentProductID ) );
 
 		// If the product is variable, but no specific variation is passed - check for default
@@ -85,11 +81,11 @@ class PricingTable {
 		?>
 		<div class="clear"></div>
 		<div class="tpt__tiered-pricing <?php echo esc_attr( $hidden ? 'tpt__hidden' : '' ); ?>"
-			 data-settings="<?php echo esc_attr( json_encode( $settings ) ); ?>"
-			 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
-			 data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
-			 data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
-			 data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>"
+		     data-settings="<?php echo esc_attr( json_encode( $settings ) ); ?>"
+		     data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>"
+		     data-display-type="<?php echo esc_attr( $settings['display_type'] ); ?>"
+		     data-product-id="<?php echo esc_attr( $parentProduct->get_id() ); ?>"
+		     data-product-type="<?php echo esc_attr( $parentProduct->get_type() ); ?>"
 
 				<?php if ( TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ) : ?>
 					<?php
@@ -107,8 +103,8 @@ class PricingTable {
 			<div class="tpt__tiered-pricing-preloaded-variations" style="display:none">
 				<?php foreach ( $parentProduct->get_available_variations( 'objects' ) as $childProduct ) : ?>
 					<div class="tiered-pricing-preloaded-variation"
-						 data-variation-id="<?php echo esc_attr( $childProduct->get_id() ); ?>"
-						 data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>">
+					     data-variation-id="<?php echo esc_attr( $childProduct->get_id() ); ?>"
+					     data-display-context="<?php echo esc_attr( $settings['display_context'] ); ?>">
 						<?php $this->renderPricingTableHTML( $parentProduct, $childProduct, $settings ); ?>
 					</div>
 				<?php endforeach; ?>
@@ -173,7 +169,7 @@ class PricingTable {
 				}
 			}
 
-			if( 'options' === $displayType ) {
+			if ( 'options' === $displayType ) {
 				$style = $settings['options_style'];
 
 				if ( $style !== 'default' ) {
@@ -201,10 +197,50 @@ class PricingTable {
 					'pricing_type' => $priceRule->getType(),
 					'id'           => $this->getUniqueTieredPricingId(),
 			) );
+		} else {
+			// Provide fallback data for products without pricing rules,
+			// which allows the frontend JS (e.g. dynamic totals, you save, etc.)
+			// to function for all products via the 'tiered_price_update' event.
+			$price_incl_taxes = wc_get_price_including_tax( $product, array(
+					'price' => $product->get_price(),
+			) );
+
+			$price_excl_taxes = wc_get_price_excluding_tax( $product, array(
+					'price' => $product->get_price(),
+			) );
+			?>
+			<div style="display:none;"
+			     class="tiered-pricing-fallback-data"
+			     data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
+			     data-price-rules="{}"
+			     data-minimum="1"
+			     data-product-name="<?php echo esc_attr( $product->get_name() ); ?>"
+			     data-regular-price="<?php echo esc_attr( $product->get_regular_price() ); ?>"
+			     data-sale-price="<?php echo esc_attr( $product->get_sale_price() ); ?>"
+			     data-price="<?php echo esc_attr( $product->get_price() ); ?>"
+			     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
+			     data-tiered-price="<?php echo esc_attr( $product->get_price() ); ?>"
+			     data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
+			     data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>"
+			></div>
+			<?php
 		}
 	}
 
 	protected function getDefaultSettings( $productId = false ): array {
+		$hasRules = true;
+
+		if ( $productId ) {
+			$product = wc_get_product( $productId );
+			if ( $product ) {
+				$hasRules = $this->productHasPricingRules( $product );
+			}
+		}
+
+		$showTotalPrice = $hasRules ? $this->getContainer()->getSettings()->get( 'show_total_price',
+						'no' ) === 'yes' : $this->getContainer()->getSettings()->get( 'show_total_price_non_tiered',
+						'no' ) === 'yes';
+
 		$settings = array(
 				'display_context'       => 'product-page',
 				'display'               => $this->getContainer()->getSettings()->get( 'display', 'yes' ) === 'yes',
@@ -227,10 +263,10 @@ class PricingTable {
 				'tooltip_border'        => $this->getContainer()->getSettings()->get( 'tooltip_border',
 								'yes' ) === 'yes',
 
-				'table_style'   => GeneralSection::getPricingTableStyle(),
-				'compact_layout'   => $this->getContainer()->getSettings()->get( 'compact_layout', 'no' ),
-				'blocks_style'  => GeneralSection::getPricingBlocksStyle(),
-				'options_style'             => GeneralSection::getPricingOptionsStyle(),
+				'table_style'    => GeneralSection::getPricingTableStyle(),
+				'compact_layout' => $this->getContainer()->getSettings()->get( 'compact_layout', 'no' ),
+				'blocks_style'   => GeneralSection::getPricingBlocksStyle(),
+				'options_style'  => GeneralSection::getPricingOptionsStyle(),
 
 				'options_show_total'                  => GeneralSection::isShowOptionTotal(),
 				'options_show_original_product_price' => GeneralSection::isShowOriginalProductPrice(),
@@ -247,8 +283,7 @@ class PricingTable {
 								'yes' ) === 'yes',
 				'show_tiered_price_as_discount' => $this->getContainer()->getSettings()->get( 'show_tiered_price_as_discount',
 								'yes' ) === 'yes',
-				'show_total_price'              => $this->getContainer()->getSettings()->get( 'show_total_price',
-								'no' ) === 'yes',
+				'show_total_price'              => $showTotalPrice,
 		);
 
 		$default_quantity_measurement = array(
@@ -376,20 +411,25 @@ class PricingTable {
 
 			<div style="font-size: .8em;">
 				<div class="woocommerce-error" role="alert" style="margin-bottom: 0">
-					<?php esc_html_e( 'Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier.', 'tier-pricing-table' ); ?>
+					<?php esc_html_e( 'Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier.',
+							'tier-pricing-table' ); ?>
 				</div>
 				<div style="color: #555;
 	padding: 10px 12px;
 	border: 1px solid #b32c2e;
 	background: #fff5f5;">
 					<p style="padding: 0; margin: 0 0 10px 0;">
-						<?php esc_html_e( 'To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity.', 'tier-pricing-table' ); ?>
+						<?php esc_html_e( 'To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity.',
+								'tier-pricing-table' ); ?>
 					</p>
 					<p style="padding: 0; margin: 0">
-						<strong><?php esc_html_e( 'Why?', 'tier-pricing-table' ); ?></strong> <?php esc_html_e( 'The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier.', 'tier-pricing-table' ); ?>
+						<strong><?php esc_html_e( 'Why?',
+									'tier-pricing-table' ); ?></strong> <?php esc_html_e( 'The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier.',
+								'tier-pricing-table' ); ?>
 					</p>
 					<br>
-					<b><?php esc_html_e( 'This notice is only visible to store administrators.', 'tier-pricing-table' ); ?></b>
+					<b><?php esc_html_e( 'This notice is only visible to store administrators.',
+								'tier-pricing-table' ); ?></b>
 				</div>
 			</div>
 			<?php

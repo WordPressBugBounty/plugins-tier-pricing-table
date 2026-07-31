@@ -144,5 +144,8 @@
 				</div>
 			</div>
 		<?php endforeach; ?>
+
+		<?php do_action( 'tiered_pricing_table/admin/tiered_pricing_rules_form/form_end', $entity_id, $role, $loop,
+				$custom_prefix ); ?>
 	</div>
 <?php

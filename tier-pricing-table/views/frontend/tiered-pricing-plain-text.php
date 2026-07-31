@@ -194,10 +194,10 @@
 				</li>
 			<?php endwhile; ?>
 
-			<?php do_action( 'tiered_pricing_table/options/options', $pricing_rule ); ?>
+			<?php do_action( 'tiered_pricing_table/plain-text/line', $pricing_rule, $settings ); ?>
 		</ul>
 
-		<?php do_action( 'tiered_pricing_table/options/after_options', $pricing_rule ); ?>
+		<?php do_action( 'tiered_pricing_table/plain-text/after_lines', $pricing_rule, $settings ); ?>
 	</div>
 
 	<style>

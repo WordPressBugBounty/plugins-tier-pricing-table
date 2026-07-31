@@ -4,7 +4,6 @@ namespace TierPricingTable\Addons\GlobalTieredPricing;
 
 use TierPricingTable\PricingRule;
 use TierPricingTable\Addons\TieredPricingCart\CartOptionsSubsection;
-use TierPricingTable\PriceManager;
 class PricingService {
     public function __construct() {
         /**
@@ -66,7 +65,6 @@ class PricingService {
 
     public function addFlexibleGlobalPricing( PricingRule $pricingRule, GlobalPricingRule $globalPricingRule ) : PricingRule {
         $updateRegularPricing = false;
-        $updateQuantityLimits = false;
         $updateTieredPricing = false;
         /**
          * Regular prices
@@ -81,18 +79,23 @@ class PricingService {
         /**
          * Quantity Limits
          */
+        $updateMinimum = false;
+        $updateMixAndMatch = false;
         if ( $globalPricingRule->getSettings()->getQuantityLimitsPriority() === 'prefer-role-based-product' ) {
-            // Update only if there are no quantity limits set in the product or role-based
             if ( $pricingRule->provider !== 'role-based' ) {
-                $updateQuantityLimits = true;
+                $updateMinimum = true;
+                $updateMixAndMatch = true;
             }
         } elseif ( $globalPricingRule->getSettings()->getQuantityLimitsPriority() === 'prefer-product' ) {
-            // Update only if there are no quantity limits set in the product
             if ( empty( $pricingRule->getMinimum() ) ) {
-                $updateQuantityLimits = true;
+                $updateMinimum = true;
+            }
+            if ( get_post_meta( $pricingRule->getProductId(), '_tiered_price_mix_and_match_minimum', true ) === '' ) {
+                $updateMixAndMatch = true;
             }
         } else {
-            $updateQuantityLimits = true;
+            $updateMinimum = true;
+            $updateMixAndMatch = true;
         }
         /**
          * Tiered Pricing
@@ -110,7 +113,7 @@ class PricingService {
         }
         if ( $updateRegularPricing ) {
         }
-        if ( $updateQuantityLimits ) {
+        if ( $updateMinimum || $updateMixAndMatch ) {
         }
         if ( $updateTieredPricing ) {
             $pricingRule->setRules( $globalPricingRule->getTieredPricingRules() );

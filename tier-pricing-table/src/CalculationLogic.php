@@ -48,4 +48,13 @@ class CalculationLogic {
 	public static function showTieredPriceInCartAsDiscount(): bool {
 		return get_option( Settings::SETTINGS_PREFIX . 'show_discount_in_cart', 'yes' ) === 'yes';
 	}
+	
+	/**
+	 * Mix and match minimum order quantity for variable products
+	 *
+	 * @return bool
+	 */
+	public static function isMixAndMatchMinimumEnabled(): bool {
+		return get_option( Settings::SETTINGS_PREFIX . 'mix_and_match_minimum', 'no' ) === 'yes';
+	}
 }

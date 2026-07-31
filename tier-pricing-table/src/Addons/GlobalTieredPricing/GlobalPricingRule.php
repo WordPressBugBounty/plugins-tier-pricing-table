@@ -186,9 +186,16 @@ class GlobalPricingRule {
     /**
      * Product minimum purchase quantity
      *
-     * @var int
+     * @var int|null
      */
     public $minimum;
+
+    /**
+     * Mix and match minimum quantity
+     *
+     * @var bool|null
+     */
+    public $mixAndMatchMinQuantity = null;
 
     public $priorityOptions;
 
@@ -320,6 +327,8 @@ class GlobalPricingRule {
         $discount = $data['discount'] ?? null;
         $discountType = $data['discount_type'] ?? 'sale_price';
         $minimum = $data['minimum'] ?? null;
+        $mixAndMatchValue = $data['mix_and_match_minimum'] ?? '';
+        $mixAndMatch = ( $mixAndMatchValue === '' ? null : $mixAndMatchValue === 'yes' );
         $taxStatus = $data['tax_status'] ?? '';
         $taxClass = $data['tax_class'] ?? '';
         $self = new self();
@@ -335,6 +344,7 @@ class GlobalPricingRule {
         $self->setPercentageTieredPricingRules( $percentageRules );
         $self->setFixedTieredPricingRules( $fixedRules );
         $self->setMinimum( ( Form::isEmpty( $minimum ) ? null : (int) $minimum ) );
+        $self->setMixAndMatchMinQuantity( $mixAndMatch );
         return $self;
     }
 
@@ -371,6 +381,14 @@ class GlobalPricingRule {
 
     public function setMinimum( ?int $minimum ) {
         $this->minimum = ( intval( $minimum ) > 1 ? $minimum : null );
+    }
+
+    public function getMixAndMatchMinQuantity() : ?bool {
+        return $this->mixAndMatchMinQuantity;
+    }
+
+    public function setMixAndMatchMinQuantity( ?bool $mixAndMatch ) {
+        $this->mixAndMatchMinQuantity = $mixAndMatch;
     }
 
     public function getIncludedProductCategories() : array {
@@ -478,62 +496,64 @@ class GlobalPricingRule {
 
     public function asArray() : array {
         return array(
-            'pricing_type'        => $this->getPricingType(),
-            'regular_price'       => $this->getRegularPrice(),
-            'sale_price'          => $this->getSalePrice(),
-            'discount'            => $this->getDiscount(),
-            'discount_type'       => $this->getDiscountType(),
-            'applying_type'       => $this->getApplyingType(),
-            'tiered_pricing_type' => $this->getTieredPricingType(),
-            'percentage_rules'    => $this->getPercentageTieredPricingRules(),
-            'fixed_rules'         => $this->getFixedTieredPricingRules(),
-            'minimum'             => $this->getMinimum(),
-            'tax_status'          => $this->getTaxStatus(),
-            'tax_class'           => $this->getTaxClass(),
-            'included_categories' => $this->getIncludedProductCategories(),
-            'included_tags'       => $this->getIncludedProductTags(),
-            'included_brands'     => $this->getIncludedProductBrands(),
-            'included_products'   => $this->getIncludedProducts(),
-            'included_users'      => $this->getIncludedUsers(),
-            'included_users_role' => $this->getIncludedUserRoles(),
-            'excluded_categories' => $this->getExcludedProductCategories(),
-            'excluded_tags'       => $this->getExcludedProductTags(),
-            'excluded_brands'     => $this->getExcludedProductBrands(),
-            'excluded_products'   => $this->getExcludedProducts(),
-            'excluded_users'      => $this->getExcludedUsers(),
-            'excluded_users_role' => $this->getExcludedUserRoles(),
-            'rule_id'             => $this->getId(),
-            'is_suspended'        => $this->isSuspended(),
+            'pricing_type'          => $this->getPricingType(),
+            'regular_price'         => $this->getRegularPrice(),
+            'sale_price'            => $this->getSalePrice(),
+            'discount'              => $this->getDiscount(),
+            'discount_type'         => $this->getDiscountType(),
+            'applying_type'         => $this->getApplyingType(),
+            'tiered_pricing_type'   => $this->getTieredPricingType(),
+            'percentage_rules'      => $this->getPercentageTieredPricingRules(),
+            'fixed_rules'           => $this->getFixedTieredPricingRules(),
+            'minimum'               => $this->getMinimum(),
+            'mix_and_match_minimum' => $this->getMixAndMatchMinQuantity(),
+            'tax_status'            => $this->getTaxStatus(),
+            'tax_class'             => $this->getTaxClass(),
+            'included_categories'   => $this->getIncludedProductCategories(),
+            'included_tags'         => $this->getIncludedProductTags(),
+            'included_brands'       => $this->getIncludedProductBrands(),
+            'included_products'     => $this->getIncludedProducts(),
+            'included_users'        => $this->getIncludedUsers(),
+            'included_users_role'   => $this->getIncludedUserRoles(),
+            'excluded_categories'   => $this->getExcludedProductCategories(),
+            'excluded_tags'         => $this->getExcludedProductTags(),
+            'excluded_brands'       => $this->getExcludedProductBrands(),
+            'excluded_products'     => $this->getExcludedProducts(),
+            'excluded_users'        => $this->getExcludedUsers(),
+            'excluded_users_role'   => $this->getExcludedUserRoles(),
+            'rule_id'               => $this->getId(),
+            'is_suspended'          => $this->isSuspended(),
         );
     }
 
     public function save() {
         $dataToUpdate = array(
-            '_tpt_pricing_type'        => $this->getPricingType(),
-            '_tpt_regular_price'       => $this->getRegularPrice(),
-            '_tpt_sale_price'          => $this->getSalePrice(),
-            '_tpt_discount'            => $this->getDiscount(),
-            '_tpt_discount_type'       => $this->getDiscountType(),
-            '_tpt_applying_type'       => $this->getApplyingType(),
-            '_tpt_tiered_pricing_type' => $this->getTieredPricingType(),
-            '_tpt_percentage_rules'    => $this->getPercentageTieredPricingRules(),
-            '_tpt_fixed_rules'         => $this->getFixedTieredPricingRules(),
-            '_tpt_minimum'             => $this->getMinimum(),
-            '_tpt_tax_status'          => $this->getTaxStatus(),
-            '_tpt_tax_class'           => $this->getTaxClass(),
-            '_tpt_included_categories' => $this->getIncludedProductCategories(),
-            '_tpt_included_tags'       => $this->getIncludedProductTags(),
-            '_tpt_included_brands'     => $this->getIncludedProductBrands(),
-            '_tpt_included_products'   => $this->getIncludedProducts(),
-            '_tpt_included_users'      => $this->getIncludedUsers(),
-            '_tpt_included_user_roles' => $this->getIncludedUserRoles(),
-            '_tpt_excluded_categories' => $this->getExcludedProductCategories(),
-            '_tpt_excluded_tags'       => $this->getExcludedProductTags(),
-            '_tpt_excluded_brands'     => $this->getExcludedProductBrands(),
-            '_tpt_excluded_products'   => $this->getExcludedProducts(),
-            '_tpt_excluded_users'      => $this->getExcludedUsers(),
-            '_tpt_excluded_user_roles' => $this->getExcludedUserRoles(),
-            '_tpt_is_suspended'        => wc_bool_to_string( $this->isSuspended() ),
+            '_tpt_pricing_type'          => $this->getPricingType(),
+            '_tpt_regular_price'         => $this->getRegularPrice(),
+            '_tpt_sale_price'            => $this->getSalePrice(),
+            '_tpt_discount'              => $this->getDiscount(),
+            '_tpt_discount_type'         => $this->getDiscountType(),
+            '_tpt_applying_type'         => $this->getApplyingType(),
+            '_tpt_tiered_pricing_type'   => $this->getTieredPricingType(),
+            '_tpt_percentage_rules'      => $this->getPercentageTieredPricingRules(),
+            '_tpt_fixed_rules'           => $this->getFixedTieredPricingRules(),
+            '_tpt_minimum'               => $this->getMinimum(),
+            '_tpt_mix_and_match_minimum' => ( is_null( $this->getMixAndMatchMinQuantity() ) ? '' : wc_bool_to_string( $this->getMixAndMatchMinQuantity() ) ),
+            '_tpt_tax_status'            => $this->getTaxStatus(),
+            '_tpt_tax_class'             => $this->getTaxClass(),
+            '_tpt_included_categories'   => $this->getIncludedProductCategories(),
+            '_tpt_included_tags'         => $this->getIncludedProductTags(),
+            '_tpt_included_brands'       => $this->getIncludedProductBrands(),
+            '_tpt_included_products'     => $this->getIncludedProducts(),
+            '_tpt_included_users'        => $this->getIncludedUsers(),
+            '_tpt_included_user_roles'   => $this->getIncludedUserRoles(),
+            '_tpt_excluded_categories'   => $this->getExcludedProductCategories(),
+            '_tpt_excluded_tags'         => $this->getExcludedProductTags(),
+            '_tpt_excluded_brands'       => $this->getExcludedProductBrands(),
+            '_tpt_excluded_products'     => $this->getExcludedProducts(),
+            '_tpt_excluded_users'        => $this->getExcludedUsers(),
+            '_tpt_excluded_user_roles'   => $this->getExcludedUserRoles(),
+            '_tpt_is_suspended'          => wc_bool_to_string( $this->isSuspended() ),
         );
         foreach ( $dataToUpdate as $key => $value ) {
             update_post_meta( $this->getId(), $key, $value );
@@ -543,17 +563,18 @@ class GlobalPricingRule {
     public static function build( $ruleId ) : self {
         // Simple data to read
         $dataToRead = array(
-            '_tpt_pricing_type'        => 'pricing_type',
-            '_tpt_sale_price'          => 'sale_price',
-            '_tpt_regular_price'       => 'regular_price',
-            '_tpt_discount'            => 'discount',
-            '_tpt_discount_type'       => 'discount_type',
-            '_tpt_applying_type'       => 'applying_type',
-            '_tpt_tiered_pricing_type' => 'tiered_pricing_type',
-            '_tpt_minimum'             => 'minimum',
-            '_tpt_tax_status'          => 'tax_status',
-            '_tpt_tax_class'           => 'tax_class',
-            '_tpt_is_suspended'        => 'is_suspended',
+            '_tpt_pricing_type'          => 'pricing_type',
+            '_tpt_sale_price'            => 'sale_price',
+            '_tpt_regular_price'         => 'regular_price',
+            '_tpt_discount'              => 'discount',
+            '_tpt_discount_type'         => 'discount_type',
+            '_tpt_applying_type'         => 'applying_type',
+            '_tpt_tiered_pricing_type'   => 'tiered_pricing_type',
+            '_tpt_minimum'               => 'minimum',
+            '_tpt_mix_and_match_minimum' => 'mix_and_match_minimum',
+            '_tpt_tax_status'            => 'tax_status',
+            '_tpt_tax_class'             => 'tax_class',
+            '_tpt_is_suspended'          => 'is_suspended',
         );
         $data = array();
         foreach ( $dataToRead as $key => $name ) {

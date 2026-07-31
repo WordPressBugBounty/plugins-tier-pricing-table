@@ -16,7 +16,7 @@ class RoleBasedRulesIntegration {
 	}
 
 	public function renderTaxFields( $productId, $role, $loop ) {
-		error_log( "renderTaxFields executed" );
+
 		$taxStatus = RoleBasedPriceManager::getProductTaxStatus( $productId, $role );
 		$taxClass  = RoleBasedPriceManager::getProductTaxClass( $productId, $role );
 

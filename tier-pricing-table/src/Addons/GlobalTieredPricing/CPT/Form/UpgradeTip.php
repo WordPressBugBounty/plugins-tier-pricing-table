@@ -45,25 +45,10 @@ class UpgradeTip extends Tip {
             return;
         }
         ?>
-		<style>
-			@keyframes pulse-animation {
-				0% {
-					box-shadow: 0 0 0 0 rgb(189, 217, 255);
-				}
-				100% {
-					box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
-				}
-			}
-			
-			.tiered-pricing-upgrade-tip {
-				border-radius: 5px;
-				animation: pulse-animation 2s infinite;
-			}
-		</style>
 			
 		<div>
 			<div class="tiered-pricing-tip tiered-pricing-upgrade-tip"
-				 style="margin-bottom: 20px; position: relative; padding: 20px 10px;  background: #fff; border: 1px solid #c3c4c7;">
+				 style="animation: pulse-animation 2s infinite;border-radius: 5px; margin-bottom: 20px; position: relative; padding: 20px 10px;  background: #fff; border: 1px solid #c3c4c7;">
 
 				<div style="text-align: center" >
 

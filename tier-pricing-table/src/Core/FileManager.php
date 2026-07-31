@@ -95,8 +95,8 @@ class FileManager {
 	 * @param  string  $__template
 	 * @param  array  $__variables
 	 */
-	public function includeTemplate( $__template, array $__variables = array() ) {
-		$__template = $this->locateTemplate( $__template );
+	public function includeTemplate( $__template, array $__variables = array(), $__default_path = '' ) {
+		$__template = $this->locateTemplate( $__template, $__default_path );
 		
 		if ( $__template ) {
 			allowedExtract( $__variables );
@@ -116,9 +116,9 @@ class FileManager {
 	 *
 	 * @return string
 	 */
-	public function renderTemplate( $template, array $variables = array() ) {
+	public function renderTemplate( $template, array $variables = array(), $default_path = '' ) {
 		ob_start();
-		$this->includeTemplate( $template, $variables );
+		$this->includeTemplate( $template, $variables, $default_path );
 		$content = ob_get_contents();
 		ob_end_clean();
 		
@@ -183,9 +183,13 @@ class FileManager {
 	 *
 	 * @return string
 	 */
-	public function locateTemplate( $template ) {
+	public function locateTemplate( $template, $default_path = '' ) {
 		
-		$file = $this->pluginDirectory . 'views/' . $template;
+		if ( $default_path ) {
+			$file = trailingslashit( $default_path ) . $template;
+		} else {
+			$file = $this->pluginDirectory . 'views/' . $template;
+		}
 		
 		if ( strpos( $template, 'frontend/' ) === 0 ) {
 			

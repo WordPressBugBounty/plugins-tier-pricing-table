@@ -1,22 +1,27 @@
 <?php namespace TierPricingTable;
 
+use WC_Product;
+
 class PricingRule {
 	
-	protected $minimum = null;
-	protected $rules = array();
-	protected $type = 'fixed';
-	protected $productId;
+	protected ?int $minimum = null;
+	protected ?bool $mixAndMatchMinQuantity = null;
+	protected array $rules = array();
+	protected string $type = 'fixed';
+	protected int $productId;
 	
-	public $provider = 'product';
-	public $providerData = array();
+	protected ?WC_product $product = null;
 	
-	protected $modificationLog = array();
+	public string $provider = 'product';
+	public array $providerData = array();
 	
-	public $data = array();
+	protected array $modificationLog = array();
 	
-	public $customColumnsData = array();
+	public array $data = array();
 	
-	public $pricingData = array(
+	public array $customColumnsData = array();
+	
+	public array $pricingData = array(
 		'regular_price' => null,
 		'sale_price'    => null,
 		'discount'      => null,
@@ -25,12 +30,26 @@ class PricingRule {
 		'tax_class'     => null,
 	);
 	
-	public function __construct( $productId ) {
-		$this->productId = intval( $productId );
+	public function __construct( $productOrId ) {
+		if ( $productOrId instanceof WC_Product ) {
+			$this->product   = $productOrId;
+			$this->productId = $productOrId->get_id();
+		} else {
+			$this->productId = intval( $productOrId );
+		}
 	}
 	
 	public function getProductId(): int {
 		return $this->productId;
+	}
+	
+	public function getProduct(): ?WC_Product {
+		if ( $this->product === null ) {
+			$product       = wc_get_product( $this->productId );
+			$this->product = $product ?: null;
+		}
+		
+		return $this->product;
 	}
 	
 	public function getMinimum( $forceValue = false ): ?int {
@@ -44,6 +63,21 @@ class PricingRule {
 	
 	public function setMinimum( ?int $minimum ) {
 		$this->minimum = $minimum > 0 ? $minimum : null;
+	}
+	
+	public function isMixAndMatchMinQuantity(): ?bool {
+		if ( $this->mixAndMatchMinQuantity ) {
+			$product = $this->getProduct();
+			if ( ! $product || ( ! $product->is_type( 'variable' ) && ! $product->is_type( 'variation' ) ) ) {
+				return false;
+			}
+		}
+		
+		return $this->mixAndMatchMinQuantity;
+	}
+	
+	public function setMixAndMatchMinQuantity( ?bool $mixAndMatch ) {
+		$this->mixAndMatchMinQuantity = $mixAndMatch;
 	}
 	
 	public function getRules(): array {
@@ -79,7 +113,7 @@ class PricingRule {
 		$this->modificationLog[] = $modification;
 	}
 	
-	public function getPricingLog() {
+	public function getPricingLog(): array {
 		return $this->modificationLog;
 	}
 }

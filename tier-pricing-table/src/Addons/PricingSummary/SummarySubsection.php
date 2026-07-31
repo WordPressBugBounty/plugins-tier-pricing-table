@@ -22,14 +22,21 @@ class SummarySubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'    => __( 'Enable pricing summary', 'tier-pricing-table' ),
+				'title'    => __( 'Show pricing summary block', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'display_summary',
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'yes',
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Title', 'tier-pricing-table' ),
+				'title'    => __( 'Show for standard products (non-tiered)', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'display_summary_non_tiered',
+				'type'     => TPTSwitchOption::FIELD_TYPE,
+				'default'  => 'no',
+				'desc'     => __( 'Display the pricing summary block for regular WooCommerce products even if they don\'t have tiered pricing rules.', 'tier-pricing-table' ),
+			),
+			array(
+				'title'    => __( 'Summary block title', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'summary_title',
 				'type'     => 'text',
 				'desc'     => __( 'The name is displaying above the summary block.', 'tier-pricing-table' ),
@@ -37,7 +44,7 @@ class SummarySubsection extends SubsectionAbstract {
 				'default'  => '',
 			),
 			array(
-				'title'    => __( 'Position on product page', 'tier-pricing-table' ),
+				'title'    => __( 'Block position', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'summary_position_hook',
 				'type'     => 'select',
 				'options'  => array(
@@ -54,13 +61,13 @@ class SummarySubsection extends SubsectionAbstract {
 				'desc_tip' => true,
 			),
 			array(
-				'title'   => __( 'Totals template', 'tier-pricing-table' ),
+				'title'   => __( 'Summary layout', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'summary_type',
 				'type'    => TPTDisplayType::FIELD_TYPE,
 				'options' => array(
 					'detailed' => __( 'Detailed', 'tier-pricing-table' ),
-					'table'    => __( 'Reduced', 'tier-pricing-table' ),
-					'inline'   => __( 'Labels', 'tier-pricing-table' ),
+					'table'    => __( 'Compact', 'tier-pricing-table' ),
+					'inline'   => __( 'Inline labels', 'tier-pricing-table' ),
 				),
 				'default' => 'table',
 			),

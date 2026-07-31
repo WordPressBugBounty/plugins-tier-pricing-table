@@ -63,7 +63,7 @@
 			   echo esc_attr( add_query_arg( array( 'post_type' => GlobalTieredPricingCPT::SLUG ),
 					   admin_url( 'post-new.php' ) ) )
 		   ?>"
-		   class="button button-primary button-large">
+		   class="button button-secondary button-large">
 			<?php esc_html_e( 'Create a global pricing rule', 'tier-pricing-table' ); ?>
 		</a>
 	</div>

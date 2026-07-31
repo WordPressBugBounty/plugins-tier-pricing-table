@@ -177,6 +177,21 @@ class PriceManager {
         return null;
     }
 
+    public static function isProductMixAndMatch( $productId ) {
+        $mixAndMatch = get_post_meta( $productId, '_tiered_price_mix_and_match_minimum', true );
+        if ( '' !== $mixAndMatch ) {
+            return 'yes' === $mixAndMatch;
+        }
+        $product = wc_get_product( $productId );
+        if ( $product && $product->is_type( 'variation' ) ) {
+            $parentMixAndMatch = get_post_meta( $product->get_parent_id(), '_tiered_price_mix_and_match_minimum', true );
+            if ( '' !== $parentMixAndMatch ) {
+                return 'yes' === $parentMixAndMatch;
+            }
+        }
+        return CalculationLogic::isMixAndMatchMinimumEnabled();
+    }
+
     /**
      * Update product minimum quantity
      *
@@ -248,17 +263,21 @@ class PriceManager {
          *
          ****************************************/
         $minimum = self::getProductQtyMin( $productId );
+        $isMixAndMatch = self::isProductMixAndMatch( $productId );
         // If product does not have minimum quantity, check parent product
         if ( !$minimum ) {
-            $product = ( $product ? $product : wc_get_product( $productId ) );
             if ( $product && TierPricingTablePlugin::isVariationProductSupported( $product ) ) {
-                $minimum = self::getProductQtyMin( $product->get_parent_id() );
-                if ( $minimum ) {
-                    $pricingRule->logPricingModification( 'Using parent product minimum quantity' );
+                $parentIsMixAndMatch = $isMixAndMatch;
+                if ( !$parentIsMixAndMatch ) {
+                    $minimum = self::getProductQtyMin( $product->get_parent_id() );
+                    if ( $minimum ) {
+                        $pricingRule->logPricingModification( 'Using parent product minimum quantity' );
+                    }
                 }
             }
         }
         $pricingRule->setMinimum( $minimum );
+        $pricingRule->setMixAndMatchMinQuantity( $isMixAndMatch );
         /*****************************************
          *
          * Services that modify pricing rule

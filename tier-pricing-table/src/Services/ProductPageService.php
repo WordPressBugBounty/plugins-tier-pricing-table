@@ -139,10 +139,11 @@ class ProductPageService {
 
 		$isVariable = in_array( $product->get_type(), TierPricingTablePlugin::getSupportedVariableProductTypes() );
 
-		$pricingRules = PriceManager::getPricingRule( $product->get_id() );
+		$pricingRules = \TierPricingTable\PriceManager::getPricingRule( $product->get_id() );
 
-		// Do not wrap if there is no pricing rules
-		if ( ! $isVariable && empty( $pricingRules->getRules() ) ) {
+		// Set to no-rules if there are no pricing rules and the main dynamic price setting is disabled
+		$updatePrice = $this->getContainer()->getSettings()->get( 'update_price_on_product_page', 'yes' ) === 'yes';
+		if ( ! $isVariable && empty( $pricingRules->getRules() ) && ! $updatePrice ) {
 			$priceType = 'no-rules';
 		}
 
@@ -151,9 +152,13 @@ class ProductPageService {
 		$wrapVariableProductPrice = apply_filters( 'tiered_pricing_table/frontend/wrap_variable_price', true,
 				$product );
 
+		$hasRules = PricingTable::getInstance()->productHasPricingRules( $product );
+		$showTotalPrice = $hasRules
+			? $this->getContainer()->getSettings()->get( 'show_total_price', 'no' ) === 'yes'
+			: $this->getContainer()->getSettings()->get( 'show_total_price_non_tiered', 'no' ) === 'yes';
+
 		// Is "show total price" is enabled, we can wrap the variable product price, or it's forced by the hook
-		if ( $wrapVariableProductPrice || $this->getContainer()->getSettings()->get( 'show_total_price',
-						'no' ) === 'yes' ) {
+		if ( $wrapVariableProductPrice || $showTotalPrice ) {
 			$supportedTypes = array_merge( $supportedTypes,
 					TierPricingTablePlugin::getSupportedVariableProductTypes() );
 		}

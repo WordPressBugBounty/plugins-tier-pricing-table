@@ -25,5 +25,6 @@ class ToolsAddon extends AbstractAddon {
 	public function run() {
 		new ToolsEndpoints();
 		new Settings();
+		new AdminUserHooks();
 	}
 }

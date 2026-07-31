@@ -20,9 +20,7 @@ class YouSaveService {
 	 */
 	public function __construct() {
 
-		if ( $this->isEnabled() ) {
-			add_action( 'woocommerce_get_price_html', array( $this, 'addYouSave' ), 150, 2 );
-		}
+		add_action( 'woocommerce_get_price_html', array( $this, 'addYouSave' ), 150, 2 );
 
 		add_shortcode( 'tiered_price_you_save', function ( $tag, $args ) {
 
@@ -39,6 +37,15 @@ class YouSaveService {
 				return '';
 			}
 
+			$hasRules = \TierPricingTable\PricingTable::getInstance()->productHasPricingRules( $product );
+			$isEnabled = $hasRules 
+				? 'yes' === $this->getContainer()->getSettings()->get( 'you_save_enabled', 'yes' )
+				: 'yes' === $this->getContainer()->getSettings()->get( 'you_save_non_tiered', 'no' ) && 'yes' === $this->getContainer()->getSettings()->get( 'you_save_consider_sale_price', 'yes' );
+
+			if ( ! $isEnabled ) {
+				return '';
+			}
+
 			return $this->getYouSaveHTML( $args['color'], $args['template'], $args['consider_sale_price'], $product );
 		} );
 	}
@@ -46,6 +53,15 @@ class YouSaveService {
 	public function addYouSave( $priceHTML, WC_Product $product ) {
 
 		if ( false === strpos( $priceHTML, 'tiered-pricing-dynamic-price-wrapper' ) ) {
+			return $priceHTML;
+		}
+
+		$hasRules = \TierPricingTable\PricingTable::getInstance()->productHasPricingRules( $product );
+		$isEnabled = $hasRules 
+			? 'yes' === $this->getContainer()->getSettings()->get( 'you_save_enabled', 'yes' )
+			: 'yes' === $this->getContainer()->getSettings()->get( 'you_save_non_tiered', 'no' ) && 'yes' === $this->getContainer()->getSettings()->get( 'you_save_consider_sale_price', 'yes' );
+
+		if ( ! $isEnabled ) {
 			return $priceHTML;
 		}
 

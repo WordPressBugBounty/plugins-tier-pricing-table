@@ -10,12 +10,12 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 	public function getTitle(): string {
 		add_filter( 'tiered_pricing_table/text_template_variables', array( $this, 'registerTemplateVariables' ) );
 		
-		return __( 'Catalog Price Format',
+		return __( 'Shop & Categories Price Format',
 			'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Manage how tiered pricing appears in catalogs, loops, and widgets.',
+		return __( 'Manage how the main product price string is formatted in shop pages, categories, and widgets.',
 			'tier-pricing-table' );
 	}
 	
@@ -26,25 +26,25 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'    => __( 'Enable tiered format', 'tier-pricing-table' ),
+				'title'    => __( 'Override default price display', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'tiered_price_at_catalog',
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'yes',
-				'desc'     => __( 'Display the lowest tiered price or a price range instead of the standard product price.',
+				'desc'     => __( 'Replace the standard WooCommerce price with a custom lowest price or price range.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Enable for variable products', 'tier-pricing-table' ),
+				'title'    => __( 'Apply to variable products', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'tiered_price_at_catalog_for_variable',
 				'type'     => TPTSwitchOption::FIELD_TYPE,
 				'default'  => 'no',
-				'desc'     => __( 'Apply the tiered format to variable products, using the lowest and highest prices across all variations.',
+				'desc'     => __( 'Calculate the lowest and highest prices across all variations and display them using your chosen format.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
 			),
 			array(
-				'title'    => __( 'Display type', 'tier-pricing-table' ),
+				'title'    => __( 'Format style', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'tiered_price_at_catalog_type',
 				'type'     => TPTDisplayType::FIELD_TYPE,
 				'options'  => [
@@ -69,7 +69,7 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 				),
 			),
 			array(
-				'title'   => __( 'Lowest price prefix', 'tier-pricing-table' ),
+				'title'   => __( 'Prefix for lowest price', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'lowest_prefix',
 				'type'    => 'text',
 				'default' => __( 'From', 'tier-pricing-table' ),

@@ -15,9 +15,11 @@ class ProductManager {
     public function __construct() {
         // Get user row via AJAX
         add_action( 'wp_ajax_' . self::GET_USER_ROW_HTML__ACTION, array($this, 'getUserRowHtml') );
+        // Activate new tab
+        add_filter( 'tiered_pricing_table/admin/role_customer_pricing_tab_active', '__return_true' );
         // Render (priority 100 to show after role-based pricing)
         add_action(
-            'tiered_pricing_table/admin/before_advance_product_options',
+            'tiered_pricing_table/admin/role_customer_pricing_tab_content',
             array($this, 'render'),
             100,
             1

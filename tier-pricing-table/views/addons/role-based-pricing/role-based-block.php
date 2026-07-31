@@ -98,18 +98,6 @@
 					esc_attr_e( 'Add role pricing', 'tier-pricing-table' );
 				?>
 			</button>
-			<?php
-				$roleManagementLink = add_query_arg( [
-						'section' => 'tools',
-				], ServiceContainer::getInstance()->getSettings()->getLink() );
-
-				$roleManagementLink .= '#roles';
-			?>
-			<a style="margin-left: auto" target="_blank"
-			   href="<?php echo esc_url( $roleManagementLink ); ?>">
-				<?php esc_html_e( 'Manage Roles', 'tier-pricing-table' ); ?>
-			</a>
-
 			<div class="clear"></div>
 		</div>
 

@@ -259,10 +259,10 @@
 						?>
 					</div>
 
-					<?php do_action( 'tiered_pricing_table/tiered_pricing/rows', $pricing_rule ); ?>
-
 				<?php endwhile; ?>
-			</div>
+				<?php do_action( 'tiered_pricing_table/tiered_pricing/rows', $pricing_rule, $settings, 'tiered-pricing-table-style-2' ); ?>
+						<?php do_action( 'tiered_pricing_table/table/tfoot', $pricing_rule, $settings, 'tiered-pricing-table-style-2' ); ?>
+		</div>
 		</div>
 
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/after', $pricing_rule, $product_id ); ?>

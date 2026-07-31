@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Admin\Tips;
 
 use TierPricingTable\Admin\Tips\Tips\DefaultVariationTip;
+use TierPricingTable\Admin\Tips\Tips\RoleCustomerPricingTabTip;
 use TierPricingTable\Admin\Tips\Tips\VariationsPricingCalculationTip;
 
 /**
@@ -16,6 +17,7 @@ class TipsManager {
 		self::$tips = array(
 			new VariationsPricingCalculationTip(),
 			new DefaultVariationTip(),
+			new RoleCustomerPricingTabTip(),
 		);
 	}
 	

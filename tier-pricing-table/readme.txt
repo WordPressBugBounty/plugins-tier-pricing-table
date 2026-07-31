@@ -3,9 +3,9 @@
 Contributors: bycrik, freemius
 Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.5.0
+Stable tag: 7.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,9 @@ Define minimum and maximum purchase quantities, and enforce quantity increments.
 
 ✅ **Discount-friendly price formatting**
 Display pricing in a way that highlights savings, including the lowest price, a price range or even a custom template.
+
+✅ **Request a Quote**
+Allow customers to request a quote with customizable form builder and flexible settings.
 
 ✅ **Flexible pricing display (product page & catalog)**
  Display tiered pricing in the format that best fits your store:
@@ -104,10 +107,16 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 == Screenshots ==
 
 1. Tiered Pricing on the product page
-2. Set up Tiered Pricing
-3. Global pricing rules
-4. Tiered Pricing in the cart
-5. Tiered Pricing in the product catalog
+2. Set up on the product-level
+3. Global Pricing Rules
+4. Shop and Catalog prices
+5. Role-based Pricing
+6. Quantity Limits (min/max/step)
+7. Tiered Pricing in the cart and upsells
+8. Custom Pricing Labels
+9. Mix&Match Pricing Rules
+10. Roles Management
+11. 3rd-party Integrations
 
 == Installation ==
 
@@ -164,6 +173,24 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 7.1.1 [2026-07-29] =
+* Fix: frontend JS issue with totals.
+
+= 7.1.0 [2026-07-27] =
+* New: Mix&Match minimum order quantity for variable products.
+* New: Woo Payment Multicurrency integration.
+* Enhance: Move role-based and customer-based pricing to a separate tab.
+* Enhance: Settings texts and descriptions updated.
+* Fix: Minor fixes and improvements.
+
+= 7.0.1 [2026-07-20] =
+* Fix: Frontend script cache issue.
+
+= 7.0.0 [2026-07-18] =
+* New: Request a Quote functionality.
+* New: Totals & "You save" feature for the products without tiered pricing rules.
+* Enhance: Dropdown accessibility.
 
 = 6.5.0 [2026-07-02] =
 * New: Product level customer based pricing.

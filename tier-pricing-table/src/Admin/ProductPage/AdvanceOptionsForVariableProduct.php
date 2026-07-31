@@ -60,7 +60,7 @@ class AdvanceOptionsForVariableProduct {
 					<?php endif; ?>
 				</select>
 			</p>
-			<div style="padding: 0 20px 0px 162px;
+			<div style="padding: 0 20px 0 162px;
     margin-bottom: 10px;
     color: #666;
     margin-top: -10px;
@@ -79,6 +79,29 @@ class AdvanceOptionsForVariableProduct {
 					'description' => __( 'Use the default variation\'s pricing for all variations to prevent reloading the pricing table.',
 							'tier-pricing-table' ),
 			) );
+
+			woocommerce_wp_select( array(
+					'id'      => '_tiered_price_mix_and_match_minimum',
+					'value'   => get_post_meta( $productId, '_tiered_price_mix_and_match_minimum', true ),
+					'options' => array(
+							''    => __( 'Global Settings', 'tier-pricing-table' ),
+							'no'  => __( 'Individual variation', 'tier-pricing-table' ),
+							'yes' => __( 'Variable product total (Mix & match)', 'tier-pricing-table' ),
+					),
+					'label'   => __( 'Calculate minimum quantity by', 'tier-pricing-table' ),
+			) );
+			?>
+			<div style="padding: 0 20px 0 162px;
+				margin-bottom: 10px;
+				color: #666;
+				margin-top: -10px;
+				font-size: 12px;">
+				<?php
+					esc_html_e( 'Determine whether the minimum quantity requirement applies to each variation separately, or to the combined total of all variations in the cart.',
+							'tier-pricing-table' );
+				?>
+			</div>
+			<?php
 		} );
 	}
 
@@ -98,9 +121,19 @@ class AdvanceOptionsForVariableProduct {
 
 		$defaultVariation = ! empty( $data['_tiered_pricing_default_variation_id'] ) ? intval( $data['_tiered_pricing_default_variation_id'] ) : null;
 		$samePrices       = ! empty( $data['_tiered_pricing_variable_product_same_prices'] );
+		$mixAndMatch      = isset( $data['_tiered_price_mix_and_match_minimum'] ) ? sanitize_text_field( $data['_tiered_price_mix_and_match_minimum'] ) : '';
 
 		self::updateDefaultVariation( $productId, $defaultVariation );
 		self::updateVariableProductSamePrices( $productId, $samePrices );
+		self::updateMixAndMatchMinimum( $productId, $mixAndMatch );
+	}
+
+	public static function updateMixAndMatchMinimum( $productId, $mixAndMatch ) {
+		if ( in_array( $mixAndMatch, array( 'yes', 'no' ) ) ) {
+			update_post_meta( $productId, '_tiered_price_mix_and_match_minimum', $mixAndMatch );
+		} else {
+			delete_post_meta( $productId, '_tiered_price_mix_and_match_minimum' );
+		}
 	}
 
 	public static function isVariableProductSamePrices( $productId ): bool {
@@ -156,20 +189,20 @@ class AdvanceOptionsForVariableProduct {
 		}
 
 		if ( empty( $term ) ) {
-			return wp_send_json( array() );
+			wp_send_json( array() );
 		}
 
 		$limit   = 30;
 		$include = ! empty( $_GET['include'] ) ? intval( $_GET['include'] ) : false;
 
 		if ( ! $include ) {
-			return wp_send_json( array() );
+			wp_send_json( array() );
 		}
 
 		$product = wc_get_product( $include );
 
 		if ( ! TierPricingTablePlugin::isVariableProductSupported( $product ) ) {
-			return wp_send_json( array() );
+			wp_send_json( array() );
 		}
 
 		$results = array();
@@ -205,6 +238,6 @@ class AdvanceOptionsForVariableProduct {
 			}
 		}
 
-		return wp_send_json( $results );
+		wp_send_json( $results );
 	}
 }

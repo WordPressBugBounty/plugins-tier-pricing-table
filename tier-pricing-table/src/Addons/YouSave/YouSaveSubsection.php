@@ -12,7 +12,8 @@ class YouSaveSubsection extends SubsectionAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Show customers exactly how much they save when tiered discounts are applied.', 'tier-pricing-table' );
+		return __( 'Show customers exactly how much they save when tiered discounts are applied.',
+			'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -22,7 +23,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 	public function getSettings(): array {
 		return array(
 			array(
-				'title'   => __( 'Enable "You Save" badge', 'tier-pricing-table' ),
+				'title'   => __( 'Show savings badge on product page', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_enabled',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
@@ -30,17 +31,26 @@ class YouSaveSubsection extends SubsectionAbstract {
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'   => __( 'Include sale price in calculation', 'tier-pricing-table' ),
+				'title'   => __( 'Include WooCommerce sale discount in total savings', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_consider_sale_price',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'The difference between the regular and sale price will be included in the “you save” calculation.',
+				'desc'    => __( 'If a product is already on sale, add that existing discount to the tiered pricing savings so the customer sees one large total saved.',
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'        => __( 'Template', 'tier-pricing-table' ),
+				'title'   => __( 'Show badge for standard products (non-tiered)', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'you_save_non_tiered',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'no',
+				'desc'    => __( 'Display the savings badge for regular WooCommerce sale products even if they don\'t have tiered pricing rules.',
+					'tier-pricing-table' ),
+			),
+			array(
+				'title'        => __( 'Badge text template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'you_save_template',
-				'default'      => __( 'You save {tp_ys_total_price} ({tp_ys_percentage_discount}%)', 'tier-pricing-table' ),
+				'default'      => __( 'You save {tp_ys_total_price} ({tp_ys_percentage_discount}%)',
+					'tier-pricing-table' ),
 				'placeholders' => array(
 					'tp_ys_price',
 					'tp_ys_total_price',
@@ -49,7 +59,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 			),
 			array(
-				'title'   => __( '"You save" price color', 'tier-pricing-table' ),
+				'title'   => __( 'Badge text color', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_text_color',
 				'type'    => 'color',
 				'css'     => 'width:6em;',

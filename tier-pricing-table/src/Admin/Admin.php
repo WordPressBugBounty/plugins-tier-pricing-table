@@ -3,6 +3,7 @@
 use TierPricingTable\Admin\ProductPage\AdvanceOptionsForVariableProduct;
 use TierPricingTable\Admin\ProductPage\Product;
 use TierPricingTable\Admin\ProductPage\TieredPricingTab;
+use TierPricingTable\Admin\ProductPage\RoleCustomerPricingTab;
 use TierPricingTable\Admin\WelcomePage\WelcomePage;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\TierPricingTablePlugin;
@@ -33,6 +34,7 @@ class Admin {
 	public function __construct() {
 		new Product();
 		new TieredPricingTab();
+		new RoleCustomerPricingTab();
 		new AdvanceOptionsForVariableProduct();
 		new TipsManager();
 		

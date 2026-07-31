@@ -24,6 +24,11 @@ class BulkPriceEditorPlugin extends Tip {
 			return;
 		}
 		
+		$activationDate = \TierPricingTable\TierPricingTablePlugin::getPluginActivationDate();
+		if ( ! $activationDate || ( time() - $activationDate ) < ( WEEK_IN_SECONDS * 2 ) ) {
+			return;
+		}
+		
 		?>
 		<div class="">
 			<div class="tiered-pricing-tip"

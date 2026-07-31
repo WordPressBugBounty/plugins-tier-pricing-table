@@ -135,7 +135,7 @@ msgid "Set tiered pricing at the product category level (Deprecated)."
 msgstr "製品カテゴリ レベルで段階的な価格設定を設定します (非推奨)。"
 
 #: src/Addons/Coupons/CouponsAddon.php:9
-#: views/admin/welcome-page/welcome-page.php:1053
+#: views/admin/welcome-page/welcome-page.php:1077
 msgid "Coupons management"
 msgstr "クーポン管理"
 
@@ -169,11 +169,15 @@ msgstr "カスタムテーブル列"
 msgid "Add custom columns to your pricing table."
 msgstr "価格表にカスタム列を追加します。"
 
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:62
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:186
 msgid "Actions"
 msgstr "アクション"
 
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:122
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:208
 msgid "Delete"
@@ -207,11 +211,11 @@ msgstr "合計行価格"
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:83
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:234
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:392
-#: src/PricingTable.php:217 src/Settings/CustomOptions/TPTTextTemplate.php:205
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:204
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:206
+#: src/PricingTable.php:253 src/Settings/CustomOptions/TPTTextTemplate.php:205
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:205
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:207
 #: views/admin/components/tiered-pricing-rules-form.php:55
-#: views/admin/welcome-page/welcome-page.php:645
+#: views/admin/welcome-page/welcome-page.php:647
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:69
 #: src/Addons/CustomColumns/js-source/index.js:284
@@ -219,6 +223,8 @@ msgstr "合計行価格"
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:80
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:430
 msgid "Price"
@@ -227,6 +233,9 @@ msgstr "価格"
 #: src/Addons/CustomColumns/Schema.php:24
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:70
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:64
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:455
 msgid "Number"
 msgstr "番号"
 
@@ -236,7 +245,7 @@ msgstr "番号"
 msgid "Text"
 msgstr "文章"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:112
+#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:97
 msgid "Upgrade your plan"
 msgstr "プランをアップグレードする"
 
@@ -245,10 +254,14 @@ msgid "Duplicate this rule"
 msgstr "このルールを複製します"
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/DuplicateAction.php:35
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:115
 msgid "Duplicate"
 msgstr "重複"
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/DuplicateAction.php:51
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:172
 msgid "(Copy)"
 msgstr "（コピー）"
 
@@ -410,16 +423,17 @@ msgstr "段階的ルール:"
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:82
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:220
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:388
-#: src/PricingTable.php:215 src/Settings/CustomOptions/TPTTextTemplate.php:141
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:194
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:196
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109
+#: src/PricingTable.php:251 src/Settings/CustomOptions/TPTTextTemplate.php:141
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:195
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:197
 #: views/addons/category-tiers/add-free.php:24
 #: views/addons/category-tiers/add.php:51
 #: views/addons/category-tiers/edit-free.php:34
 #: views/addons/category-tiers/edit.php:59
 #: views/addons/category-tiers/edit.php:82
 #: views/admin/components/tiered-pricing-rules-form.php:65
-#: views/admin/welcome-page/welcome-page.php:643
+#: views/admin/welcome-page/welcome-page.php:645
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:283
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27
@@ -428,6 +442,9 @@ msgstr "段階的ルール:"
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:21
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:145
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:428
 msgid "Quantity"
@@ -436,11 +453,13 @@ msgstr "量"
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:83
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:227
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:199
-#: views/admin/welcome-page/welcome-page.php:644
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:200
+#: views/admin/welcome-page/welcome-page.php:646
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:429
 msgid "Discount"
@@ -612,10 +631,6 @@ msgstr "最小値、最大値、および数量のステップ制限を設定す
 msgid "Quantity Limits"
 msgstr "数量制限"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:25
-msgid "Applies to each product individually."
-msgstr "各製品に個別に適用されます。"
-
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:17
 msgid "Manage how this rule interacts with product-level settings"
 msgstr "このルールが製品レベルの設定とどのように相互作用するかを管理します"
@@ -745,7 +760,7 @@ msgid "Select for a user role"
 msgstr "ユーザーの役割を選択します"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:55
-#: views/admin/welcome-page/welcome-page.php:953
+#: views/admin/welcome-page/welcome-page.php:975
 msgid "Manage user roles"
 msgstr "ユーザーの役割を管理する"
 
@@ -754,17 +769,17 @@ msgstr "ユーザーの役割を管理する"
 msgid "Select for a customer"
 msgstr "顧客向けに選択する"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:73
 msgid "You have got a discount!"
 msgstr "割引があります!"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:93
+#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:78
 msgid ""
 "You've been using the free version for a while now, and we'd like to offer "
 "you an exclusive discount on the premium version!"
 msgstr "しばらく無料版をご利用いただいておりますので、プレミアム版を限定割引価格でご提供させていただきます。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:100
+#: src/Addons/GlobalTieredPricing/CPT/Form/UpgradeTip.php:85
 msgid ""
 "Use the coupon code below for a <b>20%</b> discount on upgrading your plan."
 msgstr "プランのアップグレード時に <b>20%</b> 割引を受けるには、以下のクーポン コードを使用してください。"
@@ -777,66 +792,66 @@ msgstr "一時停止中"
 msgid "Active"
 msgstr "アクティブ"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:295
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:299
 msgid "Create Your First Global Pricing Rule"
 msgstr "初めてのグローバル価格設定ルールを作成する"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:300
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:304
 msgid ""
 "Global rules allow you to bulk-apply custom pricing, tiered discounts, and "
 "quantity limits to multiple products or categories simultaneously."
 msgstr "グローバル ルールを使用すると、カスタム価格設定、段階的割引、および数量制限を複数の製品またはカテゴリに同時に一括適用できます。"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:308
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:312
 msgid "Create Rule"
 msgstr "ルールの作成"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:401
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:402
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:405
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:406
 msgid "Pricing rule"
 msgstr "価格設定ルール"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:403
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:404
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:407
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:408
 msgid "Add Pricing Rule"
 msgstr "価格設定ルールの追加"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:405
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:409
 msgid "Edit Pricing Rule"
 msgstr "価格設定ルールの編集"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:406
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:410
 msgid "New Pricing Rule"
 msgstr "新しい価格設定ルール"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:407
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:411
 msgid "View Pricing Rule"
 msgstr "価格設定ルールを表示する"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:408
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:412
 msgid "Find Pricing Rule"
 msgstr "価格設定ルールの検索"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:409
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:413
 msgid "No pricing rules ware found"
 msgstr "価格設定ルールウェアが見つかりません"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:410
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:414
 msgid "No pricing rule in trash"
 msgstr "価格設定ルールはゴミ箱にありません"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:412
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:416
 msgid "Pricing rules"
 msgstr "価格設定ルール"
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:392
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:403
 msgid ""
 "The pricing rule does not affect either prices or product quantity. The rule"
 " will be skipped."
 msgstr "価格設定ルールは、価格や製品数量には影響しません。ルールはスキップされます。"
 
 #: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:9
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:105
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:116
 msgid "Global pricing rules"
 msgstr "グローバル価格設定ルール"
 
@@ -867,41 +882,44 @@ msgid "Minimum order quantity validation"
 msgstr "最小注文数量の検証"
 
 #. translators: %1$s: item name, %2$s: minimum quantity
-#: src/Addons/MinQuantity/MinQuantity.php:34
+#: src/Addons/MinQuantity/MinQuantity.php:40
 #, php-format
 msgid "Minimum quantity for the %1$s is %2$d"
 msgstr "%1$s の最小数量は %2$d です"
 
 #. translators: %s: minimum quantity
-#: src/Addons/MinQuantity/MinQuantity.php:100
+#: src/Addons/MinQuantity/MinQuantity.php:83
+#: src/Addons/MinQuantity/MinQuantity.php:102
 #: src/Addons/MinQuantity/MinQuantity.php:129
 #, php-format
 msgid "Minimum quantity for the product is %s"
 msgstr "製品の最小数量は %s です"
 
-#: src/Addons/MinQuantity/MinQuantity.php:209
+#: src/Addons/MinQuantity/MinQuantity.php:270
 msgid ""
 "Enforce minimum order quantities for products based on tiered pricing rules."
 msgstr "段階的な価格設定ルールに基づいて、製品の最小注文数量を強制します。"
 
-#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:39
+#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:44
 #: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:39
 #: src/Admin/Tips/Tips/DefaultVariationTip.php:38
+#: src/Admin/Tips/Tips/RoleCustomerPricingTabTip.php:39
 #: src/Admin/Tips/Tips/VariationsPricingCalculationTip.php:42
 msgid "Tip"
 msgstr "ヒント"
 
-#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:61
+#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:66
 msgid "Check plugin"
 msgstr "プラグインをチェックする"
 
-#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:66
+#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:71
 msgid "View video"
 msgstr "ビデオを見る"
 
-#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:88
+#: src/Addons/PluginsRecommendations/BulkPriceEditorPlugin.php:93
 #: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:76
 #: src/Admin/Tips/Tips/DefaultVariationTip.php:59
+#: src/Admin/Tips/Tips/RoleCustomerPricingTabTip.php:62
 #: src/Admin/Tips/Tips/VariationsPricingCalculationTip.php:82
 msgid "Hide this tip"
 msgstr "このヒントを非表示にする"
@@ -930,34 +948,13 @@ msgstr "プラグインの推奨事項"
 msgid "Show recommendations for related plugins and addons."
 msgstr "関連するプラグインとアドオンの推奨事項を表示します。"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:10
-msgid "Catalog display"
-msgstr "カタログ表示"
-
 #: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:14
 msgid "Display tiered pricing tables on the shop and category pages."
 msgstr "ショップページとカテゴリーページに段階的な価格表を表示します。"
 
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:22
-msgid "Catalog Display"
-msgstr "カタログ展示"
-
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:36
-msgid "Tiered Pricing on the shop page"
-msgstr "ショップページの段階的な価格設定"
-
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:37
 msgid "Control how tiered pricing appears on shop and category pages."
 msgstr "ショップページやカテゴリページに段階的な価格を表示する方法を制御します。"
-
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:42
-msgid "Enable on catalog pages"
-msgstr "カタログページで有効にする"
-
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:51
-msgid ""
-"Turn this on to display tiered pricing directly within your product catalog."
-msgstr "これをオンにすると、製品カタログ内に段階的な価格が直接表示されます。"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:57
 msgid ""
@@ -969,10 +966,6 @@ msgstr "テーマによっては、最適な表示を得るために CSS を微�
 msgid "Display tiered pricing tables on shop and category pages."
 msgstr "ショップページとカテゴリーページに段階的な価格表を表示します。"
 
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:67
-msgid "Position on catalog item"
-msgstr "カタログアイテム上の位置"
-
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:72
 msgid "Above add-to-cart button"
 msgstr "カートに入れるボタンの上"
@@ -981,9 +974,9 @@ msgstr "カートに入れるボタンの上"
 msgid "Below add-to-cart button"
 msgstr "カートに入れるボタンの下"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:48
+#: src/Addons/PricingSummary/SummarySubsection.php:55
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:74
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:113
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:114
 msgid "Above product title"
 msgstr "上記商品タイトル"
 
@@ -996,14 +989,6 @@ msgid ""
 "Choose where the tiered pricing table appears relative to the product image "
 "and details."
 msgstr "製品画像と詳細に応じて段階的な価格表を表示する場所を選択します。"
-
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:82
-msgid "Add quantity selector"
-msgstr "数量セレクターを追加"
-
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:91
-msgid "Add a quantity input field directly to items in the product catalog."
-msgstr "製品カタログのアイテムに数量入力フィールドを直接追加します。"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:97
 msgid ""
@@ -1022,7 +1007,6 @@ msgid ""
 msgstr "顧客がカタログから数量を変更すると、表示価格が自動的に更新されます。"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:127
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:91
 msgid "Compact layout"
 msgstr "コンパクトなレイアウト"
 
@@ -1069,7 +1053,6 @@ msgid "Select the specific visual template for the catalog page."
 msgstr "カタログ ページの特定のビジュアル テンプレートを選択します。"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:170
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:98
 msgid "Pricing title"
 msgstr "価格設定のタイトル"
 
@@ -1078,29 +1061,28 @@ msgid "Text displayed above the tiered pricing block."
 msgstr "段階的な価格設定ブロックの上に表示されるテキスト。"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:178
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:124
 msgid "Quantity display type"
 msgstr "数量表示タイプ"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:182
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:128
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:129
 msgid "Range"
 msgstr "範囲"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:183
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:129
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:130
 msgid "Static values"
 msgstr "静的な値"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:185
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:131
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:132
 msgid ""
 "\"Range\" displays the quantity range a tier applies to. \"Static\" displays"
 " only the minimum quantity required."
 msgstr "「範囲」には、階層が適用される数量範囲が表示されます。 「静的」では必要最小限の数量のみが表示されます。"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:190
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:137
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:138
 msgid "Active pricing tier color"
 msgstr "アクティブな価格帯の色"
 
@@ -1108,15 +1090,13 @@ msgstr "アクティブな価格帯の色"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:208
 #: src/Admin/ProductPage/TieredPricingTab.php:126
 #: src/Settings/CustomOptions/TPTTextTemplate.php:210
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:168
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:179
 msgid "Unit label"
 msgstr "単位ラベル"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:204
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:215
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:175
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:186
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:176
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:187
 msgid ""
 "For example: pieces, boxes, bottles, packs, etc. This will be shown next to "
 "quantity values. Leave blank to skip adding a unit label."
@@ -1126,9 +1106,9 @@ msgstr "例: ピース、ボックス、ボトル、パックなど。これは�
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:213
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:380
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:381
-#: src/PricingTable.php:268 src/PricingTable.php:269
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:183
+#: src/PricingTable.php:303 src/PricingTable.php:304
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
 msgid "piece"
 msgid_plural "pieces"
 msgstr[0] "ピース"
@@ -1162,7 +1142,7 @@ msgid "Price column title"
 msgstr "価格列のタイトル"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:240
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:213
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:214
 #: src/Blocks/build/index.js:713
 #: src/Blocks/src/panels/ColumnsPanel/ColumnsPanel.js:45
 #: src/Blocks/build/index.js:471
@@ -1170,7 +1150,6 @@ msgid "Show percentage discount"
 msgstr "割引率を表示"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:246
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:221
 msgid "Show regular product price"
 msgstr "通常商品の価格を表示"
 
@@ -1192,7 +1171,7 @@ msgstr "オプションテンプレート"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:263
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:90
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:240
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:241
 msgid ""
 "<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
 msgstr "<strong>{tp_quantity} 個を購入すると、{tp_rounded_discount}% 割引になります</strong>"
@@ -1211,19 +1190,18 @@ msgstr "「割引なし」オプションテンプレート"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:282
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:114
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:263
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:264
 msgid "<strong>Buy {tp_quantity} pieces</strong>"
 msgstr "<strong>{tp_quantity} 個を購入</strong>"
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:34
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:289
-#: src/Addons/YouSave/YouSaveSubsection.php:41
 msgid "Template"
 msgstr "テンプレート"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:291
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:97
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:275
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276
 msgid ""
 "<strong>Buy {tp_quantity} pieces for {tp_price} each and save "
 "{tp_rounded_discount}%</strong>"
@@ -1244,12 +1222,11 @@ msgid "\"No discount\" template"
 msgstr "「割引なし」テンプレート"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:313
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:300
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:301
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>"
 msgstr "<strong>{tp_quantity} 個をそれぞれ {tp_price} で購入します</strong>"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:322
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:312
 msgid "Clickable tiered pricing"
 msgstr "クリック可能な段階的な価格設定"
 
@@ -1343,16 +1320,16 @@ msgstr "段階的な価格設定タイプ"
 #: src/Addons/ImportExport/WoocommerceImportService.php:29
 #: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:142
 #: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:130
-#: views/admin/components/minimum-order-quantity-form.php:22
+#: views/admin/components/minimum-order-quantity-form.php:23
 msgid "Minimum order quantity"
 msgstr "最低注文数量"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:171
+#: src/Addons/RoleBasedPricing/ProductManager.php:174
 msgid "Invalid role"
 msgstr "無効な役割"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:177
-#: src/Addons/UserBasedPricing/ProductManager.php:182
+#: src/Addons/RoleBasedPricing/ProductManager.php:180
+#: src/Addons/UserBasedPricing/ProductManager.php:185
 msgid "Invalid nonce"
 msgstr "無効なノンス"
 
@@ -1369,6 +1346,7 @@ msgstr "個々の製品で役割ベースの価格設定ルールを有効にし
 msgid "Tax settings"
 msgstr "税金の設定"
 
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:177
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsColumn.php:21
 msgid "Status:"
 msgstr "状態："
@@ -1413,7 +1391,10 @@ msgstr "課税対象"
 msgid "Shipping only"
 msgstr "配送のみ"
 
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:213
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:101
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:141
 msgid "None"
@@ -1496,7 +1477,6 @@ msgid "Additional Options"
 msgstr "追加オプション"
 
 #: src/Admin/ProductPage/TieredPricingTab.php:116
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:38
 msgid "Pricing layout"
 msgstr "価格設定"
 
@@ -1610,7 +1590,7 @@ msgstr "専用の Elementor ウィジェットを追加して、カスタマイ�
 #: src/Services/SystemStatusReportService.php:28
 #: views/admin/banners/premium-thanking-banner.php:18
 #: views/admin/notifications/activation-notification.php:26
-#: views/admin/welcome-page/welcome-page.php:574
+#: views/admin/welcome-page/welcome-page.php:575
 msgid "Tiered Pricing Table"
 msgstr "段階的な価格表"
 
@@ -1626,7 +1606,6 @@ msgstr "プロダクトID"
 msgid "Leave empty to use the current product."
 msgstr "現在の製品を使用する場合は空のままにしてください。"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:47
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:49
 #: src/Blocks/build/index.js:768
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:35
@@ -1635,29 +1614,29 @@ msgid "Display type"
 msgstr "表示タイプ"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:53
-#: src/TierPricingTablePlugin.php:267 src/Blocks/build/index.js:751
+#: src/TierPricingTablePlugin.php:263 src/Blocks/build/index.js:751
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:11
 #: src/Blocks/build/index.js:489
 msgid "Table"
 msgstr "テーブル"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:54
-#: src/TierPricingTablePlugin.php:268 src/Blocks/build/index.js:754
+#: src/TierPricingTablePlugin.php:264 src/Blocks/build/index.js:754
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:15
 #: src/Blocks/build/index.js:493
 msgid "Blocks"
 msgstr "ブロック"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:55
-#: src/TierPricingTablePlugin.php:269 src/Blocks/build/index.js:757
+#: src/TierPricingTablePlugin.php:265 src/Blocks/build/index.js:757
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:19
 #: src/Blocks/build/index.js:497
 msgid "Options"
 msgstr "オプション"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:56
-#: src/TierPricingTablePlugin.php:270
-#: views/admin/welcome-page/welcome-page.php:862 src/Blocks/build/index.js:760
+#: src/TierPricingTablePlugin.php:266
+#: views/admin/welcome-page/welcome-page.php:869 src/Blocks/build/index.js:760
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:23
 #: src/Blocks/build/index.js:501
 msgid "Dropdown"
@@ -1667,8 +1646,9 @@ msgstr "落ちる"
 msgid "Horizontal-table"
 msgstr "水平テーブル"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:32
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:63
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:307
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:116 src/Blocks/build/index.js:781
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:51
@@ -1936,8 +1916,8 @@ msgstr "ロールの通常価格"
 msgid "Sale price for the role"
 msgstr "ロールの販売価格"
 
-#: src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:219
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:201
+#: src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:255
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:202
 #: views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "割引 （％）"
@@ -2166,70 +2146,65 @@ msgid ""
 "for a cart item."
 msgstr "デバッグ モードは、カート項目に適用されている価格設定ルールを追跡する必要がある場合に便利です。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:15
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:99
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:110
 msgid "Calculations"
 msgstr "計算"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:16
-msgid "This section controls how tiered pricing does calculations."
-msgstr "このセクションでは、段階的価格設定の計算方法を制御します。"
-
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:35
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:24
 msgid "Combine variations for quantity calculation"
 msgstr "バリエーションを組み合わせて数量を計算する"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:40
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:29
 msgid ""
 "Treat all variations of a variable product as the same item when calculating"
 " the total cart quantity for tiered pricing rules."
 msgstr "階層型価格設定ルールのカートの合計数量を計算するときは、可変商品のすべてのバリエーションを同じ品目として扱います。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:45
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:52
 msgid "Calculate percentage discounts from regular price"
 msgstr "通常価格からの割引率を計算します"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:53
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:60
 msgid "Round calculated prices"
 msgstr "四捨五入で計算された価格"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:57
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:64
 msgid ""
 "Round calculated percentage discounts to prevent minor display discrepancies"
 " with standard WooCommerce pricing."
 msgstr "標準の WooCommerce 価格設定との表示の不一致を防ぐために、計算された割引率を四捨五入します。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:69
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:80
 msgid ""
 "Calculate percentage discounts using the product's regular price, ignoring "
 "any active sale prices."
 msgstr "アクティブなセール価格を無視して、製品の通常価格を使用して割引率を計算します。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:75
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:86
 msgid ""
 "Example: Regular price is $100.00, sale price is $90.00. Rule: 20% off."
 msgstr "例: 通常価格は $100.00、セール価格は $90.00。ルール: 20% オフ。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:80
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:91
 msgid ""
 "Disabled (Default): Discount applies to the sale price ($90.00 - 20% = "
 "$72.00)."
 msgstr "無効 (デフォルト): 割引は販売価格に適用されます ($90.00 - 20% = $72.00)。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:85
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:96
 msgid ""
 "Enabled: Discount applies to the regular price ($100.00 - 20% = $80.00)."
 msgstr "有効: 割引は通常価格に適用されます ($100.00 - 20% = $80.00)。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:106
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:117
 msgid "How global pricing rules behave."
 msgstr "グローバル価格設定ルールがどのように動作するか。"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:110
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:121
 msgid "Prioritize global pricing rules"
 msgstr "グローバル価格設定ルールを優先する"
 
-#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:112
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:123
 msgid ""
 "Apply global pricing rules before product-level rules. If disabled, "
 "individual product rules take precedence over global rules."
@@ -2243,18 +2218,10 @@ msgstr "一般的な"
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price}</strong>"
 msgstr "<strong>{tp_quantity} 個を {tp_price} で購入</strong>"
 
-#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:10
-msgid "Cart Display Settings"
-msgstr "カート表示設定"
-
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:14
 #: src/Addons/TieredPricingCart/TieredPricingCartAddon.php:12
 msgid "Manage how tiered pricing and discounts appear on the cart page."
 msgstr "段階的な価格設定と割引をカート ページにどのように表示するかを管理します。"
-
-#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:24
-msgid "Display price as discount"
-msgstr "価格を割引として表示する"
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:26
 msgid ""
@@ -2262,19 +2229,11 @@ msgid ""
 "cart. For example: "
 msgstr "カート内の割引段階価格の横に取り消し線の付いた通常価格を表示します。例えば："
 
-#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:32
-msgid "Display subtotal as discount"
-msgstr "小計を割引として表示"
-
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:34
 msgid ""
 "Show a crossed-out regular subtotal next to the discounted subtotal in the "
 "cart."
 msgstr "カート内の割引小計の横に、取り消し線を引いた通常の小計を表示します。"
-
-#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:40
-msgid "Always use regular price"
-msgstr "常に通常価格を使用する"
 
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:42
 msgid ""
@@ -2282,35 +2241,9 @@ msgid ""
 "sale price."
 msgstr "価格を取り消す場合は、セール価格ではなく、必ず通常価格を表示してください。"
 
-#: src/Addons/CatalogPrices/CatalogPricesAddon.php:8
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:13
-msgid "Catalog Price Format"
-msgstr "カタログ価格フォーマット"
-
 #: src/Addons/CatalogPrices/CatalogPricesAddon.php:12
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:18
 msgid "Manage how tiered pricing appears in catalogs, loops, and widgets."
 msgstr "段階的な価格設定がカタログ、ループ、ウィジェットにどのように表示されるかを管理します。"
-
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:29
-msgid "Enable tiered format"
-msgstr "段階的フォーマットを有効にする"
-
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:33
-msgid ""
-"Display the lowest tiered price or a price range instead of the standard "
-"product price."
-msgstr "標準の製品価格の代わりに、段階的な最低価格または価格帯を表示します。"
-
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:38
-msgid "Enable for variable products"
-msgstr "可変商品に対して有効にする"
-
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:42
-msgid ""
-"Apply the tiered format to variable products, using the lowest and highest "
-"prices across all variations."
-msgstr "すべてのバリエーションにわたる最低価格と最高価格を使用して、段階的フォーマットを可変商品に適用します。"
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:51
 msgid "Show lowest price"
@@ -2320,10 +2253,6 @@ msgstr "最安値を表示"
 msgid "Show range (lowest to highest)"
 msgstr "範囲を表示 (最低から​​最高まで)"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:72
-msgid "Lowest price prefix"
-msgstr "最低価格プレフィックス"
-
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:76
 msgid "Text displayed before the lowest price (e.g., <b>From $10.00</b>)."
 msgstr "最安値の前に表示されるテキスト (例: <b>$10.00 から</b>)。"
@@ -2332,28 +2261,11 @@ msgstr "最安値の前に表示されるテキスト (例: <b>$10.00 から</b>
 msgid "Customize the appearance and behavior of your tiered pricing tables."
 msgstr "階層型価格表の外観と動作をカスタマイズします。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:29
-msgid "Display tiered pricing"
-msgstr "段階的な価格設定を表示する"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:33
-msgid ""
-"Automatically display tiered pricing on the product page. Prices remain "
-"dynamic even if the tiered pricing is not displayed. You can also display "
-"tiered pricing via shortcode, Gutenberg block, or Elementor widget."
-msgstr ""
-"製品ページに段階的な価格を自動的に表示します。段階的な価格設定が表示されない場合でも、価格は動的のままです。ショートコード、Gutenberg "
-"ブロック、または Elementor ウィジェットを介して段階的な価格を表示することもできます。"
-
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:42
 msgid ""
 "Choose the default visual layout. You can also customize this individually "
 "per product."
 msgstr "デフォルトの視覚レイアウトを選択します。これを製品ごとに個別にカスタマイズすることもできます。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:48
-msgid "Pricing options style"
-msgstr "価格オプションのスタイル"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:53
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:67
@@ -2373,157 +2285,102 @@ msgstr "スタイル #2"
 msgid "Style #3"
 msgstr "スタイル #3"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:76
-msgid "Pricing blocks style"
-msgstr "価格ブロックのスタイル"
-
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:56
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:70
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:84
 msgid "Style #4"
 msgstr "スタイル #4"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:105
-msgid "Position on the product page"
-msgstr "商品ページ上の位置"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:109
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:110
 msgid "Above add to cart button"
 msgstr "上にある「カートに入れる」ボタン"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:110
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:111
 msgid "Below add to cart button"
 msgstr "カートに入れるボタンの下に"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:46
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:111
+#: src/Addons/PricingSummary/SummarySubsection.php:53
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:112
 msgid "Above add to cart form"
 msgstr "上記のカートに追加フォーム"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:47
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:112
+#: src/Addons/PricingSummary/SummarySubsection.php:54
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:113
 msgid "Below add to cart form"
 msgstr "以下のカートに追加フォーム"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:49
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:114
+#: src/Addons/PricingSummary/SummarySubsection.php:56
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:115
 msgid "Before product summary"
 msgstr "商品概要の前に"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:50
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:115
+#: src/Addons/PricingSummary/SummarySubsection.php:57
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:116
 msgid "After product summary"
 msgstr "商品概要後"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:116
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:117
 msgid "I display tiered pricing via shortcode/gutenberg/elementor"
 msgstr "ショートコード/gutenberg/elementor を介して段階的な価格を表示します"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:119
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:120
 msgid "Choose where you what tiered pricing be displayed on the product page."
 msgstr "製品ページのどこに段階的な価格を表示するかを選択します。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:144
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:145
 msgid "Tooltip icon color"
 msgstr "ツールチップアイコンの色"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:149
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:150
 msgid "Color of the icon."
 msgstr "アイコンの色。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
 msgid "Tooltip icon size (px)"
 msgstr "ツールチップアイコンのサイズ (px)"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:158
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:159
 msgid "Size of the icon."
 msgstr "アイコンのサイズ。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:162
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:163
 msgid "Tooltip border"
 msgstr "ツールチップの境界線"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:190
-msgid "Columns titles"
-msgstr "コラムのタイトル"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:209
-msgid "Leave a column title empty so as not to show that column."
-msgstr "その列が表示されないように、列タイトルを空のままにしておきます。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:217
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:218
 msgid "Show the percentage discount in pricing blocks that offer a discount."
 msgstr "割引を提供する価格設定ブロックの割引率を表示します。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:225
-msgid ""
-"Pricing options will show a crossed-out regular product price near the "
-"actual tier price."
-msgstr "価格オプションには、実際の段階価格の近くに取り消し線が引かれた通常の製品価格が表示されます。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:230
-msgid "Show totals in a selected option"
-msgstr "選択したオプションの合計を表示"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:234
-msgid "The selected pricing option will include totals."
-msgstr "選択した価格オプションには合計が含まれます。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:238
-msgid "Pricing option template"
-msgstr "価格オプションのテンプレート"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:249
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:250
 msgid "Use the variables above to build the template for the pricing option."
 msgstr "上記の変数を使用して、価格オプションのテンプレートを作成します。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:253
-msgid "Show first tier pricing option"
-msgstr "最初の段階の価格オプションを表示"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:257
-msgid ""
-"Show the option with a regular product price. This is the first pricing tier"
-" where no discount is offered."
-msgstr "オプションは通常商品価格で表示します。これは、割引が提供されない最初の価格帯です。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:261
-msgid "First tier pricing option template"
-msgstr "第 1 段階の価格オプションのテンプレート"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:269
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:308
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:309
 msgid ""
 "Set up the first pricing tier template where a discount is not offered."
 msgstr "割引が提供されない最初の価格階層テンプレートを設定します。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:274
 msgid "Pricing string template"
 msgstr "価格文字列テンプレート"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:285
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:286
 msgid "Use the variables above to build the template for the pricing string."
 msgstr "上記の変数を使用して、価格文字列のテンプレートを作成します。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:289
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:290
 msgid "Show first tier pricing string"
 msgstr "最初の段階の価格文字列を表示"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:293
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:294
 msgid ""
 "Show the tier with a regular product price. This is the first pricing tier "
 "where no discount is offered."
 msgstr "通常の商品価格で階層を表示します。これは、割引が提供されない最初の価格帯です。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
 msgid "First tier pricing string template"
 msgstr "第 1 階層の価格文字列テンプレート"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:316
-msgid ""
-"To select the quantity, tiered pricing becomes clickable (table rows, "
-"blocks, options)."
-msgstr "数量を選択するには、段階的な価格設定 (表の行、ブロック、オプション) をクリックできるようになります。"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:11
 msgid "Guest Users"
@@ -2574,10 +2431,6 @@ msgid ""
 "This message will be displayed instead of the price for non-logged-in users."
 msgstr "ログインしていないユーザーの場合、価格の代わりにこのメッセージが表示されます。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:12
-msgid "Product Page Pricing"
-msgstr "製品ページの価格"
-
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:16
 msgid ""
 "Manage how tiered prices are displayed and behave on single product pages."
@@ -2586,44 +2439,6 @@ msgstr "段階的な価格の表示方法と、単一の商品ページでの動
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:27
 msgid "Price display format"
 msgstr "価格の表示形式"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:31
-msgid "Match catalog display (price range or lowest price)"
-msgstr "カタログ表示と一致（価格帯または最安値）"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:32
-msgid "Dynamic"
-msgstr "動的"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:38
-msgid "Enable dynamic price updates"
-msgstr "動的な価格更新を有効にする"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:42
-msgid ""
-"Automatically update the main product price when a user selects a different "
-"quantity."
-msgstr "ユーザーが別の数量を選択すると、主な製品の価格が自動的に更新されます。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:46
-msgid "Display tiered price as discount"
-msgstr "段階的な価格を割引として表示する"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:50
-msgid ""
-"Cross out the original price and show the discounted tiered price next to "
-"it."
-msgstr "元の価格を取り消し線で消して、その横に割引後の段階的価格を表示します。"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:54
-msgid "Display total price"
-msgstr "合計金額を表示"
-
-#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:58
-msgid ""
-"Show the total calculated price based on the selected quantity and active "
-"tier."
-msgstr "選択した数量とアクティブな層に基づいて計算された合計価格を表示します。"
 
 #: src/Addons/PricingSummary/PricingSummaryAddon.php:8
 #: src/Addons/PricingSummary/SummarySubsection.php:11
@@ -2634,52 +2449,35 @@ msgstr "価格の概要"
 msgid "Show a summary block with total cost and unit price details."
 msgstr "合計コストと単価の詳細を含む概要ブロックを表示します。"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:25
-msgid "Enable pricing summary"
-msgstr "料金の概要を有効にする"
-
-#: src/Addons/PricingSummary/SummarySubsection.php:35
+#: src/Addons/PricingSummary/SummarySubsection.php:42
 msgid "The name is displaying above the summary block."
 msgstr "名前は概要ブロックの上に表示されます。"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:40
-msgid "Position on product page"
-msgstr "商品ページ上の位置"
-
-#: src/Addons/PricingSummary/SummarySubsection.php:44
+#: src/Addons/PricingSummary/SummarySubsection.php:51
 msgid "Above buy button"
 msgstr "購入ボタンの上に"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:45
+#: src/Addons/PricingSummary/SummarySubsection.php:52
 msgid "Below buy button"
 msgstr "購入ボタンの下に"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:53
+#: src/Addons/PricingSummary/SummarySubsection.php:60
 msgid "Where to display the summary block."
 msgstr "概要ブロックを表示する場所。"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:57
-msgid "Totals template"
-msgstr "合計テンプレート"
-
-#: src/Addons/PricingSummary/SummarySubsection.php:61
+#: src/Addons/PricingSummary/SummarySubsection.php:68
 msgid "Detailed"
 msgstr "詳細"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:62
-msgid "Reduced"
-msgstr "減少"
-
-#: src/Addons/PricingSummary/SummarySubsection.php:63
-#: views/admin/welcome-page/welcome-page.php:960
+#: views/admin/welcome-page/welcome-page.php:982
 msgid "Labels"
 msgstr "ラベル"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:68
+#: src/Addons/PricingSummary/SummarySubsection.php:75
 msgid "\"Total\" label"
 msgstr "「合計」ラベル"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:71
+#: src/Addons/PricingSummary/SummarySubsection.php:78
 #: views/frontend/tiered-pricing-options-style-1.php:161
 #: views/frontend/tiered-pricing-options-style-1.php:271
 #: views/frontend/tiered-pricing-options-style-2.php:161
@@ -2691,11 +2489,11 @@ msgstr "「合計」ラベル"
 msgid "Total:"
 msgstr "合計："
 
-#: src/Addons/PricingSummary/SummarySubsection.php:75
+#: src/Addons/PricingSummary/SummarySubsection.php:82
 msgid "\"Each\" label"
 msgstr "「それぞれ」のラベル"
 
-#: src/Addons/PricingSummary/SummarySubsection.php:78
+#: src/Addons/PricingSummary/SummarySubsection.php:85
 msgid "Each: "
 msgstr "それぞれ："
 
@@ -2733,33 +2531,15 @@ msgid ""
 "Show customers exactly how much they save when tiered discounts are applied."
 msgstr "段階的割引が適用された場合にどれだけ節約できるかを顧客に正確に示します。"
 
-#: src/Addons/YouSave/YouSaveSubsection.php:25
-msgid "Enable \"You Save\" badge"
-msgstr "「保存」バッジを有効にする"
-
-#: src/Addons/YouSave/YouSaveSubsection.php:29
+#: src/Addons/YouSave/YouSaveSubsection.php:30
 msgid ""
 "Show the difference between the regular price and a discounted price. You "
 "can also show it via the [tiered_price_you_save] shortcode."
 msgstr "通常価格と割引価格の差を表示します。 [tiered_price_you_save] ショートコード経由で表示することもできます。"
 
-#: src/Addons/YouSave/YouSaveSubsection.php:33
-msgid "Include sale price in calculation"
-msgstr "販売価格を計算に含める"
-
-#: src/Addons/YouSave/YouSaveSubsection.php:37
-msgid ""
-"The difference between the regular and sale price will be included in the "
-"“you save” calculation."
-msgstr "通常価格とセール価格の差額は、「節約」の計算に含まれます。"
-
-#: src/Addons/YouSave/YouSaveSubsection.php:43
+#: src/Addons/YouSave/YouSaveSubsection.php:52
 msgid "You save {tp_ys_total_price} ({tp_ys_percentage_discount}%)"
 msgstr "{tp_ys_total_price} ({tp_ys_percentage_discount}%) を節約できます"
-
-#: src/Addons/YouSave/YouSaveSubsection.php:52
-msgid "\"You save\" price color"
-msgstr "「あなたが節約します」価格の色"
 
 #: src/Settings/Sections/Integrations/IntegrationSection.php:17
 msgid "General integrations"
@@ -2802,47 +2582,50 @@ msgid "Integrations"
 msgstr "統合"
 
 #. translators: %s: required plugin
-#: src/TierPricingTablePlugin.php:86
+#: src/TierPricingTablePlugin.php:82
 #, php-format
 msgid ""
 "<b>Tiered Pricing Table</b> plugin requires %s to be installed and "
 "activated."
 msgstr "<b>段階的価格表</b> プラグインを使用するには、%s をインストールしてアクティブ化する必要があります。"
 
-#: src/TierPricingTablePlugin.php:140
+#: src/TierPricingTablePlugin.php:136
 #: views/admin/notifications/activation-notification.php:56
-#: views/admin/welcome-page/welcome-page.php:594
+#: views/admin/welcome-page/welcome-page.php:595
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:267
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:34
 msgid "Settings"
 msgstr "設定"
 
-#: src/TierPricingTablePlugin.php:144
+#: src/TierPricingTablePlugin.php:140
 msgid "Go Premium"
 msgstr "プレミアムに行く"
 
-#: src/TierPricingTablePlugin.php:157
+#: src/TierPricingTablePlugin.php:153
 #: views/admin/banners/premium-thanking-banner.php:44
 #: views/admin/banners/upgrade-banner.php:59
 #: views/admin/notifications/activation-notification.php:60
-#: views/admin/welcome-page/welcome-page.php:600
+#: views/admin/welcome-page/welcome-page.php:601
 msgid "Documentation"
 msgstr "ドキュメント"
 
-#: src/TierPricingTablePlugin.php:160
-#: views/admin/welcome-page/welcome-page.php:608
+#: src/TierPricingTablePlugin.php:156
+#: views/admin/welcome-page/welcome-page.php:609
 msgid "Contact Us"
 msgstr "お問い合わせ"
 
-#: src/TierPricingTablePlugin.php:271
-#: views/admin/welcome-page/welcome-page.php:852
+#: src/TierPricingTablePlugin.php:267
+#: views/admin/welcome-page/welcome-page.php:859
 msgid "Horizontal table"
 msgstr "水平テーブル"
 
-#: src/TierPricingTablePlugin.php:272
-#: views/admin/welcome-page/welcome-page.php:857
+#: src/TierPricingTablePlugin.php:268
+#: views/admin/welcome-page/welcome-page.php:864
 msgid "Plain text"
 msgstr "プレーンテキスト"
 
-#: src/TierPricingTablePlugin.php:273
+#: src/TierPricingTablePlugin.php:269
 msgid "Tooltip"
 msgstr "ツールチップ"
 
@@ -2903,7 +2686,7 @@ msgid ""
 "You can disable this feature in the %s if you don't need role-based pricing."
 msgstr "ロールベースの価格設定が必要ない場合は、%s でこの機能を無効にすることができます。"
 
-#: views/addons/role-based-pricing/role-based-block.php:110
+#: src/Addons/Tools/AdminUserHooks.php:15
 msgid "Manage Roles"
 msgstr "役割の管理"
 
@@ -2927,6 +2710,7 @@ msgid ""
 "your <a href=\""
 msgstr "現在、無料版を実行しています。 <a href= から Pro バージョンをダウンロードします。"
 
+#: src/Admin/ProductPage/RoleCustomerPricingTab.php:77
 #: views/admin/banners/premium-thanking-banner.php:20
 msgid "Premium"
 msgstr "プレミアム"
@@ -2935,7 +2719,7 @@ msgstr "プレミアム"
 msgid "License is invalid or expired. Please check your account."
 msgstr "ライセンスが無効か期限切れです。アカウントを確認してください。"
 
-#: src/TierPricingTablePlugin.php:164
+#: src/TierPricingTablePlugin.php:160
 #: views/admin/banners/premium-thanking-banner.php:36
 #: views/admin/banners/upgrade-banner.php:71
 msgid "My Account"
@@ -2960,9 +2744,12 @@ msgstr "プラグインのアクティベーションを終了する"
 msgid "Please %s to upgrade."
 msgstr "%s してアップグレードしてください。"
 
+#: src/Addons/RequestAQuote/views/frontend/quote-modal.php:37
 #: views/admin/banners/upgrade-banner.php:49
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:234
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:122
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:238
 msgid "Upgrade to Premium"
@@ -2972,7 +2759,7 @@ msgstr "プレミアムにアップグレード"
 msgid "Opt-in"
 msgstr "オプトイン"
 
-#: views/admin/components/minimum-order-quantity-form.php:26
+#: views/admin/components/minimum-order-quantity-form.php:27
 msgid ""
 "A minimum amount of a product a customer must order to fulfill the order."
 msgstr "注文を履行するために顧客が注文しなければならない製品の最小数量。"
@@ -3034,99 +2821,99 @@ msgid ""
 "will work for product categories and user roles."
 msgstr "数量ベースの価格設定ルールを %1$s に直接追加するか、製品カテゴリとユーザー ロールに機能する %2$s を作成します。"
 
-#: views/admin/welcome-page/welcome-page.php:580
+#: views/admin/welcome-page/welcome-page.php:581
 msgid ""
 "Tiered Pricing Table is a powerful tool that allows you to create quantity-"
 "based pricing for your WooCommerce products."
 msgstr "Tiered Pricing Table は、WooCommerce 製品の数量ベースの価格設定を作成できる強力なツールです。"
 
-#: views/admin/welcome-page/welcome-page.php:586
+#: views/admin/welcome-page/welcome-page.php:587
 msgid ""
 "With intuitive templates, flexible pricing rules, and advanced features, "
 "this plugin is a perfect fit for any type of store."
 msgstr "直感的なテンプレート、柔軟な価格設定ルール、高度な機能を備えたこのプラグインは、あらゆるタイプのストアに最適です。"
 
-#: views/admin/welcome-page/welcome-page.php:796
+#: views/admin/welcome-page/welcome-page.php:803
 msgid "Prices automatically displayed on the product page:"
 msgstr "製品ページに自動的に表示される価格:"
 
-#: views/admin/welcome-page/welcome-page.php:818
+#: views/admin/welcome-page/welcome-page.php:825
 msgid "Pricing Table"
 msgstr "価格表"
 
-#: views/admin/welcome-page/welcome-page.php:821
+#: views/admin/welcome-page/welcome-page.php:828
 msgid "Ability to add custom columns."
 msgstr "カスタム列を追加する機能。"
 
-#: views/admin/welcome-page/welcome-page.php:831
+#: views/admin/welcome-page/welcome-page.php:838
 msgid "Pricing Blocks"
 msgstr "価格設定ブロック"
 
-#: views/admin/welcome-page/welcome-page.php:836
+#: views/admin/welcome-page/welcome-page.php:843
 msgid "Pricing Blocks #2"
 msgstr "価格設定ブロック #2"
 
-#: views/admin/welcome-page/welcome-page.php:841
+#: views/admin/welcome-page/welcome-page.php:848
 msgid "Pricing Options"
 msgstr "価格オプション"
 
-#: views/admin/welcome-page/welcome-page.php:903
+#: views/admin/welcome-page/welcome-page.php:910
 msgid "Apply custom prices to any user role"
 msgstr "任意のユーザー役割にカスタム価格を適用する"
 
-#: views/admin/welcome-page/welcome-page.php:924
+#: views/admin/welcome-page/welcome-page.php:935
 msgid "Apply custom prices in bulk for selected categories and users:"
 msgstr "選択したカテゴリとユーザーにカスタム価格を一括適用します。"
 
-#: views/admin/welcome-page/welcome-page.php:968
+#: views/admin/welcome-page/welcome-page.php:990
 msgid "Cart"
 msgstr "カート"
 
-#: views/admin/welcome-page/welcome-page.php:977
+#: views/admin/welcome-page/welcome-page.php:999
 msgid "Catalog prices"
 msgstr "カタログ価格"
 
-#: views/admin/welcome-page/welcome-page.php:986
+#: views/admin/welcome-page/welcome-page.php:1009
 msgid "Product catalog (Category page)"
 msgstr "製品カタログ（カテゴリーページ）"
 
-#: views/admin/welcome-page/welcome-page.php:1029
+#: views/admin/welcome-page/welcome-page.php:1053
 msgid "Tier Labels & Badges"
 msgstr "ティアラベルとバッジ"
 
-#: views/admin/welcome-page/welcome-page.php:1033
+#: views/admin/welcome-page/welcome-page.php:1057
 msgid "Data Cleanup & Role Management Tools"
 msgstr "データクリーンアップと役割管理ツール"
 
-#: views/admin/welcome-page/welcome-page.php:1037
+#: views/admin/welcome-page/welcome-page.php:1061
 msgid "Import \\ Export"
 msgstr "インポート / エクスポート"
 
-#: views/admin/welcome-page/welcome-page.php:1041
+#: views/admin/welcome-page/welcome-page.php:1065
 msgid "REST API"
 msgstr "REST API"
 
-#: views/admin/welcome-page/welcome-page.php:1045
+#: views/admin/welcome-page/welcome-page.php:1069
 msgid "Admin-made orders supported"
 msgstr "管理者による注文がサポートされています"
 
-#: views/admin/welcome-page/welcome-page.php:1049
+#: views/admin/welcome-page/welcome-page.php:1073
 msgid "Built-in cache"
 msgstr "内蔵キャッシュ"
 
-#: views/admin/welcome-page/welcome-page.php:1057
+#: views/admin/welcome-page/welcome-page.php:1081
 msgid "Shortcode \\ Gutenberg \\ Elementor"
 msgstr "ショートコード \\ Gutenberg \\ Elementor"
 
-#: views/admin/welcome-page/welcome-page.php:1061
+#: views/admin/welcome-page/welcome-page.php:1085
 msgid "Hide prices for logged-out users"
 msgstr "ログアウトしたユーザーの価格を非表示にする"
 
-#: views/admin/welcome-page/welcome-page.php:1065
+#: views/admin/welcome-page/welcome-page.php:1089
 msgid "Works with any theme"
 msgstr "あらゆるテーマに対応"
 
-#: views/admin/welcome-page/welcome-page.php:1069
+#: views/admin/welcome-page/welcome-page.php:1093
 msgid "Debug mode"
 msgstr "デバッグモード"
 
@@ -3137,6 +2924,10 @@ msgstr "デバッグモード"
 #: views/frontend/tiered-pricing-blocks-style-2.php:205
 #: views/frontend/tiered-pricing-blocks-style-4.php:108
 #: views/frontend/tiered-pricing-blocks-style-4.php:205
+#: views/frontend/tiered-pricing-blocks-style-5.php:108
+#: views/frontend/tiered-pricing-blocks-style-5.php:205
+#: views/frontend/tiered-pricing-blocks-style-6.php:108
+#: views/frontend/tiered-pricing-blocks-style-6.php:205
 #: views/frontend/tiered-pricing-blocks.php:110
 #: views/frontend/tiered-pricing-blocks.php:206
 #, php-format
@@ -3161,7 +2952,7 @@ msgid ""
 "to reach the next pricing tier."
 msgstr "次の価格帯に到達するために必要なアイテム数を示すアップセル メッセージをカートに表示します。"
 
-#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:22
+#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:24
 msgid "Add Custom Columns"
 msgstr "カスタム列の追加"
 
@@ -3217,23 +3008,23 @@ msgid ""
 "applied."
 msgstr "段階的価格設定が適用された場合に顧客がどれだけ節約できるかを示すバッジを表示します。"
 
-#: src/PricingTable.php:379
+#: src/PricingTable.php:414
 msgid ""
 "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or "
 "greater than your first pricing tier."
 msgstr "価格の矛盾が検出されました: 最小注文数量が最初の価格レベル以上です。"
 
-#: src/PricingTable.php:386
+#: src/PricingTable.php:422
 msgid ""
 "To fix this, please ensure your first tiered pricing rule starts at a higher"
 " quantity than your Minimum Order Quantity."
 msgstr "これを修正するには、最初の段階的な価格設定ルールが最小注文数量よりも高い数量で開始されるようにしてください。"
 
-#: src/PricingTable.php:389
+#: src/PricingTable.php:426
 msgid "Why?"
 msgstr "なぜ？"
 
-#: src/PricingTable.php:389
+#: src/PricingTable.php:427
 msgid ""
 "The plugin automatically creates a base tier using your standard WooCommerce"
 " product price. This base tier covers any quantities ordered between the "
@@ -3242,7 +3033,7 @@ msgstr ""
 "プラグインは、標準の WooCommerce "
 "製品価格を使用して基本階層を自動的に作成します。この基本階層は、最小注文数量と最初の割引階層の間で注文されたすべての数量をカバーします。"
 
-#: src/PricingTable.php:392
+#: src/PricingTable.php:431
 msgid "This notice is only visible to store administrators."
 msgstr "この通知はストア管理者のみに表示されます。"
 
@@ -3250,10 +3041,6 @@ msgstr "この通知はストア管理者のみに表示されます。"
 #: src/Settings/Sections/Advanced/AdvancedSection.php:43
 msgid "Modules"
 msgstr "モジュール"
-
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:62
-msgid "Pricing table style"
-msgstr "価格表のスタイル"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:85
 msgid "Style #5"
@@ -3296,6 +3083,8 @@ msgstr "列を削除する"
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:230
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:119
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:234
 msgid "Premium Feature"
@@ -3335,6 +3124,9 @@ msgstr "カスタム列を保存するには、プレミアム バージョン�
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:337
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:138
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:44
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:482
 msgid "Saving..."
@@ -3378,6 +3170,7 @@ msgstr "パーセンテージ"
 msgid "Percentage (premium feature)"
 msgstr "パーセンテージ (プレミアム機能)"
 
+#: src/Admin/ProductPage/RoleCustomerPricingTab.php:85
 #: src/Addons/ReactProductEditorAddon/js-source/src/upgrade-notice/edit.js:36
 #: src/Addons/ReactProductEditorAddon/js/upgrade-notice/index.js:1
 msgid "Upgrade Now"
@@ -3916,6 +3709,8 @@ msgstr "能力"
 msgid "Search capabilities..."
 msgstr "検索機能..."
 
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:36
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/RolesManagement.js:283
 msgid "Cancel"
@@ -4013,11 +3808,11 @@ msgid ""
 msgstr ""
 "段階的な価格設定ウィジェット。商品ページのテンプレートで使用する必要があります。プラグイン設定でカスタマイズするオプションをさらに見つけてください。"
 
-#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:18
+#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:19
 msgid "Show More Info Next to Prices?"
 msgstr "価格の隣に詳細情報を表示しますか?"
 
-#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:19
+#: src/Addons/CustomColumns/Admin/CustomColumnsAdmin.php:20
 msgid ""
 "Create additional columns to show exactly how much your customers save, "
 "total prices, or per-unit costs alongside each tier."
@@ -4039,157 +3834,155 @@ msgid ""
 "exporter."
 msgstr "組み込みの WooCommerce 製品インポーターおよびエクスポーターとの互換性を追加します。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:95
-msgid "Apply a compact layout to the tiered pricing."
-msgstr "段階的な価格設定にコンパクトなレイアウトを適用します。"
-
 #: views/admin/welcome-page/welcome-page.php:566
 msgid ""
 "Thanks for installing the plugin! Below you will find a quick overview of "
 "the main features."
 msgstr "プラグインをインストールしていただきありがとうございます!以下に主な機能の概要を示します。"
 
-#: views/admin/welcome-page/welcome-page.php:573
+#: views/admin/welcome-page/welcome-page.php:574
 msgid "Welcome to"
 msgstr "へようこそ"
 
-#: views/admin/welcome-page/welcome-page.php:605
+#: views/admin/welcome-page/welcome-page.php:606
 msgid "Questions? We're here to help."
 msgstr "質問がありますか?私たちがお手伝いします。"
 
-#: views/admin/welcome-page/welcome-page.php:634
+#: views/admin/welcome-page/welcome-page.php:635
 msgid "This is a product example."
 msgstr "商品例です。"
 
-#: views/admin/welcome-page/welcome-page.php:678
+#: views/admin/welcome-page/welcome-page.php:680
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:114
 msgid "Add to cart"
 msgstr "カートに追加"
 
-#: views/admin/welcome-page/welcome-page.php:732
+#: views/admin/welcome-page/welcome-page.php:735
 msgid "You save"
 msgstr "保存します"
 
-#: views/admin/welcome-page/welcome-page.php:768
+#: views/admin/welcome-page/welcome-page.php:772
 msgid "Easy Setup"
 msgstr "簡単セットアップ"
 
-#: views/admin/welcome-page/welcome-page.php:776
+#: views/admin/welcome-page/welcome-page.php:780
 msgid "Add tiered pricing to products"
 msgstr "製品に段階的な価格設定を追加する"
 
-#: views/admin/welcome-page/welcome-page.php:785
+#: views/admin/welcome-page/welcome-page.php:789
 msgid "Add unlimited quantity-based prices."
 msgstr "無制限の数量ベースの価格を追加します。"
 
-#: views/admin/welcome-page/welcome-page.php:786
+#: views/admin/welcome-page/welcome-page.php:791
 msgid "Fixed prices or percentage discounts."
 msgstr "固定価格またはパーセント割引。"
 
-#: views/admin/welcome-page/welcome-page.php:787
-#: views/admin/welcome-page/welcome-page.php:914
+#: views/admin/welcome-page/welcome-page.php:793
+#: views/admin/welcome-page/welcome-page.php:924
 msgid "Works great with variable products."
 msgstr "さまざまな製品に最適です。"
 
-#: views/admin/welcome-page/welcome-page.php:812
+#: views/admin/welcome-page/welcome-page.php:819
 msgid "Various Pricing Templates"
 msgstr "さまざまな価格テンプレート"
 
-#: views/admin/welcome-page/welcome-page.php:826
+#: views/admin/welcome-page/welcome-page.php:833
 msgid "Pricing Blocks #3"
 msgstr "価格設定ブロック #3"
 
-#: views/admin/welcome-page/welcome-page.php:846
+#: views/admin/welcome-page/welcome-page.php:853
 msgid "Pricing Options #2"
 msgstr "価格オプション #2"
 
-#: views/admin/welcome-page/welcome-page.php:896
+#: views/admin/welcome-page/welcome-page.php:903
 msgid "Flexible Pricing"
 msgstr "柔軟な価格設定"
 
-#: views/admin/welcome-page/welcome-page.php:911
+#: views/admin/welcome-page/welcome-page.php:918
 msgid "Add unlimited role-based pricing."
 msgstr "無制限のロールベースの価格設定を追加します。"
 
-#: views/admin/welcome-page/welcome-page.php:912
+#: views/admin/welcome-page/welcome-page.php:920
 msgid "Control regular & sale price or provide a percentage discount."
 msgstr "通常価格とセール価格を制御するか、パーセント割引を提供します。"
 
-#: views/admin/welcome-page/welcome-page.php:913
+#: views/admin/welcome-page/welcome-page.php:922
 msgid "Control minimum, maximum and quantity step."
 msgstr "最小値、最大値、数量のステップを制御します。"
 
-#: views/admin/welcome-page/welcome-page.php:934
+#: views/admin/welcome-page/welcome-page.php:945
 msgid ""
 "Control regular prices, tiered pricing and quantity limits in one place."
 msgstr "通常価格、段階的な価格設定、および数量制限を 1 か所で管理します。"
 
-#: views/admin/welcome-page/welcome-page.php:935
+#: views/admin/welcome-page/welcome-page.php:947
 msgid "Apply tiered pricing across multiple products."
 msgstr "複数の製品に段階的な価格設定を適用します。"
 
-#: views/admin/welcome-page/welcome-page.php:936
+#: views/admin/welcome-page/welcome-page.php:949
 msgid "Select products or product categories that the rule applies to."
 msgstr "ルールを適用する製品または製品カテゴリを選択します。"
 
-#: views/admin/welcome-page/welcome-page.php:937
+#: views/admin/welcome-page/welcome-page.php:951
 msgid "Select users or user roles that the rule applies to."
 msgstr "ルールを適用するユーザーまたはユーザー ロールを選択します。"
 
-#: views/admin/welcome-page/welcome-page.php:945
+#: views/admin/welcome-page/welcome-page.php:960
 msgid "Advanced Features"
 msgstr "高度な機能"
 
-#: views/admin/welcome-page/welcome-page.php:956
+#: views/admin/welcome-page/welcome-page.php:978
 msgid "Create and update user roles"
 msgstr "ユーザーロールの作成と更新"
 
-#: views/admin/welcome-page/welcome-page.php:963
+#: views/admin/welcome-page/welcome-page.php:985
 msgid "Create customizable labels and attach them to a pricing tier"
 msgstr "カスタマイズ可能なラベルを作成し、価格帯に添付します"
 
-#: views/admin/welcome-page/welcome-page.php:971
+#: views/admin/welcome-page/welcome-page.php:993
 msgid "Cart upsells to motivate customers to purchase more."
 msgstr "カートのアップセルにより、顧客がさらに購入するよう動機付けられます。"
 
-#: views/admin/welcome-page/welcome-page.php:972
+#: views/admin/welcome-page/welcome-page.php:994
 msgid "Customize cart upsells template."
 msgstr "カートのアップセル テンプレートをカスタマイズします。"
 
-#: views/admin/welcome-page/welcome-page.php:973
+#: views/admin/welcome-page/welcome-page.php:995
 msgid "Tiered price in the cart appears as a discount."
 msgstr "カート内の階層化された価格は割引として表示されます。"
 
-#: views/admin/welcome-page/welcome-page.php:980
+#: views/admin/welcome-page/welcome-page.php:1002
 msgid "Show the lowest price."
 msgstr "最安値を表示します。"
 
-#: views/admin/welcome-page/welcome-page.php:981
+#: views/admin/welcome-page/welcome-page.php:1003
 msgid ""
 "Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or "
 "whatever you want."
 msgstr "最低価格のプレフィックスをカスタマイズします:「$10.00 から」、「最低 $10.00」など、必要に応じて変更できます。"
 
-#: views/admin/welcome-page/welcome-page.php:982
+#: views/admin/welcome-page/welcome-page.php:1005
 msgid "Show the price range based on tiered pricing."
 msgstr "段階的な価格設定に基づいて価格帯を表示します。"
 
-#: views/admin/welcome-page/welcome-page.php:989
+#: views/admin/welcome-page/welcome-page.php:1012
 msgid "Customize template (can be different from product page)."
 msgstr "テンプレートをカスタマイズします (製品ページとは異なる場合があります)。"
 
-#: views/admin/welcome-page/welcome-page.php:990
+#: views/admin/welcome-page/welcome-page.php:1014
 msgid "Show quantity field."
 msgstr "数量フィールドを表示します。"
 
-#: views/admin/welcome-page/welcome-page.php:1023
+#: views/admin/welcome-page/welcome-page.php:1047
 msgid "Other Features That Make The Plugin Unique"
 msgstr "プラグインをユニークにするその他の機能"
 
-#: views/admin/welcome-page/welcome-page.php:1086
+#: views/admin/welcome-page/welcome-page.php:1110
 msgid "Integrations with 3rd party plugins"
 msgstr "サードパーティのプラグインとの統合"
 
-#: views/admin/welcome-page/welcome-page.php:1271
+#: views/admin/welcome-page/welcome-page.php:1295
 msgid "Have a question?"
 msgstr "質問がありますか?"
 
@@ -4273,7 +4066,7 @@ msgstr "元の価格"
 msgid "{tp_original_price} - product's original price without discounts."
 msgstr "{tp_original_price} - 割引なしの商品の元の価格。"
 
-#: src/Addons/UserBasedPricing/ProductManager.php:176
+#: src/Addons/UserBasedPricing/ProductManager.php:179
 msgid "Invalid user"
 msgstr "無効なユーザー"
 
@@ -4333,3 +4126,1629 @@ msgstr "すべてのロールをクリーンアップ"
 #: src/Addons/Tools/js-source/components/CleanupTool.js:273
 msgid "Select specific roles to clean"
 msgstr "クリーンアップする特定のロールを選択"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:36
+msgid "Customer Request"
+msgstr "お客様のご要望"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:39
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:108
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:387
+#: src/Addons/RequestAQuote/views/emails/admin-quote-request.php:32
+#: src/Addons/RequestAQuote/views/emails/customer-quote-request.php:32
+#: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:25
+#: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:25
+msgid "Product"
+msgstr "製品"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:42
+msgid "User"
+msgstr "ユーザー"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:45
+msgid "Quote Actions"
+msgstr "引用アクション"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:100
+msgid "Product not found."
+msgstr "製品が見つかりません。"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:110
+msgid "Unit Price"
+msgstr "単価"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:111
+msgid "Total"
+msgstr "合計"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:125
+msgid "SKU:"
+msgstr ""
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:156
+msgid "Converted to Order:"
+msgstr "注文に変換:"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:163
+msgid "Convert to Order"
+msgstr "注文に変換"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:181
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:430
+msgid "Unread"
+msgstr "未読"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:182
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:431
+msgid "Read"
+msgstr "読む"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:185
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:432
+msgid "Converted"
+msgstr "変換された"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:187
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:433
+msgid "Rejected"
+msgstr "拒否されました"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:198
+msgid "Submitted via Form:"
+msgstr "フォーム経由で送信:"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:204
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:172
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:133
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:77
+msgid "Unnamed Form"
+msgstr "名前のないフォーム"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:222
+msgid "Save Quote"
+msgstr "見積書の保存"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:256
+msgid "Guest"
+msgstr "ゲスト"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:289
+msgid "View Profile"
+msgstr "プロフィールを見る"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:295
+msgid "Guest User"
+msgstr "ゲストユーザー"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:385
+msgid "Quote"
+msgstr "引用"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:386
+msgid "Customer"
+msgstr "お客様"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:388
+msgid "Status"
+msgstr "状態"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:389
+msgid "Date"
+msgstr "日付"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:419
+msgid "Qty:"
+msgstr "数量:"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:455
+msgid "Filter by product"
+msgstr "製品でフィルタリングする"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:457
+msgid "Show all products"
+msgstr "すべての製品を表示"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:494
+msgid "Mark as Unread"
+msgstr "未読としてマークする"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:495
+msgid "Mark as Read"
+msgstr "既読としてマーク"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:496
+msgid "Mark as Rejected"
+msgstr "拒否済みとしてマークする"
+
+#. translators: %s: number of quotes.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:533
+#, php-format
+msgid "%s quote marked as unread."
+msgid_plural "%s quotes marked as unread."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of quotes.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:537
+#, php-format
+msgid "%s quote marked as read."
+msgid_plural "%s quotes marked as read."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of quotes.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:541
+#, php-format
+msgid "%s quote marked as rejected."
+msgid_plural "%s quotes marked as rejected."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:37
+msgctxt "post type general name"
+msgid "Quote Requests"
+msgstr "見積もりリクエスト"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:38
+msgctxt "post type singular name"
+msgid "Quote Request"
+msgstr "見積依頼"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:39
+msgctxt "admin menu"
+msgid "Quote Requests"
+msgstr "見積もりリクエスト"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:40
+msgctxt "add new on admin bar"
+msgid "Quote Request"
+msgstr "見積依頼"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:41
+msgctxt "quote request"
+msgid "Add New"
+msgstr "新規追加"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:42
+msgid "Add New Quote Request"
+msgstr "新しい見積リクエストを追加"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:43
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:63
+msgid "New Quote Request"
+msgstr "新規見積リクエスト"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:44
+msgid "Edit Quote Request"
+msgstr "見積依頼の編集"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:45
+msgid "View Quote Request"
+msgstr "見積依頼を見る"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:46
+msgid "All Quote Requests"
+msgstr "すべての見積もりリクエスト"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:47
+msgid "Search Quote Requests"
+msgstr "見積もりリクエストの検索"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:48
+msgid "No quote requests found."
+msgstr "見積もりリクエストが見つかりませんでした。"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:49
+msgid "No quote requests found in Trash."
+msgstr "ゴミ箱に見積もりリクエストが見つかりません。"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:54
+msgid "Quote Requests."
+msgstr "見積もりリクエスト。"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:77
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:130
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:139
+msgid "Quote Requests"
+msgstr "見積もりリクエスト"
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:87
+msgctxt "quote request status"
+msgid "Unread"
+msgstr "未読"
+
+#. translators: %s: number of requests.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:93
+#, php-format
+msgid "Unread <span class=\"count\">(%s)</span>"
+msgid_plural "Unread <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:97
+msgctxt "quote request status"
+msgid "Read"
+msgstr "読む"
+
+#. translators: %s: number of requests.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:103
+#, php-format
+msgid "Read <span class=\"count\">(%s)</span>"
+msgid_plural "Read <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:107
+msgctxt "quote request status"
+msgid "Converted"
+msgstr "変換された"
+
+#. translators: %s: number of requests.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:113
+#, php-format
+msgid "Converted <span class=\"count\">(%s)</span>"
+msgid_plural "Converted <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:117
+msgctxt "quote request status"
+msgid "Rejected"
+msgstr "拒否されました"
+
+#. translators: %s: number of requests.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:123
+#, php-format
+msgid "Rejected <span class=\"count\">(%s)</span>"
+msgid_plural "Rejected <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of unread requests.
+#: src/Addons/RequestAQuote/CPT/QuoteRequestCPT.php:134
+#, php-format
+msgid "%s unread request"
+msgid_plural "%s unread requests"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:14
+msgid "Quote Request (Admin)"
+msgstr "見積もりリクエスト (管理者)"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:15
+msgid ""
+"This email is sent to the administrator when a customer requests a quote."
+msgstr "このメールは、顧客が見積もりを要求したときに管理者に送信されます。"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:48
+msgid "Unknown Product"
+msgstr "不明な製品"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:59
+msgid "[{site_title}] New Quote Request for {product_name}"
+msgstr "[{site_title}] {product_name} の新しい見積もりリクエスト"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:89
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:130
+msgid "Enable/Disable"
+msgstr "有効化/無効化"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:91
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:132
+msgid "Enable this email notification"
+msgstr "このメール通知を有効にする"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:95
+msgid "Recipient(s)"
+msgstr "受信者）"
+
+#. translators: %s: Admin email.
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:98
+#, php-format
+msgid "Enter recipients (comma separated) for this email. Defaults to %s."
+msgstr "この電子メールの受信者を (カンマ区切りで) 入力します。デフォルトは %s です。"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:105
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:136
+msgid "Subject"
+msgstr "主題"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:108
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:139
+msgid ""
+"This controls the email subject line. Leave blank to use the default "
+"subject: "
+msgstr "これは電子メールの件名を制御します。デフォルトの件名を使用するには、空白のままにします。"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:114
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:145
+msgid "Email heading"
+msgstr "メールの見出し"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:117
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:148
+msgid ""
+"This controls the main heading contained within the email notification. "
+"Leave blank to use the default heading: "
+msgstr "これは、電子メール通知に含まれる主要な見出しを制御します。デフォルトの見出しを使用するには、空白のままにします。"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:123
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:154
+msgid "Email type"
+msgstr "電子メールの種類"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:125
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:156
+msgid "Choose which format of email to send."
+msgstr "送信する電子メールの形式を選択します。"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:135
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:166
+msgid "Sample Product"
+msgstr "サンプル品"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:153
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:184
+msgid "Sample Name"
+msgstr "サンプル名"
+
+#: src/Addons/RequestAQuote/Emails/AdminQuoteEmail.php:154
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:185
+msgid "Sample Email"
+msgstr "サンプルメール"
+
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:14
+msgid "Quote Request (Customer)"
+msgstr "お見積り依頼（お客様）"
+
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:15
+msgid "This email is sent to the customer to acknowledge their quote request."
+msgstr "このメールは、見積もりリクエストを確認するために顧客に送信されます。"
+
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:100
+msgid "[{site_title}] Thank you for your Quote Request for {product_name}"
+msgstr "[{site_title}] {product_name} の見積もりリクエストをいただきありがとうございます"
+
+#: src/Addons/RequestAQuote/Emails/CustomerQuoteEmail.php:104
+msgid "Quote Request Received"
+msgstr "見積依頼を受け取りました"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:35
+msgid "Form ID or Product ID is missing."
+msgstr "フォーム ID またはプロダクト ID がありません。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:45
+msgid "This form is not available for the selected product."
+msgstr "このフォームは選択された製品では使用できません。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:57
+msgid "Anti-Spam verification failed. Please try again."
+msgstr "スパム対策の検証に失敗しました。もう一度試してください。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:71
+msgid "Could not verify reCAPTCHA."
+msgstr "reCAPTCHA を検証できませんでした。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:79
+msgid "Anti-Spam verification failed. Token invalid."
+msgstr "スパム対策の検証に失敗しました。トークンが無効です。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:86
+msgid "Anti-Spam verification failed. Score too low."
+msgstr "スパム対策の検証に失敗しました。スコアが低すぎます。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:188
+msgid "Could not save the quote request."
+msgstr "見積もりリクエストを保存できませんでした。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:197
+#: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:35
+msgid "Your quote request has been submitted successfully!"
+msgstr "見積もりリクエストは正常に送信されました。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:255
+msgid "File upload failed."
+msgstr "ファイルのアップロードに失敗しました。"
+
+#: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:252
+#: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:47
+#: src/Addons/RequestAQuote/RequestAQuoteAddon.php:8
+#: src/Addons/RequestAQuote/Settings/RequestAQuoteSettingsSection.php:8
+#: src/Addons/RequestAQuote/views/frontend/quote-modal.php:28
+#: views/admin/welcome-page/welcome-page.php:967
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:531
+msgid "Request a Quote"
+msgstr "見積もりを依頼する"
+
+#: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:253
+#: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:76
+#: src/Addons/RequestAQuote/views/frontend/quote-modal.php:72
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:151
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:539
+msgid "Submit Request"
+msgstr "リクエストの送信"
+
+#: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:254
+msgid "Submitting..."
+msgstr "送信中..."
+
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:244
+msgid "Request a Quote Form"
+msgstr "見積依頼フォーム"
+
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:260
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:272
+msgid "Leave blank to use the form default"
+msgstr "フォームのデフォルトを使用するには空白のままにしてください"
+
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:261
+msgid "Quantity Label"
+msgstr "数量ラベル"
+
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:262
+msgid "Override the quantity label."
+msgstr "数量ラベルを上書きします。"
+
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:274
+msgid "Quantity Trigger"
+msgstr "数量トリガー"
+
+#: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:275
+msgid ""
+"Override the global auto-open trigger. Automatically open the quote form if "
+"a customer selects this quantity or higher."
+msgstr "グローバル自動オープン トリガーをオーバーライドします。顧客がこの数量以上を選択した場合、見積フォームが自動的に開きます。"
+
+#: src/Addons/RequestAQuote/Models/QuoteRequest.php:115
+msgid "Quote Request"
+msgstr "見積依頼"
+
+#: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:29
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:141
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:133
+msgid "Request a quote"
+msgstr "見積もりを依頼する"
+
+#: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:38
+msgid "Thank you for your request. We will contact you soon."
+msgstr "ご依頼ありがとうございます。すぐにご連絡させていただきます。"
+
+#: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:61
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:523
+msgid "Custom Quantity"
+msgstr "カスタム数量"
+
+#: src/Addons/RequestAQuote/RequestAQuoteAddon.php:12
+msgid "Allow customers to request a custom quote."
+msgstr "顧客がカスタム見積もりをリクエストできるようにします。"
+
+#: src/Addons/RequestAQuote/views/emails/admin-quote-request.php:24
+#: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:21
+msgid "A new quote request has been submitted on your store."
+msgstr "新しい見積もりリクエストがストアに送信されました。"
+
+#: src/Addons/RequestAQuote/views/emails/admin-quote-request.php:26
+#: src/Addons/RequestAQuote/views/emails/customer-quote-request.php:26
+msgid "Quote Request Details"
+msgstr "見積依頼の詳細"
+
+#: src/Addons/RequestAQuote/views/emails/admin-quote-request.php:33
+#: src/Addons/RequestAQuote/views/emails/customer-quote-request.php:33
+#: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:25
+#: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:25
+msgid "Unknown"
+msgstr "未知"
+
+#: src/Addons/RequestAQuote/views/emails/admin-quote-request.php:53
+#: src/Addons/RequestAQuote/views/emails/admin-quote-request.php:57
+#: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:37
+#: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:39
+msgid "View Request in Dashboard"
+msgstr "ダッシュボードでリクエストを表示"
+
+#: src/Addons/RequestAQuote/views/emails/customer-quote-request.php:24
+#: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:21
+msgid ""
+"Thank you for your quote request. We have received it and will process it "
+"shortly. Here are the details of your request:"
+msgstr "お見積りのご依頼ありがとうございます。受け取りましたので、すぐに処理させていただきます。リクエストの詳細は次のとおりです。"
+
+#: src/Addons/RequestAQuote/views/emails/customer-quote-request.php:50
+#: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:36
+msgid "We will be in touch soon!"
+msgstr "すぐにご連絡させていただきます。"
+
+#: src/Addons/RequestAQuote/views/frontend/quote-modal.php:36
+msgid "Preview Mode"
+msgstr "プレビューモード"
+
+#: src/Addons/RequestAQuote/views/frontend/quote-modal.php:36
+msgid ""
+"Request a Quote on the frontend is a premium feature. This popup is only "
+"visible to administrators."
+msgstr "フロントエンドでの見積依頼はプレミアム機能です。このポップアップは管理者のみに表示されます。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:86
+msgid "Style #6"
+msgstr "スタイル #6"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:35
+msgid "No Forms Created"
+msgstr "フォームが作成されていません"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:38
+msgid ""
+"Create your first quote request form to allow customers to ask for a custom "
+"price."
+msgstr "最初の見積もりリクエスト フォームを作成して、顧客がカスタム価格を要求できるようにします。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:41
+msgid ""
+"Once created, you can assign your forms to specific pricing tiers when "
+"editing a product or in global rules."
+msgstr "フォームを作成したら、製品の編集時またはグローバル ルールで特定の価格帯にフォームを割り当てることができます。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:44
+msgid "Add your first form"
+msgstr "最初のフォームを追加する"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:68
+msgid "Awesome T-Shirt"
+msgstr "素晴らしいTシャツ"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:107
+msgid "Looking for a personal deal? Request a quote."
+msgstr "個人取引をお探しですか?見積もりを依頼してください。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:136
+msgid "Name *"
+msgstr "名前 *"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:140
+msgid "Email *"
+msgstr "電子メール *"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:144
+msgid "Quantity *"
+msgstr "量 *"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:146
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:148
+msgid "Comment"
+msgstr "コメント"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:21
+msgid "Preview Mode:"
+msgstr "プレビューモード:"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:21
+msgid ""
+"You are currently using the free version of Tiered Pricing Table. The "
+"Request a Quote feature is available for creation and previewing purposes, "
+"but it will not be active on the frontend for your customers."
+msgstr ""
+"現在、段階的価格表の無料バージョンを使用しています。見積依頼機能は作成とプレビューの目的で使用できますが、顧客のフロントエンドではアクティブになりません。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:23
+msgid "Upgrade to Premium to unlock this feature &rarr;"
+msgstr "この機能を利用するにはプレミアムにアップグレードしてください →"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:32
+msgid "Request a Quote Forms"
+msgstr "見積依頼フォーム"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:40
+msgid "Add New Form"
+msgstr "新しいフォームを追加"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:50
+msgid "Form Name"
+msgstr "フォーム名"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:53
+msgid "Position"
+msgstr "位置"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:56
+msgid "Auto-Open Qty"
+msgstr "自動オープン数量"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:59
+msgid "Fields"
+msgstr "フィールド"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:96
+msgid "Below Pricing Layout"
+msgstr "価格レイアウトの下"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:96
+msgid "Integrated"
+msgstr "統合された"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:61
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:452
+msgid "Short Text"
+msgstr "短いテキスト"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:62
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:453
+msgid "Long Text"
+msgstr "長いテキスト"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:144
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:63
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:454
+msgid "Email"
+msgstr "電子メール"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:65
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:456
+msgid "Select Dropdown"
+msgstr "ドロップダウンを選択"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:66
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:457
+msgid "Radio Buttons"
+msgstr "ラジオボタン"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:67
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:458
+msgid "Checkboxes"
+msgstr "チェックボックス"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:68
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:461
+msgid "Heading"
+msgstr "見出し"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:69
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:462
+msgid "Paragraph"
+msgstr "段落"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:70
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:459
+msgid "File Upload"
+msgstr "ファイルのアップロード"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:72
+msgid "Field"
+msgstr "分野"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:119
+msgid ""
+"Request a Quote on the frontend is a premium feature. You can preview it as "
+"an administrator, but upgrading is required for your customers to use it."
+msgstr "フロントエンドでの見積依頼はプレミアム機能です。管理者としてプレビューできますが、顧客が使用するにはアップグレードが必要です。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:130
+msgid "Back"
+msgstr "戻る"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:133
+msgid "Edit Form:"
+msgstr "フォームを編集:"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:138
+msgid "Save Form"
+msgstr "フォームを保存"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:150
+msgid "Add form title"
+msgstr "フォームのタイトルを追加"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:166
+msgid "Form Fields"
+msgstr "フォームフィールド"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:180
+msgid "Expand All"
+msgstr "すべて展開"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:190
+msgid "Collapse All"
+msgstr "すべて折りたたむ"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:197
+msgid "No fields added yet. Select a field type below to add one."
+msgstr "まだフィールドは追加されていません。追加するには、以下のフィールド タイプを選択します。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:247
+msgid "Drag to reorder"
+msgstr "ドラッグして並べ替えます"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:282
+msgid "Remove"
+msgstr "取り除く"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:293
+msgid "Paragraph Content"
+msgstr "段落の内容"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:307
+msgid "Heading Text"
+msgstr "見出しテキスト"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:314
+msgid "Title format"
+msgstr "タイトル形式"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:317
+msgid "Label"
+msgstr "ラベル"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:318
+msgid "Hidden"
+msgstr "隠れた"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:331
+msgid "Options (One per line)"
+msgstr "オプション (1 行に 1 つ)"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:339
+msgid ""
+"Option 1\n"
+"Option 2\n"
+"Option 3"
+msgstr ""
+"オプション 1\n"
+"オプション 2\n"
+"オプション 3"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:346
+msgid "Require input"
+msgstr "入力が必要です"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:355
+msgid "Sync with product quantity"
+msgstr "製品数量と同期する"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:364
+msgid "Add description"
+msgstr "説明を追加"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:386
+msgid "Add placeholder"
+msgstr "プレースホルダーを追加"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:407
+msgid "Max File Size (MB)"
+msgstr "最大ファイルサイズ (MB)"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:411
+msgid "Leave blank or set to 0 for unlimited size (up to server limit)."
+msgstr "空白のままにするか、サイズを無制限にするには 0 に設定します (サーバー制限まで)。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:416
+msgid "Allowed Extensions"
+msgstr "許可される拡張子"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:419
+msgid "Comma separated, e.g. pdf, doc, png. Leave blank for any."
+msgstr "カンマ区切り、例: pdf、ドキュメント、png。どれも空白のままにしておきます。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:451
+msgid "Add field..."
+msgstr "フィールドを追加..."
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:475
+msgid "Appearance & Content"
+msgstr "外観と内容"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:478
+msgid "Prompt Text"
+msgstr "プロンプトテキスト"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:479
+msgid "The text displayed below the pricing table to open this form."
+msgstr "このフォームを開くために価格表の下に表示されるテキスト。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:486
+msgid "Display Position"
+msgstr "表示位置"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:489
+msgid "Below the pricing layout"
+msgstr "価格設定レイアウトの下"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:490
+msgid "Integrated into the pricing layout (Default)"
+msgstr "価格設定レイアウトに統合 (デフォルト)"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:494
+msgid "Choose how the quote link is positioned relative to the pricing rules."
+msgstr "価格設定ルールに対して見積リンクをどのように配置するかを選択します。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:520
+msgid "Integrated Quantity Label"
+msgstr "統合数量ラベル"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:524
+msgid ""
+"Customize the label shown for the quantity column when the form is "
+"integrated into pricing blocks."
+msgstr "フォームが価格設定ブロックに統合されている場合に、数量列に表示されるラベルをカスタマイズします。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:530
+msgid "Modal Title"
+msgstr "モーダルタイトル"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:538
+msgid "Submit Button Text"
+msgstr "送信ボタンのテキスト"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:548
+msgid "Auto-Open Quantity Trigger"
+msgstr "自動オープン数量トリガー"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:549
+msgid ""
+"Automatically open the quote form if a customer selects this quantity or "
+"higher. Leave blank to disable."
+msgstr "顧客がこの数量以上を選択した場合、見積フォームが自動的に開きます。無効にするには空白のままにします。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:555
+msgid "Email Notifications"
+msgstr "電子メール通知"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:558
+msgid "Enable Admin Email"
+msgstr "管理者の電子メールを有効にする"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:561
+msgid "Send an email to the store admin when this form is submitted."
+msgstr "このフォームを送信したら、ストア管理者にメールを送信してください。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:566
+msgid "Enable Customer Email"
+msgstr "顧客の電子メールを有効にする"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:569
+msgid "Send an acknowledgment email to the customer."
+msgstr "顧客に確認メールを送信します。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:574
+msgid "Manage Email Templates ↗"
+msgstr "メールテンプレートの管理 ↗"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:578
+msgid "Success Actions"
+msgstr "成功のアクション"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:581
+msgid "After Submission"
+msgstr "提出後"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:584
+msgid "Show Message"
+msgstr "メッセージを表示"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:585
+msgid "Redirect to URL"
+msgstr "URLにリダイレクト"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:594
+msgid "Success Message"
+msgstr "成功メッセージ"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:600
+msgid "Thank you, our sales team will contact you shortly."
+msgstr "ありがとうございます。弊社の営業チームがすぐにご連絡いたします。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:605
+msgid "Message shown after successful submission."
+msgstr "送信が成功した後に表示されるメッセージ。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:613
+msgid "Redirect URL"
+msgstr "リダイレクトURL"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:617
+msgid "Enter the full URL (e.g., https://example.com/thank-you)"
+msgstr "完全な URL を入力します (例: https://example.com/thank-you)"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:10
+msgid "Anti-Spam (reCAPTCHA v3)"
+msgstr "スパム対策 (reCAPTCHA v3)"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:12
+msgid ""
+"Configure Google reCAPTCHA v3 to protect all quote forms from spam. Leave "
+"blank to disable."
+msgstr "すべての見積フォームをスパムから保護するために Google reCAPTCHA v3 を構成します。無効にするには空白のままにします。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:16
+msgid "Site Key"
+msgstr "サイトキー"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:23
+msgid "Secret Key"
+msgstr "秘密鍵"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/GlobalSettings.js:44
+msgid "Save Settings"
+msgstr "設定の保存"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:104
+msgid "Settings saved successfully."
+msgstr "設定が正常に保存されました。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:110
+msgid "Error saving settings."
+msgstr "設定の保存中にエラーが発生しました。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:140
+msgid "New Form"
+msgstr "新しいフォーム"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:143
+msgid "Name"
+msgstr "名前"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:143
+msgid "Enter your full name"
+msgstr "フルネームを入力してください"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:144
+msgid "Enter your email address"
+msgstr "メールアドレスを入力してください"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:145
+msgid "Specify the quantity you need"
+msgstr "必要な数量を指定してください"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:146
+msgid "Add any specific requirements or questions here..."
+msgstr "特定の要件や質問があればここに追加してください..."
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:205
+msgid "Loading..."
+msgstr "読み込み中..."
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:214
+msgid "Congratulations! 🎉"
+msgstr "おめでとう！ 🎉"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:220
+msgid "You have successfully created your first quote request form."
+msgstr "最初の見積依頼フォームが正常に作成されました。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:224
+msgid "Next Step: Assign Your Form"
+msgstr "次のステップ: フォームを割り当てる"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:227
+msgid ""
+"You can now select this quote form in the Product settings, Role-based "
+"rules, or Global pricing rules."
+msgstr "製品設定、役割ベースのルール、またはグローバル価格設定ルールでこの見積フォームを選択できるようになりました。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:233
+msgid "Awesome, Got it!"
+msgstr "すごい、わかりました！"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:156
+msgid "Are you sure you want to delete this form?"
+msgstr "このフォームを削除してもよろしいですか?"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:126
+msgid "Global settings saved successfully."
+msgstr "グローバル設定が正常に保存されました。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/App.js:132
+msgid "Error saving global settings."
+msgstr "グローバル設定の保存中にエラーが発生しました。"
+
+#: src/Addons/CatalogPrices/CatalogPricesAddon.php:8
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:13
+msgid "Shop & Categories Price Format"
+msgstr "ショップとカテゴリーの価格形式"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:18
+msgid ""
+"Manage how the main product price string is formatted in shop pages, "
+"categories, and widgets."
+msgstr "ショップ ページ、カテゴリ、ウィジェットで主な商品価格文字列の形式を管理します。"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:29
+msgid "Override default price display"
+msgstr "デフォルトの価格表示を上書きする"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:33
+msgid ""
+"Replace the standard WooCommerce price with a custom lowest price or price "
+"range."
+msgstr "標準の WooCommerce 価格をカスタムの最低価格または価格範囲に置き換えます。"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:38
+msgid "Apply to variable products"
+msgstr "可変商品への適用"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:42
+msgid ""
+"Calculate the lowest and highest prices across all variations and display "
+"them using your chosen format."
+msgstr "すべてのバリエーションにわたる最低価格と最高価格を計算し、選択した形式を使用して表示します。"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:47
+msgid "Format style"
+msgstr "フォーマットスタイル"
+
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:72
+msgid "Prefix for lowest price"
+msgstr "最安値のプレフィックス"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:25
+msgid ""
+"Applies to each product individually. If mix & match is enabled, the minimum"
+" quantity requirement will be shared across variations of a variable "
+"product."
+msgstr "各製品に個別に適用されます。ミックスアンドマッチが有効な場合、最小数量要件は可変製品のバリエーション全体で共有されます。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:34
+msgid "Variable Product Minimum Quantity"
+msgstr "可変製品の最小数量"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35
+#: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:100
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:38
+msgid ""
+"Determine whether the minimum quantity requirement applies to each variation"
+" separately, or to the combined total of all variations in the cart."
+msgstr "最小数量要件が各バリエーションに個別に適用されるか、カート内のすべてのバリエーションの合計に適用されるかを決定します。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:45
+#: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:87
+msgid "Global Settings"
+msgstr "グローバル設定"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:46
+#: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:88
+msgid "Individual variation"
+msgstr "個人差"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:47
+#: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:89
+msgid "Variable product total (Mix & match)"
+msgstr "可変製品合計 (ミックスアンドマッチ)"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
+#: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:91
+msgid "Calculate minimum quantity by"
+msgstr "最小数量を次のように計算します"
+
+#. translators: 1: Product name, 2: Minimum quantity.
+#: src/Addons/MinQuantity/MinQuantity.php:170
+#: src/Addons/MinQuantity/StoreApiValidation.php:27
+#, php-format
+msgid "Minimum quantity for %1$s is %2$s."
+msgstr "%1$s の最小数量は %2$s です。"
+
+#. translators: 1: Minimum quantity, 2: Product name.
+#: src/Addons/MinQuantity/MinQuantity.php:190
+#: src/Addons/MinQuantity/StoreApiValidation.php:49
+#, php-format
+msgid ""
+"You need to order at least %1$s items of %2$s to meet the minimum order "
+"quantity."
+msgstr "最小注文数量を満たすには、少なくとも %2$s の %1$s 個のアイテムを注文する必要があります。"
+
+#. translators: 1: Missing quantity, 2: Product name, 3: Minimum quantity.
+#: src/Addons/MinQuantity/MinQuantity.php:209
+#, php-format
+msgid ""
+"You need %1$s more items of %2$s to meet the minimum order quantity of %3$s."
+msgstr "最小注文数量 %3$s を満たすには、さらに %2$s のアイテムが %1$s 必要です。"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:25
+msgid "Show pricing summary block"
+msgstr "価格の概要ブロックを表示"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:32
+msgid "Show for standard products (non-tiered)"
+msgstr "標準製品 (階層化されていない) を表示します"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:36
+msgid ""
+"Display the pricing summary block for regular WooCommerce products even if "
+"they don't have tiered pricing rules."
+msgstr "段階的な価格設定ルールがない場合でも、通常の WooCommerce 製品の価格概要ブロックを表示します。"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:39
+msgid "Summary block title"
+msgstr "概要ブロックのタイトル"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:47
+msgid "Block position"
+msgstr "ブロック位置"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:64
+msgid "Summary layout"
+msgstr "概要レイアウト"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:69
+msgid "Compact"
+msgstr "コンパクト"
+
+#: src/Addons/PricingSummary/SummarySubsection.php:70
+msgid "Inline labels"
+msgstr "インラインラベル"
+
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:10
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:22
+msgid "Shop & Categories"
+msgstr "ショップとカテゴリー"
+
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:36
+msgid "Tiered Pricing on Shop & Category Pages"
+msgstr "ショップページとカテゴリーページでの段階的な価格設定"
+
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:42
+msgid "Enable on Shop & Categories"
+msgstr "ショップとカテゴリで有効にする"
+
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:51
+msgid ""
+"Turn this on to display tiered pricing directly within your shop and "
+"category pages."
+msgstr "これをオンにすると、ショップ ページやカテゴリ ページ内に段階的な価格が直接表示されます。"
+
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:67
+msgid "Position on product grid item"
+msgstr "製品グリッド項目上の位置"
+
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:82
+msgid "Add quantity selector to grids"
+msgstr "数量セレクターをグリッドに追加する"
+
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:91
+msgid ""
+"Add a quantity input field directly to items on the shop and category pages."
+msgstr "ショップページやカテゴリページの商品に直接数量入力フィールドを追加します。"
+
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:100
+msgid "Security check failed. Please refresh the page and try again."
+msgstr "セキュリティチェックに失敗しました。ページを更新して、もう一度お試しください。"
+
+#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:10
+msgid "Cart Page Pricing"
+msgstr "カートページの価格"
+
+#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:24
+msgid "Show original item price crossed out"
+msgstr "元の商品価格を取り消し線で表示"
+
+#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:32
+msgid "Show original subtotal crossed out"
+msgstr "元の小計を取り消し線で表示"
+
+#: src/Addons/TieredPricingCart/CartOptionsSubsection.php:40
+msgid "Cross out regular price instead of sale price"
+msgstr "セール価格ではなく通常価格を取り消し線で消します"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:26
+msgid "Show savings badge on product page"
+msgstr "商品ページに節約バッジを表示する"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:34
+msgid "Include WooCommerce sale discount in total savings"
+msgstr "WooCommerce セール割引を合計節約額に含めます"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:38
+msgid ""
+"If a product is already on sale, add that existing discount to the tiered "
+"pricing savings so the customer sees one large total saved."
+msgstr ""
+"製品がすでに販売されている場合は、その既存の割引を段階的な価格設定の節約に追加すると、顧客は合計で 1 つの大きな節約ができるようになります。"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:42
+msgid "Show badge for standard products (non-tiered)"
+msgstr "標準商品 (階層化されていない) のバッジを表示します"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:46
+msgid ""
+"Display the savings badge for regular WooCommerce sale products even if they"
+" don't have tiered pricing rules."
+msgstr "通常の WooCommerce セール商品には、段階的な価格設定ルールがない場合でも、割引バッジを表示します。"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:50
+msgid "Badge text template"
+msgstr "バッジ テキスト テンプレート"
+
+#: src/Addons/YouSave/YouSaveSubsection.php:62
+msgid "Badge text color"
+msgstr "バッジの文字色"
+
+#: src/Admin/ProductPage/RoleCustomerPricingTab.php:21
+msgid "Role & Customer Prices"
+msgstr "役割と顧客の価格"
+
+#: src/Admin/ProductPage/RoleCustomerPricingTab.php:80
+msgid "Unlock Role & Customer pricing rules by upgrading to Premium."
+msgstr "プレミアムにアップグレードして、役割と顧客の価格設定ルールを解除します。"
+
+#: src/Admin/Tips/Tips/RoleCustomerPricingTabTip.php:43
+msgid "Need to add or modify user roles?"
+msgstr "ユーザーの役割を追加または変更する必要がありますか?"
+
+#. translators: %s: URL to the Role Manager.
+#: src/Admin/Tips/Tips/RoleCustomerPricingTabTip.php:50
+#, php-format
+msgid ""
+"You can create, edit, or manage user roles directly from the <a href=\"%s\" "
+"target=\"_blank\">Role Manager</a>."
+msgstr "ユーザー ロールは、<a href=\"%s\" target=\"_blank\">ロール マネージャー</a>から直接作成、編集、管理できます。"
+
+#: src/Integrations/Plugins/WooPaymentsMulticurrency.php:43
+msgid ""
+"Convert and display tiered pricing correctly when using WooPayments "
+"Multicurrency."
+msgstr "WooPayments Multicurrency を使用する場合、段階的な価格を正しく変換して表示します。"
+
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:18
+msgid "Variable products logic"
+msgstr "変動商品ロジック"
+
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:19
+msgid "Control how tiered pricing handles variable products."
+msgstr "段階的な価格設定で変動する製品をどのように処理するかを制御します。"
+
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:34
+msgid "Combine variations for minimum quantity"
+msgstr "バリエーションを組み合わせて最小数量を実現"
+
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:46
+msgid "General calculations"
+msgstr "一般的な計算"
+
+#: src/Settings/Sections/CalculationLogic/CalculationLogic.php:47
+msgid "Control general calculation behavior for tiered pricing."
+msgstr "段階的な価格設定の一般的な計算動作を制御します。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:29
+msgid "Show tiered pricing automatically"
+msgstr "段階的な価格設定を自動的に表示する"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:33
+msgid ""
+"Automatically insert the pricing layout on the product page. If disabled, "
+"pricing remains dynamic but you must insert the layout manually via "
+"shortcode, block, or widget."
+msgstr ""
+"製品ページに価格設定レイアウトを自動的に挿入します。無効にした場合、価格は動的のままですが、ショートコード、ブロック、またはウィジェットを介してレイアウトを手動で挿入する必要があります。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:38
+msgid "Default visual layout"
+msgstr "デフォルトのビジュアルレイアウト"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:48
+msgid "Options design style"
+msgstr "オプションのデザインスタイル"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:62
+msgid "Table design style"
+msgstr "テーブルデザインスタイル"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:76
+msgid "Blocks design style"
+msgstr "ブロックデザインスタイル"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:92
+msgid "Enable compact layout"
+msgstr "コンパクトなレイアウトを有効にする"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:96
+msgid "Apply a space-saving compact design for the selected layout."
+msgstr "選択したレイアウトに合わせて、省スペースのコンパクトなデザインを適用します。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:99
+msgid "Layout title"
+msgstr "レイアウトタイトル"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:106
+msgid "Layout position"
+msgstr "レイアウト位置"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:125
+msgid "Quantity format"
+msgstr "数量形式"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:169
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:180
+msgid "Quantity unit label"
+msgstr "数量単位ラベル"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:191
+msgid "Table column headers"
+msgstr "テーブルの列ヘッダー"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:210
+msgid "Leave a column title empty to hide that column entirely."
+msgstr "その列を完全に非表示にするには、列タイトルを空のままにします。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:222
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:46
+msgid "Show original price crossed out"
+msgstr "元の価格を取り消し線で表示"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:226
+msgid ""
+"Pricing options will show a crossed-out regular price next to the discounted"
+" tier price."
+msgstr "価格オプションでは、割引価格の横に取り消し線が付いた通常価格が表示されます。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:231
+msgid "Show total calculated price for selected option"
+msgstr "選択したオプションの合計計算価格を表示します"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:235
+msgid ""
+"The selected pricing option will dynamically display the total calculated "
+"cost."
+msgstr "選択した価格オプションにより、計算された合計コストが動的に表示されます。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:239
+msgid "Pricing option text template"
+msgstr "価格オプションのテキストテンプレート"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:254
+msgid "Show base price (no discount) option"
+msgstr "基本価格 (割引なし) オプションを表示"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:258
+msgid ""
+"Display an option for the regular product price (e.g. 1 item) where no tier "
+"discount is applied."
+msgstr "階層割引が適用されない通常の商品価格 (例: 1 アイテム) のオプションを表示します。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:262
+msgid "Base price option template"
+msgstr "基本価格オプションのテンプレート"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:270
+msgid "Customize the template for the base price option."
+msgstr "基本価格オプションのテンプレートをカスタマイズします。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:313
+msgid "Make pricing tiers clickable"
+msgstr "価格階層をクリックできるようにする"
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:317
+msgid ""
+"Allow customers to click on a pricing tier (table row, block, or option) to "
+"automatically select that quantity."
+msgstr "顧客が価格階層 (表の行、ブロック、またはオプション) をクリックして、その数量を自動的に選択できるようにします。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:12
+msgid "Single Product Page Pricing"
+msgstr "単一製品ページの価格設定"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:31
+msgid "Match Shop & Categories display (price range or lowest price)"
+msgstr "ショップとカテゴリの表示（価格帯または最安値）"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:32
+msgid "Actual price for selected quantity"
+msgstr "選択した数量の実際の価格"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:38
+msgid "Update price on quantity change"
+msgstr "数量変更時に価格を更新します"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:42
+msgid ""
+"Automatically update the main product price whenever a customer changes the "
+"quantity input."
+msgstr "顧客が数量入力を変更するたびに、主要製品の価格を自動的に更新します。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:50
+msgid ""
+"Cross out the regular price and show the discounted tiered price next to it "
+"when a higher quantity is selected."
+msgstr "より多くの数量が選択された場合は、通常価格を取り消し線で消し、その横に割引された階層価格を表示します。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:54
+msgid "Show total price (Price × Quantity)"
+msgstr "合計金額を表示（価格×数量）"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:58
+msgid ""
+"Multiply the main product price by the selected quantity instead of showing "
+"the per-item price."
+msgstr "商品ごとの価格を表示するのではなく、主な商品価格に選択した数量を掛けます。"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:63
+msgid "Show total price for non-tiered products"
+msgstr "階層化されていない製品の合計価格を表示する"
+
+#: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:67
+msgid ""
+"Multiply the price by quantity even if the product has no tiered pricing "
+"rules."
+msgstr "製品に段階的な価格設定ルールがない場合でも、価格に数量を掛けます。"
+
+#: views/admin/components/minimum-order-quantity-form.php:18
+msgid "Available in premium version"
+msgstr "プレミアムバージョンで利用可能"
+
+#: views/admin/welcome-page/welcome-page.php:970
+msgid ""
+"Allow customers to request custom quotes via a sleek customizable popup."
+msgstr "顧客は洗練されたカスタマイズ可能なポップアップを介してカスタム見積もりをリクエストできます。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:71
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:460
+msgid "Date Picker"
+msgstr "日付ピッカー"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:428
+msgid "Disable past dates"
+msgstr "過去の日付を無効にする"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:431
+msgid "Prevent customers from selecting dates in the past."
+msgstr "顧客が過去の日付を選択できないようにします。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:491
+msgid "Next to Add to Cart button"
+msgstr "「カートに追加」ボタンの横にあります"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:500
+msgid "Hide Add to Cart button"
+msgstr "「カートに追加」ボタンを非表示にする"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:503
+msgid ""
+"Visually hides the WooCommerce Add to Cart button, leaving only the Quote "
+"button."
+msgstr "WooCommerce の [カートに追加] ボタンを視覚的に非表示にし、[見積] ボタンだけを残します。"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:510
+msgid "Show for non-purchasable products"
+msgstr "購入できない商品を表示する"
+
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:513
+msgid ""
+"Display the Quote button even if the product does not have a price or is out"
+" of stock."
+msgstr "価格のない商品や在庫切れの商品でも見積ボタンを表示します。"
+
+#. translators: 1: Product name, 2: Date.
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:109
+#, php-format
+msgid "%1$s - %2$s"
+msgstr ""
+
+#. translators: 1: File name, 2: Max file size in MB.
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:231
+#, php-format
+msgid "File %1$s exceeds the maximum allowed size of %2$s MB."
+msgstr "ファイル %1$s は最大許容サイズ %2$s MB を超えています。"
+
+#. translators: 1: File extension, 2: Allowed extensions.
+#: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:241
+#, php-format
+msgid "File type .%1$s is not allowed. Allowed: %2$s"
+msgstr "ファイル タイプ .%1$s は許可されません。許可されています: %2$s"

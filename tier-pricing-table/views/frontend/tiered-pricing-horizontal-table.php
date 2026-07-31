@@ -276,6 +276,8 @@
 					?>
 				</div>
 			<?php endwhile; ?>
+			
+			<?php do_action( 'tiered_pricing_table/horizontal-table/after_columns', $pricing_rule, $settings ); ?>
 		</div>
 
 		<?php do_action( 'tiered_pricing_table/tiered_pricing/after', $pricing_rule ); ?>

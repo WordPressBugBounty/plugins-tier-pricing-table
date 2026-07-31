@@ -87,7 +87,7 @@ if ( $sale_price ) {
 			}
 			?>
 
-			<div class="tiered-pricing-dropdown__select-box" tabindex="0">
+			<div class="tiered-pricing-dropdown__select-box" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="tiered-pricing-dropdown-list-<?php echo esc_attr( $id ); ?>">
 				<div class="tiered-pricing-dropdown-option">
 					<div class="tiered-pricing-dropdown-option__quantity">
 						
@@ -158,8 +158,10 @@ if ( $sale_price ) {
 			</div>
 
 			<div class="tiered-pricing-dropdown__list">
-				<ul>
+				<ul role="listbox" id="tiered-pricing-dropdown-list-<?php echo esc_attr( $id ); ?>">
 					<li class="tiered-pricing-dropdown-option tiered-pricing-dropdown-option--active tiered-pricing-dropdown-option--default"
+						role="option"
+						aria-selected="true"
 						data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
 						data-tiered-price="<?php echo esc_attr( $price ); ?>"
 						data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
@@ -274,6 +276,8 @@ if ( $sale_price ) {
 						?>
 
 						<li class="tiered-pricing-dropdown-option"
+							role="option"
+							aria-selected="false"
 							data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
 							data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
 							data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
@@ -327,7 +331,8 @@ if ( $sale_price ) {
 		$backgroundColor = Settings::hex2rgba($settings['active_tier_color'], 0.05);
 
 		$clickableCSS = <<<EOD
-			.tiered-pricing-dropdown__list .tiered-pricing-dropdown-option:hover {
+			.tiered-pricing-dropdown__list .tiered-pricing-dropdown-option:hover,
+			.tiered-pricing-dropdown__list .tiered-pricing-dropdown-option:focus {
 		        background: $backgroundColor;
 		         cursor: pointer;
 		    }

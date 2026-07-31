@@ -57,7 +57,7 @@ class TieredPricingTab {
 			
 			<?php 
         if ( !tpt_fs()->can_use_premium_code() ) {
-            $this->renderUpgradeNotice();
+            //$this->renderUpgradeNotice();
         }
         if ( tpt_fs()->can_use_premium_code() && !tpt_fs()->is_premium() ) {
             $this->getContainer()->getFileManager()->includeTemplate( 'admin/banners/free-version-used-premium-available.php', array(

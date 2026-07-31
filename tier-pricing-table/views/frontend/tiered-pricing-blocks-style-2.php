@@ -211,7 +211,7 @@
 				</div>
 			<?php endwhile; ?>
 
-			<?php do_action( 'tiered_pricing_table/blocks/blocks', $pricing_rule ); ?>
+			<?php do_action( 'tiered_pricing_table/blocks/blocks', $pricing_rule, $settings ); ?>
 		</div>
 
 		<?php do_action( 'tiered_pricing_table/blocks/after_blocks', $pricing_rule ); ?>
