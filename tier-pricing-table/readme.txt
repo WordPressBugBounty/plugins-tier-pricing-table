@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 7.1.4
+Stable tag: 7.1.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,6 +173,10 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 7.1.5 [2026-08-14] =
+* Fix: percentage tiered prices were calculated from a price WooCommerce Subscriptions had already modified, which double-prorated the first payment of synchronised subscriptions and mis-applied sign-up fees and free trials.
+* Fix: the prorated cost of a subscription quantity switch ignored the tiered discount, overcharging the customer.
 
 = 7.1.4 [2026-08-13] =
 * Fix: cart prices ignored the exchange rate with the WPML Multicurrency integration (regression in 7.1.3).
