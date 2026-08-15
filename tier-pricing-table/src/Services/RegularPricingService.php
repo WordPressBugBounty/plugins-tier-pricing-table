@@ -148,15 +148,15 @@ class RegularPricingService {
 	}
 	
 	public function adjustPrice( $originalPrice, ?WC_Product $product ) {
-		
-		if ( ! TierPricingTablePlugin::isSimpleProductSupported( $product ) ) {
-			return $originalPrice;
-		}
-		
+
 		if ( ! $product ) {
 			return $originalPrice;
 		}
-		
+
+		if ( ! TierPricingTablePlugin::isSimpleProductSupported( $product ) ) {
+			return $originalPrice;
+		}
+
 		if ( $product->get_meta( 'tiered_pricing_cart_price_calculated' ) === 'yes' ) {
 			return $originalPrice;
 		}

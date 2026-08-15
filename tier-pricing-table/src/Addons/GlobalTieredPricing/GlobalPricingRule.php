@@ -669,29 +669,33 @@ class GlobalPricingRule {
          *
          * If the product in exclusion - pricing rule does not match immediately
          */
-        if ( !empty( $this->getExcludedProducts() ) ) {
-            if ( in_array( $product->get_id(), $this->getExcludedProducts() ) || in_array( $parentProduct->get_id(), $this->getExcludedProducts() ) ) {
+        $excludedProducts = $this->translateIds( $this->getExcludedProducts(), 'product' );
+        if ( !empty( $excludedProducts ) ) {
+            if ( in_array( $product->get_id(), $excludedProducts ) || in_array( $parentProduct->get_id(), $excludedProducts ) ) {
                 return false;
             }
         }
-        if ( !empty( $this->getExcludedProductCategories() ) ) {
-            if ( !empty( array_intersect( $parentProduct->get_category_ids(), $this->getExcludedProductCategories() ) ) ) {
+        $excludedProductCategories = $this->translateIds( $this->getExcludedProductCategories(), 'product_cat' );
+        if ( !empty( $excludedProductCategories ) ) {
+            if ( !empty( array_intersect( $parentProduct->get_category_ids(), $excludedProductCategories ) ) ) {
                 return false;
             }
         }
-        if ( !empty( $this->getExcludedProductTags() ) ) {
-            if ( !empty( array_intersect( $parentProduct->get_tag_ids(), $this->getExcludedProductTags() ) ) ) {
+        $excludedProductTags = $this->translateIds( $this->getExcludedProductTags(), 'product_tag' );
+        if ( !empty( $excludedProductTags ) ) {
+            if ( !empty( array_intersect( $parentProduct->get_tag_ids(), $excludedProductTags ) ) ) {
                 return false;
             }
         }
-        if ( !empty( $this->getExcludedProductBrands() ) ) {
+        $excludedProductBrands = $this->translateIds( $this->getExcludedProductBrands(), 'product_brand' );
+        if ( !empty( $excludedProductBrands ) ) {
             $productBrands = wp_get_post_terms( $parentProduct->get_id(), 'product_brand', array(
                 'fields' => 'ids',
             ) );
             if ( is_wp_error( $productBrands ) ) {
                 $productBrands = [];
             }
-            if ( !empty( array_intersect( $productBrands, $this->getExcludedProductBrands() ) ) ) {
+            if ( !empty( array_intersect( $productBrands, $excludedProductBrands ) ) ) {
                 return false;
             }
         }
@@ -715,25 +719,29 @@ class GlobalPricingRule {
          */
         $productMatched = false;
         $productLimitations = false;
-        if ( !empty( $this->getIncludedProducts() ) ) {
+        $includedProducts = $this->translateIds( $this->getIncludedProducts(), 'product' );
+        if ( !empty( $includedProducts ) ) {
             $productLimitations = true;
-            if ( in_array( $product->get_id(), $this->getIncludedProducts() ) || in_array( $parentProduct->get_id(), $this->getIncludedProducts() ) ) {
+            if ( in_array( $product->get_id(), $includedProducts ) || in_array( $parentProduct->get_id(), $includedProducts ) ) {
                 $productMatched = true;
             }
         }
-        if ( !empty( $this->getIncludedProductCategories() ) ) {
+        $includedProductCategories = $this->translateIds( $this->getIncludedProductCategories(), 'product_cat' );
+        if ( !empty( $includedProductCategories ) ) {
             $productLimitations = true;
-            if ( !empty( array_intersect( $parentProduct->get_category_ids(), $this->getIncludedProductCategories() ) ) ) {
+            if ( !empty( array_intersect( $parentProduct->get_category_ids(), $includedProductCategories ) ) ) {
                 $productMatched = true;
             }
         }
-        if ( !empty( $this->getIncludedProductTags() ) ) {
+        $includedProductTags = $this->translateIds( $this->getIncludedProductTags(), 'product_tag' );
+        if ( !empty( $includedProductTags ) ) {
             $productLimitations = true;
-            if ( !empty( array_intersect( $parentProduct->get_tag_ids(), $this->getIncludedProductTags() ) ) ) {
+            if ( !empty( array_intersect( $parentProduct->get_tag_ids(), $includedProductTags ) ) ) {
                 $productMatched = true;
             }
         }
-        if ( !empty( $this->getIncludedProductBrands() ) ) {
+        $includedProductBrands = $this->translateIds( $this->getIncludedProductBrands(), 'product_brand' );
+        if ( !empty( $includedProductBrands ) ) {
             $productLimitations = true;
             $productBrands = wp_get_post_terms( $parentProduct->get_id(), 'product_brand', array(
                 'fields' => 'ids',
@@ -741,7 +749,7 @@ class GlobalPricingRule {
             if ( is_wp_error( $productBrands ) ) {
                 $productBrands = [];
             }
-            if ( !empty( array_intersect( $productBrands, $this->getIncludedProductBrands() ) ) ) {
+            if ( !empty( array_intersect( $productBrands, $includedProductBrands ) ) ) {
                 $productMatched = true;
             }
         }
@@ -767,6 +775,42 @@ class GlobalPricingRule {
             }
         }
         return false;
+    }
+
+    /**
+     * Map a rule's stored object IDs to the language currently being viewed.
+     *
+     * A rule is created in a single language and stores the product/term IDs of that language. The
+     * product being priced (and the term IDs returned by WooCommerce for it) are in the current
+     * language, so under WPML/Polylang a raw ID comparison would never match on a translation. This
+     * translates the stored IDs into the current language via the shared `wpml_object_id` filter
+     * (implemented by both WPML and Polylang) so the comparison works across every translation.
+     *
+     * When no multilingual plugin is active the filter has no listeners, so the IDs are returned
+     * unchanged with no overhead.
+     *
+     * @param  int[]   $ids   Object IDs as stored on the rule.
+     * @param  string  $type  Element type: a post type ('product') or taxonomy ('product_cat',
+     *                        'product_tag', 'product_brand').
+     *
+     * @return int[]
+     */
+    protected function translateIds( array $ids, string $type ) : array {
+        if ( empty( $ids ) || !has_filter( 'wpml_object_id' ) ) {
+            return $ids;
+        }
+        $translated = array();
+        foreach ( $ids as $id ) {
+            // The `true` argument keeps the original ID when the object has no translation in the
+            // current language, preserving the previous behaviour for untranslated objects.
+            $translated[] = (int) apply_filters(
+                'wpml_object_id',
+                $id,
+                $type,
+                true
+            );
+        }
+        return $translated;
     }
 
 }

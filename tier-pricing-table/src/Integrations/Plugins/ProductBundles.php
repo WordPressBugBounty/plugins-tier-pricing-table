@@ -90,6 +90,26 @@ class ProductBundles extends PluginIntegrationAbstract {
 		} );
 
 		add_filter( 'tiered_pricing_table/services/pricing/override_zero_prices', '__return_false' );
+
+		add_filter( 'tiered_pricing_table/manual_created_orders/modify_item_price', function ( $modify, $item ) {
+			if ( ! $modify ) {
+				return false;
+			}
+
+			if ( ! ( $item instanceof \WC_Order_Item_Product ) ) {
+				return $modify;
+			}
+
+			if ( function_exists( 'wc_pb_is_bundled_order_item' ) ) {
+				if ( wc_pb_is_bundled_order_item( $item ) ) {
+					return false;
+				}
+			} elseif ( ! empty( $item->get_meta( '_bundled_by', true ) ) || ! empty( $item->get_meta( 'bundled_by', true ) ) ) {
+				return false;
+			}
+
+			return $modify;
+		}, 10, 2 );
 	}
 
 	public function getAuthorURL(): string {

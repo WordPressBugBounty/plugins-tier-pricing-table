@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 7.1.1
+Stable tag: 7.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,6 +173,27 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 7.1.4 [2026-08-13] =
+* Fix: cart prices ignored the exchange rate with the WPML Multicurrency integration (regression in 7.1.3).
+
+= 7.1.3 [2026-08-09] =
+* New: WooCommerce Subscriptions integration — tiered pricing now applies correctly to products purchased on a subscription plan, in both the initial and recurring totals.
+* New: YITH Multi Currency Switcher integration.
+* New: WPML/Polylang support for role-based and user-based tiered pricing on product translations.
+* Enhance: Global tiered pricing rules now match products, categories, tags and brands across WPML/Polylang translations.
+* Fix: Prevented two possible fatal errors — a null product passed into the price filter by third-party code, and re-calculating a manual order whose product had been deleted.
+* Fix: A 100%-off tier could be charged at full price when re-calculating manual orders.
+* Fix: WCCS, YITH and WPML currency switchers could convert percentage-based tiered prices twice.
+* Fix: Product add-on costs were dropped from the cart price when a currency switcher was active.
+* Fix: Division-by-zero warning in the WooCommerce Deposits integration.
+* Fix: SEO structured data (Rank Math, Yoast, SEOPress) declared more offers than it output; the SEOPress price-range tag showed the lowest price instead of a range.
+
+= 7.1.2 [2026-08-06] =
+* Enhance: Product Bundles integration for manually created orders.
+* Fix: WPML Multicurrency rounding rules were not applied to tiered prices.
+* Fix: Tiered price in the cart was converted twice by currency switchers after decreasing the quantity below the first tier.
+* Fix: Prices with taxes for the products without tiered pricing rules.
 
 = 7.1.1 [2026-07-29] =
 * Fix: frontend JS issue with totals.

@@ -83,9 +83,9 @@ class WooCommerceProductAddons extends PluginIntegrationAbstract {
 		if ( is_plugin_active( 'woocommerce-product-addons/woocommerce-product-addons.php' ) ) {
 			
 			add_action( 'wp_footer', array( $this, 'addCompatibilityScript' ) );
-			
-			add_action( 'tiered_pricing_table/cart/product_cart_price', array( $this, 'addAddonsPrice' ), 10, 2 );
-			add_action( 'tiered_pricing_table/cart/product_cart_price/item', array( $this, 'addAddonsPrice' ), 10, 2 );
+
+			add_action( 'tiered_pricing_table/cart/product_cart_price', array( $this, 'addAddonsPrice' ), 20, 2 );
+			add_action( 'tiered_pricing_table/cart/product_cart_price/item', array( $this, 'addAddonsPrice' ), 20, 2 );
 			
 			// Handle the case when product addons request product price via AJAX
 			add_filter( 'woocommerce_product_addons_ajax_get_product_price_excluding_tax',

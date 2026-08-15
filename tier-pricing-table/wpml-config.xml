@@ -27,6 +27,8 @@
         <custom-field action="copy">_tiered_price_minimum_qty</custom-field>
         <custom-field action="copy">_tiered_pricing_maximum_quantity</custom-field>
         <custom-field action="copy">_tiered_pricing_group_of_quantity</custom-field>
+        <custom-field action="copy">_tiered_price_mix_and_match_minimum</custom-field>
+        <custom-field action="copy">_tiered_pricing_variable_product_same_prices</custom-field>
     </custom-fields>
 
 </wpml-config>

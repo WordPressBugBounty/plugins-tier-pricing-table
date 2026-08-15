@@ -24,22 +24,30 @@ class WooCommerceDeposits extends PluginIntegrationAbstract {
 	
 	public function run() {
 		add_filter( 'tiered_pricing_table/cart/product_cart_price', function ( $new_price, $cart_item, $key ) {
-			
-			if ( $new_price ) {
-				// WooCommerce Deposit
-				$cart = wc()->cart;
-				
-				if ( isset( $cart->cart_contents[ $key ]['full_amount'] ) ) {
-					
-					$depositPercentage = 1 / ( $cart->cart_contents[ $key ]['full_amount'] / $cart->cart_contents[ $key ]['deposit_amount'] );
-					
-					$cart->cart_contents[ $key ]['full_amount']    = $new_price;
-					$cart->cart_contents[ $key ]['deposit_amount'] = $cart->cart_contents[ $key ]['full_amount'] * $depositPercentage;
-				}
+
+			if ( ! $new_price ) {
+				return $new_price;
 			}
-			
+
+			// Only WooCommerce Deposits populates these cart-item keys, so their presence gates this to deposit products.
+			$cart = wc()->cart;
+
+			if ( ! isset( $cart->cart_contents[ $key ]['full_amount'], $cart->cart_contents[ $key ]['deposit_amount'] ) ) {
+				return $new_price;
+			}
+
+			$fullAmount    = (float) $cart->cart_contents[ $key ]['full_amount'];
+			$depositAmount = (float) $cart->cart_contents[ $key ]['deposit_amount'];
+
+			// Keep the original deposit-to-full ratio and re-apply it to the new tiered price. Guard the
+			// zero full amount (e.g. 100%-later plans, where the deposit is 0 too) to avoid dividing by zero.
+			$depositPercentage = $fullAmount > 0 ? ( $depositAmount / $fullAmount ) : 0;
+
+			$cart->cart_contents[ $key ]['full_amount']    = $new_price;
+			$cart->cart_contents[ $key ]['deposit_amount'] = $new_price * $depositPercentage;
+
 			return $new_price;
-			
+
 		}, 10, 3 );
 	}
 	

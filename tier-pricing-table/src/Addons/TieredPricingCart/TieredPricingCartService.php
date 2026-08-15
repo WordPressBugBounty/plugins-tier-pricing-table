@@ -150,13 +150,22 @@ class TieredPricingCartService {
                 $newPrice = $this->getCartItemPrice( $cartItem, $key, $cart );
                 if ( false !== $newPrice ) {
                     if ( !isset( $this->originalPrices[$key] ) ) {
-                        $this->originalPrices[$key] = $cartItem['data']->get_price();
+                        // Store the raw price prop ("edit" context) on purpose. The "view" context runs the
+                        // "woocommerce_product_get_price" filter, which both RegularPricingService and currency
+                        // switchers hook into. Storing an already filtered value and restoring it with
+                        // set_price() would apply those filters a second time.
+                        $this->originalPrices[$key] = $cartItem['data']->get_price( 'edit' );
                     }
                     $cartItem['data']->set_price( $newPrice );
                     $cartItem['data']->add_meta_data( 'tiered_pricing_cart_price_calculated', 'yes' );
                 } else {
                     if ( isset( $this->originalPrices[$key] ) ) {
+                        // Fully revert the modification: put the raw price prop back and drop the flag, so the
+                        // "woocommerce_product_get_price" filters (role-based pricing, currency conversion)
+                        // apply to the restored price exactly once, as they would have without this service.
                         $cartItem['data']->set_price( $this->originalPrices[$key] );
+                        $cartItem['data']->delete_meta_data( 'tiered_pricing_cart_price_calculated' );
+                        unset($this->originalPrices[$key]);
                     }
                 }
                 // Update tiered pricing data

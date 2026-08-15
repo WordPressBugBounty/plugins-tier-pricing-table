@@ -13,6 +13,6 @@ class SEOPressPriceRangeTag extends SEOPressCustomTag implements GetTagValue {
 	}
 	
 	public function getValue( $context = null ): string {
-		return $this->getPrice( 'price_range' );
+		return $this->getPrice( 'range' );
 	}
 }

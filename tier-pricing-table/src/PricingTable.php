@@ -208,6 +208,23 @@ class PricingTable {
 			$price_excl_taxes = wc_get_price_excluding_tax( $product, array(
 					'price' => $product->get_price(),
 			) );
+
+			$sale_price = $product->get_sale_price();
+
+			if ( $sale_price ) {
+				$sale_price = wc_get_price_to_display( $product, array(
+						'price' => $sale_price,
+				) );
+			}
+
+			$regular_price = wc_get_price_to_display( $product, array(
+					'price' => $product->get_regular_price(),
+			) );
+
+			$price = wc_get_price_to_display( $product, array(
+					'price' => $product->get_price(),
+			) );
+
 			?>
 			<div style="display:none;"
 			     class="tiered-pricing-fallback-data"
@@ -215,11 +232,11 @@ class PricingTable {
 			     data-price-rules="{}"
 			     data-minimum="1"
 			     data-product-name="<?php echo esc_attr( $product->get_name() ); ?>"
-			     data-regular-price="<?php echo esc_attr( $product->get_regular_price() ); ?>"
-			     data-sale-price="<?php echo esc_attr( $product->get_sale_price() ); ?>"
-			     data-price="<?php echo esc_attr( $product->get_price() ); ?>"
+			     data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
+			     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
+			     data-price="<?php echo esc_attr( $price ); ?>"
 			     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
-			     data-tiered-price="<?php echo esc_attr( $product->get_price() ); ?>"
+			     data-tiered-price="<?php echo esc_attr( $price ); ?>"
 			     data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
 			     data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>"
 			></div>

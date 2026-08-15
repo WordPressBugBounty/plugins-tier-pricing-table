@@ -2,14 +2,9 @@
 
 namespace TierPricingTable\Integrations\Plugins\SEOPress;
 
-use TierPricingTable\Integrations\Plugins\PluginIntegrationAbstract;
-use TierPricingTable\Managers\FormatPriceManager;
-use TierPricingTable\PriceManager;
-use TierPricingTable\TierPricingTablePlugin;
+use TierPricingTable\Integrations\Plugins\SeoIntegrationAbstract;
 use WC_Product;
-class SEOPress extends PluginIntegrationAbstract {
-    protected $product = null;
-
+class SEOPress extends SeoIntegrationAbstract {
     public function getTitle() : string {
         return 'SEOPress';
     }
@@ -19,6 +14,14 @@ class SEOPress extends PluginIntegrationAbstract {
     }
 
     public function getSlug() : string {
+        return 'seopress';
+    }
+
+    protected function getSettingsPrefix() : string {
+        return 'seopress';
+    }
+
+    protected function getSchemaFilterSlug() : string {
         return 'seopress';
     }
 
@@ -33,47 +36,65 @@ class SEOPress extends PluginIntegrationAbstract {
                 return $sections;
             } );
         } );
-    }
-
-    public function getIntegrationCategory() : string {
-        return 'seo';
+        return;
+        add_filter( 'seopress_titles_template_replace_array', function ( $replace ) {
+            if ( !$this->isVariablesEnabled() ) {
+                return $replace;
+            }
+            $replace['%%lowest_price%%'] = $this->getPrice( 'lowest_price' );
+            $replace['%%price_range%%'] = $this->getPrice( 'range' );
+            return $replace;
+        } );
+        add_filter( 'seopress_titles_template_variables_array', function ( $variables ) {
+            if ( !$this->isVariablesEnabled() ) {
+                return $variables;
+            }
+            $variables[] = "%%lowest_price%%";
+            $variables[] = "%%price_range%%";
+            return $variables;
+        } );
+        add_filter( 'seopress_get_dynamic_variables', function ( $variables ) {
+            $variables['%%lowest_price%%'] = 'Lowest Price';
+            $variables['%%price_range%%'] = 'Price Range';
+            return $variables;
+        } );
+        add_filter( 'seopress_tags_available', function ( $tags ) {
+            // Register Lowest Price
+            $tags['lowest_price'] = [
+                'class'       => SEOPressLowestPriceTag::class,
+                'name'        => __( 'Lowest Price', 'tier-pricig-table' ),
+                'description' => SEOPressLowestPriceTag::getDescription(),
+                'input'       => '%%lowest_price%%',
+            ];
+            // Register Price Range
+            $tags['price_range'] = [
+                'class'       => SEOPressPriceRangeTag::class,
+                'name'        => __( 'Price Range', 'seopress' ),
+                'description' => SEOPressPriceRangeTag::getDescription(),
+                'input'       => '%%price_range%%',
+            ];
+            return $tags;
+        } );
+        // SEOPress Schema Integration
+        add_filter( 'seopress_structured_data_product', function ( $data ) {
+            if ( !is_product() || !is_array( $data ) ) {
+                return $data;
+            }
+            global $product;
+            if ( !$this->isEnhancedSchemaEnabled() || !$product instanceof WC_Product ) {
+                return $data;
+            }
+            return $this->enhanceProductSchema( $data, $product );
+        } );
     }
 
     public function getPrice( $type ) : ?string {
-        $product = $this->get_product();
-        if ( !$product ) {
-            return '';
-        }
-        return FormatPriceManager::getFormattedPrice( $product, array(
-            'for_display'        => true,
-            'with_suffix'        => false,
-            'with_default_price' => true,
-            'with_lowest_prefix' => false,
-            'html'               => false,
-            'display_type'       => $type,
-        ) );
+        return $this->getFormattedProductPrice( $type, false );
     }
 
     public function getIconURL() : ?string {
         // Make sure to add a seopress-icon.png/gif to your assets
         return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/seopress-icon.gif' );
-    }
-
-    public function get_product() {
-        if ( !is_null( $this->product ) ) {
-            return $this->product;
-        }
-        $product_id = get_queried_object_id();
-        $this->product = ( !function_exists( 'wc_get_product' ) || !$product_id || !is_admin() && !is_singular( 'product' ) ? null : wc_get_product( $product_id ) );
-        return $this->product;
-    }
-
-    public function isVariablesEnabled() : bool {
-        return $this->getContainer()->getSettings()->get( 'seopress_enable_variables', 'yes' ) === 'yes';
-    }
-
-    public function isEnhancedSchemaEnabled() : bool {
-        return $this->getContainer()->getSettings()->get( 'seopress_enhance_schema', 'no' ) === 'yes';
     }
 
 }

@@ -2,14 +2,9 @@
 
 namespace TierPricingTable\Integrations\Plugins\Yoast;
 
-use TierPricingTable\Integrations\Plugins\PluginIntegrationAbstract;
-use TierPricingTable\Managers\FormatPriceManager;
-use TierPricingTable\PriceManager;
-use TierPricingTable\TierPricingTablePlugin;
+use TierPricingTable\Integrations\Plugins\SeoIntegrationAbstract;
 use WC_Product;
-class Yoast extends PluginIntegrationAbstract {
-    protected $product = null;
-
+class Yoast extends SeoIntegrationAbstract {
     public function getTitle() : string {
         return 'Yoast SEO';
     }
@@ -22,6 +17,14 @@ class Yoast extends PluginIntegrationAbstract {
         return 'yoast-seo';
     }
 
+    protected function getSettingsPrefix() : string {
+        return 'yoast';
+    }
+
+    protected function getSchemaFilterSlug() : string {
+        return 'yoast_seo';
+    }
+
     public function run() {
         add_action( 'plugins_loaded', function () {
             if ( !class_exists( 'WPSEO_Options' ) ) {
@@ -32,31 +35,37 @@ class Yoast extends PluginIntegrationAbstract {
                 return $sections;
             } );
         } );
-    }
-
-    public function getIntegrationCategory() : string {
-        return 'seo';
+        return;
+        add_filter(
+            'wpseo_replacements',
+            function ( $replacements ) {
+                if ( !$this->isVariablesEnabled() ) {
+                    return $replacements;
+                }
+                if ( !$this->get_product() ) {
+                    return $replacements;
+                }
+                $replacements['%%lowest_price%%'] = $this->getFormattedProductPrice( 'lowest_price' );
+                $replacements['%%price_range%%'] = $this->getFormattedProductPrice( 'range' );
+                return $replacements;
+            },
+            10,
+            2
+        );
+        add_filter( 'wpseo_schema_product', function ( $data ) {
+            if ( !is_product() || !is_array( $data ) ) {
+                return $data;
+            }
+            global $product;
+            if ( !$this->isEnhancedSchemaEnabled() || !$product instanceof WC_Product ) {
+                return $data;
+            }
+            return $this->enhanceProductSchema( $data, $product );
+        } );
     }
 
     public function getIconURL() : ?string {
         return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/yoast-icon.gif' );
-    }
-
-    public function get_product() {
-        if ( !is_null( $this->product ) ) {
-            return $this->product;
-        }
-        $product_id = get_queried_object_id();
-        $this->product = ( !function_exists( 'wc_get_product' ) || !$product_id || !is_admin() && !is_singular( 'product' ) ? null : wc_get_product( $product_id ) );
-        return $this->product;
-    }
-
-    public function isVariablesEnabled() : bool {
-        return $this->getContainer()->getSettings()->get( 'yoast_enable_variables', 'yes' ) === 'yes';
-    }
-
-    public function isEnhancedSchemaEnabled() : bool {
-        return $this->getContainer()->getSettings()->get( 'yoast_enhance_schema', 'no' ) === 'yes';
     }
 
 }

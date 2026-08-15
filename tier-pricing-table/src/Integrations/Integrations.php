@@ -16,9 +16,12 @@ use TierPricingTable\Integrations\Plugins\WooPaymentsMulticurrency;
 use TierPricingTable\Integrations\Plugins\WombatProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceDeposits;
 use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
+use TierPricingTable\Integrations\Plugins\WooCommerceSubscriptions;
 use TierPricingTable\Integrations\Plugins\WOOCS;
 use TierPricingTable\Integrations\Plugins\WPAllImport;
 use TierPricingTable\Integrations\Plugins\WPMLMulticurrency;
+use TierPricingTable\Integrations\Plugins\WPMLMultilingual;
+use TierPricingTable\Integrations\Plugins\YithMulticurrency;
 use TierPricingTable\Integrations\Plugins\YithRequestAQuote;
 use TierPricingTable\Integrations\Plugins\Yoast\Yoast;
 use TierPricingTable\Integrations\Themes\Astra;
@@ -54,6 +57,7 @@ class Integrations {
 			ElementorIntegration::class,
 			WPAllImport::class,
 			WooCommerceProductAddons::class,
+			WooCommerceSubscriptions::class,
 			ProductBundles::class,
 			WooCommerceDeposits::class,
 			WOOCS::class,
@@ -63,7 +67,9 @@ class Integrations {
 			
 			WCCS::class,
 			WPMLMulticurrency::class,
+			WPMLMultilingual::class,
 			WooPaymentsMulticurrency::class,
+			YithMulticurrency::class,
 			YithRequestAQuote::class,
 			AddifyRequestAQuote::class,
 			
