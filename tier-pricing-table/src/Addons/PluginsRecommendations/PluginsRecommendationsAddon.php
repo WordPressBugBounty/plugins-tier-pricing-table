@@ -24,5 +24,6 @@ class PluginsRecommendationsAddon extends AbstractAddon {
 		new ConditionalLogicForProductAddons();
 		new CancellationSurveysPlugin();
 		new BulkPriceEditorPlugin();
+		new U2CodeProductAddonsPlugin();
 	}
 }

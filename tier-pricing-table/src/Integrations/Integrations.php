@@ -9,6 +9,8 @@ use TierPricingTable\Integrations\Plugins\MixMatch;
 use TierPricingTable\Integrations\Plugins\ProductBundles;
 use TierPricingTable\Integrations\Plugins\RankMath\RankMath;
 use TierPricingTable\Integrations\Plugins\SEOPress\SEOPress;
+use TierPricingTable\Integrations\Plugins\U2CodeProductAddons;
+use TierPricingTable\Integrations\Plugins\U2CodeMulticurrency;
 use TierPricingTable\Integrations\Plugins\WCCS;
 use TierPricingTable\Integrations\Plugins\WCPA;
 use TierPricingTable\Integrations\Plugins\WCPProductBundles;
@@ -56,6 +58,8 @@ class Integrations {
 		$plugins = apply_filters( 'tiered_pricing_table/integrations/plugins', array(
 			ElementorIntegration::class,
 			WPAllImport::class,
+			U2CodeProductAddons::class,
+			U2CodeMulticurrency::class,
 			WooCommerceProductAddons::class,
 			WooCommerceSubscriptions::class,
 			ProductBundles::class,

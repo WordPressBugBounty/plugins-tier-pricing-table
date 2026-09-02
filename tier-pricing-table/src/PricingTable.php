@@ -230,7 +230,7 @@ class PricingTable {
 			     class="tiered-pricing-fallback-data"
 			     data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
 			     data-price-rules="{}"
-			     data-minimum="1"
+			     data-minimum="<?php echo esc_attr( $priceRule->getMinimum( true ) ); ?>"
 			     data-product-name="<?php echo esc_attr( $product->get_name() ); ?>"
 			     data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
 			     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"

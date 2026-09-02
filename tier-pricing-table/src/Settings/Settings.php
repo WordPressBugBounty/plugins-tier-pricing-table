@@ -15,6 +15,8 @@ use TierPricingTable\Settings\Sections\Advanced\AdvancedSection;
 use TierPricingTable\Settings\Sections\CalculationLogic\CalculationLogic;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use TierPricingTable\Settings\Sections\Integrations\IntegrationSection;
+use TierPricingTable\Settings\Sections\Multicurrency\MulticurrencySection;
+use TierPricingTable\Settings\Sections\ProductAddons\ProductAddonsSection;
 use TierPricingTable\Settings\Sections\SectionAbstract;
 use TierPricingTable\TierPricingTablePlugin;
 /**
@@ -104,6 +106,41 @@ class Settings {
     }
 
     /**
+     * Order the settings sections deterministically: configuration first, then display, features,
+     * feature toggles, third-party sections, and maintenance last. Without this the tab order is an
+     * accident of hook registration, because every addon splices its section in relative to another.
+     *
+     * Sections with an unknown slug (third-party) keep their relative order and land before Tools.
+     *
+     * @param  array  $sections
+     *
+     * @return array
+     */
+    protected function sortSections( array $sections ) : array {
+        $order = (array) apply_filters( 'tiered_pricing_table/settings/sections_order', array(
+            'general'           => 10,
+            'calculation_logic' => 20,
+            'shop-loop-display' => 30,
+            'tier-labels'       => 40,
+            'request-a-quote'   => 50,
+            'advanced'          => 60,
+            'integrations'      => 70,
+            'multicurrency'     => 80,
+            'product-addons'    => 90,
+            'tools'             => 110,
+        ) );
+        // Stable sort: usort() is only guaranteed stable on PHP 8+, so tie-break on the original index.
+        $indexed = array();
+        foreach ( array_values( $sections ) as $index => $section ) {
+            $indexed[] = array($order[$section->getSlug()] ?? 100, $index, $section);
+        }
+        usort( $indexed, function ( $a, $b ) {
+            return ( $a[0] <=> $b[0] ?: $a[1] <=> $b[1] );
+        } );
+        return array_column( $indexed, 2 );
+    }
+
+    /**
      * Init all settings
      */
     public function initSettings() {
@@ -111,8 +148,11 @@ class Settings {
             new GeneralSection(),
             new CalculationLogic(),
             new AdvancedSection(),
+            new MulticurrencySection(),
+            new ProductAddonsSection(),
             new IntegrationSection()
         ) );
+        $this->sections = $this->sortSections( $this->sections );
         foreach ( $this->sections as $section ) {
             if ( $section->isActive() ) {
                 $this->settings = $section->getSettings();
@@ -133,6 +173,12 @@ class Settings {
     }
 
     public function renderSections() {
+        // Opening a section clears its "unread" indicator (store-wide)
+        foreach ( $this->sections as $section ) {
+            if ( $section->isActive() ) {
+                $section->markBadgeSeen();
+            }
+        }
         ?>
 		<style>
 			h2 {
@@ -169,6 +215,15 @@ class Settings {
                     ?>
 								<?php 
                     echo esc_html( $section->getName() );
+                    ?>
+								<?php 
+                    if ( $section->isBadgeUnseen() ) {
+                        ?>
+									<span class="tpt-unread-badge" aria-hidden="true">1</span><span class="screen-reader-text"><?php 
+                        esc_html_e( 'New', 'tier-pricing-table' );
+                        ?></span>
+								<?php 
+                    }
                     ?>
 							<?php 
                 }

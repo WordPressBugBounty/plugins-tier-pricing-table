@@ -38,9 +38,39 @@ abstract class PluginIntegrationAbstract {
 			'icon_url'             => $this->getIconURL(),
 			'author_url'           => $this->getAuthorURL(),
 			'integration_category' => $this->getIntegrationCategory(),
+			'official'             => $this->isOfficial(),
+			'action_links'         => $this->getActionLinks(),
+			'meta_pills'           => $this->getMetaPills(),
 		);
 		
 		return $integrations;
+	}
+	
+	/**
+	 * Whether the integrated plugin is made by U2Code (the makers of this plugin).
+	 * Official integrations get a badge on the integrations screen and are listed first in their category.
+	 */
+	public function isOfficial(): bool {
+		return false;
+	}
+	
+	/**
+	 * Optional action links rendered under the integration description
+	 * (e.g. install / activate the integrated plugin).
+	 *
+	 * @return array<int, array{url: string, label: string, target?: string}>
+	 */
+	public function getActionLinks(): array {
+		return array();
+	}
+	
+	/**
+	 * Optional short feature highlights rendered as pills under the integration title.
+	 *
+	 * @return array<int, string>
+	 */
+	public function getMetaPills(): array {
+		return array();
 	}
 	
 	public function getIconURL(): ?string {

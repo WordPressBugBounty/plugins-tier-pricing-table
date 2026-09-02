@@ -45,22 +45,35 @@ class TPTIntegrationOption {
 		}
 		
 		$option_value = $value['value'];
+		$is_official  = ! empty( $value['official'] );
+		$action_links = isset( $value['action_links'] ) && is_array( $value['action_links'] ) ? $value['action_links'] : array();
+		$meta_pills   = isset( $value['meta_pills'] ) && is_array( $value['meta_pills'] ) ? $value['meta_pills'] : array();
 		?>
-		<tr class="tpt-integration-item">
+		<tr class="tpt-integration-item <?php echo $is_official ? 'tpt-integration-item--official' : ''; ?>">
 			<td>
-				<div class="tpt-integration-wrapper">
+				<div class="tpt-integration-wrapper <?php echo $is_official ? 'tpt-integration-wrapper--official' : ''; ?>">
 					<div class="tpt-integration-item__image">
 						<img src="<?php echo esc_attr( $value['icon_url'] ); ?>"
 							 alt="<?php echo esc_attr( $value['title'] ); ?>">
 					</div>
 					<div class="tpt-integration-item__description">
+						<div class="tpt-integration-item__content">
 						
+						<?php $official_badge = $is_official ? ' <span class="tpt-integration-item__official-badge">' . esc_html__( 'By U2Code', 'tier-pricing-table' ) . '</span>' : ''; ?>
 						<?php if ( $value['author_url'] ) : ?>
 							<a target="_blank" href="<?php echo esc_attr( $value['author_url'] ); ?>">
-								<h4><?php echo esc_html( $value['title'] ); ?></h4>
+								<h4><?php echo esc_html( $value['title'] ) . wp_kses_post( $official_badge ); ?></h4>
 							</a>
 						<?php else : ?>
-							<h4><?php echo esc_html( $value['title'] ); ?></h4>
+							<h4><?php echo esc_html( $value['title'] ) . wp_kses_post( $official_badge ); ?></h4>
+						<?php endif; ?>
+
+						<?php if ( $meta_pills ) : ?>
+							<div class="tpt-integration-item__pills">
+								<?php foreach ( $meta_pills as $pill ) : ?>
+									<span class="tpt-integration-item__pill"><?php echo esc_html( $pill ); ?></span>
+								<?php endforeach; ?>
+							</div>
 						<?php endif; ?>
 
 						<p class="description">
@@ -68,6 +81,23 @@ class TPTIntegrationOption {
 								echo wp_kses_post( $value['desc'] ); // audit.php.wp.security.xss.shortcode-attr ignore
 							?>
 						</p>
+
+						</div>
+
+						<div class="tpt-integration-item__actions">
+						<?php if ( $action_links ) : ?>
+							<div class="tpt-integration-item__action-links">
+								<?php foreach ( $action_links as $action_link ) : ?>
+									<?php if ( empty( $action_link['url'] ) || empty( $action_link['label'] ) ) { continue; } ?>
+									<a class="tpt-integration-item__action-link"
+										target="<?php echo esc_attr( $action_link['target'] ?? '_blank' ); ?>"
+										<?php echo ( $action_link['target'] ?? '_blank' ) === '_blank' ? 'rel="noopener"' : ''; ?>
+										href="<?php echo esc_url( $action_link['url'] ); ?>">
+										<?php echo esc_html( $action_link['label'] ); ?> &rarr;
+									</a>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
 						<div class="tpt-integration-item-checkbox">
 							<input
 									name="<?php echo esc_attr( $value['id'] ); ?>"
@@ -81,6 +111,7 @@ class TPTIntegrationOption {
 								<span data-tpt-toggle-switch-on><?php echo esc_attr( $value['on_label'] ); ?></span>
 								<span data-tpt-toggle-switch-off><?php echo esc_attr( $value['off_label'] ); ?></span>
 							</label>
+						</div>
 						</div>
 					</div>
 				</div>

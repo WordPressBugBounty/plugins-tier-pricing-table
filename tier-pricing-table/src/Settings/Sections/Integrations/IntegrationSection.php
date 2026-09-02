@@ -8,11 +8,17 @@ class IntegrationSection extends SectionAbstract {
 	
 	use ServiceContainerTrait;
 	
+	
 	public function getSettings(): array {
 		
 		$settings = array();
 		
 		$categories = array(
+			'u2code'               => array(
+				'title'       => __( 'U2Code plugins', 'tier-pricing-table' ),
+				'description' => __( 'Plugins by the makers of Tiered Pricing Table — built to work together with deep, first-party integrations.',
+					'tier-pricing-table' ),
+			),
 			'other'                => array(
 				'title'       => __( 'General integrations', 'tier-pricing-table' ),
 				'description' => __( 'Integrations with most popular plugins that are not related to a specific category.' ),
@@ -51,7 +57,10 @@ class IntegrationSection extends SectionAbstract {
 		$integrations  = [];
 		
 		foreach ( $_integrations as $integration ) {
-			$integrations[ $integration['integration_category'] ][] = $integration;
+			// Official (U2Code) integrations are shown in their own section at the top of the page.
+			$categoryID = ! empty( $integration['official'] ) ? 'u2code' : $integration['integration_category'];
+			
+			$integrations[ $categoryID ][] = $integration;
 		}
 		
 		foreach ( $categories as $categoryID => $category ) {
@@ -102,6 +111,11 @@ class IntegrationSection extends SectionAbstract {
 		delete_option( Settings::SETTINGS_PREFIX . '_integration_product-bundles-for-woocommerce' );
 		delete_option( Settings::SETTINGS_PREFIX . '_integration_aelia-multicurrency' );
 		delete_option( Settings::SETTINGS_PREFIX . '_integration_wcpa' );
+		delete_option( Settings::SETTINGS_PREFIX . '_integration_u2code-product-addons' );
+		delete_option( Settings::SETTINGS_PREFIX . '_integration_u2code-multicurrency' );
+		delete_option( 'tpt_integrations_badge_seen' );
+		delete_option( 'tpt_section_badge_seen_multicurrency' );
+		delete_option( 'tpt_section_badge_seen_product-addons' );
 		delete_option( Settings::SETTINGS_PREFIX . 'integrations' );
 	}
 }

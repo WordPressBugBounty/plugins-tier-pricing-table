@@ -34,7 +34,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '7.1.5';
+	const VERSION = '7.1.7';
 	
 	/**
 	 * TierPricingTablePlugin constructor.

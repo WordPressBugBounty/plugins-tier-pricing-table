@@ -31,4 +31,24 @@ abstract class SectionAbstract {
 		return false;
 	}
 	
+	/**
+	 * "Unread" indicator on this section's navigation link. Return a version string to enable it;
+	 * bump the version to show the badge again after it was seen. Store-wide: the first visit
+	 * clears it for every user.
+	 */
+	public function getBadgeVersion(): ?string {
+		return null;
+	}
+	
+	public function isBadgeUnseen(): bool {
+		$version = $this->getBadgeVersion();
+		
+		return $version && get_option( 'tpt_section_badge_seen_' . $this->getSlug() ) !== $version;
+	}
+	
+	public function markBadgeSeen() {
+		if ( $this->getBadgeVersion() ) {
+			update_option( 'tpt_section_badge_seen_' . $this->getSlug(), $this->getBadgeVersion(), false );
+		}
+	}
 }

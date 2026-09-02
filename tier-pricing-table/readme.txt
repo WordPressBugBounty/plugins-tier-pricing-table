@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 7.1.5
+Stable tag: 7.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,6 +173,19 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 7.1.7 [2026-09-02] =
+* New: U2Code Multicurrency integration
+* New: Multicurrency and Product Addons settings sections — show the detected plugin of each kind, the state of its integration, and the matching U2Code plugin
+* New: Mix & Match settings section with an option to apply tiered pricing to the products inside Mix and Match containers (per-item pricing)
+* Improvement: settings tabs are now ordered consistently — configuration first, then display, features, modules, integrations, and Tools last
+* Fix: the maximum order quantity was enforced as half of the configured value in the WooCommerce block cart (Store API)
+* Fix: a pricing rule matching a Mix and Match container re-priced the container itself on top of its contents
+
+= 7.1.6 [2026-08-25] =
+* New: dedicated integration with U2Code Product Addons — the new "U2Code plugins" section on the integrations page
+* New: recommendations tip for product options in the product's Tiered Pricing tab
+* Improvement: integrations page redesign with official-plugin cards
 
 = 7.1.5 [2026-08-14] =
 * Fix: percentage tiered prices were calculated from a price WooCommerce Subscriptions had already modified, which double-prorated the first payment of synchronised subscriptions and mis-applied sign-up fees and free trials.

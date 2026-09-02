@@ -77,7 +77,11 @@ class QuantityManager {
 				
 				if ( $max ) {
 					
-					if ( ! is_cart() && ! is_checkout() ) {
+					// Subtract what is already in the cart ONLY for the classic product-page input, where
+					// the field means "how many more can be added". The Store API reads this filter's
+					// max_value as the ABSOLUTE cart maximum (QuantityLimits::get_add_to_cart_limits), so
+					// subtracting there double-counts the cart and caps customers at half the real limit.
+					if ( ! is_cart() && ! is_checkout() && ! WC()->is_rest_api_request() ) {
 						$max = max( 1, $max - $this->getProductCartQuantity( $product->get_id() ) );
 					}
 					
