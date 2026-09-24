@@ -1,0 +1,118 @@
+/* Wholesale registration form and status box. The inputs use WooCommerce's form-row classes, so the theme's form styling applies. */
+.tpt-wholesale {
+	max-width: 640px;
+}
+
+.tpt-wholesale__title {
+	margin: 0 0 .5em;
+}
+
+.tpt-wholesale__intro {
+	margin: 0 0 1.5em;
+}
+
+.tpt-wholesale__form .form-row {
+	margin: 0 0 1em;
+}
+
+.tpt-wholesale__form .form-row label {
+	display: block;
+	margin-bottom: .3em;
+}
+
+.tpt-wholesale__form .form-row .optional {
+	font-weight: normal;
+	opacity: .65;
+	font-size: .9em;
+}
+
+.tpt-wholesale__form .input-text,
+.tpt-wholesale__form textarea.input-text {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.tpt-wholesale__row--half {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0 1em;
+}
+
+@media (max-width: 480px) {
+	.tpt-wholesale__row--half {
+		grid-template-columns: 1fr;
+	}
+}
+
+.tpt-wholesale__form .form-row.woocommerce-invalid .input-text {
+	border-color: #b81c23;
+}
+
+.tpt-wholesale__account {
+	padding: .75em 1em;
+	border-radius: 6px;
+	background: rgba(0, 0, 0, .04);
+}
+
+.tpt-wholesale__terms label {
+	display: flex !important;
+	align-items: flex-start;
+	gap: .5em;
+}
+
+.tpt-wholesale__terms input {
+	margin-top: .3em;
+}
+
+.tpt-wholesale__submit {
+	margin-top: 1.5em;
+}
+
+.tpt-wholesale__login {
+	font-size: .95em;
+	opacity: .85;
+}
+
+.tpt-wholesale__hp {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* status box */
+.tpt-wholesale-status {
+	display: flex;
+	gap: 1em;
+	align-items: flex-start;
+	padding: 1.25em 1.5em;
+	border: 1px solid rgba(0, 0, 0, .12);
+	border-radius: 10px;
+}
+
+.tpt-wholesale-status__icon {
+	flex: none;
+	color: #6b7280;
+}
+
+.tpt-wholesale-status--approved .tpt-wholesale-status__icon {
+	color: #15803d;
+}
+
+.tpt-wholesale-status--rejected .tpt-wholesale-status__icon {
+	color: #b91c1c;
+}
+
+.tpt-wholesale-status__title {
+	margin: 0 0 .4em;
+	font-size: 1.25em;
+}
+
+.tpt-wholesale-status__body p:last-child {
+	margin-bottom: 0;
+}
+
+.tpt-wholesale-apply-link {
+	margin-top: 1em;
+}

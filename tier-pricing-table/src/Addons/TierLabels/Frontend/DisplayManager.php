@@ -74,7 +74,8 @@ class DisplayManager {
 
 		// CSS Fixes
 		if ( 'blocks' === $layout ) {
-			if ( in_array( $args['style'], array( 'default', '1', '2', '4' ) ) ) {
+			// styles with a floating label above the block (5 and 7 are card styles like the default)
+			if ( in_array( $args['style'], array( 'default', '1', '2', '4', '5', '7' ) ) ) {
 				$CSS .= "#{$args['id']} { gap: 20px 10px }";
 				$CSS .= "#{$args['id']} .tiered-pricing-block { position: relative; }";
 				$CSS .= "#{$args['id']} .tiered-pricing-tier-label {margin: 0 !important;
@@ -86,7 +87,7 @@ class DisplayManager {
 					z-index: 20;}";
 			}
 
-			if ( in_array( $args['style'], array( 'default', '2', '4' ) ) ) {
+			if ( in_array( $args['style'], array( 'default', '2', '4', '5', '7' ) ) ) {
 				$CSS .= "#{$args['id']} .tiered-pricing-block:has(#" . $label->getId() . ") { padding-top: 12px; }";
 			}
 
@@ -97,7 +98,9 @@ class DisplayManager {
 		} elseif ( 'table' === $layout ) {
 			$CSS .= "#{$args['id']} tbody td:has(#" . $label->getId() . ") { display: flex; align-items: center; gap: 5px; }";
 		} elseif ( 'plain-text' === $layout ) {
-			$CSS .= ".tiered-pricing-plain-text:has(#" . $label->getId() . ") {display:flex; align-items: center; gap: 5px; }";
+			// the "one line" style keeps its tiers inline
+			$display = '2' === (string) $args['style'] ? 'inline-flex' : 'flex';
+			$CSS    .= "#{$args['id']} .tiered-pricing-plain-text:has(#" . $label->getId() . ") { display: {$display}; align-items: center; gap: 5px; }";
 		}
 
 		if ( $CSS ) {

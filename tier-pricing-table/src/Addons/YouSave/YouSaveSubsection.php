@@ -49,8 +49,7 @@ class YouSaveSubsection extends SubsectionAbstract {
 			array(
 				'title'        => __( 'Badge text template', 'tier-pricing-table' ),
 				'id'           => Settings::SETTINGS_PREFIX . 'you_save_template',
-				'default'      => __( 'You save {tp_ys_total_price} ({tp_ys_percentage_discount}%)',
-					'tier-pricing-table' ),
+				'default'      => __( 'You save {tp_ys_total_price}', 'tier-pricing-table' ),
 				'placeholders' => array(
 					'tp_ys_price',
 					'tp_ys_total_price',

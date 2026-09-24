@@ -88,7 +88,7 @@ class YouSaveService {
 
 	public function getTemplate() {
 		return get_option( Settings::SETTINGS_PREFIX . 'you_save_template',
-				'You save {tp_ys_total_price} ({tp_ys_percentage_discount}%)' );
+				'You save {tp_ys_total_price}' );
 	}
 
 	public function getTextColor() {

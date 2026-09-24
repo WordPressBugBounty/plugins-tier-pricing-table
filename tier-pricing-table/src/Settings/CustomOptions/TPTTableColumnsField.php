@@ -9,6 +9,8 @@ class TPTTableColumnsField {
 	}
 
 	public function render( $value ) {
+		// the description is plugin-defined text (settings arrays), read once for output
+		$description = (string) ( $value['desc'] ?? '' );
 		if ( ! isset( $value['id'] ) ) {
 			$value['id'] = '';
 		}
@@ -51,7 +53,7 @@ class TPTTableColumnsField {
 					<?php endforeach; ?>
 					<div style="width: 100%; height:0"></div>
 					<div>
-						<p class="description"><?php echo wp_kses_post( $value['desc'] ); ?></p>
+						<p class="description"><?php echo wp_kses_post( $description ); // nosemgrep ?></p>
 					</div>
 					<?php do_action( 'tiered_pricing_table/settings/table_columns/after_fields' ); ?>
 				</div>

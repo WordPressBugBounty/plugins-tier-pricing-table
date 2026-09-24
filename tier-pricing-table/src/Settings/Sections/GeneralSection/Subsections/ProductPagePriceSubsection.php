@@ -22,6 +22,10 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 	}
 	
 	public function getSettings(): array {
+		$price = function ( $amount ) {
+			return wp_strip_all_tags( wc_price( $amount ) );
+		};
+
 		return array(
 			array(
 				'title'   => __( 'Price display format', 'tier-pricing-table' ),
@@ -30,6 +34,12 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 				'options' => array(
 					'same_as_catalog' => __( 'Match Shop & Categories display (price range or lowest price)', 'tier-pricing-table' ),
 					'custom'          => __( 'Actual price for selected quantity', 'tier-pricing-table' ),
+				),
+				'descriptions' => array(
+					/* translators: %s: example price */
+					'same_as_catalog' => sprintf( __( 'e.g. "From %s" or a price range, as on the shop page', 'tier-pricing-table' ), $price( 10 ) ),
+					/* translators: %s: example price */
+					'custom'          => sprintf( __( 'e.g. %s when 50 pieces are selected', 'tier-pricing-table' ), $price( 12 ) ),
 				),
 				'default' => ServiceContainer::getInstance()->getSettings()->get( 'tiered_price_at_product_page',
 					'no' ) === 'yes' ? 'same_as_catalog' : 'custom',
@@ -51,22 +61,20 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 					'tier-pricing-table' ),
 			),
 			array(
-				'title'             => __( 'Show total price (Price × Quantity)', 'tier-pricing-table' ),
-				'id'                => Settings::SETTINGS_PREFIX . 'show_total_price',
-				'type'              => TPTSwitchOption::FIELD_TYPE,
-				'default'           => 'no',
-				'desc'              => __( 'Multiply the main product price by the selected quantity instead of showing the per-item price.',
+				'title'   => __( 'Show total price (Price × Quantity)', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'show_total_price',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'no',
+				'desc'    => __( 'Multiply the main product price by the selected quantity instead of showing the per-item price.',
 					'tier-pricing-table' ),
-				'custom_attributes' => [ 'data-tiered-pricing-premium-option' => true ],
 			),
 			array(
-				'title'             => __( 'Show total price for non-tiered products', 'tier-pricing-table' ),
-				'id'                => Settings::SETTINGS_PREFIX . 'show_total_price_non_tiered',
-				'type'              => TPTSwitchOption::FIELD_TYPE,
-				'default'           => 'no',
-				'desc'              => __( 'Multiply the price by quantity even if the product has no tiered pricing rules.',
+				'title'   => __( 'Show total price for non-tiered products', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'show_total_price_non_tiered',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'no',
+				'desc'    => __( 'Multiply the price by quantity even if the product has no tiered pricing rules.',
 					'tier-pricing-table' ),
-				'custom_attributes' => [ 'data-tiered-pricing-premium-option' => true ],
 			),
 		);
 	}

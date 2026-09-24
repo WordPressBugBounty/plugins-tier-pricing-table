@@ -44,7 +44,31 @@ class CartOptionsSubsection extends SubsectionAbstract {
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'no',
 			),
+			array(
+				'title'   => __( 'Show a total savings row', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'cart_total_savings',
+				'desc'    => __( 'A row in the cart totals and in the classic checkout\'s order review with the amount the tiered prices take off the cart. Not available with the Checkout block.', 'tier-pricing-table' ),
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'no',
+			),
+			array(
+				'title'   => __( 'Total savings row label', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'cart_total_savings_label',
+				'type'    => 'text',
+				'default' => __( 'Total savings', 'tier-pricing-table' ),
+				'css'     => 'width: 20em;',
+			),
 		);
+	}
+
+	public static function showTotalSavings(): bool {
+		return get_option( Settings::SETTINGS_PREFIX . 'cart_total_savings', 'no' ) === 'yes';
+	}
+
+	public static function getTotalSavingsLabel(): string {
+		$label = (string) get_option( Settings::SETTINGS_PREFIX . 'cart_total_savings_label', '' );
+
+		return '' !== trim( $label ) ? $label : __( 'Total savings', 'tier-pricing-table' );
 	}
 	
 	

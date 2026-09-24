@@ -21,23 +21,43 @@ class CartUpsellsService {
     public function __construct() {
     }
 
-    public function showUpsell( $cartItem ) {
+    public function showUpsell( $cartItem, $cartItemKey = '' ) {
         if ( !$this->isCartUpsellEnabled() ) {
             return;
         }
-        $upsellString = $this->formatUpsellString( $cartItem );
+        $nextPriceData = $this->getNextPriceData( $cartItem );
+        $upsellString = $this->formatUpsellString( $cartItem, $nextPriceData, $cartItemKey );
         if ( !$upsellString ) {
             return;
         }
+        // the link carries the target quantity for the cart script
+        $allowed = wp_kses_allowed_html( 'post' );
+        $allowed['a']['data-tpt-cart-item'] = true;
+        $allowed['a']['data-tpt-quantity'] = true;
+        $current = (int) $this->getTotalProductCountInCart( $cartItem );
+        $target = $current + (int) $nextPriceData['next_quantity'];
         ?>
-		<div>
-			<small style="color: <?php 
+		<div class="tpt-cart-upsell" style="color: <?php 
         echo esc_attr( $this->getUpsellColor() );
         ?>">
-				<?php 
-        echo wp_kses_post( $upsellString );
+			<small><?php 
+        echo wp_kses( $upsellString, $allowed );
+        ?></small>
+			<?php 
+        if ( $this->isProgressBarEnabled() && $target > 0 ) {
+            ?>
+				<div class="tpt-cart-upsell__progress" role="progressbar" aria-valuemin="0" aria-valuemax="<?php 
+            echo esc_attr( $target );
+            ?>" aria-valuenow="<?php 
+            echo esc_attr( $current );
+            ?>">
+					<i style="width: <?php 
+            echo esc_attr( max( 2, min( 100, round( $current / $target * 100 ) ) ) );
+            ?>%"></i>
+				</div>
+			<?php 
+        }
         ?>
-			</small>
 		</div>
 		<?php 
     }
@@ -69,14 +89,29 @@ class CartUpsellsService {
         return $itemData;
     }
 
-    protected function formatUpsellString( $cartItem ) {
-        $nextPriceData = $this->getNextPriceData( $cartItem );
+    /**
+     * @param  array  $cartItem
+     * @param  array|null  $nextPriceData  The next tier's figures, when already computed.
+     * @param  string  $cartItemKey  Set for the classic cart: the required quantity becomes a link that
+     *                               moves the line to the next tier.
+     *
+     * @return string|false
+     */
+    protected function formatUpsellString( $cartItem, $nextPriceData = null, $cartItemKey = '' ) {
+        if ( null === $nextPriceData ) {
+            $nextPriceData = $this->getNextPriceData( $cartItem );
+        }
         if ( empty( $nextPriceData ) ) {
             return false;
         }
         $template = $this->getTemplate();
+        $quantity = (string) $nextPriceData['next_quantity'];
+        if ( $cartItemKey && $this->isQuantityLinkEnabled() ) {
+            $target = (int) $cartItem['quantity'] + (int) $nextPriceData['next_quantity'];
+            $quantity = '<a href="#" class="tpt-cart-upsell__link" data-tpt-cart-item="' . esc_attr( $cartItemKey ) . '" data-tpt-quantity="' . esc_attr( $target ) . '">' . $quantity . '</a>';
+        }
         return strtr( $template, array(
-            '{tp_required_quantity}' => $nextPriceData['next_quantity'],
+            '{tp_required_quantity}' => $quantity,
             '{tp_next_price}'        => wc_price( $nextPriceData['next_price'] ),
             '{tp_next_discount}'     => number_format(
                 $nextPriceData['next_discount'],
@@ -169,15 +204,23 @@ class CartUpsellsService {
     }
 
     protected function getTemplate() {
-        return $this->getContainer()->getSettings()->get( 'cart_upsell_template', __( 'Buy <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each', 'tier-pricing-table' ) );
+        return $this->getContainer()->getSettings()->get( 'cart_upsell_template', __( 'Add <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each', 'tier-pricing-table' ) );
     }
 
     protected function getUpsellColor() {
-        return $this->getContainer()->getSettings()->get( 'cart_upsell_color', '#3858e9' );
+        return $this->getContainer()->getSettings()->get( 'cart_upsell_color', '#059669' );
     }
 
     protected function isCartUpsellEnabled() {
         return $this->getContainer()->getSettings()->get( 'cart_upsell_enabled', 'no' ) === 'yes';
+    }
+
+    protected function isQuantityLinkEnabled() : bool {
+        return $this->getContainer()->getSettings()->get( 'cart_upsell_link', 'yes' ) !== 'no';
+    }
+
+    protected function isProgressBarEnabled() : bool {
+        return $this->getContainer()->getSettings()->get( 'cart_upsell_progress', 'no' ) === 'yes';
     }
 
 }

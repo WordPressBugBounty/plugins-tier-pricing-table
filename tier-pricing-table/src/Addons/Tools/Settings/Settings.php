@@ -6,29 +6,38 @@ class Settings {
 
 	public function __construct() {
 
-		add_filter( 'tiered_pricing_table/settings/sections', function ( $sections ) {
+		// the utilities panel on the Advanced tab, between the modules and the cache settings
+		add_filter( 'tiered_pricing_table/settings/tools_settings', function ( $settings ) {
+			return array_merge( array(
+				array(
+					// #roles: the "Manage roles" links land here, above the Utilities heading; the app also reads the hash as its tab
+					'type' => 'tiered-pricing_tools-anchor',
+				),
+				array(
+					'title' => __( 'Utilities', 'tier-pricing-table' ),
+					'desc'  => __( 'Manage roles and clean up tiered pricing data.', 'tier-pricing-table' ),
+					'id'    => MainSettings::SETTINGS_PREFIX . 'tools_utilities',
+					'type'  => 'title',
+				),
+				array(
+					'type' => 'tiered-pricing_tools-ui',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => MainSettings::SETTINGS_PREFIX . 'tools_utilities',
+				),
+			), $settings );
+		} );
 
-			$_sections = array();
-
-			foreach ( $sections as $section ) {
-
-				if ( $section->getSlug() === 'advanced' ) {
-					$_sections[] = new ToolsSettingsSection();
-				}
-
-				$_sections[] = $section;
-			}
-
-			return $_sections;
-		}, 10 );
+		add_action( 'woocommerce_admin_field_tiered-pricing_tools-anchor', function () {
+			// printed between two settings tables, so it is not a table row; the scroll margin keeps the heading below the sticky bars
+			?>
+			<div id="roles" style="scroll-margin-top: 90px;"></div>
+			<?php
+		} );
 
 		add_action( 'woocommerce_admin_field_tiered-pricing_tools-ui', function () {
 			?>
-			<style>
-				p.submit {
-					display: none !important;
-				}
-			</style>
 			<tr valign="top">
 				<td colspan="2" class="forminp">
 					<div id="tiered-pricing__feature__tools"></div>
@@ -46,7 +55,7 @@ class Settings {
 				return;
 			}
 
-			if ( 'tools' !== $section ) {
+			if ( ! in_array( $section, array( 'advanced', 'tools' ), true ) ) { // 'tools' is the pre-7.2.1 link
 				return;
 			}
 

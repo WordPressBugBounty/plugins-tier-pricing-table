@@ -13,6 +13,59 @@ class QuoteFormDisplay {
 		self::$renderedModals[ $productId ] = $form;
 	}
 
+	/**
+	 * The product a modal is keyed by: variations share their parent's modal.
+	 *
+	 * @param  int  $productId
+	 *
+	 * @return int
+	 */
+	public static function getModalProductId( $productId ): int {
+		$product = wc_get_product( $productId );
+
+		if ( $product && $product->get_parent_id() ) {
+			return (int) $product->get_parent_id();
+		}
+
+		return (int) $productId;
+	}
+
+	/**
+	 * Make sure a variable product's modal is printed in wp_footer even if no quote button rendered
+	 * during the page request: with more variations than the AJAX threshold, every variation's
+	 * pricing table (and its button) is fetched by AJAX later, and no default variation may be
+	 * selected at all. Fires only in the main page render, never in the AJAX handler.
+	 *
+	 * @param  \WC_Product|mixed  $parentProduct
+	 * @param  mixed              $variationId
+	 * @param  array              $settings
+	 */
+	public function registerVariableProductModal( $parentProduct, $variationId = null, $settings = array() ) {
+
+		if ( ! ( $parentProduct instanceof \WC_Product ) || ! TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ) {
+			return;
+		}
+
+		// Only the product page switches variations (and loads their tables by AJAX). Tables in shop
+		// loops, related products etc. never do, so they don't need a modal registered up front.
+		if ( ( $settings['display_context'] ?? 'product-page' ) !== 'product-page' ) {
+			return;
+		}
+
+		$parentId = $parentProduct->get_id();
+
+		if ( isset( self::$renderedModals[ $parentId ] ) ) {
+			return;
+		}
+
+		$formId = PriceManager::getPricingRule( $parentId )->data['tier_pricing_table_quote_form_id'] ?? null;
+		$form   = $formId ? RequestQuoteForm::get( (string) $formId ) : null;
+
+		if ( $form ) {
+			self::addModalToRender( $form, $parentId );
+		}
+	}
+
 	public function __construct() {
 		// Initialize and register hooks for Layout Adapters
 		( new Adapters\TableAdapter() )->registerHooks();
@@ -23,6 +76,7 @@ class QuoteFormDisplay {
 		( new Adapters\PlainTextAdapter() )->registerHooks();
 		( new Adapters\AddToCartAdapter() )->registerHooks();
 
+		add_action( 'tiered_pricing_table/before_rendering_tiered_pricing', array( $this, 'registerVariableProductModal' ), 10, 3 );
 		add_action( 'wp_footer', array( $this, 'renderFormModal' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueueAssets' ) );
 		add_action( 'template_redirect', array( $this, 'handleSuccessNotice' ) );
@@ -176,14 +230,13 @@ class QuoteFormDisplay {
 						?>
 						<input type="file" id="tpt_field_<?php echo esc_attr( $name ); ?>"
 						       name="<?php echo esc_attr( $name ); ?>"
-								<?php echo $allowedTypes ? 'accept="' . $allowedTypes . '"' : ''; ?>
+								<?php if ( $allowedTypes ) : ?>accept="<?php echo esc_attr( $allowedTypes ); ?>"<?php endif; ?>
 								<?php echo $required ? 'required' : ''; ?>>
 
 					<?php else : ?>
 						<?php
 						$syncClass     = ( $type === 'number' && ! empty( $field['syncWithQuantity'] ) ) ? 'tpt-quote-sync-quantity' : '';
-						$maxLengthAttr = in_array( $type,
-								array( 'text', 'email', 'tel', 'url' ) ) ? 'maxlength="255"' : '';
+						$maxLength = in_array( $type, array( 'text', 'email', 'tel', 'url' ), true ) ? 255 : 0;
 
 						$min = 1;
 						if ( $type === 'number' && ! empty( $field['syncWithQuantity'] ) && $productId ) {
@@ -194,16 +247,16 @@ class QuoteFormDisplay {
 							}
 						}
 
-						$minAttr = ( $type === 'number' ) ? 'min="' . esc_attr( $min ) . '"' : '';
+						$minValue = ( $type === 'number' ) ? (string) $min : '';
 
 						if ( $type === 'date' && ! empty( $field['disablePastDates'] ) ) {
-							$minAttr = 'min="' . esc_attr( wp_date( 'Y-m-d' ) ) . '"';
+							$minValue = wp_date( 'Y-m-d' );
 						}
 						?>
 						<input type="<?php echo esc_attr( $type ); ?>" id="tpt_field_<?php echo esc_attr( $name ); ?>"
 						       name="<?php echo esc_attr( $name ); ?>"
 						       class="<?php echo esc_attr( $syncClass ); ?>"
-						       value="<?php echo esc_attr( $value ); ?>" <?php echo $maxLengthAttr; ?> <?php echo $minAttr; ?> <?php echo $required ? 'required' : ''; ?> <?php echo ( ! empty( $field['hasPlaceholder'] ) && $placeholder ) ? 'placeholder="' . esc_attr( $placeholder ) . '"' : ''; ?>>
+						       value="<?php echo esc_attr( $value ); ?>" <?php if ( $maxLength ) : ?>maxlength="<?php echo esc_attr( $maxLength ); ?>"<?php endif; ?> <?php if ( '' !== $minValue ) : ?>min="<?php echo esc_attr( $minValue ); ?>"<?php endif; ?> <?php echo $required ? 'required' : ''; ?> <?php echo ( ! empty( $field['hasPlaceholder'] ) && $placeholder ) ? 'placeholder="' . esc_attr( $placeholder ) . '"' : ''; ?>>
 					<?php endif; ?>
 
 					<?php if ( ! empty( $field['hasDescription'] ) && $description ) : ?>

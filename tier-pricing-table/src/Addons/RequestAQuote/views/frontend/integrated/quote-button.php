@@ -9,6 +9,7 @@
 	 *
 	 * @var RequestQuoteForm $form
 	 * @var int $productId
+ * @var int $parentId
 	 * @var string $classes
 	 * @var string $idAttr
 	 * @var string $autoOpenQty
@@ -25,6 +26,7 @@
    role="button"
    data-form-id="<?php echo esc_attr( $form->getId() ); ?>"
    data-product-id="<?php echo esc_attr( $productId ); ?>"
+   data-parent-id="<?php echo esc_attr( $parentId ?? $productId ); ?>"
    data-auto-open-quantity="<?php echo esc_attr( $autoOpenQty ); ?>"
    style="<?php echo esc_attr( $style ); ?>">
 	<?php echo wp_kses_post( $content ); ?>

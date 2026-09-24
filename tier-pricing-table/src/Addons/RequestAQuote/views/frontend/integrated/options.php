@@ -12,21 +12,38 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// styles that wrap the option content in an inner box; style 5 also has a head row, style 6 a main column
+$hasInner = in_array( $optionsStyle, array( 'style-3', 'style-4' ), true );
+$hasHead  = 'style-4' === $optionsStyle;
+$hasMain  = 'style-5' === $optionsStyle;
 ?>
 <div class="tiered-pricing-option tpt-request-quote-integrated-option"
 	 onclick="document.getElementById('tpt-raq-link-<?php echo esc_attr( $productId ); ?>').click();">
 
-	<?php if ( in_array( $optionsStyle, array( 'style-3', 'style-4' ) ) ): ?>
+	<?php if ( $hasInner ) : ?>
 	<div class="tiered-pricing-option-inner">
+	<?php endif; ?>
+
+		<?php if ( $hasHead ) : ?>
+		<div class="tiered-pricing-option__head">
+		<?php endif; ?>
+			<div class="tiered-pricing-option__checkbox">
+				<div class="tiered-pricing-option-checkbox"></div>
+			</div>
+		<?php if ( $hasHead ) : ?>
+		</div>
 		<?php endif; ?>
 
-		<div class="tiered-pricing-option__checkbox">
-			<div class="tiered-pricing-option-checkbox"></div>
+		<?php if ( $hasMain ) : ?>
+		<div class="tiered-pricing-option__main">
+		<?php endif; ?>
+			<div class="tiered-pricing-option__quantity">
+				<strong><?php echo esc_html( $form->getIntegratedLabelText() ); ?></strong>
+			</div>
+		<?php if ( $hasMain ) : ?>
 		</div>
-
-		<div class="tiered-pricing-option__quantity">
-			<strong><?php echo esc_html( $form->getIntegratedLabelText() ); ?></strong>
-		</div>
+		<?php endif; ?>
 
 		<div class="tiered-pricing-option__pricing">
 			<div class="tiered-pricing-option-price">
@@ -34,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 
-		<?php if ( in_array( $optionsStyle, array( 'style-3', 'style-4' ) ) ): ?>
+	<?php if ( $hasInner ) : ?>
 	</div>
-<?php endif; ?>
+	<?php endif; ?>
 </div>

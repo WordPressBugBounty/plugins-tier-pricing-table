@@ -19,8 +19,32 @@ class SubmitQuoteEndpoint extends WP_REST_Controller {
 		register_rest_route( 'tier-pricing-table/v1', '/quote-request', array(
 			'methods'             => WP_REST_Server::CREATABLE,
 			'callback'            => array( $this, 'submitQuote' ),
-			'permission_callback' => '__return_true', // Publicly accessible
+			'permission_callback' => array( $this, 'permissionCallback' ),
 		) );
+	}
+
+	/**
+	 * A public form: visitors may submit. Without reCAPTCHA keys the request must carry the REST nonce of
+	 * the page that rendered the form; with keys, the handler verifies the reCAPTCHA token instead.
+	 *
+	 * @return true|WP_Error
+	 */
+	public function permissionCallback( WP_REST_Request $request ) {
+		$globalSettings = get_option( 'tier_pricing_table_quote_global_settings', array() );
+
+		if ( ! empty( $globalSettings['recaptcha_site_key'] ) && ! empty( $globalSettings['recaptcha_secret_key'] ) ) {
+			return true;
+		}
+
+		$nonce = $request->get_param( '_wpnonce' ) ? sanitize_text_field( (string) $request->get_param( '_wpnonce' ) ) : (string) $request->get_header( 'x_wp_nonce' );
+
+		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+			return new WP_Error( 'invalid_nonce',
+				__( 'Security check failed. Please refresh the page and try again.', 'tier-pricing-table' ),
+				array( 'status' => 403 ) );
+		}
+
+		return true;
 	}
 	
 	public function submitQuote( WP_REST_Request $request ) {
@@ -86,21 +110,8 @@ class SubmitQuoteEndpoint extends WP_REST_Controller {
 					__( 'Anti-Spam verification failed. Score too low.', 'tier-pricing-table' ),
 					array( 'status' => 400 ) );
 			}
-		} else {
-			// If reCAPTCHA is not configured, fallback to basic nonce check
-			$nonce = isset( $params['_wpnonce'] ) ? sanitize_text_field( $params['_wpnonce'] ) : '';
-			
-			// Try to get nonce from header if not in params
-			if ( empty( $nonce ) ) {
-				$nonce = $request->get_header( 'x_wp_nonce' );
-			}
-			
-			if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
-				return new WP_Error( 'invalid_nonce',
-					__( 'Security check failed. Please refresh the page and try again.', 'tier-pricing-table' ),
-					array( 'status' => 403 ) );
-			}
 		}
+		// without reCAPTCHA keys the REST nonce was verified by the permission callback
 		
 		$quote = new QuoteRequest();
 		

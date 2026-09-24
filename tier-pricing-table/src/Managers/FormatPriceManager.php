@@ -13,6 +13,28 @@ use WC_Product_Variable;
  * @package TierPricingTable\Managers
  */
 class FormatPriceManager {
+    /**
+     * Cache key for a formatted price.
+     *
+     * The formatted output depends on the display type and formatting flags, and several callers (for example, SEO
+     * integrations building schema or title variables) request a plain, prefix-less version early in the request.
+     * Keying by these arguments keeps each variant cached separately instead of letting the first caller win.
+     *
+     * @param  string  $displayType
+     * @param  array   $args
+     *
+     * @return string
+     */
+    protected static function getPriceCacheKey( string $displayType, array $args ) : string {
+        return 'price_html_' . md5( wp_json_encode( array(
+            $displayType,
+            (bool) $args['html'],
+            (bool) $args['for_display'],
+            (bool) $args['with_suffix'],
+            (bool) $args['with_lowest_prefix']
+        ) ) );
+    }
+
     public static function getFormattedPrice( WC_Product $product, array $args = array() ) : ?string {
         $args = wp_parse_args( $args, array(
             'html'               => true,

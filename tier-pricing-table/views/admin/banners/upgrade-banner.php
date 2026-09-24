@@ -16,10 +16,10 @@
 	
 	<div class="tpt-alert__text">
 		<div class="tpt-alert__inner">
-			<span class="tpt-badge tpt-badge--free"><?php esc_html_e( 'Free Version', 'tier-pricing-table' ); ?></span>
-			<strong style="margin-left: 6px;">
-				<?php esc_html_e( 'Unlock advanced features with Premium 🚀', 'tier-pricing-table' ); ?>
-			</strong>
+			<span style="margin-left: 6px;">
+				<?php esc_html_e( 'Tiered Pricing Table', 'tier-pricing-table' ); ?>
+			</span>
+			<span class="tpt-badge tpt-badge--free"><?php esc_html_e( 'Free', 'tier-pricing-table' ); ?></span>
 			<?php if ( tpt_fs()->is_activation_mode() ) : ?>
 				<br>
 				<br>

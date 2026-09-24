@@ -19,9 +19,10 @@ class PlainTextAdapter extends AbstractLayoutAdapter {
 		ServiceContainer::getInstance()->getFileManager()->includeTemplate(
 			'frontend/integrated/plain-text.php',
 			array(
-				'form' => $form,
-				'productId' => $pricingRule->getProductId(),
-				'buttonHtml' => $this->getQuoteButtonHtml( $form, $pricingRule->getProductId(), '', '' )
+				'form'           => $form,
+				'productId'      => $pricingRule->getProductId(),
+				'plainTextStyle' => $settings['plain_text_style'] ?? 'default',
+				'buttonHtml'     => $this->getQuoteButtonHtml( $form, $pricingRule->getProductId(), '', '' )
 			),
 			plugin_dir_path( dirname( __DIR__ ) ) . 'views/'
 		);

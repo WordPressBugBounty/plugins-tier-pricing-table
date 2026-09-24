@@ -2,6 +2,7 @@
 
 use TierPricingTable\CalculationLogic;
 use TierPricingTable\PriceManager;
+use TierPricingTable\PricingTable;
 use TierPricingTable\PricingRule;
 use TierPricingTable\Settings\Settings;
 if ( !defined( 'WPINC' ) ) {
@@ -66,6 +67,11 @@ if ( !empty( $price_rules ) ) {
 		<div class="tiered-pricing-options tiered-pricing-options--styled tiered-pricing-options--style-2 <?php 
     echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ? 'tiered-pricing-options--slim' : '' );
     ?>"
+
+		     <?php 
+    echo PricingTable::layoutStyleAttribute( $settings );
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper
+    ?>
 			 id="<?php 
     echo esc_attr( $id );
     ?>"
@@ -73,7 +79,7 @@ if ( !empty( $price_rules ) ) {
     echo esc_attr( $product_id );
     ?>"
 			 data-price-rules="<?php 
-    echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) );
+    echo esc_attr( htmlspecialchars( json_encode( $price_rules ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) );
     ?>"
 			 data-minimum="<?php 
     echo esc_attr( $minimum );
@@ -94,6 +100,10 @@ if ( !empty( $price_rules ) ) {
     echo esc_attr( $product->get_price_suffix() );
     ?>"
 		>
+			<?php 
+    $tptTierRows = array();
+    ob_start();
+    ?>
 			<div class="tiered-pricing-option tiered-pricing--active tiered-pricing-option--default"
 				 data-tiered-quantity="<?php 
     echo esc_attr( $minimum );
@@ -133,7 +143,7 @@ if ( !empty( $price_rules ) ) {
         ?>
 						<?php 
         $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
-        $baseUnitName = $settings['quantity_measurement_singular'];
+        $baseUnitName = ( $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] );
         ?>
 					<?php 
     } else {
@@ -153,7 +163,7 @@ if ( !empty( $price_rules ) ) {
         echo wp_kses_post( tptParseOptionText(
             $settings['options_option_text'],
             $quantity,
-            $discountAmount,
+            round( $discountAmount, 2 ),
             $baseUnitName
         ) );
         ?>
@@ -217,6 +227,9 @@ if ( !empty( $price_rules ) ) {
     ?>
 				</div>
 			</div>
+			<?php 
+    $tptTierRows[] = ob_get_clean();
+    ?>
 			
 			<?php 
     $iterator = new ArrayIterator($price_rules);
@@ -224,6 +237,7 @@ if ( !empty( $price_rules ) ) {
 			
 			<?php 
     while ( $iterator->valid() ) {
+        ob_start();
         ?>
 				<?php 
         $currentPrice = $iterator->current();
@@ -235,12 +249,9 @@ if ( !empty( $price_rules ) ) {
         }
         $iterator->next();
         if ( $iterator->valid() ) {
-            $quantity = $currentQuantity;
-            if ( intval( $iterator->key() - 1 != $currentQuantity ) ) {
-                $quantity = number_format_i18n( $quantity );
-                if ( 'range' === $settings['quantity_type'] ) {
-                    $quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
-                }
+            $quantity = number_format_i18n( $currentQuantity );
+            if ( (int) $iterator->key() - 1 !== (int) $currentQuantity && 'range' === $settings['quantity_type'] ) {
+                $quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
             }
         } else {
             $quantity = number_format_i18n( $currentQuantity );
@@ -336,7 +347,12 @@ if ( !empty( $price_rules ) ) {
 					</div>
 				</div>
 			<?php 
+        $tptTierRows[] = ob_get_clean();
     }
+    ?>
+			<?php 
+    echo PricingTable::orderTiers( $tptTierRows, $settings );
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rows escaped when rendered above
     ?>
 			
 			<?php 

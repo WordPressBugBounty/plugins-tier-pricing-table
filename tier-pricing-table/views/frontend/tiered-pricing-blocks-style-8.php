@@ -1,0 +1,185 @@
+<?php use TierPricingTable\CalculationLogic;
+	use TierPricingTable\PriceManager;
+	use TierPricingTable\PricingTable;
+	use TierPricingTable\PricingRule;
+	use TierPricingTable\Settings\Settings;
+
+	if ( ! defined( 'WPINC' ) ) {
+		die;
+	}
+	/**
+	 * Available variables
+	 *
+	 * @var array $price_rules
+	 * @var PricingRule $pricing_rule
+	 * @var string $real_price
+	 * @var string $product_name
+	 * @var string $pricing_type
+	 * @var WC_Product $product
+	 * @var string $id
+	 * @var int $product_id
+	 * @var int $minimum
+	 * @var array $settings
+	 */
+
+	$sale_price = $product->get_sale_price();
+
+	if ( $sale_price ) {
+		$sale_price = wc_get_price_to_display( $product, array(
+				'price' => $sale_price,
+		) );
+	}
+
+	$regular_price = wc_get_price_to_display( $product, array(
+			'price' => $product->get_regular_price(),
+	) );
+
+	$price = wc_get_price_to_display( $product, array(
+			'price' => $product->get_price(),
+	) );
+
+	// discount of every tier (percent), for the biggest discount
+	$tierDiscounts = array();
+	foreach ( $price_rules as $tierQuantity => $tierPrice ) {
+		$tierDiscounts[ $tierQuantity ] = 'percentage' === $pricing_type
+			? (float) $tierPrice
+			: (float) PriceManager::calculateDiscount( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price(),
+				$pricing_rule->getTierPrice( $tierQuantity, false ) );
+	}
+	$maxDiscount = $tierDiscounts ? max( $tierDiscounts ) : 0;
+
+?>
+
+<?php if ( ! empty( $price_rules ) ) : ?>
+
+	<div class="tiered-pricing-wrapper">
+		<?php if ( ! empty( $settings['title'] ) ) : ?>
+			<h3 style="clear:both; margin: 20px 0;"><?php echo esc_attr( $settings['title'] ); ?></h3>
+		<?php endif; ?>
+
+		<div class="tiered-pricing-blocks tiered-pricing-blocks--styled tiered-pricing-blocks--style-8 <?php echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ) ? 'tiered-pricing-blocks--slim' : ''; ?>"
+
+		     <?php echo PricingTable::layoutStyleAttribute( $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper ?>
+		     id="<?php echo esc_attr( $id ); ?>"
+		     data-product-id="<?php echo esc_attr( $product_id ); ?>"
+		     data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) ); ?>"
+		     data-minimum="<?php echo esc_attr( $minimum ); ?>"
+		     data-product-name="<?php echo esc_attr( $product_name ); ?>"
+		     data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
+		     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
+		     data-price="<?php echo esc_attr( $price ); ?>"
+		     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
+		>
+
+			<?php $tptTierRows = array(); ob_start(); ?>
+			<?php
+			$discountAmount = 0;
+			if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
+				$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(), $product->get_sale_price() );
+			}
+			$baseQuantityLabel = ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] )
+				? number_format_i18n( $minimum ) . ' ' . ( $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] )
+				: number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' . $settings['quantity_measurement_plural'];
+			?>
+			<div class="tiered-pricing-block tiered-pricing--active"
+			     data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
+			     data-tiered-price="<?php echo esc_attr( wc_get_price_to_display( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ); ?>"
+			     data-tiered-price-exclude-taxes="<?php echo esc_attr( wc_get_price_excluding_tax( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ); ?>"
+			     data-tiered-price-include-taxes="<?php echo esc_attr( wc_get_price_including_tax( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ); ?>">
+
+				<?php
+					do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $minimum, array(
+							'id'    => $id,
+							'style' => '8',
+					) );
+				?>
+				<div class="tiered-pricing-block__price">
+					<span><?php echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ) ); ?></span>
+					<?php if ( $settings['show_discount_column'] && $discountAmount > 0 ) : ?>
+						<span class="tiered-pricing-block__price-discount"><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, null, $settings, 'off' ) ); ?></span>
+					<?php endif; ?>
+				</div>
+				<div class="tiered-pricing-block__quantity"><?php echo esc_html( $baseQuantityLabel ); ?></div>
+			</div>
+			<?php $tptTierRows[] = ob_get_clean(); ?>
+
+			<?php $iterator = new ArrayIterator( $price_rules ); ?>
+
+			<?php while ( $iterator->valid() ) : ob_start(); ?>
+				<?php
+				$currentPrice    = $iterator->current();
+				$currentQuantity = $iterator->key();
+				$discountAmount  = $tierDiscounts[ $currentQuantity ];
+
+				$iterator->next();
+
+				if ( $iterator->valid() ) {
+					$quantity = number_format_i18n( $currentQuantity );
+
+					if ( (int) $iterator->key() - 1 !== (int) $currentQuantity && 'range' === $settings['quantity_type'] ) {
+						$quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
+					}
+				} else {
+					$quantity = number_format_i18n( $currentQuantity );
+
+					$quantity .= apply_filters( 'tiered_pricing_table/tiered_pricing/last_tier_postfix', '+',
+							$currentQuantity, $pricing_rule, 'blocks' );
+				}
+
+				$quantity = $quantity . ' ' . $settings['quantity_measurement_plural'];
+
+				$currentProductPrice = PriceManager::getPriceByRules( $currentQuantity, $product_id );
+
+				$currentProductPriceExcludeTaxes = wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
+						'price' => PriceManager::getPriceByRules( $currentQuantity, $product_id, null, null, false ),
+				) );
+
+				$currentProductPriceIncludeTaxes = wc_get_price_including_tax( wc_get_product( $product_id ), array(
+						'price' => PriceManager::getPriceByRules( $currentQuantity, $product_id, null, null, false ),
+				) );
+
+				$isBestValue = $maxDiscount > 0 && abs( $discountAmount - $maxDiscount ) < 0.0001;
+				?>
+
+				<div class="tiered-pricing-block<?php echo $isBestValue ? ' tiered-pricing-block--best' : ''; ?>"
+				     data-tiered-quantity="<?php echo esc_attr( $currentQuantity ); ?>"
+				     data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
+				     data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
+				     data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
+
+					<?php
+						do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $currentQuantity, array(
+								'id'    => $id,
+								'style' => '8',
+						) );
+					?>
+					<div class="tiered-pricing-block__price">
+						<span><?php echo wp_kses_post( wc_price( PriceManager::getPriceByRules( $currentQuantity, $product_id ) ) ); ?></span>
+						<?php if ( $settings['show_discount_column'] && $discountAmount > 0 ) : ?>
+							<span class="tiered-pricing-block__price-discount"><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, $currentQuantity, $settings, 'off' ) ); ?></span>
+						<?php endif; ?>
+					</div>
+					<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
+				</div>
+			<?php $tptTierRows[] = ob_get_clean(); endwhile; ?>
+			<?php echo PricingTable::orderTiers( $tptTierRows, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rows escaped when rendered above ?>
+
+			<?php do_action( 'tiered_pricing_table/blocks/blocks', $pricing_rule, $settings ); ?>
+		</div>
+
+		<?php do_action( 'tiered_pricing_table/blocks/after_blocks', $pricing_rule ); ?>
+	</div>
+
+	<style>
+		<?php
+		if ( $settings['clickable_rows'] && tpt_fs()->can_use_premium_code() ) {
+			echo esc_attr( '#' . $id ) . ' .tiered-pricing-block { cursor: pointer; }';
+		}
+		?>
+
+		<?php echo esc_attr( '#' . $id ); ?> .tiered-pricing--active {
+			background-color: <?php echo esc_attr( $settings['active_tier_color'] ); ?> !important;
+		}
+
+	</style>
+<?php endif; ?>

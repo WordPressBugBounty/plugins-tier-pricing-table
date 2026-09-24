@@ -246,13 +246,13 @@ class PricingRulesIntegration {
 		) );
 
 		$wrapperStyle = ( ! empty( $currentFormId ) ) ? '' : 'display:none;';
-		echo '<div id="tpt-quote-entity-settings-wrapper' . esc_attr( $idSuffix ) . '" class="tpt-quote-settings-wrapper" style="' . $wrapperStyle . '">';
+		echo '<div id="tpt-quote-entity-settings-wrapper' . esc_attr( $idSuffix ) . '" class="tpt-quote-settings-wrapper" style="' . esc_attr( $wrapperStyle ) . '">';
 
 		$labelStyle = 'display:none;';
 		if ( ! empty( $currentFormId ) && isset( $formsData[ $currentFormId ] ) && $formsData[ $currentFormId ]['display_position'] === 'integrated' ) {
 			$labelStyle = '';
 		}
-		echo '<div id="tpt-quote-integrated-label-wrapper' . esc_attr( $idSuffix ) . '" class="tpt-quote-label-wrapper" style="' . $labelStyle . '">';
+		echo '<div id="tpt-quote-integrated-label-wrapper' . esc_attr( $idSuffix ) . '" class="tpt-quote-label-wrapper" style="' . esc_attr( $labelStyle ) . '">';
 		woocommerce_wp_text_input( array(
 				'id'          => '_tier_pricing_table_quote_integrated_label_text' . $idSuffix,
 				'name'        => $nameLabel,

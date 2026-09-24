@@ -9,6 +9,7 @@
  * @var bool $hasQty
  * @var bool $hasDiscount
  * @var bool $hasPrice
+ * @var int $customColumns
  * @var string $buttonHtml
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -37,4 +38,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</span>
 		</div>
 	<?php endif; ?>
+
+	<?php for ( $i = 0; $i < (int) ( $customColumns ?? 0 ); $i++ ) : ?>
+		<div class="tiered-pricing-horizontal-table-cell"></div>
+	<?php endfor; ?>
 </div>

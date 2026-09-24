@@ -27,4 +27,12 @@ class ReactProductEditorAddon extends AbstractAddon {
 	protected function isActiveByDefault(): bool {
 		return false;
 	}
+	
+	/**
+	 * Not listed in the module list: the integration is experimental and switched on by its option only
+	 * (a store that enabled it earlier keeps it).
+	 */
+	public function addToAddonsSettings( $addons ) {
+		return $addons;
+	}
 }

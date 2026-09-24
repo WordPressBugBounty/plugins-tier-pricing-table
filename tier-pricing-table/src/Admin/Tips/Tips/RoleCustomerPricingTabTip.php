@@ -25,7 +25,7 @@ class RoleCustomerPricingTabTip extends Tip {
 			return;
 		}
 		
-		$toolsUrl = admin_url( 'admin.php?page=wc-settings&tab=tiered_pricing_table_settings&section=tools' );
+		$toolsUrl = admin_url( 'admin.php?page=wc-settings&tab=tiered_pricing_table_settings&section=advanced#roles' );
 		
 		?>
 		<div class="tiered-pricing-tip"

@@ -41,6 +41,15 @@ abstract class AbstractAddon {
 		return true;
 	}
 	
+	/**
+	 * Whether the add-on with this slug is switched on, without needing its instance.
+	 */
+	public static function isAddonEnabled( string $slug, bool $activeByDefault = true ): bool {
+		$settings = \TierPricingTable\Core\ServiceContainer::getInstance()->getSettings();
+		
+		return 'yes' === $settings->get( '_addon_' . $slug, $activeByDefault ? 'yes' : 'no' );
+	}
+	
 	abstract public function getName();
 	
 	abstract public function getDescription();

@@ -179,6 +179,17 @@ class PricingTable {
 				}
 			}
 
+			// layouts with a single style option: dropdown, plain text
+			$styledLayouts = array(
+				'dropdown'   => 'dropdown_style',
+				'plain-text' => 'plain_text_style',
+			);
+
+			if ( isset( $styledLayouts[ $displayType ] ) ) {
+				$style        = $settings[ $styledLayouts[ $displayType ] ] ?? 'default';
+				$templateType = 'default' !== $style && '' !== $style ? $displayType . '-' . $style : $displayType;
+			}
+
 			$template = "tiered-pricing-$templateType.php";
 
 			do_action( 'tiered_pricing_table/before_rendering_tiered_pricing/inner', $priceRule, $product, $settings );
@@ -197,6 +208,8 @@ class PricingTable {
 					'pricing_type' => $priceRule->getType(),
 					'id'           => $this->getUniqueTieredPricingId(),
 			) );
+
+			$this->renderMoreTiersLink( $parentProduct );
 		} else {
 			// Provide fallback data for products without pricing rules,
 			// which allows the frontend JS (e.g. dynamic totals, you save, etc.)
@@ -244,6 +257,146 @@ class PricingTable {
 		}
 	}
 
+	/**
+	 * Discount of a tier as the store shows it: a percentage, the amount saved per item, or both.
+	 *
+	 * @param  float  $percent  Discount in percent, as the templates compute it.
+	 * @param  PricingRule  $pricingRule
+	 * @param  WC_Product  $product
+	 * @param  int|null  $quantity  Tier quantity, or null for the base tier (its discount is the sale price).
+	 * @param  array  $settings  Renderer settings.
+	 * @param  string  $style  'plain' ("10%", "$4.50", "10% ($4.50)") or 'off' ("10% off", "$4.50 off", "10% off, save $4.50").
+	 *
+	 * @return string HTML
+	 */
+	public static function formatDiscount(
+			float $percent,
+			PricingRule $pricingRule,
+			WC_Product $product,
+			?int $quantity,
+			array $settings,
+			string $style = 'plain'
+	): string {
+		$format = $settings['discount_format'] ?? 'percentage';
+		$format = in_array( $format, array( 'percentage', 'amount', 'both' ), true ) ? $format : 'percentage';
+
+		$percentLabel = round( $percent, 2 ) . '%';
+		$amountLabel  = '';
+
+		if ( 'percentage' !== $format ) {
+			$saving = 0;
+
+			if ( null === $quantity ) {
+				if ( $product->is_on_sale() ) {
+					$saving = (float) $product->get_regular_price() - (float) $product->get_sale_price();
+				}
+			} else {
+				$base   = CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price();
+				$saving = (float) $base - (float) $pricingRule->getTierPrice( $quantity, false );
+			}
+
+			$amountLabel = wc_price( wc_get_price_to_display( $product, array( 'price' => max( 0, $saving ) ) ) );
+		}
+
+		if ( 'off' === $style ) {
+			switch ( $format ) {
+				case 'amount':
+					// translators: %s: amount saved per item
+					return sprintf( __( '%s off', 'tier-pricing-table' ), $amountLabel );
+				case 'both':
+					// translators: 1: discount percentage, 2: amount saved per item
+					return sprintf( __( '%1$s off, save %2$s', 'tier-pricing-table' ), $percentLabel, $amountLabel );
+				default:
+					// translators: %s: discount percentage
+					return sprintf( __( '%s off', 'tier-pricing-table' ), $percentLabel );
+			}
+		}
+
+		switch ( $format ) {
+			case 'amount':
+				return $amountLabel;
+			case 'both':
+				return $percentLabel . ' (' . $amountLabel . ')';
+			default:
+				return $percentLabel;
+		}
+	}
+
+	/**
+	 * The "Spacing" and "Cell padding" options as a style attribute for a layout's root element: CSS
+	 * variables the stylesheet reads for the gap between tiers and the padding inside table cells.
+	 * Empty when neither option is set (each style keeps its own spacing and padding).
+	 */
+	public static function layoutStyleAttribute( array $settings ): string {
+		$variables = array();
+
+		foreach ( array( 'layout_spacing' => '--tiered-pricing-gap', 'cell_padding' => '--tiered-pricing-cell-padding' ) as $option => $variable ) {
+			$value = $settings[ $option ] ?? '';
+
+			if ( '' === $value || null === $value || ! is_numeric( $value ) ) {
+				continue;
+			}
+
+			$variables[] = $variable . ': ' . max( 0, min( 80, (int) $value ) ) . 'px';
+		}
+
+		return $variables ? ' style="' . esc_attr( implode( '; ', $variables ) ) . '"' : '';
+	}
+
+	/**
+	 * @deprecated 7.1.9 Use layoutStyleAttribute().
+	 */
+	public static function spacingAttribute( array $settings ): string {
+		return self::layoutStyleAttribute( $settings );
+	}
+
+	/**
+	 * Tiers the last rendered layout left out because of the "tiers per grid item" limit.
+	 */
+	protected static $hiddenTiers = 0;
+
+	/**
+	 * Tier rows in the configured order (ascending by quantity, or the biggest discount first), cut to
+	 * the "tiers per grid item" limit when one is set.
+	 *
+	 * @param  string[]  $rows  Rendered rows, ascending.
+	 * @param  array  $settings  Renderer settings.
+	 *
+	 * @return string HTML (the rows were escaped when rendered)
+	 */
+	public static function orderTiers( array $rows, array $settings ): string {
+		if ( 'desc' === ( $settings['tiers_order'] ?? 'asc' ) ) {
+			$rows = array_reverse( $rows );
+		}
+
+		$limit             = (int) ( $settings['tiers_limit'] ?? 0 );
+		self::$hiddenTiers = 0;
+
+		if ( $limit > 0 && count( $rows ) > $limit ) {
+			self::$hiddenTiers = count( $rows ) - $limit;
+			$rows              = array_slice( $rows, 0, $limit );
+		}
+
+		return implode( '', $rows );
+	}
+
+	/**
+	 * The "+N more tiers" link to the product page, after a layout the limit shortened.
+	 */
+	protected function renderMoreTiersLink( WC_Product $parentProduct ) {
+		$hidden            = self::$hiddenTiers;
+		self::$hiddenTiers = 0;
+
+		if ( $hidden < 1 ) {
+			return;
+		}
+
+		/* translators: %d: number of tiers not listed */
+		$label = sprintf( _n( '+%d more tier', '+%d more tiers', $hidden, 'tier-pricing-table' ), $hidden );
+
+		echo '<a class="tiered-pricing-more-tiers" href="' . esc_url( $parentProduct->get_permalink() ) . '">' . esc_html( $label ) . '</a>';
+	}
+
 	protected function getDefaultSettings( $productId = false ): array {
 		$hasRules = true;
 
@@ -260,7 +413,7 @@ class PricingTable {
 
 		$settings = array(
 				'display_context'       => 'product-page',
-				'display'               => $this->getContainer()->getSettings()->get( 'display', 'yes' ) === 'yes',
+				'display'               => GeneralSection::isAutomaticDisplayEnabled(),
 				'display_type'          => $this->getContainer()->getSettings()->get( 'display_type', 'table' ),
 				'title'                 => $this->getContainer()->getSettings()->get( 'table_title', '' ),
 				'table_class'           => $this->getContainer()->getSettings()->get( 'table_css_class', '' ),
@@ -277,6 +430,12 @@ class PricingTable {
 								'yes' ) === 'yes',
 				'active_tier_color'     => $this->getContainer()->getSettings()->get( 'selected_quantity_color',
 						'#3858e9' ),
+				'discount_format'       => $this->getContainer()->getSettings()->get( 'discount_format', 'percentage' ),
+				'layout_spacing'        => $this->getContainer()->getSettings()->get( 'layout_spacing', '' ),
+				'cell_padding'          => $this->getContainer()->getSettings()->get( 'cell_padding', '' ),
+				'discount_badge_color'  => $this->getContainer()->getSettings()->get( 'discount_badge_color', '' ),
+				'active_tier_border'    => $this->getContainer()->getSettings()->get( 'table_active_border', 'yes' ),
+				'tiers_order'           => $this->getContainer()->getSettings()->get( 'tiers_order', 'asc' ),
 				'tooltip_border'        => $this->getContainer()->getSettings()->get( 'tooltip_border',
 								'yes' ) === 'yes',
 
@@ -284,6 +443,9 @@ class PricingTable {
 				'compact_layout' => $this->getContainer()->getSettings()->get( 'compact_layout', 'no' ),
 				'blocks_style'   => GeneralSection::getPricingBlocksStyle(),
 				'options_style'  => GeneralSection::getPricingOptionsStyle(),
+
+				'dropdown_style'   => GeneralSection::getPricingDropdownStyle(),
+				'plain_text_style' => GeneralSection::getPricingPlainTextStyle(),
 
 				'options_show_total'                  => GeneralSection::isShowOptionTotal(),
 				'options_show_original_product_price' => GeneralSection::isShowOriginalProductPrice(),

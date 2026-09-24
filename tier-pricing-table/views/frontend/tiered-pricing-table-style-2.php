@@ -16,7 +16,9 @@
 
 	use TierPricingTable\CalculationLogic;
 	use TierPricingTable\PriceManager;
+	use TierPricingTable\PricingTable;
 	use TierPricingTable\PricingRule;
+	use TierPricingTable\Settings\Settings;
 
 	if ( ! defined( 'WPINC' ) ) {
 		die;
@@ -73,6 +75,8 @@
 		?>
 
 		<div class="tiered-pricing-table tiered-pricing-table--styled tiered-pricing-table--style-2 <?php echo (isset($settings['compact_layout']) && $settings['compact_layout'] === 'yes') ? 'tiered-pricing-table--slim' : ''; ?>"
+
+		     <?php echo PricingTable::layoutStyleAttribute( $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper ?>
 		       id="<?php echo esc_attr( $id ); ?>"
 		       data-tiered-pricing-table
 		       data-product-id="<?php echo esc_attr( $product_id ); ?>"
@@ -84,7 +88,7 @@
 		       data-price="<?php echo esc_attr( $price ); ?>"
 		       data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
-			<div class="tiered-pricing-table-header" style="grid-template-columns: repeat(<?php echo $columns; ?>, 1fr);">
+			<div class="tiered-pricing-table-header" style="grid-template-columns: repeat(<?php echo (int) $columns; ?>, 1fr);">
 				<?php if ( $settings['quantity_column_title'] ) : ?>
 					<div><?php echo esc_attr( $settings['quantity_column_title'] ); ?></div>
 				<?php endif; ?>
@@ -97,16 +101,17 @@
 					<div><?php echo esc_attr( $settings['price_column_title'] ); ?></div>
 				<?php endif; ?>
 
-				<?php echo str_replace(['<th', '</th>'], ['<div', '</div>'], $custom_head); ?>
+				<?php echo wp_kses_post( str_replace(['<th', '</th>'], ['<div', '</div>'], $custom_head) ); ?>
 			</div>
 
 			<div class="tiered-pricing-table-body">
+				<?php $tptTierRows = array(); ob_start(); ?>
 				<div class="tiered-pricing-table-row tiered-pricing--active"
 				    data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
 				    data-tiered-price="<?php echo esc_attr( $price ); ?>"
 				    data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
 				    data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>"
-				    style="grid-template-columns: repeat(<?php echo $columns; ?>, 1fr);">
+				    style="grid-template-columns: repeat(<?php echo (int) $columns; ?>, 1fr);">
 					
 					<?php if ( $settings['quantity_column_title'] ) : ?>
 						<div>
@@ -116,7 +121,7 @@
 										<?php echo esc_attr( number_format_i18n( $minimum ) ); ?>
 									</span>
 									<span class="tiered-pricing-table-row-qty-unit">
-										<?php echo esc_attr( ' ' . $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] ); ?>
+										<?php echo esc_attr( ' ' . ( $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] ) ); ?>
 									</span>
 								</span>
 							<?php else : ?>
@@ -149,7 +154,7 @@
 
 						<div>
 							<?php if ( $discountAmount > 0 ) : ?>
-								<span class="tiered-pricing-table-row-discount"><?php echo esc_attr( round( $discountAmount, 2 ) ); ?> %</span>
+								<span class="tiered-pricing-table-row-discount"><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, null, $settings ) ); ?></span>
 							<?php else : ?>
 								<span class="tiered-pricing-table-row-discount--empty">—</span>
 							<?php endif; ?>
@@ -169,13 +174,14 @@
 						ob_start();
 						do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, null ); 
 						$custom_cols = ob_get_clean();
-						echo str_replace(['<td', '</td>'], ['<div', '</div>'], $custom_cols);
+						echo wp_kses_post( str_replace(['<td', '</td>'], ['<div', '</div>'], $custom_cols) );
 					?>
 				</div>
+				<?php $tptTierRows[] = ob_get_clean(); ?>
 
 				<?php $iterator = new ArrayIterator( $pricing_rule->getRules() ); ?>
 
-				<?php while ( $iterator->valid() ) : ?>
+				<?php while ( $iterator->valid() ) : ob_start(); ?>
 					<?php
 					$currentPrice    = $iterator->current();
 					$currentQuantity = $iterator->key();
@@ -219,7 +225,7 @@
 					    data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
 					    data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 					    data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>"
-					    style="grid-template-columns: repeat(<?php echo $columns; ?>, 1fr);">
+					    style="grid-template-columns: repeat(<?php echo (int) $columns; ?>, 1fr);">
 
 						<?php if ( $settings['quantity_column_title'] ) : ?>
 							<div>
@@ -236,7 +242,7 @@
 						<?php if ( $settings['discount_column_title'] ) : ?>
 							<div>
 								<?php if ( $discountAmount > 0 ) : ?>
-									<span class="tiered-pricing-table-row-discount"><?php echo esc_attr( round( $discountAmount, 2 ) ); ?> %</span>
+									<span class="tiered-pricing-table-row-discount"><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, $currentQuantity, $settings ) ); ?></span>
 								<?php else : ?>
 									<span class="tiered-pricing-table-row-discount--empty">—</span>
 								<?php endif; ?>
@@ -255,11 +261,12 @@
 							ob_start();
 							do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, $currentQuantity );
 							$custom_cols = ob_get_clean();
-							echo str_replace(['<td', '</td>'], ['<div', '</div>'], $custom_cols);
+							echo wp_kses_post( str_replace(['<td', '</td>'], ['<div', '</div>'], $custom_cols) );
 						?>
 					</div>
 
-				<?php endwhile; ?>
+				<?php $tptTierRows[] = ob_get_clean(); endwhile; ?>
+				<?php echo PricingTable::orderTiers( $tptTierRows, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rows escaped when rendered above ?>
 				<?php do_action( 'tiered_pricing_table/tiered_pricing/rows', $pricing_rule, $settings, 'tiered-pricing-table-style-2' ); ?>
 						<?php do_action( 'tiered_pricing_table/table/tfoot', $pricing_rule, $settings, 'tiered-pricing-table-style-2' ); ?>
 		</div>
@@ -278,7 +285,14 @@
 
 		<?php echo esc_attr('#' . $id); ?> .tiered-pricing--active {
 			border: 2px solid <?php echo esc_attr($settings['active_tier_color']); ?> !important;
-			box-shadow: 0 4px 12px <?php echo esc_attr($settings['active_tier_color']); ?>20 !important;
+			box-shadow: 0 4px 12px <?php echo esc_attr( Settings::hex2rgba( $settings['active_tier_color'], 0.12 ) ); ?> !important;
 		}
+
+		<?php if ( ! empty( $settings['discount_badge_color'] ) ) : ?>
+		<?php echo esc_attr( '#' . $id ); ?> .tiered-pricing-table-row-discount {
+			background-color: <?php echo esc_attr( Settings::hex2rgba( $settings['discount_badge_color'], 0.12 ) ); ?>;
+			color: <?php echo esc_attr( $settings['discount_badge_color'] ); ?>;
+		}
+		<?php endif; ?>
 	</style>
 <?php endif; ?>

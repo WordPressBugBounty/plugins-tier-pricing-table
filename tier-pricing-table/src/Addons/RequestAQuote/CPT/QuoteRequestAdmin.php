@@ -304,7 +304,7 @@ class QuoteRequestAdmin {
 			return;
 		}
 
-		if ( ! isset( $_POST['tier_pricing_table_quote_nonce'] ) || ! wp_verify_nonce( $_POST['tier_pricing_table_quote_nonce'],
+		if ( ! isset( $_POST['tier_pricing_table_quote_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['tier_pricing_table_quote_nonce'] ) ),
 						'tier_pricing_table_quote_save_product' ) ) {
 			return;
 		}

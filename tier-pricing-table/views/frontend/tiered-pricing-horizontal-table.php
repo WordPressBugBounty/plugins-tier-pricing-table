@@ -16,6 +16,7 @@
 
 	use TierPricingTable\CalculationLogic;
 	use TierPricingTable\PriceManager;
+	use TierPricingTable\PricingTable;
 	use TierPricingTable\PricingRule;
 
 	if ( ! defined( 'WPINC' ) ) {
@@ -71,6 +72,7 @@
 
 		<div class="tiered-pricing-horizontal-table <?php echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ) ? 'tiered-pricing-horizontal-table--slim' : ''; ?>"
 		     id="<?php echo esc_attr( $id ); ?>"
+		     <?php echo \TierPricingTable\PricingTable::layoutStyleAttribute( $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper ?>
 		     data-tiered-pricing-table
 		     data-product-id="<?php echo esc_attr( $product_id ); ?>"
 		     data-price-rules="
@@ -111,8 +113,9 @@
 					</div>
 				<?php endif; ?>
 
-				<?php echo str_replace(['<th', '</th>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_head); ?>
+				<?php echo wp_kses_post( str_replace(['<th', '</th>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_head) ); ?>
 			</div>
+			<?php $tptTierRows = array(); ob_start(); ?>
 			<div class="tiered-pricing-horizontal-table-column tiered-pricing-horizontal-table__values tiered-pricing--active"
 			     data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
 			     data-tiered-price="<?php echo esc_attr( $price ); ?>"
@@ -127,7 +130,7 @@
 									<?php echo esc_attr( number_format_i18n( $minimum ) ); ?>
 								</span>
 								<span>
-									<?php echo esc_attr( ' ' . $settings['quantity_measurement_singular'] ); ?>
+									<?php echo esc_attr( ' ' . ( $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] ) ); ?>
 								</span>
 							</span>
 						<?php else : ?>
@@ -163,7 +166,7 @@
 
 					<div class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--discount">
 						<?php if ( $discountAmount > 0 ) : ?>
-							<span><?php echo esc_attr( round( $discountAmount, 2 ) ); ?> %</span>
+							<span><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, null, $settings ) ); ?></span>
 						<?php else : ?>
 							<span>—</span>
 						<?php endif; ?>
@@ -183,13 +186,14 @@
 					ob_start();
 					do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, null ); 
 					$custom_cols = ob_get_clean();
-					echo str_replace(['<td', '</td>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_cols);
+					echo wp_kses_post( str_replace(['<td', '</td>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_cols) );
 				?>
 			</div>
+			<?php $tptTierRows[] = ob_get_clean(); ?>
 
 			<?php $iterator = new ArrayIterator( $pricing_rule->getRules() ); ?>
 
-			<?php while ( $iterator->valid() ) : ?>
+			<?php while ( $iterator->valid() ) : ob_start(); ?>
 				<?php
 				$currentPrice    = $iterator->current();
 				$currentQuantity = $iterator->key();
@@ -253,7 +257,7 @@
 						<div
 								class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--discount">
 							<?php if ( $discountAmount > 0 ) : ?>
-								<span><?php echo esc_attr( round( $discountAmount, 2 ) ); ?> %</span>
+								<span><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, $currentQuantity, $settings ) ); ?></span>
 							<?php else : ?>
 								<span>—</span>
 							<?php endif; ?>
@@ -272,10 +276,11 @@
 						ob_start();
 						do_action( 'tiered_pricing_table/tiered_pricing/row_columns', $pricing_rule, $currentQuantity );
 						$custom_cols = ob_get_clean();
-						echo str_replace(['<td', '</td>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_cols);
+						echo wp_kses_post( str_replace(['<td', '</td>'], ['<div class="tiered-pricing-horizontal-table-cell"', '</div>'], $custom_cols) );
 					?>
 				</div>
-			<?php endwhile; ?>
+			<?php $tptTierRows[] = ob_get_clean(); endwhile; ?>
+			<?php echo PricingTable::orderTiers( $tptTierRows, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rows escaped when rendered above ?>
 			
 			<?php do_action( 'tiered_pricing_table/horizontal-table/after_columns', $pricing_rule, $settings ); ?>
 		</div>

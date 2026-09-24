@@ -27,7 +27,7 @@ echo esc_html__( 'Product', 'tier-pricing-table' ) . ': ' . ( $product ? wp_kses
 $fields = $email->get_submitted_fields();
 if ( ! empty( $fields ) ) {
 	foreach ( $fields as $field ) {
-		echo esc_html( $field['label'] ) . ': ' . wp_strip_all_tags( $field['value'] ) . "\n";
+		echo esc_html( $field['label'] ) . ': ' . esc_html( wp_strip_all_tags( $field['value'] ) ) . "\n";
 	}
 }
 

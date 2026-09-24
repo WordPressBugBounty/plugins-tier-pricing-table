@@ -1,6 +1,8 @@
 <?php namespace TierPricingTable\Settings\Sections\GeneralSection;
 
+use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 use TierPricingTable\Core\ServiceContainer;
+use TierPricingTable\Settings\Sections\GeneralSection\Subsections\CalculationSubsection;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\HiddenOptionsSubsection;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\LayoutSubsection;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\ProductPagePriceSubsection;
@@ -8,6 +10,14 @@ use TierPricingTable\Settings\Sections\SectionAbstract;
 use TierPricingTable\Settings\Settings;
 
 class GeneralSection extends SectionAbstract {
+	
+	/**
+	 * Value of the "Layout position" option meaning "I place the layout myself" (shortcode, block, widget).
+	 * The layout configurator shows it as the automatic display being switched off.
+	 */
+	const NONE_POSITION = '____none____';
+	
+	const DEFAULT_POSITION_HOOK = 'woocommerce_before_add_to_cart_button';
 	
 	public function getSettings() {
 		$settings = array();
@@ -20,11 +30,19 @@ class GeneralSection extends SectionAbstract {
 	}
 	
 	protected function getSubsections() {
-		return apply_filters( 'tiered_pricing_table/settings/general_subsections', array(
+		$subsections = array(
 			HiddenOptionsSubsection::class,
 			LayoutSubsection::class,
-			ProductPagePriceSubsection::class,
-		) );
+		);
+		
+		// the layout configurator carries the product page price options while it is on
+		if ( ! LayoutConfiguratorAddon::isActive() ) {
+			$subsections[] = ProductPagePriceSubsection::class;
+		}
+		
+		$subsections[] = CalculationSubsection::class;
+		
+		return apply_filters( 'tiered_pricing_table/settings/general_subsections', $subsections );
 	}
 	
 	public static function deleteOptions() {
@@ -86,6 +104,76 @@ class GeneralSection extends SectionAbstract {
 		return __( 'General', 'tier-pricing-table' );
 	}
 	
+	/**
+	 * Whether the pricing layout is inserted on the product page automatically. Off means the merchant
+	 * places it with a shortcode, block or widget; the plugin still renders a hidden wrapper so the
+	 * live price updates keep working.
+	 */
+	public static function isAutomaticDisplayEnabled(): bool {
+		$settings = ServiceContainer::getInstance()->getSettings();
+		
+		if ( self::NONE_POSITION === $settings->get( 'position_hook', self::DEFAULT_POSITION_HOOK ) ) {
+			return false;
+		}
+		
+		return 'yes' === $settings->get( 'display', 'yes' );
+	}
+	
+	/**
+	 * Hook the pricing layout is rendered on. A stored "none" position falls back to the default hook.
+	 */
+	public static function getPositionHook(): string {
+		$hook = (string) ServiceContainer::getInstance()->getSettings()->get( 'position_hook', self::DEFAULT_POSITION_HOOK );
+		
+		return ( '' === $hook || self::NONE_POSITION === $hook ) ? self::DEFAULT_POSITION_HOOK : $hook;
+	}
+	
+	/**
+	 * Design style choices per layout.
+	 */
+	/**
+	 * Design styles withheld from shop and category pages, where the layouts sit in narrow grid cards:
+	 * layout => styles.
+	 */
+	public static function getCatalogExcludedStyles(): array {
+		return (array) apply_filters( 'tiered_pricing_table/catalog/excluded_styles', array(
+			'blocks' => array( 'style-8' ),
+		) );
+	}
+	
+	/**
+	 * Design styles per layout. With $catalog, the styles withheld from shop and category pages are left out.
+	 */
+	public static function getStyleOptions( bool $catalog = false ): array {
+		$styles = function ( int $count ) {
+			$options = array( 'default' => __( 'Default', 'tier-pricing-table' ) );
+			for ( $i = 1; $i <= $count; $i ++ ) {
+				/* translators: %d: style number */
+				$options[ 'style-' . $i ] = sprintf( __( 'Style #%d', 'tier-pricing-table' ), $i );
+			}
+			
+			return $options;
+		};
+		
+		$options = array(
+			'table'      => $styles( 6 ),
+			'blocks'     => $styles( 8 ),
+			'options'    => $styles( 6 ),
+			'dropdown'   => $styles( 1 ),
+			'plain-text' => $styles( 2 ),
+		);
+		
+		if ( $catalog ) {
+			foreach ( self::getCatalogExcludedStyles() as $layout => $excluded ) {
+				if ( isset( $options[ $layout ] ) ) {
+					$options[ $layout ] = array_diff_key( $options[ $layout ], array_flip( (array) $excluded ) );
+				}
+			}
+		}
+		
+		return $options;
+	}
+	
 	public static function getOptionText() {
 		$default = __( '<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>',
 			'tier-pricing-table' );
@@ -139,5 +227,13 @@ class GeneralSection extends SectionAbstract {
 	
 	public static function getPricingTableStyle(): string {
 		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_table_style', 'default' );
+	}
+	
+	public static function getPricingDropdownStyle(): string {
+		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_dropdown_style', 'default' );
+	}
+	
+	public static function getPricingPlainTextStyle(): string {
+		return ServiceContainer::getInstance()->getSettings()->get( 'pricing_plain_text_style', 'default' );
 	}
 }

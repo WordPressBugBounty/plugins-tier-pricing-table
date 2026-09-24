@@ -10,15 +10,20 @@
  * @var bool $hasQty
  * @var bool $hasPrice
  * @var bool $hasDiscount
+ * @var int $columns      every column of the table, custom columns included
+ * @var int $span         columns the button cell covers (everything after the quantity cell)
  * @var string $buttonHtml
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// templates copied before the custom-columns fix pass no span; behave as they did
+$span = isset( $span ) ? (int) $span : ( ! empty( $hasDiscount ) ? 2 : 1 );
+
 if ( $isDivTable ) : ?>
 	<div class="tiered-pricing-table-row tpt-request-quote-integrated-row"
-		 style="cursor: pointer; grid-template-columns: 1fr 2fr;"
+		 style="cursor: pointer; grid-template-columns: <?php echo esc_attr( $hasQty ? '1fr ' . $span . 'fr' : '1fr' ); ?>;"
 		 onclick="document.getElementById('tpt-raq-table-<?php echo esc_attr( $productId ); ?>').click();">
 		<?php if ( $hasQty ) : ?>
 			<div class="tiered-pricing-table__quantity">
@@ -47,7 +52,7 @@ if ( $isDivTable ) : ?>
 			</td>
 		<?php endif; ?>
 		<?php if ( $hasPrice ) : ?>
-			<td class="tiered-pricing-table__price" <?php echo esc_attr($hasDiscount) ? 'colspan="2"' : ''; ?> style="text-align: right">
+			<td class="tiered-pricing-table__price" <?php echo $span > 1 ? 'colspan="' . (int) $span . '"' : ''; ?> style="text-align: right">
 				<span>
 					<?php echo wp_kses_post($buttonHtml); ?>
 				</span>

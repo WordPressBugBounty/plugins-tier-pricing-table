@@ -24,40 +24,55 @@ class Cache {
 	public function __construct() {
 		
 		$this->isEnabled = $this->getContainer()->getSettings()->get( 'cache_enabled', 'yes' ) === 'yes';
-		
+
+		// The purge action must be available even when caching is disabled: the "Purge cache" button is always
+		// rendered, and a stale transient left over from when caching was enabled must be removable.
+		add_action( 'admin_post_' . self::PURGE_CACHE_ACTION, array( $this, 'handlePurgeRequest' ) );
+
 		if ( ! $this->isEnabled ) {
 			return;
 		}
-		
+
 		// Store variable products price hashes
 		add_filter( 'woocommerce_get_variation_prices_hash', function ( $hash, WC_Product_Variable $product ) {
 			$pricesDisplayType = ServiceContainer::getInstance()->getSettings()->get( 'tiered_price_at_catalog_type',
 				'range' );
-			
+
 			$hash[] = $product->get_date_modified();
 			$hash[] = $product->get_id();
-			
+
 			if ( ! array_key_exists( $product->get_id(), $this->variableProductsHashes ) ) {
 				$this->variableProductsHashes[ $product->get_id() ] = md5( wp_json_encode( $hash ) . $pricesDisplayType );
 			}
-			
+
 			return $hash;
 		}, 999999, 2 );
-		
-		add_action( 'admin_post_' . self::PURGE_CACHE_ACTION, function () {
+	}
+
+	public function handlePurgeRequest() {
 			
-			$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( $_REQUEST['nonce'] ) : false;
-			
-			if ( current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, self::PURGE_CACHE_ACTION ) ) {
-				
-				ServiceContainer::getInstance()->getAdminNotifier()->flash( __( 'Cache has been purged successfully',
-					'tier-pricing-table' ) );
-				
-				$this->purge();
-			}
-			
-			return wp_safe_redirect( wp_get_referer() );
-		} );
+		$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( $_REQUEST['nonce'] ) : false;
+
+		if ( current_user_can( 'manage_options' ) && wp_verify_nonce( $nonce, self::PURGE_CACHE_ACTION ) ) {
+
+			ServiceContainer::getInstance()->getAdminNotifier()->flash( __( 'Cache has been purged successfully',
+				'tier-pricing-table' ) );
+
+			$this->purge();
+		}
+
+		wp_safe_redirect( wp_get_referer() ? wp_get_referer() : admin_url() );
+		exit;
+	}
+
+	/**
+	 * Read the stored product data. A missing transient returns false, which "(array) false" would turn into
+	 * array( 0 => false ), so normalize explicitly.
+	 */
+	protected function readStoredData(): array {
+		$data = get_transient( self::PRODUCT_DATA_TRANSIENT_KEY );
+
+		return is_array( $data ) ? $data : array();
 	}
 	
 	public function isEnabled(): bool {
@@ -82,9 +97,9 @@ class Cache {
 		}
 		
 		$productCacheKey = $this->getProductCacheKey( $product );
-		
-		$data = (array) get_transient( self::PRODUCT_DATA_TRANSIENT_KEY );
-		
+
+		$data = $this->readStoredData();
+
 		if ( empty( $data[ $productCacheKey ] ) ) {
 			return false;
 		}
@@ -103,9 +118,9 @@ class Cache {
 		}
 		
 		$productCacheKey = $this->getProductCacheKey( $product );
-		
-		$data = (array) get_transient( self::PRODUCT_DATA_TRANSIENT_KEY );
-		
+
+		$data = $this->readStoredData();
+
 		if ( $key ) {
 			$data[ $productCacheKey ][ $key ] = $value;
 		} else {

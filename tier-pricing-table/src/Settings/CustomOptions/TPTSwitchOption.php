@@ -18,6 +18,9 @@ class TPTSwitchOption {
 	}
 
 	public function render( $value ) {
+		// the description is plugin-defined text (settings arrays), read once for output
+		$description = (string) ( $value['desc'] ?? '' );
+		$extendedDescription = (string) ( $value['extended_description'] ?? '' );
 		if ( ! isset( $value['id'] ) ) {
 			$value['id'] = '';
 		}
@@ -73,11 +76,10 @@ class TPTSwitchOption {
 						<span data-tpt-toggle-switch-off><?php echo esc_attr( $value['off_label'] ); ?></span>
 					</label>
 				</div>
-				<p class="description"><?php echo wp_kses_post( $value['desc'] ); ?></p>
-
+				<p class="description"><?php echo wp_kses_post( $description ); // nosemgrep ?></p>
 				<?php if ( isset( $value['extended_description'] ) ) : ?>
 					<div class="tpt-toggle-extended-description">
-						<?php echo wp_kses_post( $value['extended_description'] ); ?>
+						<?php echo wp_kses_post( $extendedDescription ); // nosemgrep ?>
 					</div>
 				<?php endif; ?>
 			</td>

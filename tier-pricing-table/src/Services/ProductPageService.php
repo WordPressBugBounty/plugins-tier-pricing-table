@@ -3,6 +3,7 @@
 use Exception;
 use TierPricingTable\Admin\ProductPage\TieredPricingTab;
 use TierPricingTable\Core\ServiceContainerTrait;
+use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use TierPricingTable\PriceManager;
 use TierPricingTable\PricingTable;
 use TierPricingTable\Settings\Sections\GeneralSection\Subsections\ProductPagePriceSubsection;
@@ -40,8 +41,7 @@ class ProductPageService {
 		add_action( 'woocommerce_get_price_html', array( $this, 'wrapPrice' ), 101, 2 );
 
 		// Render price table
-		add_action( $this->getContainer()->getSettings()->get( 'position_hook',
-				'woocommerce_before_add_to_cart_button' ), array(
+		add_action( GeneralSection::getPositionHook(), array(
 				$this,
 				'renderPricingTableOnProductPage',
 		), - 999 );
@@ -242,7 +242,7 @@ class ProductPageService {
 	public function renderTooltip( ?string $price, WC_Product $_product ): ?string {
 
 		// Do not render if not display
-		if ( 'yes' !== $this->getContainer()->getSettings()->get( 'display', 'yes' ) ) {
+		if ( ! GeneralSection::isAutomaticDisplayEnabled() ) {
 			return $price;
 		}
 

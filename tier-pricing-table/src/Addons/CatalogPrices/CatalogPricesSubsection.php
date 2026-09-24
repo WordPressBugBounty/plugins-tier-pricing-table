@@ -52,9 +52,14 @@ class CatalogPricesSubsection extends SubsectionAbstract {
 					'range'  => __( 'Show range (lowest to highest)', 'tier-pricing-table' ),
 					'custom' => __( 'Custom template', 'tier-pricing-table' ),
 				],
+				'descriptions' => [
+					/* translators: %s: example price */
+					'lowest' => sprintf( __( 'e.g. From %s', 'tier-pricing-table' ), wp_strip_all_tags( wc_price( 10 ) ) ),
+					/* translators: 1: lowest example price, 2: highest example price */
+					'range'  => sprintf( __( 'e.g. %1$s - %2$s', 'tier-pricing-table' ), wp_strip_all_tags( wc_price( 10 ) ), wp_strip_all_tags( wc_price( 18 ) ) ),
+					'custom' => __( 'Your own text built from the variables below', 'tier-pricing-table' ),
+				],
 				'default'  => 'lowest',
-				'desc'     => __( 'Choose whether to show only the lowest available price, the full price range, or a custom template.', 'tier-pricing-table' ),
-				'desc_tip' => true,
 			),
 			array(
 				'title'        => __( 'Custom template', 'tier-pricing-table' ),

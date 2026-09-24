@@ -66,7 +66,13 @@ abstract class AbstractLayoutAdapter {
 		string $idPrefix = 'tpt-raq-link',
 		bool $isHidden = false
 	): string {
-		QuoteFormDisplay::addModalToRender( $form, $productId );
+		// One modal per product family: variations share their parent's modal. Variation tables can be
+		// loaded by AJAX after the page (and its wp_footer) has been rendered, so a modal keyed by the
+		// variation ID would never reach the page. The JS resolves a variation's trigger to the parent
+		// modal and writes the selected variation into the modal's product field.
+		$parentId = QuoteFormDisplay::getModalProductId( $productId );
+
+		QuoteFormDisplay::addModalToRender( $form, $parentId );
 		$autoOpenQty = $form->getAutoOpenQuantity();
 		
 		if ( $isHidden ) {
@@ -83,6 +89,7 @@ abstract class AbstractLayoutAdapter {
 			array(
 				'form'        => $form,
 				'productId'   => $productId,
+				'parentId'    => $parentId,
 				'classes'     => $classes,
 				'idAttr'      => $idAttr,
 				'autoOpenQty' => $autoOpenQty,

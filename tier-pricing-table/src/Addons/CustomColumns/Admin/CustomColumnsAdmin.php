@@ -14,7 +14,7 @@ class CustomColumnsAdmin {
 			}
 			?>
 				<div style="height:0; width:100%"></div>
-			<div id="tpt-custom-columns-promo-block" style="margin-top: 10px; padding: 10px 15px; background: #f9f9f9; border-left: 4px solid #2271b1; border-radius: 4px; max-width: 700px; display: flex; align-items: center; justify-content: space-between; gap: 15px;">
+			<div id="tpt-custom-columns-promo-block" style="margin-top: 10px; padding: 10px 15px; background: #f9f9f9; border-left: 4px solid #2271b1; border-radius: 4px; max-width: 975px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 15px;">
 				<div>
 					<p style="margin: 0 0 4px 0;"><strong><?php esc_html_e( 'Show More Info Next to Prices?', 'tier-pricing-table' ); ?></strong></p>
 					<p style="margin: 0; font-size: 13px; color: #646970; line-height: 1.4;"><?php esc_html_e( 'Create additional columns to show exactly how much your customers save, total prices, or per-unit costs alongside each tier.', 'tier-pricing-table' ); ?></p>

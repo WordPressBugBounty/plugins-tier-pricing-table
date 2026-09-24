@@ -21,8 +21,18 @@ class AdminNotifier {
 	 * AdminNotifier constructor.
 	 */
 	public function __construct() {
-		$this->key .= get_current_user_id();
-		$this->process();
+		// Flash messages are processed on admin_init: the current user is not known yet when the plugin boots,
+		// and processing on every request would let a frontend visit consume a notice meant for an admin.
+		add_action( 'admin_init', array( $this, 'process' ) );
+	}
+
+	/**
+	 * Per-user notification key. Resolved lazily so the current user is already determined.
+	 *
+	 * @return string
+	 */
+	private function getKey(): string {
+		return $this->key . get_current_user_id();
 	}
 
 	/**
@@ -48,7 +58,7 @@ class AdminNotifier {
 	 */
 	public function flash( $message, $type = self::SUCCESS, $isDismissible = false ) {
 		$message  = array( 'message' => $message, 'type' => $type, 'dismissible' => $isDismissible );
-		$messages = get_transient( $this->key );
+		$messages = get_transient( $this->getKey() );
 
 		if ( ! is_array( $messages ) ) {
 			$messages = array();
@@ -56,20 +66,20 @@ class AdminNotifier {
 
 		$messages[] = $message;
 
-		set_transient( $this->key, $messages, MINUTE_IN_SECONDS );
+		set_transient( $this->getKey(), $messages, MINUTE_IN_SECONDS );
 	}
 
 	/**
 	 * Show flash messages
 	 */
-	private function process() {
-		$messages = get_transient( $this->key );
+	public function process() {
+		$messages = get_transient( $this->getKey() );
 
 		//Resolve conflict with background process
 		if ( ! wp_doing_ajax() ) {
 			if ( is_array( $messages ) ) {
 
-				delete_transient( $this->key );
+				delete_transient( $this->getKey() );
 
 				foreach ( $messages as $message ) {
 					$this->push( $message['message'], $message['type'], $message['dismissible'] );

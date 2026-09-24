@@ -3,16 +3,16 @@
 namespace TierPricingTable\Settings;
 
 use TierPricingTable\Core\ServiceContainerTrait;
+use TierPricingTable\Settings\CustomOptions\TPTCheckboxListOption;
 use TierPricingTable\Settings\CustomOptions\TPTDisplayType;
 use TierPricingTable\Settings\CustomOptions\TPTLinkButton;
-use TierPricingTable\Settings\CustomOptions\TPTTableColumnsField;
 use TierPricingTable\Settings\CustomOptions\TPTQuantityMeasurementField;
+use TierPricingTable\Settings\CustomOptions\TPTTableColumnsField;
 use TierPricingTable\Settings\CustomOptions\TPTFeatureFlagOption;
 use TierPricingTable\Settings\CustomOptions\TPTIntegrationOption;
 use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
 use TierPricingTable\Settings\CustomOptions\TPTTextTemplate;
 use TierPricingTable\Settings\Sections\Advanced\AdvancedSection;
-use TierPricingTable\Settings\Sections\CalculationLogic\CalculationLogic;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use TierPricingTable\Settings\Sections\Integrations\IntegrationSection;
 use TierPricingTable\Settings\Sections\Multicurrency\MulticurrencySection;
@@ -88,10 +88,11 @@ class Settings {
         $this->getContainer()->add( 'settings.tpt_integration_option', new TPTIntegrationOption() );
         $this->getContainer()->add( 'settings.tpt_feature_flag_option', new TPTFeatureFlagOption() );
         $this->getContainer()->add( 'settings.tpt_text_template', new TPTTextTemplate() );
+        $this->getContainer()->add( 'settings.tpt_multiple_fields', new TPTTableColumnsField() );
         $this->getContainer()->add( 'settings.tpt_display_type', new TPTDisplayType() );
+        $this->getContainer()->add( 'settings.tpt_checkbox_list', new TPTCheckboxListOption() );
         $this->getContainer()->add( 'settings.tpt_link_button', new TPTLinkButton() );
         $this->getContainer()->add( 'settings.tpt_quantity_measurement', new TPTQuantityMeasurementField() );
-        $this->getContainer()->add( 'settings.tpt_multiple_fields', new TPTTableColumnsField() );
     }
 
     protected function initSections() {
@@ -119,15 +120,13 @@ class Settings {
     protected function sortSections( array $sections ) : array {
         $order = (array) apply_filters( 'tiered_pricing_table/settings/sections_order', array(
             'general'           => 10,
-            'calculation_logic' => 20,
             'shop-loop-display' => 30,
             'tier-labels'       => 40,
             'request-a-quote'   => 50,
-            'advanced'          => 60,
             'integrations'      => 70,
             'multicurrency'     => 80,
             'product-addons'    => 90,
-            'tools'             => 110,
+            'advanced'          => 120,
         ) );
         // Stable sort: usort() is only guaranteed stable on PHP 8+, so tie-break on the original index.
         $indexed = array();
@@ -146,13 +145,33 @@ class Settings {
     public function initSettings() {
         $this->sections = apply_filters( 'tiered_pricing_table/settings/sections', array(
             new GeneralSection(),
-            new CalculationLogic(),
             new AdvancedSection(),
             new MulticurrencySection(),
             new ProductAddonsSection(),
             new IntegrationSection()
         ) );
         $this->sections = $this->sortSections( $this->sections );
+        // Only on the plugin's own settings tab: other WooCommerce tabs (REST API keys, webhooks, tax,
+        // shipping…) use the same "section" parameter and must never see it rewritten.
+        if ( $this->isOwnSettingsTab() ) {
+            // The "Tools" tab merged into "Advanced" in 7.2.1; old links and bookmarks keep working.
+            if ( isset( $_GET['section'] ) && 'tools' === $_GET['section'] ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $_GET['section'] = 'advanced';
+            }
+            // A removed or unknown section in the URL (old links to the "Calculations" tab, for example)
+            // opens the default section instead of an empty page. The sections read the request directly.
+            if ( isset( $_GET['section'] ) ) {
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                $known = array_map( function ( $section ) {
+                    return $section->getSlug();
+                }, $this->sections );
+                if ( !in_array( sanitize_text_field( wp_unslash( $_GET['section'] ) ), $known, true ) ) {
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    unset($_GET['section']);
+                }
+            }
+        }
         foreach ( $this->sections as $section ) {
             if ( $section->isActive() ) {
                 $this->settings = $section->getSettings();
@@ -170,6 +189,14 @@ class Settings {
         add_filter( 'woocommerce_settings_tabs_array', array($this, 'addSettingsTab'), 50 );
         add_action( 'woocommerce_update_options_' . self::SETTINGS_PAGE, array($this, 'updateSettings') );
         add_action( 'woocommerce_settings_' . self::SETTINGS_PAGE, array($this, 'renderSections'), 99 );
+    }
+
+    /**
+     * Whether the request is for the plugin's own WooCommerce settings tab.
+     */
+    protected function isOwnSettingsTab() : bool {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        return is_admin() && isset( $_GET['page'], $_GET['tab'] ) && 'wc-settings' === $_GET['page'] && self::SETTINGS_PAGE === $_GET['tab'];
     }
 
     public function renderSections() {

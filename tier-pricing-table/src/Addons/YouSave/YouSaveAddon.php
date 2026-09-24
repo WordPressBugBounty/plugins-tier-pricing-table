@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\YouSave;
 
 use TierPricingTable\Addons\AbstractAddon;
+use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 
 class YouSaveAddon extends AbstractAddon {
 	
@@ -26,6 +27,11 @@ class YouSaveAddon extends AbstractAddon {
 	}
 	
 	public function addSettingsSubsection( $subsections ) {
+		// the layout configurator carries the badge options while it is on
+		if ( LayoutConfiguratorAddon::isActive() ) {
+			return $subsections;
+		}
+		
 		$subsections[] = YouSaveSubsection::class;
 		return $subsections;
 	}

@@ -185,14 +185,44 @@ jQuery(document).ready(function ($) {
 			});
 		};
 
+		/**
+		 * Resolve the modal for a trigger: its own product's modal, or the shared modal of its parent
+		 * (variations share the parent's modal so triggers inserted by AJAX still have one to open).
+		 * Falls back to the enclosing pricing wrapper for themes overriding the button template.
+		 */
+		this.resolveForm = function ($trigger) {
+			const productId = $trigger.data('product-id');
+
+			if (this.forms[productId]) {
+				return this.forms[productId];
+			}
+
+			const parentId = $trigger.data('parent-id') || $trigger.closest('.tpt__tiered-pricing').data('product-id');
+
+			return parentId ? this.forms[parentId] : undefined;
+		};
+
+		this.openForTrigger = function ($trigger) {
+			const form = this.resolveForm($trigger);
+
+			if (!form) {
+				return;
+			}
+
+			const productId = $trigger.data('product-id');
+
+			// Opened from a variation's trigger: make the modal submit that variation.
+			if (productId && String(productId) !== String(form.productId)) {
+				form.updateState({ variationId: productId, parentId: form.productId });
+			}
+
+			form.open();
+		};
+
 		this.bindGlobalEvents = function () {
 			$(document).on('click', '.tpt-request-quote-trigger', (e) => {
 				e.preventDefault();
-				const productId = $(e.currentTarget).data('product-id');
-				
-				if (this.forms[productId]) {
-					this.forms[productId].open();
-				}
+				this.openForTrigger($(e.currentTarget));
 			});
 
 			$(document).on('tiered_price_update', (event, data) => {
@@ -230,14 +260,13 @@ jQuery(document).ready(function ($) {
 
 			let $trigger;
 			if (productId) {
-				$trigger = $(`.tpt-request-quote-trigger[data-product-id="${productId}"]`).first();
+				$trigger = $(`.tpt-request-quote-trigger[data-product-id="${productId}"], .tpt-request-quote-trigger[data-parent-id="${productId}"]`).first();
 			} else {
 				$trigger = $('.tpt-request-quote-trigger').first();
 			}
 
 			if ($trigger.length) {
-				const targetProductId = $trigger.data('product-id');
-				const form = this.forms[targetProductId];
+				const form = this.resolveForm($trigger);
 				
 				if (form) {
 					const triggerAttr = $trigger.attr('data-auto-open-quantity');

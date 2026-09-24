@@ -21,8 +21,15 @@ class TableAdapter extends AbstractLayoutAdapter {
 		$isDivTable = strpos( $templateName, 'style-' ) !== false;
 		
 		$hasQty      = ! empty( $settings['quantity_column_title'] ) || ! isset( $settings['quantity_column_title'] );
-		$hasDiscount = ! empty( $settings['discount_column_title'] ) || ! empty( $settings['show_discount_column'] );
+		$hasDiscount = ! empty( $settings['discount_column_title'] ); // the table draws the discount column from its header only
 		$hasPrice    = ! empty( $settings['price_column_title'] ) || ! isset( $settings['price_column_title'] );
+		
+		// the row spans the whole table: the base columns plus whatever the header hook adds (custom columns)
+		ob_start();
+		do_action( 'tiered_pricing_table/tiered_pricing/header_columns', $pricingRule );
+		$extraColumns = (int) preg_match_all( '/<th\b/i', (string) ob_get_clean() );
+		$columns      = (int) $hasQty + (int) $hasDiscount + (int) $hasPrice + $extraColumns;
+		$span         = max( 1, $columns - (int) $hasQty );
 		
 		ServiceContainer::getInstance()->getFileManager()->includeTemplate( 'frontend/integrated/table.php', array(
 			'form'        => $form,
@@ -31,6 +38,8 @@ class TableAdapter extends AbstractLayoutAdapter {
 			'hasQty'      => $hasQty,
 			'hasPrice'    => $hasPrice,
 			'hasDiscount' => $hasDiscount,
+			'columns'     => $columns,
+			'span'        => $span,
 			'buttonHtml'  => $this->getQuoteButtonHtml( $form, $pricingRule->getProductId(),
 				$isDivTable ? 'button wp-element-button' : 'button wp-element-button alt',
 				'padding: 5px 10px;margin:0; float:right', 'tpt-raq-table' ),

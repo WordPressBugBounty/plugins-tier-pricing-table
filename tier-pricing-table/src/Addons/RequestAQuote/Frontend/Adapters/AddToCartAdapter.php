@@ -44,7 +44,7 @@ class AddToCartAdapter extends AbstractLayoutAdapter {
 		$idAttr      = 'tpt-raq-link-' . esc_attr( $product->get_id() );
 		$style       = 'margin-left: 10px;';
 		
-		echo ServiceContainer::getInstance()->getFileManager()->renderTemplate( 'frontend/integrated/quote-button.php',
+		echo wp_kses_post( ServiceContainer::getInstance()->getFileManager()->renderTemplate( 'frontend/integrated/quote-button.php',
 			array(
 				'form'        => $form,
 				'productId'   => $product->get_id(),
@@ -53,7 +53,7 @@ class AddToCartAdapter extends AbstractLayoutAdapter {
 				'autoOpenQty' => $autoOpenQty,
 				'style'       => $style,
 				'content'     => esc_html( $form->getPromptText() ),
-			), plugin_dir_path( dirname( __DIR__ ) ) . 'views/' );
+			), plugin_dir_path( dirname( __DIR__ ) ) . 'views/' ) );
 	}
 	
 	public function renderCustomCartForm() {
@@ -84,7 +84,7 @@ class AddToCartAdapter extends AbstractLayoutAdapter {
 		$classes     = 'button alt wp-element-button tpt-request-quote-trigger tpt-quote-next-to-cart';
 		$idAttr      = 'tpt-raq-link-' . esc_attr( $product->get_id() );
 
-		echo ServiceContainer::getInstance()->getFileManager()->renderTemplate( 'frontend/integrated/quote-button.php',
+		echo wp_kses_post( ServiceContainer::getInstance()->getFileManager()->renderTemplate( 'frontend/integrated/quote-button.php',
 			array(
 				'form'        => $form,
 				'productId'   => $product->get_id(),
@@ -93,7 +93,7 @@ class AddToCartAdapter extends AbstractLayoutAdapter {
 				'autoOpenQty' => $autoOpenQty,
 				'style'       => '',
 				'content'     => esc_html( $form->getPromptText() ),
-			), plugin_dir_path( dirname( __DIR__ ) ) . 'views/' );
+			), plugin_dir_path( dirname( __DIR__ ) ) . 'views/' ) );
 			
 		echo '</form>';
 	}

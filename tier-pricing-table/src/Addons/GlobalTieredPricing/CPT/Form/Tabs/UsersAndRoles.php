@@ -45,7 +45,7 @@ class UsersAndRoles extends FormTab {
 					$settingsLink = ServiceContainer::getInstance()->getSettings()->getLink();
 
 					$settingsLink = add_query_arg( [
-							'section' => 'tools',
+							'section' => 'advanced',
 					], $settingsLink );
 
 					$settingsLink .= '#roles';

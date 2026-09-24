@@ -9,6 +9,7 @@ use TierPricingTable\Addons\CategoryTiers\CategoryTierAddon;
 use TierPricingTable\Addons\Coupons\CouponsAddon;
 use TierPricingTable\Addons\CustomColumns\CustomColumnsAddon;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalTieredPricingAddon;
+use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 use TierPricingTable\Addons\ManualOrders\ManualOrdersAddon;
 use TierPricingTable\Addons\MinQuantity\MinQuantity;
 use TierPricingTable\Addons\NonLoggedInUsers\NonLoggedInUsersAddon;
@@ -46,6 +47,7 @@ class Addons {
             CustomColumnsAddon::class                                        => new CustomColumnsAddon(),
             ProductCatalogLoop::class                                        => new ProductCatalogLoop(),
             ReactProductEditorAddon::class                                   => new ReactProductEditorAddon(),
+            LayoutConfiguratorAddon::class                                   => new LayoutConfiguratorAddon(),
             TaxSettingsAddon::class                                          => new TaxSettingsAddon(),
             TierLabelsAddon::class                                           => new TierLabelsAddon(),
             ToolsAddon::class                                                => new ToolsAddon(),

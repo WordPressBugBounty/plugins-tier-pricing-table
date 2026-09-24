@@ -1,6 +1,9 @@
 <?php namespace TierPricingTable\Settings\Sections\GeneralSection\Subsections;
 
+use TierPricingTable\Addons\LayoutConfigurator\LayoutConfigurator;
+use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 use TierPricingTable\Settings\CustomOptions\TPTDisplayType;
+use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use TierPricingTable\Settings\CustomOptions\TPTTableColumnsField;
 use TierPricingTable\Settings\CustomOptions\TPTQuantityMeasurementField;
 use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
@@ -9,14 +12,21 @@ use TierPricingTable\Settings\Sections\SubsectionAbstract;
 use TierPricingTable\Settings\Settings;
 use TierPricingTable\TierPricingTablePlugin;
 
+/**
+ * Product-page layout settings. With the layout configurator add-on on (the default) the whole
+ * subsection is one configurator field with a live preview; with it off the classic rows are shown.
+ */
 class LayoutSubsection extends SubsectionAbstract {
 	
 	public function getTitle(): string {
-		return __( 'Pricing Layout Settings', 'tier-pricing-table' );
+		// the configurator prints its own heading, next to the page switch
+		return LayoutConfiguratorAddon::isActive() ? '' : __( 'Pricing Layout Settings', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Customize the appearance and behavior of your tiered pricing tables.', 'tier-pricing-table' );
+		return LayoutConfiguratorAddon::isActive()
+			? ''
+			: __( 'Customize the appearance and behavior of your tiered pricing tables.', 'tier-pricing-table' );
 	}
 	
 	public function getSlug(): string {
@@ -24,6 +34,26 @@ class LayoutSubsection extends SubsectionAbstract {
 	}
 	
 	public function getSettings(): array {
+		return LayoutConfiguratorAddon::isActive() ? $this->getConfiguratorSettings() : $this->getClassicSettings();
+	}
+	
+	protected function getConfiguratorSettings(): array {
+		return array(
+			array(
+				'title' => __( 'Pricing Display', 'tier-pricing-table' ),
+				'id'    => Settings::SETTINGS_PREFIX . 'display_type',
+				'type'  => LayoutConfigurator::FIELD_TYPE,
+				'desc'  => '',
+			),
+			// Options saved from the configurator's hidden inputs; rendered by nothing.
+			...LayoutConfigurator::getSavedOnlyFields(),
+		);
+	}
+	
+	/**
+	 * The classic rows, one option each, shown while the layout configurator add-on is off.
+	 */
+	protected function getClassicSettings(): array {
 		return array(
 			array(
 				'title'    => __( 'Show tiered pricing automatically', 'tier-pricing-table' ),
@@ -48,13 +78,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'title'    => __( 'Options design style', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'pricing_options_style',
 				'type'     => TPTDisplayType::FIELD_TYPE,
-				'options'  => array(
-					'default' => __( 'Default', 'tier-pricing-table' ),
-					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
-					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
-					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
-					'style-4' => __( 'Style #4', 'tier-pricing-table' ),
-				),
+				'options'  => GeneralSection::getStyleOptions()['options'],
 				'desc_tip' => true,
 				'default'  => 'default',
 			),
@@ -62,13 +86,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'title'    => __( 'Table design style', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'pricing_table_style',
 				'type'     => TPTDisplayType::FIELD_TYPE,
-				'options'  => array(
-					'default' => __( 'Default', 'tier-pricing-table' ),
-					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
-					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
-					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
-					'style-4' => __( 'Style #4', 'tier-pricing-table' ),
-				),
+				'options'  => GeneralSection::getStyleOptions()['table'],
 				'desc_tip' => true,
 				'default'  => 'default',
 			),
@@ -76,16 +94,22 @@ class LayoutSubsection extends SubsectionAbstract {
 				'title'    => __( 'Blocks design style', 'tier-pricing-table' ),
 				'id'       => Settings::SETTINGS_PREFIX . 'pricing_blocks_style',
 				'type'     => TPTDisplayType::FIELD_TYPE,
-				'options'  => array(
-					'default' => __( 'Default', 'tier-pricing-table' ),
-					'style-1' => __( 'Style #1', 'tier-pricing-table' ),
-					'style-2' => __( 'Style #2', 'tier-pricing-table' ),
-					'style-3' => __( 'Style #3', 'tier-pricing-table' ),
-					'style-4' => __( 'Style #4', 'tier-pricing-table' ),
-					'style-5' => __( 'Style #5', 'tier-pricing-table' ),
-					'style-6' => __( 'Style #6', 'tier-pricing-table' ),
-				),
+				'options'  => GeneralSection::getStyleOptions()['blocks'],
 				'desc_tip' => true,
+				'default'  => 'default',
+			),
+			array(
+				'title'    => __( 'Dropdown design style', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'pricing_dropdown_style',
+				'type'     => TPTDisplayType::FIELD_TYPE,
+				'options'  => GeneralSection::getStyleOptions()['dropdown'],
+				'default'  => 'default',
+			),
+			array(
+				'title'    => __( 'Plain text design style', 'tier-pricing-table' ),
+				'id'       => Settings::SETTINGS_PREFIX . 'pricing_plain_text_style',
+				'type'     => TPTDisplayType::FIELD_TYPE,
+				'options'  => GeneralSection::getStyleOptions()['plain-text'],
 				'default'  => 'default',
 			),
 			array(
@@ -135,11 +159,58 @@ class LayoutSubsection extends SubsectionAbstract {
 				'default'  => 'range',
 			),
 			array(
+				'title'             => __( 'Spacing', 'tier-pricing-table' ),
+				'id'                => Settings::SETTINGS_PREFIX . 'layout_spacing',
+				'type'              => 'number',
+				'default'           => '',
+				'css'               => 'width: 6em;',
+				'custom_attributes' => array( 'min' => 0, 'max' => 40, 'step' => 1, 'placeholder' => __( 'Auto', 'tier-pricing-table' ) ),
+				'desc'              => __( 'Gap between the pricing blocks, options or card rows, in pixels. Leave empty to keep each design style\'s own spacing.', 'tier-pricing-table' ),
+			),
+			array(
+				'title'             => __( 'Cell padding', 'tier-pricing-table' ),
+				'id'                => Settings::SETTINGS_PREFIX . 'cell_padding',
+				'type'              => 'number',
+				'default'           => '',
+				'css'               => 'width: 6em;',
+				'custom_attributes' => array( 'min' => 0, 'max' => 30, 'step' => 1, 'placeholder' => __( 'Auto', 'tier-pricing-table' ) ),
+				'desc'              => __( 'Padding inside the cells of the table and horizontal table layouts, in pixels. Leave empty to keep each design style\'s own padding; a value also overrides the theme\'s cell padding.', 'tier-pricing-table' ),
+			),
+			array(
+				'title'        => __( 'Tier order', 'tier-pricing-table' ),
+				'id'           => Settings::SETTINGS_PREFIX . 'tiers_order',
+				'type'         => TPTDisplayType::FIELD_TYPE,
+				'options'      => array(
+					'asc'  => __( 'Ascending', 'tier-pricing-table' ),
+					'desc' => __( 'Descending', 'tier-pricing-table' ),
+				),
+				'descriptions' => array(
+					'asc'  => __( 'Smallest quantity first', 'tier-pricing-table' ),
+					'desc' => __( 'Biggest discount first', 'tier-pricing-table' ),
+				),
+				'default'      => 'asc',
+			),
+			array(
 				'title'   => __( 'Active pricing tier color', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'selected_quantity_color',
 				'type'    => 'color',
 				'css'     => 'width:6em;',
 				'default' => '#3858e9',
+			),
+			array(
+				'title'   => __( 'Discount badge color', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'discount_badge_color',
+				'type'    => 'color',
+				'css'     => 'width:6em;',
+				'default' => '',
+				'desc'    => __( 'The discount badge of table styles #2 to #6. Styles #2 and #6 show a light tint of this color behind text in this color, styles #3 and #4 a solid badge with white text, style #5 colors its savings bar and percentage. Leave empty to keep the style\'s own colors (the active tier color on styles #3 to #5).', 'tier-pricing-table' ),
+			),
+			array(
+				'title'   => __( 'Active tier left border', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'table_active_border',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'yes',
+				'desc'    => __( 'Table styles #1, #5 and #6 mark the active tier with a left border in the active tier color. Switch it off to keep the row highlight only.', 'tier-pricing-table' ),
 			),
 			array(
 				'title'    => __( 'Tooltip icon color', 'tier-pricing-table' ),
@@ -211,12 +282,30 @@ class LayoutSubsection extends SubsectionAbstract {
 				'type'    => TPTTableColumnsField::FIELD_TYPE,
 			),
 			array(
-				'title'   => __( 'Show percentage discount', 'tier-pricing-table' ),
+				'title'   => __( 'Show discount', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'show_discount_column',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
 				'default' => 'yes',
-				'desc'    => __( 'Show the percentage discount in pricing blocks that offer a discount.',
+				'desc'    => __( 'Show the discount in pricing blocks that offer a discount.',
 					'tier-pricing-table' ),
+			),
+			array(
+				'title'        => __( 'Discount format', 'tier-pricing-table' ),
+				'id'           => Settings::SETTINGS_PREFIX . 'discount_format',
+				'type'         => TPTDisplayType::FIELD_TYPE,
+				'options'      => array(
+					'percentage' => __( 'Percentage', 'tier-pricing-table' ),
+					'amount'     => __( 'Amount saved', 'tier-pricing-table' ),
+					'both'       => __( 'Both', 'tier-pricing-table' ),
+				),
+				'descriptions' => array(
+					'percentage' => __( 'e.g. 10%', 'tier-pricing-table' ),
+					'amount'     => __( 'e.g. $4.50', 'tier-pricing-table' ),
+					'both'       => __( 'e.g. 10% ($4.50)', 'tier-pricing-table' ),
+				),
+				'desc'         => __( 'How the discount column and discount badges show a tier\'s discount.', 'tier-pricing-table' ),
+				'desc_tip'     => false,
+				'default'      => 'percentage',
 			),
 			array(
 				'title'   => __( 'Show original price crossed out', 'tier-pricing-table' ),

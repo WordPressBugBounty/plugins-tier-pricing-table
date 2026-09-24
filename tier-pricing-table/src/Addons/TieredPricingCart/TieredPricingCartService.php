@@ -45,6 +45,80 @@ class TieredPricingCartService {
         );
     }
 
+    /**
+     * The "Total savings" row: what the tiered prices took off the cart, before the order total in the
+     * cart totals and in the checkout order review.
+     */
+    public function renderTotalSavings() {
+        if ( !CartOptionsSubsection::showTotalSavings() ) {
+            return;
+        }
+        $savings = $this->getTotalSavings();
+        if ( $savings <= 0 ) {
+            return;
+        }
+        $label = CartOptionsSubsection::getTotalSavingsLabel();
+        ?>
+		<tr class="tpt-cart-total-savings">
+			<th><?php 
+        echo esc_html( $label );
+        ?></th>
+			<td data-title="<?php 
+        echo esc_attr( $label );
+        ?>"><?php 
+        echo wp_kses_post( wc_price( $savings ) );
+        ?></td>
+		</tr>
+		<?php 
+    }
+
+    /**
+     * The sum of every line's saving: the original price (regular or sale, per the cart option) against
+     * the tiered price, both as displayed (with or without tax) times the quantity.
+     */
+    public function getTotalSavings() : float {
+        $cart = wc()->cart;
+        if ( !$cart instanceof WC_Cart ) {
+            return 0;
+        }
+        $considerSalePriceAsDiscount = $this->getContainer()->getSettings()->get( 'consider_sale_price_as_discount_in_cart', 'no' ) === 'yes';
+        $total = 0;
+        foreach ( $cart->get_cart() as $cartItemKey => $cartItem ) {
+            $newPrice = $this->getCartItemPrice( $cartItem, $cartItemKey, $cart );
+            if ( false === $newPrice ) {
+                continue;
+            }
+            $product = wc_get_product( $cartItem['data']->get_id() );
+            $originalPrice = ( $considerSalePriceAsDiscount ? $product->get_regular_price() : $product->get_price() );
+            if ( '' === $originalPrice || null === $originalPrice ) {
+                continue;
+            }
+            $quantity = (int) $cartItem['quantity'];
+            if ( $product->is_taxable() ) {
+                $withTax = $cart->display_prices_including_tax();
+                $original = ( $withTax ? wc_get_price_including_tax( $product, array(
+                    'qty'   => $quantity,
+                    'price' => $originalPrice,
+                ) ) : wc_get_price_excluding_tax( $product, array(
+                    'qty'   => $quantity,
+                    'price' => $originalPrice,
+                ) ) );
+                $new = ( $withTax ? wc_get_price_including_tax( $product, array(
+                    'qty'   => $quantity,
+                    'price' => $newPrice,
+                ) ) : wc_get_price_excluding_tax( $product, array(
+                    'qty'   => $quantity,
+                    'price' => $newPrice,
+                ) ) );
+            } else {
+                $original = (float) $originalPrice * $quantity;
+                $new = (float) $newPrice * $quantity;
+            }
+            $total += max( 0, (float) $original - (float) $new );
+        }
+        return (float) apply_filters( 'tiered_pricing_table/cart/total_savings', round( $total, wc_get_price_decimals() ), $cart );
+    }
+
     public function modifyCartItemSubtotal( $subtotal, $cartItem, $cartItemKey ) {
         $newPrice = $this->getCartItemPrice( $cartItem, $cartItemKey );
         if ( false === $newPrice ) {

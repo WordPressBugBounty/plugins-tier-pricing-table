@@ -2,6 +2,7 @@
 
 use TierPricingTable\CalculationLogic;
 use TierPricingTable\PriceManager;
+use TierPricingTable\PricingTable;
 use TierPricingTable\PricingRule;
 use TierPricingTable\Settings\Settings;
 if ( !defined( 'WPINC' ) ) {
@@ -49,6 +50,12 @@ if ( !function_exists( 'tptParseOptionText' ) ) {
     }
 
 }
+// discount of every tier (percent), for the biggest discount
+$tierDiscounts = array();
+foreach ( $price_rules as $tierQuantity => $tierPrice ) {
+    $tierDiscounts[$tierQuantity] = ( 'percentage' === $pricing_type ? (float) $tierPrice : (float) PriceManager::calculateDiscount( ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price() ), $pricing_rule->getTierPrice( $tierQuantity, false ) ) );
+}
+$maxDiscount = ( $tierDiscounts ? max( $tierDiscounts ) : 0 );
 if ( !empty( $price_rules ) ) {
     ?>
 
@@ -66,6 +73,11 @@ if ( !empty( $price_rules ) ) {
 		<div class="tiered-pricing-options tiered-pricing-options--styled tiered-pricing-options--style-4 <?php 
     echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ? 'tiered-pricing-options--slim' : '' );
     ?>"
+
+		     <?php 
+    echo PricingTable::layoutStyleAttribute( $settings );
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in the helper
+    ?>
 			 id="<?php 
     echo esc_attr( $id );
     ?>"
@@ -73,7 +85,7 @@ if ( !empty( $price_rules ) ) {
     echo esc_attr( $product_id );
     ?>"
 			 data-price-rules="<?php 
-    echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) );
+    echo esc_attr( htmlspecialchars( json_encode( $price_rules ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) );
     ?>"
 			 data-minimum="<?php 
     echo esc_attr( $minimum );
@@ -94,6 +106,34 @@ if ( !empty( $price_rules ) ) {
     echo esc_attr( $product->get_price_suffix() );
     ?>"
 		>
+			<?php 
+    $tptTierRows = array();
+    ob_start();
+    ?>
+			<?php 
+    $discountAmount = 0;
+    if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
+        $discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(), $product->get_sale_price() );
+    }
+    if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) {
+        $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
+        $baseUnitName = ( $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] );
+    } else {
+        $quantity = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' );
+        $baseUnitName = $settings['quantity_measurement_plural'];
+    }
+    $optionText = ( $discountAmount > 0 ? tptParseOptionText(
+        $settings['options_option_text'],
+        $quantity,
+        round( $discountAmount, 2 ),
+        $baseUnitName
+    ) : tptParseOptionText(
+        $settings['options_default_option_text'],
+        $quantity,
+        null,
+        $baseUnitName
+    ) );
+    ?>
 			<div class="tiered-pricing-option tiered-pricing--active tiered-pricing-option--default"
 				 data-tiered-quantity="<?php 
     echo esc_attr( $minimum );
@@ -101,79 +141,41 @@ if ( !empty( $price_rules ) ) {
 				 data-tiered-price="<?php 
     echo esc_attr( $price );
     ?>"
-				 data-tiered-price-exclude-taxes="
-				<?php 
+				 data-tiered-price-exclude-taxes="<?php 
     echo esc_attr( wc_get_price_excluding_tax( wc_get_product( $product_id ), array(
         'price' => $real_price,
     ) ) );
-    ?>
-				 "
-				 data-tiered-price-include-taxes="
-				<?php 
+    ?>"
+				 data-tiered-price-include-taxes="<?php 
     echo esc_attr( wc_get_price_including_tax( wc_get_product( $product_id ), array(
         'price' => $real_price,
     ) ) );
-    ?>
-				 "
+    ?>"
 			>
 				<div class="tiered-pricing-option-inner">
-					<div class="tiered-pricing-option__checkbox">
-						<div class="tiered-pricing-option-checkbox tiered-pricing-option-checkbox--active"></div>
-					</div>
-
-					<?php 
-    $discountAmount = 0;
-    if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
-        $discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(), $product->get_sale_price() );
-    }
-    ?>
-
-					<div class="tiered-pricing-option__quantity">
+					<div class="tiered-pricing-option__head">
+						<div class="tiered-pricing-option__checkbox">
+							<div class="tiered-pricing-option-checkbox tiered-pricing-option-checkbox--active"></div>
+						</div>
 						<?php 
-    if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) {
+    if ( $settings['show_discount_column'] && $discountAmount > 0 ) {
         ?>
-							<?php 
-        $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
-        $baseUnitName = $settings['quantity_measurement_singular'];
-        ?>
-						<?php 
-    } else {
-        ?>
-							<?php 
-        $quantity = esc_attr( number_format_i18n( $minimum ) . ' - ' . number_format_i18n( array_keys( $price_rules )[0] - 1 ) . ' ' );
-        $baseUnitName = $settings['quantity_measurement_plural'];
-        ?>
-						<?php 
-    }
-    ?>
-
-						<?php 
-    if ( $discountAmount > 0 ) {
-        ?>
-							<?php 
-        echo wp_kses_post( tptParseOptionText(
-            $settings['options_option_text'],
-            $quantity,
+							<div class="tiered-pricing-option__discount-label"><?php 
+        echo wp_kses_post( PricingTable::formatDiscount(
             $discountAmount,
-            $baseUnitName
-        ) );
-        ?>
-						<?php 
-    } else {
-        ?>
-							<?php 
-        echo wp_kses_post( tptParseOptionText(
-            $settings['options_default_option_text'],
-            $quantity,
+            $pricing_rule,
+            $product,
             null,
-            $baseUnitName
+            $settings
         ) );
-        ?>
+        ?></div>
 						<?php 
     }
     ?>
 					</div>
-
+					<div class="tiered-pricing-option__quantity"><?php 
+    echo wp_kses_post( $optionText );
+    ?></div>
 					<?php 
     do_action(
         'tiered_pricing_table/options/label',
@@ -185,63 +187,33 @@ if ( !empty( $price_rules ) ) {
         )
     );
     ?>
-
-					<?php 
-    if ( $discountAmount > 0 ) {
-        ?>
-						<div class="tiered-pricing-option__discount-label">
-							<?php 
-        echo esc_html( round( $discountAmount, 2 ) . '%' );
-        ?>
-						</div>
-					<?php 
-    }
-    ?>
-
 					<div class="tiered-pricing-option__pricing">
 						<div class="tiered-pricing-option-price">
-
-							<div class="tiered-pricing-option-price__discounted">
-								<?php 
+							<div class="tiered-pricing-option-price__discounted"><?php 
     echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array(
         'price' => $real_price,
     ) ) ) );
-    ?>
-							</div>
-
-							<?php 
+    ?></div>
+						<?php 
     if ( $discountAmount > 0 ) {
         ?>
-								<div class="tiered-pricing-option-price__original">
-									<del>
-										<?php 
+							<div class="tiered-pricing-option-price__original"><del><?php 
         echo wp_kses_post( wc_price( $regular_price ) );
-        ?>
-									</del>
-								</div>
-							<?php 
+        ?></del></div>
+						<?php 
     }
     ?>
-
 						</div>
 
-
-
 						<?php 
-    if ( $settings['show_discount_column'] && $discountAmount > 0 ) {
-        ?>
-							<div class="tiered-pricing-option-discount">
-								<?php 
-        echo esc_html( $discountAmount );
-        ?>%
-							</div>
-						<?php 
-    }
     ?>
 
 					</div>
 				</div>
 			</div>
+			<?php 
+    $tptTierRows[] = ob_get_clean();
+    ?>
 
 			<?php 
     $iterator = new ArrayIterator($price_rules);
@@ -249,23 +221,17 @@ if ( !empty( $price_rules ) ) {
 
 			<?php 
     while ( $iterator->valid() ) {
+        ob_start();
         ?>
 				<?php 
         $currentPrice = $iterator->current();
         $currentQuantity = $iterator->key();
-        if ( 'percentage' === $pricing_type ) {
-            $discountAmount = $currentPrice;
-        } else {
-            $discountAmount = PriceManager::calculateDiscount( ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price() ), $pricing_rule->getTierPrice( $currentQuantity, false ) );
-        }
+        $discountAmount = $tierDiscounts[$currentQuantity];
         $iterator->next();
         if ( $iterator->valid() ) {
-            $quantity = $currentQuantity;
-            if ( intval( $iterator->key() - 1 != $currentQuantity ) ) {
-                $quantity = number_format_i18n( $quantity );
-                if ( 'range' === $settings['quantity_type'] ) {
-                    $quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
-                }
+            $quantity = number_format_i18n( $currentQuantity );
+            if ( (int) $iterator->key() - 1 !== (int) $currentQuantity && 'range' === $settings['quantity_type'] ) {
+                $quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
             }
         } else {
             $quantity = number_format_i18n( $currentQuantity );
@@ -296,6 +262,12 @@ if ( !empty( $price_rules ) ) {
                 false
             ),
         ) );
+        $optionText = tptParseOptionText(
+            $settings['options_option_text'],
+            $quantity,
+            round( $discountAmount, 2 ),
+            $settings['quantity_measurement_plural']
+        );
         ?>
 
 				<div class="tiered-pricing-option"
@@ -311,24 +283,30 @@ if ( !empty( $price_rules ) ) {
 					 data-tiered-price-include-taxes="<?php 
         echo esc_attr( $currentProductPriceIncludeTaxes );
         ?>">
-
-
-
 					<div class="tiered-pricing-option-inner">
-						<div class="tiered-pricing-option__checkbox">
-							<div class="tiered-pricing-option-checkbox"></div>
-						</div>
-						<div class="tiered-pricing-option__quantity">
+						<div class="tiered-pricing-option__head">
+							<div class="tiered-pricing-option__checkbox">
+								<div class="tiered-pricing-option-checkbox"></div>
+							</div>
 							<?php 
-        echo wp_kses_post( tptParseOptionText(
-            $settings['options_option_text'],
-            $quantity,
-            round( $discountAmount, 2 ),
-            $settings['quantity_measurement_plural']
-        ) );
+        if ( $settings['show_discount_column'] && $discountAmount > 0 ) {
+            ?>
+								<div class="tiered-pricing-option__discount-label"><?php 
+            echo wp_kses_post( PricingTable::formatDiscount(
+                $discountAmount,
+                $pricing_rule,
+                $product,
+                $currentQuantity,
+                $settings
+            ) );
+            ?></div>
+							<?php 
+        }
         ?>
 						</div>
-
+						<div class="tiered-pricing-option__quantity"><?php 
+        echo wp_kses_post( $optionText );
+        ?></div>
 						<?php 
         do_action(
             'tiered_pricing_table/options/label',
@@ -340,45 +318,37 @@ if ( !empty( $price_rules ) ) {
             )
         );
         ?>
-
-						<?php 
-        if ( $discountAmount > 0 ) {
-            ?>
-							<div class="tiered-pricing-option__discount-label">
-								<?php 
-            echo esc_html( round( $discountAmount, 2 ) . '%' );
-            ?>
-							</div>
-						<?php 
-        }
-        ?>
-
 						<div class="tiered-pricing-option__pricing">
 							<div class="tiered-pricing-option-price">
-								<div class="tiered-pricing-option-price__discounted">
-									<?php 
+								<div class="tiered-pricing-option-price__discounted"><?php 
         echo wp_kses_post( wc_price( PriceManager::getPriceByRules( $currentQuantity, $product_id ) ) );
+        ?></div>
+							<?php 
+        if ( $discountAmount > 0 ) {
+            ?>
+								<div class="tiered-pricing-option-price__original"><del><?php 
+            echo wp_kses_post( wc_price( wc_get_price_to_display( $product, array(
+                'price' => ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $regular_price : $real_price ),
+            ) ) ) );
+            ?></del></div>
+							<?php 
+        }
         ?>
-								</div>
-								<div class="tiered-pricing-option-price__original">
-									<del>
-										<?php 
-        echo wp_kses_post( wc_price( wc_get_price_to_display( $product, array(
-            'price' => ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $regular_price : $real_price ),
-        ) ) ) );
-        ?>
-									</del>
-								</div>
 							</div>
 
+							<?php 
+        ?>
 
 						</div>
 					</div>
-
-
 				</div>
 			<?php 
+        $tptTierRows[] = ob_get_clean();
     }
+    ?>
+			<?php 
+    echo PricingTable::orderTiers( $tptTierRows, $settings );
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rows escaped when rendered above
     ?>
 
 			<?php 
@@ -396,21 +366,19 @@ if ( !empty( $price_rules ) ) {
     if ( !$settings['options_show_default_option'] ) {
         echo esc_html( "#{$id} .tiered-pricing-option--default { display: none }" );
     }
-    $background_05percent = Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.05 );
-    $background_20percent = Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.3 );
-    $background_50percent = Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.5 );
-    $background_80percent = Settings::shadeHexWithOpacity( $settings['active_tier_color'], 0.8 );
-    echo esc_html( "#{$id} .tiered-pricing--active .tiered-pricing-option-checkbox::after {\n\t\t\tbackground: {$settings['active_tier_color']};\n\t\t}" );
-    echo esc_html( "#{$id} .tiered-pricing--active .tiered-pricing-option-checkbox {\n\t\t\tborder-color:  {$settings['active_tier_color']};\n\t\t}" );
-    echo esc_html( "#{$id} .tiered-pricing-option__discount-label {\n\t\t\tbackground:  {$background_80percent};\n\t\t}" );
-    echo esc_html( "#{$id} .tiered-pricing--active  {\n\t\t\tbackground:  {$background_05percent};\n\t\t}" );
-    echo esc_html( "#{$id} .tiered-pricing-option {\n\t\t\tborder-color: {$background_20percent};\n\t\t}" );
-    echo esc_html( "#{$id} .tiered-pricing--active {\n\t\t\tbackground:  {$background_05percent};\n\t\t\tborder-color:  {$background_80percent};\n\t\t}" );
-    echo esc_html( "#{$id} .tiered-pricing--active  .tiered-pricing-option__discount-label {\n\t\t\tbackground:  {$settings['active_tier_color']};\n\t\t}" );
-    echo esc_html( "#{$id} {\n\t\t\tborder-color: {$background_20percent};\n\t\t}" );
     if ( !$settings['options_show_original_product_price'] ) {
-        echo esc_html( "#{$id} .tiered-pricing-option-price__original {\n\t\t\t\tdisplay: none\n\t\t\t}" );
+        echo esc_html( "#{$id} .tiered-pricing-option-price__original { display: none }" );
+        echo esc_html( "#{$id} .tiered-pricing-option-total__original_total { display: none }" );
     }
+    $tint = Settings::hex2rgba( $settings['active_tier_color'], 0.06 );
+    $border = Settings::hex2rgba( $settings['active_tier_color'], 0.35 );
+    $color = $settings['active_tier_color'];
+    echo esc_html( "#{$id} .tiered-pricing-option { border-color: #e5e7eb; }" );
+    echo esc_html( "#{$id} .tiered-pricing--active { border-color: {$color}; background: {$tint}; box-shadow: 0 0 0 1px {$color}; }" );
+    echo esc_html( "#{$id} .tiered-pricing--active .tiered-pricing-option-checkbox { border-color: {$color}; }" );
+    echo esc_html( "#{$id} .tiered-pricing--active .tiered-pricing-option-checkbox::after { background: {$color}; }" );
+    echo esc_html( "#{$id} .tiered-pricing-option__discount-label { background: {$tint}; color: {$color}; }" );
+    echo esc_html( "#{$id} .tiered-pricing--active .tiered-pricing-option__discount-label { background: {$color}; color: #fff; }" );
     ?>
 	</style>
 <?php 

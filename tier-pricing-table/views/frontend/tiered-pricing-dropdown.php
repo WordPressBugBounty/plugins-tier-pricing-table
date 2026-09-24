@@ -2,6 +2,7 @@
 	
 	use TierPricingTable\CalculationLogic;
 	use TierPricingTable\PriceManager;
+	use TierPricingTable\PricingTable;
 	use TierPricingTable\PricingRule;
 	use TierPricingTable\Settings\Settings;
 	
@@ -71,7 +72,7 @@ if ( $sale_price ) {
 		<div class="tiered-pricing-dropdown <?php echo ( isset( $settings['compact_layout'] ) && $settings['compact_layout'] === 'yes' ) ? 'tiered-pricing-dropdown--slim' : ''; ?>"
 			 id="<?php echo esc_attr( $id ); ?>"
 			 data-product-id="<?php echo esc_attr( $product_id ); ?>"
-			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ) ) ); ?>"
+			 data-price-rules="<?php echo esc_attr( htmlspecialchars( json_encode( $price_rules ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) ); ?>"
 			 data-minimum="<?php echo esc_attr( $minimum ); ?>"
 			 data-product-name="<?php echo esc_attr( $product_name ); ?>"
 			 data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
@@ -94,7 +95,7 @@ if ( $sale_price ) {
 						<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
 							<?php
 							$quantity     = esc_attr( number_format_i18n( $minimum ) . ' ' );
-							$baseUnitName = $settings['quantity_measurement_singular'];
+							$baseUnitName = $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'];
 							?>
 						<?php else : ?>
 							<?php
@@ -106,7 +107,7 @@ if ( $sale_price ) {
 						<?php if ( $discountAmount > 0 ) : ?>
 							<?php
 							echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity,
-								$discountAmount, $baseUnitName ) );
+								round( $discountAmount, 2 ), $baseUnitName ) );
 							?>
 						<?php else : ?>
 							<?php
@@ -159,7 +160,8 @@ if ( $sale_price ) {
 
 			<div class="tiered-pricing-dropdown__list">
 				<ul role="listbox" id="tiered-pricing-dropdown-list-<?php echo esc_attr( $id ); ?>">
-					<li class="tiered-pricing-dropdown-option tiered-pricing-dropdown-option--active tiered-pricing-dropdown-option--default"
+					<?php $tptTierRows = array(); ob_start(); ?>
+					<li class="tiered-pricing-dropdown-option tiered-pricing--active tiered-pricing-dropdown-option--selected tiered-pricing-dropdown-option--default"
 						role="option"
 						aria-selected="true"
 						data-tiered-quantity="<?php echo esc_attr( $minimum ); ?>"
@@ -171,7 +173,7 @@ if ( $sale_price ) {
 							<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
 								<?php
 								$quantity     = esc_attr( number_format_i18n( $minimum ) . ' ' );
-								$baseUnitName = $settings['quantity_measurement_singular'];
+								$baseUnitName = $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'];
 								?>
 							<?php else : ?>
 								<?php
@@ -183,7 +185,7 @@ if ( $sale_price ) {
 							<?php if ( $discountAmount > 0 ) : ?>
 								<?php
 								echo wp_kses_post( tptParseOptionText( $settings['options_option_text'], $quantity,
-									$discountAmount, $baseUnitName ) );
+									round( $discountAmount, 2 ), $baseUnitName ) );
 								?>
 							<?php else : ?>
 								<?php
@@ -226,9 +228,10 @@ if ( $sale_price ) {
 							</div>
 						</div>
 					</li>
+					<?php $tptTierRows[] = ob_get_clean(); ?>
 					<?php $iterator = new ArrayIterator( $price_rules ); ?>
 					
-					<?php while ( $iterator->valid() ) : ?>
+					<?php while ( $iterator->valid() ) : ob_start(); ?>
 						<?php
 						$currentPrice    = $iterator->current();
 						$currentQuantity = $iterator->key();
@@ -243,15 +246,10 @@ if ( $sale_price ) {
 						$iterator->next();
 						
 						if ( $iterator->valid() ) {
-							$quantity = $currentQuantity;
-							
-							if ( intval( $iterator->key() - 1 != $currentQuantity ) ) {
-								
-								$quantity = number_format_i18n( $quantity );
-								
-								if ( 'range' === $settings['quantity_type'] ) {
-									$quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
-								}
+							$quantity = number_format_i18n( $currentQuantity );
+
+							if ( (int) $iterator->key() - 1 !== (int) $currentQuantity && 'range' === $settings['quantity_type'] ) {
+								$quantity .= ' - ' . number_format_i18n( intval( $iterator->key() - 1 ) );
 							}
 						} else {
 							$quantity = number_format_i18n( $currentQuantity );
@@ -317,12 +315,13 @@ if ( $sale_price ) {
 								</div>
 							</div>
 						</li>
-					<?php endwhile; ?>
+					<?php $tptTierRows[] = ob_get_clean(); endwhile; ?>
+					<?php echo PricingTable::orderTiers( $tptTierRows, $settings ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- rows escaped when rendered above ?>
 					<?php do_action( 'tiered_pricing_table/dropdown/options', $pricing_rule ); ?>
 				</ul>
-				
-				<?php do_action( 'tiered_pricing_table/dropdown/after_options', $pricing_rule ); ?>
 			</div>
+
+			<?php do_action( 'tiered_pricing_table/dropdown/after_options', $pricing_rule ); ?>
 		</div>
 	</div>
 

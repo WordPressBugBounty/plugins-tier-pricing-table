@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\CatalogPrices;
 
 use TierPricingTable\Addons\AbstractAddon;
+use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 
 class CatalogPricesAddon extends AbstractAddon {
 	
@@ -26,6 +27,11 @@ class CatalogPricesAddon extends AbstractAddon {
 	}
 	
 	public function addSettingsSubsection( $subsections ) {
+		// the layout configurator carries these options while it is on
+		if ( LayoutConfiguratorAddon::isActive() ) {
+			return $subsections;
+		}
+		
 		$subsections[] = CatalogPricesSubsection::class;
 		return $subsections;
 	}

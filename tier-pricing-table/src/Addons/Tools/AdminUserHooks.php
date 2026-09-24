@@ -11,7 +11,7 @@ class AdminUserHooks {
 
 	public function addRolesManagementLink() {
 
-		$url  = admin_url( 'admin.php?page=wc-settings&tab=' . Settings::SETTINGS_PAGE . '&section=tools' );
+		$url  = admin_url( 'admin.php?page=wc-settings&tab=' . Settings::SETTINGS_PAGE . '&section=advanced#roles' );
 		$text = __( 'Manage Roles', 'tier-pricing-table' );
 		?>
 		<script>
