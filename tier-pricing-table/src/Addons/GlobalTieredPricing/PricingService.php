@@ -27,7 +27,7 @@ class PricingService {
                 if ( 'default' === $priority ) {
                     $priority = ( CartOptionsSubsection::globalRulesOverrideProductLevelRules() ? 'override' : 'prefer-product' );
                 }
-                $pricingRule->logPricingModification( '[global rule]: Matched global pricing rule #' . $globalPricingRule->getId() . '  with priority: ' . $priority );
+                $pricingRule->logPricingModification( '[global rule]: Matched global pricing rule #' . $globalPricingRule->getId() . ' (priority ' . $globalPricingRule->getPriority() . ') with priority type: ' . $priority );
                 $pricingRule = apply_filters(
                     'tiered_pricing_table/global_pricing/before_adjusting_pricing_rule',
                     $pricingRule,

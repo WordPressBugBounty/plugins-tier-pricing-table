@@ -23,6 +23,10 @@ class Formatter {
 	}
 
 	public static function formatRoleString( $roleSlug ) {
+		if ( GlobalPricingRule::GUEST_ROLE === $roleSlug ) {
+			return __( 'Guests (not logged in)', 'tier-pricing-table' );
+		}
+
 		$roles = wp_roles()->roles;
 
 		if ( array_key_exists( $roleSlug, $roles ) ) {

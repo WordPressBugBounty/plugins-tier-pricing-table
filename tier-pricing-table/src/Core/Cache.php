@@ -88,7 +88,10 @@ class Cache {
 			}
 		}
 		
-		return md5( $product->get_date_modified() . implode( ',', TierPricingTablePlugin::getCurrentUserRoles() ) );
+		// add-ons whose pricing changes without the product changing (scheduled global rules, for instance) salt the key
+		$salt = (string) apply_filters( 'tiered_pricing_table/cache/product_cache_key_salt', '', $product );
+		
+		return md5( $product->get_date_modified() . implode( ',', TierPricingTablePlugin::getCurrentUserRoles() ) . $salt );
 	}
 	
 	public function getProductData( WC_Product $product, $key = null ) {

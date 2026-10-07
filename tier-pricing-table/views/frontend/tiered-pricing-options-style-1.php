@@ -43,7 +43,7 @@ if ( !function_exists( 'tptParseOptionText' ) ) {
     ) {
         return strtr( $text, array(
             '{tp_quantity}'         => $quantity,
-            '{tp_discount}'         => $discount,
+            '{tp_discount}'         => ( !is_null( $discount ) ? round( (float) $discount, \TierPricingTable\PricingTable::discountDecimals( (float) $discount ) ) : $discount ),
             '{tp_rounded_discount}' => ( !is_null( $discount ) ? round( $discount ) : 0 ),
             '{tp_base_unit_name}'   => $base_unit_name,
         ) );

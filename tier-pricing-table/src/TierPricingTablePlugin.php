@@ -34,7 +34,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.0.2';
+	const VERSION = '8.1.0';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -239,6 +239,17 @@ class TierPricingTablePlugin {
 	 */
 	public static function getRulesSeparator(): string {
 		return apply_filters( 'tiered_pricing_table/rules_separator', ',' );
+	}
+	
+	/**
+	 * Separator between the quantity and the price inside one rule ("20:100") in CSV export.
+	 * Spreadsheets read "20:100" as a time; a store that edits exports in Excel can switch to "=",
+	 * which the importer accepts next to ":" out of the box.
+	 */
+	public static function getRuleSeparator(): string {
+		$separator = (string) apply_filters( 'tiered_pricing_table/rule_separator', ':' );
+		
+		return '' !== $separator ? $separator : ':';
 	}
 	
 	/**

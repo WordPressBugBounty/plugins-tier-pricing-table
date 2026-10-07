@@ -7,6 +7,7 @@ use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Settings;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\UsersAndRoles;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
+use TierPricingTable\Addons\GlobalTieredPricing\RuleOverlaps;
 use TierPricingTable\Core\ServiceContainerTrait;
 use WP_Post;
 
@@ -25,7 +26,14 @@ class Form {
 
 	protected $pricingRuleInstance = null;
 
+	/**
+	 * @var Guide
+	 */
+	protected $guide;
+
 	public function __construct() {
+
+		$this->guide = new Guide();
 
 		add_action( 'init', function () {
 			$tabs = array(
@@ -79,6 +87,16 @@ class Form {
 			.tpt-global-pricing-rule-hint--top-level {
 				margin-top: 10px;
 				border: 1px solid #888;
+			}
+
+			.tpt-global-pricing-rule-hint--warning {
+				border-left-color: #dba617;
+				background: #fcf9e8;
+				color: #6d4f00 !important;
+			}
+
+			.tpt-global-pricing-rule-hint--top-level + .tpt-global-pricing-rule-hint--top-level {
+				margin-top: -10px;
 			}
 
 			.tpt-global-pricing-rule-hint__icon {
@@ -302,15 +320,11 @@ class Form {
 
 		$this->includeAssets();
 
-		$rulesCount = (int) wp_count_posts( GlobalTieredPricingCPT::SLUG )->publish;
+		$this->guide->render();
 
-		if ( $this->isNewRule() && $rulesCount < 1 ) {
-			$this->renderHelpingSteps();
-		}
-
-		if ( ! $this->isNewRule() && ! $this->getPricingRuleInstance( $post )->isValidPricing() ) {
-			$this->tabs[0]->renderHint( __( 'The pricing rule does not affect either prices or product quantity limits. The rule will be skipped.',
-					'tier-pricing-table' ), array( 'custom_class' => 'tpt-global-pricing-rule-hint--top-level' ) );
+		// a rule that changes nothing is flagged as "Skipped" by the Rule status box; no second notice here
+		if ( ! $this->isNewRule() ) {
+			$this->renderStatusHints( $this->getPricingRuleInstance( $post ) );
 		}
 
 		?>
@@ -357,6 +371,37 @@ class Form {
 	}
 
 	/**
+	 * What the admin should know before editing: other rules have a higher priority for products and
+	 * customers they share, so this rule is skipped there. The Rule status box lists them.
+	 */
+	protected function renderStatusHints( GlobalPricingRule $rule ) {
+		// a suspended, expired or skipped rule is not applied anyway, so nothing overrides it
+		if ( 'publish' !== get_post_status( $rule->getId() ) || ! $rule->canBeOverridden() ) {
+			return;
+		}
+
+		$overriding = ( new RuleOverlaps() )->findOverriding( $rule, GlobalTieredPricingCPT::getGlobalRules( true, false ) );
+
+		if ( ! $overriding ) {
+			return;
+		}
+
+		$this->tabs[0]->renderHint(
+			sprintf(
+				/* translators: %d: number of rules */
+				_n(
+					'%d other rule has a higher priority and is applied instead of this rule for the products and customers they both match. See "Overridden by" in the Rule status box.',
+					'%d other rules have a higher priority and are applied instead of this rule for the products and customers they both match. See "Overridden by" in the Rule status box.',
+					count( $overriding ),
+					'tier-pricing-table'
+				),
+				count( $overriding )
+			),
+			array( 'custom_class' => 'tpt-global-pricing-rule-hint--top-level tpt-global-pricing-rule-hint--warning' )
+		);
+	}
+
+	/**
 	 * Get pricing rule instance
 	 *
 	 * @param  WP_Post  $post
@@ -369,193 +414,6 @@ class Form {
 		}
 
 		return $this->pricingRuleInstance;
-	}
-
-	public function renderHelpingSteps() {
-		?>
-		<style>
-			.tpt-global-pricing-rule-helping {
-				background: #ffffff;
-				border: 1px solid #e2e4e7;
-				border-radius: 8px;
-				padding: 30px;
-				position: relative;
-				margin: 20px 0;
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-			}
-
-			.tpt-global-pricing-rule-helping__close {
-				position: absolute;
-				top: 15px;
-				width: 32px;
-				height: 32px;
-				background: #f0f0f1;
-				color: #3c434a;
-				text-align: center;
-				line-height: 32px;
-				right: 15px;
-				font-weight: 600;
-				border-radius: 50%;
-				transition: all 0.2s ease;
-			}
-
-			.tpt-global-pricing-rule-helping__close:hover {
-				background: #dcdcdd;
-				cursor: pointer;
-				transform: scale(1.05);
-			}
-
-			.tpt-global-pricing-rule-helping__header {
-				text-align: center;
-				margin-bottom: 30px;
-			}
-
-			.tpt-global-pricing-rule-helping__title {
-				font-size: 22px;
-				font-weight: 600;
-				color: #1d2327;
-				margin-bottom: 20px;
-			}
-
-			.tpt-global-pricing-rule-helping__subtitle {
-				font-size: 14px;
-				color: #646970;
-				max-width: 650px;
-				margin: 0 auto;
-				line-height: 1.5;
-			}
-
-			.tpt-global-pricing-rule-helping__steps {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-				gap: 20px;
-			}
-
-			.tpt-global-pricing-rule-helping-step {
-				background: #ffffff;
-				border: 1px solid #e0e0e0;
-				border-radius: 8px;
-				padding: 24px 20px;
-				text-align: center;
-				transition: transform 0.2s ease, box-shadow 0.2s ease;
-				position: relative;
-			}
-
-			.tpt-global-pricing-rule-helping-step:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-				border-color: #c3c4c7;
-			}
-
-			.tpt-global-pricing-rule-helping-step__icon {
-				width: 52px;
-				height: 52px;
-				border-radius: 50%;
-				background: #e0f0fa;
-				color: #0070bc;
-				margin: 0 auto 16px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-size: 24px;
-				font-weight: bold;
-			}
-
-			.tpt-global-pricing-rule-helping-step__title {
-				font-size: 15px;
-				font-weight: 600;
-				color: #1d2327;
-				margin-bottom: 8px;
-			}
-
-			.tpt-global-pricing-rule-helping-step__description {
-				font-size: 13px;
-				color: #50575e;
-				line-height: 1.5;
-			}
-
-		</style>
-		<script>
-			jQuery(document).ready(function () {
-				jQuery('.tpt-global-pricing-rule-helping__close').click(function () {
-					jQuery(this).closest('.tpt-global-pricing-rule-helping').slideUp(200);
-				})
-			})
-		</script>
-		<?php
-		$steps = array(
-				array(
-						'title'       => __( 'Set Custom Pricing', 'tier-pricing-table' ),
-						'description' => __( 'Set custom regular and tiered pricing for matching products.',
-								'tier-pricing-table' ),
-						'icon'        => '$',
-				),
-				array(
-						'title'       => __( 'Select Products', 'tier-pricing-table' ),
-						'description' => __( 'Target specific products, categories, tags, or brands. Leave empty to apply store-wide.',
-								'tier-pricing-table' ),
-						'icon'        => '<span class="dashicons dashicons-archive"></span>',
-				),
-				array(
-						'title'       => __( 'Filter Users', 'tier-pricing-table' ),
-						'description' => 'Restrict this pricing to specific customers or user roles.',
-						'icon'        => '<span class="dashicons dashicons-admin-users"></span>',
-				),
-				array(
-						'title'       => __( 'Quantity Limits', 'tier-pricing-table' ),
-						'description' => __( 'Enforce minimum, maximum, and step increments for purchasing.',
-								'tier-pricing-table' ),
-						'icon'        => '<span class="dashicons dashicons-database"></span>',
-				),
-		)
-		?>
-		<div class="tpt-global-pricing-rule-helping">
-			<div class="tpt-global-pricing-rule-helping__close"
-			     title="<?php esc_attr_e( 'Dismiss', 'tier-pricing-table' ); ?>">
-				&times;
-			</div>
-
-			<div class="tpt-global-pricing-rule-helping__header">
-				<div class="tpt-global-pricing-rule-helping__title">
-					<?php esc_html_e( 'How global pricing rules work', 'tier-pricing-table' ); ?>
-				</div>
-				<div class="tpt-global-pricing-rule-helping__subtitle">
-					<p style="margin: 0 0 6px;">
-						<?php
-							esc_html_e( 'Global rules enable you to bulk-apply dynamic pricing and quantity limits to selected groups of products and users simultaneously.',
-									'tier-pricing-table' );
-						?>
-					</p>
-					<p style="margin: 0;">
-						<?php
-							echo sprintf( '<strong>%s</strong> %s', esc_html__( 'Note:', 'tier-pricing-table' ),
-									esc_html__( 'Depending on your priority settings, global rules may override product-level pricing configurations.',
-											'tier-pricing-table' ) );
-						?>
-					</p>
-				</div>
-			</div>
-
-			<div class="tpt-global-pricing-rule-helping__steps">
-				<?php foreach ( $steps as $index => $step ) : ?>
-					<div class="tpt-global-pricing-rule-helping-step">
-						<div class="tpt-global-pricing-rule-helping-step__icon">
-							<?php echo wp_kses_post( $step['icon'] ); ?>
-						</div>
-
-						<div class="tpt-global-pricing-rule-helping-step__title">
-							<?php echo esc_html( $step['title'] ); ?>
-						</div>
-
-						<div class="tpt-global-pricing-rule-helping-step__description">
-							<?php echo esc_html( $step['description'] ); ?>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-		<?php
 	}
 
 	public function isNewRule(): bool {

@@ -83,20 +83,23 @@ class WoocommerceImportService {
 	}
 	
 	/**
-	 * Decode export string format to array of pricing rules
+	 * Decode the export string format ("10:90,20:80") into an array of pricing rules.
+	 *
+	 * Each rule is "quantity:price" (or "quantity=price", which spreadsheets leave alone, while they
+	 * turn "20:100" into a time). Anything else, for example a cell a spreadsheet already turned
+	 * into "21:40:00", is ignored instead of being imported as a wrong tier.
 	 */
 	public static function decodeExport( string $data ): array {
 		$rules = explode( TierPricingTablePlugin::getRulesSeparator(), $data );
 		
+		// ":" and "=" always work; a store may export with another separator through the filter.
+		$separators = preg_quote( ':=' . TierPricingTablePlugin::getRuleSeparator(), '/' );
+		
 		$data = array();
 		
-		if ( $rules ) {
-			foreach ( $rules as $rule ) {
-				$rule = explode( ':', $rule );
-				
-				if ( isset( $rule[0] ) && isset( $rule[1] ) ) {
-					$data[ intval( $rule[0] ) ] = $rule[1];
-				}
+		foreach ( $rules as $rule ) {
+			if ( preg_match( '/^\s*(\d+)\s*[' . $separators . ']\s*(\d+(?:\.\d+)?)\s*$/', $rule, $matches ) ) {
+				$data[ intval( $matches[1] ) ] = $matches[2];
 			}
 		}
 		

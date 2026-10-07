@@ -5,6 +5,7 @@ use TierPricingTable\PriceManager;
 use TierPricingTable\TierPricingTablePlugin;
 use WC_Cart;
 use WC_Product;
+use WP_Error;
 
 class MinQuantity extends AbstractAddon {
 
@@ -135,6 +136,28 @@ class MinQuantity extends AbstractAddon {
 			return $passed;
 
 		}, 10, 4 );
+
+		// The Store API (Cart and Checkout blocks) counterpart of the filter above, WooCommerce 11.2+.
+		// The minimum already reaches the Store API's numeric limits through woocommerce_quantity_input_args;
+		// this keeps the rule in force when another extension raises those limits. A WP_Error rejects the
+		// change; the shopper sees its message in the block.
+		add_filter( 'woocommerce_store_api_cart_item_quantity_validation', function ( $valid, $quantity, $product ) {
+
+			if ( is_wp_error( $valid ) || ! ( $product instanceof WC_Product ) ) {
+				return $valid;
+			}
+
+			$minimum = PriceManager::getPricingRule( $product->get_id() )->getMinimum();
+
+			if ( $minimum && $quantity && $quantity < $minimum ) {
+				return new WP_Error( 'tiered_pricing_table_minimum_quantity',
+					// translators: %s: minimum quantity
+					sprintf( __( 'Minimum quantity for the product is %s', 'tier-pricing-table' ), $minimum ) );
+			}
+
+			return $valid;
+
+		}, 9, 3 ); // before the maximum and step checks, so a too-small quantity gets the minimum message
 
 		add_filter( 'woocommerce_available_variation', function ( $variation ) {
 			$pricingRule = PriceManager::getPricingRule( (int) $variation['variation_id'] );

@@ -152,21 +152,24 @@ class RoleBasedPricingImport {
 			
 			$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
 			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Regular pricing type' ] = $WPRole . '_tiered_price_pricing_type';
+			$labels = array(
+				'Regular pricing type'     => $WPRole . '_tiered_price_pricing_type',
+				'Regular price'            => $WPRole . '_tiered_price_regular_price',
+				'Sale price'               => $WPRole . '_tiered_price_sale_price',
+				'Percentage discount'      => $WPRole . '_tiered_price_discount',
+				'Fixed pricing rules'      => $WPRole . '_tiered_price_fixed',
+				'Percentage pricing rules' => $WPRole . '_tiered_price_percentage',
+				'Tiered pricing type'      => $WPRole . '_tiered_price_type',
+				'Minimum order quantity'   => $WPRole . '_tiered_price_minimum',
+			);
 			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Regular price' ] = $WPRole . '_tiered_price_regular_price';
-			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Sale price' ] = $WPRole . '_tiered_price_sale_price';
-			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Percentage discount' ] = $WPRole . '_tiered_price_discount';
-			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Fixed pricing rules' ] = $WPRole . '_tiered_price_fixed';
-			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Percentage pricing rules' ] = $WPRole . '_tiered_price_percentage';
-			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Tiered pricing type' ] = $WPRole . '_tiered_price_type';
-			
-			$columns[ 'Tiered Pricing — [' . $roleName . '] Minimum order quantity' ] = $WPRole . '_tiered_price_minimum';
+			foreach ( $labels as $label => $column ) {
+				// The exporter writes "Tiered Pricing — [Role] Label". Files exported before 8.0.3 / 10.0.3 carried
+				// two (three for the pricing type) spaces before the bracket; they must keep mapping automatically.
+				foreach ( array( ' ', '  ', '   ' ) as $spacing ) {
+					$columns[ 'Tiered Pricing —' . $spacing . '[' . $roleName . '] ' . $label ] = $column;
+				}
+			}
 		}
 		
 		return $columns;

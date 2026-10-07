@@ -64,7 +64,7 @@ class RoleBasedPricingExport {
 						$separator = TierPricingTablePlugin::getRulesSeparator();
 						
 						foreach ( $fixedRules as $quantity => $price ) {
-							$str .= $quantity . ':' . $price . $separator;
+							$str .= $quantity . TierPricingTablePlugin::getRuleSeparator() . $price . $separator;
 						}
 						
 						return mb_strlen( $str ) > 0 ? trim( $str, $separator ) : null;
@@ -80,7 +80,7 @@ class RoleBasedPricingExport {
 						$separator = TierPricingTablePlugin::getRulesSeparator();
 						
 						foreach ( $fixedRules as $quantity => $discount ) {
-							$str .= $quantity . ':' . $discount . $separator;
+							$str .= $quantity . TierPricingTablePlugin::getRuleSeparator() . $discount . $separator;
 						}
 						
 						return mb_strlen( $str ) > 0 ? trim( $str, $separator ) : null;
@@ -125,21 +125,21 @@ class RoleBasedPricingExport {
 			
 			$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
 			
-			$columns[ $WPRole . '_tiered_price_pricing_type' ]  = 'Tiered Pricing —  ' . ' [' . $roleName . '] ' . __( 'Regular pricing type',
+			$columns[ $WPRole . '_tiered_price_pricing_type' ]  = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Regular pricing type',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_regular_price' ] = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Regular price',
+			$columns[ $WPRole . '_tiered_price_regular_price' ] = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Regular price',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_sale_price' ]    = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Sale price',
+			$columns[ $WPRole . '_tiered_price_sale_price' ]    = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Sale price',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_discount' ]      = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Percentage discount',
+			$columns[ $WPRole . '_tiered_price_discount' ]      = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Percentage discount',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_fixed' ]         = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Fixed pricing rules',
+			$columns[ $WPRole . '_tiered_price_fixed' ]         = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Fixed pricing rules',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_percentage' ]    = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Percentage pricing rules',
+			$columns[ $WPRole . '_tiered_price_percentage' ]    = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Percentage pricing rules',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_type' ]          = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Tiered pricing type',
+			$columns[ $WPRole . '_tiered_price_type' ]          = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Tiered pricing type',
 					'tier-pricing-table' );
-			$columns[ $WPRole . '_tiered_price_minimum' ]       = 'Tiered Pricing — ' . ' [' . $roleName . '] ' . __( 'Minimum order quantity',
+			$columns[ $WPRole . '_tiered_price_minimum' ]       = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Minimum order quantity',
 					'tier-pricing-table' );
 		}
 		

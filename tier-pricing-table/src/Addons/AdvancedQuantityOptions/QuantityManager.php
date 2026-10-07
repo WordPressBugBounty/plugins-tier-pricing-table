@@ -4,6 +4,7 @@ use TierPricingTable\PriceManager;
 use TierPricingTable\PricingRule;
 use TierPricingTable\TierPricingTablePlugin;
 use WC_Product;
+use WP_Error;
 
 class QuantityManager {
 	
@@ -219,9 +220,40 @@ class QuantityManager {
 			}
 			
 			return $passed;
-			
+
 		}, 10, 4 );
-		
+
+		// The Store API (Cart and Checkout blocks) counterpart of the filter above, WooCommerce 11.2+. The
+		// maximum and the step already reach the Store API's numeric limits through
+		// woocommerce_quantity_input_args; this keeps them in force when another extension raises those
+		// limits. A WP_Error rejects the change; the shopper sees its message in the block.
+		add_filter( 'woocommerce_store_api_cart_item_quantity_validation', function ( $valid, $quantity, $product ) {
+
+			if ( is_wp_error( $valid ) || ! ( $product instanceof WC_Product ) ) {
+				return $valid;
+			}
+
+			$pricingRule = PriceManager::getPricingRule( $product->get_id() );
+
+			$max     = ! empty( $pricingRule->data['maximum_quantity'] ) ? intval( $pricingRule->data['maximum_quantity'] ) : null;
+			$groupOf = ! empty( $pricingRule->data['group_of_quantity'] ) ? intval( $pricingRule->data['group_of_quantity'] ) : null;
+
+			if ( $max && $quantity > $max ) {
+				return new WP_Error( 'tiered_pricing_table_maximum_quantity',
+					// translators: %s: maximum quantity
+					sprintf( __( 'Maximum order quantity for the product is %s', 'tier-pricing-table' ), $max ) );
+			}
+
+			if ( $groupOf && 0 !== (int) $quantity % $groupOf ) {
+				return new WP_Error( 'tiered_pricing_table_quantity_step',
+					// translators: %s: quantity step
+					sprintf( __( 'Order quantity must be multiple of %s', 'tier-pricing-table' ), $groupOf ) );
+			}
+
+			return $valid;
+
+		}, 10, 3 );
+
 		add_filter( 'woocommerce_available_variation', function ( $variation ) {
 			
 			$pricingRule = PriceManager::getPricingRule( $variation['variation_id'] );

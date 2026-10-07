@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 8.0.2
+Stable tag: 8.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,17 +113,19 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 
 == Screenshots ==
 
-1. Tiered Pricing on the product page
-2. Set up on the product-level
-3. Global Pricing Rules
-4. Shop and Catalog prices
-5. Role-based Pricing
-6. Quantity Limits (min/max/step)
-7. Tiered Pricing in the cart and upsells
-8. Custom Pricing Labels
-9. Mix&Match Pricing Rules
-10. Roles Management
-11. 3rd-party Integrations
+1. Tiered pricing on the product page
+2. Layout configurator with live preview
+3. Tiered pricing on shop and category pages
+4. Wholesale registration and approval
+5. Private store and catalog visibility
+6. Role and customer pricing
+7. Cart rules by role
+8. Tiered pricing in the cart and upsells
+9. Request a quote
+10. Tier labels and badges
+11. Mix & Match pricing rules
+12. Roles management
+13. 3rd-party integrations
 
 == Installation ==
 
@@ -181,105 +183,89 @@ Each order has the "recalculate with tiered pricing" button, which recalculates 
 
 == Changelog ==
 
+= 8.1.0 [2026-10-06] =
+* New: Pricing test (Settings → Advanced → Utilities): see what a customer pays for a product and which global rule is applied.
+* New: priority for global pricing rules; the editor shows the rules that override the one you edit.
+* New: start and end dates for global pricing rules.
+* New: Rule status box in the rule editor with the status, Suspend / Reactivate, priority, schedule and overriding rules.
+* New: "Include subcategories" switch and "Guests (not logged in)" role in global pricing rules.
+* Improvement: the rules list shows status, priority, scope and pricing in four columns and filters by status.
+* Improvement: rules that change nothing are marked "Skipped" and never block other rules.
+* Improvement: savings badge styles (text, pill, outline), positions and an "Auto" colour.
+* Improvement: faster layout configurator preview.
+* Improvement: filters for the discount decimals and the CSV rule separator; the CSV import accepts "20=100" and maps role columns automatically.
+* Fix: global rules created before 8.0.0 and never re-saved were ignored.
+* Fix: block cart quantity changes that break the minimum, maximum or step are rejected.
+
 = 8.0.2 [2026-09-24] =
-* New: the catalog quantity box now works with the Product Button block too (Product Collection, block themes): it sits next to the button, the button adds the typed quantity, and Enter in the box adds to the cart.
-* Improvement: in the catalog the quantity box and the add-to-cart button share one line, with the button filling the rest of the row.
-* Improvement: no space above the catalog pricing and 20px below it, so the price and the tiers sit together in the product card.
-* Fix: block themes showed the catalog pricing, the badge and the quantity box a second time outside the product card's layout, which stretched the card; WooCommerce fires the classic loop hooks inside product template blocks as well, and the plugin now renders through the blocks only.
-* Fix: the catalog pricing and the badge no longer appear on the single product page of block themes, whose template uses the same blocks.
-* Fix: the integrated "Request a quote" row of the table layouts spans every column when custom columns are added to the table.
+* New: the catalog quantity box works with the Product Button block (Product Collection, block themes).
+* Improvement: in the catalog, the quantity box and the add-to-cart button share one line, and the tiers sit right under the price.
+* Fix: block themes no longer show the catalog pricing, badge and quantity box twice, nor on the single product page.
+* Fix: the integrated "Request a quote" row spans every column when the table has custom columns.
 
 = 8.0.1 [2026-09-23] =
-* Improvement: PHP 8.1+ code compatibility: htmlspecialchars() and html_entity_decode() calls pass explicit flags (WooCommerce QIT code compatibility test).
-* Fix: the plugin no longer clears the "section" parameter on other WooCommerce settings tabs; since 7.2.0 this broke the REST API keys screen and saving webhooks, and could affect tax and shipping sections.
-* Improvement: security hardening from the WooCommerce QIT audit: every layout template output is escaped, server and request variables are sanitized, the plain-text quote e-mails escape field values, and the quote request endpoint verifies the REST nonce in its permission callback unless reCAPTCHA is configured.
+* Fix: the plugin no longer clears the "section" parameter on other WooCommerce settings tabs; since 7.2.0 this broke the REST API keys screen and saving webhooks.
+* Improvement: security hardening and PHP 8.1+ compatibility from the WooCommerce QIT audit: escaped template output, sanitized request variables, a nonce check on the quote request endpoint.
 
 = 8.0.0 [2026-09-23] =
-* New: wholesale registration and approval, part of the "Non-Logged-In Users" module, now called "Wholesale & Guest Users": an application form via the [tiered_pricing_wholesale_registration] shortcode with a form builder (add, reorder and remove fields; label, type and required per field; text, paragraph, phone, e-mail, website, number, dropdown and checkbox types), an approval queue under WooCommerce → Wholesale Applications with approve, reject and bulk actions, automatic or manual approval, four WooCommerce e-mails (new application, received, approved, rejected), an "Apply for a wholesale account" link on the login form, a login redirect for wholesale customers, an optional terms checkbox, a honeypot and reCAPTCHA v3 with its own keys. Switched on under the new Wholesale settings tab.
-* New: private store, off by default. "Closed store" sends visitors to the login page except for My Account, the wholesale registration page and chosen pages. "Catalog visibility by role" adds a "Who can see" rule to every product and product category (everyone, only selected roles, everyone except selected roles; guests count as a role) for wholesale-only or retail-only catalogs. Hidden products leave the shop, search, related, upsell and cross-sell lists, menus, the sitemap and the Store API, cannot be bought, and their pages send guests to the login page or show a not-found page; hidden categories leave category lists, menus and their archives. The products list and the product categories list show a "Who can see" column, and the products list can be filtered by it.
-* New: cart rules by role (premium), off by default: a minimum order amount or quantity for the whole cart per role (guests count as a role, the strictest minimum applies), enforced in the cart and at checkout for the classic pages and the blocks with editable messages; and payment methods and shipping methods limited to selected roles, for example invoice payment for wholesale customers only or free shipping for retail only.
-* Improvement: the Guest Users options (hide prices, require login to purchase) moved from the General tab to the Wholesale tab, next to the other B2B settings; both belong to the same module now.
-* Improvement: the Tools tab merged into the Modules tab, now called Advanced: modules, roles management, data clean-up, cache and debug in one place. Old links to the Tools tab still open it.
-* Improvement: the experimental "WooCommerce Product Editor integration" module is no longer listed under Modules; a store that switched it on keeps it.
-* Fix: table design styles #1 to #6 no longer break a quantity range onto two lines when a tier label sits in the row; the label wraps under the quantity instead.
+* New: wholesale registration and approval: an application form with a form builder (shortcode [tiered_pricing_wholesale_registration]), an approval queue under WooCommerce → Wholesale Applications, automatic or manual approval, four WooCommerce e-mails, a link on the login form, a login redirect, an optional terms checkbox, a honeypot and reCAPTCHA v3.
+* New: private store, off by default: "Closed store" sends visitors to the login page, and "Catalog visibility by role" adds a "Who can see" rule to every product and category (guests count as a role). Hidden products and categories leave every list, menu, search, the sitemap and the Store API.
+* New: cart rules by role (premium), off by default: a minimum order amount or quantity per role, and payment and shipping methods limited to selected roles.
+* Improvement: the Guest Users options moved to the new Wholesale tab; the Tools tab merged into the Modules tab, now called Advanced.
+* Improvement: the experimental "WooCommerce Product Editor integration" module is no longer listed; a store that switched it on keeps it.
+* Fix: table styles #1 to #6 keep a quantity range on one line when a tier label sits in the row.
 
 = 7.2.0 [2026-09-23] =
-* New: layout configurator with a live preview, for the product page, shop & category pages and the cart. Every layout, style, text and colour option in one place. It is an add-on: switch it off to get the classic settings rows back.
-* New: design styles: table "minimal" (#1) and "savings bar" (#5), blocks "cards" (#7) and "segmented" (#8), options "plan picker" (#4), "list with savings bar" (#5) and "steps" (#6), dropdown "pill" (#1), plain text "check list" (#1) and "one line" (#2). The former table style #1 is now #6.
-* New: layout options: discount format (percentage, amount or both), tier order, spacing, cell padding, discount badge colour, active tier left border.
-* New: shop & category pages: a bulk savings badge on the product image, "Where it shows" (product lists and categories), Product Collection block support, and tiers per grid item with a "+N more" link.
-* New: cart: the quantity in the upsell message is a one-click link to the next tier, an optional progress bar under it, and a "Total savings" row in the cart totals and the classic checkout.
-* Improvement: single-choice settings are chips with examples, the price calculation options show Off/On examples, and the text template editor is lighter.
-* Improvement: the "Show total price" options are free now.
-* Improvement: the Calculations tab is now the Price Calculation group on the General tab; Cache and Debug moved to the Tools tab.
-* Improvement: the "nowhere" position is gone; an existing "nowhere" setting behaves as automatic display switched off.
-* Improvement: default table cell padding for themes that leave cells unpadded, smaller badges in the compact layout, and new default texts for the "You Save" badge and the cart upsell message.
-* Fix: no crossed-out price and no "0% off" badge for a tier priced at the regular price.
-* Fix: quantity ranges use the site's number format and never show equal ends; the base row's unit name is singular for a minimum of 1.
-* Fix: table styles #2 and #6 tint the active row from the active tier colour without shifting it.
-* Fix: the dropdown starts with the base option selected and keyboard navigation focuses it; the Request a Quote prompt renders under the list.
-* Fix: the horizontal table's Request a Quote column keeps the row count with custom columns or without the discount row.
+* New: layout configurator with a live preview for the product page, shop & category pages and the cart. It is a module: switch it off to get the classic settings back.
+* New: ten design styles: table "minimal" and "savings bar", blocks "cards" and "segmented", options "plan picker", "list with savings bar" and "steps", dropdown "pill", plain text "check list" and "one line". The former table style #1 is now #6.
+* New: layout options: discount format, tier order, spacing, cell padding, discount badge colour, active tier left border.
+* New: shop & category pages: a bulk savings badge on the product image, "Where it shows", Product Collection block support, and tiers per grid item with a "+N more" link.
+* New: cart: a one-click link to the next tier in the upsell message, an optional progress bar, and a "Total savings" row.
+* Improvement: the "Show total price" options are free; the Calculations tab became the Price Calculation group on the General tab; the "nowhere" position is gone (an existing setting behaves as automatic display switched off).
+* Improvement: default cell padding for themes that leave cells unpadded, smaller badges in the compact layout, new default texts for the "You Save" badge and the upsell message.
+* Fix: no crossed-out price or "0% off" badge for a tier at the regular price; quantity ranges use the site's number format; table styles #2 and #6 tint the active row correctly; the dropdown starts on the base option; the horizontal table keeps its row count with custom columns.
 
 = 7.1.8 [2026-09-08] =
-* Fix: the Request a Quote form did not open for variations of products with more variations than the AJAX threshold.
-* Fix: the catalog price of variable products could lose its prefix or format when an SEO integration formatted the price first with caching enabled.
-* Fix: the "Purge cache" button did nothing while caching was disabled, and its success notice could be lost.
+* Fix: the Request a Quote form for variations of products with many variations, the catalog price format of variable products with SEO integrations and caching, and the "Purge cache" button while caching is disabled.
 
 = 7.1.7 [2026-09-02] =
-* New: U2Code Multicurrency integration
-* New: Multicurrency and Product Addons settings sections — show the detected plugin of each kind, the state of its integration, and the matching U2Code plugin
-* New: Mix & Match settings section with an option to apply tiered pricing to the products inside Mix and Match containers (per-item pricing)
-* Improvement: settings tabs are now ordered consistently — configuration first, then display, features, modules, integrations, and Tools last
-* Fix: the maximum order quantity was enforced as half of the configured value in the WooCommerce block cart (Store API)
-* Fix: a pricing rule matching a Mix and Match container re-priced the container itself on top of its contents
+* New: U2Code Multicurrency integration, and Multicurrency and Product Addons settings sections.
+* New: Mix & Match settings section: tiered pricing for the products inside Mix and Match containers.
+* Improvement: settings tabs ordered consistently.
+* Fix: the maximum order quantity in the block cart (Store API); a pricing rule matching a Mix and Match container no longer re-prices the container itself.
 
 = 7.1.6 [2026-08-25] =
-* New: dedicated integration with U2Code Product Addons — the new "U2Code plugins" section on the integrations page
-* New: recommendations tip for product options in the product's Tiered Pricing tab
-* Improvement: integrations page redesign with official-plugin cards
+* New: U2Code Product Addons integration and a redesigned integrations page.
 
 = 7.1.5 [2026-08-14] =
-* Fix: percentage tiered prices were calculated from a price WooCommerce Subscriptions had already modified, which double-prorated the first payment of synchronised subscriptions and mis-applied sign-up fees and free trials.
-* Fix: the prorated cost of a subscription quantity switch ignored the tiered discount, overcharging the customer.
+* Fix: WooCommerce Subscriptions: percentage tiers were calculated from an already modified price (double-prorated first payments, wrong sign-up fees and trials), and quantity switches ignored the tiered discount.
 
 = 7.1.4 [2026-08-13] =
 * Fix: cart prices ignored the exchange rate with the WPML Multicurrency integration (regression in 7.1.3).
 
 = 7.1.3 [2026-08-09] =
-* New: WooCommerce Subscriptions integration — tiered pricing now applies correctly to products purchased on a subscription plan, in both the initial and recurring totals.
-* New: YITH Multi Currency Switcher integration.
-* New: WPML/Polylang support for role-based and user-based tiered pricing on product translations.
-* Enhance: Global tiered pricing rules now match products, categories, tags and brands across WPML/Polylang translations.
-* Fix: Prevented two possible fatal errors — a null product passed into the price filter by third-party code, and re-calculating a manual order whose product had been deleted.
-* Fix: A 100%-off tier could be charged at full price when re-calculating manual orders.
-* Fix: WCCS, YITH and WPML currency switchers could convert percentage-based tiered prices twice.
-* Fix: Product add-on costs were dropped from the cart price when a currency switcher was active.
-* Fix: Division-by-zero warning in the WooCommerce Deposits integration.
-* Fix: SEO structured data (Rank Math, Yoast, SEOPress) declared more offers than it output; the SEOPress price-range tag showed the lowest price instead of a range.
+* New: WooCommerce Subscriptions and YITH Multi Currency Switcher integrations.
+* New: WPML/Polylang support for role-based and customer-based pricing on translations; global rules match translated products, categories, tags and brands.
+* Fix: two possible fatal errors (a null product in the price filter, re-calculating a manual order whose product was deleted), a 100%-off tier charged at full price in manual orders, currency switchers converting percentage tiers twice, add-on costs dropped with a currency switcher, a division-by-zero warning in the Deposits integration, and the SEO structured data offers (Rank Math, Yoast, SEOPress).
 
 = 7.1.2 [2026-08-06] =
-* Enhance: Product Bundles integration for manually created orders.
-* Fix: WPML Multicurrency rounding rules were not applied to tiered prices.
-* Fix: Tiered price in the cart was converted twice by currency switchers after decreasing the quantity below the first tier.
-* Fix: Prices with taxes for the products without tiered pricing rules.
+* Improvement: Product Bundles integration for manually created orders.
+* Fix: WPML Multicurrency rounding, double conversion after lowering the quantity below the first tier, and prices with taxes for products without tiers.
 
 = 7.1.1 [2026-07-29] =
-* Fix: frontend JS issue with totals.
+* Fix: front-end totals script.
 
 = 7.1.0 [2026-07-27] =
-* New: Mix&Match minimum order quantity for variable products.
-* New: Woo Payment Multicurrency integration.
-* Enhance: Move role-based and customer-based pricing to a separate tab.
-* Enhance: Settings texts and descriptions updated.
-* Fix: Minor fixes and improvements.
+* New: Mix & Match minimum order quantity for variable products; WooPayments Multicurrency integration.
+* Improvement: role-based and customer-based pricing on their own product tab; updated settings texts.
 
 = 7.0.1 [2026-07-20] =
-* Fix: Frontend script cache issue.
+* Fix: front-end script cache issue.
 
 = 7.0.0 [2026-07-18] =
-* New: Request a Quote functionality.
-* New: Totals & "You save" feature for the products without tiered pricing rules.
-* Enhance: Dropdown accessibility.
+* New: Request a Quote.
+* New: totals and "You save" for products without tiered pricing rules.
+* Improvement: dropdown accessibility.
 
 = 6.5.0 [2026-07-02] =
 * New: Product level customer based pricing.

@@ -111,6 +111,14 @@ class PricingTable {
 			</div>
 		<?php endif; ?>
 		<?php
+		/**
+		 * After the pricing layout and its wrapper. The savings badge uses it for its "after the table" position.
+		 *
+		 * @param  WC_Product  $parentProduct
+		 * @param  int|null  $variationID
+		 * @param  array  $settings
+		 */
+		do_action( 'tiered_pricing_table/after_rendering_tiered_pricing', $parentProduct, $variationID, $settings );
 	}
 
 	/**
@@ -269,6 +277,29 @@ class PricingTable {
 	 *
 	 * @return string HTML
 	 */
+	/**
+	 * Decimals shown on a percentage discount ("10.14%" with 2, "10%" with 0).
+	 *
+	 * @param  float  $percent  The discount percentage.
+	 * @param  WC_Product|null  $product
+	 * @param  PricingRule|null  $pricingRule
+	 *
+	 * @return int
+	 */
+	public static function discountDecimals( float $percent, ?WC_Product $product = null, ?PricingRule $pricingRule = null ): int {
+		/**
+		 * Filter the number of decimals of displayed percentage discounts.
+		 *
+		 * @param  int  $decimals  Default 2. Return 0 to show whole numbers.
+		 * @param  float  $percent  The discount percentage before rounding.
+		 * @param  WC_Product|null  $product
+		 * @param  PricingRule|null  $pricingRule
+		 */
+		$decimals = apply_filters( 'tiered_pricing_table/discount/decimals', 2, $percent, $product, $pricingRule );
+
+		return max( 0, (int) $decimals );
+	}
+
 	public static function formatDiscount(
 			float $percent,
 			PricingRule $pricingRule,
@@ -280,7 +311,7 @@ class PricingTable {
 		$format = $settings['discount_format'] ?? 'percentage';
 		$format = in_array( $format, array( 'percentage', 'amount', 'both' ), true ) ? $format : 'percentage';
 
-		$percentLabel = round( $percent, 2 ) . '%';
+		$percentLabel = round( $percent, self::discountDecimals( $percent, $product, $pricingRule ) ) . '%';
 		$amountLabel  = '';
 
 		if ( 'percentage' !== $format ) {

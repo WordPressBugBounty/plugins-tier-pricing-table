@@ -2,6 +2,8 @@
 
 namespace TierPricingTable\Addons\TaxSettings\GlobalRulesIntegration;
 
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns\Settings;
+use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 class GlobalRules {
     public function __construct() {
         add_filter(

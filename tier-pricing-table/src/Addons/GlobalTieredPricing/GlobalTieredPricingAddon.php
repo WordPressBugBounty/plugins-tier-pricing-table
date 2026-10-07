@@ -2,6 +2,7 @@
 
 use TierPricingTable\Addons\AbstractAddon;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\PricingTestLinks;
 
 class GlobalTieredPricingAddon extends AbstractAddon {
 	
@@ -16,6 +17,7 @@ class GlobalTieredPricingAddon extends AbstractAddon {
 		
 		new LookupService();
 		new GlobalTieredPricingCPT();
+		new PricingTestLinks();
 		new GlobalTieredPricingCartManager();
 		new PricingService();
 		
@@ -25,6 +27,29 @@ class GlobalTieredPricingAddon extends AbstractAddon {
 			$this,
 			'showMessageOnProductsTieredPricingTab',
 		), 999 );
+		
+		// The set of rules in force changes with schedules and priorities, so cached prices must change with it:
+		// WooCommerce's variable price ranges and the plugin's own product data are keyed by this fingerprint.
+		add_filter( 'woocommerce_get_variation_prices_hash', function ( $hash ) {
+			if ( is_array( $hash ) ) {
+				$hash[] = 'tpt-rules:' . self::getActiveRulesFingerprint();
+			}
+			
+			return $hash;
+		} );
+		
+		add_filter( 'tiered_pricing_table/cache/product_cache_key_salt', function ( $salt ) {
+			return $salt . '|rules:' . self::getActiveRulesFingerprint();
+		} );
+	}
+	
+	/**
+	 * The rules in force right now with their priorities, as one string.
+	 */
+	public static function getActiveRulesFingerprint(): string {
+		return implode( ',', array_map( function ( GlobalPricingRule $rule ) {
+			return $rule->getId() . ':' . $rule->getPriority();
+		}, GlobalTieredPricingCPT::getGlobalRules() ) );
 	}
 	
 	public function showMessageOnProductsTieredPricingTab() {

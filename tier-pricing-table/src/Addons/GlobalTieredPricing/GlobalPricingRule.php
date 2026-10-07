@@ -4,6 +4,8 @@ namespace TierPricingTable\Addons\GlobalTieredPricing;
 
 use TierPricingTable\Addons\GlobalTieredPricing\PricingRule\RuleSettings;
 use TierPricingTable\Forms\Form;
+use DateTime;
+use DateTimeZone;
 use Exception;
 use WC_Product;
 use WP_User;
@@ -114,6 +116,13 @@ class GlobalPricingRule {
     public $excludedProductCategories = array();
 
     /**
+     * Whether the included and excluded categories cover their subcategories too.
+     *
+     * @var bool
+     */
+    public $includeSubcategories = false;
+
+    /**
      * Included tags
      *
      * @var array
@@ -198,6 +207,56 @@ class GlobalPricingRule {
     public $mixAndMatchMinQuantity = null;
 
     public $priorityOptions;
+
+    const DEFAULT_PRIORITY = 10;
+
+    /**
+     * The pseudo role of a visitor who is not logged in, selectable in the role lists. The same key the
+     * wholesale registration add-on uses (NonLoggedInUsers\Roles::GUEST).
+     */
+    const GUEST_ROLE = 'guest';
+
+    /**
+     * The roles the matcher reads for a user: a visitor who is not logged in has the guest pseudo role.
+     */
+    public static function rolesOf( WP_User $user ) : array {
+        return ( $user->ID ? (array) $user->roles : array(self::GUEST_ROLE) );
+    }
+
+    /**
+     * Whether a role key may be stored in the rule's role lists: an existing WordPress role or the guest pseudo role.
+     */
+    public static function isSelectableRole( $role ) : bool {
+        return self::GUEST_ROLE === $role || function_exists( 'wp_roles' ) && array_key_exists( $role, wp_roles()->roles );
+    }
+
+    /**
+     * Order among global rules: the lowest number is applied first; equal numbers, the newest rule first.
+     *
+     * @var int
+     */
+    public $priority = self::DEFAULT_PRIORITY;
+
+    /**
+     * First day the rule applies (Y-m-d in the site's timezone, inclusive), null = no start.
+     *
+     * @var ?string
+     */
+    public $startDate = null;
+
+    /**
+     * Last day the rule applies (Y-m-d in the site's timezone, inclusive), null = no end.
+     *
+     * @var ?string
+     */
+    public $endDate = null;
+
+    /**
+     * post_date_gmt of the rule: orders rules with the same priority (newest first).
+     *
+     * @var string
+     */
+    public $createdAt = '';
 
     /**
      * Array with custom data from 3rd-party addons
@@ -345,6 +404,9 @@ class GlobalPricingRule {
         $self->setFixedTieredPricingRules( $fixedRules );
         $self->setMinimum( ( Form::isEmpty( $minimum ) ? null : (int) $minimum ) );
         $self->setMixAndMatchMinQuantity( $mixAndMatch );
+        $self->setPriority( $data['priority'] ?? self::DEFAULT_PRIORITY );
+        $self->setStartDate( $data['start_date'] ?? null );
+        $self->setEndDate( $data['end_date'] ?? null );
         return $self;
     }
 
@@ -354,11 +416,17 @@ class GlobalPricingRule {
      * @throws Exception
      */
     public function validatePricing() {
-        $valid = !Form::isEmpty( $this->getRegularPrice() );
-        $valid = $valid || !Form::isEmpty( $this->getSalePrice() );
+        // only the fields of the chosen pricing type reach the storefront: a discount left over from
+        // "percentage" changes nothing in "flat" mode, and the other way round
+        if ( 'percentage' === $this->getPricingType() ) {
+            $valid = (float) $this->getDiscount() > 0;
+        } else {
+            $valid = !Form::isEmpty( $this->getRegularPrice() ) || !Form::isEmpty( $this->getSalePrice() );
+        }
         $valid = $valid || !empty( $this->getTieredPricingRules() );
         $valid = $valid || !Form::isEmpty( $this->getMinimum() );
-        $valid = $valid || !Form::isEmpty( $this->getDiscount() );
+        // a mix & match choice alone changes how product-level minimums count across variations
+        $valid = $valid || !is_null( $this->getMixAndMatchMinQuantity() );
         $valid = $valid || $this->getSettings()->getPriorityType() === 'flexible';
         $valid = apply_filters( 'tiered_pricing_table/global_pricing/validation', $valid, $this );
         if ( !$valid ) {
@@ -405,6 +473,43 @@ class GlobalPricingRule {
 
     public function setExcludedProductCategories( array $excludedProductCategories ) {
         $this->excludedProductCategories = $excludedProductCategories;
+    }
+
+    public function isIncludeSubcategories() : bool {
+        return $this->includeSubcategories;
+    }
+
+    public function setIncludeSubcategories( bool $includeSubcategories ) {
+        $this->includeSubcategories = $includeSubcategories;
+    }
+
+    /**
+     * The included categories as the matcher reads them: with every subcategory when the switch is on.
+     */
+    public function getEffectiveIncludedCategories() : array {
+        return ( $this->includeSubcategories ? self::withSubcategories( $this->includedProductCategories ) : $this->includedProductCategories );
+    }
+
+    /**
+     * The excluded categories as the matcher reads them: with every subcategory when the switch is on.
+     */
+    public function getEffectiveExcludedCategories() : array {
+        return ( $this->includeSubcategories ? self::withSubcategories( $this->excludedProductCategories ) : $this->excludedProductCategories );
+    }
+
+    /**
+     * The ids plus all their descendant product categories.
+     */
+    public static function withSubcategories( array $ids ) : array {
+        $all = array();
+        foreach ( array_map( 'intval', $ids ) as $id ) {
+            $all[] = $id;
+            $children = get_term_children( $id, 'product_cat' );
+            if ( is_array( $children ) ) {
+                $all = array_merge( $all, array_map( 'intval', $children ) );
+            }
+        }
+        return array_values( array_unique( $all ) );
     }
 
     public function getIncludedProductTags() : array {
@@ -487,6 +592,166 @@ class GlobalPricingRule {
         $this->excludedUsers = $excludedUsers;
     }
 
+    public function getPriority() : int {
+        return $this->priority;
+    }
+
+    /**
+     * @param  mixed  $priority  Anything non-numeric (an empty meta row, for instance) falls back to the default.
+     */
+    public function setPriority( $priority ) {
+        $this->priority = ( is_numeric( $priority ) ? max( 0, (int) $priority ) : self::DEFAULT_PRIORITY );
+    }
+
+    public function getStartDate() : ?string {
+        return $this->startDate;
+    }
+
+    public function setStartDate( $date ) {
+        $this->startDate = self::normalizeDate( $date );
+    }
+
+    public function getEndDate() : ?string {
+        return $this->endDate;
+    }
+
+    public function setEndDate( $date ) {
+        $this->endDate = self::normalizeDate( $date );
+    }
+
+    public function hasSchedule() : bool {
+        return null !== $this->startDate || null !== $this->endDate;
+    }
+
+    public function getCreatedAt() : string {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt( string $createdAt ) {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * A "Y-m-d" string or null; anything else (a partial date, "0000-00-00", a timestamp) is dropped.
+     */
+    protected static function normalizeDate( $date ) : ?string {
+        $date = ( is_string( $date ) ? trim( $date ) : '' );
+        if ( '' === $date ) {
+            return null;
+        }
+        $parsed = DateTime::createFromFormat( '!Y-m-d', $date );
+        return ( $parsed && $parsed->format( 'Y-m-d' ) === $date ? $date : null );
+    }
+
+    /**
+     * 00:00:00 of the start date in the site's timezone, as a timestamp; null without a start date.
+     */
+    public function getStartTimestamp() : ?int {
+        return ( null === $this->startDate ? null : self::dayBoundary( $this->startDate, false ) );
+    }
+
+    /**
+     * 23:59:59 of the end date in the site's timezone, as a timestamp; null without an end date.
+     */
+    public function getEndTimestamp() : ?int {
+        return ( null === $this->endDate ? null : self::dayBoundary( $this->endDate, true ) );
+    }
+
+    protected static function dayBoundary( string $date, bool $endOfDay ) : int {
+        $timezone = ( function_exists( 'wp_timezone' ) ? wp_timezone() : new DateTimeZone('UTC') );
+        $moment = new DateTime($date . (( $endOfDay ? ' 23:59:59' : ' 00:00:00' )), $timezone);
+        return $moment->getTimestamp();
+    }
+
+    /**
+     * "active", "scheduled" (starts later) or "expired" (ended) at the given moment (default: now).
+     */
+    public function getScheduleStatus( ?int $now = null ) : string {
+        $now = ( null === $now ? time() : $now );
+        $start = $this->getStartTimestamp();
+        $end = $this->getEndTimestamp();
+        if ( null !== $start && $now < $start ) {
+            return 'scheduled';
+        }
+        if ( null !== $end && $now > $end ) {
+            return 'expired';
+        }
+        return 'active';
+    }
+
+    public function isWithinSchedule( ?int $now = null ) : bool {
+        return 'active' === $this->getScheduleStatus( $now );
+    }
+
+    const EFFECTIVE_STATUSES = array(
+        'active',
+        'scheduled',
+        'expired',
+        'suspended',
+        'skipped'
+    );
+
+    /**
+     * What the storefront makes of a published rule, in order of precedence: "suspended", "expired",
+     * "skipped" (changes neither prices nor quantity limits), "scheduled" (starts later) or "active".
+     */
+    public function getEffectiveStatus( ?int $now = null ) : string {
+        if ( $this->isSuspended() ) {
+            return 'suspended';
+        }
+        $schedule = $this->getScheduleStatus( $now );
+        if ( 'expired' === $schedule ) {
+            return 'expired';
+        }
+        // shown before "scheduled" so an empty campaign rule gets fixed before it starts
+        if ( !$this->isValidPricing() ) {
+            return 'skipped';
+        }
+        return $schedule;
+    }
+
+    /**
+     * Whether a higher-priority rule can take products and customers away from this one: only a rule
+     * that is (or will be) in force. A suspended, expired or skipped rule is not applied anyway.
+     */
+    public function canBeOverridden( ?int $now = null ) : bool {
+        return in_array( $this->getEffectiveStatus( $now ), array('active', 'scheduled'), true );
+    }
+
+    /**
+     * usort() callback: the order the rules are matched in. Lowest priority number first; among equal
+     * numbers the newest rule first (today's behaviour for rules that never had a priority), then by ID.
+     */
+    public static function compareOrder( GlobalPricingRule $a, GlobalPricingRule $b ) : int {
+        if ( $a->getPriority() !== $b->getPriority() ) {
+            return $a->getPriority() <=> $b->getPriority();
+        }
+        if ( $a->getCreatedAt() !== $b->getCreatedAt() ) {
+            return strcmp( $b->getCreatedAt(), $a->getCreatedAt() );
+        }
+        return (int) $b->id <=> (int) $a->id;
+    }
+
+    /**
+     * Whether this rule has a higher priority than another one (and so is applied where both match).
+     */
+    public function outranks( GlobalPricingRule $other ) : bool {
+        return self::compareOrder( $this, $other ) < 0;
+    }
+
+    /**
+     * The rule's title, or "Rule #ID" for a rule saved without one.
+     */
+    public static function titleOf( int $id ) : string {
+        $title = get_the_title( $id );
+        /* translators: %d: rule ID */
+        return ( '' !== trim( (string) $title ) ? $title : sprintf( __( 'Rule #%d', 'tier-pricing-table' ), $id ) );
+    }
+
+    public function getTitle() : string {
+        return self::titleOf( (int) $this->id );
+    }
+
     public function getSettings() : RuleSettings {
         if ( !$this->priorityOptions ) {
             $this->priorityOptions = new RuleSettings($this);
@@ -509,7 +774,11 @@ class GlobalPricingRule {
             'mix_and_match_minimum' => $this->getMixAndMatchMinQuantity(),
             'tax_status'            => $this->getTaxStatus(),
             'tax_class'             => $this->getTaxClass(),
+            'priority'              => $this->getPriority(),
+            'start_date'            => $this->getStartDate(),
+            'end_date'              => $this->getEndDate(),
             'included_categories'   => $this->getIncludedProductCategories(),
+            'include_subcategories' => $this->isIncludeSubcategories(),
             'included_tags'         => $this->getIncludedProductTags(),
             'included_brands'       => $this->getIncludedProductBrands(),
             'included_products'     => $this->getIncludedProducts(),
@@ -541,7 +810,11 @@ class GlobalPricingRule {
             '_tpt_mix_and_match_minimum' => ( is_null( $this->getMixAndMatchMinQuantity() ) ? '' : wc_bool_to_string( $this->getMixAndMatchMinQuantity() ) ),
             '_tpt_tax_status'            => $this->getTaxStatus(),
             '_tpt_tax_class'             => $this->getTaxClass(),
+            '_tpt_priority'              => $this->getPriority(),
+            '_tpt_start_date'            => (string) $this->getStartDate(),
+            '_tpt_end_date'              => (string) $this->getEndDate(),
             '_tpt_included_categories'   => $this->getIncludedProductCategories(),
+            '_tpt_include_subcategories' => wc_bool_to_string( $this->isIncludeSubcategories() ),
             '_tpt_included_tags'         => $this->getIncludedProductTags(),
             '_tpt_included_brands'       => $this->getIncludedProductBrands(),
             '_tpt_included_products'     => $this->getIncludedProducts(),
@@ -575,33 +848,34 @@ class GlobalPricingRule {
             '_tpt_tax_status'            => 'tax_status',
             '_tpt_tax_class'             => 'tax_class',
             '_tpt_is_suspended'          => 'is_suspended',
+            '_tpt_priority'              => 'priority',
+            '_tpt_start_date'            => 'start_date',
+            '_tpt_end_date'              => 'end_date',
         );
         $data = array();
         foreach ( $dataToRead as $key => $name ) {
             $data[$name] = get_post_meta( $ruleId, $key, true );
         }
         $priceRule = self::fromArray( $data );
+        $priceRule->setCreatedAt( (string) get_post_field( 'post_date_gmt', $ruleId ) );
         $existingRoles = wp_roles()->roles;
         $includedCategoriesIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_categories', true ) ) );
         $includedTagsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_tags', true ) ) );
         $includedBrandsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_brands', true ) ) );
         $includedProductsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_products', true ) ) );
-        $includedUsersRole = array_filter( (array) get_post_meta( $ruleId, '_tpt_included_user_roles', true ), function ( $role ) use($existingRoles) {
-            return array_key_exists( $role, $existingRoles );
-        } );
+        $includedUsersRole = array_filter( (array) get_post_meta( $ruleId, '_tpt_included_user_roles', true ), array(self::class, 'isSelectableRole') );
         $includedUsers = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_included_users', true ) ) );
         $excludedCategoriesIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_categories', true ) ) );
         $excludedTagsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_tags', true ) ) );
         $excludedBrandsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_brands', true ) ) );
         $excludedProductsIds = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_products', true ) ) );
-        $excludedUsersRole = array_filter( (array) get_post_meta( $ruleId, '_tpt_excluded_user_roles', true ), function ( $role ) use($existingRoles) {
-            return array_key_exists( $role, $existingRoles );
-        } );
+        $excludedUsersRole = array_filter( (array) get_post_meta( $ruleId, '_tpt_excluded_user_roles', true ), array(self::class, 'isSelectableRole') );
         $excludedUsers = array_filter( array_map( 'intval', (array) get_post_meta( $ruleId, '_tpt_excluded_users', true ) ) );
         $isSuspended = get_post_meta( $ruleId, '_tpt_is_suspended', true ) === 'yes';
         $priceRule->setPercentageTieredPricingRules( self::readPricingRules( 'percentage', $ruleId ) );
         $priceRule->setFixedTieredPricingRules( self::readPricingRules( 'fixed', $ruleId ) );
         $priceRule->setIncludedProductCategories( $includedCategoriesIds );
+        $priceRule->setIncludeSubcategories( 'yes' === get_post_meta( $ruleId, '_tpt_include_subcategories', true ) );
         $priceRule->setIncludedProductTags( $includedTagsIds );
         $priceRule->setIncludedProductBrands( $includedBrandsIds );
         $priceRule->setIncludedUsers( $includedUsers );
@@ -675,7 +949,7 @@ class GlobalPricingRule {
                 return false;
             }
         }
-        $excludedProductCategories = $this->translateIds( $this->getExcludedProductCategories(), 'product_cat' );
+        $excludedProductCategories = $this->translateIds( $this->getEffectiveExcludedCategories(), 'product_cat' );
         if ( !empty( $excludedProductCategories ) ) {
             if ( !empty( array_intersect( $parentProduct->get_category_ids(), $excludedProductCategories ) ) ) {
                 return false;
@@ -707,8 +981,9 @@ class GlobalPricingRule {
         if ( in_array( $user->ID, $this->getExcludedUsers() ) ) {
             return false;
         }
+        $userRoles = self::rolesOf( $user );
         foreach ( $this->getExcludedUserRoles() as $role ) {
-            if ( in_array( $role, $user->roles ) ) {
+            if ( in_array( $role, $userRoles ) ) {
                 return false;
             }
         }
@@ -726,7 +1001,7 @@ class GlobalPricingRule {
                 $productMatched = true;
             }
         }
-        $includedProductCategories = $this->translateIds( $this->getIncludedProductCategories(), 'product_cat' );
+        $includedProductCategories = $this->translateIds( $this->getEffectiveIncludedCategories(), 'product_cat' );
         if ( !empty( $includedProductCategories ) ) {
             $productLimitations = true;
             if ( !empty( array_intersect( $parentProduct->get_category_ids(), $includedProductCategories ) ) ) {
@@ -770,7 +1045,7 @@ class GlobalPricingRule {
             return true;
         }
         foreach ( $this->getIncludedUserRoles() as $role ) {
-            if ( in_array( $role, $user->roles ) ) {
+            if ( in_array( $role, $userRoles ) ) {
                 return true;
             }
         }

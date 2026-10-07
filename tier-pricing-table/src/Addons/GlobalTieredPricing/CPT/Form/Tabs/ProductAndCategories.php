@@ -47,6 +47,14 @@ class ProductAndCategories extends FormTab {
 			'search_action' => 'woocommerce_json_search_tpt_categories',
 		) );
 		
+		$this->renderCheckbox( array(
+			'title'       => __( 'Subcategories', 'tier-pricing-table' ),
+			'id'          => 'tpt_include_subcategories',
+			'value'       => $pricingRule->isIncludeSubcategories(), // a bool: the helper's checked() compares with true
+			'label'       => __( 'Include subcategories', 'tier-pricing-table' ),
+			'description' => __( 'Products in subcategories of the selected categories match too. The excluded categories below follow the same switch.', 'tier-pricing-table' ),
+		) );
+		
 		$this->renderSelect2( array(
 			'id'            => 'tpt_included_tags',
 			'label'         => __( 'Tags', 'tier-pricing-table' ),

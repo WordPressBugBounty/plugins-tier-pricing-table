@@ -58,11 +58,34 @@ class YouSaveSubsection extends SubsectionAbstract {
 				'type'         => TPTTextTemplate::FIELD_TYPE,
 			),
 			array(
-				'title'   => __( 'Badge text color', 'tier-pricing-table' ),
+				'title'   => __( 'Badge style', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'you_save_style',
+				'type'    => 'select',
+				'default' => 'text',
+				'options' => array(
+					'text'    => __( 'Text', 'tier-pricing-table' ),
+					'pill'    => __( 'Pill', 'tier-pricing-table' ),
+					'outline' => __( 'Outlined', 'tier-pricing-table' ),
+				),
+			),
+			array(
+				'title'   => __( 'Badge position', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'you_save_position',
+				'type'    => 'select',
+				'default' => 'price',
+				'options' => array(
+					'price'              => __( 'Under the price', 'tier-pricing-table' ),
+					'before_add_to_cart' => __( 'Above the add-to-cart button', 'tier-pricing-table' ),
+					'after_table'        => __( 'After the pricing layout', 'tier-pricing-table' ),
+				),
+			),
+			array(
+				'title'   => __( 'Badge colour', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'you_save_text_color',
 				'type'    => 'color',
 				'css'     => 'width:6em;',
-				'default' => '#FF0000',
+				'default' => '',
+				'desc'    => __( 'Leave empty to follow the active tier colour.', 'tier-pricing-table' ),
 			),
 		);
 	}

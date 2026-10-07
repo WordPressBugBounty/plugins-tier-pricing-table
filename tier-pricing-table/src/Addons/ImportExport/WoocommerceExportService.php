@@ -3,6 +3,7 @@
 namespace TierPricingTable\Addons\ImportExport;
 
 use TierPricingTable\PriceManager;
+use TierPricingTable\TierPricingTablePlugin;
 use WC_Product;
 /**
  * Class WooCommerce Export
@@ -78,7 +79,7 @@ class WoocommerceExportService {
         }
         $str = '';
         foreach ( $tiered_pricing as $quantity => $price ) {
-            $str .= $quantity . ':' . $price . ',';
+            $str .= $quantity . TierPricingTablePlugin::getRuleSeparator() . $price . ',';
         }
         return ( mb_strlen( $str ) > 0 ? trim( $str, ',' ) : null );
     }

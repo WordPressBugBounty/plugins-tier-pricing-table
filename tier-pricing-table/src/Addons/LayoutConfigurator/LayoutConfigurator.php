@@ -85,7 +85,9 @@ class LayoutConfigurator {
 		'you_save_consider_sale_price' => 'yes',
 		'you_save_non_tiered'          => 'no',
 		'you_save_template'            => '',
-		'you_save_text_color'          => '#FF0000',
+		'you_save_text_color'          => '', // empty: the active tier colour
+		'you_save_style'               => 'text',
+		'you_save_position'            => 'price',
 	);
 
 	const YOU_SAVE_ADDON_SLUG = 'you-save';
@@ -256,7 +258,7 @@ class LayoutConfigurator {
 		} );
 
 		// colours: a hex colour, or the option's default
-		foreach ( array( 'selected_quantity_color' => '#3858e9', 'tooltip_color' => '#3858e9', 'you_save_text_color' => '#FF0000', 'cart_upsell_color' => '#059669', 'shop_loop_display_selected_quantity_color' => '#3858e9' ) as $id => $default ) {
+		foreach ( array( 'selected_quantity_color' => '#3858e9', 'tooltip_color' => '#3858e9', 'cart_upsell_color' => '#059669', 'shop_loop_display_selected_quantity_color' => '#3858e9' ) as $id => $default ) {
 			add_filter( 'woocommerce_admin_settings_sanitize_option_' . self::getOptionId( $id ), function ( $value ) use ( $default ) {
 				$color = is_string( $value ) ? sanitize_hex_color( trim( $value ) ) : null;
 
@@ -265,7 +267,7 @@ class LayoutConfigurator {
 		}
 
 		// optional colours: a hex colour, or empty (the design style's own colours)
-		foreach ( array( 'discount_badge_color', 'shop_loop_display_discount_badge_color', 'shop_loop_display_badge_color' ) as $id ) {
+		foreach ( array( 'discount_badge_color', 'shop_loop_display_discount_badge_color', 'shop_loop_display_badge_color', 'you_save_text_color' ) as $id ) {
 			add_filter( 'woocommerce_admin_settings_sanitize_option_' . self::getOptionId( $id ), function ( $value ) {
 				$color = is_string( $value ) ? sanitize_hex_color( trim( $value ) ) : null;
 
@@ -294,6 +296,7 @@ class LayoutConfigurator {
 	const CHOICE_OPTIONS = array(
 		'shop_loop_display_badge_position',
 		'shop_loop_display_scope',
+		'you_save_style', 'you_save_position',
 		'display_type', 'pricing_table_style', 'pricing_blocks_style', 'pricing_options_style', 'pricing_dropdown_style', 'pricing_plain_text_style',
 		'quantity_type', 'tiers_order', 'discount_format', 'product_page_price_format', 'position_hook', 'summary_type', 'tiered_price_at_catalog_type',
 		'shop_loop_display_layout', 'shop_loop_display_pricing_table_style', 'shop_loop_display_pricing_blocks_style', 'shop_loop_display_pricing_options_style',
@@ -319,6 +322,8 @@ class LayoutConfigurator {
 			'tiers_order'                    => array( 'asc', 'desc' ),
 			'discount_format'                => array( 'percentage', 'amount', 'both' ),
 			'product_page_price_format'      => array( 'custom', 'same_as_catalog' ),
+			'you_save_style'                 => array( 'text', 'pill', 'outline' ),
+			'you_save_position'              => array( 'price', 'before_add_to_cart', 'after_table' ),
 			'shop_loop_display_badge_position' => array( 'top-left', 'top-right' ),
 			'shop_loop_display_scope'          => array( 'everywhere', 'selected' ),
 			'position_hook'                  => array_merge( array_keys( self::getPositionOptions() ), array( GeneralSection::NONE_POSITION ) ),
@@ -663,6 +668,30 @@ class LayoutConfigurator {
 	}
 
 	/**
+	 * The product-page preview for the stored values, rendered with the page so the first paint needs
+	 * no request: the current layout plus the sibling layouts the preview prefetches, and the extras.
+	 */
+	protected function getInitialPreview( LayoutPreview $preview ): ?array {
+		try {
+			$values    = $preview->getStoredValues();
+			$fragments = array();
+			foreach ( array_keys( LayoutPreview::KINDS ) as $kind ) {
+				$fragments[ $kind ] = $preview->render( $kind, $values, 'product-page' );
+			}
+
+			return array(
+				'fragments' => $fragments,
+				'extras'    => array(
+					'catalogPrice' => $preview->renderCatalogPrice( $values ),
+					'summary'      => $preview->renderSummary( $values ),
+				),
+			);
+		} catch ( \Throwable $e ) {
+			return null; // the app falls back to a request
+		}
+	}
+
+	/**
 	 * Configuration handed to the app.
 	 */
 	public function getConfig(): array {
@@ -760,7 +789,20 @@ class LayoutConfigurator {
 			),
 			'placeholder'   => function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src( 'woocommerce_single' ) : '',
 			'youSave'       => self::isYouSaveAvailable(),
+			'youSaveOptions' => array(
+				'styles'    => array(
+					'text'    => __( 'Text', 'tier-pricing-table' ),
+					'pill'    => __( 'Pill', 'tier-pricing-table' ),
+					'outline' => __( 'Outlined', 'tier-pricing-table' ),
+				),
+				'positions' => array(
+					'price'              => __( 'Under the price', 'tier-pricing-table' ),
+					'before_add_to_cart' => __( 'Above the add-to-cart button', 'tier-pricing-table' ),
+					'after_table'        => __( 'After the pricing layout', 'tier-pricing-table' ),
+				),
+			),
 			'samples'       => $samples,
+			'initial'       => $this->getInitialPreview( $preview ),
 			'summary'       => self::isSummaryAvailable() ? array(
 				'positions' => self::getPositionOptions(),
 				'types'     => array(

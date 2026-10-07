@@ -32,13 +32,12 @@ class UsersAndRoles extends FormTab {
 				'id'            => 'tpt_included_user_roles',
 				'label'         => __( 'User roles', 'tier-pricing-table' ),
 				'options'       => ( function () {
-					return array_map( function ( $WPRole ) {
+					return array( GlobalPricingRule::GUEST_ROLE => __( 'Guests (not logged in)', 'tier-pricing-table' ) ) + array_map( function ( $WPRole ) {
 						return $WPRole['name'];
 					}, wp_roles()->roles );
 				} )(),
 				'value'         => $pricingRule->getIncludedUserRoles(),
 				'placeholder'   => __( 'Select for a user role', 'tier-pricing-table' ),
-				'search_action' => 'woocommerce_json_search_tpt_user_roles',
 				'css_class'     => 'tpt-select-woo',
 				'desc_tip'      => false,
 				'description'   => function () {
@@ -94,7 +93,7 @@ class UsersAndRoles extends FormTab {
 				'id'            => 'tpt_excluded_user_roles',
 				'label'         => __( 'User roles', 'tier-pricing-table' ),
 				'options'       => ( function () {
-					$roles = [];
+					$roles = array( GlobalPricingRule::GUEST_ROLE => __( 'Guests (not logged in)', 'tier-pricing-table' ) );
 					foreach ( wp_roles()->roles as $key => $WPRole ) {
 						$roles[ $key ] = $WPRole['name'];
 					}
@@ -103,7 +102,6 @@ class UsersAndRoles extends FormTab {
 				} )(),
 				'value'         => $pricingRule->getExcludedUserRoles(),
 				'placeholder'   => __( 'Select for a user role', 'tier-pricing-table' ),
-				'search_action' => 'woocommerce_json_search_tpt_user_roles',
 				'css_class'     => 'tpt-select-woo',
 		) );
 

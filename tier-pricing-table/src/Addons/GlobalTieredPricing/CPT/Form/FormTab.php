@@ -224,10 +224,11 @@ abstract class FormTab {
 			        id="<?php echo esc_attr( $args['id'] ); ?>"
 			        name="<?php echo esc_attr( $args['multiple'] ? $args['id'] . '[]' : $args['id'] ); ?>"
 			        data-placeholder="<?php echo esc_attr( $args['placeholder'] ); ?>"
-			        data-action="<?php echo esc_attr( $args['search_action'] ); ?>"
-			        data-minimum_input_length="<?php echo esc_attr( $args['minimum_input_length'] ); ?>">
-				>
-
+					<?php if ( $args['search_action'] ) : // preloaded lists (roles) have no search action and filter locally ?>
+						data-action="<?php echo esc_attr( $args['search_action'] ); ?>"
+						data-minimum_input_length="<?php echo esc_attr( $args['minimum_input_length'] ); ?>"
+					<?php endif; ?>
+			>
 				<?php if ( $args['options'] ) : ?>
 
 					<?php foreach ( $args['options'] as $optionId => $label ) : ?>

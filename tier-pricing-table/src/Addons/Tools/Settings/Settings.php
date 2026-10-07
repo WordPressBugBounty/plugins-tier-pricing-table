@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Addons\Tools\Settings;
 
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use TierPricingTable\Settings\Settings as MainSettings;
 
 class Settings {
@@ -15,7 +17,7 @@ class Settings {
 				),
 				array(
 					'title' => __( 'Utilities', 'tier-pricing-table' ),
-					'desc'  => __( 'Manage roles and clean up tiered pricing data.', 'tier-pricing-table' ),
+					'desc'  => __( 'Manage roles, test what a customer pays, and clean up tiered pricing data.', 'tier-pricing-table' ),
 					'id'    => MainSettings::SETTINGS_PREFIX . 'tools_utilities',
 					'type'  => 'title',
 				),
@@ -67,6 +69,26 @@ class Settings {
 
 			wp_set_script_translations( 'tiered-pricing/feature/tools', 'tier-pricing-table',
 					dirname( __FILE__, 5 ) . '/languages' );
+
+			// a rule to highlight in the Pricing test, from the links on the rules screens
+			$testRule = isset( $_GET[ PricingTester::RULE_PARAM ] ) ? absint( $_GET[ PricingTester::RULE_PARAM ] ) : 0;
+			$testRule = $testRule && GlobalTieredPricingCPT::SLUG === get_post_type( $testRule ) ? $testRule : 0;
+
+			wp_localize_script( 'tiered-pricing/feature/tools', 'tptToolsConfig', array(
+				'ajaxUrl'              => admin_url( 'admin-ajax.php' ),
+				'searchProductsNonce'  => wp_create_nonce( 'search-products' ),
+				'searchCustomersNonce' => wp_create_nonce( 'search-customers' ),
+				'pricingTest'          => array(
+					'rulesEnabled' => PricingTester::rulesEnabled(),
+					'rulesUrl'     => admin_url( 'edit.php?post_type=' . GlobalTieredPricingCPT::SLUG ),
+					'newRuleUrl'   => admin_url( 'post-new.php?post_type=' . GlobalTieredPricingCPT::SLUG ),
+					'rule'         => $testRule ? array(
+						'id'    => $testRule,
+						'title' => PricingTester::ruleTitle( $testRule ),
+						'url'   => get_edit_post_link( $testRule, 'raw' ),
+					) : null,
+				),
+			) );
 
 			wp_enqueue_style( 'wp-components' );
 		} );

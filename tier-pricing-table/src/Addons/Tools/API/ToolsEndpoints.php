@@ -1,6 +1,8 @@
 <?php namespace TierPricingTable\Addons\Tools\API;
 
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
+use WP_Error;
 use WP_REST_Request;
 
 class ToolsEndpoints {
@@ -40,6 +42,21 @@ class ToolsEndpoints {
 				'permission_callback' => function () {
 					return current_user_can( 'manage_options' );
 				},
+			),
+		) );
+		
+		register_rest_route( self::NAMESPACE, '/pricing_test', array(
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'pricingTest' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_woocommerce' );
+				},
+				'args'                => array(
+					'product_id' => array( 'type' => 'integer', 'required' => true ),
+					'user_id'    => array( 'type' => 'integer', 'default' => 0 ),
+					'rule_id'    => array( 'type' => 'integer', 'default' => 0 ),
+				),
 			),
 		) );
 		
@@ -83,6 +100,31 @@ class ToolsEndpoints {
 				},
 			),
 		) );
+	}
+	
+	/**
+	 * The Pricing test: what a customer (0 = visitor) gets for a product, and which global rules apply.
+	 */
+	public function pricingTest( WP_REST_Request $request ) {
+		$productId = absint( $request->get_param( 'product_id' ) );
+		$userId    = absint( $request->get_param( 'user_id' ) );
+		$ruleId    = absint( $request->get_param( 'rule_id' ) );
+		
+		if ( ! $productId ) {
+			return new WP_Error( 'tpt_pricing_test_product', __( 'Pick a product first.', 'tier-pricing-table' ), array( 'status' => 400 ) );
+		}
+		
+		if ( $userId && ! get_user_by( 'id', $userId ) ) {
+			return new WP_Error( 'tpt_pricing_test_customer', __( 'The customer could not be loaded.', 'tier-pricing-table' ), array( 'status' => 400 ) );
+		}
+		
+		$result = ( new PricingTester() )->run( $productId, $userId, $ruleId );
+		
+		if ( isset( $result['error'] ) ) {
+			return new WP_Error( 'tpt_pricing_test', $result['error'], array( 'status' => 400 ) );
+		}
+		
+		return rest_ensure_response( $result );
 	}
 	
 	public function getRoles() {

@@ -43,7 +43,7 @@
 		function tptParsePlainText( $text, $quantity, $discount = null, $price = null, $base_unit_name = null ) {
 			return strtr( $text, array(
 					'{tp_quantity}'         => $quantity,
-					'{tp_discount}'         => $discount,
+					'{tp_discount}'         => ! is_null( $discount ) ? round( (float) $discount, \TierPricingTable\PricingTable::discountDecimals( (float) $discount ) ) : $discount,
 					'{tp_rounded_discount}' => ! is_null( $discount ) ? round( $discount ) : 0,
 					'{tp_price}'            => $price ? wc_price( $price ) : '',
 					'{tp_base_unit_name}'   => $base_unit_name,
