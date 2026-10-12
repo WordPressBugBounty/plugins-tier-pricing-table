@@ -42,7 +42,7 @@ class PricingTester {
 
 	/**
 	 * Run the pricing for a product as the given customer (0 = visitor) would see it.
-	 * Switches the current user for the rest of the request.
+	 * The plugin's current-user accessor is pointed at that customer for the rest of the request.
 	 *
 	 * @return array The result, or array{error: string}.
 	 */
@@ -50,8 +50,8 @@ class PricingTester {
 		$user = $userId ? get_user_by( 'id', $userId ) : null;
 		$user = $user ? $user : new WP_User( 0 );
 
-		// the pricing providers read the current user through the plugin's accessor
-		wp_set_current_user( $user->ID );
+		// the pricing providers read the current user through the plugin's accessor (the global and the
+		// filter below), so the WordPress user is not switched
 		$GLOBALS['tpt_current_user_id'] = $user->ID;
 		add_filter( 'tiered_pricing_table/current_user', function () use ( $user ) {
 			return $user;

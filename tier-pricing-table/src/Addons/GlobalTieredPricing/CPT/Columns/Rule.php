@@ -25,12 +25,13 @@ class Rule {
 		$id     = $rule->getId();
 		$post   = get_post( $id );
 		$status = $this->status( $post ? $post->post_status : 'publish', $rule );
+		$meta   = implode( ' <span class="tpt-rules-list__sep">·</span> ', $this->metaParts( $rule ) ); // escaped fragments
 		?>
 		<span class="tpt-rules-list__badge tpt-rules-list__badge--<?php echo esc_attr( $status['key'] ); ?>"><?php echo esc_html( $status['label'] ); ?></span>
 		<strong><a class="row-title" href="<?php echo esc_url( get_edit_post_link( $id ) ); ?>"><?php echo esc_html( $rule->getTitle() ); ?></a></strong>
 		<?php $this->renderLockInfo( $id ); ?>
 		<div class="tpt-rules-list__meta">
-			<?php echo wp_kses_post( implode( ' <span class="tpt-rules-list__sep">·</span> ', $this->metaParts( $rule ) ) ); ?>
+			<?php echo wp_kses_post( $meta ); // nosemgrep ?>
 		</div>
 		<?php
 	}

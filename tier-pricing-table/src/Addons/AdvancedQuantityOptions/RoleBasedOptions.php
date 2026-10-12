@@ -2,6 +2,7 @@
 
 namespace TierPricingTable\Addons\AdvancedQuantityOptions;
 
+use TierPricingTable\TierPricingTablePlugin;
 class RoleBasedOptions {
     /**
      * Form

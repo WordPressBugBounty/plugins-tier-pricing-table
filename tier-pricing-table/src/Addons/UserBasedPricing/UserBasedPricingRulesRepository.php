@@ -17,7 +17,7 @@ class UserBasedPricingRulesRepository {
 	
 	public function getCurrentUserRule( WC_Product $product ): ?UserBasedPricingRule {
 		
-		$userId = get_current_user_id();
+		$userId = TierPricingTablePlugin::getCurrentUser()->ID; // honours the plugin's current-user filter (Pricing test)
 		
 		if ( $userId ) {
 			
