@@ -3,9 +3,9 @@
 Contributors: bycrik, freemius
 Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 8.1.1
+Stable tag: 8.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,21 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 8.1.2 [2026-10-20] =
+* New: pricing tables for variable products in WooCommerce's block-based add-to-cart form.
+* New: a filter to skip the frontend script and styles on pages that do not need them.
+* Improvement: faster shop, cart and checkout on large catalogues.
+* Improvement: lighter price lookups for variable products.
+* Improvement: a Save changes bar follows you through the layout configurator.
+* Improvement: the Price Calculation options as a compact card below the configurator.
+* Improvement: install U2Code Multicurrency or Product Addons in one click from their tabs, with examples.
+* Improvement: translations updated for the new screens.
+* Improvement: Freemius SDK 2.13.5.
+* Fix: the layout configurator preview ignored the store's own pricing rules.
+* Fix: the compact pricing summary layout could not be saved from the layout configurator.
+* Fix: the savings badge showed as plain text in the wishlist and in other prices served through the REST API.
+* Fix: a PHP deprecation notice on the Pricing page.
 
 = 8.1.1 [2026-10-12] =
 * Improvement: translations updated for all ten languages, including the new global rules, wholesale and quote screens.

@@ -7,6 +7,7 @@ use TierPricingTable\Admin\Notifications\Notifications;
 use TierPricingTable\Blocks\GutenbergBlocks;
 use TierPricingTable\Core\AdminNotifier;
 use TierPricingTable\Core\Cache;
+use TierPricingTable\Core\RestContext;
 use TierPricingTable\Core\FileManager;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Frontend\Frontend;
@@ -34,7 +35,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.1.1';
+	const VERSION = '8.1.2';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -103,6 +104,8 @@ class TierPricingTablePlugin {
 		
 		$this->getContainer()->add( 'settings', new Settings() );
 		$this->getContainer()->add( 'cache', new Cache() );
+
+		RestContext::init();
 		
 		$this->initializationHooks();
 		

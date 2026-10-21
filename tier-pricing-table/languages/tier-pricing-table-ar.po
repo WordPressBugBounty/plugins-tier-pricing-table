@@ -1,10 +1,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tpt-freemius-i18n\n"
-"POT-Creation-Date: 2026-10-12T11:42:05+00:00\n"
-"PO-Revision-Date: 2026-10-12 11:58+0000\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
+"POT-Creation-Date: 2026-10-20T17:09:08+00:00\n"
+"PO-Revision-Date: 2026-10-20 17:14+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -102,7 +102,7 @@ msgstr "عربة التسوق"
 msgid "Display an upsell message in the cart indicating how many items are needed to reach the next pricing tier."
 msgstr "اعرض رسالة زيادة المبيعات في عربة التسوق تشير إلى عدد العناصر المطلوبة للوصول إلى مستوى التسعير التالي."
 
-#: src/Addons/CartUpsells/CartUpsellsService.php:229 src/Addons/CartUpsells/UpsellsSubsection.php:43 src/Addons/LayoutConfigurator/LayoutConfigurator.php:402
+#: src/Addons/CartUpsells/CartUpsellsService.php:229 src/Addons/CartUpsells/UpsellsSubsection.php:43 src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
 msgid "Add <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each"
 msgstr "أضف <b>{tp_required_quantity}</b> أخرى لتحصل على سعر <b>{tp_next_price}</b> للقطعة"
 
@@ -154,7 +154,7 @@ msgstr "المتجر والفئات تنسيق الأسعار"
 msgid "Manage how tiered pricing appears in catalogs, loops, and widgets."
 msgstr "إدارة كيفية ظهور التسعير المتدرج في الكتالوجات والحلقات والأدوات."
 
-#: src/Addons/CatalogPrices/CatalogPricesService.php:41 src/Addons/CatalogPrices/CatalogPricesService.php:46 src/Addons/CatalogPrices/CatalogPricesSubsection.php:68 src/Addons/LayoutConfigurator/LayoutConfigurator.php:393 src/Addons/LayoutConfigurator/LayoutPreview.php:437 src/Managers/FormatPriceManager.php:276
+#: src/Addons/CatalogPrices/CatalogPricesService.php:41 src/Addons/CatalogPrices/CatalogPricesService.php:46 src/Addons/CatalogPrices/CatalogPricesSubsection.php:68 src/Addons/LayoutConfigurator/LayoutConfigurator.php:398 src/Addons/LayoutConfigurator/LayoutPreview.php:437 src/Managers/FormatPriceManager.php:281
 msgid "From {tp_lowest_price} instead of {tp_original_price}"
 msgstr "من {tp_lowest_price} بدلاً من {tp_original_price}"
 
@@ -190,18 +190,18 @@ msgstr "عرض أقل سعر"
 msgid "Show range (lowest to highest)"
 msgstr "عرض النطاق (من الأدنى إلى الأعلى)"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53 src/Addons/CatalogPrices/CatalogPricesSubsection.php:65 src/Addons/LayoutConfigurator/LayoutConfigurator.php:831 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1206
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53 src/Addons/CatalogPrices/CatalogPricesSubsection.php:65 src/Addons/LayoutConfigurator/LayoutConfigurator.php:836 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1206
 msgid "Custom template"
 msgstr "قالب مخصص"
 
 #. translators: %s: example price
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:57 src/Addons/LayoutConfigurator/LayoutConfigurator.php:823
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:57 src/Addons/LayoutConfigurator/LayoutConfigurator.php:828
 #, php-format
 msgid "e.g. From %s"
 msgstr "مثل: من %s"
 
 #. translators: 1: lowest example price, 2: highest example price
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:59 src/Addons/LayoutConfigurator/LayoutConfigurator.php:828
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:59 src/Addons/LayoutConfigurator/LayoutConfigurator.php:833
 #, php-format
 msgid "e.g. %1$s - %2$s"
 msgstr "مثل %1$s - %2$s"
@@ -218,7 +218,7 @@ msgstr "إنشاء قالب مخصص لأسعار الكتالوج. استخدم
 msgid "Prefix for lowest price"
 msgstr "البادئة لأدنى سعر"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80 src/Addons/LayoutConfigurator/LayoutConfigurator.php:394 src/Addons/LayoutConfigurator/LayoutPreview.php:445 src/Managers/FormatPriceManager.php:315
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80 src/Addons/LayoutConfigurator/LayoutConfigurator.php:399 src/Addons/LayoutConfigurator/LayoutPreview.php:445 src/Managers/FormatPriceManager.php:320
 msgid "From"
 msgstr "من"
 
@@ -226,7 +226,7 @@ msgstr "من"
 msgid "Text displayed before the lowest price (e.g., <b>From $10.00</b>)."
 msgstr "يتم عرض النص قبل أقل سعر (على سبيل المثال، <b>من 10.00 دولارات</b>)."
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:89 src/Addons/LayoutConfigurator/LayoutConfigurator.php:821 src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:456
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:89 src/Addons/LayoutConfigurator/LayoutConfigurator.php:826 src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:457
 msgid "Lowest price"
 msgstr "أدنى سعر"
 
@@ -330,7 +330,7 @@ msgstr "سعر الصف الإجمالي"
 msgid "Saving per item"
 msgstr "الادخار لكل عنصر"
 
-#: src/Addons/CustomColumns/Schema.php:23 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:376 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746 src/PricingTable.php:454 src/Settings/CustomOptions/TPTTextTemplate.php:207 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278 views/admin/components/tiered-pricing-rules-form.php:55 views/admin/welcome-page/welcome-page.php:647 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:69 src/Addons/CustomColumns/js-source/index.js:286 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:718 src/Addons/LayoutConfigurator/js-source/components/Controls.js:884 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1157 src/Addons/LayoutConfigurator/js-source/skeleton.js:433 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:40 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:80 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:430
+#: src/Addons/CustomColumns/Schema.php:23 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:381 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746 src/PricingTable.php:457 src/Settings/CustomOptions/TPTTextTemplate.php:207 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278 views/admin/components/tiered-pricing-rules-form.php:55 views/admin/welcome-page/welcome-page.php:647 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:69 src/Addons/CustomColumns/js-source/index.js:286 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:718 src/Addons/LayoutConfigurator/js-source/components/Controls.js:884 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1157 src/Addons/LayoutConfigurator/js-source/skeleton.js:433 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:40 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:80 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:430
 msgid "Price"
 msgstr "سعر"
 
@@ -338,7 +338,7 @@ msgstr "سعر"
 msgid "Number"
 msgstr "رقم"
 
-#: src/Addons/CustomColumns/Schema.php:25 src/Addons/LayoutConfigurator/LayoutConfigurator.php:794 src/Addons/NonLoggedInUsers/Wholesale/Settings/FormFields.php:17 src/Addons/YouSave/YouSaveSubsection.php:66 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:71
+#: src/Addons/CustomColumns/Schema.php:25 src/Addons/LayoutConfigurator/LayoutConfigurator.php:799 src/Addons/NonLoggedInUsers/Wholesale/Settings/FormFields.php:17 src/Addons/YouSave/YouSaveSubsection.php:66 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:71
 msgid "Text"
 msgstr "نص"
 
@@ -488,11 +488,11 @@ msgstr "فردي"
 msgid "mix & match"
 msgstr "مزج ومطابقة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159 src/Addons/LayoutConfigurator/LayoutConfigurator.php:374 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742 src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109 src/PricingTable.php:452 src/Settings/CustomOptions/TPTTextTemplate.php:143 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268 views/addons/category-tiers/add-free.php:24 views/addons/category-tiers/add.php:51 views/addons/category-tiers/edit-free.php:34 views/addons/category-tiers/edit.php:59 views/addons/category-tiers/edit.php:82 views/admin/components/tiered-pricing-rules-form.php:65 views/admin/welcome-page/welcome-page.php:645 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:285 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:712 src/Addons/LayoutConfigurator/js-source/skeleton.js:324 src/Addons/LayoutConfigurator/js-source/skeleton.js:434 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:32 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:16 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:21 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/App.js:145 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:428 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:211
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159 src/Addons/LayoutConfigurator/LayoutConfigurator.php:379 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742 src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109 src/PricingTable.php:455 src/Settings/CustomOptions/TPTTextTemplate.php:143 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268 views/addons/category-tiers/add-free.php:24 views/addons/category-tiers/add.php:51 views/addons/category-tiers/edit-free.php:34 views/addons/category-tiers/edit.php:59 views/addons/category-tiers/edit.php:82 views/admin/components/tiered-pricing-rules-form.php:65 views/admin/welcome-page/welcome-page.php:645 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:285 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:712 src/Addons/LayoutConfigurator/js-source/skeleton.js:324 src/Addons/LayoutConfigurator/js-source/skeleton.js:434 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:32 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:16 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:21 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/App.js:145 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:428 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:211
 msgid "Quantity"
 msgstr "كمية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:586 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271 views/admin/welcome-page/welcome-page.php:646 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:724 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:429 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:213
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:591 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271 views/admin/welcome-page/welcome-page.php:646 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:724 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:429 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:213
 msgid "Discount"
 msgstr "تخفيض"
 
@@ -688,7 +688,7 @@ msgstr "التسعير الأساسي"
 msgid "Override the default regular product prices."
 msgstr "تجاوز أسعار المنتجات العادية الافتراضية."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39 src/Addons/ImportExport/WoocommerceImportService.php:24 src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38 src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21 src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118 src/Admin/ProductPage/TieredPricingTab.php:35 src/Integrations/Plugins/WPAllImport.php:335 src/Settings/Settings.php:302
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39 src/Addons/ImportExport/WoocommerceImportService.php:24 src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38 src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21 src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118 src/Admin/ProductPage/TieredPricingTab.php:35 src/Integrations/Plugins/WPAllImport.php:335 src/Settings/Settings.php:306
 msgid "Tiered Pricing"
 msgstr "التسعير المتدرج"
 
@@ -772,7 +772,7 @@ msgstr "ينطبق على كل منتج على حدة. إذا تم تمكين ا
 msgid "Variable Product Minimum Quantity"
 msgstr "الحد الأدنى لكمية المنتج المتغير"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35 src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:100 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:57
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35 src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:100 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82
 msgid "Determine whether the minimum quantity requirement applies to each variation separately, or to the combined total of all variations in the cart."
 msgstr "حدد ما إذا كان الحد الأدنى لمتطلبات الكمية ينطبق على كل تنوع على حدة، أو على الإجمالي المجمع لكل التباينات في سلة التسوق."
 
@@ -1202,47 +1202,47 @@ msgstr "نوع التسعير المتدرج"
 msgid "Minimum order quantity"
 msgstr "الحد الأدنى لكمية الطلب"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:372 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:442 src/Settings/Sections/GeneralSection/GeneralSection.php:178 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:330
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:377 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:442 src/Settings/Sections/GeneralSection/GeneralSection.php:178 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:330
 msgid "<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
 msgstr "<strong>اشتري {tp_quantity} قطعة ووفّر {tp_rounded_discount}%</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:373 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:461 src/Settings/Sections/GeneralSection/GeneralSection.php:202 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:353
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:378 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:461 src/Settings/Sections/GeneralSection/GeneralSection.php:202 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:353
 msgid "<strong>Buy {tp_quantity} pieces</strong>"
 msgstr "<strong>شراء {tp_quantity} قطعة</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:375 src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:456 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273 views/admin/components/regular-pricing-form.php:75
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380 src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:459 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273 views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "تخفيض (٪)"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:377 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:470 src/Settings/Sections/GeneralSection/GeneralSection.php:185 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:365
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:382 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:470 src/Settings/Sections/GeneralSection/GeneralSection.php:185 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:365
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each and save {tp_rounded_discount}%</strong>"
 msgstr "<strong>اشترِ {tp_quantity} قطعة مقابل {tp_price} لكل قطعة ووفّر {tp_rounded_discount}%</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:378 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:492 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:390
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:383 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:492 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:390
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>"
 msgstr "<strong>اشترِ {tp_quantity} قطعة مقابل {tp_price} لكل قطعة</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:384 src/Addons/YouSave/YouSaveSubsection.php:52
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:389 src/Addons/YouSave/YouSaveSubsection.php:52
 msgid "You save {tp_ys_total_price}"
 msgstr "توفر {tp_ys_total_price}"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:388 src/Addons/LayoutConfigurator/LayoutPreview.php:471 src/Addons/PricingSummary/SummarySubsection.php:78 views/frontend/tiered-pricing-options-style-1.php:165 views/frontend/tiered-pricing-options-style-1.php:271 views/frontend/tiered-pricing-options-style-2.php:165 views/frontend/tiered-pricing-options-style-2.php:271 views/frontend/tiered-pricing-options-style-3.php:165 views/frontend/tiered-pricing-options-style-3.php:288 views/frontend/tiered-pricing-options-style-4.php:133 views/frontend/tiered-pricing-options-style-4.php:213 views/frontend/tiered-pricing-options-style-5.php:135 views/frontend/tiered-pricing-options-style-5.php:216 views/frontend/tiered-pricing-options-style-6.php:131 views/frontend/tiered-pricing-options-style-6.php:207 views/frontend/tiered-pricing-options.php:165 views/frontend/tiered-pricing-options.php:271
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:393 src/Addons/LayoutConfigurator/LayoutPreview.php:471 src/Addons/PricingSummary/SummarySubsection.php:78 views/frontend/tiered-pricing-options-style-1.php:165 views/frontend/tiered-pricing-options-style-1.php:271 views/frontend/tiered-pricing-options-style-2.php:165 views/frontend/tiered-pricing-options-style-2.php:271 views/frontend/tiered-pricing-options-style-3.php:165 views/frontend/tiered-pricing-options-style-3.php:288 views/frontend/tiered-pricing-options-style-4.php:133 views/frontend/tiered-pricing-options-style-4.php:213 views/frontend/tiered-pricing-options-style-5.php:135 views/frontend/tiered-pricing-options-style-5.php:216 views/frontend/tiered-pricing-options-style-6.php:131 views/frontend/tiered-pricing-options-style-6.php:207 views/frontend/tiered-pricing-options.php:165 views/frontend/tiered-pricing-options.php:271
 msgid "Total:"
 msgstr "المجموع:"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:389 src/Addons/LayoutConfigurator/LayoutPreview.php:472 src/Addons/PricingSummary/SummarySubsection.php:85
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:394 src/Addons/LayoutConfigurator/LayoutPreview.php:472 src/Addons/PricingSummary/SummarySubsection.php:85
 msgid "Each: "
 msgstr "كل:"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:398 src/Addons/TieredPricingCart/CartOptionsSubsection.php:58 src/Addons/TieredPricingCart/CartOptionsSubsection.php:71 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:420
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:403 src/Addons/TieredPricingCart/CartOptionsSubsection.php:58 src/Addons/TieredPricingCart/CartOptionsSubsection.php:71 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:420
 msgid "Total savings"
 msgstr "إجمالي التوفير"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:484 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/skeleton.js:291 src/Addons/LayoutConfigurator/js-source/skeleton.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:375 src/Addons/LayoutConfigurator/js-source/skeleton.js:441
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:489 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/skeleton.js:291 src/Addons/LayoutConfigurator/js-source/skeleton.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:375 src/Addons/LayoutConfigurator/js-source/skeleton.js:441
 msgid "Product name"
 msgstr "اسم المنتج"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:539 src/Addons/LayoutConfigurator/LayoutConfigurator.php:540 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:375 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735 src/PricingTable.php:513 src/PricingTable.php:514 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:544 src/Addons/LayoutConfigurator/LayoutConfigurator.php:545 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:375 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735 src/PricingTable.php:516 src/PricingTable.php:517 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
 msgid "piece"
 msgid_plural "pieces"
 msgstr[0] "قطعة"
@@ -1252,143 +1252,143 @@ msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:647 src/Addons/LayoutConfigurator/LayoutConfigurator.php:656
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:652 src/Addons/LayoutConfigurator/LayoutConfigurator.php:661
 msgid "Above the add to cart button"
 msgstr "فوق زر الإضافة إلى السلة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:648 src/Addons/LayoutConfigurator/LayoutConfigurator.php:657
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:653 src/Addons/LayoutConfigurator/LayoutConfigurator.php:662
 msgid "Below the add to cart button"
 msgstr "أسفل زر الإضافة إلى السلة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:649 src/Addons/LayoutConfigurator/LayoutConfigurator.php:660
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:654 src/Addons/LayoutConfigurator/LayoutConfigurator.php:665
 msgid "Above the product title"
 msgstr "فوق عنوان المنتج"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:650
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:655
 msgid "Below the product title"
 msgstr "أسفل عنوان المنتج"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:658
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:663
 msgid "Above the add to cart form"
 msgstr "فوق نموذج الإضافة إلى السلة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:659
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:664
 msgid "Below the add to cart form"
 msgstr "أسفل نموذج الإضافة إلى السلة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:661
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:666
 msgid "Before the product summary"
 msgstr "قبل ملخص المنتج"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:662
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:667
 msgid "After the product summary"
 msgstr "بعد ملخص المنتج"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:717 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:43 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:243
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:722 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:43 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:280
 msgid "Pricing Display"
 msgstr "عرض التسعير"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:795 src/Addons/YouSave/YouSaveSubsection.php:67 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:129
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:800 src/Addons/YouSave/YouSaveSubsection.php:67 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:129
 msgid "Pill"
 msgstr "حبة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:796 src/Addons/YouSave/YouSaveSubsection.php:68
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:801 src/Addons/YouSave/YouSaveSubsection.php:68
 msgid "Outlined"
 msgstr "بإطار"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:799 src/Addons/YouSave/YouSaveSubsection.php:77
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:804 src/Addons/YouSave/YouSaveSubsection.php:77
 msgid "Under the price"
 msgstr "أسفل السعر"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:800 src/Addons/YouSave/YouSaveSubsection.php:78
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:805 src/Addons/YouSave/YouSaveSubsection.php:78
 msgid "Above the add-to-cart button"
 msgstr "فوق زر الإضافة إلى السلة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:801 src/Addons/YouSave/YouSaveSubsection.php:79
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:806 src/Addons/YouSave/YouSaveSubsection.php:79
 msgid "After the pricing layout"
 msgstr "بعد تخطيط التسعير"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:809 src/Addons/PricingSummary/SummarySubsection.php:68
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:814 src/Addons/PricingSummary/SummarySubsection.php:68
 msgid "Detailed"
 msgstr "مفصل"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:810 src/Addons/PricingSummary/SummarySubsection.php:69
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:815 src/Addons/PricingSummary/SummarySubsection.php:69
 msgid "Compact"
 msgstr "مدمج"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:811 src/Addons/PricingSummary/SummarySubsection.php:70
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:816 src/Addons/PricingSummary/SummarySubsection.php:70
 msgid "Inline labels"
 msgstr "التسميات المضمنة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:826
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:831
 msgid "Price range"
 msgstr "نطاق السعر"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:832
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:837
 msgid "Your own text built from variables"
 msgstr "نصك الخاص المبني من المتغيرات"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:838
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:843
 msgid "Match shop & categories"
 msgstr "مطابقة المتجر والتصنيفات"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:839
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:844
 msgid "Lowest price or a price range, as on the shop page"
 msgstr "أدنى سعر أو نطاق سعري، كما في صفحة المتجر"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:842
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847
 msgid "Price for the selected quantity"
 msgstr "السعر للكمية المحددة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:843
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848
 msgid "Follows the quantity the customer enters"
 msgstr "يتبع الكمية التي يدخلها العميل"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:296 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:296 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
 msgid "Range"
 msgstr "يتراوح"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852
 msgid "10 - 24 pieces"
 msgstr "10 - 24 قطعة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:297 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:297 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
 msgid "Static values"
 msgstr "القيم الثابتة"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853
 msgid "10 pieces"
 msgstr "10 قطع"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:851 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:328 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:328 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
 msgid "Ascending"
 msgstr "تصاعدي"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:851 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:332 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:188
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:332 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:188
 msgid "Smallest quantity first"
 msgstr "أصغر كمية أولًا"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:329 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:329 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
 msgid "Descending"
 msgstr "تنازلي"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:333 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:189
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:333 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:189
 msgid "Biggest discount first"
 msgstr "أكبر خصم أولًا"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:855 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:860 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage"
 msgstr "نسبة مئوية"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:414 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:861 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:414 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
 msgid "Amount saved"
 msgstr "المبلغ الموفَّر"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:415 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:862 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:415 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
 msgid "Both"
 msgstr "كلاهما"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:930
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:935
 msgid "Loading the layout configurator…"
 msgstr "جارٍ تحميل مصمم التخطيط…"
 
@@ -1408,7 +1408,7 @@ msgstr "تخطيط التلميح غير متاح في صفحات المتجر �
 msgid "The tooltip layout shows the pricing table next to the product price when the customer hovers over an icon. Open a product page to see it in action."
 msgstr "يعرض تخطيط التلميح جدول التسعير بجانب سعر المنتج عندما يمرر العميل المؤشر فوق أيقونة. افتح صفحة منتج لرؤيته عمليًا."
 
-#: src/Addons/LayoutConfigurator/LayoutPreview.php:230 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:323
+#: src/Addons/LayoutConfigurator/LayoutPreview.php:230 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:324
 msgid "The preview could not be rendered."
 msgstr "تعذر عرض المعاينة."
 
@@ -2605,7 +2605,7 @@ msgstr "عرض الفيديو"
 msgid "Hide this tip"
 msgstr "إخفاء هذه النصيحة"
 
-#: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:54 src/Addons/PluginsRecommendations/U2CodeProductAddonsPlugin.php:88 src/Integrations/Plugins/U2CodeMulticurrency.php:57 src/Integrations/Plugins/U2CodeProductAddons.php:76 src/Settings/Sections/PluginPairingSectionAbstract.php:240
+#: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:54 src/Addons/PluginsRecommendations/U2CodeProductAddonsPlugin.php:88 src/Integrations/Plugins/U2CodeMulticurrency.php:57 src/Integrations/Plugins/U2CodeProductAddons.php:76 src/Settings/Sections/PluginPairingSectionAbstract.php:343
 msgid "Learn more"
 msgstr "يتعلم أكثر"
 
@@ -2725,39 +2725,39 @@ msgstr "التسمية \"المجموع\"."
 msgid "\"Each\" label"
 msgstr "تسمية \"كل\"."
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:14 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:24
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:15 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:24
 msgid "Shop & Categories"
 msgstr "متجر والفئات"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:18
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:19
 msgid "Display tiered pricing tables on the shop and category pages."
 msgstr "عرض جداول التسعير المتدرجة على صفحات المتجر والفئات."
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:451
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:452
 msgid "Biggest discount"
 msgstr "أكبر خصم"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:452
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:453
 msgid "{tp_max_discount} - the biggest percentage discount the product's tiers give."
 msgstr "{tp_max_discount} - أكبر نسبة خصم تمنحها طبقات المنتج."
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:457
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:458
 msgid "{tp_lowest_price} - the lowest tier price."
 msgstr "{tp_lowest_price} - أدنى سعر طبقة."
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:461
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:462
 msgid "Lowest price quantity"
 msgstr "كمية أدنى سعر"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:462
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:463
 msgid "{tp_lowest_quantity} - the quantity the lowest tier price starts at."
 msgstr "{tp_lowest_quantity} - الكمية التي يبدأ عندها أدنى سعر طبقة."
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:466
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:467
 msgid "Biggest saving"
 msgstr "أكبر توفير"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:467
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:468
 msgid "{tp_max_saving} - the saving per item at the lowest tier price."
 msgstr "{tp_max_saving} - التوفير لكل قطعة عند أدنى سعر طبقة."
 
@@ -4273,7 +4273,7 @@ msgstr "مرحبًا بك في التسعير المتدرج لـ WooCommerce!"
 msgid "Hidden Admin Page"
 msgstr "صفحة المشرف المخفية"
 
-#: src/Core/Cache.php:58
+#: src/Core/Cache.php:91
 msgid "Cache has been purged successfully"
 msgstr "تم مسح ذاكرة التخزين المؤقت بنجاح"
 
@@ -4501,7 +4501,7 @@ msgstr "أكثر من 11 نوعًا من الحقول"
 msgid "Per-option pricing"
 msgstr "تسعير لكل خيار"
 
-#: src/Integrations/Plugins/U2CodeProductAddons.php:63 src/Settings/Sections/ProductAddons/ProductAddonsSection.php:58
+#: src/Integrations/Plugins/U2CodeProductAddons.php:63 src/Settings/Sections/ProductAddons/ProductAddonsSection.php:58 src/Settings/Sections/ProductAddons/ProductAddonsSection.php:91
 msgid "Live totals"
 msgstr "إجماليات مباشرة"
 
@@ -4627,19 +4627,19 @@ msgstr "أضف بيانات تسعير متدرجة إلى مخطط منتج Yoa
 
 #. translators: %s: amount saved per item
 #. translators: %s: discount percentage
-#: src/PricingTable.php:336 src/PricingTable.php:342
+#: src/PricingTable.php:339 src/PricingTable.php:345
 #, php-format
 msgid "%s off"
 msgstr "خصم %s"
 
 #. translators: 1: discount percentage, 2: amount saved per item
-#: src/PricingTable.php:339
+#: src/PricingTable.php:342
 #, php-format
 msgid "%1$s off, save %2$s"
 msgstr "خصم %1$s، وفّر %2$s"
 
 #. translators: %d: number of tiers not listed
-#: src/PricingTable.php:426
+#: src/PricingTable.php:429
 #, php-format
 msgid "+%d more tier"
 msgid_plural "+%d more tiers"
@@ -4650,23 +4650,23 @@ msgstr[3] "+%d طبقات أخرى"
 msgstr[4] "+%d طبقة أخرى"
 msgstr[5] "+%d طبقة أخرى"
 
-#: src/PricingTable.php:624
+#: src/PricingTable.php:628
 msgid "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier."
 msgstr "تم اكتشاف تضارب في الأسعار: الحد الأدنى لكمية الطلب الخاص بك يساوي أو يزيد عن مستوى التسعير الأول الخاص بك."
 
-#: src/PricingTable.php:632
+#: src/PricingTable.php:636
 msgid "To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity."
 msgstr "لإصلاح هذه المشكلة، يرجى التأكد من أن قاعدة التسعير ذات المستوى الأول تبدأ بكمية أعلى من الحد الأدنى لكمية الطلب."
 
-#: src/PricingTable.php:636
+#: src/PricingTable.php:640
 msgid "Why?"
 msgstr "لماذا؟"
 
-#: src/PricingTable.php:637
+#: src/PricingTable.php:641
 msgid "The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier."
 msgstr "يقوم المكون الإضافي تلقائيًا بإنشاء طبقة أساسية باستخدام سعر منتج WooCommerce القياسي. تغطي هذه الطبقة الأساسية أي كميات مطلوبة بين الحد الأدنى لكمية الطلب والطبقة المخفضة الأولى."
 
-#: src/PricingTable.php:641
+#: src/PricingTable.php:645
 msgid "This notice is only visible to store administrators."
 msgstr "هذا الإشعار مرئي فقط لمسؤولي المتجر."
 
@@ -4682,7 +4682,7 @@ msgstr "الإخطارات التي تم رؤيتها"
 msgid "Tips hidden"
 msgstr "نصائح مخفية"
 
-#: src/Settings/CustomOptions/TPTIntegrationOption.php:64 src/Settings/Sections/PluginPairingSectionAbstract.php:217
+#: src/Settings/CustomOptions/TPTIntegrationOption.php:64 src/Settings/Sections/PluginPairingSectionAbstract.php:319
 msgid "By U2Code"
 msgstr "من U2Code"
 
@@ -4701,6 +4701,18 @@ msgstr "جمع"
 #: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:83
 msgid "e.g., pieces"
 msgstr "على سبيل المثال، القطع"
+
+#: src/Settings/CustomOptions/TPTSwitchRowOption.php:18 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:183
+msgid "On"
+msgstr "مفعّل"
+
+#: src/Settings/CustomOptions/TPTSwitchRowOption.php:19 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:182
+msgid "Off"
+msgstr "معطّل"
+
+#: src/Settings/CustomOptions/TPTSwitchRowOption.php:47
+msgid "Show an example"
+msgstr "عرض مثال"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:144
 msgid "{tp_quantity} - range or a static quantity of the current pricing tier."
@@ -4828,135 +4840,127 @@ msgstr "النمط رقم %d"
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price}</strong>"
 msgstr "<strong>اشترِ {tp_quantity} قطعة مقابل {tp_price}</strong>"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:13
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:14
 msgid "Price Calculation"
 msgstr "حساب السعر"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:17
-msgid "How tiered prices are calculated for variable products, sale prices and global rules."
-msgstr "كيفية حساب الأسعار المتدرجة للمنتجات المتغيرة وأسعار التخفيض والقواعد العالمية."
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:18
+msgid "These options change what customers pay, on every page."
+msgstr "تغيّر هذه الخيارات ما يدفعه العملاء، في كل صفحة."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:33
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:59
 msgid "Combine variations for quantity calculation"
 msgstr "الجمع بين الاختلافات لحساب الكمية"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:37
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:63
 msgid "Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules."
 msgstr "تعامل مع جميع أشكال المنتج المتغير على أنها نفس العنصر عند حساب إجمالي كمية سلة التسوق لقواعد التسعير المتدرجة."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:40
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:66
 msgid "Red × 3 and Blue × 4 in the cart count separately: 3 and 4."
 msgstr "أحمر × 3 وأزرق × 4 في السلة يُحسبان بشكل منفصل: 3 و4."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:41
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:67
 msgid "Below the 5+ tier, no discount"
 msgstr "دون طبقة 5+، لا خصم"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:45
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:71
 msgid "Red × 3 and Blue × 4 in the cart count together: 7."
 msgstr "أحمر × 3 وأزرق × 4 في السلة يُحسبان معًا: 7."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:46
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:72
 msgid "5+ tier reached: 10% off"
 msgstr "تم بلوغ طبقة 5+: خصم 10%"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:53
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:78
 msgid "Combine variations for minimum quantity"
 msgstr "الجمع بين الاختلافات للحد الأدنى من الكمية"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:60
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:85
 msgid "Minimum 10. Red × 6 and Blue × 4 each need 10 on their own."
 msgstr "الحد الأدنى 10. أحمر × 6 وأزرق × 4 يحتاج كل منهما إلى 10 بمفرده."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:61
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:86
 msgid "Minimum not met, cannot add to cart"
 msgstr "لم يُستوفَ الحد الأدنى، لا يمكن الإضافة إلى السلة"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:65
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:90
 msgid "Minimum 10. Red × 6 and Blue × 4 add up to 10."
 msgstr "الحد الأدنى 10. أحمر × 6 وأزرق × 4 يجتمعان ليصبحا 10."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:66
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:91
 msgid "Minimum met"
 msgstr "تم استيفاء الحد الأدنى"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:73
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:97
 msgid "Calculate percentage discounts from regular price"
 msgstr "حساب نسبة الخصومات من السعر العادي"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:76
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:100
 msgid "Calculate percentage discounts using the product's regular price, ignoring any active sale prices."
 msgstr "حساب نسبة الخصومات باستخدام السعر العادي للمنتج، وتجاهل أي أسعار بيع نشطة."
 
 #. translators: 1: regular price, 2: sale price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:80
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:104
 #, php-format
 msgid "Regular price %1$s, on sale for %2$s. The 20%% tier starts from the sale price."
 msgstr "السعر العادي %1$s، معروض بتخفيض بسعر %2$s. تبدأ طبقة 20%% من سعر التخفيض."
 
 #. translators: %s: tier price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:88
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:106 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:112
 #, php-format
 msgid "Tier price %s"
 msgstr "سعر الطبقة %s"
 
 #. translators: 1: regular price, 2: sale price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:86
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:110
 #, php-format
 msgid "Regular price %1$s, on sale for %2$s. The 20%% tier starts from the regular price."
 msgstr "السعر العادي %1$s، معروض بتخفيض بسعر %2$s. تبدأ طبقة 20%% من السعر العادي."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:94
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:118
 msgid "Round calculated prices"
 msgstr "جولة الأسعار المحسوبة"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:98
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:122
 msgid "Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing."
 msgstr "خصومات النسبة المئوية المحسوبة تقريبًا لمنع حدوث اختلافات طفيفة في العرض مع أسعار WooCommerce القياسية."
 
 #. translators: %s: price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:102 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:107
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:126 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:131
 #, php-format
 msgid "%s with a 15%% tier comes to 16.9915."
 msgstr "%s مع طبقة خصم 15%% يصبح 16.9915."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:103
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:127
 msgid "The exact amount is used"
 msgstr "يُستخدم المبلغ الدقيق"
 
 #. translators: %s: rounded price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:109
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:133
 #, php-format
 msgid "Rounded to %s"
 msgstr "مقرّب إلى %s"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:115
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:138
 msgid "Prioritize global pricing rules"
 msgstr "إعطاء الأولوية لقواعد التسعير العالمية"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:117
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:140
 msgid "Apply global pricing rules before product-level rules. If disabled, individual product rules take precedence over global rules."
 msgstr "تطبيق قواعد التسعير العالمية قبل القواعد على مستوى المنتج. في حالة التعطيل، تكون لقواعد المنتج الفردية الأولوية على القواعد العامة."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:120 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:124
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:143 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:147
 msgid "A product rule gives 10% off from 10 items, a global rule 15% off from 10 items."
 msgstr "تمنح قاعدة المنتج خصم 10% ابتداءً من 10 قطع، وتمنح القاعدة العالمية خصم 15% ابتداءً من 10 قطع."
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:121
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:144
 msgid "The product rule wins: 10% off"
 msgstr "تفوز قاعدة المنتج: خصم 10%"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:125
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:148
 msgid "The global rule wins: 15% off"
 msgstr "تفوز القاعدة العالمية: خصم 15%"
-
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:159
-msgid "Off"
-msgstr "معطّل"
-
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:160
-msgid "On"
-msgstr "مفعّل"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:29
 msgid "Customize the appearance and behavior of your tiered pricing tables."
@@ -5242,40 +5246,88 @@ msgstr "التكامل"
 msgid "Multicurrency"
 msgstr "تعدد العملات"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:89
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:90
+msgid "dollars"
+msgstr "الدولار"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:90
+msgid "euros"
+msgstr "اليورو"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:100
+msgid "Tier prices follow the currency"
+msgstr "أسعار الطبقات تتبع العملة"
+
+#. translators: 1: tier price, 2: next tier price, 3: converted price, 4: converted next price, 5: currency name
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:102
+#, php-format
+msgid "Tiers of %1$s and %2$s show as %3$s and %4$s for a shopper paying in %5$s, at the store's rate."
+msgstr "تظهر الطبقتان %1$s و%2$s بقيمة %3$s و%4$s للمتسوّق الذي يدفع بعملة %5$s، وفق سعر الصرف المحدد في المتجر."
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:105
+msgid "Fixed prices per currency"
+msgstr "أسعار ثابتة لكل عملة"
+
+#. translators: 1: price, 2: currency name
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:107
+#, php-format
+msgid "Set the 10+ tier to a round %1$s for shoppers paying in %2$s instead of the converted amount, the same way for any currency."
+msgstr "اضبط طبقة 10+ على مبلغ مقرّب قدره %1$s للمتسوّقين الذين يدفعون بعملة %2$s بدلًا من المبلغ المحوَّل، وبالطريقة نفسها لأي عملة أخرى."
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:110
+msgid "Role and catalog prices convert too"
+msgstr "تُحوَّل أسعار الأدوار والكتالوج أيضًا"
+
+#. translators: 1: wholesale price, 2: converted price
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:112
+#, php-format
+msgid "A wholesale price of %1$s becomes %2$s, and the \"From\" price in the shop grid follows."
+msgstr "يتحوّل سعر الجملة البالغ %1$s إلى %2$s، ويتبعه سعر \"من\" في شبكة المتجر."
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:115
+msgid "Checkout in the shopper's currency"
+msgstr "إتمام الطلب بعملة المتسوّق"
+
+#. translators: %s: currency name
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:117
+#, php-format
+msgid "Cart totals, discounts and the \"You save\" badge are shown in %s, and the order is placed in that currency."
+msgstr "تُعرض إجماليات السلة والخصومات وشارة \"توفّر\" بعملة %s، ويُسجَّل الطلب بالعملة نفسها."
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:131
 msgid "Tiered pricing works with multi-currency stores"
 msgstr "يعمل التسعير المتدرج مع المتاجر متعددة العملات"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:93
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:135
 msgid "When a currency switcher is active, tiered prices follow it: tier rules, role-based prices, catalog prices and cart discounts are converted to the visitor's currency."
 msgstr "عندما يكون مبدّل عملات مفعّلًا، تتبعه الأسعار المتدرجة: تُحوَّل قواعد الطبقات والأسعار حسب الدور وأسعار الكتالوج وخصومات السلة إلى عملة الزائر."
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:97
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:139
 msgid "U2Code Multicurrency is built by the makers of Tiered Pricing Table — a native pairing instead of an adapter: tier and role prices convert natively, per-currency price rules, and one support team for both plugins."
 msgstr "U2Code Multicurrency من صانعي Tiered Pricing Table — تكامل أصلي بدلًا من محوّل وسيط: تُحوَّل أسعار الطبقات والأدوار بشكل أصلي، مع قواعد أسعار لكل عملة، وفريق دعم واحد لكلتا الإضافتين."
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:101
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:143
 msgid "U2Code Multicurrency is active — the native pairing."
 msgstr "U2Code Multicurrency مفعّلة — التكامل الأصلي."
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:102
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:144
 msgid "Tiered, role-based and catalog prices convert to the visitor's currency automatically."
 msgstr "تُحوَّل الأسعار المتدرجة وأسعار الأدوار وأسعار الكتالوج إلى عملة الزائر تلقائيًا."
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:106
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:148
 msgid "The Tiered Pricing integration for it is enabled — tiered prices are converted at the current exchange rate."
 msgstr "تكامل Tiered Pricing معها مفعّل — تُحوَّل الأسعار المتدرجة بسعر الصرف الحالي."
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:110
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:152
 msgid "The Tiered Pricing integration for it is disabled — tiered prices may not convert correctly."
 msgstr "تكامل Tiered Pricing معها معطّل — قد لا تُحوَّل الأسعار المتدرجة بشكل صحيح."
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:114
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:156
 msgid "Two currency systems are active."
 msgstr "هناك نظامان للعملات مفعّلان."
 
 #. translators: %s: competitor plugin name(s)
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:117
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:159
 #, php-format
 msgid "U2Code Multicurrency and %s will both try to convert prices. Deactivate one of them — we recommend keeping U2Code Multicurrency for the native pairing with tiered pricing."
 msgstr "ستحاول كل من U2Code Multicurrency و%s تحويل الأسعار. عطّل إحداهما — ننصح بالإبقاء على U2Code Multicurrency للتكامل الأصلي مع التسعير المتدرج."
@@ -5302,63 +5354,115 @@ msgstr "يعمل مع"
 msgid "active"
 msgstr "نشط"
 
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:251
+msgid "Activate now"
+msgstr "التفعيل الآن"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:262
+msgid "Install now, free"
+msgstr "التثبيت الآن، مجانًا"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:270
+msgid "Get it free on WordPress.org"
+msgstr "احصل عليه مجانًا من WordPress.org"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:283
+msgid "How it works together"
+msgstr "كيف تعمل الإضافتان معًا"
+
 #. translators: %s: U2Code plugin name
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:203
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:305
 #, php-format
 msgid "Switch to %s"
 msgstr "التبديل إلى %s"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:218 views/admin/banners/upgrade-banner.php:22
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:320 views/admin/banners/upgrade-banner.php:22
 msgid "Free"
 msgstr "مجاني"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:236
-msgid "Get it free on WordPress.org"
-msgstr "احصل عليه مجانًا من WordPress.org"
-
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:242
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:345
 msgid "Same team, one support channel for both plugins."
 msgstr "الفريق نفسه، وقناة دعم واحدة لكلتا الإضافتين."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:75
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:350
+msgid "Installs from WordPress.org. Once activated, the pairing switches on by itself; you can manage it under Integrations."
+msgstr "يُثبَّت من WordPress.org. بمجرد التفعيل، يعمل التكامل تلقائيًا؛ ويمكنك إدارته من تبويب التكامل."
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:352
+msgid "The plugin is installed but inactive. Once activated, the pairing switches on by itself; you can manage it under Integrations."
+msgstr "الإضافة مثبّتة لكنها غير مفعّلة. بمجرد التفعيل، يعمل التكامل تلقائيًا؛ ويمكنك إدارته من تبويب التكامل."
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:81
+msgid "Options on top of the tier price"
+msgstr "الخيارات تُضاف إلى سعر الطبقة"
+
+#. translators: 1: tier price, 2: option price, 3: price each, 4: total for ten
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:83
+#, php-format
+msgid "Hoodie at the 10+ tier: %1$s. Embroidery adds %2$s, so each costs %3$s and ten cost %4$s."
+msgstr "هودي في طبقة 10+: %1$s. يضيف التطريز %2$s، فتكون تكلفة القطعة الواحدة %3$s وتكلفة عشر قطع %4$s."
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:86
+msgid "Percentage options use the tier price"
+msgstr "خيارات النسبة المئوية تُحسب من سعر الطبقة"
+
+#. translators: 1: option price on the tier price, 2: tier price, 3: option price on the regular price, 4: regular price
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:88
+#, php-format
+msgid "A 10%% gift box adds %1$s on the %2$s tier price, not %3$s on the regular %4$s."
+msgstr "علبة هدايا بنسبة 10%% تضيف %1$s على سعر الطبقة %2$s، لا %3$s على السعر العادي %4$s."
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:92
+msgid "The price, the pricing summary and the add-to-cart total update as the shopper picks options and changes the quantity."
+msgstr "يتحدّث السعر وملخص التسعير وإجمالي الإضافة إلى السلة مع اختيار المتسوّق للخيارات وتغييره للكمية."
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:95
+msgid "The cart keeps both"
+msgstr "السلة تحتفظ بكليهما"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:96
+msgid "Each cart line shows the tier price with the option prices on top, and the order records which options were chosen."
+msgstr "يعرض كل سطر في السلة سعر الطبقة مضافًا إليه أسعار الخيارات، ويسجّل الطلب الخيارات التي تم اختيارها."
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:110
 msgid "Charge for product options alongside tiered pricing"
 msgstr "تحصيل رسوم خيارات المنتج إلى جانب التسعير المتدرج"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:79
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:114
 msgid "Product addons — options, extra fields, services like engraving or gift wrap — work together with tiered pricing: addon prices are added on top of the tiered price in the cart and totals."
 msgstr "تعمل إضافات المنتج — الخيارات والحقول الإضافية والخدمات مثل النقش أو تغليف الهدايا — جنبًا إلى جنب مع التسعير المتدرج: تُضاف أسعار الإضافات فوق السعر المتدرج في السلة والإجماليات."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:83
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:118
 msgid "U2Code Product Addons is built by the makers of Tiered Pricing Table — a native pairing: addon prices follow the tier price, percentage options are based on the actual tier price, and one support team for both plugins."
 msgstr "U2Code Product Addons من صانعي Tiered Pricing Table — تكامل أصلي: تتبع أسعار الإضافات سعر الطبقة، وتُحسب الخيارات بالنسبة المئوية على أساس سعر الطبقة الفعلي، وفريق دعم واحد لكلتا الإضافتين."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:87
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:122
 msgid "U2Code Product Addons is active — the native pairing."
 msgstr "U2Code Product Addons مفعّلة — التكامل الأصلي."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:88
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:123
 msgid "Addon prices follow the tier price on the product page, in the live totals and in the cart."
 msgstr "تتبع أسعار الإضافات سعر الطبقة في صفحة المنتج وفي الإجماليات المباشرة وفي السلة."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:92
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:127
 msgid "The Tiered Pricing integration for it is enabled — addon prices are included in tiered price calculations in the cart."
 msgstr "تكامل Tiered Pricing معها مفعّل — تُدرج أسعار الإضافات في حسابات السعر المتدرج في السلة."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:96
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:131
 msgid "The Tiered Pricing integration for it is disabled — addon prices may be lost when tiered pricing applies."
 msgstr "تكامل Tiered Pricing معها معطّل — قد تُفقد أسعار الإضافات عند تطبيق التسعير المتدرج."
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:100
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:135
 msgid "Multiple product addons plugins are active."
 msgstr "هناك أكثر من إضافة لإضافات المنتج مفعّلة."
 
 #. translators: %s: competitor plugin name(s)
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:103
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:138
 #, php-format
 msgid "U2Code Product Addons and %s are both adding fields to your products, which usually duplicates options on the product page. Consider consolidating on one — we recommend U2Code Product Addons for the native pairing with tiered pricing."
 msgstr "تضيف كل من U2Code Product Addons و%s حقولًا إلى منتجاتك، ما يؤدي عادةً إلى تكرار الخيارات في صفحة المنتج. فكّر في الاكتفاء بواحدة — ننصح بـ U2Code Product Addons للتكامل الأصلي مع التسعير المتدرج."
 
-#: src/Settings/Settings.php:264
+#: src/Settings/Settings.php:268
 msgid "New"
 msgstr "جديد"
 
@@ -6388,7 +6492,7 @@ msgstr "صفحة المنتج"
 msgid "Layout preview"
 msgstr "معاينة التخطيط"
 
-#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:326
+#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:327
 msgid "The real product page may look a bit different, depending on your theme."
 msgstr "قد تبدو صفحة المنتج الفعلية مختلفة قليلًا، حسب قالب موقعك."
 
@@ -6399,6 +6503,14 @@ msgstr "يمكنك تجربتها هنا؛ ولا يعرض المتجر الأع
 #: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:32
 msgid "Extra columns for every tier: total price, saving per item, price including tax or your own values. Columns are saved with their own button and show up in the preview once saved."
 msgstr "أعمدة إضافية لكل طبقة: السعر الإجمالي، والتوفير لكل قطعة، والسعر شامل الضريبة، أو قيمك الخاصة. تُحفظ الأعمدة بزرها الخاص وتظهر في المعاينة بعد حفظها."
+
+#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:306
+msgid "Unsaved changes"
+msgstr "تغييرات غير محفوظة"
+
+#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:307
+msgid "Save changes"
+msgstr "حفظ التغييرات"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:7 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 msgid "Role-based pricing is a premium feature."

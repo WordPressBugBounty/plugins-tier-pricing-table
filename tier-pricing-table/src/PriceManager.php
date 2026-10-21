@@ -221,6 +221,22 @@ class PriceManager {
      *
      * @return PricingRule
      */
+    /**
+     * Prime the post and meta caches for a list of product IDs in two queries, so the pricing lookups that
+     * follow (meta reads, wc_get_product()) hit the cache instead of querying per product.
+     *
+     * @param array $productIds
+     *
+     * @return int[] The IDs, as integers, without empty values.
+     */
+    public static function primeProducts( array $productIds ) : array {
+        $productIds = array_values( array_filter( array_map( 'intval', $productIds ) ) );
+        if ( !empty( $productIds ) && function_exists( '_prime_post_caches' ) ) {
+            _prime_post_caches( $productIds, false, true );
+        }
+        return $productIds;
+    }
+
     public static function getPricingRule( $productId, ?string $tieredPricingType = null ) : PricingRule {
         /****************************************
          *

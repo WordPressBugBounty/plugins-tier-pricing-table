@@ -1,10 +1,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tpt-freemius-i18n\n"
-"POT-Creation-Date: 2026-10-12T11:42:05+00:00\n"
-"PO-Revision-Date: 2026-10-12 11:58+0000\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.1.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
+"POT-Creation-Date: 2026-10-20T17:09:08+00:00\n"
+"PO-Revision-Date: 2026-10-20 17:14+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: zh_CN\n"
 "Language: zh_CN\n"
@@ -102,7 +102,7 @@ msgstr "购物车追加销售"
 msgid "Display an upsell message in the cart indicating how many items are needed to reach the next pricing tier."
 msgstr "在购物车中显示追加销售消息，指示需要多少商品才能达到下一个定价层。"
 
-#: src/Addons/CartUpsells/CartUpsellsService.php:229 src/Addons/CartUpsells/UpsellsSubsection.php:43 src/Addons/LayoutConfigurator/LayoutConfigurator.php:402
+#: src/Addons/CartUpsells/CartUpsellsService.php:229 src/Addons/CartUpsells/UpsellsSubsection.php:43 src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
 msgid "Add <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each"
 msgstr "再加 <b>{tp_required_quantity}</b> 件，每件仅需 <b>{tp_next_price}</b>"
 
@@ -154,7 +154,7 @@ msgstr "商店和类别价格格式"
 msgid "Manage how tiered pricing appears in catalogs, loops, and widgets."
 msgstr "管理分层定价在目录、循环和小部件中的显示方式。"
 
-#: src/Addons/CatalogPrices/CatalogPricesService.php:41 src/Addons/CatalogPrices/CatalogPricesService.php:46 src/Addons/CatalogPrices/CatalogPricesSubsection.php:68 src/Addons/LayoutConfigurator/LayoutConfigurator.php:393 src/Addons/LayoutConfigurator/LayoutPreview.php:437 src/Managers/FormatPriceManager.php:276
+#: src/Addons/CatalogPrices/CatalogPricesService.php:41 src/Addons/CatalogPrices/CatalogPricesService.php:46 src/Addons/CatalogPrices/CatalogPricesSubsection.php:68 src/Addons/LayoutConfigurator/LayoutConfigurator.php:398 src/Addons/LayoutConfigurator/LayoutPreview.php:437 src/Managers/FormatPriceManager.php:281
 msgid "From {tp_lowest_price} instead of {tp_original_price}"
 msgstr "从 {tp_lowest_price} 起，原价 {tp_original_price}"
 
@@ -190,18 +190,18 @@ msgstr "显示最低价格"
 msgid "Show range (lowest to highest)"
 msgstr "显示范围（最低到最高）"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53 src/Addons/CatalogPrices/CatalogPricesSubsection.php:65 src/Addons/LayoutConfigurator/LayoutConfigurator.php:831 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1206
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53 src/Addons/CatalogPrices/CatalogPricesSubsection.php:65 src/Addons/LayoutConfigurator/LayoutConfigurator.php:836 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1206
 msgid "Custom template"
 msgstr "自定义模板"
 
 #. translators: %s: example price
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:57 src/Addons/LayoutConfigurator/LayoutConfigurator.php:823
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:57 src/Addons/LayoutConfigurator/LayoutConfigurator.php:828
 #, php-format
 msgid "e.g. From %s"
 msgstr "例如 %s 起"
 
 #. translators: 1: lowest example price, 2: highest example price
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:59 src/Addons/LayoutConfigurator/LayoutConfigurator.php:828
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:59 src/Addons/LayoutConfigurator/LayoutConfigurator.php:833
 #, php-format
 msgid "e.g. %1$s - %2$s"
 msgstr "例如 %1$s - %2$s"
@@ -218,7 +218,7 @@ msgstr "创建目录价格的自定义模板。使用下面的可用变量动态
 msgid "Prefix for lowest price"
 msgstr "最低价格前缀"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80 src/Addons/LayoutConfigurator/LayoutConfigurator.php:394 src/Addons/LayoutConfigurator/LayoutPreview.php:445 src/Managers/FormatPriceManager.php:315
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80 src/Addons/LayoutConfigurator/LayoutConfigurator.php:399 src/Addons/LayoutConfigurator/LayoutPreview.php:445 src/Managers/FormatPriceManager.php:320
 msgid "From"
 msgstr "从"
 
@@ -226,7 +226,7 @@ msgstr "从"
 msgid "Text displayed before the lowest price (e.g., <b>From $10.00</b>)."
 msgstr "最低价格之前显示的文本（例如，<b>起价 10.00 美元</b>）。"
 
-#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:89 src/Addons/LayoutConfigurator/LayoutConfigurator.php:821 src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:456
+#: src/Addons/CatalogPrices/CatalogPricesSubsection.php:89 src/Addons/LayoutConfigurator/LayoutConfigurator.php:826 src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:457
 msgid "Lowest price"
 msgstr "最低价格"
 
@@ -330,7 +330,7 @@ msgstr "总行价"
 msgid "Saving per item"
 msgstr "每件商品节省"
 
-#: src/Addons/CustomColumns/Schema.php:23 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:376 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746 src/PricingTable.php:454 src/Settings/CustomOptions/TPTTextTemplate.php:207 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278 views/admin/components/tiered-pricing-rules-form.php:55 views/admin/welcome-page/welcome-page.php:647 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:69 src/Addons/CustomColumns/js-source/index.js:286 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:718 src/Addons/LayoutConfigurator/js-source/components/Controls.js:884 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1157 src/Addons/LayoutConfigurator/js-source/skeleton.js:433 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:40 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:80 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:430
+#: src/Addons/CustomColumns/Schema.php:23 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:381 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746 src/PricingTable.php:457 src/Settings/CustomOptions/TPTTextTemplate.php:207 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278 views/admin/components/tiered-pricing-rules-form.php:55 views/admin/welcome-page/welcome-page.php:647 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:69 src/Addons/CustomColumns/js-source/index.js:286 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:718 src/Addons/LayoutConfigurator/js-source/components/Controls.js:884 src/Addons/LayoutConfigurator/js-source/components/Controls.js:1157 src/Addons/LayoutConfigurator/js-source/skeleton.js:433 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:40 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:80 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:430
 msgid "Price"
 msgstr "价格"
 
@@ -338,7 +338,7 @@ msgstr "价格"
 msgid "Number"
 msgstr "数字"
 
-#: src/Addons/CustomColumns/Schema.php:25 src/Addons/LayoutConfigurator/LayoutConfigurator.php:794 src/Addons/NonLoggedInUsers/Wholesale/Settings/FormFields.php:17 src/Addons/YouSave/YouSaveSubsection.php:66 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:71
+#: src/Addons/CustomColumns/Schema.php:25 src/Addons/LayoutConfigurator/LayoutConfigurator.php:799 src/Addons/NonLoggedInUsers/Wholesale/Settings/FormFields.php:17 src/Addons/YouSave/YouSaveSubsection.php:66 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:71
 msgid "Text"
 msgstr "文本"
 
@@ -488,11 +488,11 @@ msgstr "单独"
 msgid "mix & match"
 msgstr "混合搭配"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159 src/Addons/LayoutConfigurator/LayoutConfigurator.php:374 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742 src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109 src/PricingTable.php:452 src/Settings/CustomOptions/TPTTextTemplate.php:143 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268 views/addons/category-tiers/add-free.php:24 views/addons/category-tiers/add.php:51 views/addons/category-tiers/edit-free.php:34 views/addons/category-tiers/edit.php:59 views/addons/category-tiers/edit.php:82 views/admin/components/tiered-pricing-rules-form.php:65 views/admin/welcome-page/welcome-page.php:645 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:285 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:712 src/Addons/LayoutConfigurator/js-source/skeleton.js:324 src/Addons/LayoutConfigurator/js-source/skeleton.js:434 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:32 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:16 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:21 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/App.js:145 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:428 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:211
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115 src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159 src/Addons/LayoutConfigurator/LayoutConfigurator.php:379 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742 src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109 src/PricingTable.php:455 src/Settings/CustomOptions/TPTTextTemplate.php:143 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268 views/addons/category-tiers/add-free.php:24 views/addons/category-tiers/add.php:51 views/addons/category-tiers/edit-free.php:34 views/addons/category-tiers/edit.php:59 views/addons/category-tiers/edit.php:82 views/admin/components/tiered-pricing-rules-form.php:65 views/admin/welcome-page/welcome-page.php:645 src/Addons/CustomColumns/build/index.js:1 src/Addons/CustomColumns/js-source/index.js:285 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:712 src/Addons/LayoutConfigurator/js-source/skeleton.js:324 src/Addons/LayoutConfigurator/js-source/skeleton.js:434 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:32 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:16 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:21 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/App.js:145 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:428 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:211
 msgid "Quantity"
 msgstr "数量"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:586 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271 views/admin/welcome-page/welcome-page.php:646 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:724 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:429 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:213
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116 src/Addons/LayoutConfigurator/LayoutConfigurator.php:591 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271 views/admin/welcome-page/welcome-page.php:646 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/js-source/components/Controls.js:724 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1 src/Addons/RequestAQuote/build/index.js:1 src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:429 src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/components/PricingTest.js:213
 msgid "Discount"
 msgstr "折扣"
 
@@ -678,7 +678,7 @@ msgstr "基本定价"
 msgid "Override the default regular product prices."
 msgstr "覆盖默认的常规产品价格。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39 src/Addons/ImportExport/WoocommerceImportService.php:24 src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38 src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21 src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118 src/Admin/ProductPage/TieredPricingTab.php:35 src/Integrations/Plugins/WPAllImport.php:335 src/Settings/Settings.php:302
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39 src/Addons/ImportExport/WoocommerceImportService.php:24 src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38 src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21 src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118 src/Admin/ProductPage/TieredPricingTab.php:35 src/Integrations/Plugins/WPAllImport.php:335 src/Settings/Settings.php:306
 msgid "Tiered Pricing"
 msgstr "分级定价"
 
@@ -762,7 +762,7 @@ msgstr "单独适用于每个产品。如果启用混合匹配，最低数量要
 msgid "Variable Product Minimum Quantity"
 msgstr "可变产品最小数量"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35 src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:100 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:57
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35 src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:100 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82
 msgid "Determine whether the minimum quantity requirement applies to each variation separately, or to the combined total of all variations in the cart."
 msgstr "确定最低数量要求是单独适用于每个变体，还是购物车中所有变体的总和。"
 
@@ -1192,188 +1192,188 @@ msgstr "阶梯定价类型"
 msgid "Minimum order quantity"
 msgstr "最小订购量"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:372 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:442 src/Settings/Sections/GeneralSection/GeneralSection.php:178 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:330
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:377 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:442 src/Settings/Sections/GeneralSection/GeneralSection.php:178 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:330
 msgid "<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
 msgstr "<strong>购买 {tp_quantity} 件可节省 {tp_rounded_discount}%</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:373 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:461 src/Settings/Sections/GeneralSection/GeneralSection.php:202 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:353
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:378 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:461 src/Settings/Sections/GeneralSection/GeneralSection.php:202 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:353
 msgid "<strong>Buy {tp_quantity} pieces</strong>"
 msgstr "<strong>购买 {tp_quantity} 件</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:375 src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:456 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273 views/admin/components/regular-pricing-form.php:75
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380 src/Integrations/Plugins/WPAllImport.php:178 src/PricingTable.php:459 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273 views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "折扣 （％）"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:377 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:470 src/Settings/Sections/GeneralSection/GeneralSection.php:185 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:365
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:382 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:470 src/Settings/Sections/GeneralSection/GeneralSection.php:185 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:365
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each and save {tp_rounded_discount}%</strong>"
 msgstr "<strong>以每件 {tp_price} 的价格购买 {tp_quantity} 件，可节省 {tp_rounded_discount}%</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:378 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:492 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:390
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:383 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:492 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:390
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>"
 msgstr "<strong>以每件 {tp_price} 的价格购买 {tp_quantity} 件</strong>"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:384 src/Addons/YouSave/YouSaveSubsection.php:52
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:389 src/Addons/YouSave/YouSaveSubsection.php:52
 msgid "You save {tp_ys_total_price}"
 msgstr "您节省 {tp_ys_total_price}"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:388 src/Addons/LayoutConfigurator/LayoutPreview.php:471 src/Addons/PricingSummary/SummarySubsection.php:78 views/frontend/tiered-pricing-options-style-1.php:165 views/frontend/tiered-pricing-options-style-1.php:271 views/frontend/tiered-pricing-options-style-2.php:165 views/frontend/tiered-pricing-options-style-2.php:271 views/frontend/tiered-pricing-options-style-3.php:165 views/frontend/tiered-pricing-options-style-3.php:288 views/frontend/tiered-pricing-options-style-4.php:133 views/frontend/tiered-pricing-options-style-4.php:213 views/frontend/tiered-pricing-options-style-5.php:135 views/frontend/tiered-pricing-options-style-5.php:216 views/frontend/tiered-pricing-options-style-6.php:131 views/frontend/tiered-pricing-options-style-6.php:207 views/frontend/tiered-pricing-options.php:165 views/frontend/tiered-pricing-options.php:271
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:393 src/Addons/LayoutConfigurator/LayoutPreview.php:471 src/Addons/PricingSummary/SummarySubsection.php:78 views/frontend/tiered-pricing-options-style-1.php:165 views/frontend/tiered-pricing-options-style-1.php:271 views/frontend/tiered-pricing-options-style-2.php:165 views/frontend/tiered-pricing-options-style-2.php:271 views/frontend/tiered-pricing-options-style-3.php:165 views/frontend/tiered-pricing-options-style-3.php:288 views/frontend/tiered-pricing-options-style-4.php:133 views/frontend/tiered-pricing-options-style-4.php:213 views/frontend/tiered-pricing-options-style-5.php:135 views/frontend/tiered-pricing-options-style-5.php:216 views/frontend/tiered-pricing-options-style-6.php:131 views/frontend/tiered-pricing-options-style-6.php:207 views/frontend/tiered-pricing-options.php:165 views/frontend/tiered-pricing-options.php:271
 msgid "Total:"
 msgstr "全部的："
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:389 src/Addons/LayoutConfigurator/LayoutPreview.php:472 src/Addons/PricingSummary/SummarySubsection.php:85
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:394 src/Addons/LayoutConfigurator/LayoutPreview.php:472 src/Addons/PricingSummary/SummarySubsection.php:85
 msgid "Each: "
 msgstr "每个："
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:398 src/Addons/TieredPricingCart/CartOptionsSubsection.php:58 src/Addons/TieredPricingCart/CartOptionsSubsection.php:71 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:420
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:403 src/Addons/TieredPricingCart/CartOptionsSubsection.php:58 src/Addons/TieredPricingCart/CartOptionsSubsection.php:71 src/Addons/LayoutConfigurator/build/index.js:1 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Controls.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:420
 msgid "Total savings"
 msgstr "总节省"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:484 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/skeleton.js:291 src/Addons/LayoutConfigurator/js-source/skeleton.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:375 src/Addons/LayoutConfigurator/js-source/skeleton.js:441
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:489 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/skeleton.js:291 src/Addons/LayoutConfigurator/js-source/skeleton.js:316 src/Addons/LayoutConfigurator/js-source/skeleton.js:375 src/Addons/LayoutConfigurator/js-source/skeleton.js:441
 msgid "Product name"
 msgstr "产品名称"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:539 src/Addons/LayoutConfigurator/LayoutConfigurator.php:540 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:375 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735 src/PricingTable.php:513 src/PricingTable.php:514 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:544 src/Addons/LayoutConfigurator/LayoutConfigurator.php:545 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:375 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735 src/PricingTable.php:516 src/PricingTable.php:517 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
 msgid "piece"
 msgid_plural "pieces"
 msgstr[0] "片"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:647 src/Addons/LayoutConfigurator/LayoutConfigurator.php:656
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:652 src/Addons/LayoutConfigurator/LayoutConfigurator.php:661
 msgid "Above the add to cart button"
 msgstr "加入购物车按钮上方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:648 src/Addons/LayoutConfigurator/LayoutConfigurator.php:657
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:653 src/Addons/LayoutConfigurator/LayoutConfigurator.php:662
 msgid "Below the add to cart button"
 msgstr "加入购物车按钮下方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:649 src/Addons/LayoutConfigurator/LayoutConfigurator.php:660
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:654 src/Addons/LayoutConfigurator/LayoutConfigurator.php:665
 msgid "Above the product title"
 msgstr "产品标题上方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:650
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:655
 msgid "Below the product title"
 msgstr "产品标题下方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:658
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:663
 msgid "Above the add to cart form"
 msgstr "加入购物车表单上方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:659
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:664
 msgid "Below the add to cart form"
 msgstr "加入购物车表单下方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:661
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:666
 msgid "Before the product summary"
 msgstr "产品摘要之前"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:662
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:667
 msgid "After the product summary"
 msgstr "产品摘要之后"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:717 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:43 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:243
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:722 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:43 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:280
 msgid "Pricing Display"
 msgstr "定价显示"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:795 src/Addons/YouSave/YouSaveSubsection.php:67 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:129
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:800 src/Addons/YouSave/YouSaveSubsection.php:67 src/Addons/TierLabels/build/index.js:1 src/Addons/TierLabels/js-source/index.js:129
 msgid "Pill"
 msgstr "丸"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:796 src/Addons/YouSave/YouSaveSubsection.php:68
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:801 src/Addons/YouSave/YouSaveSubsection.php:68
 msgid "Outlined"
 msgstr "描边"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:799 src/Addons/YouSave/YouSaveSubsection.php:77
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:804 src/Addons/YouSave/YouSaveSubsection.php:77
 msgid "Under the price"
 msgstr "价格下方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:800 src/Addons/YouSave/YouSaveSubsection.php:78
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:805 src/Addons/YouSave/YouSaveSubsection.php:78
 msgid "Above the add-to-cart button"
 msgstr "加入购物车按钮上方"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:801 src/Addons/YouSave/YouSaveSubsection.php:79
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:806 src/Addons/YouSave/YouSaveSubsection.php:79
 msgid "After the pricing layout"
 msgstr "定价布局之后"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:809 src/Addons/PricingSummary/SummarySubsection.php:68
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:814 src/Addons/PricingSummary/SummarySubsection.php:68
 msgid "Detailed"
 msgstr "详细的"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:810 src/Addons/PricingSummary/SummarySubsection.php:69
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:815 src/Addons/PricingSummary/SummarySubsection.php:69
 msgid "Compact"
 msgstr "袖珍的"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:811 src/Addons/PricingSummary/SummarySubsection.php:70
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:816 src/Addons/PricingSummary/SummarySubsection.php:70
 msgid "Inline labels"
 msgstr "内联标签"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:826
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:831
 msgid "Price range"
 msgstr "价格区间"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:832
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:837
 msgid "Your own text built from variables"
 msgstr "使用变量自定义文字"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:838
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:843
 msgid "Match shop & categories"
 msgstr "与商店和分类页一致"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:839
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:844
 msgid "Lowest price or a price range, as on the shop page"
 msgstr "最低价或价格区间，与商店页面相同"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:842
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847
 msgid "Price for the selected quantity"
 msgstr "所选数量的价格"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:843
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848
 msgid "Follows the quantity the customer enters"
 msgstr "跟随客户输入的数量"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:296 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:296 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
 msgid "Range"
 msgstr "范围"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852
 msgid "10 - 24 pieces"
 msgstr "10 - 24 件"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:297 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:297 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
 msgid "Static values"
 msgstr "静态值"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853
 msgid "10 pieces"
 msgstr "10 件"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:851 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:328 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:328 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
 msgid "Ascending"
 msgstr "升序"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:851 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:332 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:188
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:332 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:188
 msgid "Smallest quantity first"
 msgstr "最小数量优先"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:329 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:329 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
 msgid "Descending"
 msgstr "降序"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:333 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:189
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:333 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:189
 msgid "Biggest discount first"
 msgstr "最大折扣优先"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:855 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:860 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297 src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1 src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage"
 msgstr "百分比"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:414 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:861 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:414 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
 msgid "Amount saved"
 msgstr "节省金额"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:415 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:862 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:415 src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
 msgid "Both"
 msgstr "两者"
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:930
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:935
 msgid "Loading the layout configurator…"
 msgstr "正在加载布局配置器…"
 
@@ -1393,7 +1393,7 @@ msgstr "工具提示布局不适用于商店和分类页面。请选择“自定
 msgid "The tooltip layout shows the pricing table next to the product price when the customer hovers over an icon. Open a product page to see it in action."
 msgstr "工具提示布局在客户悬停图标时在产品价格旁显示定价表。打开产品页面即可查看实际效果。"
 
-#: src/Addons/LayoutConfigurator/LayoutPreview.php:230 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:323
+#: src/Addons/LayoutConfigurator/LayoutPreview.php:230 src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:324
 msgid "The preview could not be rendered."
 msgstr "无法渲染预览。"
 
@@ -2560,7 +2560,7 @@ msgstr "观看视频"
 msgid "Hide this tip"
 msgstr "隐藏此提示"
 
-#: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:54 src/Addons/PluginsRecommendations/U2CodeProductAddonsPlugin.php:88 src/Integrations/Plugins/U2CodeMulticurrency.php:57 src/Integrations/Plugins/U2CodeProductAddons.php:76 src/Settings/Sections/PluginPairingSectionAbstract.php:240
+#: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:54 src/Addons/PluginsRecommendations/U2CodeProductAddonsPlugin.php:88 src/Integrations/Plugins/U2CodeMulticurrency.php:57 src/Integrations/Plugins/U2CodeProductAddons.php:76 src/Settings/Sections/PluginPairingSectionAbstract.php:343
 msgid "Learn more"
 msgstr "了解更多"
 
@@ -2680,39 +2680,39 @@ msgstr "“总计”标签"
 msgid "\"Each\" label"
 msgstr "“每个”标签"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:14 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:24
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:15 src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:24
 msgid "Shop & Categories"
 msgstr "商店及类别"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:18
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:19
 msgid "Display tiered pricing tables on the shop and category pages."
 msgstr "在商店和类别页面上显示分层定价表。"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:451
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:452
 msgid "Biggest discount"
 msgstr "最大折扣"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:452
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:453
 msgid "{tp_max_discount} - the biggest percentage discount the product's tiers give."
 msgstr "{tp_max_discount} - 该产品各档位中的最大折扣百分比。"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:457
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:458
 msgid "{tp_lowest_price} - the lowest tier price."
 msgstr "{tp_lowest_price} - 最低档位价格。"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:461
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:462
 msgid "Lowest price quantity"
 msgstr "最低价对应数量"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:462
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:463
 msgid "{tp_lowest_quantity} - the quantity the lowest tier price starts at."
 msgstr "{tp_lowest_quantity} - 最低档位价格的起始数量。"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:466
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:467
 msgid "Biggest saving"
 msgstr "最大节省"
 
-#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:467
+#: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:468
 msgid "{tp_max_saving} - the saving per item at the lowest tier price."
 msgstr "{tp_max_saving} - 最低档位价格下每件节省的金额。"
 
@@ -4183,7 +4183,7 @@ msgstr "欢迎使用 WooCommerce 分级定价！"
 msgid "Hidden Admin Page"
 msgstr "隐藏管理页面"
 
-#: src/Core/Cache.php:58
+#: src/Core/Cache.php:91
 msgid "Cache has been purged successfully"
 msgstr "缓存已成功清除"
 
@@ -4411,7 +4411,7 @@ msgstr "11 种以上字段类型"
 msgid "Per-option pricing"
 msgstr "按选项定价"
 
-#: src/Integrations/Plugins/U2CodeProductAddons.php:63 src/Settings/Sections/ProductAddons/ProductAddonsSection.php:58
+#: src/Integrations/Plugins/U2CodeProductAddons.php:63 src/Settings/Sections/ProductAddons/ProductAddonsSection.php:58 src/Settings/Sections/ProductAddons/ProductAddonsSection.php:91
 msgid "Live totals"
 msgstr "实时总价"
 
@@ -4537,41 +4537,41 @@ msgstr "将分层定价数据添加到 Yoast 产品架构中，并引入用于 S
 
 #. translators: %s: amount saved per item
 #. translators: %s: discount percentage
-#: src/PricingTable.php:336 src/PricingTable.php:342
+#: src/PricingTable.php:339 src/PricingTable.php:345
 #, php-format
 msgid "%s off"
 msgstr "优惠 %s"
 
 #. translators: 1: discount percentage, 2: amount saved per item
-#: src/PricingTable.php:339
+#: src/PricingTable.php:342
 #, php-format
 msgid "%1$s off, save %2$s"
 msgstr "优惠 %1$s，每件节省 %2$s"
 
 #. translators: %d: number of tiers not listed
-#: src/PricingTable.php:426
+#: src/PricingTable.php:429
 #, php-format
 msgid "+%d more tier"
 msgid_plural "+%d more tiers"
 msgstr[0] "还有 %d 个档位"
 
-#: src/PricingTable.php:624
+#: src/PricingTable.php:628
 msgid "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier."
 msgstr "检测到定价冲突：您的最低订购数量等于或大于您的第一定价层。"
 
-#: src/PricingTable.php:632
+#: src/PricingTable.php:636
 msgid "To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity."
 msgstr "要解决此问题，请确保您的第一级定价规则的起始数量高于您的最低订购数量。"
 
-#: src/PricingTable.php:636
+#: src/PricingTable.php:640
 msgid "Why?"
 msgstr "为什么？"
 
-#: src/PricingTable.php:637
+#: src/PricingTable.php:641
 msgid "The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier."
 msgstr "该插件使用您的标准 WooCommerce 产品价格自动创建基础层。此基本层涵盖最低订购数量和第一个折扣层之间的任何订购数量。"
 
-#: src/PricingTable.php:641
+#: src/PricingTable.php:645
 msgid "This notice is only visible to store administrators."
 msgstr "此通知仅对商店管理员可见。"
 
@@ -4587,7 +4587,7 @@ msgstr "已查看通知"
 msgid "Tips hidden"
 msgstr "隐藏提示"
 
-#: src/Settings/CustomOptions/TPTIntegrationOption.php:64 src/Settings/Sections/PluginPairingSectionAbstract.php:217
+#: src/Settings/CustomOptions/TPTIntegrationOption.php:64 src/Settings/Sections/PluginPairingSectionAbstract.php:319
 msgid "By U2Code"
 msgstr "由 U2Code 开发"
 
@@ -4606,6 +4606,18 @@ msgstr "复数"
 #: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:83
 msgid "e.g., pieces"
 msgstr "例如，碎片"
+
+#: src/Settings/CustomOptions/TPTSwitchRowOption.php:18 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:183
+msgid "On"
+msgstr "开"
+
+#: src/Settings/CustomOptions/TPTSwitchRowOption.php:19 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:182
+msgid "Off"
+msgstr "关"
+
+#: src/Settings/CustomOptions/TPTSwitchRowOption.php:47
+msgid "Show an example"
+msgstr "显示示例"
 
 #: src/Settings/CustomOptions/TPTTextTemplate.php:144
 msgid "{tp_quantity} - range or a static quantity of the current pricing tier."
@@ -4733,135 +4745,127 @@ msgstr "样式 #%d"
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price}</strong>"
 msgstr "<strong>以 {tp_price} 购买 {tp_quantity} 件</strong>"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:13
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:14
 msgid "Price Calculation"
 msgstr "价格计算"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:17
-msgid "How tiered prices are calculated for variable products, sale prices and global rules."
-msgstr "可变产品、促销价和全局规则的阶梯价格计算方式。"
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:18
+msgid "These options change what customers pay, on every page."
+msgstr "这些选项会改变客户在每个页面上支付的价格。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:33
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:59
 msgid "Combine variations for quantity calculation"
 msgstr "组合变量进行数量计算"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:37
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:63
 msgid "Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules."
 msgstr "在计算分级定价规则的购物车总数量时，将可变产品的所有变体视为同一商品。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:40
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:66
 msgid "Red × 3 and Blue × 4 in the cart count separately: 3 and 4."
 msgstr "购物车中的红色 × 3 和蓝色 × 4 分开计算：3 和 4。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:41
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:67
 msgid "Below the 5+ tier, no discount"
 msgstr "未达到 5+ 档位，无折扣"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:45
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:71
 msgid "Red × 3 and Blue × 4 in the cart count together: 7."
 msgstr "购物车中的红色 × 3 和蓝色 × 4 合并计算：7。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:46
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:72
 msgid "5+ tier reached: 10% off"
 msgstr "已达到 5+ 档位：优惠 10%"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:53
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:78
 msgid "Combine variations for minimum quantity"
 msgstr "组合不同的最小数量"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:60
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:85
 msgid "Minimum 10. Red × 6 and Blue × 4 each need 10 on their own."
 msgstr "最低 10 件。红色 × 6 和蓝色 × 4 各自都需要达到 10。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:61
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:86
 msgid "Minimum not met, cannot add to cart"
 msgstr "未满足最低要求，无法加入购物车"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:65
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:90
 msgid "Minimum 10. Red × 6 and Blue × 4 add up to 10."
 msgstr "最低 10 件。红色 × 6 加蓝色 × 4 合计为 10。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:66
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:91
 msgid "Minimum met"
 msgstr "已满足最低要求"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:73
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:97
 msgid "Calculate percentage discounts from regular price"
 msgstr "计算正常价格的折扣百分比"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:76
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:100
 msgid "Calculate percentage discounts using the product's regular price, ignoring any active sale prices."
 msgstr "使用产品的正常价格计算折扣百分比，忽略任何有效的销售价格。"
 
 #. translators: 1: regular price, 2: sale price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:80
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:104
 #, php-format
 msgid "Regular price %1$s, on sale for %2$s. The 20%% tier starts from the sale price."
 msgstr "原价 %1$s，促销价 %2$s。20%% 档位从促销价开始计算。"
 
 #. translators: %s: tier price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:88
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:106 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:112
 #, php-format
 msgid "Tier price %s"
 msgstr "档位价格 %s"
 
 #. translators: 1: regular price, 2: sale price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:86
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:110
 #, php-format
 msgid "Regular price %1$s, on sale for %2$s. The 20%% tier starts from the regular price."
 msgstr "原价 %1$s，促销价 %2$s。20%% 档位从原价开始计算。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:94
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:118
 msgid "Round calculated prices"
 msgstr "舍入计算价格"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:98
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:122
 msgid "Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing."
 msgstr "对计算的百分比折扣进行四舍五入，以防止显示与标准 WooCommerce 定价出现细微差异。"
 
 #. translators: %s: price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:102 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:107
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:126 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:131
 #, php-format
 msgid "%s with a 15%% tier comes to 16.9915."
 msgstr "%s 按 15%% 档位计算得 16.9915。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:103
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:127
 msgid "The exact amount is used"
 msgstr "使用精确金额"
 
 #. translators: %s: rounded price
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:109
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:133
 #, php-format
 msgid "Rounded to %s"
 msgstr "四舍五入为 %s"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:115
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:138
 msgid "Prioritize global pricing rules"
 msgstr "优先考虑全球定价规则"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:117
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:140
 msgid "Apply global pricing rules before product-level rules. If disabled, individual product rules take precedence over global rules."
 msgstr "在产品级规则之前应用全局定价规则。如果禁用，单个产品规则优先于全局规则。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:120 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:124
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:143 src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:147
 msgid "A product rule gives 10% off from 10 items, a global rule 15% off from 10 items."
 msgstr "产品规则：满 10 件优惠 10%；全局规则：满 10 件优惠 15%。"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:121
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:144
 msgid "The product rule wins: 10% off"
 msgstr "产品规则胜出：优惠 10%"
 
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:125
+#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:148
 msgid "The global rule wins: 15% off"
 msgstr "全局规则胜出：优惠 15%"
-
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:159
-msgid "Off"
-msgstr "关"
-
-#: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:160
-msgid "On"
-msgstr "开"
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:29
 msgid "Customize the appearance and behavior of your tiered pricing tables."
@@ -5147,40 +5151,88 @@ msgstr "集成"
 msgid "Multicurrency"
 msgstr "多货币"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:89
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:90
+msgid "dollars"
+msgstr "美元"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:90
+msgid "euros"
+msgstr "欧元"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:100
+msgid "Tier prices follow the currency"
+msgstr "档位价格跟随货币"
+
+#. translators: 1: tier price, 2: next tier price, 3: converted price, 4: converted next price, 5: currency name
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:102
+#, php-format
+msgid "Tiers of %1$s and %2$s show as %3$s and %4$s for a shopper paying in %5$s, at the store's rate."
+msgstr "对于以%5$s付款的顾客，%1$s 和 %2$s 的档位会按商店汇率显示为 %3$s 和 %4$s。"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:105
+msgid "Fixed prices per currency"
+msgstr "按货币设置固定价格"
+
+#. translators: 1: price, 2: currency name
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:107
+#, php-format
+msgid "Set the 10+ tier to a round %1$s for shoppers paying in %2$s instead of the converted amount, the same way for any currency."
+msgstr "为以%2$s付款的顾客将 10+ 档位直接设为 %1$s 这样的整数价格，而不是换算后的金额；任何货币都可以这样设置。"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:110
+msgid "Role and catalog prices convert too"
+msgstr "角色价格和目录价格同样会转换"
+
+#. translators: 1: wholesale price, 2: converted price
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:112
+#, php-format
+msgid "A wholesale price of %1$s becomes %2$s, and the \"From\" price in the shop grid follows."
+msgstr "批发价 %1$s 会变为 %2$s，商店网格中显示的“从”价格也会随之变化。"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:115
+msgid "Checkout in the shopper's currency"
+msgstr "以顾客的货币结账"
+
+#. translators: %s: currency name
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:117
+#, php-format
+msgid "Cart totals, discounts and the \"You save\" badge are shown in %s, and the order is placed in that currency."
+msgstr "购物车合计、折扣和“您节省”徽章均以%s显示，订单也以该货币下单。"
+
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:131
 msgid "Tiered pricing works with multi-currency stores"
 msgstr "阶梯定价支持多货币商店"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:93
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:135
 msgid "When a currency switcher is active, tiered prices follow it: tier rules, role-based prices, catalog prices and cart discounts are converted to the visitor's currency."
 msgstr "启用货币切换器时，阶梯价格会随之转换：档位规则、角色价格、目录价格和购物车折扣都会转换为访客的货币。"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:97
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:139
 msgid "U2Code Multicurrency is built by the makers of Tiered Pricing Table — a native pairing instead of an adapter: tier and role prices convert natively, per-currency price rules, and one support team for both plugins."
 msgstr "U2Code Multicurrency 由 Tiered Pricing Table 的开发团队打造 — 原生配合而非适配器：档位和角色价格原生转换，按货币设置价格规则，两款插件共用一个支持团队。"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:101
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:143
 msgid "U2Code Multicurrency is active — the native pairing."
 msgstr "U2Code Multicurrency 已激活 — 原生配合。"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:102
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:144
 msgid "Tiered, role-based and catalog prices convert to the visitor's currency automatically."
 msgstr "阶梯价格、角色价格和目录价格会自动转换为访客的货币。"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:106
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:148
 msgid "The Tiered Pricing integration for it is enabled — tiered prices are converted at the current exchange rate."
 msgstr "它的 Tiered Pricing 集成已启用 — 阶梯价格按当前汇率转换。"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:110
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:152
 msgid "The Tiered Pricing integration for it is disabled — tiered prices may not convert correctly."
 msgstr "它的 Tiered Pricing 集成已禁用 — 阶梯价格可能无法正确转换。"
 
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:114
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:156
 msgid "Two currency systems are active."
 msgstr "同时启用了两个货币系统。"
 
 #. translators: %s: competitor plugin name(s)
-#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:117
+#: src/Settings/Sections/Multicurrency/MulticurrencySection.php:159
 #, php-format
 msgid "U2Code Multicurrency and %s will both try to convert prices. Deactivate one of them — we recommend keeping U2Code Multicurrency for the native pairing with tiered pricing."
 msgstr "U2Code Multicurrency 和 %s 都会尝试转换价格。请停用其中一个 — 我们建议保留 U2Code Multicurrency，以获得与阶梯定价的原生配合。"
@@ -5207,63 +5259,115 @@ msgstr "可配合"
 msgid "active"
 msgstr "已激活"
 
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:251
+msgid "Activate now"
+msgstr "立即激活"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:262
+msgid "Install now, free"
+msgstr "立即安装，免费"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:270
+msgid "Get it free on WordPress.org"
+msgstr "在 WordPress.org 免费获取"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:283
+msgid "How it works together"
+msgstr "如何配合使用"
+
 #. translators: %s: U2Code plugin name
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:203
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:305
 #, php-format
 msgid "Switch to %s"
 msgstr "切换到 %s"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:218 views/admin/banners/upgrade-banner.php:22
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:320 views/admin/banners/upgrade-banner.php:22
 msgid "Free"
 msgstr "免费"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:236
-msgid "Get it free on WordPress.org"
-msgstr "在 WordPress.org 免费获取"
-
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:242
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:345
 msgid "Same team, one support channel for both plugins."
 msgstr "同一团队，两款插件共用一个支持渠道。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:75
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:350
+msgid "Installs from WordPress.org. Once activated, the pairing switches on by itself; you can manage it under Integrations."
+msgstr "从 WordPress.org 安装。激活后，配对会自动开启；您可以在“集成”中管理它。"
+
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:352
+msgid "The plugin is installed but inactive. Once activated, the pairing switches on by itself; you can manage it under Integrations."
+msgstr "该插件已安装但未激活。激活后，配对会自动开启；您可以在“集成”中管理它。"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:81
+msgid "Options on top of the tier price"
+msgstr "选项价格叠加在档位价格之上"
+
+#. translators: 1: tier price, 2: option price, 3: price each, 4: total for ten
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:83
+#, php-format
+msgid "Hoodie at the 10+ tier: %1$s. Embroidery adds %2$s, so each costs %3$s and ten cost %4$s."
+msgstr "连帽衫在 10+ 档位的价格：%1$s。刺绣加收 %2$s，因此每件 %3$s，十件共 %4$s。"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:86
+msgid "Percentage options use the tier price"
+msgstr "百分比选项基于档位价格计算"
+
+#. translators: 1: option price on the tier price, 2: tier price, 3: option price on the regular price, 4: regular price
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:88
+#, php-format
+msgid "A 10%% gift box adds %1$s on the %2$s tier price, not %3$s on the regular %4$s."
+msgstr "10%% 的礼品盒选项按 %2$s 的档位价格加收 %1$s，而不是按 %4$s 的原价加收 %3$s。"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:92
+msgid "The price, the pricing summary and the add-to-cart total update as the shopper picks options and changes the quantity."
+msgstr "顾客选择选项并更改数量时，价格、定价摘要和加入购物车的总价会实时更新。"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:95
+msgid "The cart keeps both"
+msgstr "购物车同时保留两者"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:96
+msgid "Each cart line shows the tier price with the option prices on top, and the order records which options were chosen."
+msgstr "购物车中的每一行都显示档位价格以及叠加在其上的选项价格，订单中会记录所选的选项。"
+
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:110
 msgid "Charge for product options alongside tiered pricing"
 msgstr "在阶梯定价的基础上为产品选项收费"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:79
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:114
 msgid "Product addons — options, extra fields, services like engraving or gift wrap — work together with tiered pricing: addon prices are added on top of the tiered price in the cart and totals."
 msgstr "产品附加组件（选项、额外字段、刻字或礼品包装等服务）可与阶梯定价协同工作：在购物车和总计中，附加选项价格会加在阶梯价格之上。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:83
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:118
 msgid "U2Code Product Addons is built by the makers of Tiered Pricing Table — a native pairing: addon prices follow the tier price, percentage options are based on the actual tier price, and one support team for both plugins."
 msgstr "U2Code Product Addons 由 Tiered Pricing Table 的开发团队打造 — 原生配合：附加选项价格跟随档位价格，百分比选项基于实际档位价格计算，两款插件共用一个支持团队。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:87
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:122
 msgid "U2Code Product Addons is active — the native pairing."
 msgstr "U2Code Product Addons 已激活 — 原生配合。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:88
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:123
 msgid "Addon prices follow the tier price on the product page, in the live totals and in the cart."
 msgstr "附加选项价格在产品页、实时总价和购物车中均跟随档位价格。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:92
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:127
 msgid "The Tiered Pricing integration for it is enabled — addon prices are included in tiered price calculations in the cart."
 msgstr "它的 Tiered Pricing 集成已启用 — 购物车中的阶梯价格计算会包含附加选项价格。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:96
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:131
 msgid "The Tiered Pricing integration for it is disabled — addon prices may be lost when tiered pricing applies."
 msgstr "它的 Tiered Pricing 集成已禁用 — 应用阶梯定价时附加选项价格可能会丢失。"
 
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:100
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:135
 msgid "Multiple product addons plugins are active."
 msgstr "同时启用了多个产品附加组件插件。"
 
 #. translators: %s: competitor plugin name(s)
-#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:103
+#: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:138
 #, php-format
 msgid "U2Code Product Addons and %s are both adding fields to your products, which usually duplicates options on the product page. Consider consolidating on one — we recommend U2Code Product Addons for the native pairing with tiered pricing."
 msgstr "U2Code Product Addons 和 %s 都在为您的产品添加字段，这通常会导致产品页面上的选项重复。建议只保留一个 — 我们推荐 U2Code Product Addons，以获得与阶梯定价的原生配合。"
 
-#: src/Settings/Settings.php:264
+#: src/Settings/Settings.php:268
 msgid "New"
 msgstr "新"
 
@@ -6293,7 +6397,7 @@ msgstr "产品页面"
 msgid "Layout preview"
 msgstr "布局预览"
 
-#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:326
+#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/Preview.js:327
 msgid "The real product page may look a bit different, depending on your theme."
 msgstr "实际产品页面可能略有不同，取决于您的主题。"
 
@@ -6304,6 +6408,14 @@ msgstr "您可以在此试用；商店中仅高级版会显示这些列。"
 #: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:32
 msgid "Extra columns for every tier: total price, saving per item, price including tax or your own values. Columns are saved with their own button and show up in the preview once saved."
 msgstr "为每个档位添加额外列：总价、每件节省、含税价格或您自定义的值。列需用其自身的按钮保存，保存后会显示在预览中。"
+
+#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:306
+msgid "Unsaved changes"
+msgstr "未保存的更改"
+
+#: src/Addons/LayoutConfigurator/build/index.js:69 src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:307
+msgid "Save changes"
+msgstr "保存更改"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:7 src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 msgid "Role-based pricing is a premium feature."

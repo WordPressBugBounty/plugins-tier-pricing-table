@@ -1,5 +1,6 @@
 <?php namespace TierPricingTable\Addons\YouSave;
 
+use TierPricingTable\Core\RestContext;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Settings\Settings;
 use WC_Product;
@@ -66,6 +67,11 @@ class YouSaveService {
 	public function addYouSave( $priceHTML, WC_Product $product ) {
 
 		if ( false === strpos( $priceHTML, 'tiered-pricing-dynamic-price-wrapper' ) ) {
+			return $priceHTML;
+		}
+
+		// Only the frontend script fills the badge; a REST consumer (the wishlist block, apps) would show its bare text.
+		if ( RestContext::isDispatching() ) {
 			return $priceHTML;
 		}
 

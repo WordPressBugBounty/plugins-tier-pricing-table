@@ -3,6 +3,7 @@
 use TierPricingTable\Admin\ProductPage\AdvanceOptionsForVariableProduct;
 use TierPricingTable\Admin\ProductPage\TieredPricingTab;
 use TierPricingTable\Core\ServiceContainerTrait;
+use TierPricingTable\Frontend\Frontend;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use WC_Product;
 use WC_Product_Data_Store_CPT;
@@ -67,6 +68,8 @@ class PricingTable {
 		}
 
 		$settings = apply_filters( 'tiered_pricing_table/display_settings', $settings, $productId );
+
+		Frontend::enqueueAssets();
 
 		if ( 'tooltip' === $settings['display_type'] ) {
 			wp_enqueue_script( 'jquery-ui-tooltip' );
@@ -591,12 +594,13 @@ class PricingTable {
 				return true;
 			}
 
-			foreach ( $product->get_available_variations() as $productVariation ) {
-				$pricingRule = PriceManager::getPricingRule( $productVariation['variation_id'] );
-
+			// Variation IDs with primed post and meta caches: no per-variation queries, no attribute or image work.
+			foreach ( PriceManager::primeProducts( $product->get_visible_children() ) as $variationId ) {
+				$pricingRule = PriceManager::getPricingRule( $variationId );
+				
 				if ( ! empty( $pricingRule->getRules() ) ) {
 					$this->getContainer()->getCache()->setProductData( $product, 'product_has_rules', 'yes' );
-
+					
 					return true;
 				}
 			}

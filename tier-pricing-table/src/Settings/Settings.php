@@ -11,6 +11,8 @@ use TierPricingTable\Settings\CustomOptions\TPTTableColumnsField;
 use TierPricingTable\Settings\CustomOptions\TPTFeatureFlagOption;
 use TierPricingTable\Settings\CustomOptions\TPTIntegrationOption;
 use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
+use TierPricingTable\Settings\CustomOptions\TPTSwitchRowOption;
+use TierPricingTable\Settings\CustomOptions\TPTCollapsibleCardOption;
 use TierPricingTable\Settings\CustomOptions\TPTTextTemplate;
 use TierPricingTable\Settings\Sections\Advanced\AdvancedSection;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
@@ -85,6 +87,8 @@ class Settings {
 
     protected function initCustomOptions() {
         $this->getContainer()->add( 'settings.tpt_switch_option', new TPTSwitchOption() );
+        $this->getContainer()->add( 'settings.tpt_switch_row_option', new TPTSwitchRowOption() );
+        $this->getContainer()->add( 'settings.tpt_collapsible_card_option', new TPTCollapsibleCardOption() );
         $this->getContainer()->add( 'settings.tpt_integration_option', new TPTIntegrationOption() );
         $this->getContainer()->add( 'settings.tpt_feature_flag_option', new TPTFeatureFlagOption() );
         $this->getContainer()->add( 'settings.tpt_text_template', new TPTTextTemplate() );

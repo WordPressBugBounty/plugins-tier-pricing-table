@@ -5,11 +5,11 @@ class TPTSwitchOption {
 	const FIELD_TYPE = 'tpt_switch_option';
 
 	public function __construct() {
-		add_action( 'woocommerce_admin_field_' . self::FIELD_TYPE, array( $this, 'render' ) );
+		add_action( 'woocommerce_admin_field_' . static::FIELD_TYPE, array( $this, 'render' ) );
 
 		add_action( 'woocommerce_admin_settings_sanitize_option', function ( $value, $option, $rawValue ) {
 
-			if ( self::FIELD_TYPE === $option['type'] ) {
+			if ( static::FIELD_TYPE === $option['type'] ) {
 				$value = in_array( $value, array( 1, 'yes' ) ) ? 'yes' : 'no';
 			}
 

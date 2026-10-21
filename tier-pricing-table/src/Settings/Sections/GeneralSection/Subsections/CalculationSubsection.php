@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Settings\Sections\GeneralSection\Subsections;
 
-use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
+use TierPricingTable\Settings\CustomOptions\TPTCollapsibleCardOption;
+use TierPricingTable\Settings\CustomOptions\TPTSwitchRowOption;
 use TierPricingTable\Settings\Sections\SubsectionAbstract;
 use TierPricingTable\Settings\Settings;
 
@@ -14,7 +15,32 @@ class CalculationSubsection extends SubsectionAbstract {
 	}
 	
 	public function getDescription(): string {
-		return __( 'How tiered prices are calculated for variable products, sale prices and global rules.', 'tier-pricing-table' );
+		return __( 'These options change what customers pay, on every page.', 'tier-pricing-table' );
+	}
+
+	/**
+	 * One card below the layout configurator instead of a settings table, open by default and collapsible,
+	 * in the configurator's visual language.
+	 */
+	public function getWrappedSettings() {
+		$settings = $this->getSettings();
+
+		array_unshift( $settings, array(
+			'title'     => $this->getTitle(),
+			'desc'      => $this->getDescription(),
+			'id'        => Settings::SETTINGS_PREFIX . '_subsection_' . $this->getSlug(),
+			'type'      => TPTCollapsibleCardOption::OPEN_FIELD_TYPE,
+			'open'      => true,
+			'is_option' => false,
+		) );
+
+		$settings[] = array(
+			'type'      => TPTCollapsibleCardOption::CLOSE_FIELD_TYPE,
+			'id'        => Settings::SETTINGS_PREFIX . '_end_subsection_' . $this->getSlug(),
+			'is_option' => false,
+		);
+
+		return $settings;
 	}
 	
 	public function getSlug(): string {
@@ -32,10 +58,10 @@ class CalculationSubsection extends SubsectionAbstract {
 			array(
 				'title'                => __( 'Combine variations for quantity calculation', 'tier-pricing-table' ),
 				'id'                   => Settings::SETTINGS_PREFIX . 'summarize_variations',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
+				'type'                 => TPTSwitchRowOption::FIELD_TYPE,
 				'default'              => 'no',
-				'extended_description' => __( 'Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules.', 'tier-pricing-table' )
-				                          . $this->example( 'tiers',
+				'desc' => __( 'Treat all variations of a variable product as the same item when calculating the total cart quantity for tiered pricing rules.', 'tier-pricing-table' ),
+				                          'example' => $this->example( 'tiers',
 					                             array(
 					                                'scene'  => __( 'Red × 3 and Blue × 4 in the cart count separately: 3 and 4.', 'tier-pricing-table' ),
 					                                'result' => __( 'Below the 5+ tier, no discount', 'tier-pricing-table' ),
@@ -47,15 +73,14 @@ class CalculationSubsection extends SubsectionAbstract {
 					                                'tone'   => 'good',
 					                             )
 					                          ),
-				'desc_tip'             => true,
 			),
 			array(
 				'title'                => __( 'Combine variations for minimum quantity', 'tier-pricing-table' ),
 				'id'                   => Settings::SETTINGS_PREFIX . 'mix_and_match_minimum',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
+				'type'                 => TPTSwitchRowOption::FIELD_TYPE,
 				'default'              => 'no',
-				'extended_description' => __( 'Determine whether the minimum quantity requirement applies to each variation separately, or to the combined total of all variations in the cart.', 'tier-pricing-table' )
-				                          . $this->example( 'minimum',
+				'desc' => __( 'Determine whether the minimum quantity requirement applies to each variation separately, or to the combined total of all variations in the cart.', 'tier-pricing-table' ),
+				                          'example' => $this->example( 'minimum',
 					                             array(
 					                                'scene'  => __( 'Minimum 10. Red × 6 and Blue × 4 each need 10 on their own.', 'tier-pricing-table' ),
 					                                'result' => __( 'Minimum not met, cannot add to cart', 'tier-pricing-table' ),
@@ -67,14 +92,13 @@ class CalculationSubsection extends SubsectionAbstract {
 					                                'tone'   => 'good',
 					                             )
 					                          ),
-				'desc_tip'             => true,
 			),
 			array(
 				'title'                => __( 'Calculate percentage discounts from regular price', 'tier-pricing-table' ),
 				'id'                   => Settings::SETTINGS_PREFIX . 'calculate_discount_based_on_regular_price',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
-				'extended_description' => __( 'Calculate percentage discounts using the product\'s regular price, ignoring any active sale prices.', 'tier-pricing-table' )
-				                          . $this->example( 'flow',
+				'type'                 => TPTSwitchRowOption::FIELD_TYPE,
+				'desc' => __( 'Calculate percentage discounts using the product\'s regular price, ignoring any active sale prices.', 'tier-pricing-table' ),
+				                          'example' => $this->example( 'flow',
 					                             array(
 					                                /* translators: 1: regular price, 2: sale price */
 					                                'scene'  => sprintf( __( 'Regular price %1$s, on sale for %2$s. The 20%% tier starts from the sale price.', 'tier-pricing-table' ), $price( 100 ), $price( 90 ) ),
@@ -93,10 +117,10 @@ class CalculationSubsection extends SubsectionAbstract {
 			array(
 				'title'                => __( 'Round calculated prices', 'tier-pricing-table' ),
 				'id'                   => Settings::SETTINGS_PREFIX . 'round_price',
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
+				'type'                 => TPTSwitchRowOption::FIELD_TYPE,
 				'default'              => 'yes',
-				'extended_description' => __( 'Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing.', 'tier-pricing-table' )
-				                          . $this->example( 'round',
+				'desc' => __( 'Round calculated percentage discounts to prevent minor display discrepancies with standard WooCommerce pricing.', 'tier-pricing-table' ),
+				                          'example' => $this->example( 'round',
 					                             array(
 					                                /* translators: %s: price */
 					                                'scene'  => sprintf( __( '%s with a 15%% tier comes to 16.9915.', 'tier-pricing-table' ), $price( 19.99 ) ),
@@ -109,13 +133,12 @@ class CalculationSubsection extends SubsectionAbstract {
 					                                'result' => sprintf( __( 'Rounded to %s', 'tier-pricing-table' ), $price( 16.99 ) ),
 					                             )
 					                          ),
-				'desc_tip'             => true,
 			),
 			array(
 				'title'                => __( 'Prioritize global pricing rules', 'tier-pricing-table' ),
 				'id'                   => Settings::SETTINGS_PREFIX . 'override_prices_by_global_rules',
-				'extended_description' => __( 'Apply global pricing rules before product-level rules. If disabled, individual product rules take precedence over global rules.', 'tier-pricing-table' )
-				                          . $this->example( 'rules',
+				'desc' => __( 'Apply global pricing rules before product-level rules. If disabled, individual product rules take precedence over global rules.', 'tier-pricing-table' ),
+				                          'example' => $this->example( 'rules',
 					                             array(
 					                                'scene'  => __( 'A product rule gives 10% off from 10 items, a global rule 15% off from 10 items.', 'tier-pricing-table' ),
 					                                'result' => __( 'The product rule wins: 10% off', 'tier-pricing-table' ),
@@ -125,7 +148,7 @@ class CalculationSubsection extends SubsectionAbstract {
 					                                'result' => __( 'The global rule wins: 15% off', 'tier-pricing-table' ),
 					                             )
 					                          ),
-				'type'                 => TPTSwitchOption::FIELD_TYPE,
+				'type'                 => TPTSwitchRowOption::FIELD_TYPE,
 				'default'              => 'no',
 			),
 		) );

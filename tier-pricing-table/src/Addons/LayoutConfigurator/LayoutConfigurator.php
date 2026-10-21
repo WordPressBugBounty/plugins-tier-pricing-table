@@ -95,6 +95,11 @@ class LayoutConfigurator {
 	/**
 	 * Pricing summary block options (the add-on's), managed here while that add-on is on.
 	 */
+	/**
+	 * Stored values of the summary layout: the keys of the "Summary layout" option (`table` is the compact one).
+	 */
+	const SUMMARY_TYPES = array( 'detailed', 'table', 'inline' );
+
 	const SUMMARY_OPTIONS = array(
 		'display_summary'            => 'yes',
 		'display_summary_non_tiered' => 'no',
@@ -341,7 +346,7 @@ class LayoutConfigurator {
 		);
 
 		if ( self::isSummaryAvailable() ) {
-			$lists['summary_type'] = array( 'detailed', 'compact', 'inline' );
+			$lists['summary_type'] = self::SUMMARY_TYPES;
 		}
 		if ( self::isCatalogPriceAvailable() ) {
 			$lists['tiered_price_at_catalog_type'] = array( 'lowest', 'range', 'custom' );

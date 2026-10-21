@@ -461,7 +461,7 @@ class LayoutPreview {
 		};
 
 		$type = (string) $get( 'summary_type', 'table' );
-		$type = in_array( $type, array( 'detailed', 'table', 'inline' ), true ) ? $type : 'table';
+		$type = in_array( $type, LayoutConfigurator::SUMMARY_TYPES, true ) ? $type : 'table';
 
 		ob_start();
 		try {
@@ -620,14 +620,21 @@ class LayoutPreview {
 			$sampleRules[ $quantity ] = round( self::PRICE * ( 1 - $discount ), 2 );
 		}
 
+		// The preview product must not pick up the store's own pricing: a global rule for "all products", a role
+		// or customer price or a quantity step would replace the sample base price and tiers, and the preview
+		// would then show the store owner's data instead of the layout. Late priority, so every add-on ran first.
 		add_filter( 'tiered_pricing_table/price/pricing_rule', function ( $pricingRule, $id ) use ( $productId, $sampleRules ) {
 			if ( (int) $id === $productId && $pricingRule instanceof PricingRule ) {
-				$pricingRule->setType( 'fixed' );
-				$pricingRule->setRules( $sampleRules );
-				$pricingRule->setMinimum( null );
+				return self::sampleRule( $pricingRule, $sampleRules );
 			}
 
 			return $pricingRule;
+		}, 999, 2 );
+
+		// The price filters of the pricing service would still apply role, customer and global prices to the
+		// preview product through other paths: keep its price at the sample price.
+		add_filter( 'tiered_pricing_table/services/regular_pricing/price', function ( $price, $product ) use ( $productId ) {
+			return $product instanceof WC_Product && $product->get_id() === $productId ? null : $price;
 		}, 999, 2 );
 
 		// Forget any rule cached for this id earlier in the request so the sample tiers apply.
@@ -644,5 +651,35 @@ class LayoutPreview {
 		$this->product = new PreviewProduct();
 
 		return $this->product;
+	}
+
+	/**
+	 * Turn the rule the store computed for the preview product into the sample rule: the sample tiers on the
+	 * sample base price, no global, role or customer pricing, no quantity limits. Tier labels and custom
+	 * columns stay, because the preview shows them.
+	 *
+	 * @param PricingRule $pricingRule
+	 * @param array $sampleRules quantity => price
+	 *
+	 * @return PricingRule
+	 */
+	public static function sampleRule( PricingRule $pricingRule, array $sampleRules ): PricingRule {
+
+		$pricingRule->setType( 'fixed' );
+		$pricingRule->setRules( $sampleRules );
+		$pricingRule->setMinimum( null );
+		$pricingRule->setMixAndMatchMinQuantity( null );
+
+		$pricingRule->provider     = 'product';
+		$pricingRule->providerData = array();
+
+		foreach ( array_keys( $pricingRule->pricingData ) as $key ) {
+			$pricingRule->pricingData[ $key ] = null;
+		}
+
+		$pricingRule->data['maximum_quantity']  = null;
+		$pricingRule->data['group_of_quantity'] = null;
+
+		return $pricingRule;
 	}
 }

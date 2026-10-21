@@ -63,6 +63,41 @@ class ProductAddonsSection extends PluginPairingSectionAbstract {
 		return 'https://wordpress.org/plugins/u2code-product-addons-for-woocommerce/';
 	}
 
+	public function getOwnPluginWporgSlug(): string {
+		return 'u2code-product-addons-for-woocommerce';
+	}
+
+	public function getOwnPluginHeaderNames(): array {
+		return array( 'U2Code Product Addons for WooCommerce', 'U2Code Product Addons' );
+	}
+
+	public function getExamples(): array {
+		$price = function ( $amount ) {
+			return html_entity_decode( wp_strip_all_tags( wc_price( $amount ) ), ENT_QUOTES, 'UTF-8' );
+		};
+
+		return array(
+			array(
+				'title' => __( 'Options on top of the tier price', 'tier-pricing-table' ),
+				/* translators: 1: tier price, 2: option price, 3: price each, 4: total for ten */
+				'text'  => sprintf( __( 'Hoodie at the 10+ tier: %1$s. Embroidery adds %2$s, so each costs %3$s and ten cost %4$s.', 'tier-pricing-table' ), $price( 36 ), $price( 4 ), $price( 40 ), $price( 400 ) ),
+			),
+			array(
+				'title' => __( 'Percentage options use the tier price', 'tier-pricing-table' ),
+				/* translators: 1: option price on the tier price, 2: tier price, 3: option price on the regular price, 4: regular price */
+				'text'  => sprintf( __( 'A 10%% gift box adds %1$s on the %2$s tier price, not %3$s on the regular %4$s.', 'tier-pricing-table' ), $price( 3.6 ), $price( 36 ), $price( 4.5 ), $price( 45 ) ),
+			),
+			array(
+				'title' => __( 'Live totals', 'tier-pricing-table' ),
+				'text'  => __( 'The price, the pricing summary and the add-to-cart total update as the shopper picks options and changes the quantity.', 'tier-pricing-table' ),
+			),
+			array(
+				'title' => __( 'The cart keeps both', 'tier-pricing-table' ),
+				'text'  => __( 'Each cart line shows the tier price with the option prices on top, and the order records which options were chosen.', 'tier-pricing-table' ),
+			),
+		);
+	}
+
 	public function getOwnPluginSiteURL(): string {
 		return 'https://product-addons.com/';
 	}

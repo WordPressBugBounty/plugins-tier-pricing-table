@@ -3,6 +3,7 @@
 namespace TierPricingTable\Addons\ProductCatalogLoop;
 
 use TierPricingTable\Addons\AbstractAddon;
+use TierPricingTable\Frontend\Frontend;
 use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 use TierPricingTable\Addons\ProductCatalogLoop\Settings\ProductCatalogLoopSettingsSection;
 use TierPricingTable\PriceManager;
@@ -419,6 +420,7 @@ class ProductCatalogLoop extends AbstractAddon {
     }
 
     public function render( WC_product $product, $useReducedStyles = false ) {
+        Frontend::enqueueAssets();
         $classes = 'tiered-pricing-shop-loop';
         if ( $useReducedStyles ) {
             $classes .= ' tiered-pricing-shop-loop--reduced';

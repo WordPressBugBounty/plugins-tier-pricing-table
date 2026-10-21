@@ -77,6 +77,48 @@ class MulticurrencySection extends PluginPairingSectionAbstract {
 		return 'https://wordpress.org/plugins/u2code-product-multicurrency-for-woocommerce/';
 	}
 
+	public function getOwnPluginWporgSlug(): string {
+		return 'u2code-product-multicurrency-for-woocommerce';
+	}
+
+	public function getOwnPluginHeaderNames(): array {
+		return array( 'U2Code Product Multicurrency for WooCommerce', 'U2Code Multicurrency for WooCommerce', 'U2Code Multicurrency' );
+	}
+
+	public function getExamples(): array {
+		$store   = get_woocommerce_currency();
+		$foreign = 'EUR' === $store ? array( 'symbol' => '$', 'rate' => 1.09, 'name' => __( 'dollars', 'tier-pricing-table' ) ) : array( 'symbol' => '€', 'rate' => 0.92, 'name' => __( 'euros', 'tier-pricing-table' ) );
+		$home    = function ( $amount ) {
+			return html_entity_decode( wp_strip_all_tags( wc_price( $amount ) ), ENT_QUOTES, 'UTF-8' );
+		};
+		$away    = function ( $amount ) use ( $foreign ) {
+			return $foreign['symbol'] . number_format( $amount * $foreign['rate'], 2 );
+		};
+
+		return array(
+			array(
+				'title' => __( 'Tier prices follow the currency', 'tier-pricing-table' ),
+				/* translators: 1: tier price, 2: next tier price, 3: converted price, 4: converted next price, 5: currency name */
+				'text'  => sprintf( __( 'Tiers of %1$s and %2$s show as %3$s and %4$s for a shopper paying in %5$s, at the store\'s rate.', 'tier-pricing-table' ), $home( 20 ), $home( 18 ), $away( 20 ), $away( 18 ), $foreign['name'] ),
+			),
+			array(
+				'title' => __( 'Fixed prices per currency', 'tier-pricing-table' ),
+				/* translators: 1: price, 2: currency name */
+				'text'  => sprintf( __( 'Set the 10+ tier to a round %1$s for shoppers paying in %2$s instead of the converted amount, the same way for any currency.', 'tier-pricing-table' ), $foreign['symbol'] . '15.00', $foreign['name'] ),
+			),
+			array(
+				'title' => __( 'Role and catalog prices convert too', 'tier-pricing-table' ),
+				/* translators: 1: wholesale price, 2: converted price */
+				'text'  => sprintf( __( 'A wholesale price of %1$s becomes %2$s, and the "From" price in the shop grid follows.', 'tier-pricing-table' ), $home( 12 ), $away( 12 ) ),
+			),
+			array(
+				'title' => __( 'Checkout in the shopper\'s currency', 'tier-pricing-table' ),
+				/* translators: %s: currency name */
+				'text'  => sprintf( __( 'Cart totals, discounts and the "You save" badge are shown in %s, and the order is placed in that currency.', 'tier-pricing-table' ), $foreign['name'] ),
+			),
+		);
+	}
+
 	public function getOwnPluginSiteURL(): string {
 		return 'https://u2code.com/plugins/multicurrency-for-woocommerce/';
 	}

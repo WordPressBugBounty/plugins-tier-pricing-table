@@ -4,7 +4,7 @@
  * Plugin Name:       WooCommerce Tiered Price Table
  * Requires Plugins:  woocommerce
  * Description:       Quantity-based discounts with nice-looking reflection on the product page.
- * Version:           8.1.1
+ * Version:           8.1.2
  * Author:            U2Code
  * Author URI:        https://tiered-pricing.com/
  * Plugin URI:        https://tiered-pricing.com/
@@ -16,7 +16,7 @@
  * Requires PHP:      7.4
  *
  * WC requires at least: 9.0
- * WC tested up to: 11.2
+ * WC tested up to: 11.3
  */
 use TierPricingTable\TierPricingTablePlugin;
 // If this file is called directly, abort.
@@ -73,8 +73,34 @@ if ( !function_exists( 'tpt_initFreemius' ) ) {
 
         // Init Freemius.
         tpt_fs();
+        // The SDK's pricing and checkout screens are hidden pages without a menu entry, so WordPress finds no
+        // title for them and hands null to strip_tags() in admin-header.php (a deprecation on PHP 8.1+).
+        add_action( 'current_screen', 'tpt_fs_admin_page_title' );
         // Signal that SDK was initiated.
         do_action( 'tpt_fs_loaded' );
+    }
+
+}
+if ( !function_exists( 'tpt_fs_admin_page_title' ) ) {
+    function tpt_fs_admin_page_title() {
+        global $title, $plugin_page;
+        if ( !empty( $title ) || empty( $plugin_page ) || !function_exists( 'tpt_fs' ) ) {
+            return;
+        }
+        // the SDK names its pages "<menu slug>-<page>"
+        $base = tpt_fs()->get_menu_slug();
+        $titles = array(
+            $base . '-pricing'  => fs_text_x_inline(
+                'Pricing',
+                'noun',
+                'pricing',
+                'tier-pricing-table'
+            ),
+            $base . '-checkout' => fs_text_inline( 'Checkout', 'checkout', 'tier-pricing-table' ),
+        );
+        if ( isset( $titles[$plugin_page] ) ) {
+            $title = $titles[$plugin_page];
+        }
     }
 
 }
