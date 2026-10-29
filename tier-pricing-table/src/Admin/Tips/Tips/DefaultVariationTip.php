@@ -3,7 +3,7 @@
 use TierPricingTable\Admin\Tips\Tip;
 
 /**
- * Class VariationsPricingCalculationTip
+ * Suggests a default variation so the pricing table shows before a variation is picked.
  *
  * @package TierPricingTable\Admin\Tips\Tips
  */
@@ -16,7 +16,7 @@ class DefaultVariationTip extends Tip {
 	public function __construct() {
 		parent::__construct();
 		
-		add_action( 'tiered_pricing_table/admin/before_advance_product_options', array( $this, 'render' ), 999, 1 );
+		add_action( 'tiered_pricing_table/admin/variable_product_options', array( $this, 'render' ), 999, 1 );
 	}
 	
 	public function render() {
@@ -38,16 +38,9 @@ class DefaultVariationTip extends Tip {
 							<?php esc_html_e( 'Tip', 'tier-pricing-table' ); ?>:
 						</strong>
 						
-						<?php 
-						esc_html_e( 'You can show tiered pricing even if a variation is not selected.',
-							'tier-pricing-table' ); 
-						?>
-
+						<?php esc_html_e( 'Show tiered pricing before a variation is selected.', 'tier-pricing-table' ); ?>
 						<div style="margin-top: 10px;">
-							<?php 
-							echo wp_kses_post( __( 'Tiered pricing is related to each variation, so a variation must be selected to show the pricing table. However, you can show the tiered pricing before users choose a variation by enabling the <strong>default variation</strong> option in the <strong>Additional Options</strong> section below.',
-								'tier-pricing-table' ) ); 
-							?>
+							<?php esc_html_e( 'Tiers belong to each variation, so the pricing table appears once the customer has picked one. To show it right away, choose a default variation in the field above. Its tiers are shown until the customer picks another variation.', 'tier-pricing-table' ); ?>
 						</div>
 						
 					</div>

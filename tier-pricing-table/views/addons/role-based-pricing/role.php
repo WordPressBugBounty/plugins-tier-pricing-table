@@ -1,5 +1,6 @@
 <?php
 
+use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingRule;
 use TierPricingTable\Core\ServiceContainer;
 
@@ -16,9 +17,7 @@ defined( 'ABSPATH' ) || die;
 
 $loop = isset( $loop ) ? $loop : null;
 
-global $wp_roles;
-
-$roleName = isset( $wp_roles->role_names[ $pricing_rule->getRole() ] ) ? translate_user_role( $wp_roles->role_names[ $pricing_rule->getRole() ] ) : $pricing_rule->getRole();
+$roleName = RoleBasedPriceManager::getRoleLabel( $pricing_rule->getRole() );
 
 $fileManager = ServiceContainer::getInstance()->getFileManager();
 ?>
@@ -29,9 +28,12 @@ $fileManager = ServiceContainer::getInstance()->getFileManager();
 	<div class="tpt-role-based-role__header">
 		<div class="tpt-role-based-role__name">
 			<b><?php echo esc_attr( $roleName ); ?></b>
+			<span class="tpt-rc__chip tpt-rc__chip--role"><?php esc_html_e( 'Role', 'tier-pricing-table' ); ?></span>
 		</div>
+		<?php \TierPricingTable\Admin\ProductPage\RoleCustomerPricingUI::renderSummary( $pricing_rule ); ?>
 		<div class="tpt-role-based-role__actions">
 			<span class="tpt-role-based-role__action-toggle-view tpt-role-based-role__action-toggle-view--open"></span>
+			<button type="button" class="button-link tpt-rc__edit"><?php esc_html_e( 'Edit', 'tier-pricing-table' ); ?></button>
 			<a href="#" class="tpt-role-based-role-action--delete"><?php esc_attr_e( 'Remove', 'woocommerce' ); ?></a>
 		</div>
 	</div>

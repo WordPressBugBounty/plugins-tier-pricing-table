@@ -2,11 +2,13 @@
 
 use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use TierPricingTable\Addons\Addons;
+use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use TierPricingTable\Admin\Admin;
 use TierPricingTable\Admin\Notifications\Notifications;
 use TierPricingTable\Blocks\GutenbergBlocks;
 use TierPricingTable\Core\AdminNotifier;
 use TierPricingTable\Core\Cache;
+use TierPricingTable\Core\Install;
 use TierPricingTable\Core\RestContext;
 use TierPricingTable\Core\FileManager;
 use TierPricingTable\Core\ServiceContainerTrait;
@@ -35,7 +37,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.1.2';
+	const VERSION = '8.2.0';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -106,6 +108,7 @@ class TierPricingTablePlugin {
 		$this->getContainer()->add( 'cache', new Cache() );
 
 		RestContext::init();
+		Install::init();
 		
 		$this->initializationHooks();
 		
@@ -219,9 +222,11 @@ class TierPricingTablePlugin {
 	}
 	
 	/**
-	 * Plugin activation
+	 * Plugin activation: record the install and give a fresh store its first active tier colour.
 	 */
-	public function activate() {}
+	public function activate() {
+		Install::run();
+	}
 	
 	public static function getDocumentationURL(): string {
 		return 'https://tiered-pricing.com/documentation/user/';
@@ -291,8 +296,11 @@ class TierPricingTablePlugin {
 	 */
 	public static function getCurrentUserRoles(): array {
 		$user = self::getCurrentUser();
-		
-		return apply_filters( 'tiered_pricing_table/current_user_roles', $user->roles, get_current_user_id() );
+
+		// a visitor who is not logged in has the guest pseudo role, so role-based rules can target visitors
+		$roles = $user->ID ? (array) $user->roles : array( RoleBasedPriceManager::GUEST_ROLE );
+
+		return apply_filters( 'tiered_pricing_table/current_user_roles', $roles, get_current_user_id() );
 	}
 	
 	public function saveActivationTime() {

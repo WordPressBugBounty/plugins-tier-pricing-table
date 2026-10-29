@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\ReactProductEditorAddon\Blocks;
 
 use TierPricingTable\Addons\ReactProductEditorAddon\Block;
+use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use TierPricingTable\Addons\ReactProductEditorAddon\Sections\RoleBasedPricingSection;
 
 class RoleBasedPricing extends Block {
@@ -27,7 +28,9 @@ class RoleBasedPricing extends Block {
 	
 	public function getAttributes(): array {
 		return array(
-			'availableRoles' => wp_roles()->roles,
+			'availableRoles' => array_map( function ( $label ) {
+				return array( 'name' => $label );
+			}, RoleBasedPriceManager::getAvailableRoles() ),
 			'isPremium'      => tpt_fs()->can_use_premium_code(),
 			'upgradeUrl'     => tpt_fs_activation_url(),
 		);

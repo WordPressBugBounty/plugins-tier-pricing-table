@@ -192,7 +192,7 @@ class FormatPriceManager {
 
     public static function getDisplayType() : string {
         $settings = ServiceContainer::getInstance()->getSettings();
-        $type = $settings->get( 'tiered_price_at_catalog_type', 'range' );
+        $type = $settings->get( 'tiered_price_at_catalog_type', 'lowest' );
         if ( 'custom' === $type ) {
             return 'custom';
         }

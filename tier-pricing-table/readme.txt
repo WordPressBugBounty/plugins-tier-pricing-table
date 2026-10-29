@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 8.1.2
+Stable tag: 8.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,22 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 8.2.0 [2026-10-28] =
+* New: a Guest role for product-level role prices, for visitors who are not logged in.
+* New: the tier labels screen rebuilt, with a live preview, custom colours, more icons and an inverted style on the active tier.
+* Improvement: role and customer prices live in the Tiered Pricing tab of the product editor, as one list with a single picker.
+* Improvement: the Tiered Pricing tab of the product editor is organised in sections with short descriptions.
+* Improvement: quantity limits sit next to the tiers, on the General tab for simple products and in the Variable product section for variable ones.
+* Improvement: new stores start with an active tier colour taken from the theme.
+* Improvement: the layout configurator preview is narrower, hides the gallery on mobile and lets you try the dropdown layout.
+* Improvement: clearer wording in the global rule editor, with a collapsed Priority box and help tips.
+* Improvement: the settings reset also clears tips, badges, role tax overrides and the activation date.
+* Improvement: a clearer premium notice inside role and customer rules on the free plan.
+* Improvement: translations updated for the new screens.
+* Fix: the quantity unit was ignored by some layouts.
+* Fix: catalog price defaults did not match the settings screen.
+* Fix: the pricing summary showed on a variable product before a variation was chosen.
 
 = 8.1.2 [2026-10-20] =
 * New: pricing tables for variable products in WooCommerce's block-based add-to-cart form.

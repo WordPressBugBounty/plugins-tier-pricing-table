@@ -8,17 +8,21 @@
 
 ?>
 <style>
+	/* the panel is a column so the global-rules hint sits on its bottom edge */
 	#tiered-pricing-data {
+		display: flex;
+		flex-direction: column;
 		min-height: 350px;
 	}
 
 	.tpt-global-rules-product-notice {
 		display: flex;
 		gap: 20px;
-		padding: 15px;
 		align-items: center;
+		margin-top: auto;
+		padding: 14px 20px;
 		background: #fafafa;
-		bottom: 0;
+		border-top: 1px solid #eee;
 	}
 
 	.tpt-global-rules-product-notice__text {

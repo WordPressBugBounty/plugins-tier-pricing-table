@@ -81,13 +81,12 @@ class ProductManager {
     public function getRoleRowHtml() {
         $nonce = ( isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : false );
         if ( wp_verify_nonce( $nonce, self::GET_ROLE_ROW_HTML__ACTION ) ) {
-            $role = ( isset( $_GET['role'] ) ? sanitize_text_field( $_GET['role'] ) : false );
+            $role = ( isset( $_GET['role'] ) ? sanitize_text_field( $_GET['role'] ) : '' );
             $productId = ( isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0 );
             $loop = ( isset( $_GET['loop'] ) && '' !== $_GET['loop'] ? intval( $_GET['loop'] ) : null );
-            $role = get_role( $role );
             $product = wc_get_product( $productId );
-            if ( $role && $product ) {
-                $pricingRule = RoleBasedPricingRule::build( $productId, $role->name );
+            if ( $role && RoleBasedPriceManager::isAvailableRole( $role ) && $product ) {
+                $pricingRule = RoleBasedPricingRule::build( $productId, $role );
                 wp_send_json( array(
                     'success'       => true,
                     'role_row_html' => $this->getContainer()->getFileManager()->renderTemplate( 'addons/role-based-pricing/role.php', array(

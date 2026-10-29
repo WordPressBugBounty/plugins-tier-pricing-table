@@ -202,11 +202,10 @@ class LayoutPreview {
 			return '';
 		}
 
-		$settings = 'shop-loop' === $context ? $this->mapCatalogSettings( $values ) : $this->mapSettings( $values );
-
-		if ( self::KINDS[ $kind ] ) {
-			$settings['display_type'] = self::KINDS[ $kind ];
-		}
+		// a sibling kind pins its layout before the mapping, so layout-bound settings (the quantity unit) follow it
+		$settings = 'shop-loop' === $context
+			? $this->mapCatalogSettings( $values, self::KINDS[ $kind ] )
+			: $this->mapSettings( $values, self::KINDS[ $kind ] );
 
 		if ( 'tooltip' === $settings['display_type'] ) {
 			$note = 'shop-loop' === $context
@@ -508,7 +507,7 @@ class LayoutPreview {
 	 * Settings for the shop & category preview: the product page settings when the catalog follows the
 	 * product page, otherwise the catalog's own values translated to the product page keys.
 	 */
-	protected function mapCatalogSettings( array $values ): array {
+	protected function mapCatalogSettings( array $values, ?string $displayType = null ): array {
 		$sourceKey = LayoutConfigurator::CATALOG_OPTIONS['layout_settings'];
 		$custom    = isset( $values[ $sourceKey ] ) ? 'custom' === $values[ $sourceKey ] : \TierPricingTable\Addons\ProductCatalogLoop\Settings\ProductCatalogLoopSettingsSection::isCustomLayoutSettings();
 
@@ -522,7 +521,7 @@ class LayoutPreview {
 				}
 			}
 
-			return $this->mapSettings( $translated );
+			return $this->mapSettings( $translated, $displayType );
 		}
 
 		$translated = array();
@@ -538,14 +537,14 @@ class LayoutPreview {
 			}
 		}
 
-		return $this->mapSettings( $translated );
+		return $this->mapSettings( $translated, $displayType );
 	}
 
 	/**
 	 * Map form values onto the renderer's settings keys. Missing values fall back to the stored ones
 	 * through the renderer's defaults.
 	 */
-	protected function mapSettings( array $values ): array {
+	protected function mapSettings( array $values, ?string $displayType = null ): array {
 		$settings = array();
 
 		foreach ( self::FIELDS as $id => $map ) {
@@ -570,7 +569,9 @@ class LayoutPreview {
 			}
 		}
 
-		if ( empty( $settings['display_type'] ) ) {
+		if ( $displayType ) {
+			$settings['display_type'] = $displayType;
+		} elseif ( empty( $settings['display_type'] ) ) {
 			$settings['display_type'] = $this->getContainer()->getSettings()->get( 'display_type', 'table' );
 		}
 

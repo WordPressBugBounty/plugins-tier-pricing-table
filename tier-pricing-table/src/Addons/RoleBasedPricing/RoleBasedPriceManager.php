@@ -3,7 +3,36 @@
 use TierPricingTable\Forms\Form;
 
 class RoleBasedPriceManager {
-	
+
+	/**
+	 * Pseudo role of visitors who are not logged in. Shares its key with the global rules and the
+	 * wholesale add-on, so a product rule, a global rule and a cart rule mean the same audience.
+	 */
+	const GUEST_ROLE = 'guest';
+
+	/**
+	 * The roles a product rule can target: every WordPress role plus guests, as key => label.
+	 */
+	public static function getAvailableRoles(): array {
+		$roles = array();
+
+		foreach ( wp_roles()->roles as $key => $role ) {
+			$roles[ $key ] = translate_user_role( $role['name'] );
+		}
+
+		$roles[ self::GUEST_ROLE ] = __( 'Guests (not logged in)', 'tier-pricing-table' );
+
+		return (array) apply_filters( 'tiered_pricing_table/role_based_rules/available_roles', $roles );
+	}
+
+	public static function isAvailableRole( string $role ): bool {
+		return array_key_exists( $role, self::getAvailableRoles() );
+	}
+
+	public static function getRoleLabel( string $role ): string {
+		return (string) ( self::getAvailableRoles()[ $role ] ?? $role );
+	}
+
 	public static function roleHasRules( string $role, int $productId, string $context = 'view' ): bool {
 		
 		$metadataToCheck = apply_filters( 'tiered_pricing_table/role_based_rules/rule_exists_meta', array(
@@ -46,7 +75,7 @@ class RoleBasedPriceManager {
 	
 	public static function deleteAllRoleDataForProduct( int $productId ) {
 		
-		$roles = array_keys( wp_roles()->roles );
+		$roles = array_keys( self::getAvailableRoles() );
 		
 		foreach ( $roles as $role ) {
 			if ( self::roleHasRules( $role, $productId ) ) {

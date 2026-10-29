@@ -20,9 +20,13 @@ class TierLabelsEndpoints {
 				'methods'             => 'GET',
 				'callback'            => function () use ( $labelsManager ) {
 					$labels = $labelsManager->getLabels();
+					$usage  = $labelsManager->getUsage();
 					
-					$labelsArray = array_map( function ( $label ) {
-						return $label->toArray();
+					$labelsArray = array_map( function ( $label ) use ( $usage ) {
+						$data          = $label->toArray();
+						$data['usage'] = (int) ( $usage[ $label->getId() ] ?? 0 );
+						
+						return $data;
 					}, $labels );
 					
 					return rest_ensure_response( $labelsArray );

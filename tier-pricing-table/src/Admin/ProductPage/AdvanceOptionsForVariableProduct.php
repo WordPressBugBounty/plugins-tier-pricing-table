@@ -25,13 +25,9 @@ class AdvanceOptionsForVariableProduct {
 		// Saving
 		add_action( 'woocommerce_process_product_meta', array( $this, 'saveOptions' ) );
 
-		add_action( 'tiered_pricing_table/admin/advance_product_options', function ( $productId ) {
-
-			$product = wc_get_product( $productId );
-
-			if ( ! TierPricingTablePlugin::isVariableProductSupported( $product ) ) {
-				return;
-			}
+		// rendered for every product: the section is shown or hidden with the product type, so the fields
+		// are there as soon as the type is switched to variable in the editor
+		add_action( 'tiered_pricing_table/admin/variable_product_options', function ( $productId ) {
 			?>
 
 			<p class="form-field _tiered_pricing_default_variation show_if_variable">

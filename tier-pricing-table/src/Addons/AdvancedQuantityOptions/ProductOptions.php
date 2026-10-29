@@ -2,6 +2,7 @@
 
 namespace TierPricingTable\Addons\AdvancedQuantityOptions;
 
+use TierPricingTable\Admin\ProductPage\Product;
 class ProductOptions {
     /**
      * Form
@@ -15,11 +16,18 @@ class ProductOptions {
         // Rendering
         add_action(
             'tiered_pricing_table/admin/after_minimum_order_quantity_field',
-            function ( $productId, $loop ) {
-                $this->form->render( $productId, $loop );
+            function ( $productId, $loop, $customPrefix = '' ) {
+                $this->form->render(
+                    $productId,
+                    $loop,
+                    null,
+                    false,
+                    true,
+                    (string) $customPrefix
+                );
             },
             10,
-            2
+            3
         );
         add_action(
             'tiered_pricing_table/admin/after_variation_minimum_order_quantity_field',
@@ -30,17 +38,20 @@ class ProductOptions {
     }
 
     public function save( $productId, $loop = null ) {
+        $prefix = Product::getSubmittedPrefix( $loop );
         DataProvider::updateFromRequest(
             'maximum',
             $productId,
             null,
-            $loop
+            $loop,
+            $prefix
         );
         DataProvider::updateFromRequest(
             'group_of',
             $productId,
             null,
-            $loop
+            $loop,
+            $prefix
         );
     }
 

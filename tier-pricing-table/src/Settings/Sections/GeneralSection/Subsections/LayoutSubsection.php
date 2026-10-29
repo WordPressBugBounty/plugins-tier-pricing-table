@@ -270,7 +270,7 @@ class LayoutSubsection extends SubsectionAbstract {
 					array(
 						'label'   => __( 'Discount', 'tier-pricing-table' ),
 						'id'      => Settings::SETTINGS_PREFIX . 'head_discount_text',
-						'default' => __( 'Discount (%)', 'tier-pricing-table' ),
+						'default' => __( 'Discount', 'tier-pricing-table' ),
 					),
 					array(
 						'label'   => __( 'Price', 'tier-pricing-table' ),

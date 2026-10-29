@@ -3,7 +3,7 @@
 use TierPricingTable\Admin\ProductPage\AdvanceOptionsForVariableProduct;
 use TierPricingTable\Admin\ProductPage\Product;
 use TierPricingTable\Admin\ProductPage\TieredPricingTab;
-use TierPricingTable\Admin\ProductPage\RoleCustomerPricingTab;
+use TierPricingTable\Admin\ProductPage\RoleCustomerPricingUI;
 use TierPricingTable\Admin\WelcomePage\WelcomePage;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\TierPricingTablePlugin;
@@ -34,7 +34,7 @@ class Admin {
 	public function __construct() {
 		new Product();
 		new TieredPricingTab();
-		new RoleCustomerPricingTab();
+		new RoleCustomerPricingUI();
 		new AdvanceOptionsForVariableProduct();
 		new TipsManager();
 		
@@ -50,6 +50,7 @@ class Admin {
 		wp_enqueue_script( 'tiered-pricing-table-admin-js',
 			$this->getContainer()->getFileManager()->locateJSAsset( 'admin/main' ), [ 'jquery' ],
 			TierPricingTablePlugin::VERSION );
+		wp_localize_script( 'tiered-pricing-table-admin-js', 'tptRoleCustomerUI', RoleCustomerPricingUI::scriptData() );
 		wp_enqueue_style( 'tiered-pricing-table-admin-css',
 			$this->getContainer()->getFileManager()->locateCSSAsset( 'admin/style.css' ), array(),
 			TierPricingTablePlugin::VERSION );

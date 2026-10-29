@@ -29,10 +29,12 @@ abstract class FormTab {
 	abstract public function render( GlobalPricingRule $pricingRule );
 
 	public function renderRadioOptions( $args = array(), $inline = false ) {
+		$args = wp_parse_args( $args, array( 'description' => '', 'desc_tip' => false ) );
 		?>
 		<div class="tiered-pricing-form-block">
 			<label for="tpt_tiered_pricing_type">
 				<?php echo esc_html( $args['title'] ); ?>
+				<?php if ( $args['description'] && $args['desc_tip'] ) { echo wc_help_tip( $args['description'] ); } ?>
 			</label>
 			<div style="min-height: 25px">
 				<?php if ( $inline ) : ?>
@@ -69,7 +71,11 @@ abstract class FormTab {
 					</ul>
 				<?php endif; ?>
 			</div>
-
+			<?php if ( $args['description'] && ! $args['desc_tip'] ) : ?>
+				<p class="description" style="margin:0">
+					<?php echo esc_html( $args['description'] ); ?>
+				</p>
+			<?php endif; ?>
 		</div>
 		<?php
 	}

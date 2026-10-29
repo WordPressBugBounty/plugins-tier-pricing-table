@@ -377,7 +377,7 @@ class LayoutConfigurator {
 		$defaults['options_option_text']         = __( '<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>', 'tier-pricing-table' );
 		$defaults['options_default_option_text'] = __( '<strong>Buy {tp_quantity} pieces</strong>', 'tier-pricing-table' );
 		$defaults['head_quantity_text']          = __( 'Quantity', 'tier-pricing-table' );
-		$defaults['head_discount_text']          = __( 'Discount (%)', 'tier-pricing-table' );
+		$defaults['head_discount_text']          = __( 'Discount', 'tier-pricing-table' );
 		$defaults['head_price_text']             = __( 'Price', 'tier-pricing-table' );
 		$defaults['plain_text_template']         = __( '<strong>Buy {tp_quantity} pieces for {tp_price} each and save {tp_rounded_discount}%</strong>', 'tier-pricing-table' );
 		$defaults['plain_text_first_tier_template'] = __( '<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>', 'tier-pricing-table' );
@@ -865,6 +865,11 @@ class LayoutConfigurator {
 				'url'    => admin_url( 'admin-ajax.php' ),
 				'action' => LayoutPreview::AJAX_ACTION,
 				'nonce'  => wp_create_nonce( LayoutPreview::AJAX_ACTION ),
+			),
+			// the colour applied from the theme on install, so the colour field can say where it came from
+			'themeColor'    => array(
+				'color' => \TierPricingTable\Core\Install::getThemeColor(),
+				'theme' => wp_get_theme()->get( 'Name' ),
 			),
 			'stylesheets'   => $preview->getStylesheetURLs(),
 			'inlineStyles'  => $preview->getInlineStyles(),

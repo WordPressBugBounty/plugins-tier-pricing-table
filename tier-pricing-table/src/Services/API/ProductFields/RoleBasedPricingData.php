@@ -13,9 +13,8 @@ class RoleBasedPricingData extends ProductField {
     public function sanitizeValue( $value, $productId ) : array {
         $value = ( is_array( $value ) ? $value : array() );
         $sanitizedValue = array();
-        wp_roles()->roles;
         foreach ( $value as $role => $roleData ) {
-            if ( array_key_exists( $role, wp_roles()->roles ) ) {
+            if ( RoleBasedPriceManager::isAvailableRole( (string) $role ) ) {
                 $roleBasedRule = RoleBasedPricingRule::build( $productId, $role );
                 $sanitizedValue[$role] = wp_parse_args( $roleData, $roleBasedRule->asArray() );
             }

@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Integrations\Plugins;
 
 use TierPricingTable\TierPricingTablePlugin;
+use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use PMXI_API, XmlImportParser;
 use function \extract as allowedExtract;
 
@@ -85,7 +86,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 	
 	public function getRoleKey( $key ) {
 		
-		foreach ( wp_roles()->roles as $role => $roleData ) {
+		foreach ( array_keys( RoleBasedPriceManager::getAvailableRoles() ) as $role ) {
 			if ( strpos( $key, $role ) !== false ) {
 				return $role;
 			}
@@ -134,7 +135,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 			),
 		);
 		
-		foreach ( wp_roles()->roles as $role => $roleData ) {
+		foreach ( array_keys( RoleBasedPriceManager::getAvailableRoles() ) as $role ) {
 			
 			$fields[ '__' . $role . '_enabled' ] = array(
 				'title'        => '',
@@ -564,13 +565,8 @@ class WPAllImport extends PluginIntegrationAbstract {
 		?>
 		<div>
 			<h3><?php esc_attr_e( 'Role-based import', 'tier-pricing-table' ); ?>: </h3>
-			<?php foreach ( wp_roles()->roles as $WPRole => $role_data ) : ?>
+			<?php foreach ( RoleBasedPriceManager::getAvailableRoles() as $WPRole => $roleName ) : ?>
 				
-				<?php
-				
-				global $wp_roles;
-				$roleName = isset( $wp_roles->role_names[ $WPRole ] ) ? translate_user_role( $wp_roles->role_names[ $WPRole ] ) : $WPRole;
-				?>
 
 				<div class="tiered-pricing-import-role-block">
 					<div class="tiered-pricing-import-role-block__header">

@@ -41,6 +41,46 @@ class TierLabelsManager {
 		return $this->labels;
 	}
 	
+	/**
+	 * How many products, variations and rules assign each label (one count per entity, whatever the tier).
+	 *
+	 * @return array<string, int> label id => count
+	 */
+	public function getUsage(): array {
+		global $wpdb;
+
+		$rows = $wpdb->get_results( $wpdb->prepare(
+			"SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key LIKE %s",
+			'%' . $wpdb->esc_like( 'tiered_price_tier_labels' )
+		) );
+
+		$usage = array();
+
+		foreach ( (array) $rows as $row ) {
+			$value = maybe_unserialize( $row->meta_value );
+
+			if ( ! is_array( $value ) ) {
+				continue;
+			}
+
+			$ids = array();
+
+			foreach ( $value as $byType ) {
+				foreach ( (array) $byType as $labelId ) {
+					if ( '' !== (string) $labelId ) {
+						$ids[ (string) $labelId ] = true;
+					}
+				}
+			}
+
+			foreach ( array_keys( $ids ) as $labelId ) {
+				$usage[ $labelId ] = ( $usage[ $labelId ] ?? 0 ) + 1;
+			}
+		}
+
+		return $usage;
+	}
+
 	public function getLabel( $id ): ?TierLabel {
 		$labels = $this->getLabels();
 		

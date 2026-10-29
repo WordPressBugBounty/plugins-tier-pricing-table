@@ -4,14 +4,14 @@ use TierPricingTable\Addons\NonLoggedInUsers\Visibility\VisibilityMeta;
 use TierPricingTable\Addons\NonLoggedInUsers\Visibility\VisibilityRule;
 
 /**
- * "Who can see this product" in the product's Tiered Pricing tab (Additional Options).
+ * "Who can see this product": the Visibility section of the product's Tiered Pricing tab.
  */
 class ProductVisibilityFields {
 
 	const NONCE = 'tpt_visibility_product';
 
 	public function __construct() {
-		add_action( 'tiered_pricing_table/admin/advance_product_options', array( $this, 'render' ) );
+		add_action( 'tiered_pricing_table/admin/visibility_options', array( $this, 'render' ) );
 		add_action( 'woocommerce_process_product_meta', array( $this, 'save' ) );
 	}
 

@@ -456,7 +456,7 @@ class PricingTable {
 				'price_column_title'    => $this->getContainer()->getSettings()->get( 'head_price_text',
 						__( 'Price', 'tier-pricing-table' ) ),
 				'discount_column_title' => $this->getContainer()->getSettings()->get( 'head_discount_text',
-						__( 'Discount (%)', 'tier-pricing-table' ) ),
+						__( 'Discount', 'tier-pricing-table' ) ),
 				'quantity_type'         => $this->getContainer()->getSettings()->get( 'quantity_type', 'range' ),
 				'show_discount_column'  => $this->getContainer()->getSettings()->get( 'show_discount_column',
 								'yes' ) === 'yes',
@@ -499,35 +499,21 @@ class PricingTable {
 				'show_total_price'              => $showTotalPrice,
 		);
 
-		$default_quantity_measurement = array(
-				'singular' => '',
-				'plural'   => '',
-		);
-
-		$quantity_measurement = $default_quantity_measurement;
-
-		if ( in_array( $settings['display_type'], array( 'table', 'horizontal-table', 'tooltip' ) ) ) {
-			$quantity_measurement = $this->getContainer()->getSettings()->get( 'table_quantity_measurement',
-					$default_quantity_measurement );
-		}
-
-		if ( 'blocks' === $settings['display_type'] ) {
-			$quantity_measurement = $this->getContainer()->getSettings()->get( 'blocks_quantity_measurement', array(
-					'singular' => _n( 'piece', 'pieces', 1, 'tier-pricing-table' ),
-					'plural'   => _n( 'piece', 'pieces', 2, 'tier-pricing-table' ),
-			) );
-		}
-
-		$settings['quantity_measurement_singular'] = $quantity_measurement['singular'];
-		$settings['quantity_measurement_plural']   = $quantity_measurement['plural'];
-
 		if ( $productId ) {
 			$template = TieredPricingTab::getProductTemplate( $productId );
 
 			if ( 'default' !== $template ) {
 				$settings['display_type'] = $template;
 			}
+		}
 
+		// the unit follows the layout that is actually rendered, including a per-product template
+		$quantity_measurement = $this->getQuantityMeasurement( $settings['display_type'] );
+
+		$settings['quantity_measurement_singular'] = $quantity_measurement['singular'];
+		$settings['quantity_measurement_plural']   = $quantity_measurement['plural'];
+
+		if ( $productId ) {
 			$baseUnitName = TieredPricingTab::getProductBaseUnitName( $productId );
 
 			if ( $baseUnitName['singular'] && $baseUnitName['plural'] ) {
@@ -537,6 +523,32 @@ class PricingTable {
 		}
 
 		return $settings;
+	}
+
+	/**
+	 * Quantity unit labels for a layout: tables and the tooltip share one option, blocks have their own
+	 * (defaulting to pieces); the other layouts show no unit.
+	 *
+	 * @return array{singular: string, plural: string}
+	 */
+	public function getQuantityMeasurement( string $displayType ): array {
+		$stored = array( 'singular' => '', 'plural' => '' );
+
+		if ( in_array( $displayType, array( 'table', 'horizontal-table', 'tooltip' ), true ) ) {
+			$stored = $this->getContainer()->getSettings()->get( 'table_quantity_measurement', $stored );
+		} elseif ( 'blocks' === $displayType ) {
+			$stored = $this->getContainer()->getSettings()->get( 'blocks_quantity_measurement', array(
+					'singular' => _n( 'piece', 'pieces', 1, 'tier-pricing-table' ),
+					'plural'   => _n( 'piece', 'pieces', 2, 'tier-pricing-table' ),
+			) );
+		}
+
+		$stored = is_array( $stored ) ? $stored : array();
+
+		return array(
+				'singular' => (string) ( $stored['singular'] ?? '' ),
+				'plural'   => (string) ( $stored['plural'] ?? '' ),
+		);
 	}
 
 	protected function getUniqueTieredPricingId() {

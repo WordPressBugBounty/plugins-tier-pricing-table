@@ -71,12 +71,12 @@ class AdvancedQuantityOptionsForm {
 		<?php
 	}
 	
-	public function render( $productId, $loop = null, $role = null, $expandedByDefault = false, $showToggle = true ) {
+	public function render( $productId, $loop = null, $role = null, $expandedByDefault = false, $showToggle = true, string $customPrefix = '' ) {
 		
 		$maximumFieldName = Form::getFieldName( AdvancedQuantityOptionsAddon::MAXIMUM_QUANTITY_BASE_META_KEY, $role,
-			$loop );
+			$loop, $customPrefix );
 		$groupOfFieldName = Form::getFieldName( AdvancedQuantityOptionsAddon::GROUP_OF_QUANTITY_BASE_META_KEY, $role,
-			$loop );
+			$loop, $customPrefix );
 		?>
 
 		<div class="tiered_pricing_advanced_quantity_options">

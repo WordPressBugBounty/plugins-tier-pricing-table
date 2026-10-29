@@ -70,7 +70,7 @@ class Cache {
 		add_filter( 'woocommerce_get_variation_prices_hash', function ( $hash, WC_Product_Variable $product ) {
 
 			$pricesDisplayType = ServiceContainer::getInstance()->getSettings()->get( 'tiered_price_at_catalog_type',
-				'range' );
+				'lowest' );
 
 			$hash[] = $product->get_date_modified();
 			$hash[] = $product->get_id();

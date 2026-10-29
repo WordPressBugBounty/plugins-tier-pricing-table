@@ -30,7 +30,6 @@
      data-add-action-nonce="<?php echo esc_attr( wp_create_nonce( ProductManager::GET_USER_ROW_HTML__ACTION ) ); ?>"
      data-product-id="<?php echo esc_attr( $product_id ); ?>"
      data-loop="<?php echo esc_attr( $loop ); ?>">
-	<label class="tpt-user-based-block__name" style="line-height: normal"><?php esc_attr_e( 'Customer-Specific Pricing', 'tier-pricing-table' ); ?></label>
 	<div class="tpt-user-based-block__content">
 		<div class="tpt-user-based-users">
 			<?php
@@ -71,32 +70,8 @@
 			?>
 		</div>
 
-		<div class="tpt-user-based-no-users"
-		     style="<?php echo esc_attr( ! empty( $presentUsers ) ? 'display: none;' : '' ); ?>">
-			<span>
-				<?php
-					esc_attr_e( 'Set up specific pricing and rules for individual customers.',
-							'tier-pricing-table' );
-				?>
-			</span>
-			<p class="description" style="display: block; margin: 0">
-				<?php
-					$settingsLink = add_query_arg( array(
-							'section' => 'advanced',
-					), ServiceContainer::getInstance()->getSettings()->getLink() );
 
-					$settingsLink = sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( $settingsLink ),
-							esc_html__( 'settings', 'tier-pricing-table' ) );
-					// translators: %s: settings link
-					echo wp_kses_post( sprintf( __( 'You can disable this feature in the %s if you don\'t need customer-based pricing.',
-							'tier-pricing-table' ), $settingsLink ) );
-
-				?>
-
-			</p>
-		</div>
-
-		<div class="tpt-user-based-adding-form">
+		<div class="tpt-user-based-adding-form tpt-rc__hidden-form">
 			<select class="tpt-user-based-adding-form__user-selector wc-customer-search" data-placeholder="<?php esc_attr_e( 'Search for a customer&hellip;', 'woocommerce' ); ?>" data-allow_clear="true" style="width: 250px;">
 			</select>
 

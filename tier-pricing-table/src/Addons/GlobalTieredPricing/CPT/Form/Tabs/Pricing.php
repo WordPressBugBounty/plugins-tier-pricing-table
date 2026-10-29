@@ -38,18 +38,17 @@ class Pricing extends FormTab {
 			<?php
 				$this->renderSectionTitle( __( 'Tiered Pricing', 'tier-pricing-table' ) );
 
-				$this->renderHint( __( '<b>Mix & Match:</b> Combines the quantities of different products to reach tiered pricing thresholds, allowing discounts when products are purchased together. <br /><br />
-<b>Individually:</b> Treats each product’s quantity separately in pricing calculations, ensuring that each product follows its own pricing tier independently without being combined with others.',
-						'tier-pricing-table' ), array( 'show_icon' => false, 'only_for_new_rules' => true ) );
 
 				$this->renderRadioOptions( array(
 						'id'      => 'tpt_applying_type',
-						'title'   => __( 'Calculation type', 'tier-pricing-table' ),
-						'options' => array(
-								'individual' => __( 'Individual', 'tier-pricing-table' ),
-								'cross'      => __( 'Mix and Match', 'tier-pricing-table' ),
+						'title'       => __( 'Count quantities', 'tier-pricing-table' ),
+						'options'     => array(
+								'individual' => __( 'Per product', 'tier-pricing-table' ),
+								'cross'      => __( 'Across all products in this rule (mix and match)', 'tier-pricing-table' ),
 						),
-						'value'   => $pricingRule->getApplyingType(),
+						'value'       => $pricingRule->getApplyingType(),
+						'description' => __( 'Mix and match adds up the quantities of every product this rule covers to reach a tier. Per product counts each product on its own.', 'tier-pricing-table' ),
+						'desc_tip'    => true,
 				), true );
 
 				global $post;

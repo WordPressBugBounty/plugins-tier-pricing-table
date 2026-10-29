@@ -38,9 +38,12 @@
 	<div class="tpt-user-based-user__header">
 		<div class="tpt-user-based-user__name">
 			<b><?php echo esc_html( $displayName ); ?></b>
+			<span class="tpt-rc__chip tpt-rc__chip--customer"><?php esc_html_e( 'Customer', 'tier-pricing-table' ); ?></span>
 		</div>
+		<?php \TierPricingTable\Admin\ProductPage\RoleCustomerPricingUI::renderSummary( $pricing_rule ); ?>
 		<div class="tpt-user-based-user__actions">
 			<span class="tpt-user-based-user__action-toggle-view tpt-user-based-user__action-toggle-view--open"></span>
+			<button type="button" class="button-link tpt-rc__edit"><?php esc_html_e( 'Edit', 'tier-pricing-table' ); ?></button>
 			<a href="#" class="tpt-user-based-user-action--delete"><?php esc_attr_e( 'Remove', 'woocommerce' ); ?></a>
 		</div>
 	</div>

@@ -1,6 +1,10 @@
 <?php namespace TierPricingTable\Addons\Tools\API;
 
+use TierPricingTable\Addons\CustomColumns\CustomColumnsManager;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Guide;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+use TierPricingTable\Addons\TaxSettings\API\TaxSettingsEndpoints;
+use TierPricingTable\Admin\Tips\Tip;
 use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use WP_Error;
 use WP_REST_Request;
@@ -292,17 +296,33 @@ class ToolsEndpoints {
 		) );
 	}
 	
+	/**
+	 * Back to a fresh install: every option of the plugin, the labels and the custom columns, the
+	 * role tax overrides, the dismissed tips, badges and guides. Products, pricing rules, quote
+	 * requests and wholesale applications are kept.
+	 */
 	public function resetSettings( WP_REST_Request $request ) {
 		global $wpdb;
 		
-		if ( class_exists( '\TierPricingTable\Settings\Settings' ) ) {
-			\TierPricingTable\Settings\Settings::deleteOptions();
+		foreach ( array( 'tier_pricing_table_', 'tiered_pricing_table/', CustomColumnsManager::CUSTOM_COLUMNS_OPTION_NAME, 'tpt_section_badge_seen_' ) as $prefix ) {
+			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( $prefix ) . '%' ) );
 		}
 		
-		// Wipe all other plugin settings that might be stored via different addons
-		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'tier_pricing_table_%'" );
-		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'tiered_pricing_table/%'" );
-		$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE 'tpt_custom_table_columns%'" );
+		// the activation date comes back as "today" on the next request, like a fresh install
+		foreach ( array( Tip::SEEN_TIPS_OPTION_KEY, 'tpt_integrations_badge_seen', TaxSettingsEndpoints::OPTION_KEY, 'tpt_plugin_activation_timestamp' ) as $option ) {
+			delete_option( $option );
+		}
+		
+		// the global rule guide is dismissed per user
+		delete_metadata( 'user', 0, Guide::USER_META, '', true );
+		
+		// the raw deletes bypass the options cache
+		wp_cache_flush();
+		
+		// the first-run defaults again, the theme colour included; must come after the deletes
+		if ( class_exists( '\TierPricingTable\Core\Install' ) ) {
+			\TierPricingTable\Core\Install::reset();
+		}
 		
 		return rest_ensure_response( array(
 			'success' => true,

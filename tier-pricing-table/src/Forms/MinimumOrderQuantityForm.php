@@ -7,17 +7,19 @@ class MinimumOrderQuantityForm {
 	public static function render(
 		$role = null,
 		$loop = null,
-		$minimumOrderQuantity = null
+		$minimumOrderQuantity = null,
+		string $customPrefix = ''
 	) {
 		ServiceContainer::getInstance()->getFileManager()->includeTemplate( 'admin/components/minimum-order-quantity-form.php',
 			array(
 				'role'                   => $role,
 				'loop'                   => $loop,
 				'minimum_order_quantity' => $minimumOrderQuantity,
+				'custom_prefix'          => $customPrefix,
 			) );
 	}
 
-	public static function getDataFromRequest( $role = null, $loop = null, $request = null ) {
+	public static function getDataFromRequest( $role = null, $loop = null, $request = null, string $customPrefix = '' ) {
 		
 		$data = array();
 
@@ -29,7 +31,7 @@ class MinimumOrderQuantityForm {
 
 		foreach ( $fields as $fieldKey => $sanitizeFunction ) {
 			$data[ $fieldKey ] = call_user_func( $sanitizeFunction,
-				Form::getFieldValue( $fieldKey, $role, $loop, null, $request ) );
+				Form::getFieldValue( $fieldKey, $role, $loop, $customPrefix, $request ) );
 
 		}
 

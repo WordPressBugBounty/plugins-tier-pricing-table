@@ -12,14 +12,16 @@
 	 * @var string $role
 	 * @var string $loop
 	 * @var string $minimum_order_quantity
+	 * @var string $custom_prefix
 	 */
 
-	$placeholder = __( 'Leave blank for no restrictions', 'tier-pricing-table' );
+	$custom_prefix = isset( $custom_prefix ) ? (string) $custom_prefix : '';
+	$placeholder   = __( 'Leave blank for no restrictions', 'tier-pricing-table' );
 	$title       = !tpt_fs()->can_use_premium_code() ? __( 'Available in premium version', 'tier-pricing-table' ) : '';
 ?>
 
 <p class="form-field tpt_minimum_order_quantity <?php echo esc_attr( ! is_null( $loop ) ? 'form-row' : '' ); ?>">
-	<label for="<?php echo esc_attr( Form::getFieldName( 'minimum_order_quantity', $role, $loop ) ); ?>">
+	<label for="<?php echo esc_attr( Form::getFieldName( 'minimum_order_quantity', $role, $loop, $custom_prefix ) ); ?>">
 		<?php esc_html_e( 'Minimum order quantity', 'tier-pricing-table' ); ?>
 	</label>
 
@@ -36,8 +38,8 @@
 			step="1"
 			style="<?php echo esc_attr( tpt_fs()->can_use_premium_code() ? '' : 'cursor: not-allowed' ); ?>"
 			placeholder="<?php echo esc_attr( $placeholder ); ?>"
-			name="<?php echo esc_attr( Form::getFieldName( 'minimum_order_quantity', $role, $loop ) ); ?>"
-			id="<?php echo esc_attr( Form::getFieldName( 'minimum_order_quantity', $role, $loop ) ); ?>"
+			name="<?php echo esc_attr( Form::getFieldName( 'minimum_order_quantity', $role, $loop, $custom_prefix ) ); ?>"
+			id="<?php echo esc_attr( Form::getFieldName( 'minimum_order_quantity', $role, $loop, $custom_prefix ) ); ?>"
 			value="<?php echo esc_attr( $minimum_order_quantity ); ?>"
 	>
 

@@ -64,7 +64,7 @@ class StatusBox {
 					<?php endif; ?>
 				</div>
 
-				<details class="tpt-rule-box__section" <?php echo GlobalPricingRule::DEFAULT_PRIORITY !== $rule->getPriority() ? 'open' : ''; ?>>
+				<details class="tpt-rule-box__section">
 					<summary>
 						<span><?php esc_html_e( 'Priority', 'tier-pricing-table' ); ?></span>
 						<span class="tpt-rule-box__meta"><?php echo esc_html( number_format_i18n( $rule->getPriority() ) ); ?></span>

@@ -25,15 +25,11 @@
 ?>
 
 <?php if ( ! tpt_fs()->can_use_premium_code() ) : ?>
-	<p style="color: red;    background: #f6f6f6;
-    margin: 0;
-    width: 100%;
-    padding: 16px;">
-		<?php esc_html_e( 'Premium feature.', 'tier-pricing-table' ); ?>
-		<a target="_blank" href="<?php echo esc_attr( tpt_fs_activation_url() ); ?>">
-			<?php esc_html_e( 'Upgrade to premium', 'tier-pricing-table' ); ?>
-		</a>
-	</p>
+	<div class="tpt-rc__premium">
+		<span class="tpt-badge tpt-badge--premium"><?php esc_html_e( 'Premium', 'tier-pricing-table' ); ?></span>
+		<span class="tpt-rc__premium-text"><?php esc_html_e( 'Customer prices are a premium feature. The fields below are read-only in the free version.', 'tier-pricing-table' ); ?></span>
+		<a class="button tpt-rc__premium-button" target="_blank" rel="noopener" href="<?php echo esc_url( tpt_fs_activation_url() ); ?>"><?php esc_html_e( 'Upgrade to premium', 'tier-pricing-table' ); ?></a>
+	</div>
 <?php endif; ?>
 
 <?php

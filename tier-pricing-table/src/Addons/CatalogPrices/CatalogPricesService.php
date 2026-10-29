@@ -98,11 +98,11 @@ class CatalogPricesService {
     }
 
     public function useForVariable() : bool {
-        return $this->getContainer()->getSettings()->get( 'tiered_price_at_catalog_for_variable', 'yes' ) === 'yes';
+        return $this->getContainer()->getSettings()->get( 'tiered_price_at_catalog_for_variable', 'no' ) === 'yes';
     }
 
     public function getDisplayType() : string {
-        return $this->getContainer()->getSettings()->get( 'tiered_price_at_catalog_type', 'range' );
+        return $this->getContainer()->getSettings()->get( 'tiered_price_at_catalog_type', 'lowest' );
     }
 
 }
