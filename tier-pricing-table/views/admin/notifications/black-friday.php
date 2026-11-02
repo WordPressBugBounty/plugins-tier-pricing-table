@@ -1,392 +1,102 @@
 <?php defined( 'WPINC' ) || die;
 
-	use TierPricingTable\Admin\Notifications\Notifications\TwoMonthsUsingDiscount;
-	use TierPricingTable\Core\ServiceContainer;
+	use TierPricingTable\Admin\Notifications\Notifications\BlackFriday;
 	use TierPricingTable\TierPricingTablePlugin;
 
-	$fileManager = ServiceContainer::getInstance()->getFileManager();
-
 	/**
-	 * Available variables
+	 * The Black Friday offer, see BlackFriday::passedRequirements() for when it shows.
 	 *
-	 * @var TwoMonthsUsingDiscount $notification
+	 * @var BlackFriday $notification
 	 */
 
-	// Updated, more marketing-friendly feature names
-	$premiumFeatures = array(
-			'Dynamic, Role-Based Pricing Rules',
-			'Percentage-Based Bulk Discounts',
-			'Smart In-Cart Upsells',
-			'Customizable Pricing Table Columns',
-			'Interactive, Clickable Tables',
-			'Set Min/Max Order Quantities',
-			'Instant Price Totals',
-			'Hide Prices for Guest Users',
-			'Show "As Low As" Price in Lists',
-	);
-
-	$upgradeUrl = add_query_arg( array(
-			'coupon' => 'BF25OFF',
-	), tpt_fs_activation_url() );
-
+	$coupon     = $notification->getCoupon();
+	$features   = TierPricingTablePlugin::getPremiumFeatures();
+	$upgradeUrl = add_query_arg( array( 'coupon' => $coupon['code'] ), tpt_fs_activation_url() );
+	$lastDay    = wp_date( get_option( 'date_format' ), $notification->getLastDay() );
 ?>
 
 <style>
-	/* Scope everything to avoid conflicts */
-	.tpt-bf-light-banner {
-		box-sizing: border-box;
-		/* Updated background: White to very light primary color gradient */
-		background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
-		border: 1px solid #dcdcde;
-		border-left: 5px solid #96598a; /* Primary color */
-		border-radius: 8px;
-		color: #3c434a;
-		margin: 20px 0 15px;
-		padding: 0;
-		position: relative;
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-		overflow: hidden;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-	}
-
-	/* Close button */
-	.tpt-bf-light-banner__close {
-		position: absolute;
-		top: 10px;
-		right: 15px;
-		color: #a7aaad;
-		text-decoration: none;
-		font-size: 20px;
-		line-height: 1;
-		transition: color 0.2s;
-		z-index: 10;
-	}
-	.tpt-bf-light-banner__close:hover {
-		color: #3c434a;
-	}
-
-	.tpt-bf-light-banner__inner {
-		display: flex;
-		flex-wrap: wrap;
-		padding: 20px;
-		gap: 30px;
-	}
-
-	/* Left Side: Call to Action */
-	.tpt-bf-light-banner__cta-column {
-		flex: 1;
-		min-width: 300px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	/* Plugin Name Badge Style */
-	.tpt-bf-light-banner__plugin-badge {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		background-color: #fdf2f8; /* Very light primary bg */
-		color: #96598a;
-		font-size: 11px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		padding: 5px 12px;
-		border-radius: 20px;
-		margin-bottom: 10px;
-		border: 1px solid rgba(150, 89, 138, 0.2);
-		box-shadow: 0 2px 4px rgba(150, 89, 138, 0.05);
-	}
-
-	.tpt-bf-light-banner__plugin-badge::before {
-		content: '';
-		display: block;
-		width: 6px;
-		height: 6px;
-		background-color: #96598a;
-		border-radius: 50%;
-	}
-
-	.tpt-bf-light-banner__headline {
-		font-size: 1.4em;
-		font-weight: 600;
-		margin-bottom: 15px;
-		line-height: 1.3;
-	}
-
-	.tpt-bf-light-banner__highlight {
-		color: #96598a; /* Primary color */
-		font-weight: 700;
-		display: inline-block;
-		animation: tpt-pulse 2s infinite;
-	}
-
-	.tpt-bf-light-banner__subtext {
-		font-size: 15px;
-		margin-top: 0;
-		margin-bottom: 25px;
-		color: #646970;
-		line-height: 1.5;
-	}
-
-	.tpt-bf-light-banner__coupon-box {
-		background-color: #fff;
-		border: 2px dashed #96598a;
-		padding: 12px 24px;
-		border-radius: 8px;
-		display: inline-flex;
-		align-items: center;
-		gap: 15px;
-		margin-bottom: 25px;
-		box-shadow: 0 4px 10px rgba(150, 89, 138, 0.1);
-	}
-
-	.tpt-bf-light-banner__code-label {
-		font-weight: 600;
-		color: #646970;
-		font-size: 14px;
-	}
-
-	.tpt-bf-light-banner__code {
-		font-family: monospace;
-		font-size: 1.4em;
-		font-weight: 700;
-		color: #96598a;
-		letter-spacing: 1px;
-		background-color: #fdf2f8;
-		padding: 6px 12px;
-		border-radius: 6px;
-	}
-
-	.tpt-bf-light-banner__actions {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-	}
-
-	/* Animated Button */
-	.tpt-bf-light-button {
-		background: linear-gradient(to right, #96598a, #b06ba3);
-		color: white !important;
-		text-decoration: none;
-		padding: 12px 30px;
-		border-radius: 50px;
-		font-weight: 600;
-		font-size: 15px;
-		border: none;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-		transition: transform 0.2s, box-shadow 0.2s;
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		box-shadow: 0 4px 6px rgba(150, 89, 138, 0.2);
-	}
-
-	.tpt-bf-light-button:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 6px 12px rgba(150, 89, 138, 0.3);
-		color: white !important;
-	}
-
-	/* Button Shimmer Animation */
-	.tpt-bf-light-button::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-		animation: tpt-shimmer 3s infinite;
-	}
-
-	.tpt-bf-light-banner__dismiss {
-		font-size: 13px;
-		color: #646970;
-		text-decoration: underline;
-		cursor: pointer;
-	}
-	.tpt-bf-light-banner__dismiss:hover {
-		color: #3c434a;
-	}
-
-	/* Right Side: Features List */
-	.tpt-bf-light-banner__features-column {
-		flex: 1.2;
-		min-width: 320px;
-		border-left: 1px solid rgba(0,0,0,0.05);
-		padding-left: 30px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		background: rgba(255,255,255,0.4);
-	}
-
-	.tpt-bf-light-banner__features-title {
-		font-weight: 700;
-		font-size: 14px;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		margin-bottom: 15px;
-		color: #96598a;
-		opacity: 0.9;
-	}
-
-	.tpt-bf-light-banner__features-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 10px;
-	}
-
-	/* Modern Card Design for Features */
-	.tpt-bf-light-feature {
-		font-size: 13px;
-		font-weight: 500;
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		color: #3c434a;
-		background: #fff;
-		padding: 10px 12px;
-		border-radius: 8px;
-		border: 1px solid rgba(0,0,0,0.05);
-		box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-		transition: all 0.2s ease;
-	}
-
-	.tpt-bf-light-feature:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(150, 89, 138, 0.15);
-		border-color: rgba(150, 89, 138, 0.2);
-		color: #96598a;
-	}
-
-	.tpt-bf-light-feature i {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 20px;
-		height: 20px;
-		background-color: #eafaf1; /* Light green bg */
-		color: #2ed573; /* Green check */
-		border-radius: 50%;
-		font-style: normal;
-		font-size: 10px;
-		flex-shrink: 0;
-	}
-
-	/* Animations */
-	@keyframes tpt-pulse {
-		0% { transform: scale(1); }
-		50% { transform: scale(1.05); }
-		100% { transform: scale(1); }
-	}
-
-	@keyframes tpt-shimmer {
-		0% { left: -100%; }
-		20% { left: 100%; }
-		100% { left: 100%; }
-	}
-
-	/* Mobile Responsiveness */
-	@media screen and (max-width: 960px) {
-		.tpt-bf-light-banner__inner {
-			flex-direction: column;
-			gap: 25px;
-			padding: 25px;
-		}
-		.tpt-bf-light-banner__features-column {
-			border-left: none;
-			padding-left: 0;
-			border-top: 1px solid #dcdcde;
-			padding-top: 25px;
-		}
-	}
-
-	@media screen and (max-width: 600px) {
-		.tpt-bf-light-banner__coupon-box {
-			width: 100%;
-			justify-content: center;
-			box-sizing: border-box;
-		}
-		.tpt-bf-light-banner__actions {
-			flex-direction: column;
-			align-items: stretch;
-			gap: 15px;
-		}
-		.tpt-bf-light-button {
-			justify-content: center;
-			width: 100%;
-			box-sizing: border-box;
-		}
-		.tpt-bf-light-banner__dismiss {
-			text-align: center;
-			display: block;
-		}
-		.tpt-bf-light-banner__features-list {
-			grid-template-columns: 1fr;
-		}
-	}
+	.tpt-bf.notice { position: relative; margin: 20px 0 15px; padding: 0; background: #fff; border: 1px solid #dcdcde; border-left: 4px solid var(--wp-admin-theme-color, #2271b1); border-radius: 4px; box-shadow: none; color: #1d2327; }
+	.tpt-bf__close { position: absolute; top: 10px; right: 12px; color: #787c82; text-decoration: none; font-size: 20px; line-height: 1; }
+	.tpt-bf__close:hover, .tpt-bf__close:focus { color: #1d2327; }
+	.tpt-bf__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 32px; padding: 22px 28px 24px; }
+	.tpt-bf__badge { display: inline-block; margin-bottom: 10px; padding: 2px 9px; border-radius: 999px; background: #1d2327; color: #fff; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+	.tpt-bf__title { margin: 0 0 8px; font-size: 18px; line-height: 1.3; font-weight: 600; color: #1d2327; }
+	.tpt-bf__title strong { color: var(--wp-admin-theme-color, #2271b1); }
+	.tpt-bf__text { margin: 0 0 14px; color: #50575e; font-size: 14px; line-height: 1.55; max-width: 60ch; }
+	.tpt-bf__coupon { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 16px; padding: 8px 14px; border: 1px dashed #8c8f94; border-radius: 6px; font-size: 13px; color: #50575e; }
+	.tpt-bf__code { font-family: Menlo, Consolas, monospace; font-size: 15px; font-weight: 700; letter-spacing: .08em; color: #1d2327; user-select: all; }
+	.tpt-bf__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+	.tpt-bf__actions .button { margin: 0; }
+	.tpt-bf__actions a:not(.button) { color: #787c82; font-size: 13px; }
+	.tpt-bf__features { border-left: 1px solid #f0f0f1; padding-left: 32px; }
+	.tpt-bf__features-title { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #1d2327; }
+	.tpt-bf__list { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 20px; }
+	.tpt-bf__list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.45; color: #3c434a; }
+	.tpt-bf__list svg { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px; color: #00a32a; }
+	.tpt-bf__help { margin: 0; font-size: 12px; color: #787c82; }
+	@media screen and (max-width: 1100px) { .tpt-bf__inner { grid-template-columns: 1fr; gap: 20px; } .tpt-bf__features { border-left: 0; padding-left: 0; border-top: 1px solid #f0f0f1; padding-top: 16px; } }
+	@media screen and (max-width: 600px) { .tpt-bf__list { grid-template-columns: 1fr; } }
 </style>
 
-<div class="tpt-bf-light-banner notice">
-	<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>" class="tpt-bf-light-banner__close" title="Dismiss">&times;</a>
+<div class="tpt-bf notice">
+	<a href="<?php echo esc_url( $notification->getCloseURL() ); ?>" class="tpt-bf__close" aria-label="<?php esc_attr_e( 'Dismiss', 'tier-pricing-table' ); ?>">&times;</a>
 
-	<div class="tpt-bf-light-banner__inner">
+	<div class="tpt-bf__inner">
+		<div>
+			<span class="tpt-bf__badge"><?php esc_html_e( 'Black Friday', 'tier-pricing-table' ); ?></span>
 
-		<!-- Left Column: CTA -->
-		<div class="tpt-bf-light-banner__cta-column">
-			<div class="tpt-bf-light-banner__headline">
-                <span class="tpt-bf-light-banner__plugin-badge">
-                    Tiered Pricing Table for WooCommerce
-                </span>
-				<br>
-				🎉 Boost Your Sales this Black Friday!
-				<br>
-				<span class="tpt-bf-light-banner__highlight">Save 25% on Premium</span>
-			</div>
+			<h3 class="tpt-bf__title">
+				<?php
+				echo wp_kses( sprintf(
+					/* translators: %s: "save 25%" */
+					__( 'Tiered Pricing Table: %s on premium', 'tier-pricing-table' ),
+					/* translators: %d: discount in percent */
+					'<strong>' . esc_html( sprintf( __( 'save %d%%', 'tier-pricing-table' ), $coupon['percent'] ) ) . '</strong>'
+				), array( 'strong' => array() ) );
+				?>
+			</h3>
 
-			<p class="tpt-bf-light-banner__subtext">
-				Unlock powerful features to maximize revenue and offer dynamic pricing to your customers.
+			<p class="tpt-bf__text">
+				<?php
+				echo esc_html( sprintf(
+					/* translators: %s: the last day of the offer */
+					__( 'Role and customer prices, cart rules, upsells and the rest of the premium version, with the code below until %s.', 'tier-pricing-table' ),
+					$lastDay
+				) );
+				?>
 			</p>
 
-			<div>
-				<div class="tpt-bf-light-banner__coupon-box">
-					<span class="tpt-bf-light-banner__code-label">Use Code:</span>
-					<span class="tpt-bf-light-banner__code">BF25OFF</span>
-				</div>
-			</div>
+			<p class="tpt-bf__coupon">
+				<span><?php esc_html_e( 'Coupon code', 'tier-pricing-table' ); ?></span>
+				<span class="tpt-bf__code"><?php echo esc_html( $coupon['code'] ); ?></span>
+			</p>
 
-			<div class="tpt-bf-light-banner__actions">
-				<a href="<?php echo esc_attr( $upgradeUrl ); ?>" class="tpt-bf-light-button">
-					Get the Offer & Grow 🚀
-				</a>
-				<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>" class="tpt-bf-light-banner__dismiss">
-					No thanks, I'll miss out on this one
-				</a>
+			<div class="tpt-bf__actions">
+				<a class="button button-primary" href="<?php echo esc_url( $upgradeUrl ); ?>"><?php esc_html_e( 'Get the offer', 'tier-pricing-table' ); ?></a>
+				<a href="<?php echo esc_url( $notification->getCloseURL() ); ?>"><?php esc_html_e( 'No thanks', 'tier-pricing-table' ); ?></a>
 			</div>
 		</div>
 
-		<!-- Right Column: Features -->
-		<div class="tpt-bf-light-banner__features-column">
-			<div class="tpt-bf-light-banner__features-title">What's Included in Premium:</div>
-			<ul class="tpt-bf-light-banner__features-list">
-				<?php foreach ( $premiumFeatures as $feature ) : ?>
-					<li class="tpt-bf-light-feature">
-						<i>✔</i> <?php echo esc_html( $feature ); ?>
+		<div class="tpt-bf__features">
+			<p class="tpt-bf__features-title"><?php esc_html_e( 'What premium adds', 'tier-pricing-table' ); ?></p>
+			<ul class="tpt-bf__list">
+				<?php foreach ( $features as $feature ) : ?>
+					<li>
+						<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".14"/><path d="M6 10.4l2.6 2.6L14 7.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html( $feature ); ?>
 					</li>
 				<?php endforeach; ?>
 			</ul>
-			<div style="margin-top: 15px; font-size: 13px; color: #646970;">
-				Have questions? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>" target="_blank" style="color: #96598a; text-decoration: underline;">Contact our team</a>.
-			</div>
+			<p class="tpt-bf__help">
+				<?php
+				printf(
+					/* translators: %s: link to the contact page */
+					esc_html__( 'Questions? %s', 'tier-pricing-table' ),
+					'<a href="' . esc_url( TierPricingTablePlugin::getContactUsURL() ) . '" target="_blank" rel="noopener">' . esc_html__( 'Contact us', 'tier-pricing-table' ) . '</a>'
+				);
+				?>
+			</p>
 		</div>
-
 	</div>
 </div>

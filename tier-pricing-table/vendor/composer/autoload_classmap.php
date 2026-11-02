@@ -225,6 +225,7 @@ return array(
     'TierPricingTable\\Admin\\Notifications\\Notifications\\Notification' => $baseDir . '/src/Admin/Notifications/Notifications/Notification.php',
     'TierPricingTable\\Admin\\Notifications\\Notifications\\TwoMonthsUsingDiscount' => $baseDir . '/src/Admin/Notifications/Notifications/TwoMonthsUsingDiscount.php',
     'TierPricingTable\\Admin\\Notifications\\Notifications\\YearUsingDiscount' => $baseDir . '/src/Admin/Notifications/Notifications/YearUsingDiscount.php',
+    'TierPricingTable\\Admin\\PluginInstaller\\PluginInstaller' => $baseDir . '/src/Admin/PluginInstaller/PluginInstaller.php',
     'TierPricingTable\\Admin\\ProductPage\\AdvanceOptionsForVariableProduct' => $baseDir . '/src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php',
     'TierPricingTable\\Admin\\ProductPage\\Product' => $baseDir . '/src/Admin/ProductPage/Product.php',
     'TierPricingTable\\Admin\\ProductPage\\RoleCustomerPricingUI' => $baseDir . '/src/Admin/ProductPage/RoleCustomerPricingUI.php',

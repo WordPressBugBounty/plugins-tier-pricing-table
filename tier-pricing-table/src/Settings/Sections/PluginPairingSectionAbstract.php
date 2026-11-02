@@ -1,5 +1,6 @@
 <?php namespace TierPricingTable\Settings\Sections;
 
+use TierPricingTable\Admin\PluginInstaller\PluginInstaller;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Settings\Settings;
 
@@ -73,7 +74,10 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 	}
 
 	public function __construct() {
-		add_action( 'woocommerce_admin_field_' . $this->getFieldType(), array( $this, 'renderUI' ) );
+		// The sections are also built by PluginInstaller for their plugin descriptions; one renderer per field type.
+		if ( ! has_action( 'woocommerce_admin_field_' . $this->getFieldType() ) ) {
+			add_action( 'woocommerce_admin_field_' . $this->getFieldType(), array( $this, 'renderUI' ) );
+		}
 	}
 
 	public function getSettings(): array {
@@ -335,10 +339,14 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 
 				<?php $action = $this->getInstallAction(); ?>
 				<div class="tpt-pairing__promo-actions">
-					<a class="tpt-pairing__promo-cta" href="<?php echo esc_url( $action['url'] ); ?>"<?php if ( $action['external'] ) : ?> target="_blank" rel="noopener"<?php endif; ?>>
-						<?php echo esc_html( $action['label'] ); ?>
-						<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</a>
+					<?php if ( 'wporg' === $action['kind'] ) : ?>
+						<a class="tpt-pairing__promo-cta" href="<?php echo esc_url( $action['url'] ); ?>" target="_blank" rel="noopener">
+							<?php echo esc_html( $action['label'] ); ?>
+							<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						</a>
+					<?php else : ?>
+						<?php PluginInstaller::renderButton( PluginInstaller::describe( $this ), array( 'class' => 'tpt-pairing__promo-cta', 'reload' => true ) ); ?>
+					<?php endif; ?>
 					<a class="tpt-pairing__promo-link" target="_blank" rel="noopener" href="<?php echo esc_url( $this->getOwnPluginSiteURL() . $utm ); ?>">
 						<?php esc_html_e( 'Learn more', 'tier-pricing-table' ); ?>
 					</a>

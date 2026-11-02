@@ -1,10 +1,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.2.0\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
 "POT-Creation-Date: 2026-10-28T13:31:01+00:00\n"
-"PO-Revision-Date: 2026-10-28T13:31:01+00:00\n"
+"PO-Revision-Date: 2026-11-02 14:56+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr_FR\n"
 "Language: fr_FR\n"
@@ -228,7 +228,7 @@ msgstr ""
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:38
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1179
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1184
 msgid "Apply to variable products"
 msgstr "Appliquer aux produits variables"
 
@@ -256,7 +256,7 @@ msgstr "Afficher la plage (de la plus basse à la plus élevée)"
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:65
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:836
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1211
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1216
 msgid "Custom template"
 msgstr "Modèle personnalisé"
 
@@ -353,7 +353,6 @@ msgstr ""
 "(obsolète)."
 
 #: src/Addons/Coupons/CouponsAddon.php:9
-#: views/admin/welcome-page/welcome-page.php:1077
 msgid "Coupons management"
 msgstr "Gestion des coupons"
 
@@ -401,6 +400,7 @@ msgid "Upgrade you plan"
 msgstr "Mettez à niveau votre plan"
 
 #: src/Addons/CustomColumns/CustomColumnsAddon.php:17
+#: src/TierPricingTablePlugin.php:251
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:30
 msgid "Custom table columns"
@@ -449,15 +449,14 @@ msgstr "Économie par article"
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278
 #: views/admin/components/tiered-pricing-rules-form.php:55
-#: views/admin/welcome-page/welcome-page.php:647
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:69
 #: src/Addons/CustomColumns/js-source/index.js:286
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:723
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:889
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1162
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:728
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:894
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1167
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:460
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:40
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:41
@@ -687,12 +686,11 @@ msgstr "Mix & Match"
 #: views/addons/category-tiers/edit.php:59
 #: views/addons/category-tiers/edit.php:82
 #: views/admin/components/tiered-pricing-rules-form.php:65
-#: views/admin/welcome-page/welcome-page.php:645
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:285
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:717
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:722
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:351
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:461
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Fixed/Row.js:27
@@ -719,9 +717,8 @@ msgstr "Quantité"
 #: src/PricingTable.php:459
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
-#: views/admin/welcome-page/welcome-page.php:646
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:729
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
@@ -793,9 +790,8 @@ msgid "%s is currently editing"
 msgstr "%s est en train de modifier"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:12
-#: src/TierPricingTablePlugin.php:142
-#: views/admin/notifications/activation-notification.php:56
-#: views/admin/welcome-page/welcome-page.php:595
+#: src/TierPricingTablePlugin.php:148
+#: views/admin/welcome-page/welcome-page.php:195
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/App.js:267
 #: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:34
@@ -874,6 +870,8 @@ msgid "Making a pricing rule"
 msgstr "Créer une règle de tarification"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:44
+#: views/admin/notifications/black-friday.php:43
+#: views/admin/notifications/feedback-discount.php:41
 msgid "Dismiss"
 msgstr "Rejeter"
 
@@ -971,7 +969,7 @@ msgstr "Remplacez les prix réguliers par défaut des produits."
 #: src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21
 #: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:116
 #: src/Admin/ProductPage/TieredPricingTab.php:35
-#: src/Integrations/Plugins/WPAllImport.php:336 src/Settings/Settings.php:306
+#: src/Integrations/Plugins/WPAllImport.php:336 src/Settings/Settings.php:307
 msgid "Tiered Pricing"
 msgstr "Tarification échelonnée"
 
@@ -1266,7 +1264,6 @@ msgid "Select for a user role"
 msgstr "Sélectionner pour un rôle d'utilisateur"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:54
-#: views/admin/welcome-page/welcome-page.php:975
 msgid "Manage user roles"
 msgstr "Gérer les rôles des utilisateurs"
 
@@ -1524,6 +1521,8 @@ msgstr "Débute le %s."
 
 #: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:390
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:25
+#: src/Admin/PluginInstaller/PluginInstaller.php:102
+#: src/Admin/PluginInstaller/PluginInstaller.php:148
 msgid "Active"
 msgstr "Actif"
 
@@ -1702,7 +1701,7 @@ msgstr "Chaque:"
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:71
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:316
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:321
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:447
 msgid "Total savings"
 msgstr "Économies totales"
@@ -2520,6 +2519,7 @@ msgid "View"
 msgstr "Voir"
 
 #: src/Addons/NonLoggedInUsers/Wholesale/CPT/ApplicationAdmin.php:213
+#: src/Admin/WelcomePage/WelcomePage.php:59
 msgid "You are not allowed to do this."
 msgstr "Vous n'êtes pas autorisé à faire cela."
 
@@ -2951,8 +2951,7 @@ msgstr "Paragraphe"
 
 #: src/Addons/NonLoggedInUsers/Wholesale/Settings/FormFields.php:23
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:56
-#: src/TierPricingTablePlugin.php:285
-#: views/admin/welcome-page/welcome-page.php:869 src/Blocks/build/index.js:760
+#: src/TierPricingTablePlugin.php:315 src/Blocks/build/index.js:760
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:23
 #: src/Blocks/build/index.js:501
 msgid "Dropdown"
@@ -3442,6 +3441,7 @@ msgid "Applying as %1$s (%2$s)."
 msgstr "Vous faites votre demande en tant que %1$s (%2$s)."
 
 #: src/Addons/NonLoggedInUsers/Wholesale/views/frontend/registration-form.php:112
+#: views/admin/welcome-page/welcome-page.php:138
 msgid "optional"
 msgstr "facultatif"
 
@@ -3493,13 +3493,13 @@ msgstr "Masquer cette astuce"
 #: src/Addons/PluginsRecommendations/CancellationSurveysPlugin.php:54
 #: src/Addons/PluginsRecommendations/U2CodeProductAddonsPlugin.php:88
 #: src/Integrations/Plugins/U2CodeMulticurrency.php:57
-#: src/Integrations/Plugins/U2CodeProductAddons.php:76
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:343
+#: src/Integrations/Plugins/U2CodeProductAddons.php:80
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:351
 msgid "Learn more"
 msgstr "Apprendre encore plus"
 
 #: src/Addons/PluginsRecommendations/ConditionalLogicForProductAddons.php:44
-#: src/Integrations/Plugins/U2CodeProductAddons.php:62
+#: src/Integrations/Plugins/U2CodeProductAddons.php:66
 #: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:57
 msgid "Conditional logic"
 msgstr "Logique conditionnelle"
@@ -3528,7 +3528,7 @@ msgstr "Installer maintenant — gratuit"
 
 #: src/Addons/PluginsRecommendations/U2CodeProductAddonsPlugin.php:62
 #: src/Integrations/Plugins/U2CodeMulticurrency.php:52
-#: src/Integrations/Plugins/U2CodeProductAddons.php:71
+#: src/Integrations/Plugins/U2CodeProductAddons.php:75
 msgid "Free on WordPress.org"
 msgstr "Gratuit sur WordPress.org"
 
@@ -3634,7 +3634,7 @@ msgstr "Où afficher le bloc récapitulatif."
 
 #: src/Addons/PricingSummary/SummarySubsection.php:64
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1058
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1063
 msgid "Summary layout"
 msgstr "Disposition récapitulative"
 
@@ -3758,7 +3758,7 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:84
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:407
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:412
 msgid "Where it shows"
 msgstr "Où l'afficher"
 
@@ -3772,7 +3772,7 @@ msgstr "Listes et catégories choisies"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:95
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:418
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:423
 msgid "Product lists"
 msgstr "Listes de produits"
 
@@ -3790,7 +3790,7 @@ msgstr "Uniquement pour les produits des catégories"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:107
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:441
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:446
 msgid "All categories"
 msgstr "Toutes les catégories"
 
@@ -3804,13 +3804,13 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:112
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:483
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:488
 msgid "Tiers per grid item"
 msgstr "Niveaux par élément de la grille"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:117
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:486
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:491
 msgid "All"
 msgstr "Tous"
 
@@ -3825,7 +3825,7 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:121
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1108
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1113
 msgid "Bulk savings badge"
 msgstr "Badge d'économies sur volume"
 
@@ -3875,13 +3875,13 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:176
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:468
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:473
 msgid "Dynamic price"
 msgstr "Prix dynamique"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:185
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:469
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:474
 msgid ""
 "Update the displayed price to the tier price when the customer changes the "
 "quantity in the grid. Needs a quantity field on the grid item, from this "
@@ -3893,8 +3893,8 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:195
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:461
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:534
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:466
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:539
 msgid "Compact layout"
 msgstr "Disposition compacte"
 
@@ -3920,19 +3920,19 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:216
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:495
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:500
 msgid "Layout source"
 msgstr "Source de mise en page"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:220
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:501
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:506
 msgid "Same as product page"
 msgstr "Identique à la page produit"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:221
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:502
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:507
 msgid "Custom"
 msgstr "Coutume"
 
@@ -4000,7 +4000,7 @@ msgstr "ex. 10+ pièces"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:306
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:162
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:549
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:554
 msgid "Spacing"
 msgstr "Espacement"
 
@@ -4009,11 +4009,11 @@ msgstr "Espacement"
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:167
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:176
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:573
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:607
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:632
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:985
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1149
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:578
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:612
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:637
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:990
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1154
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:165
 msgid "Auto"
@@ -4032,7 +4032,7 @@ msgstr ""
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:315
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:171
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:583
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:588
 msgid "Cell padding"
 msgstr "Marge intérieure des cellules"
 
@@ -4051,7 +4051,7 @@ msgstr ""
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:324
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:180
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:678
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:683
 msgid "Tier order"
 msgstr "Ordre des niveaux"
 
@@ -4145,14 +4145,14 @@ msgstr "Titre de la colonne Prix"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:403
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:285
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:841
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:846
 msgid "Show discount"
 msgstr "Afficher la remise"
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:409
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:293
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:738
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:743
 msgid "Discount format"
 msgstr "Format de la remise"
 
@@ -4356,7 +4356,7 @@ msgstr "Prix ​​unitaire"
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:111
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1090
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1095
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:480
 #: src/Addons/Tools/build/index.js:3
 #: src/Addons/Tools/js-source/components/PricingTest.js:214
@@ -4739,7 +4739,6 @@ msgstr "Le téléchargement du fichier a échoué."
 #: src/Addons/RequestAQuote/RequestAQuoteAddon.php:8
 #: src/Addons/RequestAQuote/Settings/RequestAQuoteSettingsSection.php:8
 #: src/Addons/RequestAQuote/views/frontend/quote-modal.php:28
-#: views/admin/welcome-page/welcome-page.php:967
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:531
 msgid "Request a Quote"
@@ -4801,6 +4800,7 @@ msgid "Quote Request"
 msgstr "Demande de devis"
 
 #: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:29
+#: src/Admin/WelcomePage/WelcomePage.php:240
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/App.js:141
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:133
@@ -4872,7 +4872,6 @@ msgstr ""
 "fenêtre contextuelle n'est visible que par les administrateurs."
 
 #: src/Addons/RequestAQuote/views/frontend/quote-modal.php:37
-#: views/admin/banners/upgrade-banner.php:49
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:236
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -5168,13 +5167,13 @@ msgstr ""
 msgid "Manage Roles"
 msgstr "Gérer les rôles"
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:118
+#: src/Addons/Tools/API/ToolsEndpoints.php:119
 #: src/Addons/Tools/build/index.js:3
 #: src/Addons/Tools/js-source/components/PricingTest.js:343
 msgid "Pick a product first."
 msgstr "Choisissez d'abord un produit."
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:122
+#: src/Addons/Tools/API/ToolsEndpoints.php:123
 msgid "The customer could not be loaded."
 msgstr "Le client n'a pas pu être chargé."
 
@@ -5535,14 +5534,71 @@ msgstr "Style du badge"
 
 #: src/Addons/YouSave/YouSaveSubsection.php:83
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:979
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1143
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:984
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1148
 msgid "Badge colour"
 msgstr "Couleur du badge"
 
 #: src/Addons/YouSave/YouSaveSubsection.php:88
 msgid "Leave empty to follow the active tier colour."
 msgstr "Laissez vide pour suivre la couleur du niveau actif."
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:53
+msgid ""
+"Sell in several currencies. Tier and role prices follow the exchange rate, "
+"and the order is placed in the shopper's currency."
+msgstr ""
+"Vendez en plusieurs devises. Les prix par niveau et par rôle suivent le taux"
+" de change, et la commande est passée dans la devise du client."
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:54
+msgid ""
+"Paid options such as engraving or gift wrap, priced on top of the tier price"
+" with live totals."
+msgstr ""
+"Options payantes telles que la gravure ou l'emballage cadeau, facturées en "
+"plus du prix par niveau, avec des totaux en direct."
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:112
+msgid "Install and activate"
+msgstr "Installer et activer"
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:113
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:255
+msgid "Activate now"
+msgstr "Activer maintenant"
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:146
+msgid "Installing…"
+msgstr "Installation…"
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:147
+msgid "Activating…"
+msgstr "Activation…"
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:149
+msgid "Try again"
+msgstr "Réessayer"
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:150
+msgid "The plugin could not be installed from here."
+msgstr "Le plugin n'a pas pu être installé depuis cette page."
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:151
+msgid "Open the WordPress installer"
+msgstr "Ouvrir l'installateur WordPress"
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:163
+msgid "You are not allowed to activate plugins."
+msgstr "Vous n'êtes pas autorisé à activer des plugins."
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:170
+msgid "Unknown plugin."
+msgstr "Plugin inconnu."
+
+#: src/Admin/PluginInstaller/PluginInstaller.php:176
+msgid "The plugin is not installed."
+msgstr "Le plugin n'est pas installé."
 
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:36
 msgid "Default variation"
@@ -5692,7 +5748,7 @@ msgstr ""
 
 #: src/Admin/ProductPage/TieredPricingTab.php:157
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:397
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:402
 msgid "Visibility"
 msgstr "Visibilité"
 
@@ -5743,13 +5799,145 @@ msgstr ""
 msgid "Find more in the settings"
 msgstr "En savoir plus dans les paramètres"
 
-#: src/Admin/WelcomePage/WelcomePage.php:14
-msgid "Welcome to Tiered Pricing for WooCommerce!"
-msgstr "Bienvenue dans la tarification échelonnée pour WooCommerce !"
+#: src/Admin/WelcomePage/WelcomePage.php:31
+#: views/admin/welcome-page/welcome-page.php:94
+msgid "Getting started with Tiered Pricing Table"
+msgstr "Prise en main de Tiered Pricing Table"
 
-#: src/Admin/WelcomePage/WelcomePage.php:15
-msgid "Hidden Admin Page"
-msgstr "Page d'administration masquée"
+#: src/Admin/WelcomePage/WelcomePage.php:32 src/TierPricingTablePlugin.php:145
+#: views/admin/notifications/activation-notification.php:55
+msgid "Getting started"
+msgstr "Prise en main"
+
+#: src/Admin/WelcomePage/WelcomePage.php:185
+msgid "Choose how tiers look"
+msgstr "Choisir l'apparence des niveaux"
+
+#: src/Admin/WelcomePage/WelcomePage.php:186
+msgid ""
+"Pick a layout, the colours and the texts in the live preview. The choice "
+"applies to every product."
+msgstr ""
+"Choisissez une mise en page, les couleurs et les textes dans l'aperçu en "
+"direct. Le choix s'applique à tous les produits."
+
+#: src/Admin/WelcomePage/WelcomePage.php:187
+msgid "Open the configurator"
+msgstr "Ouvrir le configurateur"
+
+#: src/Admin/WelcomePage/WelcomePage.php:193
+msgid "Add tiers to a product"
+msgstr "Ajouter des niveaux à un produit"
+
+#: src/Admin/WelcomePage/WelcomePage.php:194
+msgid ""
+"On the General tab of a product, under the price: a tiered pricing type and "
+"the quantities with their prices or discounts."
+msgstr ""
+"Dans l'onglet Général d'un produit, sous le prix : un type de tarification "
+"échelonnée et les quantités avec leurs prix ou réductions."
+
+#: src/Admin/WelcomePage/WelcomePage.php:195
+msgid "Edit a product with tiers"
+msgstr "Modifier un produit avec des niveaux"
+
+#: src/Admin/WelcomePage/WelcomePage.php:195
+msgid "Open your products"
+msgstr "Ouvrir vos produits"
+
+#: src/Admin/WelcomePage/WelcomePage.php:201
+msgid "See it in your store"
+msgstr "Voir cela dans votre boutique"
+
+#: src/Admin/WelcomePage/WelcomePage.php:202
+msgid ""
+"The pricing table shows above the add-to-cart button, and the price follows "
+"the quantity the customer enters."
+msgstr ""
+"Le tableau de prix s'affiche au-dessus du bouton Ajouter au panier, et le "
+"prix suit la quantité saisie par le client."
+
+#: src/Admin/WelcomePage/WelcomePage.php:203
+msgid "View the product"
+msgstr "Voir le produit"
+
+#: src/Admin/WelcomePage/WelcomePage.php:206
+msgid "Available once a product has tiers."
+msgstr "Disponible dès qu'un produit a des niveaux."
+
+#: src/Admin/WelcomePage/WelcomePage.php:210
+msgid "Price many products at once"
+msgstr "Tarifer plusieurs produits à la fois"
+
+#: src/Admin/WelcomePage/WelcomePage.php:211
+msgid ""
+"A global pricing rule gives categories, tags, brands or customer roles one "
+"set of tiers."
+msgstr ""
+"Une règle de tarification mondiale donne aux catégories, tags, marques ou "
+"rôles de clients un même jeu de niveaux."
+
+#: src/Admin/WelcomePage/WelcomePage.php:212
+msgid "Open the pricing rules"
+msgstr "Ouvrir les règles de tarification"
+
+#: src/Admin/WelcomePage/WelcomePage.php:212 src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:313
+msgid "Add a pricing rule"
+msgstr "Ajouter une règle de tarification"
+
+#: src/Admin/WelcomePage/WelcomePage.php:219
+msgid "Sell to wholesale customers"
+msgstr "Vendre aux clients grossistes"
+
+#: src/Admin/WelcomePage/WelcomePage.php:220
+msgid ""
+"Let trade customers apply for an account, keep the catalog private, and give"
+" the Wholesale role its own prices."
+msgstr ""
+"Permettez aux clients grossistes de demander un compte, gardez le catalogue "
+"privé, et donnez au rôle grossiste ses propres prix."
+
+#: src/Admin/WelcomePage/WelcomePage.php:221
+msgid "Open the wholesale settings"
+msgstr "Ouvrir les réglages de vente en gros"
+
+#: src/Admin/WelcomePage/WelcomePage.php:235
+msgid "Import and export"
+msgstr "Importation et exportation"
+
+#: src/Admin/WelcomePage/WelcomePage.php:236
+msgid "Tiers travel with the WooCommerce CSV importer and exporter."
+msgstr ""
+"Les niveaux sont inclus dans l'importateur et l'exportateur CSV de "
+"WooCommerce."
+
+#: src/Admin/WelcomePage/WelcomePage.php:241
+msgid "A quote form for customers who want a price on a large order."
+msgstr ""
+"Un formulaire de devis pour les clients qui souhaitent un prix sur une "
+"commande importante."
+
+#: src/Admin/WelcomePage/WelcomePage.php:245
+msgid "Pricing labels"
+msgstr "Étiquettes de niveau"
+
+#: src/Admin/WelcomePage/WelcomePage.php:246
+msgid ""
+"Mark a tier as the best value or the most popular, with an icon and a "
+"colour."
+msgstr ""
+"Signalez un niveau comme le meilleur rapport qualité-prix ou le plus "
+"populaire, avec une icône et une couleur."
+
+#: src/Admin/WelcomePage/WelcomePage.php:250
+#: src/Settings/Sections/Advanced/AdvancedSection.php:35
+msgid "Modules"
+msgstr "Modules"
+
+#: src/Admin/WelcomePage/WelcomePage.php:251
+msgid "Switch off the features you do not use under Advanced."
+msgstr "Désactivez les fonctionnalités que vous n'utilisez pas sous Avancé."
 
 #: src/Core/Cache.php:91
 msgid "Cache has been purged successfully"
@@ -5779,17 +5967,28 @@ msgstr ""
 "Convertissez et affichez correctement les prix échelonnés lorsque vous "
 "utilisez le plugin multidevise CURCY."
 
-#: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:37
+#: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:142
 msgid "Discount Rules for WooCommerce"
 msgstr "Règles de réduction pour WooCommerce"
 
-#: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:41
+#: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:146
 msgid ""
-"Prevent price recalculations for free promotional items added to the cart by"
-" Discount Rules for WooCommerce."
+"Discount Rules takes priority: while one of its rules discounts a product, "
+"the tiers of that product are switched off and the discounted price applies "
+"at every quantity. Free gift items are never re-priced."
 msgstr ""
-"Empêchez les recalculs de prix pour les articles promotionnels gratuits "
-"ajoutés au panier par les règles de remise pour WooCommerce."
+"Discount Rules est prioritaire : tant qu'une de ses règles remise un "
+"produit, les niveaux de ce produit sont désactivés et le prix remisé "
+"s'applique quelle que soit la quantité. Les articles cadeaux gratuits ne "
+"sont jamais recalculés."
+
+#: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:151
+msgid "Discounts take priority"
+msgstr "Les remises ont la priorité"
+
+#: src/Integrations/Plugins/DiscountRulesForWooCommerce.php:152
+msgid "Free gifts stay free"
+msgstr "Les cadeaux gratuits restent gratuits"
 
 #: src/Integrations/Plugins/Elementor/ElementorIntegration.php:13
 msgid ""
@@ -5804,7 +6003,7 @@ msgstr ""
 #: views/admin/banners/premium-thanking-banner.php:18
 #: views/admin/banners/upgrade-banner.php:20
 #: views/admin/notifications/activation-notification.php:26
-#: views/admin/welcome-page/welcome-page.php:575
+#: views/admin/notifications/feedback-discount.php:45
 msgid "Tiered Pricing Table"
 msgstr "Tableau de tarification par niveaux"
 
@@ -5828,23 +6027,23 @@ msgid "Display type"
 msgstr "Type d'affichage"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:53
-#: src/TierPricingTablePlugin.php:282 src/Blocks/build/index.js:751
+#: src/TierPricingTablePlugin.php:312 src/Blocks/build/index.js:751
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:11
 #: src/Blocks/build/index.js:489
 msgid "Table"
 msgstr "Tableau"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:54
-#: src/TierPricingTablePlugin.php:283 src/Blocks/build/index.js:754
+#: src/TierPricingTablePlugin.php:313 src/Blocks/build/index.js:754
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:15
 #: src/Blocks/build/index.js:493
 msgid "Blocks"
 msgstr "Blocs"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:55
-#: src/TierPricingTablePlugin.php:284
+#: src/TierPricingTablePlugin.php:314
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:836
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:841
 #: src/Blocks/build/index.js:757
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:19
 #: src/Blocks/build/index.js:497
@@ -5857,8 +6056,8 @@ msgstr "Table horizontale"
 
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:63
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:657
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1068
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:662
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1073
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:307
 #: src/Addons/TierLabels/build/index.js:2
@@ -6091,7 +6290,7 @@ msgstr "Règles de prix par devise"
 msgid "Multi-currency checkout"
 msgstr "Validation de commande multidevise"
 
-#: src/Integrations/Plugins/U2CodeProductAddons.php:38
+#: src/Integrations/Plugins/U2CodeProductAddons.php:42
 msgid ""
 "Custom product options with per-option pricing, live totals and conditional "
 "logic. Deep integration: addon prices follow the tier price."
@@ -6100,17 +6299,17 @@ msgstr ""
 "direct et logique conditionnelle. Intégration poussée : les prix des options"
 " suivent le prix du niveau."
 
-#: src/Integrations/Plugins/U2CodeProductAddons.php:60
+#: src/Integrations/Plugins/U2CodeProductAddons.php:64
 #: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:55
 msgid "11+ field types"
 msgstr "Plus de 11 types de champs"
 
-#: src/Integrations/Plugins/U2CodeProductAddons.php:61
+#: src/Integrations/Plugins/U2CodeProductAddons.php:65
 #: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:56
 msgid "Per-option pricing"
 msgstr "Tarification par option"
 
-#: src/Integrations/Plugins/U2CodeProductAddons.php:63
+#: src/Integrations/Plugins/U2CodeProductAddons.php:67
 #: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:58
 #: src/Settings/Sections/ProductAddons/ProductAddonsSection.php:91
 msgid "Live totals"
@@ -6405,13 +6604,13 @@ msgid "Tips hidden"
 msgstr "Conseils cachés"
 
 #: src/Settings/CustomOptions/TPTIntegrationOption.php:64
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:319
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:323
 msgid "By U2Code"
 msgstr "Par U2Code"
 
 #: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:64
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:695
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:700
 msgid "Singular"
 msgstr "Singulier"
 
@@ -6421,7 +6620,7 @@ msgstr "par exemple, morceau"
 
 #: src/Settings/CustomOptions/TPTQuantityMeasurementField.php:76
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:701
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:706
 msgid "Plural"
 msgstr "Pluriel"
 
@@ -6533,10 +6732,6 @@ msgstr "Il utilisera l'étiquette d'unité des produits si vous la définissez."
 #: src/Settings/Sections/Advanced/AdvancedSection.php:29
 msgid "Advanced"
 msgstr "Avancé"
-
-#: src/Settings/Sections/Advanced/AdvancedSection.php:35
-msgid "Modules"
-msgstr "Modules"
 
 #: src/Settings/Sections/Advanced/AdvancedSection.php:36
 msgid "You can disable or enable specific plugin features."
@@ -6785,7 +6980,7 @@ msgstr ""
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:116
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:538
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:543
 msgid "Enable compact layout"
 msgstr "Activer une disposition compacte"
 
@@ -6823,7 +7018,7 @@ msgstr ""
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:149
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:669
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:674
 msgid "Quantity format"
 msgstr "Format de quantité"
 
@@ -6853,7 +7048,7 @@ msgstr "Taille de l'icône."
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:234
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:849
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:854
 msgid "Tooltip border"
 msgstr "Bordure d'info-bulle"
 
@@ -6971,7 +7166,7 @@ msgstr ""
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:402
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:874
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:879
 msgid "Make pricing tiers clickable"
 msgstr "Rendre les niveaux de tarification cliquables"
 
@@ -7258,60 +7453,56 @@ msgstr ""
 "Désactivez l'un des deux — nous recommandons de conserver U2Code "
 "Multicurrency pour son intégration native avec la tarification échelonnée."
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:129
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:133
 msgid "Manage integrations"
 msgstr "Gérer les intégrations"
 
 #. translators: %s: detected plugin name
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:142
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:146
 #, php-format
 msgid "%s detected."
 msgstr "%s détecté."
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:151
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:155
 msgid "Manage integration"
 msgstr "Gérer l'intégration"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:180
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:184
 msgid "Works with"
 msgstr "Compatible avec"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:186
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:190
 msgid "active"
 msgstr "actif"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:251
-msgid "Activate now"
-msgstr "Activer maintenant"
-
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:262
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:266
 msgid "Install now, free"
 msgstr "Installer maintenant, gratuit"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:270
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:274
 msgid "Get it free on WordPress.org"
 msgstr "Obtenez-le gratuitement sur WordPress.org"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:283
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:287
 msgid "How it works together"
 msgstr "Comment les deux fonctionnent ensemble"
 
 #. translators: %s: U2Code plugin name
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:305
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:309
 #, php-format
 msgid "Switch to %s"
 msgstr "Passer à %s"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:320
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:324
 #: views/admin/banners/upgrade-banner.php:22
 msgid "Free"
 msgstr "Gratuit"
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:345
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:353
 msgid "Same team, one support channel for both plugins."
 msgstr "La même équipe, un seul canal de support pour les deux plugins."
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:350
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:358
 msgid ""
 "Installs from WordPress.org. Once activated, the pairing switches on by "
 "itself; you can manage it under Integrations."
@@ -7319,7 +7510,7 @@ msgstr ""
 "S'installe depuis WordPress.org. Une fois le plugin activé, l'intégration "
 "s'active d'elle-même ; vous pouvez la gérer dans Intégrations."
 
-#: src/Settings/Sections/PluginPairingSectionAbstract.php:352
+#: src/Settings/Sections/PluginPairingSectionAbstract.php:360
 msgid ""
 "The plugin is installed but inactive. Once activated, the pairing switches "
 "on by itself; you can manage it under Integrations."
@@ -7449,12 +7640,12 @@ msgstr ""
 "n'en garder qu'un — nous recommandons U2Code Product Addons pour son "
 "intégration native avec la tarification échelonnée."
 
-#: src/Settings/Settings.php:268
+#: src/Settings/Settings.php:269
 msgid "New"
 msgstr "Nouveau"
 
 #. translators: %s: required plugin
-#: src/TierPricingTablePlugin.php:85
+#: src/TierPricingTablePlugin.php:87
 #, php-format
 msgid ""
 "<b>Tiered Pricing Table</b> plugin requires %s to be installed and "
@@ -7463,40 +7654,88 @@ msgstr ""
 "Le plugin <b>Tiered Pricing Table</b> nécessite que %s soit installé et "
 "activé."
 
-#: src/TierPricingTablePlugin.php:146
-msgid "Go Premium"
-msgstr "Passez à la version premium"
+#: src/TierPricingTablePlugin.php:152
+#: views/addons/role-based-pricing/role-pricing-form.php:29
+#: views/addons/user-based-pricing/user-pricing-form.php:31
+#: views/admin/banners/upgrade-banner.php:65
+msgid "Upgrade to premium"
+msgstr "Passer à la version premium"
 
-#: src/TierPricingTablePlugin.php:159
-#: views/admin/banners/premium-thanking-banner.php:44
-#: views/admin/banners/upgrade-banner.php:59
-#: views/admin/notifications/activation-notification.php:60
-#: views/admin/welcome-page/welcome-page.php:601
+#: src/TierPricingTablePlugin.php:165
+#: views/admin/welcome-page/welcome-page.php:113
 msgid "Documentation"
 msgstr "Documentation"
 
-#: src/TierPricingTablePlugin.php:162
-#: views/admin/welcome-page/welcome-page.php:609
-msgid "Contact Us"
+#: src/TierPricingTablePlugin.php:168
+#: views/admin/banners/premium-thanking-banner.php:56
+#: views/admin/banners/upgrade-banner.php:70
+#: views/admin/notifications/black-friday.php:96
+#: views/admin/notifications/feedback-discount.php:84
+#: views/admin/welcome-page/welcome-page.php:114
+msgid "Contact us"
 msgstr "Contactez-nous"
 
-#: src/TierPricingTablePlugin.php:166
-#: views/admin/banners/premium-thanking-banner.php:36
-#: views/admin/banners/upgrade-banner.php:71
-msgid "My Account"
-msgstr "Mon compte"
+#: src/TierPricingTablePlugin.php:172
+#: views/admin/banners/premium-thanking-banner.php:52
+#: views/admin/banners/upgrade-banner.php:82
+msgid "Account"
+msgstr "Compte"
 
-#: src/TierPricingTablePlugin.php:286
-#: views/admin/welcome-page/welcome-page.php:859
+#: src/TierPricingTablePlugin.php:246
+msgid "Percentage discounts by quantity"
+msgstr "Remises en pourcentage par quantité"
+
+#: src/TierPricingTablePlugin.php:247
+msgid "Role and customer prices"
+msgstr "Prix des rôles et des clients"
+
+#: src/TierPricingTablePlugin.php:248
+msgid "Cart rules by role: minimums, payment and shipping methods"
+msgstr ""
+"Règles de panier par rôle : minimums, moyens de paiement et méthodes de "
+"livraison"
+
+#: src/TierPricingTablePlugin.php:249
+msgid "Tax options by role"
+msgstr "Options fiscales par rôle"
+
+#: src/TierPricingTablePlugin.php:250
+msgid "Minimum, maximum and step quantities"
+msgstr "Quantité minimale, maximale et échelonnée"
+
+#: src/TierPricingTablePlugin.php:252
+msgid "Clickable pricing table"
+msgstr "Tableau de prix cliquable"
+
+#: src/TierPricingTablePlugin.php:253
+msgid "Totals on the product page"
+msgstr "Totaux sur la page produit"
+
+#: src/TierPricingTablePlugin.php:254
+msgid "Cart upsells"
+msgstr "Ventes incitatives de panier"
+
+#: src/TierPricingTablePlugin.php:255
+msgid "Hide prices from guests"
+msgstr "Masquer les prix pour les invités"
+
+#: src/TierPricingTablePlugin.php:256
+msgid "Lowest price or a price range in the catalog"
+msgstr "Prix le plus bas ou fourchette de prix dans le catalogue"
+
+#: src/TierPricingTablePlugin.php:257
+msgid "Tiered price shown as a discount in the cart"
+msgstr "Prix échelonné affiché comme remise dans le panier"
+
+#: src/TierPricingTablePlugin.php:316
 msgid "Horizontal table"
 msgstr "Tableau horizontal"
 
-#: src/TierPricingTablePlugin.php:287
-#: views/admin/welcome-page/welcome-page.php:864
+#: src/TierPricingTablePlugin.php:317
 msgid "Plain text"
 msgstr "Texte brut"
 
-#: src/TierPricingTablePlugin.php:288
+#: src/TierPricingTablePlugin.php:318
 msgid "Tooltip"
 msgstr "Info-bulle"
 
@@ -7566,11 +7805,6 @@ msgstr ""
 "Les prix par rôle sont une fonctionnalité premium. Les champs ci-dessous "
 "sont en lecture seule dans la version gratuite."
 
-#: views/addons/role-based-pricing/role-pricing-form.php:29
-#: views/addons/user-based-pricing/user-pricing-form.php:31
-msgid "Upgrade to premium"
-msgstr "Passer à la version premium"
-
 #: views/addons/role-based-pricing/role.php:36
 #: views/addons/user-based-pricing/user.php:46
 #: src/Addons/Tools/build/index.js:1
@@ -7606,26 +7840,33 @@ msgstr ""
 "Vous utilisez actuellement la version gratuite. Téléchargez la version Pro "
 "depuis votre <a href=\""
 
-#: views/admin/banners/premium-thanking-banner.php:25
+#. translators: %1$d: getting-started steps done, %2$d: steps in total
+#: views/admin/banners/premium-thanking-banner.php:32
+#: views/admin/banners/upgrade-banner.php:34
+#, php-format
+msgid "Setup %1$d of %2$d"
+msgstr "Configuration %1$d sur %2$d"
+
+#: views/admin/banners/premium-thanking-banner.php:34
+#: views/admin/banners/upgrade-banner.php:36
+msgid "Continue"
+msgstr "Continuer"
+
+#: views/admin/banners/premium-thanking-banner.php:41
 msgid "License is invalid or expired. Please check your account."
 msgstr "La licence est invalide ou expirée. Veuillez vérifier votre compte."
 
-#: views/admin/banners/premium-thanking-banner.php:40
-#: views/admin/banners/upgrade-banner.php:54
-msgid "Contact Support"
-msgstr "Contacter l'assistance"
-
-#: views/admin/banners/upgrade-banner.php:28
+#: views/admin/banners/upgrade-banner.php:44
 msgid "finish plugin activation"
 msgstr "terminer l'activation du plugin"
 
 #. translators: %s: activation link
-#: views/admin/banners/upgrade-banner.php:35
+#: views/admin/banners/upgrade-banner.php:51
 #, php-format
 msgid "Please %s to upgrade."
 msgstr "Veuillez %s effectuer une mise à niveau."
 
-#: views/admin/banners/upgrade-banner.php:65
+#: views/admin/banners/upgrade-banner.php:76
 msgid "Opt-in"
 msgstr "S'inscrire"
 
@@ -7692,291 +7933,134 @@ msgstr ""
 "les %1$s ou créez des %2$s qui fonctionneront pour les catégories de "
 "produits et les rôles d'utilisateur."
 
-#: views/admin/welcome-page/welcome-page.php:566
+#: views/admin/notifications/black-friday.php:47
+msgid "Black Friday"
+msgstr "Black Friday"
+
+#. translators: %s: "save 25%"
+#: views/admin/notifications/black-friday.php:53
+#, php-format
+msgid "Tiered Pricing Table: %s on premium"
+msgstr "Tiered Pricing Table : %s sur la version premium"
+
+#. translators: %d: discount in percent
+#: views/admin/notifications/black-friday.php:55
+#, php-format
+msgid "save %d%%"
+msgstr "économisez %d %%"
+
+#. translators: %s: the last day of the offer
+#: views/admin/notifications/black-friday.php:64
+#, php-format
 msgid ""
-"Thanks for installing the plugin! Below you will find a quick overview of "
-"the main features."
+"Role and customer prices, cart rules, upsells and the rest of the premium "
+"version, with the code below until %s."
 msgstr ""
-"Merci d'avoir installé le plugin ! Vous trouverez ci-dessous un aperçu "
-"rapide des principales fonctionnalités."
+"Prix des rôles et des clients, règles de panier, ventes incitatives et le "
+"reste de la version premium, avec le code ci-dessous jusqu'au %s."
 
-#: views/admin/welcome-page/welcome-page.php:574
-msgid "Welcome to"
-msgstr "Bienvenue à"
+#: views/admin/notifications/black-friday.php:71
+msgid "Coupon code"
+msgstr "Code promo"
 
-#: views/admin/welcome-page/welcome-page.php:581
+#: views/admin/notifications/black-friday.php:76
+msgid "Get the offer"
+msgstr "Profiter de l'offre"
+
+#: views/admin/notifications/black-friday.php:77
+#: views/admin/notifications/feedback-discount.php:65
+msgid "No thanks"
+msgstr "Non merci"
+
+#: views/admin/notifications/black-friday.php:82
+#: views/admin/notifications/feedback-discount.php:70
+msgid "What premium adds"
+msgstr "Ce que la version premium ajoute"
+
+#. translators: %s: link to the contact page
+#: views/admin/notifications/black-friday.php:95
+#: views/admin/notifications/feedback-discount.php:83
+#, php-format
+msgid "Questions? %s"
+msgstr "Des questions ? %s"
+
+#. translators: %s: "save 20%"
+#: views/admin/notifications/feedback-discount.php:51
+#, php-format
+msgid "Tell us what you think and %s on premium"
+msgstr "Dites-nous ce que vous en pensez et %s sur la version premium"
+
+#: views/admin/notifications/feedback-discount.php:52
+msgid "save 20%"
+msgstr "économisez 20 %"
+
+#: views/admin/notifications/feedback-discount.php:58
 msgid ""
-"Tiered Pricing Table is a powerful tool that allows you to create quantity-"
-"based pricing for your WooCommerce products."
+"You have been using the plugin for a while. Answer four short questions "
+"about it and get a 20% coupon for the premium version."
 msgstr ""
-"Tiered Pricing Table est un outil puissant qui vous permet de créer une "
-"tarification basée sur la quantité pour vos produits WooCommerce."
+"Vous utilisez le plugin depuis un moment. Répondez à quatre questions "
+"courtes à son sujet et obtenez un coupon de 20 % pour la version premium."
 
-#: views/admin/welcome-page/welcome-page.php:587
-msgid ""
-"With intuitive templates, flexible pricing rules, and advanced features, "
-"this plugin is a perfect fit for any type of store."
-msgstr ""
-"Avec des modèles intuitifs, des règles de tarification flexibles et des "
-"fonctionnalités avancées, ce plugin convient parfaitement à tout type de "
-"magasin."
+#: views/admin/notifications/feedback-discount.php:62
+msgid "Give feedback and get the coupon"
+msgstr "Donner votre avis et obtenir le coupon"
 
-#: views/admin/welcome-page/welcome-page.php:606
-msgid "Questions? We're here to help."
-msgstr "Des questions ? Nous sommes là pour vous aider."
+#: views/admin/notifications/feedback-discount.php:63
+msgid "Upgrade now"
+msgstr "Mettre à niveau maintenant"
 
-#: views/admin/welcome-page/welcome-page.php:635
-msgid "This is a product example."
-msgstr "Ceci est un exemple de produit."
+#: views/admin/notifications/feedback-discount.php:64
+msgid "Remind me later"
+msgstr "Me le rappeler plus tard"
 
-#: views/admin/welcome-page/welcome-page.php:680
-#: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:352
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:408
-#: src/Addons/RequestAQuote/build/index.js:1
-#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:114
-msgid "Add to cart"
-msgstr "Ajouter au panier"
+#. translators: %1$d: steps done, %2$d: steps in total, %3$s: "N steps left"
+#: views/admin/welcome-page/welcome-page.php:100
+#, php-format
+msgid "%1$d of %2$d steps done, %3$s"
+msgstr "%1$d sur %2$d étapes terminées, %3$s"
 
-#: views/admin/welcome-page/welcome-page.php:735
-msgid "You save"
-msgstr "Vous économisez"
+#. translators: %d: steps not done yet
+#: views/admin/welcome-page/welcome-page.php:104
+#, php-format
+msgid "%d step left"
+msgid_plural "%d steps left"
+msgstr[0] "%d étape restante"
+msgstr[1] "%d étapes restantes"
 
-#: views/admin/welcome-page/welcome-page.php:772
-msgid "Easy Setup"
-msgstr "Installation facile"
+#. translators: %d: steps in total
+#: views/admin/welcome-page/welcome-page.php:108
+#, php-format
+msgid "All %d steps done"
+msgstr "Toutes les %d étapes sont terminées"
 
-#: views/admin/welcome-page/welcome-page.php:780
-msgid "Add tiered pricing to products"
-msgstr "Ajouter des tarifs différenciés aux produits"
+#: views/admin/welcome-page/welcome-page.php:137
+msgid "skipped"
+msgstr "ignorée"
 
-#: views/admin/welcome-page/welcome-page.php:789
-msgid "Add unlimited quantity-based prices."
-msgstr "Ajoutez des prix illimités basés sur la quantité."
+#: views/admin/welcome-page/welcome-page.php:151
+msgid "Undo skip"
+msgstr "Ne plus ignorer"
 
-#: views/admin/welcome-page/welcome-page.php:791
-msgid "Fixed prices or percentage discounts."
-msgstr "Prix ​​fixes ou réductions en pourcentage."
+#: views/admin/welcome-page/welcome-page.php:153
+msgid "Skip this step"
+msgstr "Ignorer cette étape"
 
-#: views/admin/welcome-page/welcome-page.php:793
-#: views/admin/welcome-page/welcome-page.php:924
-msgid "Works great with variable products."
-msgstr "Fonctionne très bien avec des produits variables."
+#: views/admin/welcome-page/welcome-page.php:163
+msgid "Pairs with Tiered Pricing"
+msgstr "S'associe à Tiered Pricing"
 
-#: views/admin/welcome-page/welcome-page.php:803
-msgid "Prices automatically displayed on the product page:"
-msgstr "Prix ​​affichés automatiquement sur la page produit :"
+#: views/admin/welcome-page/welcome-page.php:180
+msgid "Good to know"
+msgstr "Bon à savoir"
 
-#: views/admin/welcome-page/welcome-page.php:819
-msgid "Various Pricing Templates"
-msgstr "Divers modèles de prix"
+#: views/admin/welcome-page/welcome-page.php:196
+msgid "Changelog"
+msgstr "Journal des modifications"
 
-#: views/admin/welcome-page/welcome-page.php:825
-msgid "Pricing Table"
-msgstr "Tableau des prix"
-
-#: views/admin/welcome-page/welcome-page.php:828
-msgid "Ability to add custom columns."
-msgstr "Possibilité d'ajouter des colonnes personnalisées."
-
-#: views/admin/welcome-page/welcome-page.php:833
-msgid "Pricing Blocks #3"
-msgstr "Blocs de tarification #3"
-
-#: views/admin/welcome-page/welcome-page.php:838
-msgid "Pricing Blocks"
-msgstr "Blocs de tarification"
-
-#: views/admin/welcome-page/welcome-page.php:843
-msgid "Pricing Blocks #2"
-msgstr "Blocs de tarification #2"
-
-#: views/admin/welcome-page/welcome-page.php:848
-msgid "Pricing Options"
-msgstr "Options de tarification"
-
-#: views/admin/welcome-page/welcome-page.php:853
-msgid "Pricing Options #2"
-msgstr "Options de tarification #2"
-
-#: views/admin/welcome-page/welcome-page.php:903
-msgid "Flexible Pricing"
-msgstr "Tarification flexible"
-
-#: views/admin/welcome-page/welcome-page.php:910
-msgid "Apply custom prices to any user role"
-msgstr "Appliquer des prix personnalisés à n'importe quel rôle d'utilisateur"
-
-#: views/admin/welcome-page/welcome-page.php:918
-msgid "Add unlimited role-based pricing."
-msgstr "Ajoutez une tarification illimitée basée sur les rôles."
-
-#: views/admin/welcome-page/welcome-page.php:920
-msgid "Control regular & sale price or provide a percentage discount."
-msgstr ""
-"Contrôlez les prix réguliers et de vente ou offrez un pourcentage de remise."
-
-#: views/admin/welcome-page/welcome-page.php:922
-msgid "Control minimum, maximum and quantity step."
-msgstr "Contrôlez le minimum, le maximum et l'étape de quantité."
-
-#: views/admin/welcome-page/welcome-page.php:935
-msgid "Apply custom prices in bulk for selected categories and users:"
-msgstr ""
-"Appliquez des prix personnalisés en masse pour les catégories et les "
-"utilisateurs sélectionnés :"
-
-#: views/admin/welcome-page/welcome-page.php:945
-msgid ""
-"Control regular prices, tiered pricing and quantity limits in one place."
-msgstr ""
-"Contrôlez les prix réguliers, les prix échelonnés et les limites de quantité"
-" en un seul endroit."
-
-#: views/admin/welcome-page/welcome-page.php:947
-msgid "Apply tiered pricing across multiple products."
-msgstr "Appliquez une tarification échelonnée sur plusieurs produits."
-
-#: views/admin/welcome-page/welcome-page.php:949
-msgid "Select products or product categories that the rule applies to."
-msgstr ""
-"Sélectionnez les produits ou les catégories de produits auxquels la règle "
-"s'applique."
-
-#: views/admin/welcome-page/welcome-page.php:951
-msgid "Select users or user roles that the rule applies to."
-msgstr ""
-"Sélectionnez les utilisateurs ou les rôles d'utilisateur auxquels la règle "
-"s'applique."
-
-#: views/admin/welcome-page/welcome-page.php:960
-msgid "Advanced Features"
-msgstr "Fonctionnalités avancées"
-
-#: views/admin/welcome-page/welcome-page.php:970
-msgid ""
-"Allow customers to request custom quotes via a sleek customizable popup."
-msgstr ""
-"Permettez aux clients de demander des devis personnalisés via une élégante "
-"fenêtre contextuelle personnalisable."
-
-#: views/admin/welcome-page/welcome-page.php:978
-msgid "Create and update user roles"
-msgstr "Créer et mettre à jour les rôles d'utilisateur"
-
-#: views/admin/welcome-page/welcome-page.php:982
-#: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1086
-msgid "Labels"
-msgstr "Étiquettes"
-
-#: views/admin/welcome-page/welcome-page.php:985
-msgid "Create customizable labels and attach them to a pricing tier"
-msgstr ""
-"Créez des étiquettes personnalisables et attachez-les à un niveau tarifaire"
-
-#: views/admin/welcome-page/welcome-page.php:990
-#: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:454
-msgid "Cart"
-msgstr "Panier"
-
-#: views/admin/welcome-page/welcome-page.php:993
-msgid "Cart upsells to motivate customers to purchase more."
-msgstr ""
-"Ventes incitatives de panier pour motiver les clients à acheter davantage."
-
-#: views/admin/welcome-page/welcome-page.php:994
-msgid "Customize cart upsells template."
-msgstr "Personnalisez le modèle de ventes incitatives de panier."
-
-#: views/admin/welcome-page/welcome-page.php:995
-msgid "Tiered price in the cart appears as a discount."
-msgstr "Le prix progressif dans le panier apparaît comme une remise."
-
-#: views/admin/welcome-page/welcome-page.php:999
-msgid "Catalog prices"
-msgstr "Tarifs catalogue"
-
-#: views/admin/welcome-page/welcome-page.php:1002
-msgid "Show the lowest price."
-msgstr "Afficher le prix le plus bas."
-
-#: views/admin/welcome-page/welcome-page.php:1003
-msgid ""
-"Customize the lowest price prefix: “from $10.00”, “as low as $10.00” or "
-"whatever you want."
-msgstr ""
-"Personnalisez le préfixe du prix le plus bas : « à partir de 10,00 $ », « à "
-"partir de 10,00 $ » ou ce que vous voulez."
-
-#: views/admin/welcome-page/welcome-page.php:1005
-msgid "Show the price range based on tiered pricing."
-msgstr "Affichez la fourchette de prix basée sur une tarification échelonnée."
-
-#: views/admin/welcome-page/welcome-page.php:1009
-msgid "Product catalog (Category page)"
-msgstr "Catalogue de produits (page Catégorie)"
-
-#: views/admin/welcome-page/welcome-page.php:1012
-msgid "Customize template (can be different from product page)."
-msgstr "Personnaliser le modèle (peut être différent de la page produit)."
-
-#: views/admin/welcome-page/welcome-page.php:1014
-msgid "Show quantity field."
-msgstr "Afficher le champ de quantité."
-
-#: views/admin/welcome-page/welcome-page.php:1047
-msgid "Other Features That Make The Plugin Unique"
-msgstr "Autres fonctionnalités qui rendent le plugin unique"
-
-#: views/admin/welcome-page/welcome-page.php:1053
-msgid "Tier Labels & Badges"
-msgstr "Étiquettes et badges de niveau"
-
-#: views/admin/welcome-page/welcome-page.php:1057
-msgid "Data Cleanup & Role Management Tools"
-msgstr "Outils de nettoyage des données et de gestion des rôles"
-
-#: views/admin/welcome-page/welcome-page.php:1061
-msgid "Import \\ Export"
-msgstr "Importer \\ Exporter"
-
-#: views/admin/welcome-page/welcome-page.php:1065
-msgid "REST API"
-msgstr "API REST"
-
-#: views/admin/welcome-page/welcome-page.php:1069
-msgid "Admin-made orders supported"
-msgstr "Commandes effectuées par l'administrateur prises en charge"
-
-#: views/admin/welcome-page/welcome-page.php:1073
-msgid "Built-in cache"
-msgstr "Cache intégré"
-
-#: views/admin/welcome-page/welcome-page.php:1081
-msgid "Shortcode \\ Gutenberg \\ Elementor"
-msgstr "Code court \\ Gutenberg \\ Elementor"
-
-#: views/admin/welcome-page/welcome-page.php:1085
-msgid "Hide prices for logged-out users"
-msgstr "Masquer les prix pour les utilisateurs déconnectés"
-
-#: views/admin/welcome-page/welcome-page.php:1089
-msgid "Works with any theme"
-msgstr "Fonctionne avec n'importe quel thème"
-
-#: views/admin/welcome-page/welcome-page.php:1093
-msgid "Debug mode"
-msgstr "Mode débogage"
-
-#: views/admin/welcome-page/welcome-page.php:1110
-msgid "Integrations with 3rd party plugins"
-msgstr "Intégrations avec des plugins tiers"
-
-#: views/admin/welcome-page/welcome-page.php:1295
-msgid "Have a question?"
-msgstr "Vous avez une question ?"
+#: views/admin/welcome-page/welcome-page.php:198
+msgid "Leave a review"
+msgstr "Laisser un avis"
 
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:40
@@ -8001,7 +8085,7 @@ msgstr "Sélectionnez le type de colonne..."
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:66
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1189
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1194
 msgid "Format"
 msgstr "Format"
 
@@ -8122,12 +8206,12 @@ msgid "Insert"
 msgstr "Insérer"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:192
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:197
 msgid "Auto: the design style's own badge colours."
 msgstr "Auto : les couleurs de badge propres au style visuel."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:192
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:197
 msgid ""
 "A light tint of this colour behind the badge text in this colour. Reset for "
 "the design style's own colours."
@@ -8136,13 +8220,13 @@ msgstr ""
 "couleur. Réinitialisez pour retrouver les couleurs propres au style visuel."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:193
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:980
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:198
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:985
 msgid "Auto: the badge follows the active tier colour."
 msgstr "Auto : le badge suit la couleur du niveau actif."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:193
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:198
 msgid ""
 "The badge background; its text stays white. Reset for the active tier "
 "colour."
@@ -8151,12 +8235,12 @@ msgstr ""
 "retrouver la couleur du niveau actif."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:194
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:199
 msgid "Auto: the savings bar follows the active tier colour."
 msgstr "Auto : la barre d'économies suit la couleur du niveau actif."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:194
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:199
 msgid ""
 "The savings bar and the percentage next to it. Reset for the active tier "
 "colour."
@@ -8166,21 +8250,21 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:227
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:230
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:232
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:235
 #: src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:23
 msgid "Available in the premium version."
 msgstr "Disponible dans la version premium."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:232
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:237
 msgid "You can try it in the preview; the store shows it with premium only."
 msgstr ""
 "Vous pouvez l'essayer dans l'aperçu ; la boutique ne l'affiche qu'avec la "
 "version premium."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:262
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:267
 msgid ""
 "Depending on the theme, the pricing block may need small CSS adjustments to "
 "fit the grid."
@@ -8189,14 +8273,14 @@ msgstr ""
 "ajustements CSS pour s'intégrer à la grille."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:263
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:268
 msgid "Tiered pricing is not shown on shop and category pages."
 msgstr ""
 "La tarification échelonnée n'est pas affichée sur les pages boutique et "
 "catégorie."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:265
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:270
 msgid ""
 "The layout is not inserted automatically. Place it with the [tiered-pricing-"
 "table] shortcode, the Tiered Pricing block or the widget; prices still "
@@ -8207,53 +8291,53 @@ msgstr ""
 "prix se mettent quand même à jour en direct."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:269
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:996
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1077
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1131
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:274
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1001
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1082
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1136
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:53
 msgid "Position"
 msgstr "Emplacement"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:287
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:292
 msgid "Cart prices"
 msgstr "Prix dans le panier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:289
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:294
 msgid "Discounted items"
 msgstr "Articles remisés"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:290
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:295
 msgid "How items with a tiered price appear in the cart."
 msgstr ""
 "Comment les articles avec un prix échelonné apparaissent dans le panier."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:295
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:300
 msgid "Show the original item price crossed out"
 msgstr "Afficher le prix d'origine de l'article barré"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:301
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:306
 msgid "Show the original subtotal crossed out"
 msgstr "Afficher le sous-total d'origine barré"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:307
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:312
 msgid "Cross out the regular price instead of the sale price"
 msgstr "Barrer le prix régulier au lieu du prix promo"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:308
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:313
 msgid "For products on sale."
 msgstr "Pour les produits en promotion."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:317
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:322
 msgid ""
 "A row before the order total, in the cart totals and in the classic "
 "checkout's order review. Not available with the Checkout block."
@@ -8263,27 +8347,27 @@ msgstr ""
 " le bloc Validation de commande."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:322
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:327
 msgid "Show what the tiered prices take off the cart"
 msgstr "Afficher ce que les prix échelonnés retirent du panier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:330
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:335
 msgid "Row label"
 msgstr "Libellé de la ligne"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:341
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:346
 msgid "Upsell message"
 msgstr "Message de vente incitative"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:343
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:348
 msgid "Next tier message"
 msgstr "Message du niveau suivant"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:344
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:349
 msgid ""
 "Shown under the item name while a higher tier is within reach. Not available"
 " with the Cart block."
@@ -8292,54 +8376,54 @@ msgstr ""
 "Non disponible avec le bloc Panier."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:349
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:354
 msgid "Show a message about the next tier"
 msgstr "Afficher un message sur le niveau suivant"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:364
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:369
 msgid "Next tier shortcuts"
 msgstr "Raccourcis vers le niveau suivant"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:368
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:373
 msgid "Make the quantity a link that sets the cart to the next tier"
 msgstr "Faire de la quantité un lien qui passe le panier au niveau suivant"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:369
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:374
 msgid "One click moves the line to the next tier and updates the cart."
 msgstr ""
 "Un clic fait passer la ligne au niveau suivant et met à jour le panier."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:375
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:380
 msgid "Show a progress bar to the next tier"
 msgstr "Afficher une barre de progression vers le niveau suivant"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:384
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:389
 msgid "Message colour"
 msgstr "Couleur du message"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:396
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:512
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:401
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:517
 msgid "Layout"
 msgstr "Mise en page"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:400
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:405
 msgid "Show on shop and category pages"
 msgstr "Afficher sur les pages boutique et catégorie"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:400
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:405
 msgid "Show on the product page"
 msgstr "Afficher sur la page produit"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:407
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:412
 msgid ""
 "The badge shows in every product list: the shop, categories, search, related"
 " products, shortcodes and blocks."
@@ -8349,7 +8433,7 @@ msgstr ""
 "blocs."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:407
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:412
 msgid ""
 "Every product list: the shop, categories, search, related products, "
 "shortcodes and blocks."
@@ -8358,17 +8442,17 @@ msgstr ""
 "les produits apparentés, les shortcodes et les blocs."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:418
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:423
 msgid "The product lists that show tiered pricing."
 msgstr "Les listes de produits qui affichent la tarification échelonnée."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:434
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:439
 msgid "Only for products in"
 msgstr "Uniquement pour les produits dans"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:434
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:439
 msgid ""
 "Type to search categories. Leave empty for every product; a category covers "
 "its child categories."
@@ -8377,24 +8461,24 @@ msgstr ""
 "produits ; une catégorie couvre ses sous-catégories."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:457
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:462
 msgid "Grid item"
 msgstr "Élément de la grille"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:462
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:467
 msgid "Minimal styling so the pricing block fits the product grid."
 msgstr ""
 "Style minimal pour que le bloc de tarification s'intègre à la grille de "
 "produits."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:475
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:480
 msgid "Quantity selector in the grid"
 msgstr "Sélecteur de quantité dans la grille"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:476
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:481
 msgid ""
 "Adds a quantity field to every grid item. Only for themes that do not have "
 "one."
@@ -8403,48 +8487,48 @@ msgstr ""
 "les thèmes qui n'en ont pas."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:484
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:489
 msgid "The rest sit behind a \"+N more\" link to the product page."
 msgstr ""
 "Les autres sont accessibles via un lien « +N de plus » vers la page produit."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:496
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:501
 msgid "Shop and category pages use the product page layout and its settings."
 msgstr ""
 "Les pages boutique et catégorie utilisent la mise en page de la page produit"
 " et ses réglages."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:522
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:527
 msgid "Design style"
 msgstr "Style visuel"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:539
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:544
 msgid "A space-saving version of the selected design style."
 msgstr "Une version compacte du style visuel sélectionné."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:550
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:555
 msgid "Auto: each design style keeps its own spacing."
 msgstr "Auto : chaque style visuel conserve son propre espacement."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:550
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:555
 msgid "Gap between the tiers. Reset for the design style's own spacing."
 msgstr ""
 "Espace entre les niveaux. Réinitialisez pour retrouver l'espacement propre "
 "au style visuel."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:584
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:589
 msgid "Auto: each design style keeps its own cell padding."
 msgstr ""
 "Auto : chaque style visuel conserve sa propre marge intérieure de cellule."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:584
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:589
 msgid ""
 "Padding inside each cell; it also overrides the theme's cell padding. Reset "
 "for the design style's own padding."
@@ -8454,56 +8538,56 @@ msgstr ""
 "style visuel."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:616
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:621
 msgid "Active tier colour"
 msgstr "Couleur du niveau actif"
 
 #. translators: %s: theme name
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:618
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:623
 #, js-format
 msgid "Taken from your theme (%s) when the plugin was installed."
 msgstr "Repris de votre thème (%s) lors de l'installation du plugin."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:626
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:631
 msgid "Discount badge colour"
 msgstr "Couleur du badge de remise"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:636
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:989
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1153
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:641
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:994
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1158
 msgid "Reset"
 msgstr "Réinitialiser"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:643
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:648
 msgid "Active tier border"
 msgstr "Bordure du niveau actif"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:647
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:652
 msgid "Mark the active tier with a left border"
 msgstr "Marquer le niveau actif par une bordure gauche"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:648
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:653
 msgid "A bar in the active tier colour at the left of the row."
 msgstr "Une barre de la couleur du niveau actif à gauche de la ligne."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:661
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:666
 msgid "e.g. Buy more, pay less"
 msgstr "ex. Achetez plus, payez moins"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:689
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:694
 msgid "Quantity unit"
 msgstr "Unité de quantité"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:690
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:695
 msgid ""
 "Shown next to quantities, e.g. pieces, boxes, packs. Leave empty for none."
 msgstr ""
@@ -8511,138 +8595,138 @@ msgstr ""
 " rien afficher."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:711
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:716
 msgid "Column headers"
 msgstr "En-têtes de colonne"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:712
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:717
 msgid "Leave a header empty to hide that column."
 msgstr "Laissez un en-tête vide pour masquer cette colonne."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:749
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:754
 msgid "Tooltip icon"
 msgstr "Icône de l'info-bulle"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:749
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:754
 msgid "Colour and size of the icon shown next to the price."
 msgstr "Couleur et taille de l'icône affichée à côté du prix."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:769
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:774
 msgid "Option text"
 msgstr "Texte de l'option"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:770
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:775
 msgid "Text of each pricing option. Click a variable to insert it."
 msgstr ""
 "Texte de chaque option de prix. Cliquez sur une variable pour l'insérer."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:781
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:786
 msgid "Base price option"
 msgstr "Option du prix de base"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:786
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:791
 msgid "Show an option for the regular price (no discount)"
 msgstr "Afficher une option pour le prix régulier (sans remise)"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:804
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:809
 msgid "Pricing string"
 msgstr "Chaîne de prix"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:805
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:810
 msgid "Text shown for each pricing tier. Click a variable to insert it."
 msgstr ""
 "Texte affiché pour chaque niveau de prix. Cliquez sur une variable pour "
 "l'insérer."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:816
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:821
 msgid "First tier"
 msgstr "Premier niveau"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:820
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:825
 msgid "Show the regular price tier (no discount)"
 msgstr "Afficher le niveau du prix régulier (sans remise)"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:857
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:913
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:862
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:918
 msgid "Show the original price crossed out"
 msgstr "Afficher le prix d'origine barré"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:865
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:870
 msgid "Show the total for the selected option"
 msgstr "Afficher le total pour l'option sélectionnée"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:875
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:880
 msgid "Clicking a tier selects its quantity."
 msgstr "Cliquer sur un niveau sélectionne sa quantité."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:891
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1165
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:896
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1170
 msgid "Price display"
 msgstr "Affichage du prix"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:901
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:906
 msgid "Price behaviour"
 msgstr "Comportement du prix"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:905
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:910
 msgid "Update the price on quantity change"
 msgstr "Mettre à jour le prix au changement de quantité"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:906
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:911
 msgid "The main price follows the quantity the customer enters."
 msgstr "Le prix principal suit la quantité saisie par le client."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:914
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:919
 msgid "Next to the discounted tier price."
 msgstr "À côté du prix remisé du niveau."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:921
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:926
 msgid "Show the total price (price × quantity)"
 msgstr "Afficher le prix total (prix × quantité)"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:922
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:927
 msgid "Instead of the price per item."
 msgstr "Au lieu du prix par article."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:929
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:934
 msgid "Also for products without tiered pricing"
 msgstr "Aussi pour les produits sans tarification échelonnée"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:943
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:948
 msgid "Savings badge"
 msgstr "Badge d'économies"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:946
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1110
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:951
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1115
 msgid "Badge"
 msgstr "Badge"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:947
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:952
 msgid ""
 "Shown when the selected quantity has a discount. Also available as the "
 "[tiered_price_you_save] shortcode."
@@ -8651,17 +8735,17 @@ msgstr ""
 "disponible via le shortcode [tiered_price_you_save]."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:952
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:957
 msgid "Show the savings badge"
 msgstr "Afficher le badge d'économies"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:967
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:972
 msgid "Style"
 msgstr "Style"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:967
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:972
 msgid ""
 "Text: the colour as text colour. Pill: a filled label with white text. "
 "Outlined: a bordered label."
@@ -8670,49 +8754,49 @@ msgstr ""
 "avec du texte blanc. Contour : une étiquette avec bordure."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:980
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1144
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:985
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1149
 msgid "Reset for the active tier colour."
 msgstr "Réinitialisez pour retrouver la couleur du niveau actif."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1007
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1012
 msgid "Badge options"
 msgstr "Options du badge"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1011
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1016
 msgid "Include the WooCommerce sale discount"
 msgstr "Inclure la remise promotionnelle WooCommerce"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1012
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1017
 msgid "An existing sale discount counts towards the savings."
 msgstr "Une remise promotionnelle existante est comptée dans les économies."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1019
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1048
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1024
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1053
 msgid "Show for products without tiered pricing"
 msgstr "Afficher pour les produits sans tarification échelonnée"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1020
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1025
 msgid "For regular sale products."
 msgstr "Pour les produits en promotion classiques."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1032
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1037
 msgid "Pricing summary"
 msgstr "Récapitulatif des prix"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1035
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1040
 msgid "Summary block"
 msgstr "Bloc récapitulatif"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1036
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1041
 msgid ""
 "Quantity, price per item and total for the selected quantity, near the "
 "pricing layout."
@@ -8721,22 +8805,27 @@ msgstr ""
 "la mise en page des prix."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1041
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1046
 msgid "Show the pricing summary block"
 msgstr "Afficher le bloc récapitulatif des prix"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1072
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1077
 msgid "e.g. Your order"
 msgstr "ex. Votre commande"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1096
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1091
+msgid "Labels"
+msgstr "Étiquettes"
+
+#: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1101
 msgid "Each"
 msgstr "L'unité"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1111
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1116
 msgid ""
 "A badge on the product image with the biggest discount the product's tiers "
 "give. Shows whether or not the pricing does, in the lists \"Where it shows\""
@@ -8747,47 +8836,52 @@ msgstr ""
 "dans les listes autorisées par « Où l'afficher »."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1116
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1121
 msgid "Show a bulk savings badge"
 msgstr "Afficher un badge d'économies sur volume"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1144
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1149
 msgid "Auto: the active tier colour."
 msgstr "Auto : la couleur du niveau actif."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1166
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1171
 msgid "The price shown in the product grid for products with tiered pricing."
 msgstr ""
 "Le prix affiché dans la grille de produits pour les produits avec "
 "tarification échelonnée."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1171
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1176
 msgid "Replace the regular price"
 msgstr "Remplacer le prix régulier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1172
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1177
 msgid "Show the lowest tier price or a price range instead."
 msgstr ""
 "Affiche plutôt le prix du niveau le plus bas ou une fourchette de prix."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1180
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1185
 msgid "Lowest and highest prices across all variations."
 msgstr "Prix le plus bas et le plus élevé parmi toutes les variations."
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1200
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1205
 msgid "Prefix for the lowest price"
 msgstr "Préfixe du prix le plus bas"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1212
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1217
 msgid "Click a variable to insert it."
 msgstr "Cliquez sur une variable pour l'insérer."
+
+#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:454
+msgid "Cart"
+msgstr "Panier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
@@ -8816,6 +8910,14 @@ msgid "Tiered pricing is switched off for shop and category pages."
 msgstr ""
 "La tarification échelonnée est désactivée pour les pages boutique et "
 "catégorie."
+
+#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:352
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:408
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:114
+msgid "Add to cart"
+msgstr "Ajouter au panier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:276
@@ -10411,11 +10513,6 @@ msgstr ""
 #: src/Addons/Tools/js-source/components/PricingTest.js:311
 msgid "There are no global pricing rules yet."
 msgstr "Il n'y a pas encore de règle de tarification globale."
-
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:313
-msgid "Add a pricing rule"
-msgstr "Ajouter une règle de tarification"
 
 #: src/Addons/Tools/build/index.js:3
 #: src/Addons/Tools/js-source/components/PricingTest.js:322

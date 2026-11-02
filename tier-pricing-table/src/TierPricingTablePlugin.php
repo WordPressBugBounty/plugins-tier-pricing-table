@@ -5,6 +5,8 @@ use TierPricingTable\Addons\Addons;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use TierPricingTable\Admin\Admin;
 use TierPricingTable\Admin\Notifications\Notifications;
+use TierPricingTable\Admin\Notifications\Notifications\ActivationNotification;
+use TierPricingTable\Admin\WelcomePage\WelcomePage;
 use TierPricingTable\Blocks\GutenbergBlocks;
 use TierPricingTable\Core\AdminNotifier;
 use TierPricingTable\Core\Cache;
@@ -37,7 +39,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.2.0';
+	const VERSION = '8.2.1';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -139,11 +141,15 @@ class TierPricingTablePlugin {
 	 * @return array
 	 */
 	public function addPluginActions( array $actions ): array {
+		if ( ! WelcomePage::isComplete() ) {
+			$actions[] = '<a href="' . esc_url( WelcomePage::getURL() ) . '">' . __( 'Getting started',
+					'tier-pricing-table' ) . '</a>';
+		}
 		$actions[] = '<a href="' . $this->getContainer()->getSettings()->getLink() . '">' . __( 'Settings',
 				'tier-pricing-table' ) . '</a>';
 		
 		if ( ! tpt_fs()->can_use_premium_code() ) {
-			$actions[] = '<a href="' . tpt_fs_activation_url() . '"><b style="color: red">' . __( 'Go Premium',
+			$actions[] = '<a href="' . tpt_fs_activation_url() . '"><b>' . __( 'Upgrade to premium',
 					'tier-pricing-table' ) . '</b></a>';
 		}
 		
@@ -159,11 +165,11 @@ class TierPricingTablePlugin {
 		$links['docs'] = '<a target="_blank" href="' . self::getDocumentationURL() . '">' . __( 'Documentation',
 				'tier-pricing-table' ) . '</a>';
 		
-		$links['contact-us'] = '<a href="' . self::getContactUsURL() . '"><b style="color: green">' . __( 'Contact Us',
+		$links['contact-us'] = '<a href="' . self::getContactUsURL() . '"><b style="color: green">' . __( 'Contact us',
 				'tier-pricing-table' ) . '</b></a>';
 		
 		if ( ! tpt_fs()->is_anonymous() && tpt_fs()->is_installed_on_site() ) {
-			$links['account'] = '<a href="' . self::getAccountPageURL() . '"><b>' . __( 'My Account',
+			$links['account'] = '<a href="' . self::getAccountPageURL() . '"><b>' . __( 'Account',
 					'tier-pricing-table' ) . '</b></a>';
 		}
 		
@@ -226,8 +232,32 @@ class TierPricingTablePlugin {
 	 */
 	public function activate() {
 		Install::run();
+		ActivationNotification::setActive();
 	}
 	
+	/**
+	 * What the premium version adds, in the order of the readme. One list for every banner that
+	 * shows it, so it cannot go stale in one place and not another.
+	 *
+	 * @return string[]
+	 */
+	public static function getPremiumFeatures(): array {
+		return array(
+			__( 'Percentage discounts by quantity', 'tier-pricing-table' ),
+			__( 'Role and customer prices', 'tier-pricing-table' ),
+			__( 'Cart rules by role: minimums, payment and shipping methods', 'tier-pricing-table' ),
+			__( 'Tax options by role', 'tier-pricing-table' ),
+			__( 'Minimum, maximum and step quantities', 'tier-pricing-table' ),
+			__( 'Custom table columns', 'tier-pricing-table' ),
+			__( 'Clickable pricing table', 'tier-pricing-table' ),
+			__( 'Totals on the product page', 'tier-pricing-table' ),
+			__( 'Cart upsells', 'tier-pricing-table' ),
+			__( 'Hide prices from guests', 'tier-pricing-table' ),
+			__( 'Lowest price or a price range in the catalog', 'tier-pricing-table' ),
+			__( 'Tiered price shown as a discount in the cart', 'tier-pricing-table' ),
+		);
+	}
+
 	public static function getDocumentationURL(): string {
 		return 'https://tiered-pricing.com/documentation/user/';
 	}

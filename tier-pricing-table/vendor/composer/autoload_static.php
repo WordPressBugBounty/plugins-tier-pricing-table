@@ -240,6 +240,7 @@ class ComposerStaticInitf6da27eb3c107eed44ce0823439221c3
         'TierPricingTable\\Admin\\Notifications\\Notifications\\Notification' => __DIR__ . '/../..' . '/src/Admin/Notifications/Notifications/Notification.php',
         'TierPricingTable\\Admin\\Notifications\\Notifications\\TwoMonthsUsingDiscount' => __DIR__ . '/../..' . '/src/Admin/Notifications/Notifications/TwoMonthsUsingDiscount.php',
         'TierPricingTable\\Admin\\Notifications\\Notifications\\YearUsingDiscount' => __DIR__ . '/../..' . '/src/Admin/Notifications/Notifications/YearUsingDiscount.php',
+        'TierPricingTable\\Admin\\PluginInstaller\\PluginInstaller' => __DIR__ . '/../..' . '/src/Admin/PluginInstaller/PluginInstaller.php',
         'TierPricingTable\\Admin\\ProductPage\\AdvanceOptionsForVariableProduct' => __DIR__ . '/../..' . '/src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php',
         'TierPricingTable\\Admin\\ProductPage\\Product' => __DIR__ . '/../..' . '/src/Admin/ProductPage/Product.php',
         'TierPricingTable\\Admin\\ProductPage\\RoleCustomerPricingUI' => __DIR__ . '/../..' . '/src/Admin/ProductPage/RoleCustomerPricingUI.php',

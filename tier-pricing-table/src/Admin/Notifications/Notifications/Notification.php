@@ -34,4 +34,12 @@ abstract class Notification {
 	public function isSeen(): bool {
 		return $this->getContainer()->getNotificationManager()->isNotificationSeen( $this->getId() );
 	}
+
+	public function getSnoozeURL(): string {
+		return $this->getContainer()->getNotificationManager()->getNotificationSnoozeURL( $this->getId() );
+	}
+
+	public function isSnoozed(): bool {
+		return $this->getContainer()->getNotificationManager()->isNotificationSnoozed( $this->getId() );
+	}
 }

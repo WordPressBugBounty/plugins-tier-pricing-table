@@ -2,6 +2,7 @@
 
 namespace TierPricingTable\Settings;
 
+use TierPricingTable\Admin\WelcomePage\WelcomePage;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Settings\CustomOptions\TPTCheckboxListOption;
 use TierPricingTable\Settings\CustomOptions\TPTDisplayType;
@@ -61,9 +62,9 @@ class Settings {
             $template = 'upgrade-banner.php';
             add_action( 'woocommerce_settings_' . self::SETTINGS_PAGE, function () use($template) {
                 $this->getContainer()->getFileManager()->includeTemplate( 'admin/banners/' . $template, [
-                    'upgradeUrl'       => tpt_fs_activation_url(),
-                    'contactUsUrl'     => TierPricingTablePlugin::getContactUsURL(),
-                    'documentationUrl' => TierPricingTablePlugin::getDocumentationURL(),
+                    'upgradeUrl'   => tpt_fs_activation_url(),
+                    'contactUsUrl' => TierPricingTablePlugin::getContactUsURL(),
+                    'setup'        => self::setupProgress(),
                 ] );
             } );
         }
@@ -329,6 +330,19 @@ class Settings {
      *
      * @return mixed
      */
+    /**
+     * The getting-started progress for the banners: url, done, total and left, or an empty array once
+     * every step is done.
+     */
+    protected static function setupProgress() : array {
+        if ( WelcomePage::isComplete() ) {
+            return array();
+        }
+        return array_merge( WelcomePage::progress(), array(
+            'url' => WelcomePage::getURL(),
+        ) );
+    }
+
     public function get( string $optionName, $default = null ) {
         return get_option( self::SETTINGS_PREFIX . $optionName, $default );
     }

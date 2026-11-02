@@ -1,395 +1,90 @@
 <?php defined( 'WPINC' ) || die;
 
 	use TierPricingTable\Admin\Notifications\Notifications\TwoMonthsUsingDiscount;
-	use TierPricingTable\Core\ServiceContainer;
 	use TierPricingTable\TierPricingTablePlugin;
 
-	$fileManager = ServiceContainer::getInstance()->getFileManager();
-
 	/**
-	 * Available variables
+	 * Feedback for a coupon: shown on the plugin's own screens after two months (and a year) on
+	 * the free plan, until dismissed; "Remind me later" keeps it away for a month.
 	 *
 	 * @var TwoMonthsUsingDiscount $notification
 	 */
 
-	// Kept the same feature list, just formatted for the new layout
-	$premiumFeatures = array(
-			'Dynamic, Role-Based Pricing',
-			'Percentage-Based Bulk Discounts',
-			'Smart In-Cart Upsells',
-			'Customizable Table Columns',
-			'Interactive, Clickable Tables',
-			'Min/Max Order Quantities',
-			'Instant Price Totals',
-			'Hide Prices for Guests',
-			'Show "As Low As" Prices',
-	);
-
-	$upgradeUrl = tpt_fs_activation_url();
+	$features    = TierPricingTablePlugin::getPremiumFeatures();
+	$upgradeUrl  = tpt_fs_activation_url();
 	$feedbackUrl = 'https://forms.gle/yWTt3aWuvZVQhbRZ7';
-
 ?>
 
 <style>
-	/* Scope everything to avoid conflicts - using 'tpt-feedback-banner' prefix */
-	.tpt-feedback-banner {
-		box-sizing: border-box;
-		/* Modern light gradient background */
-		background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
-		border: 1px solid #dcdcde;
-		border-left: 5px solid #96598a; /* Primary color */
-		border-radius: 8px;
-		color: #3c434a;
-		margin: 20px 0 15px;
-		padding: 0;
-		position: relative;
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-		overflow: hidden;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-	}
-
-	/* Close button */
-	.tpt-feedback-banner__close {
-		position: absolute;
-		top: 10px;
-		right: 15px;
-		color: #a7aaad;
-		text-decoration: none;
-		font-size: 20px;
-		line-height: 1;
-		transition: color 0.2s;
-		z-index: 10;
-	}
-	.tpt-feedback-banner__close:hover {
-		color: #3c434a;
-	}
-
-	.tpt-feedback-banner__inner {
-		display: flex;
-		flex-wrap: wrap;
-		padding: 25px;
-		gap: 30px;
-	}
-
-	/* Left Side: Call to Action */
-	.tpt-feedback-banner__cta-column {
-		flex: 1;
-		min-width: 300px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	/* Plugin Name Badge */
-	.tpt-feedback-banner__plugin-badge {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		background-color: #fdf2f8;
-		color: #96598a;
-		font-size: 11px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		padding: 5px 12px;
-		border-radius: 20px;
-		margin-bottom: 12px;
-		border: 1px solid rgba(150, 89, 138, 0.2);
-		box-shadow: 0 2px 4px rgba(150, 89, 138, 0.05);
-		align-self: flex-start;
-	}
-
-	.tpt-feedback-banner__plugin-badge::before {
-		content: '';
-		display: block;
-		width: 6px;
-		height: 6px;
-		background-color: #96598a;
-		border-radius: 50%;
-	}
-
-	.tpt-feedback-banner__headline {
-		font-size: 1.5em;
-		font-weight: 600;
-		margin-bottom: 15px;
-		line-height: 1.3;
-		color: #2c3338;
-	}
-
-	.tpt-feedback-banner__highlight {
-		color: #96598a;
-		font-weight: 700;
-		position: relative;
-		display: inline-block;
-	}
-
-	/* Underline effect for highlight */
-	.tpt-feedback-banner__highlight::after {
-		content: '';
-		position: absolute;
-		bottom: 2px;
-		left: 0;
-		width: 100%;
-		height: 8px;
-		background: rgba(150, 89, 138, 0.15);
-		z-index: -1;
-		transform: rotate(-1deg);
-	}
-
-	.tpt-feedback-banner__subtext {
-		font-size: 15px;
-		margin-top: 0;
-		margin-bottom: 25px;
-		color: #646970;
-		line-height: 1.6;
-	}
-
-	.tpt-feedback-banner__actions {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 15px;
-	}
-
-	/* Primary Button (Gradient) */
-	.tpt-feedback-banner__btn-primary {
-		background: linear-gradient(to right, #96598a, #b06ba3);
-		color: white !important;
-		text-decoration: none;
-		padding: 12px 24px;
-		border-radius: 50px;
-		font-weight: 600;
-		font-size: 14px;
-		border: none;
-		cursor: pointer;
-		position: relative;
-		overflow: hidden;
-		transition: transform 0.2s, box-shadow 0.2s;
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		box-shadow: 0 4px 6px rgba(150, 89, 138, 0.2);
-	}
-
-	.tpt-feedback-banner__btn-primary:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 6px 12px rgba(150, 89, 138, 0.3);
-		color: white !important;
-	}
-
-	/* Shimmer Effect */
-	.tpt-feedback-banner__btn-primary::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-		animation: tpt-shimmer 3s infinite;
-	}
-
-	/* Secondary Button (Outline) */
-	.tpt-feedback-banner__btn-secondary {
-		background: transparent;
-		color: #96598a !important;
-		text-decoration: none;
-		padding: 11px 20px;
-		border-radius: 50px;
-		font-weight: 600;
-		font-size: 14px;
-		border: 1px solid #96598a;
-		cursor: pointer;
-		transition: all 0.2s;
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-	}
-
-	.tpt-feedback-banner__btn-secondary:hover {
-		background: rgba(150, 89, 138, 0.05);
-		color: #7d4a73 !important;
-	}
-
-	.tpt-feedback-banner__dismiss {
-		font-size: 13px;
-		color: #8c8f94;
-		text-decoration: underline;
-		cursor: pointer;
-		margin-left: 5px;
-	}
-	.tpt-feedback-banner__dismiss:hover {
-		color: #3c434a;
-	}
-
-	/* Right Side: Features List */
-	.tpt-feedback-banner__features-column {
-		flex: 1.2;
-		min-width: 320px;
-		border-left: 1px solid rgba(0,0,0,0.05);
-		padding-left: 30px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		background: rgba(255,255,255,0.4);
-		border-radius: 0 8px 8px 0;
-	}
-
-	.tpt-feedback-banner__features-title {
-		font-weight: 700;
-		font-size: 13px;
-		text-transform: uppercase;
-		letter-spacing: 0.5px;
-		margin-bottom: 15px;
-		color: #96598a;
-		opacity: 0.9;
-	}
-
-	.tpt-feedback-banner__features-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 10px;
-	}
-
-	.tpt-feedback-banner__feature {
-		font-size: 13px;
-		font-weight: 500;
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		color: #3c434a;
-		background: #fff;
-		padding: 10px 12px;
-		border-radius: 8px;
-		border: 1px solid rgba(0,0,0,0.05);
-		box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-		transition: all 0.2s ease;
-	}
-
-	.tpt-feedback-banner__feature:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(150, 89, 138, 0.15);
-		border-color: rgba(150, 89, 138, 0.2);
-		color: #96598a;
-	}
-
-	.tpt-feedback-banner__feature i {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 20px;
-		height: 20px;
-		background-color: #eafaf1; /* Light green bg */
-		color: #2ed573; /* Green check */
-		border-radius: 50%;
-		font-style: normal;
-		font-size: 10px;
-		flex-shrink: 0;
-	}
-
-	@keyframes tpt-shimmer {
-		0% { left: -100%; }
-		20% { left: 100%; }
-		100% { left: 100%; }
-	}
-
-	/* Mobile Responsiveness */
-	@media screen and (max-width: 960px) {
-		.tpt-feedback-banner__inner {
-			flex-direction: column;
-			gap: 25px;
-			padding: 20px;
-		}
-		.tpt-feedback-banner__features-column {
-			border-left: none;
-			padding-left: 0;
-			border-top: 1px solid #dcdcde;
-			padding-top: 25px;
-			background: transparent;
-		}
-	}
-
-	@media screen and (max-width: 600px) {
-		.tpt-feedback-banner__actions {
-			flex-direction: column;
-			align-items: stretch;
-		}
-		.tpt-feedback-banner__btn-primary,
-		.tpt-feedback-banner__btn-secondary {
-			justify-content: center;
-			width: 100%;
-			box-sizing: border-box;
-		}
-		.tpt-feedback-banner__dismiss {
-			text-align: center;
-			display: block;
-			margin-left: 0;
-			margin-top: 10px;
-		}
-	}
+	.tpt-feedback.notice { position: relative; margin: 20px 0 15px; padding: 0; background: #fff; border: 1px solid #dcdcde; border-left: 4px solid var(--wp-admin-theme-color, #2271b1); border-radius: 4px; box-shadow: none; color: #1d2327; }
+	.tpt-feedback__close { position: absolute; top: 10px; right: 12px; color: #787c82; text-decoration: none; font-size: 20px; line-height: 1; }
+	.tpt-feedback__close:hover, .tpt-feedback__close:focus { color: #1d2327; }
+	.tpt-feedback__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 32px; padding: 22px 28px 24px; }
+	.tpt-feedback__badge { display: inline-block; margin-bottom: 10px; padding: 2px 9px; border-radius: 999px; background: #f0f0f1; color: #3c434a; font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+	.tpt-feedback__title { margin: 0 0 8px; font-size: 18px; line-height: 1.3; font-weight: 600; color: #1d2327; }
+	.tpt-feedback__title strong { color: var(--wp-admin-theme-color, #2271b1); }
+	.tpt-feedback__text { margin: 0 0 16px; color: #50575e; font-size: 14px; line-height: 1.55; max-width: 60ch; }
+	.tpt-feedback__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+	.tpt-feedback__actions .button { margin: 0; }
+	.tpt-feedback__actions a:not(.button) { color: #787c82; font-size: 13px; }
+	.tpt-feedback__features { border-left: 1px solid #f0f0f1; padding-left: 32px; }
+	.tpt-feedback__features-title { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: #1d2327; }
+	.tpt-feedback__list { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 20px; }
+	.tpt-feedback__list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.45; color: #3c434a; }
+	.tpt-feedback__list svg { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px; color: #00a32a; }
+	.tpt-feedback__help { margin: 0; font-size: 12px; color: #787c82; }
+	@media screen and (max-width: 1100px) { .tpt-feedback__inner { grid-template-columns: 1fr; gap: 20px; } .tpt-feedback__features { border-left: 0; padding-left: 0; border-top: 1px solid #f0f0f1; padding-top: 16px; } }
+	@media screen and (max-width: 600px) { .tpt-feedback__list { grid-template-columns: 1fr; } }
 </style>
 
-<div class="tpt-feedback-banner notice">
-	<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>" class="tpt-feedback-banner__close" title="Dismiss">&times;</a>
+<div class="tpt-feedback notice">
+	<a href="<?php echo esc_url( $notification->getCloseURL() ); ?>" class="tpt-feedback__close" aria-label="<?php esc_attr_e( 'Dismiss', 'tier-pricing-table' ); ?>">&times;</a>
 
-	<div class="tpt-feedback-banner__inner">
+	<div class="tpt-feedback__inner">
+		<div>
+			<span class="tpt-feedback__badge"><?php esc_html_e( 'Tiered Pricing Table', 'tier-pricing-table' ); ?></span>
 
-		<!-- Left Column: CTA -->
-		<div class="tpt-feedback-banner__cta-column">
+			<h3 class="tpt-feedback__title">
+				<?php
+				echo wp_kses( sprintf(
+					/* translators: %s: "save 20%" */
+					__( 'Tell us what you think and %s on premium', 'tier-pricing-table' ),
+					'<strong>' . esc_html__( 'save 20%', 'tier-pricing-table' ) . '</strong>'
+				), array( 'strong' => array() ) );
+				?>
+			</h3>
 
-            <span class="tpt-feedback-banner__plugin-badge">
-                Tiered Pricing Table for WooCommerce
-            </span>
+			<p class="tpt-feedback__text">
+				<?php esc_html_e( 'You have been using the plugin for a while. Answer four short questions about it and get a 20% coupon for the premium version.', 'tier-pricing-table' ); ?>
+			</p>
 
-			<div class="tpt-feedback-banner__headline">
-				<span>🎁</span> We value your feedback!<br>
-				Help us improve and <span class="tpt-feedback-banner__highlight">Save 20%</span>
+			<div class="tpt-feedback__actions">
+				<a class="button button-primary" href="<?php echo esc_url( $feedbackUrl ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Give feedback and get the coupon', 'tier-pricing-table' ); ?></a>
+				<a class="button" href="<?php echo esc_url( $upgradeUrl ); ?>"><?php esc_html_e( 'Upgrade now', 'tier-pricing-table' ); ?></a>
+				<a href="<?php echo esc_url( $notification->getSnoozeURL() ); ?>"><?php esc_html_e( 'Remind me later', 'tier-pricing-table' ); ?></a>
+				<a href="<?php echo esc_url( $notification->getCloseURL() ); ?>"><?php esc_html_e( 'No thanks', 'tier-pricing-table' ); ?></a>
 			</div>
-
-			<div class="tpt-feedback-banner__subtext">
-				<p style="margin: 0 0 10px;">You've been using the plugin for a while now. We'd love to hear your thoughts!</p>
-				<p style="margin: 0;">
-					Answer 4 quick questions in our form and receive an
-					<b>exclusive 20% discount code</b> for the Premium version.
-				</p>
-			</div>
-
-			<div class="tpt-feedback-banner__actions">
-				<!-- Primary Action: Go to Form -->
-				<a href="<?php echo esc_url( $feedbackUrl ); ?>" target="_blank" class="tpt-feedback-banner__btn-primary">
-					Give Feedback & Get Coupon 📝
-				</a>
-
-				<!-- Secondary Action: Direct Upgrade -->
-				<a href="<?php echo esc_attr( $upgradeUrl ); ?>" class="tpt-feedback-banner__btn-secondary">
-					Upgrade Now 🚀
-				</a>
-
-				<a href="<?php echo esc_attr( $notification->getCloseURL() ); ?>" class="tpt-feedback-banner__dismiss">
-					No thanks
-				</a>
-			</div>
-
 		</div>
 
-		<!-- Right Column: Features -->
-		<div class="tpt-feedback-banner__features-column">
-			<div class="tpt-feedback-banner__features-title">Upgrade to unlock:</div>
-			<ul class="tpt-feedback-banner__features-list">
-				<?php foreach ( $premiumFeatures as $feature ) : ?>
-					<li class="tpt-feedback-banner__feature">
-						<i>✔</i> <?php echo esc_html( $feature ); ?>
+		<div class="tpt-feedback__features">
+			<p class="tpt-feedback__features-title"><?php esc_html_e( 'What premium adds', 'tier-pricing-table' ); ?></p>
+			<ul class="tpt-feedback__list">
+				<?php foreach ( $features as $feature ) : ?>
+					<li>
+						<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="10" fill="currentColor" opacity=".14"/><path d="M6 10.4l2.6 2.6L14 7.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						<?php echo esc_html( $feature ); ?>
 					</li>
 				<?php endforeach; ?>
 			</ul>
-
-			<div style="margin-top: 15px; font-size: 12px; color: #646970;">
-				Have questions? <a href="<?php echo esc_attr( TierPricingTablePlugin::getContactUsURL() ); ?>" target="_blank" style="color: #96598a; text-decoration: underline;">Contact our team</a>
-			</div>
+			<p class="tpt-feedback__help">
+				<?php
+				printf(
+					/* translators: %s: link to the contact page */
+					esc_html__( 'Questions? %s', 'tier-pricing-table' ),
+					'<a href="' . esc_url( TierPricingTablePlugin::getContactUsURL() ) . '" target="_blank" rel="noopener">' . esc_html__( 'Contact us', 'tier-pricing-table' ) . '</a>'
+				);
+				?>
+			</p>
 		</div>
-
 	</div>
 </div>

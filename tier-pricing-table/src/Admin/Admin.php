@@ -4,6 +4,7 @@ use TierPricingTable\Admin\ProductPage\AdvanceOptionsForVariableProduct;
 use TierPricingTable\Admin\ProductPage\Product;
 use TierPricingTable\Admin\ProductPage\TieredPricingTab;
 use TierPricingTable\Admin\ProductPage\RoleCustomerPricingUI;
+use TierPricingTable\Admin\PluginInstaller\PluginInstaller;
 use TierPricingTable\Admin\WelcomePage\WelcomePage;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\TierPricingTablePlugin;
@@ -39,6 +40,7 @@ class Admin {
 		new TipsManager();
 		
 		new WelcomePage();
+		new PluginInstaller();
 		
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueueAssets' ], 10, 2 );
 	}

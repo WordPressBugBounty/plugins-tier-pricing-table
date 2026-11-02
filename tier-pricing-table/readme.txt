@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 8.2.0
+Stable tag: 8.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,17 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 8.2.1 [2026-11-02] =
+* New: a Getting started page with five setup steps, their live progress, a skip for the optional ones, and one-click install of the U2Code Multicurrency and Product Addons plugins.
+* New: Discount Rules for WooCommerce discounts take priority over tiered prices while a rule is active, switchable under Integrations.
+* Improvement: the settings page banners show the setup progress and lead to the Getting started page until every step is done.
+* Improvement: the feedback and Black Friday notices are calmer, translatable, show only on the plugin's screens and can be snoozed or dismissed.
+* Improvement: the layout configurator opens with only the Layout card expanded.
+* Improvement: pricing tables inserted after the page loads, as in quick views and popups, initialise on their own, and builder layouts without a product wrapper find their quantity field.
+* Improvement: the WooCommerce.com build of U2Code Product Addons (Bespoke Product Options) is recognised as the same plugin.
+* Improvement: the settings reset also clears dismissed notices and keeps the activation date.
+* Improvement: translations updated for the new screens.
 
 = 8.2.0 [2026-10-28] =
 * New: a Guest role for product-level role prices, for visitors who are not logged in.

@@ -2,8 +2,8 @@
 	
 	use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 	use TierPricingTable\Admin\Notifications\Notifications\ActivationNotification;
+	use TierPricingTable\Admin\WelcomePage\WelcomePage;
 	use TierPricingTable\Core\ServiceContainer;
-	use TierPricingTable\TierPricingTablePlugin;
 	
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -51,14 +51,9 @@ if ( ! defined( 'WPINC' ) ) {
 			</p>
 			<p style="margin-top: 10px">
 				<span>
-					<a href="<?php echo esc_attr( ServiceContainer::getInstance()->getSettings()->getLink() ); ?>"
-					   class="button button-primary">
-					<?php esc_html_e( 'Settings', 'tier-pricing-table' ); ?>
+					<a href="<?php echo esc_url( WelcomePage::getURL() ); ?>" class="button button-primary">
+						<?php esc_html_e( 'Getting started', 'tier-pricing-table' ); ?>
 					</a>
-				<a href="<?php echo esc_attr( TierPricingTablePlugin::getDocumentationURL() ); ?>"
-				   target="_blank" class="button">
-					<?php esc_html_e( 'Documentation', 'tier-pricing-table' ); ?>
-				</a>
 				</span>
 			</p>
 		</div>

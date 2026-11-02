@@ -4,6 +4,7 @@ use TierPricingTable\Addons\CustomColumns\CustomColumnsManager;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Guide;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\Addons\TaxSettings\API\TaxSettingsEndpoints;
+use TierPricingTable\Admin\Notifications\Notifications;
 use TierPricingTable\Admin\Tips\Tip;
 use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use WP_Error;
@@ -308,8 +309,8 @@ class ToolsEndpoints {
 			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( $prefix ) . '%' ) );
 		}
 		
-		// the activation date comes back as "today" on the next request, like a fresh install
-		foreach ( array( Tip::SEEN_TIPS_OPTION_KEY, 'tpt_integrations_badge_seen', TaxSettingsEndpoints::OPTION_KEY, 'tpt_plugin_activation_timestamp' ) as $option ) {
+		// dismissed tips, badges and notices come back; the activation date stays, it is history, not a setting
+		foreach ( array( Tip::SEEN_TIPS_OPTION_KEY, 'tpt_integrations_badge_seen', TaxSettingsEndpoints::OPTION_KEY, Notifications::SEEN_NOTIFICATIONS_OPTION_KEY, Notifications::SNOOZED_NOTIFICATIONS_OPTION_KEY ) as $option ) {
 			delete_option( $option );
 		}
 		

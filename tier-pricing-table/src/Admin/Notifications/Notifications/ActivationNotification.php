@@ -1,12 +1,12 @@
 <?php namespace TierPricingTable\Admin\Notifications\Notifications;
 
 use TierPricingTable\Core\ServiceContainerTrait;
-use TierPricingTable\TierPricingTablePlugin;
+use TierPricingTable\Admin\WelcomePage\WelcomePage;
 
 /**
- * Class Notifications
- *
- * @package TierPricingTable\Admin\Notifications
+ * Shown once after activation, as the way to the getting-started page for anyone the post-activation
+ * redirect missed (WP-CLI, bulk activation, a reinstall). Opening the page clears it, and a store
+ * that already has every step done never sees it.
  */
 class ActivationNotification extends Notification {
 	
@@ -35,10 +35,30 @@ class ActivationNotification extends Notification {
 	}
 	
 	public function isSeen(): bool {
-		return get_transient( 'tiered_pricing_table_activated' ) !== 'yes';
+		return get_transient( self::ACTIVATION_TRANSIENT_NAME ) !== 'yes';
 	}
 	
+	/**
+	 * Not on the getting-started page itself (the page hides notices, and it is where the notice leads)
+	 * and not on the Freemius opt-in screen, which ends on that page anyway.
+	 */
 	public function isActive(): bool {
-		return ! $this->isSeen();
+		if ( $this->isSeen() ) {
+			return false;
+		}
+		
+		if ( WelcomePage::isComplete() ) {
+			self::setInactive();
+			
+			return false;
+		}
+		
+		$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+		
+		if ( WelcomePage::PAGE_SLUG === $page ) {
+			return false;
+		}
+		
+		return ! ( function_exists( 'tpt_fs' ) && tpt_fs()->is_activation_page() );
 	}
 }

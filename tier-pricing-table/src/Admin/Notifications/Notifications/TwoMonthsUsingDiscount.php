@@ -11,8 +11,12 @@ use TierPricingTable\TierPricingTablePlugin;
  */
 class TwoMonthsUsingDiscount extends Notification {
     use ServiceContainerTrait;
+    /**
+     * One month of use is enough to have an opinion, and most upgrade decisions are made early.
+     * The class and the stored id keep their original names: the id is what remembers a dismissal.
+     */
     public function getMonthsNumberToUsePluginToSeeNotification() : int {
-        return 2;
+        return 1;
     }
 
     public function getId() : string {
@@ -36,7 +40,7 @@ class TwoMonthsUsingDiscount extends Notification {
     }
 
     public function isActive() : bool {
-        return $this->passedRequirements() && !$this->isSeen();
+        return $this->passedRequirements() && !$this->isSeen() && !$this->isSnoozed();
     }
 
 }

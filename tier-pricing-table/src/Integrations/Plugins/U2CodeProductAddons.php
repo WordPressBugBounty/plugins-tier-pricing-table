@@ -17,16 +17,20 @@ class U2CodeProductAddons extends PluginIntegrationAbstract {
 
 		// One toggle governs the whole pairing: when the integration is switched off on the
 		// Tiered Pricing side, unregister the addons-side integration as well. The plugin ships
-		// in two distributions with different namespaces (SimpleProductAddons — free build,
-		// U2Code\ProductAddons — premium); instanceof against a class from an inactive plugin
-		// is safe, it simply never matches.
+		// in three distributions with their own namespaces and hook prefixes (SimpleProductAddons,
+		// the free build; U2Code\ProductAddons, premium; BespokeProductOptions, the WooCommerce.com
+		// build); instanceof against a class from an inactive plugin is safe, it simply never matches.
 		if ( ! $this->isEnabled() ) {
-			add_filter( 'simple_product_addons/integrations', function ( $integrations ) {
+			$withoutTieredPricing = function ( $integrations ) {
 				return array_filter( (array) $integrations, function ( $integration ) {
 					return ! ( $integration instanceof \SimpleProductAddons\Integrations\Plugins\TieredPricingTable )
-						&& ! ( $integration instanceof \U2Code\ProductAddons\Integrations\Plugins\TieredPricingTable );
+						&& ! ( $integration instanceof \U2Code\ProductAddons\Integrations\Plugins\TieredPricingTable )
+						&& ! ( $integration instanceof \BespokeProductOptions\Integrations\Plugins\TieredPricingTable );
 				} );
-			} );
+			};
+
+			add_filter( 'simple_product_addons/integrations', $withoutTieredPricing );
+			add_filter( 'bespoke_product_options/integrations', $withoutTieredPricing );
 		}
 	}
 

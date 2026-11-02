@@ -17,8 +17,8 @@ class U2CodeProductAddonsPlugin extends Tip {
 	}
 
 	public static function isAddonsPluginActive(): bool {
-		// Free build (SimpleProductAddons) or premium build (U2Code\ProductAddons)
-		return class_exists( '\\SimpleProductAddons\\Plugin' ) || class_exists( '\\U2Code\\ProductAddons\\Plugin' );
+		// Free build (SimpleProductAddons), premium build (U2Code\ProductAddons) or the WooCommerce.com build (Bespoke Product Options)
+		return class_exists( '\\SimpleProductAddons\\Plugin' ) || class_exists( '\\U2Code\\ProductAddons\\Plugin' ) || class_exists( '\\BespokeProductOptions\\Plugin' );
 	}
 
 	public function __construct() {
