@@ -1,10 +1,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.2.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
-"POT-Creation-Date: 2026-10-28T13:31:01+00:00\n"
-"PO-Revision-Date: 2026-11-02 14:56+0000\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.3.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tier-pricing-table\n"
+"POT-Creation-Date: 2026-11-10T15:53:33+00:00\n"
+"PO-Revision-Date: 2026-11-07 16:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -117,7 +117,7 @@ msgstr ""
 "اعرض رسالة زيادة المبيعات في عربة التسوق تشير إلى عدد العناصر المطلوبة "
 "للوصول إلى مستوى التسعير التالي."
 
-#: src/Addons/CartUpsells/CartUpsellsService.php:229
+#: src/Addons/CartUpsells/CartUpsellsService.php:235
 #: src/Addons/CartUpsells/UpsellsSubsection.php:43
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
 msgid ""
@@ -160,6 +160,7 @@ msgstr ""
 "التالية وتحدّث السلة."
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:58
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:82
 msgid "Progress bar"
 msgstr "شريط التقدم"
 
@@ -281,9 +282,11 @@ msgid "Prefix for lowest price"
 msgstr "البادئة لأدنى سعر"
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:61
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:399
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:444
 #: src/Managers/FormatPriceManager.php:320
+#: views/addons/global-rules/order-discount-form.php:55
 msgid "From"
 msgstr "من"
 
@@ -365,15 +368,15 @@ msgstr ""
 msgid "Add Custom Columns"
 msgstr "إضافة أعمدة مخصصة"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:168
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:174
 msgid "(first row)"
 msgstr "(الصف الأول)"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:179
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:185
 msgid "Custom columns are available only in the premium version."
 msgstr "الأعمدة المخصصة متاحة فقط في الإصدار المميز."
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:182
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:188
 msgid "Upgrade you plan"
 msgstr "ترقية خطتك"
 
@@ -419,19 +422,21 @@ msgid "Saving per item"
 msgstr "الادخار لكل عنصر"
 
 #: src/Addons/CustomColumns/Schema.php:23
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:381
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746
-#: src/PricingTable.php:457 src/Settings/CustomOptions/TPTTextTemplate.php:207
+#: src/PricingTable.php:464 src/Settings/CustomOptions/TPTTextTemplate.php:207
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278
-#: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/components/tiered-pricing-rules-form.php:60
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:69
 #: src/Addons/CustomColumns/js-source/index.js:286
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:728
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:894
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1167
@@ -505,7 +510,7 @@ msgid "Suspend"
 msgstr "تعليق"
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:54
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:412
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:561
 msgid "The rule suspended successfully."
 msgstr "تم تعليق القاعدة بنجاح."
 
@@ -515,8 +520,8 @@ msgstr "تنطبق على"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:44
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:123
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:222
 msgid "Products"
 msgstr "منتجات"
 
@@ -525,35 +530,39 @@ msgid "Categories and subcategories"
 msgstr "التصنيفات والتصنيفات الفرعية"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:45
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:32
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:139
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:160
 msgid "Categories"
 msgstr "فئات"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:60
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:159
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
 msgid "Tags"
 msgstr "العلامات"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:47
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
 msgid "Brands"
 msgstr "العلامات التجارية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
+msgid "The whole cart"
+msgstr "السلة بالكامل"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
 msgid "All products"
 msgstr "جميع المنتجات"
 
 #. translators: %s: list of names
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:62
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:78
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:83
 #, php-format
 msgid "except %s"
 msgstr "باستثناء %s"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:72
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryVisibilityFields.php:32
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:23
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:27
@@ -561,101 +570,221 @@ msgstr "باستثناء %s"
 msgid "Roles"
 msgstr "الأدوار"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:68
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:62
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:110
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:73
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:63
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:111
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:88
 msgid "Customers"
 msgstr "عملاء"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:71
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:76
 msgid "All customers"
 msgstr "جميع العملاء"
 
 #. translators: %d: number of further items
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:96
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:101
 #, php-format
 msgid "+%d more"
 msgstr "+%d أخرى"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:15
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:53
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:16
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:15
 msgid "Pricing"
 msgstr "التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:40
+#. translators: %s: amount
+#. translators: %s: quantity
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:236
+#, php-format
+msgid "Min <b>%s</b>"
+msgstr "الحد الأدنى <b>%s</b>"
+
+#. translators: %s: number of items
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:55
+#, php-format
+msgid "Min <b>%s items</b>"
+msgstr "الحد الأدنى <b>%s عناصر</b>"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:59
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:18
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:32
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:216
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:455
+msgid "Minimum order"
+msgstr "الحد الأدنى للطلب"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:64
+msgid "<b>always</b>"
+msgstr "<b>دائمًا</b>"
+
+#. translators: %s: subtotal or number of items
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:70
+#, php-format
+msgid "from <b>%s</b>"
+msgstr "من <b>%s</b>"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:74
+msgid "with the progress bar"
+msgstr "مع شريط التقدم"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:76
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:20
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:40
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:196
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:431
+msgid "Free shipping"
+msgstr "الشحن المجاني"
+
+#. translators: 1: "fixed amount off" or "percentage off", 2: "by subtotal" or
+#. "by item count"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:89
+#, php-format
+msgid "Cart discount (%1$s, %2$s)"
+msgstr "خصم السلة (%1$s، %2$s)"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:90
+msgid "percentage off"
+msgstr "خصم بنسبة مئوية"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:90
+msgid "fixed amount off"
+msgstr "خصم بمبلغ ثابت"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:91
+msgid "by item count"
+msgstr "حسب عدد العناصر"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:91
+msgid "by subtotal"
+msgstr "حسب المجموع الفرعي"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
+msgid "Items"
+msgstr "العناصر"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
+#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:173
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:101
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:20
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
+#: src/PricingTable.php:466
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
+#: views/addons/global-rules/order-discount-form.php:61
+#: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
+#: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
+#: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
+#: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:190
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:227
+msgid "Discount"
+msgstr "تخفيض"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:121
 msgid "Regular"
 msgstr "عادي"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:43
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:124
 msgid "Sale"
 msgstr "تخفيض"
 
 #. translators: 1: percentage, 2: "sale price" or "regular price"
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:48
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:129
 #, php-format
 msgid "Discount <b>%1$s%%</b> off the %2$s"
 msgstr "خصم <b>%1$s%%</b> من %2$s"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:131
 msgid "sale price"
 msgstr "سعر التخفيض"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:131
 msgid "regular price"
 msgstr "السعر العادي"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:136
 msgid "Base price"
 msgstr "السعر الأساسي"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:78
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:127
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:120
-#: src/Integrations/Plugins/WPAllImport.php:161
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:160
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:153
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:168
+#: src/Integrations/Plugins/WPAllImport.php:169
 #: views/admin/components/regular-pricing-form.php:119
 #: views/admin/components/regular-pricing-form.php:129
 msgid "Regular price"
 msgstr "السعر العادي"
 
 #. translators: %s: percentage
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:87
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:169
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:94
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:112
 #, php-format
 msgid "%s%% off"
 msgstr "خصم %s%%"
 
+#. translators: %s: amount
+#. translators: %s: amount saved per item
+#. translators: %s: discount percentage
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:184
+#: src/PricingTable.php:346 src/PricingTable.php:352
+#, php-format
+msgid "%s off"
+msgstr "خصم %s"
+
 #. translators: 1: "fixed" or "percentage", 2: "individual" or "mix & match"
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:104
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:193
 #, php-format
 msgid "Tiers (%1$s, %2$s)"
 msgstr "الطبقات (%1$s، %2$s)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:194
 msgid "percentage"
 msgstr "نسبة مئوية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:194
 msgid "fixed"
 msgstr "ثابت"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:106
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:195
 msgid "individual"
 msgstr "فردي"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:106
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:195
 msgid "mix & match"
 msgstr "مزج ومطابقة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:204
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:248
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:379
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109
-#: src/PricingTable.php:455 src/Settings/CustomOptions/TPTTextTemplate.php:143
+#: src/PricingTable.php:462 src/Settings/CustomOptions/TPTTextTemplate.php:143
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268
 #: views/addons/category-tiers/add-free.php:24
@@ -663,11 +792,13 @@ msgstr "مزج ومطابقة"
 #: views/addons/category-tiers/edit-free.php:34
 #: views/addons/category-tiers/edit.php:59
 #: views/addons/category-tiers/edit.php:82
-#: views/admin/components/tiered-pricing-rules-form.php:65
+#: views/admin/components/tiered-pricing-rules-form.php:73
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:285
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:722
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:351
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:461
@@ -682,79 +813,67 @@ msgstr "مزج ومطابقة"
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:190
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:211
+#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:225
+#: src/Addons/Tools/js-source/components/PricingTest.js:352
+#: src/Addons/Tools/js-source/components/PricingTest.js:534
+#: src/Addons/Tools/js-source/components/PricingTest.js:535
 msgid "Quantity"
 msgstr "كمية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
-#: src/PricingTable.php:459
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
-#: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
-#: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
-#: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
-#: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
-#: src/Addons/RequestAQuote/build/index.js:1
-#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
-#: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:190
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:213
-msgid "Discount"
-msgstr "تخفيض"
-
 #. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:147
-#, php-format
-msgid "Min <b>%s</b>"
-msgstr "الحد الأدنى <b>%s</b>"
-
-#. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:151
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:240
 #, php-format
 msgid "Max <b>%s</b>"
 msgstr "الحد الأقصى <b>%s</b>"
 
 #. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:155
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:244
 #, php-format
 msgid "Step <b>%s</b>"
 msgstr "الخطوة <b>%s</b>"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:21
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:236
+#: src/Addons/Tools/js-source/components/PricingTest.js:250
 msgid "Rule"
 msgstr "القاعدة"
 
+#. translators: %d: priority number
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:30
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:266
+#, php-format, js-format
+msgid "Priority %d"
+msgstr "الأولوية %d"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:34
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:475
+msgid "Cart rule"
+msgstr "قاعدة السلة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:35
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:43
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:471
+msgid "Product prices"
+msgstr "أسعار المنتجات"
+
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:56
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:80
 #, php-format
 msgid "Starts %s"
 msgstr "تبدأ في %s"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:60
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:84
 #, php-format
 msgid "Ended %s"
 msgstr "انتهت في %s"
 
-#. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:74
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:252
-#, php-format, js-format
-msgid "Priority %d"
-msgstr "الأولوية %d"
-
 #. translators: %d: number of rules
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:94
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:117
 #, php-format
 msgid "Overridden by %d rule"
 msgid_plural "Overridden by %d rules"
@@ -766,12 +885,12 @@ msgstr[4] "تتجاوزها %d قاعدة"
 msgstr[5] "تتجاوزها %d قاعدة"
 
 #. translators: %s: user's display name
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:118
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:141
 #, php-format
 msgid "%s is currently editing"
 msgstr "%s يقوم بالتحرير حاليًا"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:12
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:13
 #: src/TierPricingTablePlugin.php:148
 #: views/admin/welcome-page/welcome-page.php:195
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -780,39 +899,65 @@ msgstr "%s يقوم بالتحرير حاليًا"
 msgid "Settings"
 msgstr "إعدادات"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:18
-msgid "prefer product"
-msgstr "تفضيل المنتج"
-
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:19
-msgid "prefer product role prices"
-msgstr "تفضيل أسعار أدوار المنتج"
-
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:20
-msgid "override product"
-msgstr "تجاوز المنتج"
-
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:25
-msgid "Prefers product pricing"
-msgstr "تفضّل تسعير المنتج"
+msgid "product kept"
+msgstr "تم الاحتفاظ بالمنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:28
-msgid "Overrides product pricing"
-msgstr "تتجاوز تسعير المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:26
+msgid "product role prices kept"
+msgstr "تم الاحتفاظ بأسعار أدوار المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:31
-msgid "Custom priorities"
-msgstr "أولويات مخصصة"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:27
+msgid "rule overrides"
+msgstr "تجاوز القاعدة"
 
-#. translators: 1, 2, 3: the three priority choices
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:32
+msgid "Keeps product settings"
+msgstr "يحتفظ بإعدادات المنتج"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:35
+msgid "Overrides product settings"
+msgstr "يتجاوز إعدادات المنتج"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:38
+msgid "Per setting"
+msgstr "لكل إعداد"
+
+#. translators: 1, 2, 3: the three choices
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:40
 #, php-format
 msgid "Base prices: %1$s. Tiers: %2$s. Quantity limits: %3$s."
 msgstr "الأسعار الأساسية: %1$s. الطبقات: %2$s. حدود الكمية: %3$s."
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:40
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:34
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:45
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:47
+msgid "Store default"
+msgstr "الافتراضي للمتجر"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:59
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:75
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:225
+msgid "Free shipping bar"
+msgstr "شريط الشحن المجاني"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:59
+msgid "Customers see a progress bar towards the free shipping threshold."
+msgstr "يرى العملاء شريط تقدم نحو حد الشحن المجاني."
+
+#. translators: %s: the discount line label
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:64
+#, php-format
+msgid "Label: %s"
+msgstr "التسمية: %s"
+
+#. translators: %s: the discount line label
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:64
+msgid "The discount line in the cart, at checkout and in e-mails."
+msgstr "سطر الخصم في السلة وعند إتمام الطلب وفي رسائل البريد الإلكتروني."
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:68
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:48
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:27
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:34
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:149
@@ -820,7 +965,7 @@ msgid "Default"
 msgstr "تقصير"
 
 #. translators: %d: number of rules
-#: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:392
+#: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:442
 #, php-format
 msgid ""
 "%d other rule has a higher priority and is applied instead of this rule for "
@@ -849,127 +994,292 @@ msgstr[5] ""
 "توجد %d قاعدة أخرى ذات أولوية أعلى تُطبّق بدلًا من هذه القاعدة على المنتجات "
 "والعملاء الذين تطابقهم جميعها. انظر \"تتجاوزها\" في مربع حالة القاعدة."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:147
+#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:165
 msgid "Premium feature"
 msgstr "ميزة متميزة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:154
+#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:172
 msgid "Upgrade plan"
 msgstr "خطة الترقية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:43
-msgid "Making a pricing rule"
-msgstr "إنشاء قاعدة تسعير"
+#: src/Addons/GlobalTieredPricing/CPT/Form/RuleTypePointer.php:73
+msgid "Start with the rule type"
+msgstr "ابدأ بنوع القاعدة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:44
-#: views/admin/notifications/black-friday.php:43
-#: views/admin/notifications/feedback-discount.php:41
-msgid "Dismiss"
-msgstr "رفض"
+#: src/Addons/GlobalTieredPricing/CPT/Form/RuleTypePointer.php:79
+msgid "The tabs of the form follow the type you pick."
+msgstr "تتبع تبويبات النموذج النوع الذي تختاره."
 
-#. translators: 1: link "Pricing", 2: link "Quantity limits"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:52
-#, php-format
-msgid "Set the prices, tiers or quantity limits on the %1$s and %2$s tabs."
-msgstr "حدد الأسعار أو الطبقات أو حدود الكمية في تبويبي %1$s و%2$s."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:24
+msgid "Tiers and the discount line label"
+msgstr "الطبقات وتسمية سطر الخصم"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:54
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:108
-msgid "Quantity limits"
-msgstr "حدود الكمية"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:34
+msgid "Discount tiers"
+msgstr "طبقات الخصم"
 
-#. translators: 1: link "products", 2: link "customers"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:62
-#, php-format
-msgid "Choose the %1$s and %2$s it covers. An empty list covers all of them."
-msgstr "اختر %1$s و%2$s التي تشملها القاعدة. القائمة الفارغة تشمل الكل."
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:63
-#: views/admin/notifications/activation-notification.php:41
-msgid "products"
-msgstr "منتجات"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:64
-msgid "customers"
-msgstr "العملاء"
-
-#. translators: %s: link "Priority Settings"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:72
-#, php-format
-msgid "Decide how it meets product-level pricing on the %s tab."
-msgstr "حدد كيفية تعاملها مع التسعير على مستوى المنتج في تبويب %s."
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:73
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:13
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:22
-msgid "Priority Settings"
-msgstr "إعدادات الأولوية"
-
-#. translators: %s: link "Rule status box"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:81
-#, php-format
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:35
 msgid ""
-"Publish, then use \"Test this rule\" in the %s to see what a customer pays."
-msgstr "انشر، ثم استخدم \"اختبار هذه القاعدة\" في %s لترى ما يدفعه العميل."
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:82
-msgid "Rule status box"
-msgstr "مربع حالة القاعدة"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:89
-msgid ""
-"When several rules match the same product and customer, the rule with the "
-"lowest priority number is applied. The Rule status box lists the rules that "
-"override the one you are editing."
+"The lines are counted after tiered prices, before shipping. The highest tier"
+" reached is used. Whether the subtotal includes tax is set on the Cart rules"
+" settings page."
 msgstr ""
-"عندما تطابق عدة قواعد المنتج والعميل نفسيهما، تُطبّق القاعدة ذات رقم "
-"الأولوية الأقل. يسرد مربع حالة القاعدة القواعد التي تتجاوز القاعدة التي "
-"تحررها."
+"تُحتسب البنود بعد الأسعار المتدرجة وقبل الشحن. تُطبَّق أعلى طبقة تم بلوغها. "
+"يُحدَّد ما إذا كان المجموع الفرعي يشمل الضريبة في صفحة إعدادات قواعد السلة."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:91
-msgid "Read the guide"
-msgstr "اقرأ الدليل"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:40
+msgid "Label in the cart"
+msgstr "التسمية في السلة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:93
-msgid "Don't show again"
-msgstr "عدم الإظهار مرة أخرى"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:44
+msgid "Discount line label"
+msgstr "تسمية سطر الخصم"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:47
+msgid ""
+"Shown in the cart, at checkout and in e-mails. Placeholders: {discount}, "
+"{threshold}."
+msgstr ""
+"تظهر في السلة وعند إتمام الطلب وفي رسائل البريد الإلكتروني. العناصر النائبة:"
+" {discount}، {threshold}."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:51
+msgid ""
+"The discount is applied as an automatic coupon, so WooCommerce computes it, "
+"shows it as one line and counts it in Analytics. The checkout block shows "
+"the rule title as the coupon code."
+msgstr ""
+"يُطبَّق الخصم كقسيمة تلقائية، فيحتسبه WooCommerce ويعرضه في سطر واحد ويُدرجه"
+" في التحليلات. تعرض كتلة إتمام الطلب عنوان القاعدة كرمز للقسيمة."
+
+#. translators: %s: link "Customize the cart messages"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:55
+#, php-format
+msgid ""
+"%s: the message that leads to the next tier, the subtotal basis and how the "
+"discount behaves next to customer coupons, with a live preview of the cart, "
+"the checkout and the mini cart."
+msgstr ""
+"%s: الرسالة المؤدية إلى الطبقة التالية، وأساس المجموع الفرعي، وسلوك الخصم مع"
+" قسائم العملاء، مع معاينة مباشرة للسلة وإتمام الطلب والسلة المصغّرة."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:56
+msgid "Customize the cart messages"
+msgstr "تخصيص رسائل السلة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:22
+msgid "An amount or a number of items before checkout"
+msgstr "مبلغ أو عدد من العناصر قبل إتمام الطلب"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:34
+msgid ""
+"The cart and the checkout, classic pages and blocks, block the order until "
+"the counted lines reach the minimum. Every matching cart rule's minimum must"
+" be met. The messages are set on the Cart rules settings page."
+msgstr ""
+"تمنع السلة وصفحة إتمام الطلب، بصفحاتهما الكلاسيكية وكتلهما، إتمام الطلب إلى "
+"أن تبلغ البنود المحتسبة الحد الأدنى. يجب استيفاء الحد الأدنى لكل قاعدة سلة "
+"مطابقة. تُحدَّد الرسائل في صفحة إعدادات قواعد السلة."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:39
+msgid "Minimum amount"
+msgstr "الحد الأدنى للمبلغ"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:42
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:51
+msgid "No minimum"
+msgstr "لا حد أدنى"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:48
+msgid "Minimum items"
+msgstr "الحد الأدنى للعناصر"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:55
+msgid ""
+"The counted lines are the ones matching the Products tab, or the whole cart "
+"when it is empty. The amount follows the subtotal basis of the Cart rules "
+"settings."
+msgstr ""
+"البنود المحتسبة هي التي تطابق تبويب المنتجات، أو السلة بالكامل إن كان "
+"فارغًا. يتبع المبلغ أساس المجموع الفرعي في إعدادات قواعد السلة."
+
+#. translators: %s: link "Edit the minimum order messages"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:59
+#, php-format
+msgid "%s, with a live preview of the notice in the cart and at checkout."
+msgstr "%s، مع معاينة مباشرة للإشعار في السلة وعند إتمام الطلب."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:60
+msgid "Edit the minimum order messages"
+msgstr "تعديل رسائل الحد الأدنى للطلب"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:24
+msgid "Always, or from a subtotal or item count, and the progress bar"
+msgstr "دائمًا، أو من مجموع فرعي أو عدد عناصر، مع شريط التقدم"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:35
+msgid ""
+"The rule can grant free shipping: on every order it covers, or once the "
+"counted lines reach a subtotal or a number of items. Works with or without "
+"discount tiers; it only adds free shipping and never takes away what the "
+"shipping settings already give."
+msgstr ""
+"يمكن للقاعدة منح شحن مجاني: على كل طلب تشمله، أو عندما تبلغ البنود المحتسبة "
+"مجموعًا فرعيًا أو عددًا من العناصر. تعمل مع طبقات الخصم أو بدونها؛ فهي تضيف "
+"الشحن المجاني فقط ولا تلغي ما تمنحه إعدادات الشحن أصلًا."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:41
+msgid "Grant free shipping through this rule"
+msgstr "منح الشحن المجاني عبر هذه القاعدة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:50
+msgid "When"
+msgstr "متى"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:53
+msgid "On every order under this rule"
+msgstr "على كل طلب ضمن هذه القاعدة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:54
+msgid "From a subtotal of the counted lines"
+msgstr "من مجموع فرعي للبنود المحتسبة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:55
+msgid "From a number of items in the counted lines"
+msgstr "من عدد عناصر في البنود المحتسبة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:64
+msgid "Subtotal or number of items"
+msgstr "المجموع الفرعي أو عدد العناصر"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:65
+msgid ""
+"A subtotal in the store currency, or a number of items, as chosen above."
+msgstr "مجموع فرعي بعملة المتجر، أو عدد من العناصر، حسب الاختيار أعلاه."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:77
+msgid ""
+"A progress bar towards the free shipping threshold (\"Add $40 more for free "
+"shipping\"), then a message once it is reached. It follows the rule the cart"
+" is under. Where it shows and how it looks is set for the whole store on the"
+" Cart rules settings page."
+msgstr ""
+"شريط تقدم نحو حد الشحن المجاني («أضف $40 أخرى للحصول على شحن مجاني»)، ثم "
+"رسالة عند بلوغه. يتبع القاعدة المطبّقة على السلة. يُحدَّد مكان ظهوره وشكله "
+"لكامل المتجر في صفحة إعدادات قواعد السلة."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:83
+msgid "Show the free shipping bar for this rule"
+msgstr "عرض شريط الشحن المجاني لهذه القاعدة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:93
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:240
+msgid "Message until reached"
+msgstr "الرسالة قبل البلوغ"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:96
+msgid ""
+"Placeholders: {remaining}, {threshold}, {progress}. Leave it empty for the "
+"store message."
+msgstr ""
+"العناصر النائبة: {remaining}، {threshold}، {progress}. اتركه فارغًا لاستخدام"
+" رسالة المتجر."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:103
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:243
+msgid "Message when reached"
+msgstr "الرسالة عند البلوغ"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:106
+msgid "Placeholder: {threshold}. Leave it empty for the store message."
+msgstr "العنصر النائب: {threshold}. اتركه فارغًا لاستخدام رسالة المتجر."
+
+#. translators: 1: list of places, 2: link "Customize the free shipping bar",
+#. 3: shortcode
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:113
+#, php-format
+msgid ""
+"The bar shows in: %1$s. %2$s: the places, the colours and the store "
+"messages, with a live preview. The shortcode %3$s and the Free Shipping Bar "
+"block put it anywhere else, such as the header or the page of the Cart "
+"block; they refresh when something is added to the cart."
+msgstr ""
+"يظهر الشريط في: %1$s. %2$s: الأماكن والألوان ورسائل المتجر، مع معاينة "
+"مباشرة. يضعه الرمز القصير %3$s وكتلة «شريط الشحن المجاني» في أي مكان آخر، "
+"مثل الترويسة أو صفحة كتلة السلة؛ ويتحدّث عند إضافة شيء إلى السلة."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:115
+msgid "Customize the free shipping bar"
+msgstr "تخصيص شريط الشحن المجاني"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:153
+msgid "no place of its own yet (only the shortcode and the block)"
+msgstr "لا مكان خاص به بعد (الرمز القصير والكتلة فقط)"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:166
+msgid "Locations not covered by your other zones"
+msgstr "المواقع غير المشمولة بمناطقك الأخرى"
+
+#. translators: %s: zone names
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:181
+#, php-format
+msgid "Free shipping methods that accept a free shipping coupon: %s."
+msgstr "طرق الشحن المجاني التي تقبل قسيمة شحن مجاني: %s."
+
+#. translators: %s: link to the shipping settings
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:185
+#, php-format
+msgid ""
+"No Free shipping method accepts a coupon yet, so the threshold would change "
+"nothing. In %s, add a Free shipping method to the zone and set \"Free "
+"shipping requires\" to \"A valid free shipping coupon\" (or \"… OR "
+"coupon\")."
+msgstr ""
+"لا توجد طريقة شحن مجاني تقبل قسيمة حتى الآن، لذا لن يغيّر الحد شيئًا. في %s،"
+" أضف طريقة شحن مجاني إلى المنطقة واضبط «يتطلب الشحن المجاني» على «قسيمة شحن "
+"مجاني صالحة» (أو «… أو قسيمة»)."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:186
+msgid "WooCommerce → Settings → Shipping"
+msgstr "WooCommerce ← الإعدادات ← الشحن"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:19
 msgid "Configure regular and tiered pricing rules"
 msgstr "تكوين قواعد التسعير العادية والمتدرجة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:26
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:30
 msgid "Base Pricing"
 msgstr "التسعير الأساسي"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:27
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:31
 msgid "Override the default regular product prices."
 msgstr "تجاوز أسعار المنتجات العادية الافتراضية."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39
-#: src/Addons/ImportExport/WoocommerceImportService.php:24
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:43
+#: src/Addons/ImportExport/WoocommerceImportService.php:26
 #: src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38
 #: src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:116
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:164
 #: src/Admin/ProductPage/TieredPricingTab.php:35
-#: src/Integrations/Plugins/WPAllImport.php:336 src/Settings/Settings.php:307
+#: src/Integrations/Plugins/WPAllImport.php:352 src/Settings/Settings.php:314
 msgid "Tiered Pricing"
 msgstr "التسعير المتدرج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:44
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:48
 msgid "Count quantities"
 msgstr "احتساب الكميات"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:46
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:50
 msgid "Per product"
 msgstr "لكل منتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:51
 msgid "Across all products in this rule (mix and match)"
 msgstr "عبر كل المنتجات في هذه القاعدة (المزج والمطابقة)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:54
 msgid ""
 "Mix and match adds up the quantities of every product this rule covers to "
 "reach a tier. Per product counts each product on its own."
@@ -978,16 +1288,25 @@ msgstr ""
 "طبقة. أما خيار \"لكل منتج\" فيحتسب كل منتج على حدة."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:18
-msgid "Select products, categories, tags, or brands this rule applies to"
+msgid "Products, categories, tags or brands this rule covers"
 msgstr ""
-"حدد المنتجات أو الفئات أو العلامات أو العلامات التجارية التي تنطبق عليها هذه"
-" القاعدة"
+"المنتجات أو الفئات أو الوسوم أو العلامات التجارية التي تشملها هذه القاعدة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:23
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:22
 msgid "Applies to products"
 msgstr "ينطبق على المنتجات"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:26
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:25
+msgid ""
+"For a cart rule these lists decide which cart lines count towards the tiers "
+"and the minimum, and which lines get the discount. Leave them empty to count"
+" the whole cart, except the products in the Exclusions section."
+msgstr ""
+"بالنسبة لقاعدة السلة، تحدد هذه القوائم أي بنود السلة تُحتسب ضمن الطبقات "
+"والحد الأدنى، وأي بنود تحصل على الخصم. اتركها فارغة لاحتساب السلة بالكامل، "
+"باستثناء المنتجات في قسم الاستثناءات."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:28
 msgid ""
 "If no products, categories, tags, or brands are selected, this rule will "
 "apply to all products in your store, except those listed in the Exclusions "
@@ -997,20 +1316,20 @@ msgstr ""
 "هذه القاعدة على جميع المنتجات في متجرك، باستثناء تلك المدرجة في قسم "
 "الاستثناءات."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:153
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:174
 msgid "Search categories&hellip;"
 msgstr "فئات البحث&هليب؛"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:51
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:52
 msgid "Subcategories"
 msgstr "التصنيفات الفرعية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:54
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
 msgid "Include subcategories"
 msgstr "تضمين التصنيفات الفرعية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:56
 msgid ""
 "Products in subcategories of the selected categories match too. The excluded"
 " categories below follow the same switch."
@@ -1018,35 +1337,41 @@ msgstr ""
 "تطابق أيضًا المنتجات في التصنيفات الفرعية للتصنيفات المحددة. وتتبع التصنيفات"
 " المستبعدة أدناه المفتاح نفسه."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:74
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:173
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
 msgid "Search tags&hellip;"
 msgstr "البحث عن العلامات&هليب؛"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:116
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:215
 msgid "Search brands&hellip;"
 msgstr "البحث عن العلامات التجارية&هليب؛"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:120
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:221
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:141
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:242
 msgid "Search products&hellip;"
 msgstr "البحث عن المنتجات&هليب؛"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:131
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:86
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:152
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:87
 msgid "Exclusions"
 msgstr "الاستثناءات"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:14
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:121
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:128
+msgid "Quantity limits"
+msgstr "حدود الكمية"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:18
 msgid "Set minimum, maximum, and quantity step limits"
 msgstr "تعيين الحد الأدنى والحد الأقصى وحدود الخطوة الكمية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:23
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:27
 msgid "Quantity Limits"
 msgstr "حدود الكمية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:25
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:29
 msgid ""
 "Applies to each product individually. If mix & match is enabled, the minimum"
 " quantity requirement will be shared across variations of a variable "
@@ -1055,11 +1380,11 @@ msgstr ""
 "ينطبق على كل منتج على حدة. إذا تم تمكين المزج والمطابقة، فستتم مشاركة الحد "
 "الأدنى من متطلبات الكمية عبر الأشكال المختلفة لمنتج متغير."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:38
 msgid "Variable Product Minimum Quantity"
 msgstr "الحد الأدنى لكمية المنتج المتغير"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:39
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:96
 #: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82
 msgid ""
@@ -1069,132 +1394,159 @@ msgstr ""
 "حدد ما إذا كان الحد الأدنى لمتطلبات الكمية ينطبق على كل تنوع على حدة، أو على"
 " الإجمالي المجمع لكل التباينات في سلة التسوق."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:45
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:83
 msgid "Global Settings"
 msgstr "الإعدادات العالمية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:46
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:50
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:84
 msgid "Individual variation"
 msgstr "الاختلاف الفردي"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:51
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:85
 msgid "Variable product total (Mix & match)"
 msgstr "إجمالي المنتج المتغير (المزج والمطابقة)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:53
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:87
 msgid "Calculate minimum quantity by"
 msgstr "حساب الحد الأدنى للكمية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:17
-msgid "Manage how this rule interacts with product-level settings"
-msgstr "إدارة كيفية تفاعل هذه القاعدة مع الإعدادات على مستوى المنتج"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:24
-msgid ""
-"Determine which rules take precedence when a product has both global and "
-"individual settings."
-msgstr ""
-"تحديد القواعد التي لها الأولوية عندما يكون للمنتج إعدادات عامة وفردية."
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:29
-msgid "Rule priority"
-msgstr "أولوية القاعدة"
-
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:18
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:31
-msgid "Use global settings"
-msgstr "استخدم الإعدادات العالمية"
+msgid "Product overrides"
+msgstr "تجاوزات المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:32
-msgid "Prefer product-level rules"
-msgstr "تفضل القواعد على مستوى المنتج"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:34
-msgid "Override product-level rules"
-msgstr "تجاوز القواعد على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:22
+msgid "Which settings win when a product has its own"
+msgstr "أي الإعدادات تتقدّم عندما يملك المنتج إعداداته الخاصة"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:36
-msgid "Custom component priorities"
-msgstr "أولويات المكونات المخصصة"
+msgid "global rules override the product's settings"
+msgstr "القواعد العامة تتجاوز إعدادات المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:46
-msgid "Base Prices Priority"
-msgstr "أولوية الأسعار الأساسية"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:37
+msgid "the product's settings win"
+msgstr "إعدادات المنتج هي التي تتقدّم"
+
+#. translators: 1: "on" or "off", 2: what the store default does right now
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:41
+#, php-format
+msgid ""
+"A product can carry its own tiered prices, role prices and quantity limits. "
+"Decide what happens when this rule and the product both have a setting. "
+"\"Follow the store default\" uses the \"Prioritize global pricing rules\" "
+"switch under Settings → General → Price Calculation, which is %1$s right "
+"now: %2$s."
+msgstr ""
+"قد يحمل المنتج أسعاره المتدرجة وأسعار أدواره وحدود كمياته الخاصة. حدّد ما "
+"يحدث عندما يكون للقاعدة وللمنتج إعداد معًا. يستخدم «اتباع الافتراضي للمتجر» "
+"مفتاح «إعطاء الأولوية لقواعد التسعير العامة» ضمن الإعدادات ← عام ← حساب "
+"الأسعار، وهو %1$s الآن: %2$s."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:42
+msgid "on"
+msgstr "مفعّل"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:42
+msgid "off"
+msgstr "معطّل"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:48
+msgid "When a product has its own pricing"
+msgstr "عندما يكون للمنتج تسعير خاص به"
+
+#. translators: %s: what the store default does right now
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:51
+#, php-format
+msgid "Follow the store default (right now: %s)"
+msgstr "اتباع الافتراضي للمتجر (حاليًا: %s)"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:52
+msgid "Keep the product's settings"
+msgstr "الإبقاء على إعدادات المنتج"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:54
+msgid "This rule overrides them"
+msgstr "تتجاوزها هذه القاعدة"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:56
+msgid "Decide per setting"
+msgstr "القرار لكل إعداد"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:66
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:72
 msgid "Base prices"
 msgstr "الأسعار الأساسية"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:54
-msgid "Prefer product-level role prices"
-msgstr "تفضل أسعار الأدوار على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:74
+msgid "Keep the product's role prices"
+msgstr "الإبقاء على أسعار أدوار المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:56
-msgid "Override all product-level prices"
-msgstr "تجاوز جميع الأسعار على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:76
+msgid "This rule overrides every product price"
+msgstr "تتجاوز هذه القاعدة كل أسعار المنتجات"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:62
-msgid "Prioritize product-specific role pricing over this global rule."
-msgstr "إعطاء الأولوية لتسعير الدور الخاص بالمنتج على هذه القاعدة العالمية."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:82
+msgid ""
+"Whether a product's own role prices stay in place or this rule's base prices"
+" replace them."
+msgstr ""
+"هل تبقى أسعار أدوار المنتج الخاصة كما هي أم تحل محلها الأسعار الأساسية لهذه "
+"القاعدة."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:68
-msgid "Tiered Prices Priority"
-msgstr "أولوية الأسعار المتدرجة"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:75
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
 msgid "Tiered prices"
 msgstr "أسعار متدرجة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:77
-msgid "Prefer product-level tiers"
-msgstr "تفضل المستويات على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:97
+msgid "Keep the product's tiers"
+msgstr "الإبقاء على طبقات المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:79
-msgid "Prefer product-level role tiers"
-msgstr "تفضيل طبقات الأدوار على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:99
+msgid "Keep the product's role tiers only"
+msgstr "الإبقاء على طبقات أدوار المنتج فقط"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:81
-msgid "Override all product-level tiers"
-msgstr "تجاوز كافة المستويات على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
+msgid "This rule overrides every product tier"
+msgstr "تتجاوز هذه القاعدة كل طبقات المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:108
 msgid "Mix & Match"
 msgstr "مزيج وتطابق"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:91
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:111
 msgid "Enable Mix & Match for product-level tiers"
 msgstr "تمكين المزج والمطابقة للمستويات على مستوى المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:115
 msgid ""
-"Prioritize product-specific tiered pricing over this global rule, and "
-"optionally enable Mix & Match for those inherited tiers."
+"Whether a product's own tiers stay in place or this rule's tiers replace "
+"them; Mix & Match can apply to the tiers kept from the product."
 msgstr ""
-"قم بإعطاء الأولوية للتسعير المتدرج الخاص بالمنتج على هذه القاعدة العالمية، "
-"وقم بشكل اختياري بتمكين المزج والمطابقة لتلك المستويات الموروثة."
+"هل تبقى طبقات المنتج الخاصة كما هي أم تحل محلها طبقات هذه القاعدة؛ ويمكن "
+"تطبيق المزج والمطابقة على الطبقات المحتفظ بها من المنتج."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
-msgid "Quantity Limits Priority"
-msgstr "أولوية حدود الكمية"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:130
+msgid "Keep the product's limits"
+msgstr "الإبقاء على حدود المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:110
-msgid "Prefer product-level limits"
-msgstr "تفضيل الحدود على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:132
+msgid "Keep the product's role limits only"
+msgstr "الإبقاء على حدود أدوار المنتج فقط"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:112
-msgid "Prefer product-level role limits"
-msgstr "تفضيل حدود الأدوار على مستوى المنتج"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:134
+msgid "This rule overrides every product limit"
+msgstr "تتجاوز هذه القاعدة كل حدود المنتج"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:114
-msgid "Override all product-level limits"
-msgstr "تجاوز كافة الحدود على مستوى المنتج"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:120
-msgid "Prioritize product-specific quantity limits over this global rule."
-msgstr "إعطاء الأولوية لحدود الكمية الخاصة بالمنتج على هذه القاعدة العالمية."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:140
+msgid ""
+"Whether a product's own quantity limits stay in place or this rule's limits "
+"replace them."
+msgstr "هل تبقى حدود كمية المنتج الخاصة كما هي أم تحل محلها حدود هذه القاعدة."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:15
 msgid "Users & Roles"
@@ -1204,11 +1556,22 @@ msgstr "المستخدمون والأدوار"
 msgid "Select the users or roles this rule applies to"
 msgstr "حدد المستخدمين أو الأدوار التي تنطبق عليها هذه القاعدة"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:24
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:23
 msgid "Applies to users"
 msgstr "ينطبق على المستخدمين"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:27
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:26
+msgid ""
+"The discount is given to these customers; leave roles and customers empty "
+"for everyone, except those in the Exclusions section. When several cart "
+"rules match a customer, the one with the higher priority applies, one "
+"discount per cart."
+msgstr ""
+"يُمنح الخصم لهؤلاء العملاء؛ اترك الأدوار والعملاء فارغين ليشمل الجميع، "
+"باستثناء من في قسم الاستثناءات. عند تطابق عدة قواعد سلة مع عميل، تُطبَّق "
+"القاعدة ذات الأولوية الأعلى، بخصم واحد لكل سلة."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:29
 msgid ""
 "The rule will apply to all users if you do not specify user roles or "
 "specific customers (excluding those selected in the exclusions section)."
@@ -1216,31 +1579,31 @@ msgstr ""
 "سيتم تطبيق القاعدة على جميع المستخدمين إذا لم تحدد أدوار المستخدم أو عملاء "
 "محددين (باستثناء العملاء المحددين في قسم الاستثناءات)."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:33
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:94
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:95
 msgid "User roles"
 msgstr "أدوار المستخدم"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:35
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:96
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:36
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:97
 #: src/Addons/GlobalTieredPricing/Formatter.php:27
 #: src/Addons/NonLoggedInUsers/Roles.php:15
-#: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:23
-#: src/Addons/Tools/PricingTest/RuleTester.php:166
+#: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:25
+#: src/Addons/Tools/PricingTest/RuleTester.php:223
 msgid "Guests (not logged in)"
 msgstr "الضيوف (غير مسجلي الدخول)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:40
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:104
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:41
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:105
 msgid "Select for a user role"
 msgstr "حدد لدور المستخدم"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:54
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:55
 msgid "Manage user roles"
 msgstr "إدارة أدوار المستخدم"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:76
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:124
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:77
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:125
 msgid "Select for a customer"
 msgstr "اختر للعميل"
 
@@ -1265,73 +1628,99 @@ msgstr "استخدم رمز القسيمة أدناه للحصول على خصم
 msgid "Upgrade your plan"
 msgstr "قم بترقية خطتك"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:415
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:243
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:100
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:17
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:43
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:53
+msgid "Cart rules settings"
+msgstr "إعدادات قواعد السلة"
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:564
 msgid "The rule reactivated successfully."
 msgstr "تمت إعادة تنشيط القاعدة بنجاح."
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:424
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
 msgid "The end date was before the start date, so it was cleared."
 msgstr "كان تاريخ الانتهاء قبل تاريخ البدء، لذا تم مسحه."
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:460
-msgid "Create Your First Global Pricing Rule"
-msgstr "قم بإنشاء قاعدة التسعير العالمية الأولى الخاصة بك"
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:605
+msgid "Create your first pricing rule"
+msgstr "أنشئ أول قاعدة تسعير لك"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:465
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:610
 msgid ""
-"Global rules allow you to bulk-apply custom pricing, tiered discounts, and "
-"quantity limits to multiple products or categories simultaneously."
+"A pricing rule gives many products one set of tiers, prices or quantity "
+"limits at once: by category, tag, brand or customer role. A cart rule works "
+"on the cart as a whole instead: an amount off from a subtotal or item count,"
+" free shipping, and a minimum order."
 msgstr ""
-"تسمح لك القواعد العالمية بتطبيق الأسعار المخصصة والخصومات المتدرجة وحدود "
-"الكمية بشكل مجمّع على منتجات أو فئات متعددة في وقت واحد."
+"تمنح قاعدة التسعير منتجات كثيرة مجموعة واحدة من الطبقات أو الأسعار أو حدود "
+"الكمية دفعة واحدة: حسب الفئة أو الوسم أو العلامة التجارية أو دور العميل. أما"
+" قاعدة السلة فتعمل على السلة ككل: خصم بمبلغ من مجموع فرعي أو عدد عناصر، وشحن"
+" مجاني، وحد أدنى للطلب."
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:473
-msgid "Create Rule"
-msgstr "إنشاء القاعدة"
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:618
+msgid "Create a pricing rule"
+msgstr "إنشاء قاعدة تسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:566
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:567
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:711
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:712
 msgid "Pricing rule"
 msgstr "قاعدة التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:568
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:569
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:713
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:714
 msgid "Add Pricing Rule"
 msgstr "إضافة قاعدة التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:570
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:715
 msgid "Edit Pricing Rule"
 msgstr "تحرير قاعدة التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:571
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:716
 msgid "New Pricing Rule"
 msgstr "قاعدة التسعير الجديدة"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:572
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:717
 msgid "View Pricing Rule"
 msgstr "عرض قاعدة التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:718
 msgid "Find Pricing Rule"
 msgstr "ابحث عن قاعدة التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:574
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:719
 msgid "No pricing rules ware found"
 msgstr "لم يتم العثور على أدوات قواعد التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:575
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:720
 msgid "No pricing rule in trash"
 msgstr "لا توجد قاعدة التسعير في سلة المهملات"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:577
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:722
 msgid "Pricing rules"
 msgstr "قواعد التسعير"
 
-#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:29
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:42
+msgid "All rule types"
+msgstr "كل أنواع القواعد"
+
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:44
+#: src/Admin/WelcomePage/WelcomePage.php:240 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:494
+msgid "Cart rules"
+msgstr "قواعد السلة"
+
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:47
+msgid "Filter by rule type"
+msgstr "التصفية حسب نوع القاعدة"
+
+#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:31
 msgid "Test"
 msgstr "اختبار"
 
-#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:43
+#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:46
 msgid "Pricing test"
 msgstr "اختبار التسعير"
 
@@ -1343,12 +1732,16 @@ msgstr "حالة القاعدة"
 msgid "Save"
 msgstr "حفظ"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:69
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:73
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:70
+msgid "Rule type"
+msgstr "نوع القاعدة"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:88
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
 msgid "Priority"
 msgstr "الأولوية"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:74
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:93
 msgid ""
 "The rule with the lowest number is applied first. If two rules have the same"
 " number, the newer rule is applied first."
@@ -1356,36 +1749,36 @@ msgstr ""
 "تُطبّق القاعدة ذات الرقم الأقل أولًا. وإذا تساوى الرقم بين قاعدتين، تُطبّق "
 "القاعدة الأحدث أولًا."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:80
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:99
 msgid "Schedule"
 msgstr "الجدولة"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:84
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
 msgid "Start date"
 msgstr "تاريخ البدء"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:86
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:105
 msgid "End date"
 msgstr "تاريخ الانتهاء"
 
 #. translators: %s: timezone, e.g. "Europe/Kyiv"
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:111
 #, php-format
 msgid "Whole days in the site timezone (%s). Leave a date empty for no limit."
 msgstr ""
 "أيام كاملة بالمنطقة الزمنية للموقع (%s). اترك التاريخ فارغًا لعدم تحديد حد."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:122
 msgid "Overridden by"
 msgstr "تتجاوزها"
 
 #. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:114
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
 #, php-format
 msgid "priority %d"
 msgstr "الأولوية %d"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:123
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
 msgid ""
 "These rules have a higher priority. When one of them matches the same "
 "product and customer, that rule is applied and the rule you are editing is "
@@ -1394,94 +1787,90 @@ msgstr ""
 "هذه القواعد لها أولوية أعلى. عندما تطابق إحداها المنتج والعميل نفسيهما، "
 "تُطبّق تلك القاعدة وتُتخطى القاعدة التي تحررها."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:132
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
 msgid "Test this rule"
 msgstr "اختبار هذه القاعدة"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+msgid "What a cart gets, and which cart rule wins."
+msgstr "ما تحصل عليه السلة، وأي قاعدة سلة تفوز."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
 msgid "What a customer pays for a product, and which rule wins."
 msgstr "ما يدفعه العميل مقابل منتج ما، وأي قاعدة تفوز."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
 #: src/Addons/NonLoggedInUsers/Wholesale/CPT/ApplicationAdmin.php:333
 msgid "Move to Trash"
 msgstr "نقل إلى سلة المهملات"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
 msgid "Delete permanently"
 msgstr "حذف نهائيًا"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:149
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:150
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:169
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:170
 msgid "Update"
 msgstr "تحديث"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:172
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:173
 msgid "Publish"
 msgstr "نشر"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:349
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:400
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:156
+#: src/Addons/Tools/js-source/components/PricingTest.js:170
 msgid "Not published"
 msgstr "غير منشورة"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:350
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:401
 msgid "Publish the rule to put it in force."
 msgstr "انشر القاعدة لتدخل حيز التنفيذ."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:359
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:410
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:28
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:153
+#: src/Addons/Tools/js-source/components/PricingTest.js:167
 msgid "Suspended"
 msgstr "معلق"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:360
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:411
 msgid "The rule is saved but does not apply until you reactivate it."
 msgstr "القاعدة محفوظة لكنها لا تُطبّق حتى تعيد تنشيطها."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:366
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:417
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:27
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:155
+#: src/Addons/Tools/js-source/components/PricingTest.js:169
 msgid "Expired"
 msgstr "منتهية"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:368
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:419
 #, php-format
 msgid "Ended %s. Clear or move the end date to use the rule again."
 msgstr "انتهت في %s. امسح تاريخ الانتهاء أو غيّره لاستخدام القاعدة مجددًا."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:374
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:425
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:29
 msgid "Skipped"
 msgstr "متخطّاة"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:375
-msgid ""
-"The rule changes neither prices nor quantity limits, so the storefront skips"
-" it. Set a price, tiers or a limit on the tabs on the left."
-msgstr ""
-"لا تغيّر القاعدة الأسعار ولا حدود الكمية، لذا تتخطاها واجهة المتجر. حدد "
-"سعرًا أو طبقات أو حدًا في التبويبات الجانبية."
-
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:381
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:432
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:26
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:154
+#: src/Addons/Tools/js-source/components/PricingTest.js:168
 msgid "Scheduled"
 msgstr "مجدولة"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:383
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:434
 #, php-format
 msgid "Starts %s."
 msgstr "تبدأ في %s."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:390
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:441
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:25
 #: src/Admin/PluginInstaller/PluginInstaller.php:102
 #: src/Admin/PluginInstaller/PluginInstaller.php:148
@@ -1489,58 +1878,195 @@ msgid "Active"
 msgstr "نشيط"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:393
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:444
 #, php-format
 msgid "Applies now, until %s."
 msgstr "سارية الآن، حتى %s."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:394
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:445
 msgid "Applies now."
 msgstr "سارية الآن."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:404
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:460
+msgid ""
+"The rule changes neither prices nor quantity limits, so the storefront skips"
+" it. Set a price, tiers or a limit on the tabs on the left."
+msgstr ""
+"لا تغيّر القاعدة الأسعار ولا حدود الكمية، لذا تتخطاها واجهة المتجر. حدد "
+"سعرًا أو طبقات أو حدًا في التبويبات الجانبية."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:472
+msgid "Tiers and base prices per product."
+msgstr "الطبقات والأسعار الأساسية لكل منتج."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:476
+msgid ""
+"A discount, free shipping or a minimum order, based on the cart subtotal or "
+"item count."
+msgstr ""
+"خصم أو شحن مجاني أو حد أدنى للطلب، بناءً على المجموع الفرعي للسلة أو عدد "
+"العناصر."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:486
 msgid "Always"
 msgstr "دائمًا"
 
 #. translators: 1: start date, 2: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:413
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:495
 #, php-format
 msgid "%1$s to %2$s"
 msgstr "من %1$s إلى %2$s"
 
 #. translators: %s: start date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:418
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:500
 #, php-format
 msgid "From %s"
 msgstr "من %s"
 
 #. translators: %s: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:422
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:504
 #, php-format
 msgid "Until %s"
 msgstr "حتى %s"
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:473
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:877
+msgid ""
+"The rule has no discount tiers, no free shipping threshold and no minimum "
+"order, so the storefront skips it. Add them on the Discount, Free shipping "
+"and Minimum order tabs."
+msgstr ""
+"ليس للقاعدة طبقات خصم ولا حد شحن مجاني ولا حد أدنى للطلب، لذا يتخطاها "
+"المتجر. أضفها في تبويبات الخصم والشحن المجاني والحد الأدنى للطلب."
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:881
+msgid ""
+"The rule gives a percentage discount, which the premium version applies, so "
+"the storefront skips it. Switch to a fixed amount off, or upgrade."
+msgstr ""
+"تمنح القاعدة خصمًا بنسبة مئوية تطبّقه النسخة المدفوعة، لذا يتخطاها المتجر. "
+"انتقل إلى خصم بمبلغ ثابت أو قم بالترقية."
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:885
+msgid ""
+"The rule only sets a minimum order, which the premium version applies, so "
+"the storefront skips it."
+msgstr ""
+"تحدد القاعدة حدًا أدنى للطلب فقط، وتطبّقه النسخة المدفوعة، لذا يتخطاها "
+"المتجر."
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:908
 msgid ""
 "The pricing rule does not affect either prices or product quantity. The rule"
 " will be skipped."
 msgstr "لا تؤثر قاعدة التسعير على الأسعار أو كمية المنتج. سيتم تخطي القاعدة."
 
 #. translators: %d: rule ID
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:802
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:1237
 #, php-format
 msgid "Rule #%d"
 msgstr "القاعدة رقم %d"
 
-#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:10
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:15
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:300
+#: src/Addons/Tools/js-source/components/PricingTest.js:314
 msgid "Global pricing rules"
 msgstr "قواعد التسعير العالمية"
 
-#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:64
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:84
 msgid "Create reusable pricing rules and apply them globally."
 msgstr "إنشاء قواعد تسعير قابلة لإعادة الاستخدام وتطبيقها عالميًا."
+
+#. translators: %s: role name
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/MinimumsMigration.php:89
+#, php-format
+msgid "Minimum order for %s"
+msgstr "الحد الأدنى للطلب لـ %s"
+
+#. translators: %s: role name
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/MinimumsMigration.php:108
+#: src/Addons/NonLoggedInUsers/Roles.php:34
+#: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListFilter.php:31
+#: src/Addons/NonLoggedInUsers/Visibility/Admin/RuleText.php:31
+msgid "Guests"
+msgstr "الضيوف"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:157
+msgid "Order discount {discount}"
+msgstr "خصم الطلب {discount}"
+
+#. translators: %s: number of items
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:177
+#: src/Addons/Tools/PricingTest/CartTester.php:137
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "لا عناصر"
+msgstr[1] "عنصر واحد"
+msgstr[2] "عنصران"
+msgstr[3] "%s عناصر"
+msgstr[4] "%s عنصرًا"
+msgstr[5] "%s عنصر"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:52
+msgid "Add {remaining} more to get {discount} off your order."
+msgstr "أضف {remaining} أخرى للحصول على خصم {discount} على طلبك."
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:70
+msgid "Classic cart, under the cart totals"
+msgstr "السلة الكلاسيكية، تحت إجمالي السلة"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:71
+msgid "Classic checkout, under the order review total"
+msgstr "صفحة إتمام الطلب الكلاسيكية، تحت إجمالي مراجعة الطلب"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:72
+msgid "Mini cart (the cart widget)"
+msgstr "السلة المصغّرة (أداة السلة)"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:73
+msgid "Product page, above the add to cart form"
+msgstr "صفحة المنتج، فوق نموذج الإضافة إلى السلة"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:139
+msgid "Add {remaining} more for free shipping."
+msgstr "أضف {remaining} أخرى للحصول على شحن مجاني."
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:150
+msgid "You have unlocked free shipping!"
+msgstr "لقد حصلت على شحن مجاني!"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:108
+msgid "Follow the cart tax display setting"
+msgstr "اتباع إعداد عرض ضريبة السلة"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:109
+msgid "Excluding tax"
+msgstr "بدون ضريبة"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:110
+msgid "Including tax"
+msgstr "شاملة الضريبة"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:177
+msgid "Loading the cart rules settings…"
+msgstr "جارٍ تحميل إعدادات قواعد السلة…"
+
+#. translators: %s: link to the pricing rules list
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:48
+#, php-format
+msgid ""
+"How the Order pricing rules read and look in the cart, at checkout, in the "
+"mini cart and on product pages: the discount behaviour and the next tier "
+"message, the minimum order messages, and where and how the free shipping bar"
+" shows. %s"
+msgstr ""
+"كيف تُقرأ قواعد تسعير الطلب وكيف تبدو في السلة وعند إتمام الطلب وفي السلة "
+"المصغّرة وفي صفحات المنتجات: سلوك الخصم ورسالة الطبقة التالية، ورسائل الحد "
+"الأدنى للطلب، ومكان ظهور شريط الشحن المجاني وشكله. %s"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:49
+msgid "Back to the pricing rules"
+msgstr "العودة إلى قواعد التسعير"
 
 #: src/Addons/ImportExport/ImportExportAddon.php:8
 msgid "WooCommerce Import/Export"
@@ -1552,37 +2078,44 @@ msgid ""
 "exporter."
 msgstr "يضيف التوافق مع مستورد ومصدر منتج WooCommerce المدمج."
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:40
-#: src/Addons/ImportExport/WoocommerceImportService.php:27
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:133
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:130
+#: src/Addons/ImportExport/WoocommerceExportService.php:43
+#: src/Addons/ImportExport/WoocommerceImportService.php:29
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:159
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:178
 msgid "Fixed pricing rules"
 msgstr "قواعد التسعير الثابت"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:43
-#: src/Addons/ImportExport/WoocommerceImportService.php:28
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:135
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:132
-msgid "Percentage pricing rules"
-msgstr "قواعد التسعير بالنسبة المئوية"
+#: src/Addons/ImportExport/WoocommerceExportService.php:44
+#: src/Addons/ImportExport/WoocommerceImportService.php:31
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:163
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:182
+msgid "Amount pricing rules"
+msgstr "قواعد تسعير المبالغ"
 
 #: src/Addons/ImportExport/WoocommerceExportService.php:45
-#: src/Addons/ImportExport/WoocommerceImportService.php:26
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:137
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:126
-#: src/Integrations/Plugins/WPAllImport.php:117
-#: src/Integrations/Plugins/WPAllImport.php:223
-#: views/admin/components/tiered-pricing-rules-form.php:98
+#: src/Addons/ImportExport/WoocommerceImportService.php:28
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:165
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:174
+#: src/Integrations/Plugins/WPAllImport.php:125
+#: src/Integrations/Plugins/WPAllImport.php:239
+#: views/admin/components/tiered-pricing-rules-form.php:106
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:9
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Tiered pricing type"
 msgstr "نوع التسعير المتدرج"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:47
-#: src/Addons/ImportExport/WoocommerceImportService.php:29
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:139
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:128
+#: src/Addons/ImportExport/WoocommerceExportService.php:48
+#: src/Addons/ImportExport/WoocommerceImportService.php:30
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:161
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:180
+msgid "Percentage pricing rules"
+msgstr "قواعد التسعير بالنسبة المئوية"
+
+#: src/Addons/ImportExport/WoocommerceExportService.php:50
+#: src/Addons/ImportExport/WoocommerceImportService.php:32
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:167
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:176
 #: views/admin/components/minimum-order-quantity-form.php:25
 msgid "Minimum order quantity"
 msgstr "الحد الأدنى لكمية الطلب"
@@ -1678,7 +2211,7 @@ msgstr "اسم المنتج"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735
-#: src/PricingTable.php:541 src/PricingTable.php:542
+#: src/PricingTable.php:548 src/PricingTable.php:549
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
 msgid "piece"
@@ -1845,6 +2378,7 @@ msgstr "أكبر خصم أولًا"
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:860
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297
+#: views/addons/global-rules/order-discount-form.php:39
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
@@ -1905,23 +2439,23 @@ msgstr "تعذر عرض المعاينة."
 msgid "Preview product"
 msgstr "منتج المعاينة"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:15
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:22
 msgid "Tiered pricing for manual orders"
 msgstr "التسعير المتدرج للطلبات اليدوية"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:19
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:26
 msgid "Apply tiered pricing to orders created manually in the admin area."
 msgstr ""
 "قم بتطبيق التسعير المتدرج على الطلبات التي تم إنشاؤها يدويًا في منطقة "
 "الإدارة."
 
 #. translators: %1$s: item name, %2$s: original price, %3$s: new price
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:161
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:207
 #, php-format
 msgid "Tiered pricing recalculations for %1$s: %2$s → %3$s"
 msgstr "عمليات إعادة حساب الأسعار المتدرجة لـ %1$s: %2$s → %3$s"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:207
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:258
 msgid "Re-calculate with tiered pricing"
 msgstr "أعد الحساب باستخدام التسعير المتدرج"
 
@@ -1977,7 +2511,7 @@ msgid ""
 msgstr ""
 "فرض الحد الأدنى لكميات الطلب على المنتجات بناءً على قواعد التسعير المتدرجة."
 
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:54
+#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:58
 msgid ""
 "A minimum order of {minimum} is required to check out. Your order subtotal "
 "is {subtotal}."
@@ -1985,65 +2519,12 @@ msgstr ""
 "يلزم حد أدنى للطلب قدره {minimum} لإتمام الطلب. المجموع الفرعي لطلبك هو "
 "{subtotal}."
 
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:58
+#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:62
 msgid ""
 "A minimum of {minimum} items is required to check out. Your cart has "
 "{count}."
 msgstr ""
 "يلزم {minimum} قطعة كحد أدنى لإتمام الطلب. تحتوي سلة مشترياتك على {count}."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:9
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:23
-msgid "Cart rules by role"
-msgstr "قواعد السلة حسب الدور"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:13
-msgid ""
-"A minimum order amount or quantity for the whole cart per role, and payment "
-"or shipping methods limited to roles (the two groups below). Guests count as"
-" a role; a customer with several roles gets the strictest minimum. Off by "
-"default."
-msgstr ""
-"حد أدنى لمبلغ الطلب أو كميته لكامل السلة لكل دور، وطرق دفع أو شحن مقصورة على"
-" أدوار معينة (المجموعتان أدناه). يُعامل الزوار كدور؛ والعميل الذي له عدة "
-"أدوار يُطبّق عليه الحد الأدنى الأشد. معطّل افتراضيًا."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:27
-msgid ""
-"Applies the minimums below and the payment and shipping method limits of the"
-" next two groups in the cart and at checkout, for the classic pages and the "
-"blocks."
-msgstr ""
-"يطبّق الحدود الدنيا أدناه وقيود طرق الدفع والشحن في المجموعتين التاليتين في "
-"السلة وعند إتمام الطلب، في الصفحات الكلاسيكية والمكوّنات على حد سواء."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:30
-msgid "Minimum order"
-msgstr "الحد الأدنى للطلب"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:33
-msgid ""
-"Leave a cell empty for no minimum. The amount is the cart subtotal after "
-"tiered prices, before shipping."
-msgstr ""
-"اترك الخلية فارغة لعدم تطبيق حد أدنى. المبلغ هو المجموع الفرعي للسلة بعد "
-"الأسعار المتدرجة وقبل الشحن."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:36
-msgid "Amount message"
-msgstr "رسالة المبلغ"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:40
-msgid "Placeholders: {minimum}, {subtotal}."
-msgstr "العناصر النائبة: {minimum}، {subtotal}."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:43
-msgid "Quantity message"
-msgstr "رسالة الكمية"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:47
-msgid "Placeholders: {minimum}, {count}."
-msgstr "العناصر النائبة: {minimum}، {count}."
 
 #: src/Addons/NonLoggedInUsers/CartRules/PaymentMethodsSubsection.php:10
 msgid "Payment methods by role"
@@ -2066,21 +2547,6 @@ msgstr ""
 "من يمكنه استخدام كل طريقة دفع مفعّلة، مثل الدفع بالفاتورة لعملاء الجملة فقط."
 " اترك الطريقة فارغة لإبقائها متاحة للجميع."
 
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:41
-#: views/addons/role-based-pricing/role.php:31
-msgid "Role"
-msgstr "الدور"
-
-#. translators: %s: currency symbol
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:45
-#, php-format
-msgid "Minimum order amount (%s)"
-msgstr "الحد الأدنى لمبلغ الطلب (%s)"
-
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:48
-msgid "Minimum quantity"
-msgstr "الحد الأدنى للكمية"
-
 #: src/Addons/NonLoggedInUsers/CartRules/ShippingMethodsSubsection.php:12
 msgid "Shipping methods by role"
 msgstr "طرق الشحن حسب الدور"
@@ -2102,11 +2568,11 @@ msgstr ""
 "من يمكنه استخدام كل طريقة شحن في كل منطقة، مثل الشحن المجاني لعملاء التجزئة "
 "فقط. اترك الطريقة فارغة لإبقائها متاحة للجميع."
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:33
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:32
 msgid "Wholesale & Guest Users"
 msgstr "الجملة والمستخدمون الضيوف"
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:37
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:36
 msgid ""
 "Hide prices or prevent purchasing for guests, close the store to visitors, "
 "show products and categories to selected roles only, set minimum orders and "
@@ -2119,7 +2585,7 @@ msgstr ""
 "تبويب الجملة."
 
 #. translators: %s: link to the settings
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:118
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:113
 #, php-format
 msgid ""
 "Wholesale registration is switched off. Enable it under %s. Only shop "
@@ -2127,7 +2593,7 @@ msgid ""
 msgstr ""
 "تسجيل الجملة معطّل. فعّله من %s. هذه الملاحظة مرئية لمدراء المتجر فقط."
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:119
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:114
 msgid "Tiered Pricing → Wholesale"
 msgstr "التسعير المتدرج → الجملة"
 
@@ -2141,18 +2607,6 @@ msgstr "الرجاء إدخال %s لإجراء عملية شراء"
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:52
 msgid "your account"
 msgstr "حسابك"
-
-#. translators: %s: login page url
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:85
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:70
-#, php-format
-msgid "%s see prices"
-msgstr "%s اطلع على الأسعار"
-
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:87
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:72
-msgid "Login"
-msgstr "تسجيل الدخول"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:11
 msgid "Guest Users"
@@ -2205,13 +2659,6 @@ msgstr ""
 "سيتم عرض هذه الرسالة بدلاً من السعر للمستخدمين الذين لم يقوموا بتسجيل "
 "الدخول."
 
-#. translators: %s: role name
-#: src/Addons/NonLoggedInUsers/Roles.php:34
-#: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListFilter.php:31
-#: src/Addons/NonLoggedInUsers/Visibility/Admin/RuleText.php:31
-msgid "Guests"
-msgstr "الضيوف"
-
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryListColumn.php:26
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryListColumn.php:33
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListColumn.php:28
@@ -2254,7 +2701,7 @@ msgid "Hidden from %s"
 msgstr "مخفي عن %s"
 
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductVisibilityFields.php:25
-#: src/Admin/ProductPage/TieredPricingTab.php:157
+#: src/Admin/ProductPage/TieredPricingTab.php:158
 msgid "Who can see this product"
 msgstr "من يمكنه رؤية هذا المنتج"
 
@@ -3393,6 +3840,8 @@ msgstr "أوافق على %s."
 msgid "Already have an account? %s and apply from there."
 msgstr "لديك حساب بالفعل؟ %s وقدّم طلبك من هناك."
 
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:87
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:72
 #: src/Addons/NonLoggedInUsers/Wholesale/views/frontend/registration-form.php:159
 msgid "Log in"
 msgstr "تسجيل الدخول"
@@ -3668,7 +4117,9 @@ msgstr "اختر مكان ظهور جدول التسعير المتدرج بال
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:84
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:412
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:227
 msgid "Where it shows"
 msgstr "أين تظهر"
 
@@ -3996,7 +4447,7 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:360
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:371
-#: src/Admin/ProductPage/TieredPricingTab.php:122
+#: src/Admin/ProductPage/TieredPricingTab.php:123
 #: src/Settings/CustomOptions/TPTTextTemplate.php:212
 msgid "Unit label"
 msgstr "تسمية الوحدة"
@@ -4222,9 +4673,13 @@ msgstr "طلب العميل"
 #: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:25
 #: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:25
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:459
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:389
+#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:351
+#: src/Addons/Tools/js-source/components/PricingTest.js:527
+#: src/Addons/Tools/js-source/components/PricingTest.js:647
 msgid "Product"
 msgstr "منتج"
 
@@ -4247,10 +4702,12 @@ msgstr "سعر الوحدة"
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:111
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:179
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1095
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:480
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:214
+#: src/Addons/Tools/js-source/components/PricingTest.js:228
 msgid "Total"
 msgstr "المجموع"
 
@@ -4319,8 +4776,8 @@ msgstr "يقتبس"
 
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:386
 #: views/addons/user-based-pricing/user.php:41
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:397
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:656
 msgid "Customer"
 msgstr "عميل"
 
@@ -4677,7 +5134,7 @@ msgstr "تقديم..."
 
 #: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:213
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:36
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:40
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:101
 msgid "None"
@@ -4717,7 +5174,7 @@ msgid "Quote Request"
 msgstr "طلب اقتباس"
 
 #: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:29
-#: src/Admin/WelcomePage/WelcomePage.php:240
+#: src/Admin/WelcomePage/WelcomePage.php:245
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/App.js:141
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:133
@@ -4798,21 +5255,21 @@ msgstr ""
 msgid "Upgrade to Premium"
 msgstr "الترقية إلى بريميوم"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:125
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:151
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:166
 msgid "Regular pricing type"
 msgstr "نوع التسعير العادي"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:129
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:122
-#: src/Integrations/Plugins/WPAllImport.php:170
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:155
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:170
+#: src/Integrations/Plugins/WPAllImport.php:178
 #: views/admin/components/regular-pricing-form.php:106
 #: views/admin/components/regular-pricing-form.php:148
 msgid "Sale price"
 msgstr "سعر البيع"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:131
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:124
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:157
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:172
 #: src/Settings/CustomOptions/TPTTextTemplate.php:150
 #: src/Settings/CustomOptions/TPTTextTemplate.php:203
 #: views/addons/category-tiers/add-free.php:28
@@ -4822,19 +5279,19 @@ msgstr "سعر البيع"
 #: views/addons/category-tiers/edit.php:88
 #: views/admin/components/regular-pricing-form.php:38
 #: views/admin/components/regular-pricing-form.php:65
-#: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/components/tiered-pricing-rules-form.php:61
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:29
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage discount"
 msgstr "خصم النسبة المئوية"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:173
+#: src/Addons/RoleBasedPricing/ProductManager.php:174
 msgid "Invalid role"
 msgstr "دور غير صالح"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:179
-#: src/Addons/UserBasedPricing/ProductManager.php:185
+#: src/Addons/RoleBasedPricing/ProductManager.php:180
+#: src/Addons/UserBasedPricing/ProductManager.php:186
 msgid "Invalid nonce"
 msgstr "رقم غير صالح"
 
@@ -4847,12 +5304,12 @@ msgid "Enable role-based pricing rules on individual products."
 msgstr "تمكين قواعد التسعير المستندة إلى الأدوار على المنتجات الفردية."
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:34
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:35
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:38
 msgid "Taxable"
 msgstr "خاضع للضريبة"
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:35
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:36
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:39
 msgid "Shipping only"
 msgstr "الشحن فقط"
 
@@ -4876,28 +5333,28 @@ msgstr "ضريبة"
 msgid "Set tax status and class"
 msgstr "تعيين الحالة الضريبية والفئة"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:25
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:29
 msgid "Tax settings"
 msgstr "إعدادات الضريبة"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:26
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:30
 msgid ""
 "Override the default tax status and class for products matching this rule."
 msgstr ""
 "تجاوز الحالة الضريبية والفئة الافتراضية للمنتجات المطابقة لهذه القاعدة."
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:32
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:35
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:49
 msgid "Tax status"
 msgstr "الوضع الضريبي"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:46
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:49
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:270
 msgid "Standard"
 msgstr "معيار"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:56
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:59
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:63
 msgid "Tax class"
 msgstr "فئة الضرائب"
@@ -4977,12 +5434,12 @@ msgstr "تسمية صف إجمالي التوفير"
 msgid "Cart Display Options"
 msgstr "خيارات عرض سلة التسوق"
 
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:72
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:97
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:74
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:99
 msgid "No label"
 msgstr "لا التسمية"
 
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:104
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:106
 msgid "Tier label (regular price)"
 msgstr "تسمية الطبقة (السعر العادي)"
 
@@ -5071,53 +5528,150 @@ msgstr "أضف تصنيفات مخصصة مثل \"القيمة الأفضل\" إ
 msgid "Manage Roles"
 msgstr "إدارة الأدوار"
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:119
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:343
+#: src/Addons/Tools/API/ToolsEndpoints.php:130
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:586
 msgid "Pick a product first."
 msgstr "اختر منتجًا أولًا."
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:123
+#: src/Addons/Tools/API/ToolsEndpoints.php:134
+#: src/Addons/Tools/API/ToolsEndpoints.php:156
 msgid "The customer could not be loaded."
 msgstr "تعذر تحميل العميل."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:62
+#. translators: %d: line number
+#: src/Addons/Tools/PricingTest/CartTester.php:51
+#, php-format
+msgid "The product of line %d could not be loaded."
+msgstr "تعذّر تحميل منتج السطر %d."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:74
+msgid "Add at least one line to the cart."
+msgstr "أضف سطرًا واحدًا على الأقل إلى السلة."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:93
+#: src/Addons/Tools/PricingTest/PricingTester.php:123
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:660
+msgid "Visitor (not logged in)"
+msgstr "زائر (غير مسجل الدخول)"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:94
+#: src/Addons/Tools/PricingTest/PricingTester.php:124
+msgid "no role"
+msgstr "بدون دور"
+
+#. translators: 1: number of lines, 2: number of lines in the cart
+#: src/Addons/Tools/PricingTest/CartTester.php:258
+#, php-format
+msgid "%1$d of %2$d cart lines match the rule's products and are counted."
+msgstr "يطابق %1$d من %2$d من بنود السلة منتجات القاعدة وتُحتسب."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:259
+msgid "None of the cart lines matches the rule's products."
+msgstr "لا يطابق أي بند في السلة منتجات القاعدة."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:261
+msgid ""
+"The rule counts the whole cart (no products, categories, tags or brands "
+"selected)."
+msgstr ""
+"تحتسب القاعدة السلة بالكامل (لم تُحدَّد منتجات أو فئات أو وسوم أو علامات "
+"تجارية)."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:272
+#: src/Addons/Tools/PricingTest/PricingTester.php:193
+msgid "The rule is not published, so the storefront ignores it."
+msgstr "القاعدة غير منشورة، لذا تتجاهلها واجهة المتجر."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:275
+#: src/Addons/Tools/PricingTest/PricingTester.php:196
+msgid "The rule is suspended, so the storefront ignores it."
+msgstr "القاعدة معلّقة، لذا تتجاهلها واجهة المتجر."
+
+#. translators: %s: date
+#: src/Addons/Tools/PricingTest/CartTester.php:279
+#: src/Addons/Tools/PricingTest/PricingTester.php:200
+#, php-format
+msgid "The rule starts on %s, so the storefront ignores it until then."
+msgstr "تبدأ القاعدة في %s، لذا تتجاهلها واجهة المتجر حتى ذلك الحين."
+
+#. translators: %s: date
+#: src/Addons/Tools/PricingTest/CartTester.php:283
+#: src/Addons/Tools/PricingTest/PricingTester.php:204
+#, php-format
+msgid "The rule ended on %s, so the storefront ignores it."
+msgstr "انتهت القاعدة في %s، لذا تتجاهلها واجهة المتجر."
+
+#. translators: 1: tier threshold, 2: discount
+#: src/Addons/Tools/PricingTest/CartTester.php:297
+#, php-format
+msgid "The cart reaches the tier from %1$s: %2$s off."
+msgstr "تبلغ السلة الطبقة من %1$s: خصم %2$s."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:300
+msgid "The cart reaches the free shipping threshold."
+msgstr "تبلغ السلة حد الشحن المجاني."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:304
+msgid ""
+"The rule has no discount tiers; the cart is below its free shipping "
+"threshold."
+msgstr "ليس للقاعدة طبقات خصم؛ السلة دون حد الشحن المجاني."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:305
+msgid "The rule has no discount tiers; it only sets a minimum order."
+msgstr "ليس للقاعدة طبقات خصم؛ فهي تحدد حدًا أدنى للطلب فقط."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:308
+msgid ""
+"The cart is below the rule's first tier. As the matching rule with the "
+"highest priority it holds the cart: rules below it are not applied."
+msgstr ""
+"السلة دون الطبقة الأولى للقاعدة. وبصفتها القاعدة المطابقة الأعلى أولوية فهي "
+"تتحكم بالسلة: لا تُطبَّق القواعد الأدنى منها."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:312
+msgid ""
+"Another matching cart rule has a higher priority and is the one in play. The"
+" rule with the lowest priority number is applied first; if two rules have "
+"the same number, the newer rule is applied first."
+msgstr ""
+"توجد قاعدة سلة مطابقة أخرى ذات أولوية أعلى وهي المعتمدة. تُطبَّق أولًا "
+"القاعدة ذات رقم الأولوية الأقل؛ وإذا تساوى رقما قاعدتين تُطبَّق الأحدث "
+"أولًا."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:318
+msgid "Its minimum order is checked for this cart: see the minimums above."
+msgstr "يُفحص حدها الأدنى للطلب لهذه السلة: انظر الحدود الدنيا أعلاه."
+
+#: src/Addons/Tools/PricingTest/PricingTester.php:68
 msgid "The product could not be loaded."
 msgstr "تعذر تحميل المنتج."
 
 #. translators: %d: minimum quantity
-#: src/Addons/Tools/PricingTest/PricingTester.php:98
+#: src/Addons/Tools/PricingTest/PricingTester.php:104
 #, php-format
 msgid "minimum %d"
 msgstr "الحد الأدنى %d"
 
 #. translators: %d: maximum quantity
-#: src/Addons/Tools/PricingTest/PricingTester.php:102
+#: src/Addons/Tools/PricingTest/PricingTester.php:108
 #, php-format
 msgid "maximum %d"
 msgstr "الحد الأقصى %d"
 
 #. translators: %d: quantity step
-#: src/Addons/Tools/PricingTest/PricingTester.php:106
+#: src/Addons/Tools/PricingTest/PricingTester.php:112
 #, php-format
 msgid "step %d"
 msgstr "الخطوة %d"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:117
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:401
-msgid "Visitor (not logged in)"
-msgstr "زائر (غير مسجل الدخول)"
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:118
-msgid "no role"
-msgstr "بدون دور"
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:167
+#: src/Addons/Tools/PricingTest/PricingTester.php:173
 msgid "See the rule's products and customers tabs."
 msgstr "انظر تبويبي المنتجات والعملاء في القاعدة."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:181
+#: src/Addons/Tools/PricingTest/PricingTester.php:187
 msgid ""
 "Because of the rule's priority settings, the product's own pricing is "
 "applied instead. The pricing log shows the decision."
@@ -5125,33 +5679,13 @@ msgstr ""
 "بسبب إعدادات أولوية القاعدة، يُطبّق تسعير المنتج الخاص بدلًا منها. يوضح سجل "
 "التسعير القرار."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:187
-msgid "The rule is not published, so the storefront ignores it."
-msgstr "القاعدة غير منشورة، لذا تتجاهلها واجهة المتجر."
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:190
-msgid "The rule is suspended, so the storefront ignores it."
-msgstr "القاعدة معلّقة، لذا تتجاهلها واجهة المتجر."
-
-#. translators: %s: date
-#: src/Addons/Tools/PricingTest/PricingTester.php:194
-#, php-format
-msgid "The rule starts on %s, so the storefront ignores it until then."
-msgstr "تبدأ القاعدة في %s، لذا تتجاهلها واجهة المتجر حتى ذلك الحين."
-
-#. translators: %s: date
-#: src/Addons/Tools/PricingTest/PricingTester.php:198
-#, php-format
-msgid "The rule ended on %s, so the storefront ignores it."
-msgstr "انتهت القاعدة في %s، لذا تتجاهلها واجهة المتجر."
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:203
+#: src/Addons/Tools/PricingTest/PricingTester.php:209
 msgid ""
 "The rule changes neither prices nor quantity limits, so the storefront skips"
 " it."
 msgstr "لا تغيّر القاعدة الأسعار ولا حدود الكمية، لذا تتخطاها واجهة المتجر."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:206
+#: src/Addons/Tools/PricingTest/PricingTester.php:212
 msgid ""
 "Another matching rule has a higher priority and is applied instead. The rule"
 " with the lowest priority number is applied first; if two rules have the "
@@ -5181,10 +5715,13 @@ msgid "The product has an excluded brand: %s."
 msgstr "للمنتج علامة تجارية مستبعدة: %s."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:49
+#: src/Addons/Tools/PricingTest/RuleTester.php:161
 msgid "The customer is listed under the excluded customers."
 msgstr "العميل مدرج ضمن العملاء المستبعدين."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:53
+#: src/Addons/Tools/PricingTest/RuleTester.php:166
 #, php-format
 msgid "The customer has an excluded role: %s."
 msgstr "لدى العميل دور مستبعد: %s."
@@ -5264,28 +5801,37 @@ msgstr ""
 "تجارية)."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:116
+#: src/Addons/Tools/PricingTest/RuleTester.php:176
 msgid "The rule applies to every customer (no roles or customers selected)."
 msgstr "تنطبق القاعدة على كل العملاء (لم تُحدد أدوار أو عملاء)."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:122
+#: src/Addons/Tools/PricingTest/RuleTester.php:179
 msgid "The customer is listed under the rule's customers."
 msgstr "العميل مدرج ضمن عملاء القاعدة."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:129
+#: src/Addons/Tools/PricingTest/RuleTester.php:184
 #, php-format
 msgid "The customer has the rule's role: %s."
 msgstr "لدى العميل دور القاعدة: %s."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:135
+#: src/Addons/Tools/PricingTest/RuleTester.php:189
 #, php-format
 msgid "This customer has the roles %s."
 msgstr "لهذا العميل الأدوار %s."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:135
+#: src/Addons/Tools/PricingTest/RuleTester.php:189
 msgid "This customer has no role."
 msgstr "ليس لهذا العميل أي دور."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:136
+#: src/Addons/Tools/PricingTest/RuleTester.php:190
 msgid ""
 "A visitor who is not logged in only matches rules that include \"Guests (not"
 " logged in)\" or have no customer limits."
@@ -5293,12 +5839,16 @@ msgstr ""
 "الزائر غير المسجل للدخول يطابق فقط القواعد التي تشمل \"الضيوف (غير مسجلي "
 "الدخول)\" أو التي لا تحدد أي عملاء."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:139
+#: src/Addons/Tools/PricingTest/RuleTester.php:194
 #, php-format
 msgid "roles %s"
 msgstr "الأدوار %s"
 
+#. translators: %d: number of customers
 #: src/Addons/Tools/PricingTest/RuleTester.php:142
+#: src/Addons/Tools/PricingTest/RuleTester.php:198
 #, php-format
 msgid "%d selected customer"
 msgid_plural "%d selected customers"
@@ -5309,30 +5859,36 @@ msgstr[3] "%d عملاء محددين"
 msgstr[4] "%d عميلًا محددًا"
 msgstr[5] "%d عميل محدد"
 
+#. translators: %s: the limits, e.g. "roles Wholesale and 2 selected
+#. customers"
 #: src/Addons/Tools/PricingTest/RuleTester.php:147
+#: src/Addons/Tools/PricingTest/RuleTester.php:204
 #, php-format
 msgid "The rule is limited to %s."
 msgstr "القاعدة مقصورة على %s."
 
+#. translators: %s: the limits, e.g. "roles Wholesale and 2 selected
+#. customers"
 #: src/Addons/Tools/PricingTest/RuleTester.php:147
+#: src/Addons/Tools/PricingTest/RuleTester.php:204
 msgid "and"
 msgstr "و"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:181
+#: src/Addons/Tools/PricingTest/RuleTester.php:238
 msgid "a role price on the product"
 msgstr "سعر دور على المنتج"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:183
+#: src/Addons/Tools/PricingTest/RuleTester.php:240
 msgid "a customer price on the product"
 msgstr "سعر عميل على المنتج"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:185
+#: src/Addons/Tools/PricingTest/RuleTester.php:242
 #: views/admin/notifications/activation-notification.php:44
 msgid "a global pricing rule"
 msgstr "قاعدة التسعير العالمية"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:187
-#: src/Addons/Tools/PricingTest/RuleTester.php:189
+#: src/Addons/Tools/PricingTest/RuleTester.php:244
+#: src/Addons/Tools/PricingTest/RuleTester.php:246
 msgid "the product's own pricing"
 msgstr "تسعير المنتج الخاص"
 
@@ -5354,7 +5910,7 @@ msgstr "أدوات"
 msgid "Access utilities for managing and cleaning up tiered pricing data."
 msgstr "الوصول إلى الأدوات المساعدة لإدارة وتنظيف بيانات التسعير المتدرجة."
 
-#: src/Addons/UserBasedPricing/ProductManager.php:179
+#: src/Addons/UserBasedPricing/ProductManager.php:180
 msgid "Invalid user"
 msgstr "مستخدم غير صالح"
 
@@ -5611,45 +6167,45 @@ msgstr "منتج متغير"
 msgid "Tiers, quantity limits and how variations are priced together"
 msgstr "الطبقات وحدود الكمية وطريقة تسعير المتغيرات معًا"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:100
+#: src/Admin/ProductPage/TieredPricingTab.php:101
 msgid "Display"
 msgstr "العرض"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:100
+#: src/Admin/ProductPage/TieredPricingTab.php:101
 msgid "Layout and unit label for this product"
 msgstr "التخطيط وتسمية الوحدة لهذا المنتج"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:112
+#: src/Admin/ProductPage/TieredPricingTab.php:113
 msgid "Pricing layout"
 msgstr "تخطيط التسعير"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:113
+#: src/Admin/ProductPage/TieredPricingTab.php:114
 msgid "Override the global layout for this specific product."
 msgstr "تجاوز التخطيط العام لهذا المنتج المحدد."
 
-#: src/Admin/ProductPage/TieredPricingTab.php:129
+#: src/Admin/ProductPage/TieredPricingTab.php:130
 msgid "Singular (e.g. piece)"
 msgstr "مفرد (قطعة مثلاً)"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:135
+#: src/Admin/ProductPage/TieredPricingTab.php:136
 msgid "Plural (e.g. pieces)"
 msgstr "الجمع (مثل القطع)"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:146
+#: src/Admin/ProductPage/TieredPricingTab.php:147
 msgid "Displayed next to quantities. Leave empty to inherit global settings."
 msgstr "تظهر بجانب الكميات. اتركه فارغًا لوراثة الإعدادات العامة."
 
-#: src/Admin/ProductPage/TieredPricingTab.php:157
+#: src/Admin/ProductPage/TieredPricingTab.php:158
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:402
 msgid "Visibility"
 msgstr "الظهور"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:260
+#: src/Admin/ProductPage/TieredPricingTab.php:261
 msgid "Role & Customer Prices"
 msgstr "الدور وأسعار العملاء"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:260
+#: src/Admin/ProductPage/TieredPricingTab.php:261
 msgid "Prices for customer roles and individual customers"
 msgstr "أسعار لأدوار العملاء والعملاء الأفراد"
 
@@ -5763,17 +6319,21 @@ msgstr "تسعير عدة منتجات دفعة واحدة"
 #: src/Admin/WelcomePage/WelcomePage.php:211
 msgid ""
 "A global pricing rule gives categories, tags, brands or customer roles one "
-"set of tiers."
+"set of tiers, or takes an amount off the whole order and ships it free from "
+"a subtotal."
 msgstr ""
-"تمنح قاعدة التسعير العالمية الفئات أو العلامات أو العلامات التجارية أو أدوار"
-" العملاء مجموعة واحدة من الطبقات."
+"تمنح قاعدة التسعير العامة فئات أو وسومًا أو علامات تجارية أو أدوار عملاء "
+"مجموعة واحدة من الطبقات، أو تخصم مبلغًا من الطلب كاملًا وتشحنه مجانًا من "
+"مجموع فرعي معيّن."
 
 #: src/Admin/WelcomePage/WelcomePage.php:212
 msgid "Open the pricing rules"
 msgstr "فتح قواعد التسعير"
 
 #: src/Admin/WelcomePage/WelcomePage.php:212 src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:313
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:327
+#: src/Addons/Tools/js-source/components/PricingTest.js:507
 msgid "Add a pricing rule"
 msgstr "إضافة قاعدة تسعير"
 
@@ -5802,25 +6362,33 @@ msgid "Tiers travel with the WooCommerce CSV importer and exporter."
 msgstr "تنتقل الطبقات مع مستورد ومصدّر WooCommerce CSV."
 
 #: src/Admin/WelcomePage/WelcomePage.php:241
+msgid ""
+"A discount, free shipping with a progress bar and a minimum order on the "
+"whole cart, per role, products and dates."
+msgstr ""
+"خصم وشحن مجاني مع شريط تقدم وحد أدنى للطلب على السلة بالكامل، لكل دور "
+"ومنتجات وتواريخ."
+
+#: src/Admin/WelcomePage/WelcomePage.php:246
 msgid "A quote form for customers who want a price on a large order."
 msgstr "نموذج طلب عرض أسعار للعملاء الذين يريدون سعرًا لطلب كبير."
 
-#: src/Admin/WelcomePage/WelcomePage.php:245
+#: src/Admin/WelcomePage/WelcomePage.php:250
 msgid "Pricing labels"
 msgstr "تسميات التسعير"
 
-#: src/Admin/WelcomePage/WelcomePage.php:246
+#: src/Admin/WelcomePage/WelcomePage.php:251
 msgid ""
 "Mark a tier as the best value or the most popular, with an icon and a "
 "colour."
 msgstr "ضع على الطبقة علامة القيمة الأفضل أو الأكثر شعبية، مع أيقونة ولون."
 
-#: src/Admin/WelcomePage/WelcomePage.php:250
+#: src/Admin/WelcomePage/WelcomePage.php:255
 #: src/Settings/Sections/Advanced/AdvancedSection.php:35
 msgid "Modules"
 msgstr "وحدات"
 
-#: src/Admin/WelcomePage/WelcomePage.php:251
+#: src/Admin/WelcomePage/WelcomePage.php:256
 msgid "Switch off the features you do not use under Advanced."
 msgstr "عطّل الميزات التي لا تستخدمها من قسم متقدم."
 
@@ -5844,7 +6412,7 @@ msgstr ""
 "قم بتحويل وعرض الأسعار المتدرجة بشكل صحيح عند استخدام Aeliacurrency "
 "Switcher."
 
-#: src/Integrations/Plugins/Curcy.php:79
+#: src/Integrations/Plugins/Curcy.php:88
 msgid ""
 "Convert and display tiered pricing correctly when using the CURCY "
 "multicurrency plugin."
@@ -6184,7 +6752,7 @@ msgstr "تسعير لكل خيار"
 msgid "Live totals"
 msgstr "إجماليات مباشرة"
 
-#: src/Integrations/Plugins/WCCS.php:67
+#: src/Integrations/Plugins/WCCS.php:82
 msgid ""
 "Convert and display tiered pricing correctly when using the WooCommerce "
 "Currency Switcher by WP Experts."
@@ -6234,7 +6802,7 @@ msgstr ""
 "تطبيق التسعير المتدرج بشكل صحيح على المنتجات المشتراة ضمن خطة WooCommerce "
 "Subscriptions، في الإجماليات الأولية والمتكررة على حد سواء."
 
-#: src/Integrations/Plugins/WOOCS.php:65
+#: src/Integrations/Plugins/WOOCS.php:80
 msgid ""
 "Convert and display tiered pricing correctly when using the FOX WooCommerce "
 "Currency Switcher."
@@ -6250,13 +6818,13 @@ msgstr ""
 "قم بتحويل وعرض الأسعار المتدرجة بشكل صحيح عند استخدام WooPayments "
 "Multicurrency."
 
-#: src/Integrations/Plugins/WPAllImport.php:103
-#: src/Integrations/Plugins/WPAllImport.php:203
+#: src/Integrations/Plugins/WPAllImport.php:105
+#: src/Integrations/Plugins/WPAllImport.php:211
 msgid "Fixed Tiered prices"
 msgstr "أسعار متدرجة ثابتة"
 
-#: src/Integrations/Plugins/WPAllImport.php:106
-#: src/Integrations/Plugins/WPAllImport.php:208
+#: src/Integrations/Plugins/WPAllImport.php:108
+#: src/Integrations/Plugins/WPAllImport.php:216
 msgid ""
 "The format for the rules must be the following: "
 "quantity:price,quantity:price. For example: \"10:5,20:15\" where 10 and 20 "
@@ -6265,13 +6833,13 @@ msgstr ""
 "يجب أن يكون تنسيق القواعد كما يلي: الكمية:السعر،الكمية:السعر. على سبيل "
 "المثال: \"10:5,20:15\" حيث 10 و20 هما الكميتان و5 و15 هما أسعار تلك الكميات."
 
-#: src/Integrations/Plugins/WPAllImport.php:110
-#: src/Integrations/Plugins/WPAllImport.php:213
+#: src/Integrations/Plugins/WPAllImport.php:112
+#: src/Integrations/Plugins/WPAllImport.php:221
 msgid "Percentage Tiered prices"
 msgstr "النسبة المئوية للأسعار المتدرجة"
 
-#: src/Integrations/Plugins/WPAllImport.php:113
-#: src/Integrations/Plugins/WPAllImport.php:218
+#: src/Integrations/Plugins/WPAllImport.php:115
+#: src/Integrations/Plugins/WPAllImport.php:226
 msgid ""
 "Format for the rules must be the following: "
 "quantity:percent_discount,quantity:percent_discount. For example: "
@@ -6282,27 +6850,43 @@ msgstr ""
 "الكمية:percent_discount،quantity:percent_discount. على سبيل المثال: "
 "\"10:5,20:15\" حيث 10 و20 عبارة عن كميات و5 و15 عبارة عن مبالغ الخصم."
 
-#: src/Integrations/Plugins/WPAllImport.php:126
-#: src/Integrations/Plugins/WPAllImport.php:234
-msgid "The field must be either \"fixed\" or \"percentage\"."
-msgstr "يجب أن يكون الحقل إما \"ثابت\" أو \"نسبة مئوية\"."
+#: src/Integrations/Plugins/WPAllImport.php:119
+#: src/Integrations/Plugins/WPAllImport.php:231
+msgid "Amount-off Tiered prices"
+msgstr "أسعار متدرجة بمبلغ خصم"
 
-#: src/Integrations/Plugins/WPAllImport.php:129
-#: src/Integrations/Plugins/WPAllImport.php:238
+#: src/Integrations/Plugins/WPAllImport.php:122
+#: src/Integrations/Plugins/WPAllImport.php:236
+msgid ""
+"Format for the rules must be the following: "
+"quantity:amount_off,quantity:amount_off. For example: \"10:5,20:15\" where "
+"10 and 20 are quantities and 5 and 15 are the amounts taken off the price of"
+" each unit."
+msgstr ""
+"يجب أن يكون تنسيق القواعد كما يلي: quantity:amount_off,quantity:amount_off. "
+"مثال: \"10:5,20:15\" حيث 10 و20 كميات و5 و15 مبالغ تُخصم من سعر كل وحدة."
+
+#: src/Integrations/Plugins/WPAllImport.php:134
+#: src/Integrations/Plugins/WPAllImport.php:250
+msgid "The field must be \"fixed\", \"percentage\" or \"amount\"."
+msgstr "يجب أن يكون الحقل \"fixed\" أو \"percentage\" أو \"amount\"."
+
+#: src/Integrations/Plugins/WPAllImport.php:137
+#: src/Integrations/Plugins/WPAllImport.php:254
 msgid "Minimum product quantity"
 msgstr "الحد الأدنى لكمية المنتج"
 
-#: src/Integrations/Plugins/WPAllImport.php:134
-#: src/Integrations/Plugins/WPAllImport.php:245
+#: src/Integrations/Plugins/WPAllImport.php:142
+#: src/Integrations/Plugins/WPAllImport.php:261
 msgid "The field must contain an integer value."
 msgstr "يجب أن يحتوي الحقل على قيمة عددية."
 
-#: src/Integrations/Plugins/WPAllImport.php:149
+#: src/Integrations/Plugins/WPAllImport.php:157
 #: views/admin/components/regular-pricing-form.php:28
 msgid "Pricing type"
 msgstr "نوع التسعير"
 
-#: src/Integrations/Plugins/WPAllImport.php:156
+#: src/Integrations/Plugins/WPAllImport.php:164
 msgid ""
 "The field must be either \"fixed\" or \"percentage\". This affect what "
 "fields will be used to grant a discount: sale and regular prices or "
@@ -6311,38 +6895,38 @@ msgstr ""
 "يجب أن يكون الحقل إما \"ثابت\" أو \"نسبة مئوية\". يؤثر هذا على الحقول التي "
 "سيتم استخدامها لمنح الخصم: البيع والأسعار العادية أو النسبة المئوية للخصم."
 
-#: src/Integrations/Plugins/WPAllImport.php:166
+#: src/Integrations/Plugins/WPAllImport.php:174
 msgid "Regular price for the role"
 msgstr "السعر العادي للدور"
 
-#: src/Integrations/Plugins/WPAllImport.php:175
+#: src/Integrations/Plugins/WPAllImport.php:183
 msgid "Sale price for the role"
 msgstr "سعر البيع للدور"
 
-#: src/Integrations/Plugins/WPAllImport.php:179
+#: src/Integrations/Plugins/WPAllImport.php:187
 #: views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "تخفيض (٪)"
 
-#: src/Integrations/Plugins/WPAllImport.php:198
+#: src/Integrations/Plugins/WPAllImport.php:206
 msgid "Percentage discount for the role."
 msgstr "نسبة الخصم للدور."
 
-#: src/Integrations/Plugins/WPAllImport.php:567
+#: src/Integrations/Plugins/WPAllImport.php:583
 msgid "Role-based import"
 msgstr "الاستيراد على أساس الدور"
 
-#: src/Integrations/Plugins/WPAllImport.php:884
+#: src/Integrations/Plugins/WPAllImport.php:900
 msgid "Import and update tiered pricing rules using WP All Import."
 msgstr "قم باستيراد وتحديث قواعد التسعير المتدرجة باستخدام WP All Import."
 
-#: src/Integrations/Plugins/WPMLMulticurrency.php:125
+#: src/Integrations/Plugins/WPMLMulticurrency.php:135
 msgid ""
 "Convert and display tiered pricing correctly when using WPML Multicurrency."
 msgstr ""
 "قم بتحويل وعرض الأسعار المتدرجة بشكل صحيح عند استخدام WPML Multicurrency."
 
-#: src/Integrations/Plugins/WPMLMultilingual.php:143
+#: src/Integrations/Plugins/WPMLMultilingual.php:144
 msgid ""
 "Copy role-based and user-based tiered pricing to product translations when "
 "using WPML or Polylang."
@@ -6350,7 +6934,7 @@ msgstr ""
 "نسخ التسعير المتدرج حسب الدور وحسب المستخدم إلى ترجمات المنتج عند استخدام "
 "WPML أو Polylang."
 
-#: src/Integrations/Plugins/YithMulticurrency.php:67
+#: src/Integrations/Plugins/YithMulticurrency.php:78
 msgid ""
 "Convert and display tiered pricing correctly when using the YITH Multi "
 "Currency Switcher for WooCommerce."
@@ -6391,21 +6975,14 @@ msgstr ""
 "أضف بيانات تسعير متدرجة إلى مخطط منتج Yoast وقدم متغيرات "
 "<b>%%lowest_price%%</b> و<b>%%price_range%%</b> لتحسين محركات البحث."
 
-#. translators: %s: amount saved per item
-#. translators: %s: discount percentage
-#: src/PricingTable.php:339 src/PricingTable.php:345
-#, php-format
-msgid "%s off"
-msgstr "خصم %s"
-
 #. translators: 1: discount percentage, 2: amount saved per item
-#: src/PricingTable.php:342
+#: src/PricingTable.php:349
 #, php-format
 msgid "%1$s off, save %2$s"
 msgstr "خصم %1$s، وفّر %2$s"
 
 #. translators: %d: number of tiers not listed
-#: src/PricingTable.php:429
+#: src/PricingTable.php:436
 #, php-format
 msgid "+%d more tier"
 msgid_plural "+%d more tiers"
@@ -6416,7 +6993,7 @@ msgstr[3] "+%d طبقات أخرى"
 msgstr[4] "+%d طبقة أخرى"
 msgstr[5] "+%d طبقة أخرى"
 
-#: src/PricingTable.php:640
+#: src/PricingTable.php:647
 msgid ""
 "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or "
 "greater than your first pricing tier."
@@ -6424,7 +7001,7 @@ msgstr ""
 "تم اكتشاف تضارب في الأسعار: الحد الأدنى لكمية الطلب الخاص بك يساوي أو يزيد "
 "عن مستوى التسعير الأول الخاص بك."
 
-#: src/PricingTable.php:648
+#: src/PricingTable.php:655
 msgid ""
 "To fix this, please ensure your first tiered pricing rule starts at a higher"
 " quantity than your Minimum Order Quantity."
@@ -6432,11 +7009,11 @@ msgstr ""
 "لإصلاح هذه المشكلة، يرجى التأكد من أن قاعدة التسعير ذات المستوى الأول تبدأ "
 "بكمية أعلى من الحد الأدنى لكمية الطلب."
 
-#: src/PricingTable.php:652
+#: src/PricingTable.php:659
 msgid "Why?"
 msgstr "لماذا؟"
 
-#: src/PricingTable.php:653
+#: src/PricingTable.php:660
 msgid ""
 "The plugin automatically creates a base tier using your standard WooCommerce"
 " product price. This base tier covers any quantities ordered between the "
@@ -6446,7 +7023,7 @@ msgstr ""
 "WooCommerce القياسي. تغطي هذه الطبقة الأساسية أي كميات مطلوبة بين الحد "
 "الأدنى لكمية الطلب والطبقة المخفضة الأولى."
 
-#: src/PricingTable.php:657
+#: src/PricingTable.php:664
 msgid "This notice is only visible to store administrators."
 msgstr "هذا الإشعار مرئي فقط لمسؤولي المتجر."
 
@@ -7444,7 +8021,7 @@ msgstr ""
 "تكرار الخيارات في صفحة المنتج. فكّر في الاكتفاء بواحدة — ننصح بـ U2Code "
 "Product Addons للتكامل الأصلي مع التسعير المتدرج."
 
-#: src/Settings/Settings.php:269
+#: src/Settings/Settings.php:276
 msgid "New"
 msgstr "جديد"
 
@@ -7492,8 +8069,8 @@ msgid "Role and customer prices"
 msgstr "أسعار الأدوار والعملاء"
 
 #: src/TierPricingTablePlugin.php:248
-msgid "Cart rules by role: minimums, payment and shipping methods"
-msgstr "قواعد السلة حسب الدور: الحد الأدنى وطرق الدفع والشحن"
+msgid "Payment and shipping methods by role"
+msgstr "طرق الدفع والشحن حسب الدور"
 
 #: src/TierPricingTablePlugin.php:249
 msgid "Tax options by role"
@@ -7547,13 +8124,16 @@ msgstr "متوفر فقط في الإصدار المميز (يمكنك تعطي�
 
 #: views/addons/category-tiers/add-free.php:43
 #: views/addons/category-tiers/edit-free.php:59
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:186
 msgid "Upgrade"
 msgstr "يرقي"
 
 #: views/addons/category-tiers/add.php:69
 #: views/addons/category-tiers/edit-free.php:46
 #: views/addons/category-tiers/edit.php:100
-#: views/admin/components/tiered-pricing-rules-form.php:141
+#: views/addons/global-rules/order-discount-form.php:73
+#: views/admin/components/tiered-pricing-rules-form.php:153
 msgid "New tier"
 msgstr "طبقة جديدة"
 
@@ -7572,6 +8152,47 @@ msgid ""
 msgstr ""
 "تعيين نسبة خصومات للمنتجات التي تحتوي على هذه الفئة. يمكن تجاوز القواعد في "
 "المنتج."
+
+#: views/addons/global-rules/free-shipping-bar.php:20
+msgid "Progress towards free shipping"
+msgstr "التقدم نحو الشحن المجاني"
+
+#: views/addons/global-rules/order-discount-form.php:21
+msgid "Tiers on"
+msgstr "الطبقات على"
+
+#: views/addons/global-rules/order-discount-form.php:24
+msgid "The subtotal of the counted lines"
+msgstr "المجموع الفرعي للبنود المحتسبة"
+
+#: views/addons/global-rules/order-discount-form.php:27
+msgid "The number of items in the counted lines"
+msgstr "عدد العناصر في البنود المحتسبة"
+
+#: views/addons/global-rules/order-discount-form.php:33
+msgid "Discount type"
+msgstr "نوع الخصم"
+
+#: views/addons/global-rules/order-discount-form.php:36
+msgid "Fixed amount"
+msgstr "مبلغ ثابت"
+
+#: views/addons/global-rules/order-discount-form.php:39
+msgid "Percentage (premium)"
+msgstr "نسبة مئوية (النسخة المدفوعة)"
+
+#: views/addons/global-rules/order-discount-form.php:45
+msgid "Tiers"
+msgstr "الطبقات"
+
+#: views/addons/global-rules/order-discount-form.php:79
+msgid ""
+"\"From\" is a subtotal in the store currency or a number of items, as chosen"
+" above. A fixed discount is an amount in the store currency; a percentage "
+"one is a number such as 10, taken off the discounted lines."
+msgstr ""
+"«من» هو مجموع فرعي بعملة المتجر أو عدد عناصر، حسب الاختيار أعلاه. الخصم "
+"الثابت مبلغ بعملة المتجر؛ والنسبي رقم مثل 10 يُخصم من البنود المخصومة."
 
 #: views/addons/global-rules/tiered-pricing-tab.php:60
 msgid ""
@@ -7600,6 +8221,10 @@ msgid ""
 "free version."
 msgstr ""
 "أسعار الأدوار ميزة متميزة. الحقول أدناه للقراءة فقط في الإصدار المجاني."
+
+#: views/addons/role-based-pricing/role.php:31
+msgid "Role"
+msgstr "الدور"
 
 #: views/addons/role-based-pricing/role.php:36
 #: views/addons/user-based-pricing/user.php:46
@@ -7692,28 +8317,40 @@ msgstr "تعيين سعر مخفض كما"
 msgid "Leave blank to keep unchanged"
 msgstr "اتركه فارغًا لتبقى دون تغيير"
 
-#: views/admin/components/tiered-pricing-rules-form.php:105
+#: views/admin/components/tiered-pricing-rules-form.php:62
+msgid "Amount off"
+msgstr "مبلغ الخصم"
+
+#: views/admin/components/tiered-pricing-rules-form.php:113
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:16
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Fixed prices"
 msgstr "أسعار ثابتة"
 
-#: views/admin/components/tiered-pricing-rules-form.php:110
+#: views/admin/components/tiered-pricing-rules-form.php:118
 msgid "Percentage discounts"
 msgstr "نسبة التخفيضات"
 
-#: views/admin/components/tiered-pricing-rules-form.php:111
+#: views/admin/components/tiered-pricing-rules-form.php:119
 msgid "Percentage discounts (only in premium version)"
 msgstr "نسبة الخصومات (فقط في الإصدار المميز)"
 
-#: views/admin/components/tiered-pricing-rules-form.php:125
+#: views/admin/components/tiered-pricing-rules-form.php:124
+msgid "Amount discounts"
+msgstr "خصومات المبالغ"
+
+#: views/admin/components/tiered-pricing-rules-form.php:137
 msgid "Tiered price"
 msgstr "سعر متدرج"
 
 #: views/admin/notifications/activation-notification.php:25
 msgid "Thanks for installing the"
 msgstr "شكرا لتثبيت"
+
+#: views/admin/notifications/activation-notification.php:41
+msgid "products"
+msgstr "منتجات"
 
 #. translators: %1$s: product links, %2$s: categories
 #: views/admin/notifications/activation-notification.php:47
@@ -7724,6 +8361,11 @@ msgid ""
 msgstr ""
 "أضف قواعد التسعير المستندة إلى الكمية مباشرةً في %1$s أو قم بإنشاء %2$s التي"
 " ستعمل مع فئات المنتجات وأدوار المستخدمين."
+
+#: views/admin/notifications/black-friday.php:43
+#: views/admin/notifications/feedback-discount.php:41
+msgid "Dismiss"
+msgstr "رفض"
 
 #: views/admin/notifications/black-friday.php:47
 msgid "Black Friday"
@@ -7971,26 +8613,31 @@ msgid "+ Add Column"
 msgstr "+ إضافة عمود"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:59
 msgid "Bold"
 msgstr "غامق"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:60
 msgid "Italic"
 msgstr "مائل"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:61
 msgid "Strikethrough"
 msgstr "يتوسطه خط"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:147
 msgid "Formatting"
 msgstr "التنسيق"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:195
 msgid "Insert"
 msgstr "إدراج"
@@ -8037,9 +8684,11 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:232
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:235
 #: src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:23
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:184
 msgid "Available in the premium version."
 msgstr "متاح في الإصدار المميز."
 
@@ -8141,7 +8790,9 @@ msgid "Upsell message"
 msgstr "رسالة البيع الإضافي"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:348
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:196
 msgid "Next tier message"
 msgstr "رسالة الطبقة التالية"
 
@@ -8635,27 +9286,30 @@ msgid "Click a variable to insert it."
 msgstr "انقر على متغير لإدراجه."
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:193
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:176
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:454
 msgid "Cart"
 msgstr "عربة"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
-msgid "Subtotal"
-msgstr "المجموع الفرعي"
-
-#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:205
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:476
 msgid "Cart totals"
 msgstr "إجماليات السلة"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:478
 msgid "Shipping"
 msgstr "الشحن"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:207
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:481
 msgid "Proceed to checkout"
 msgstr "المتابعة لإتمام الطلب"
@@ -8666,6 +9320,8 @@ msgid "Tiered pricing is switched off for shop and category pages."
 msgstr "التسعير المتدرج معطّل لصفحات المتجر والتصنيفات."
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:263
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:352
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:408
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -8704,7 +9360,9 @@ msgid "Cart & Checkout"
 msgstr "السلة وإتمام الطلب"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:178
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:179
 #: src/Addons/LayoutConfigurator/js-source/components/Preview.js:295
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:177
@@ -8739,16 +9397,224 @@ msgstr ""
 "حفظها."
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:306
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:314
 #: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:443
 msgid "Unsaved changes"
 msgstr "تغييرات غير محفوظة"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:307
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:315
 msgid "Save changes"
 msgstr "حفظ التغييرات"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:164
+msgid "Sample product"
+msgstr "منتج تجريبي"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:176
+msgid "Order discount"
+msgstr "خصم الطلب"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+msgid "Flat rate:"
+msgstr "السعر الثابت:"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:217
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:243
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:177
+msgid "Checkout"
+msgstr "إتمام الطلب"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:221
+msgid "Your order"
+msgstr "طلبك"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:224
+msgid "Place order"
+msgstr "تأكيد الطلب"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:238
+msgid "Subtotal:"
+msgstr "المجموع الفرعي:"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:242
+msgid "View cart"
+msgstr "عرض السلة"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:252
+msgid ""
+"The bar is not placed on product pages. Tick \"Product page\" under \"Where "
+"it shows\" to add it above the add to cart form."
+msgstr ""
+"الشريط غير موضوع في صفحات المنتجات. فعّل «صفحة المنتج» ضمن «مكان الظهور» "
+"لإضافته فوق نموذج الإضافة إلى السلة."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:178
+msgid "Mini cart"
+msgstr "السلة المصغّرة"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:185
+msgid ""
+"The free shipping bar needs the premium version; the preview shows what it "
+"would look like."
+msgstr "يتطلب شريط الشحن المجاني النسخة المدفوعة؛ وتعرض المعاينة شكله."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:195
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:405
+msgid "Cart discount"
+msgstr "خصم السلة"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:196
+msgid ""
+"Shown under the cart totals, in the checkout order review and in the mini "
+"cart until the next tier is reached. Leave it empty to hide it. Not "
+"available in the Cart and Checkout blocks."
+msgstr ""
+"يظهر تحت إجمالي السلة وفي مراجعة طلب إتمام الطلب وفي السلة المصغّرة حتى بلوغ"
+" الطبقة التالية. اتركه فارغًا لإخفائه. غير متاح في كتلتي السلة وإتمام الطلب."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:199
+msgid "Subtotal basis"
+msgstr "أساس المجموع الفرعي"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:199
+msgid ""
+"The subtotal the cart rules compare with their tiers and minimums: the cart "
+"lines after tiered prices, before shipping."
+msgstr ""
+"المجموع الفرعي الذي تقارنه قواعد السلة بطبقاتها وحدودها الدنيا: بنود السلة "
+"بعد الأسعار المتدرجة وقبل الشحن."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:208
+msgid "Keep the discount next to customer coupons"
+msgstr "إبقاء الخصم مع قسائم العملاء"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:209
+msgid ""
+"Switched off, a coupon the customer applies replaces the cart discount. An "
+"individual-use coupon always replaces it."
+msgstr ""
+"عند إيقافه، تحل القسيمة التي يطبّقها العميل محل خصم السلة. وتحل القسيمة ذات "
+"الاستخدام الفردي محله دائمًا."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:217
+msgid "Amount not reached"
+msgstr "المبلغ غير مستوفى"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:217
+msgid ""
+"Shown in the cart and at checkout, classic pages and blocks, while a cart "
+"rule's minimum amount is not met."
+msgstr ""
+"يظهر في السلة وعند إتمام الطلب، بصفحاتهما الكلاسيكية وكتلهما، ما دام الحد "
+"الأدنى للمبلغ في قاعدة سلة غير مستوفى."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:220
+msgid "Items not reached"
+msgstr "العناصر غير مستوفاة"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:220
+msgid "Shown while a cart rule's minimum number of items is not met."
+msgstr "يظهر ما دام الحد الأدنى لعدد العناصر في قاعدة سلة غير مستوفى."
+
+#. translators: %s: shortcode
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:230
+#, js-format
+msgid ""
+"The bar is switched on per rule, on its Free shipping tab. The shortcode %s "
+"and the Free Shipping Bar block put it anywhere else, such as the header or "
+"the page of the Cart block."
+msgstr ""
+"يُفعَّل الشريط لكل قاعدة في تبويب الشحن المجاني الخاص بها. يضعه الرمز القصير"
+" %s وكتلة «شريط الشحن المجاني» في أي مكان آخر، مثل الترويسة أو صفحة كتلة "
+"السلة."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:240
+msgid "The store message; a rule can carry its own."
+msgstr "رسالة المتجر؛ ويمكن لكل قاعدة أن تحمل رسالتها."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:246
+#: src/Addons/TierLabels/build/index.js:2
+#: src/Addons/TierLabels/js-source/index.js:234
+msgid "Colours"
+msgstr "الألوان"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:250
+msgid "Until reached"
+msgstr "قبل البلوغ"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:254
+msgid "Reached"
+msgstr "تم البلوغ"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:258
+msgid "Height"
+msgstr "الارتفاع"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:282
+msgid "Cart rules preview"
+msgstr "معاينة قواعد السلة"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:290
+msgid "Sample cart subtotal"
+msgstr "مثال لمجموع فرعي للسلة"
+
+#. translators: 1: discount, 2: tier threshold, 3: free shipping threshold, 4:
+#. minimum amount, 5: minimum items
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:304
+#, js-format
+msgid ""
+"Sample rule: %1$s off from %2$s, free shipping from %3$s, a minimum of %4$s "
+"or %5$s items."
+msgstr ""
+"قاعدة تجريبية: خصم %1$s من %2$s، وشحن مجاني من %3$s، وحد أدنى %4$s أو %5$s "
+"عناصر."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:318
+msgid ""
+"Your rules set their own tiers, thresholds and minimums; the preview uses a "
+"sample rule. The real pages may look a bit different, depending on your "
+"theme."
+msgstr ""
+"تحدد قواعدك طبقاتها وعتباتها وحدودها الدنيا بنفسها؛ تستخدم المعاينة قاعدة "
+"تجريبية. قد تبدو الصفحات الفعلية مختلفة قليلًا حسب قالبك."
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:7
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
@@ -9640,11 +10506,6 @@ msgid "Shape"
 msgstr "الشكل"
 
 #: src/Addons/TierLabels/build/index.js:2
-#: src/Addons/TierLabels/js-source/index.js:234
-msgid "Colours"
-msgstr "الألوان"
-
-#: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:236
 msgid "Background"
 msgstr "الخلفية"
@@ -10098,44 +10959,59 @@ msgid "Save Role"
 msgstr "حفظ الدور"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:135
+#: src/Addons/Tools/js-source/components/PricingTest.js:146
 msgid "Selected"
 msgstr "محدد"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:144
+#: src/Addons/Tools/js-source/components/PricingTest.js:155
 msgid "Matches and is applied"
 msgstr "مطابقة ومطبّقة"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:145
+#: src/Addons/Tools/js-source/components/PricingTest.js:156
 msgid "Matches, but product pricing is applied"
 msgstr "مطابقة، لكن يُطبّق تسعير المنتج"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:146
+#: src/Addons/Tools/js-source/components/PricingTest.js:157
 msgid "Matches, but a higher-priority rule is applied"
 msgstr "مطابقة، لكن تُطبّق قاعدة ذات أولوية أعلى"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:147
+#: src/Addons/Tools/js-source/components/PricingTest.js:158
 msgid "Matches, but changes nothing"
 msgstr "مطابقة، لكنها لا تغيّر شيئًا"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:148
+#: src/Addons/Tools/js-source/components/PricingTest.js:159
 msgid "Would match"
 msgstr "ستُطابق"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:149
+#: src/Addons/Tools/js-source/components/PricingTest.js:160
 msgid "Does not match"
 msgstr "غير مطابقة"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:161
+msgid "No counted line"
+msgstr "لا بند محتسب"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:162
+msgid "In play, below its first tier"
+msgstr "مطبّقة، دون طبقتها الأولى"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:163
+msgid "In play, minimum order only"
+msgstr "مطبّقة، حد أدنى للطلب فقط"
 
 #. translators: 1: rule title, 2: pricing source, e.g. "the product's own
 #. pricing"
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:172
+#: src/Addons/Tools/js-source/components/PricingTest.js:186
 #, js-format
 msgid ""
 "%1$s matches, but the prices come from %2$s because of the rule's priority "
@@ -10144,72 +11020,74 @@ msgstr "%1$s مطابقة، لكن الأسعار تأتي من %2$s بسبب إ
 
 #. translators: %s: rule title
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:177
+#: src/Addons/Tools/js-source/components/PricingTest.js:191
 #, js-format
 msgid "The prices come from %s."
 msgstr "الأسعار تأتي من %s."
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:179
+#: src/Addons/Tools/js-source/components/PricingTest.js:193
 msgid "No global pricing rule matches this product for this customer."
 msgstr "لا توجد قاعدة تسعير عالمية تطابق هذا المنتج لهذا العميل."
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:168
+#: src/Addons/Tools/js-source/components/PricingTest.js:182
 msgid ""
 "No global pricing rule takes part: the Global pricing rules add-on is "
 "switched off."
 msgstr "لا تشارك أي قاعدة تسعير عالمية: وحدة قواعد التسعير العالمية معطّلة."
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:195
+#: src/Addons/Tools/js-source/components/PricingTest.js:209
 #, js-format
 msgid "Source of the prices: %s."
 msgstr "مصدر الأسعار: %s."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:199
+#: src/Addons/Tools/js-source/components/PricingTest.js:213
 #, js-format
 msgid "Quantity limits: %s."
 msgstr "حدود الكمية: %s."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:200
+#: src/Addons/Tools/js-source/components/PricingTest.js:214
 msgid "No quantity limits."
 msgstr "لا توجد حدود للكمية."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:212
+#: src/Addons/Tools/js-source/components/PricingTest.js:226
+#: src/Addons/Tools/js-source/components/PricingTest.js:353
 msgid "Price per item"
 msgstr "سعر القطعة"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:237
+#: src/Addons/Tools/js-source/components/PricingTest.js:251
 msgid "Verdict"
 msgstr "النتيجة"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:238
+#: src/Addons/Tools/js-source/components/PricingTest.js:252
 msgid "Why"
 msgstr "السبب"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:255
+#: src/Addons/Tools/js-source/components/PricingTest.js:269
 msgid "The rule you came from"
 msgstr "القاعدة التي أتيت منها"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:285
+#: src/Addons/Tools/js-source/components/PricingTest.js:299
+#: src/Addons/Tools/js-source/components/PricingTest.js:394
 msgid "for"
 msgstr "لـ"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:291
+#: src/Addons/Tools/js-source/components/PricingTest.js:305
 msgid "What the customer pays"
 msgstr "ما يدفعه العميل"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:301
+#: src/Addons/Tools/js-source/components/PricingTest.js:315
 msgid ""
 "Rules are matched in priority order: the lowest number first, and the newer "
 "rule first when numbers are equal. The first active rule that matches is "
@@ -10219,7 +11097,7 @@ msgstr ""
 "عند تساوي الأرقام. وتُطبّق أول قاعدة نشطة مطابقة."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:306
+#: src/Addons/Tools/js-source/components/PricingTest.js:320
 msgid ""
 "The Global pricing rules add-on is switched off (see the modules above), so "
 "no rule takes part in pricing."
@@ -10228,85 +11106,324 @@ msgstr ""
 "قاعدة في التسعير."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:311
+#: src/Addons/Tools/js-source/components/PricingTest.js:325
 msgid "There are no global pricing rules yet."
 msgstr "لا توجد قواعد تسعير عالمية بعد."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:322
+#: src/Addons/Tools/js-source/components/PricingTest.js:336
 msgid "Pricing log"
 msgstr "سجل التسعير"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:51
-#: src/Addons/Tools/js-source/components/PricingTest.js:372
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:354
+msgid "Line total"
+msgstr "إجمالي البند"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:355
+msgid "Source of the price"
+msgstr "مصدر السعر"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:363
+msgid "tier"
+msgstr "طبقة"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:371
+msgid "Counted, including tax"
+msgstr "محتسب شاملًا الضريبة"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:371
+msgid "Counted, excluding tax"
+msgstr "محتسب دون الضريبة"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:393
+#, js-format
+msgid "A cart of %d line"
+msgid_plural "A cart of %d lines"
+msgstr[0] "سلة بلا بنود"
+msgstr[1] "سلة من بند واحد"
+msgstr[2] "سلة من بندين"
+msgstr[3] "سلة من %d بنود"
+msgstr[4] "سلة من %d بندًا"
+msgstr[5] "سلة من %d بند"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:400
+msgid "What the cart gets"
+msgstr "ما تحصل عليه السلة"
+
+#. translators: 1: discount, 2: counted amount or items, 3: amount taken off
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:412
+#, js-format
+msgid "%1$s off from the tier at %2$s, taken on %3$s counted: %4$s off."
+msgstr "خصم %1$s من الطبقة عند %2$s، مأخوذ على %3$s محتسبة: خصم %4$s."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:418
+#, js-format
+msgid "Shown as \"%1$s\" (coupon %2$s)."
+msgstr "يُعرض باسم «%1$s» (القسيمة %2$s)."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:419
+#, js-format
+msgid "%d line counted."
+msgid_plural "%d lines counted."
+msgstr[0] "لا بنود محتسبة."
+msgstr[1] "بند واحد محتسب."
+msgstr[2] "بندان محتسبان."
+msgstr[3] "%d بنود محتسبة."
+msgstr[4] "%d بندًا محتسبًا."
+msgstr[5] "%d بند محتسب."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:424
+msgid "none."
+msgstr "لا شيء."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:424
+msgid ""
+"is in play for this cart, but the cart does not reach its first tier, and "
+"its minimum order (if any) is checked below."
+msgstr ""
+"مطبّقة على هذه السلة، لكن السلة لا تبلغ طبقتها الأولى، ويُفحص حدها الأدنى "
+"للطلب (إن وُجد) أدناه."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:427
+msgid "none. No cart rule applies to this cart for this customer."
+msgstr "لا شيء. لا تنطبق أي قاعدة سلة على هذه السلة لهذا العميل."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:427
+msgid "none. The Global pricing rules add-on is switched off."
+msgstr "لا شيء. إضافة قواعد التسعير العامة متوقفة."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:435
+msgid "yes: on every order under"
+msgstr "نعم: على كل طلب ضمن"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:437
+#, js-format
+msgid "yes: the cart reaches %s of"
+msgstr "نعم: تبلغ السلة %s من"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:438
+msgid "A Free shipping method that requires a coupon becomes available."
+msgstr "تتوفر طريقة شحن مجاني تتطلب قسيمة."
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:443
+msgid "not yet:"
+msgstr "ليس بعد:"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:443
+#, js-format
+msgid "gives it from %s."
+msgstr "تمنحه من %s."
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:446
+msgid "none: the rule in play has no free shipping threshold."
+msgstr "لا شيء: ليس للقاعدة المطبّقة حد شحن مجاني."
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:450
+#, js-format
+msgid "The free shipping bar shows %1$s: “%2$s”"
+msgstr "يعرض شريط الشحن المجاني %1$s: “%2$s”"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:456
+msgid "no cart rule sets a minimum for this cart."
+msgstr "لا تحدد أي قاعدة سلة حدًا أدنى لهذه السلة."
+
+#: src/Addons/Tools/build/index.js:6
+#: src/Addons/Tools/js-source/components/PricingTest.js:464
+#, js-format
+msgid "minimum %1$s, the cart counts %2$s"
+msgstr "الحد الأدنى %1$s، والسلة تحتسب %2$s"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:466
+#, js-format
+msgid "minimum %1$s items, the cart counts %2$s"
+msgstr "الحد الأدنى %1$s عناصر، والسلة تحتسب %2$s"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:468
+msgid "Met"
+msgstr "مستوفى"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:468
+msgid "Missed: checkout blocked"
+msgstr "غير مستوفى: إتمام الطلب محظور"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:476
+msgid "Next tier"
+msgstr "الطبقة التالية"
+
+#. translators: 1: remaining amount or items, 2: discount, 3: threshold
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:481
+#, js-format
+msgid "add %1$s more to get %2$s off (the tier from %3$s of"
+msgstr "أضف %1$s أخرى للحصول على خصم %2$s (الطبقة من %3$s من"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:486
+msgid "none: the top tier is reached, or no rule with tiers is in play."
+msgstr "لا شيء: بلغت الطبقة العليا، أو لا توجد قاعدة ذات طبقات مطبّقة."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:495
+msgid ""
+"One cart rule is in play at a time: the first in priority order that covers "
+"the customer and counts a line. Every matching rule's minimum is checked."
+msgstr ""
+"تُطبَّق قاعدة سلة واحدة في كل مرة: الأولى بحسب ترتيب الأولوية التي تشمل "
+"العميل وتحتسب بندًا. يُفحص الحد الأدنى لكل قاعدة مطابقة."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:500
+msgid ""
+"The Global pricing rules add-on is switched off (see the modules above), so "
+"no rule takes part."
+msgstr ""
+"إضافة قواعد التسعير العامة متوقفة (انظر الوحدات أعلاه)، لذا لا تشارك أي "
+"قاعدة."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:505
+msgid "There are no cart rules yet."
+msgstr "لا توجد قواعد سلة بعد."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:523
+msgid "Cart lines"
+msgstr "بنود السلة"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:537
+msgid "Remove the line"
+msgstr "إزالة البند"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:540
+msgid "Add a line"
+msgstr "إضافة بند"
+
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:51
+#: src/Addons/Tools/js-source/components/PricingTest.js:615
 msgid "Pricing Test"
 msgstr "اختبار التسعير"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:374
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:617
 msgid ""
-"See what a customer pays for a product without opening the storefront: which"
-" global pricing rule applies and why, which one wins when several match, and"
-" the prices per quantity."
+"See what a customer gets without opening the storefront: for a product, "
+"which pricing rule applies and the prices per quantity; for a cart, which "
+"cart rule is in play, its discount, the minimums and the next tier."
 msgstr ""
-"اطّلع على ما يدفعه العميل لمنتج ما دون فتح واجهة المتجر: أي قاعدة تسعير "
-"عالمية تنطبق ولماذا، وأيها تفوز عند تطابق عدة قواعد، والأسعار حسب الكمية."
+"اعرف ما يحصل عليه العميل دون فتح المتجر: لمنتج، أي قاعدة تسعير تنطبق "
+"والأسعار لكل كمية؛ ولسلة، أي قاعدة سلة مطبّقة وخصمها والحدود الدنيا والطبقة "
+"التالية."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:382
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
 msgid "Checking the rule"
 msgstr "جارٍ فحص القاعدة"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:382
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
+msgid ""
+"Build a cart and pick a customer; the rule is highlighted in the results."
+msgstr "أنشئ سلة واختر عميلًا؛ تُبرَز القاعدة في النتائج."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
 msgid "Pick a product and a customer; the rule is highlighted in the results."
 msgstr "اختر منتجًا وعميلًا؛ وستُبرز القاعدة في النتائج."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:390
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:632
+msgid "What to test"
+msgstr "ما الذي يُختبر"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:636
+msgid "A product: its prices and the product rules"
+msgstr "منتج: أسعاره وقواعد المنتج"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:640
+msgid "A cart: the cart rules, their discount and minimums"
+msgstr "سلة: قواعد السلة وخصمها وحدودها الدنيا"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:648
 msgid "Type to search products and variations."
 msgstr "اكتب للبحث في المنتجات والمتغيرات."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:405
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:664
 msgid "A customer"
 msgstr "عميل"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:411
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:670
 msgid "Which customer"
 msgstr "أي عميل"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:412
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:671
 msgid "Type a name or an email address."
 msgstr "اكتب اسمًا أو عنوان بريد إلكتروني."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:361
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:579
+#: src/Addons/Tools/js-source/components/PricingTest.js:604
 msgid "The test could not run. Reload the page and try again."
 msgstr "تعذر تشغيل الاختبار. أعد تحميل الصفحة وحاول مرة أخرى."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:425
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:561
+msgid "Add at least one product to the cart."
+msgstr "أضف منتجًا واحدًا على الأقل إلى السلة."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:684
 msgid "Testing…"
 msgstr "جارٍ الاختبار…"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:425
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:684
 msgid "Run the test"
 msgstr "تشغيل الاختبار"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:428
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:687
 msgid "Rules are tested as they are saved."
 msgstr "تُختبر القواعد بحالتها المحفوظة."
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:46
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:46
 msgid "Roles Management"
 msgstr "إدارة الأدوار"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:56
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:56
 msgid "Data Clean Up"
 msgstr "تنظيف البيانات"
 
@@ -10349,6 +11466,15 @@ msgstr "عرض نسبة الخصم"
 #: src/Blocks/build/index.js:510
 msgid "Main settings"
 msgstr "الإعدادات الرئيسية"
+
+#: src/Blocks/free-shipping-bar/index.js:21
+msgid ""
+"Free shipping bar: shows here when a cart rule with the free shipping bar "
+"covers the visitor. Switch the bar on under WooCommerce → Pricing rules → "
+"the rule → Free shipping."
+msgstr ""
+"شريط الشحن المجاني: يظهر هنا عندما تشمل الزائر قاعدة سلة مفعّل فيها الشريط. "
+"فعّل الشريط من WooCommerce ← قواعد التسعير ← القاعدة ← الشحن المجاني."
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/premium-wrapper/block.json
 #: src/Addons/ReactProductEditorAddon/js/premium-wrapper/block.json
@@ -10395,3 +11521,39 @@ msgid ""
 msgstr ""
 "القطعة التسعير المتدرج. يجب استخدامه في قالب صفحة المنتج. ابحث عن المزيد من "
 "الخيارات للتخصيص في إعدادات البرنامج المساعد."
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block title"
+msgid "Free Shipping Bar"
+msgstr "شريط الشحن المجاني"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block description"
+msgid ""
+"How far the cart is from the free shipping of a cart rule. Shows nothing "
+"when no rule with the bar covers the visitor."
+msgstr ""
+"مدى بُعد السلة عن الشحن المجاني لقاعدة سلة. لا يعرض شيئًا إذا لم تشمل الزائر"
+" قاعدة ذات شريط."
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "free shipping"
+msgstr "شحن مجاني"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "progress"
+msgstr "تقدم"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "tiered pricing"
+msgstr "تسعير متدرج"
+
+#. translators: %s: login page url
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:85
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:70
+#, php-format
+msgid "%s to see prices"
+msgstr "%s لعرض الأسعار"

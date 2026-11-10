@@ -26,12 +26,30 @@ class GlobalPricingRulesRepository {
 		return self::$instance;
 	}
 	
+	/**
+	 * The product rules in force, in priority order. Order-total rules discount the cart, not products.
+	 *
+	 * @return GlobalPricingRule[]
+	 */
 	public function getPricingRules(): array {
 		if ( empty( $this->rules ) ) {
-			$this->rules = GlobalTieredPricingCPT::getGlobalRules();
+			$this->rules = array_values( array_filter( GlobalTieredPricingCPT::getGlobalRules(), function ( GlobalPricingRule $rule ) {
+				return ! $rule->isOrderRule();
+			} ) );
 		}
 		
 		return $this->rules;
+	}
+	
+	/**
+	 * The order-total rules in force, in priority order.
+	 *
+	 * @return GlobalPricingRule[]
+	 */
+	public function getOrderDiscountRules(): array {
+		return array_values( array_filter( GlobalTieredPricingCPT::getGlobalRules(), function ( GlobalPricingRule $rule ) {
+			return $rule->isOrderRule();
+		} ) );
 	}
 	
 	/**

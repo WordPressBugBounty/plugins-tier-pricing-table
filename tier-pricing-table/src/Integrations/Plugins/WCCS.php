@@ -6,6 +6,21 @@ use TierPricingTable\PricingRule;
 class WCCS extends PluginIntegrationAbstract {
 
 	public function run() {
+		// Amount-off tiers are stored in the base currency: convert the amounts, the product price is converted by WCCS.
+		add_filter( 'tiered_pricing_table/price/pricing_rule', function ( PricingRule $pricingRule ) {
+			global $WCCS;
+			
+			$product = $pricingRule->isAmount() && $WCCS ? wc_get_product( $pricingRule->getProductId() ) : null;
+			
+			if ( $product ) {
+				$pricingRule->setRules( array_map( function ( $amount ) use ( $WCCS, $product ) {
+					return $WCCS->wccs_custom_price( $amount, $product );
+				}, $pricingRule->getRules() ) );
+			}
+			
+			return $pricingRule;
+		}, 9999 );
+		
 
 		add_filter( 'tiered_pricing_table/price/price_by_rules',
 			function ( $product_price, $quantity, $product_id, $context, $place, PricingRule $pricingRule ) {
@@ -14,7 +29,7 @@ class WCCS extends PluginIntegrationAbstract {
 
 				// Percentage tiers are derived from the product's 'view' price, which WCCS has already converted.
 				// Converting again here would double-convert the price.
-				if ( $pricingRule->isPercentage() ) {
+				if ( $pricingRule->isPercentage() || $pricingRule->isAmount() ) {
 					return $product_price;
 				}
 

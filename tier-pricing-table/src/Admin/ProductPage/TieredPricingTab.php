@@ -82,6 +82,7 @@ class TieredPricingTab {
         $type = PriceManager::getPricingType( $post->ID, 'fixed', 'edit' );
         $percentageRules = PriceManager::getPercentagePriceRules( $post->ID, 'edit' );
         $fixedRules = PriceManager::getFixedPriceRules( $post->ID, 'edit' );
+        $amountRules = PriceManager::getAmountPriceRules( $post->ID, 'edit' );
         TieredPricingRulesForm::render(
             $post->ID,
             null,
@@ -89,7 +90,8 @@ class TieredPricingTab {
             $type,
             $percentageRules,
             $fixedRules,
-            '_variable'
+            '_variable',
+            $amountRules
         );
         ?>
 					</div>

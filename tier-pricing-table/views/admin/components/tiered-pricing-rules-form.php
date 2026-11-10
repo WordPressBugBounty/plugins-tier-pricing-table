@@ -14,17 +14,20 @@
 	 * @var string $tiered_pricing_type
 	 * @var array $percentage_rules
 	 * @var array $fixed_rules
+	 * @var array $amount_rules
 	 */
 
 	// Ensure arrays and apply filters
 	$percentage_rules = is_array( $percentage_rules ) ? $percentage_rules : array();
 	$fixed_rules      = is_array( $fixed_rules ) ? $fixed_rules : array();
+	$amount_rules     = isset( $amount_rules ) && is_array( $amount_rules ) ? $amount_rules : array();
 	$fieldsWidth      = apply_filters( 'tiered_pricing_table/admin/tiered_pricing_rules_form/inputs_width', 50 );
 
 	// Define types to loop through for the UI blocks
 	$pricing_blocks = array(
 			'fixed'      => $fixed_rules,
 			'percentage' => $percentage_rules,
+			'amount'     => $amount_rules,
 	);
 
 	/**
@@ -41,19 +44,24 @@
 				$fieldsWidth,
 				$entity_id
 		) {
-			$is_fixed = ( 'fixed' === $type );
+			$is_fixed      = ( 'fixed' === $type );
+			$is_percentage = ( 'percentage' === $type );
 
-			// Map field keys based on type
-			$qty_key = $is_fixed ? 'fixed_quantities' : 'percentage_quantities';
-			$val_key = $is_fixed ? 'fixed_prices' : 'percentage_discounts';
+			// Map field keys based on type: a price per unit, a percentage off, or an amount off per unit.
+			$qty_key = $type . '_quantities';
+			$val_key = $is_fixed ? 'fixed_prices' : $type . '_discounts';
 
 			$qty_name = Form::getFieldName( $qty_key, $role, $loop, $custom_prefix ) . '[]';
 			$val_name = Form::getFieldName( $val_key, $role, $loop, $custom_prefix ) . '[]';
 
 			// Format value and attributes
-			$val_display = $is_fixed ? wc_format_localized_price( $value ) : $value;
-			$placeholder = $is_fixed ? __( 'Price', 'tier-pricing-table' ) : __( 'Percentage discount',
-					'tier-pricing-table' );
+			$val_display = $is_percentage ? $value : wc_format_localized_price( $value );
+			$placeholders = array(
+					'fixed'      => __( 'Price', 'tier-pricing-table' ),
+					'percentage' => __( 'Percentage discount', 'tier-pricing-table' ),
+					'amount'     => __( 'Amount off', 'tier-pricing-table' ),
+			);
+			$placeholder  = $placeholders[ $type ] ?? $placeholders['fixed'];
 			?>
 			<div class="tiered-pricing-pricing-rules-form-row">
 				<div class="tiered-pricing-pricing-rules-form-row__inputs"
@@ -65,10 +73,10 @@
 						   placeholder="<?php esc_attr_e( 'Quantity', 'tier-pricing-table' ); ?>"
 						   name="<?php echo esc_attr( $qty_name ); ?>">
 
-					<input type="<?php echo $is_fixed ? 'text' : 'number'; ?>"
-							<?php echo ! $is_fixed ? 'max="99"' : ''; ?>
+					<input type="<?php echo $is_percentage ? 'number' : 'text'; ?>"
+							<?php echo $is_percentage ? 'max="99"' : ''; ?>
 						   step="any"
-						   class="<?php echo $is_fixed ? 'wc_input_price' : ''; ?>"
+						   class="<?php echo $is_percentage ? '' : 'wc_input_price'; ?>"
 						   value="<?php echo esc_attr( $val_display ); ?>"
 						   placeholder="<?php echo esc_attr( $placeholder ); ?>"
 						   name="<?php echo esc_attr( $val_name ); ?>">
@@ -110,6 +118,10 @@
 					<?php echo tpt_fs()->can_use_premium_code() ? esc_html__( 'Percentage discounts',
 							'tier-pricing-table' ) : esc_html__( 'Percentage discounts (only in premium version)',
 							'tier-pricing-table' ); ?>
+				</option>
+
+				<option value="amount" <?php selected( 'amount', $tiered_pricing_type ); ?>>
+					<?php esc_html_e( 'Amount discounts', 'tier-pricing-table' ); ?>
 				</option>
 			</select>
 		</div>

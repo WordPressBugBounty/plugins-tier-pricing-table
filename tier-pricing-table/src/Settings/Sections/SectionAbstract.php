@@ -32,6 +32,14 @@ abstract class SectionAbstract {
 	}
 	
 	/**
+	 * A section listed in the sections navigation only while it is open: reached through its own links (the
+	 * Order rules settings, linked from the rule editor and the rules list).
+	 */
+	public function isHiddenFromNavigation(): bool {
+		return false;
+	}
+	
+	/**
 	 * "Unread" indicator on this section's navigation link. Return a version string to enable it;
 	 * bump the version to show the badge again after it was seen. Store-wide: the first visit
 	 * clears it for every user.

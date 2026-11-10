@@ -2,6 +2,7 @@
 
 namespace TierPricingTable\Addons\CustomColumns\Columns;
 
+use TierPricingTable\PriceManager;
 use TierPricingTable\Addons\CustomColumns\Schema;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingRule;
@@ -106,8 +107,9 @@ class CustomDataColumn extends AbstractCustomColumn {
     ) : PricingRule {
         $percentageValues = $this->getValue( $entityId, 'percentage', $role );
         $fixedValues = $this->getValue( $entityId, 'fixed', $role );
+        $amountValues = $this->getValue( $entityId, 'amount', $role );
         // Try to get variable product level value if values are empty.
-        if ( empty( $percentageValues ) || empty( $fixedValues ) ) {
+        if ( empty( $percentageValues ) || empty( $fixedValues ) || empty( $amountValues ) ) {
             if ( $isProductRule ) {
                 $product = wc_get_product( $entityId );
                 if ( !$product ) {
@@ -116,11 +118,13 @@ class CustomDataColumn extends AbstractCustomColumn {
                 if ( $product->get_parent_id() ) {
                     $percentageValues = ( $percentageValues ? $percentageValues : $this->getValue( $product->get_parent_id(), 'percentage', $role ) );
                     $fixedValues = ( $fixedValues ? $fixedValues : $this->getValue( $product->get_parent_id(), 'fixed', $role ) );
+                    $amountValues = ( $amountValues ? $amountValues : $this->getValue( $product->get_parent_id(), 'amount', $role ) );
                 }
             }
         }
         $pricingRule->customColumnsData[$this->getSlug()]['percentage'] = $percentageValues;
         $pricingRule->customColumnsData[$this->getSlug()]['fixed'] = $fixedValues;
+        $pricingRule->customColumnsData[$this->getSlug()]['amount'] = $amountValues;
         return $pricingRule;
     }
 
@@ -267,8 +271,9 @@ class CustomDataColumn extends AbstractCustomColumn {
         $_value = array(
             'fixed'      => array(),
             'percentage' => array(),
+            'amount'     => array(),
         );
-        foreach ( array('fixed', 'percentage') as $pricingType ) {
+        foreach ( PriceManager::getPricingTypes() as $pricingType ) {
             $value = Form::getFieldValue(
                 $this->getSlug( $pricingType ),
                 $role,
@@ -277,7 +282,7 @@ class CustomDataColumn extends AbstractCustomColumn {
                 $request
             );
             $value = ( is_array( $value ) ? $value : array() );
-            $amounts = ( 'fixed' === $pricingType ? $data['fixed_quantities'] : $data['percentage_quantities'] );
+            $amounts = ( isset( $data[$pricingType . '_quantities'] ) ? (array) $data[$pricingType . '_quantities'] : array() );
             foreach ( $value as $key => $itemValue ) {
                 if ( !empty( $amounts[$key] ) ) {
                     $_value[$pricingType][$amounts[$key]] = $this->sanitizeValue( $itemValue );

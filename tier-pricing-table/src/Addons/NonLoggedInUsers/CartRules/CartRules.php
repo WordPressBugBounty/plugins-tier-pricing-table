@@ -5,8 +5,8 @@ use TierPricingTable\Addons\NonLoggedInUsers\Roles;
 /**
  * Cart-level rules per role. Pure: no WordPress calls, so it is unit-tested on its own.
  *
- * Minimums are [ role => [ 'amount' => float, 'quantity' => int ] ]; a customer with several roles
- * gets the strictest minimum. Method allow-lists are role arrays; an empty list allows everyone.
+ * Method allow-lists are role arrays; an empty list allows everyone. The minimums table
+ * [ role => [ 'amount' => float, 'quantity' => int ] ] is only read to move it into order rules.
  */
 class CartRules {
 
@@ -38,45 +38,6 @@ class CartRules {
 		}
 
 		return $minimums;
-	}
-
-	/**
-	 * The minimums that apply to a visitor: the strictest among their roles.
-	 *
-	 * @return array{amount: float, quantity: int}
-	 */
-	public static function pickMinimums( array $minimums, array $roles, bool $isGuest ): array {
-		$picked = array( 'amount' => 0.0, 'quantity' => 0 );
-
-		foreach ( $isGuest ? array( Roles::GUEST ) : $roles as $role ) {
-			if ( ! isset( $minimums[ $role ] ) ) {
-				continue;
-			}
-
-			$picked['amount']   = max( $picked['amount'], (float) ( $minimums[ $role ]['amount'] ?? 0 ) );
-			$picked['quantity'] = max( $picked['quantity'], (int) ( $minimums[ $role ]['quantity'] ?? 0 ) );
-		}
-
-		return $picked;
-	}
-
-	/**
-	 * Which minimums the cart misses.
-	 *
-	 * @return array{amount?: float, quantity?: int} the missed minimum(s)
-	 */
-	public static function missedMinimums( array $picked, float $subtotal, int $count ): array {
-		$missed = array();
-
-		if ( $picked['amount'] > 0 && $subtotal + 0.00001 < $picked['amount'] ) {
-			$missed['amount'] = (float) $picked['amount'];
-		}
-
-		if ( $picked['quantity'] > 0 && $count < $picked['quantity'] ) {
-			$missed['quantity'] = (int) $picked['quantity'];
-		}
-
-		return $missed;
 	}
 
 	/**

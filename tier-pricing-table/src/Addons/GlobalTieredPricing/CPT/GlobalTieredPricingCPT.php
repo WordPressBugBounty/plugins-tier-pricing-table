@@ -2,6 +2,9 @@
 
 namespace TierPricingTable\Addons\GlobalTieredPricing\CPT;
 
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\OrderRulesSettingsSection;
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\OrderDiscountForm;
+use TierPricingTable\PriceManager;
 use Automattic\WooCommerce\Admin\PageController;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Actions\DuplicateAction;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Actions\ReactivateAction;
@@ -69,6 +72,18 @@ class GlobalTieredPricingCPT {
             return $columns;
         } );
         add_action( 'admin_head-edit.php', array($this, 'printListStyles') );
+        // the row knows its rule type: cart rule rows carry an accent in a list that holds both types
+        add_filter(
+            'post_class',
+            function ( $classes, $class, $postId ) {
+                if ( is_admin() && self::SLUG === get_post_type( $postId ) && GlobalPricingRule::KIND_ORDER === get_post_meta( $postId, '_tpt_rule_kind', true ) && self::hasBothRuleKinds() ) {
+                    $classes[] = 'tpt-rule--order';
+                }
+                return $classes;
+            },
+            10,
+            3
+        );
         add_filter( 'manage_' . self::SLUG . '_posts_custom_column', function ( $column ) {
             global $post;
             $globalRule = GlobalPricingRule::build( $post->ID );
@@ -107,6 +122,7 @@ class GlobalTieredPricingCPT {
         } );
         $this->initInlineActions();
         new ListOrder();
+        new KindFilter();
         new StatusViews();
         new StatusBox();
     }
@@ -133,10 +149,92 @@ class GlobalTieredPricingCPT {
     /**
      * Styles for the rules list (badges, chips, column widths).
      */
+    /**
+     * Whether any rule exists at all (any status, the trash included, as the blank state counts them): the
+     * rules list shows its Pricing test button only then.
+     */
+    public static function hasAnyRules() : bool {
+        $counts = (array) wp_count_posts( self::SLUG );
+        unset($counts['auto-draft']);
+        return array_sum( $counts ) > 0;
+    }
+
+    /**
+     * Whether any Order rule exists (any status but the trash): the rules list shows its type filter and the
+     * Order rules settings button only then.
+     */
+    public static function hasOrderRules() : bool {
+        static $has = null;
+        if ( null === $has ) {
+            $found = get_posts( array(
+                'post_type'      => self::SLUG,
+                'post_status'    => 'any',
+                'posts_per_page' => 1,
+                'fields'         => 'ids',
+                'meta_key'       => '_tpt_rule_kind',
+                'meta_value'     => GlobalPricingRule::KIND_ORDER,
+            ) );
+            $has = (bool) apply_filters( 'tiered_pricing_table/global_pricing/has_order_rules', !empty( $found ) );
+        }
+        return $has;
+    }
+
+    /**
+     * Whether any product pricing rule exists (any status but the trash): rules saved before the types
+     * existed carry no kind and count as product rules.
+     */
+    public static function hasProductRules() : bool {
+        static $has = null;
+        if ( null === $has ) {
+            $found = get_posts( array(
+                'post_type'      => self::SLUG,
+                'post_status'    => 'any',
+                'posts_per_page' => 1,
+                'fields'         => 'ids',
+                'meta_query'     => array(
+                    'relation' => 'OR',
+                    array(
+                        'key'     => '_tpt_rule_kind',
+                        'compare' => 'NOT EXISTS',
+                    ),
+                    array(
+                        'key'     => '_tpt_rule_kind',
+                        'value'   => GlobalPricingRule::KIND_ORDER,
+                        'compare' => '!=',
+                    ),
+                ),
+            ) );
+            $has = (bool) apply_filters( 'tiered_pricing_table/global_pricing/has_product_rules', !empty( $found ) );
+        }
+        return $has;
+    }
+
+    /**
+     * Whether rules of both types exist: only then does the rules list mark each row with its type.
+     */
+    public static function hasBothRuleKinds() : bool {
+        return self::hasOrderRules() && self::hasProductRules();
+    }
+
     public function printListStyles() {
         $screen = get_current_screen();
         if ( !$screen || self::SLUG !== $screen->post_type ) {
             return;
+        }
+        ?>
+		<?php 
+        if ( self::hasOrderRules() ) {
+            // the Order rules settings matter once an Order rule exists
+            ?>
+		<script>
+			jQuery( function ( $ ) {
+				// the Order rules settings (a customizer with a live preview), next to "Add Pricing Rule"
+				$( '.wrap .page-title-action' ).first().after( <?php 
+            echo wp_json_encode( ' <a href="' . esc_url( OrderRulesSettingsSection::url() ) . '" class="page-title-action">' . esc_html__( 'Cart rules settings', 'tier-pricing-table' ) . '</a>' );
+            ?> );
+			} );
+		</script>
+		<?php 
         }
         ?>
 		<style>
@@ -277,6 +375,45 @@ class GlobalTieredPricingCPT {
 				font-size: 12px;
 				line-height: 1.6;
 			}
+			/* the rule type: the first line of the Rule column, an icon and a chip, the priority next to it */
+			.tpt-rules-list__kind {
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				margin: 0 0 6px;
+				font-size: 12px;
+				color: #646970;
+			}
+
+			.tpt-rules-list__kind > .dashicons {
+				font-size: 16px;
+				width: 16px;
+				height: 16px;
+				color: #8c8f94;
+			}
+
+			.tpt-rules-list__kind--order > .dashicons { color: #2271b1; }
+
+			.tpt-rules-list__tag--kind {
+				margin: 0;
+				padding: 0 6px;
+				font-size: 11px;
+				font-weight: 600;
+				line-height: 1.5;
+			}
+
+			.tpt-rules-list__kind--product .tpt-rules-list__tag--kind {
+				border-color: #dcdcde;
+				background: #f0f0f1;
+				color: #50575e;
+			}
+
+			/* cart rule rows keep a thin accent on the left, so the type reads while scrolling a mixed list */
+			.post-type-<?php 
+        echo esc_attr( self::SLUG );
+        ?> .wp-list-table tr.tpt-rule--order > .check-column { /* a th or, on newer WordPress, a td */
+				box-shadow: inset 3px 0 0 #2271b1;
+			}
 		</style>
 		<?php 
     }
@@ -304,6 +441,11 @@ class GlobalTieredPricingCPT {
         if ( isset( $_GET['action'] ) && $_GET['action'] === DuplicateAction::ACTION ) {
             return;
         }
+        // Only the rule form saves the rule's fields. Every other save_post caller (trash and restore, bulk
+        // actions, translation plugins, wp_update_post from code) must leave the stored rule as it is.
+        if ( empty( $_POST[Form::NONCE_FIELD] ) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[Form::NONCE_FIELD] ) ), Form::NONCE_ACTION ) ) {
+            return;
+        }
         // Save pricing
         if ( wp_verify_nonce( true, true ) ) {
             // as phpcs comments at Woo are not available, we have to do such trash
@@ -322,7 +464,28 @@ class GlobalTieredPricingCPT {
         $pricingRule = GlobalPricingRule::build( $ruleId );
         $applyingType = ( isset( $postedData['tpt_applying_type'] ) ? sanitize_text_field( $postedData['tpt_applying_type'] ) : 'individual' );
         $pricingRule->setApplyingType( $applyingType );
+        // Rule type and the order-total discount; the percentage type and the matching scope are premium
+        // options and are disabled in the free version's form (a rule using them is skipped there)
+        $pricingRule->setKind( ( isset( $postedData['tpt_rule_kind'] ) ? sanitize_key( $postedData['tpt_rule_kind'] ) : GlobalPricingRule::KIND_PRODUCT ) );
+        $pricingRule->setOrderDiscountType( ( isset( $postedData['tpt_order_discount_type'] ) ? sanitize_key( $postedData['tpt_order_discount_type'] ) : 'fixed' ) );
+        $pricingRule->setOrderTiers( OrderDiscountForm::tiersFromRequest( $postedData ) );
+        $pricingRule->setOrderLabel( ( isset( $postedData['tpt_order_label'] ) ? sanitize_text_field( wp_unslash( $postedData['tpt_order_label'] ) ) : '' ) );
+        $pricingRule->setOrderBasis( ( isset( $postedData['tpt_order_basis'] ) ? sanitize_key( $postedData['tpt_order_basis'] ) : 'amount' ) );
+        $pricingRule->setOrderFreeShipping( ( isset( $postedData['tpt_order_free_shipping_enabled'], $postedData['tpt_order_free_shipping'] ) ? sanitize_key( $postedData['tpt_order_free_shipping'] ) : 'none' ) );
+        $pricingRule->setOrderFreeShippingFrom( ( isset( $postedData['tpt_order_free_shipping_from'] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $postedData['tpt_order_free_shipping_from'] ) ) ) : null ) );
+        $pricingRule->setOrderShippingBar( isset( $postedData['tpt_order_shipping_bar'] ) );
+        $pricingRule->setOrderShippingBarMessage( ( isset( $postedData['tpt_order_shipping_bar_message'] ) ? sanitize_text_field( wp_unslash( $postedData['tpt_order_shipping_bar_message'] ) ) : '' ) );
+        $pricingRule->setOrderShippingBarReached( ( isset( $postedData['tpt_order_shipping_bar_reached'] ) ? sanitize_text_field( wp_unslash( $postedData['tpt_order_shipping_bar_reached'] ) ) : '' ) );
+        $pricingRule->setOrderMinimumAmount( ( isset( $postedData['tpt_order_minimum_amount'] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $postedData['tpt_order_minimum_amount'] ) ) ) : null ) );
+        $pricingRule->setOrderMinimumQuantity( ( isset( $postedData['tpt_order_minimum_quantity'] ) ? absint( $postedData['tpt_order_minimum_quantity'] ) : null ) );
+        $pricingRule->setTieredPricingType( PriceManager::getAvailablePricingType( $tieredPricingData['type'] ) );
         $pricingRule->setFixedTieredPricingRules( $tieredPricingData['fixed_tiered_pricing_rules'] );
+        $pricingRule->setAmountTieredPricingRules( $tieredPricingData['amount_tiered_pricing_rules'] );
+        // Tax settings (free)
+        $taxStatus = ( isset( $postedData['tpt_tax_status'] ) ? sanitize_text_field( $postedData['tpt_tax_status'] ) : '' );
+        $taxClass = ( isset( $postedData['tpt_tax_class'] ) ? sanitize_text_field( $postedData['tpt_tax_class'] ) : '' );
+        $pricingRule->setTaxStatus( $taxStatus );
+        $pricingRule->setTaxClass( $taxClass );
         $includedCategoriesIds = ( isset( $postedData['tpt_included_categories'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_categories'] ) ) : array() );
         $includedTagsIds = ( isset( $postedData['tpt_included_tags'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_tags'] ) ) : array() );
         $includedBrandsIds = ( isset( $postedData['tpt_included_brands'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_brands'] ) ) : array() );
@@ -377,10 +540,7 @@ class GlobalTieredPricingCPT {
     public function renderBlankState( $which ) {
         global $post_type;
         if ( self::SLUG === $post_type && 'top' === $which ) {
-            $counts = (array) wp_count_posts( $post_type );
-            unset($counts['auto-draft']);
-            $count = array_sum( $counts );
-            if ( 0 < $count ) {
+            if ( self::hasAnyRules() ) {
                 return;
             }
             ?>
@@ -395,13 +555,13 @@ class GlobalTieredPricingCPT {
 
 					<h2 class="tpt-blank-state__title">
 						<?php 
-            esc_html_e( 'Create Your First Global Pricing Rule', 'tier-pricing-table' );
+            esc_html_e( 'Create your first pricing rule', 'tier-pricing-table' );
             ?>
 					</h2>
 
 					<p class="tpt-blank-state__description">
 						<?php 
-            esc_html_e( 'Global rules allow you to bulk-apply custom pricing, tiered discounts, and quantity limits to multiple products or categories simultaneously.', 'tier-pricing-table' );
+            esc_html_e( 'A pricing rule gives many products one set of tiers, prices or quantity limits at once: by category, tag, brand or customer role. A cart rule works on the cart as a whole instead: an amount off from a subtotal or item count, free shipping, and a minimum order.', 'tier-pricing-table' );
             ?>
 					</p>
 
@@ -411,7 +571,7 @@ class GlobalTieredPricingCPT {
             echo esc_url( admin_url( 'post-new.php?post_type=' . self::SLUG ) );
             ?>">
 							<span style="line-height: 1; padding-top: 2px;"><?php 
-            esc_html_e( 'Create Rule', 'tier-pricing-table' );
+            esc_html_e( 'Create a pricing rule', 'tier-pricing-table' );
             ?></span>
 						</a>
 					</div>

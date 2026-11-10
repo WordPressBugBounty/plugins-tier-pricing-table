@@ -53,7 +53,7 @@
 
 	TieredPricingRulesForm::render( $pricing_rule->getProductId(), $roleKey, $loop,
 			$pricing_rule->getTieredPricingType(), $pricing_rule->getPercentageTieredPricingRules(),
-			$pricing_rule->getFixedTieredPricingRules() );
+			$pricing_rule->getFixedTieredPricingRules(), null, $pricing_rule->getAmountTieredPricingRules() );
 
 	do_action( 'tiered_pricing_table/admin/user_based_rules/after_tiered_pricing_rules_field',
 			$pricing_rule->getProductId(), $pricing_rule->getUserId(), $loop );

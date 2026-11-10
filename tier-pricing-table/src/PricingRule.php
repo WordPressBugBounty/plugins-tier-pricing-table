@@ -93,7 +93,7 @@ class PricingRule {
 	}
 	
 	public function setType( string $type ) {
-		$this->type = in_array( $type, array( 'fixed', 'percentage' ) ) ? $type : 'fixed';
+		$this->type = in_array( $type, PriceManager::getPricingTypes(), true ) ? $type : 'fixed';
 	}
 	
 	public function isPercentage(): bool {
@@ -102,6 +102,13 @@ class PricingRule {
 	
 	public function isFixed(): bool {
 		return $this->getType() === 'fixed';
+	}
+	
+	/**
+	 * Tiers that take an amount off the product price per unit ("amount off").
+	 */
+	public function isAmount(): bool {
+		return $this->getType() === 'amount';
 	}
 	
 	public function getTierPrice( $quantity, bool $withTaxes = true, $place = 'shop', ?bool $round = null ) {

@@ -1,10 +1,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.2.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
-"POT-Creation-Date: 2026-10-28T13:31:01+00:00\n"
-"PO-Revision-Date: 2026-11-02 14:56+0000\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.3.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tier-pricing-table\n"
+"POT-Creation-Date: 2026-11-10T15:53:33+00:00\n"
+"PO-Revision-Date: 2026-11-07 16:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: zh_CN\n"
 "Language: zh_CN\n"
@@ -115,7 +115,7 @@ msgid ""
 "to reach the next pricing tier."
 msgstr "在购物车中显示追加销售消息，指示需要多少商品才能达到下一个定价层。"
 
-#: src/Addons/CartUpsells/CartUpsellsService.php:229
+#: src/Addons/CartUpsells/CartUpsellsService.php:235
 #: src/Addons/CartUpsells/UpsellsSubsection.php:43
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
 msgid ""
@@ -152,6 +152,7 @@ msgid ""
 msgstr "提示信息中的所需数量是一个链接：点击一次即可将购物车中的该行设为下一档位并更新购物车。"
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:58
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:82
 msgid "Progress bar"
 msgstr "进度条"
 
@@ -267,9 +268,11 @@ msgid "Prefix for lowest price"
 msgstr "最低价格前缀"
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:61
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:399
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:444
 #: src/Managers/FormatPriceManager.php:320
+#: views/addons/global-rules/order-discount-form.php:55
 msgid "From"
 msgstr "从"
 
@@ -347,15 +350,15 @@ msgstr "创建额外的列，以准确显示客户节省的金额、总价格或
 msgid "Add Custom Columns"
 msgstr "添加自定义列"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:168
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:174
 msgid "(first row)"
 msgstr "（第一行）"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:179
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:185
 msgid "Custom columns are available only in the premium version."
 msgstr "自定义列仅在高级版本中可用。"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:182
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:188
 msgid "Upgrade you plan"
 msgstr "升级你的计划"
 
@@ -401,19 +404,21 @@ msgid "Saving per item"
 msgstr "每件商品节省"
 
 #: src/Addons/CustomColumns/Schema.php:23
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:381
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746
-#: src/PricingTable.php:457 src/Settings/CustomOptions/TPTTextTemplate.php:207
+#: src/PricingTable.php:464 src/Settings/CustomOptions/TPTTextTemplate.php:207
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278
-#: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/components/tiered-pricing-rules-form.php:60
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:69
 #: src/Addons/CustomColumns/js-source/index.js:286
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:728
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:894
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1167
@@ -487,7 +492,7 @@ msgid "Suspend"
 msgstr "暂停"
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:54
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:412
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:561
 msgid "The rule suspended successfully."
 msgstr "规则成功暂停。"
 
@@ -497,8 +502,8 @@ msgstr "适用于"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:44
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:123
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:222
 msgid "Products"
 msgstr "产品"
 
@@ -507,35 +512,39 @@ msgid "Categories and subcategories"
 msgstr "分类和子分类"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:45
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:32
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:139
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:160
 msgid "Categories"
 msgstr "类别"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:60
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:159
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
 msgid "Tags"
 msgstr "标签"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:47
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
 msgid "Brands"
 msgstr "品牌"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
+msgid "The whole cart"
+msgstr "整个购物车"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
 msgid "All products"
 msgstr "所有产品"
 
 #. translators: %s: list of names
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:62
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:78
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:83
 #, php-format
 msgid "except %s"
 msgstr "%s 除外"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:72
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryVisibilityFields.php:32
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:23
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:27
@@ -543,101 +552,221 @@ msgstr "%s 除外"
 msgid "Roles"
 msgstr "角色"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:68
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:62
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:110
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:73
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:63
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:111
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:88
 msgid "Customers"
 msgstr "顾客"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:71
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:76
 msgid "All customers"
 msgstr "所有客户"
 
 #. translators: %d: number of further items
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:96
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:101
 #, php-format
 msgid "+%d more"
 msgstr "还有 %d 个"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:15
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:53
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:16
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:15
 msgid "Pricing"
 msgstr "定价"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:40
+#. translators: %s: amount
+#. translators: %s: quantity
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:236
+#, php-format
+msgid "Min <b>%s</b>"
+msgstr "最少 <b>%s</b>"
+
+#. translators: %s: number of items
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:55
+#, php-format
+msgid "Min <b>%s items</b>"
+msgstr "至少 <b>%s 件商品</b>"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:59
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:18
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:32
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:216
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:455
+msgid "Minimum order"
+msgstr "最低订单"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:64
+msgid "<b>always</b>"
+msgstr "<b>始终</b>"
+
+#. translators: %s: subtotal or number of items
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:70
+#, php-format
+msgid "from <b>%s</b>"
+msgstr "从 <b>%s</b> 起"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:74
+msgid "with the progress bar"
+msgstr "带进度条"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:76
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:20
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:40
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:196
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:431
+msgid "Free shipping"
+msgstr "免运费"
+
+#. translators: 1: "fixed amount off" or "percentage off", 2: "by subtotal" or
+#. "by item count"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:89
+#, php-format
+msgid "Cart discount (%1$s, %2$s)"
+msgstr "购物车折扣（%1$s，%2$s）"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:90
+msgid "percentage off"
+msgstr "按百分比减免"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:90
+msgid "fixed amount off"
+msgstr "按固定金额减免"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:91
+msgid "by item count"
+msgstr "按商品数量"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:91
+msgid "by subtotal"
+msgstr "按小计"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
+msgid "Items"
+msgstr "商品"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
+#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:173
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
+msgid "Subtotal"
+msgstr "小计"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:101
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:20
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
+#: src/PricingTable.php:466
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
+#: views/addons/global-rules/order-discount-form.php:61
+#: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
+#: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
+#: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
+#: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:190
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:227
+msgid "Discount"
+msgstr "折扣"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:121
 msgid "Regular"
 msgstr "原价"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:43
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:124
 msgid "Sale"
 msgstr "促销价"
 
 #. translators: 1: percentage, 2: "sale price" or "regular price"
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:48
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:129
 #, php-format
 msgid "Discount <b>%1$s%%</b> off the %2$s"
 msgstr "较%2$s优惠 <b>%1$s%%</b>"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:131
 msgid "sale price"
 msgstr "促销价"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:131
 msgid "regular price"
 msgstr "原价"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:136
 msgid "Base price"
 msgstr "基础价格"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:78
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:127
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:120
-#: src/Integrations/Plugins/WPAllImport.php:161
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:160
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:153
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:168
+#: src/Integrations/Plugins/WPAllImport.php:169
 #: views/admin/components/regular-pricing-form.php:119
 #: views/admin/components/regular-pricing-form.php:129
 msgid "Regular price"
 msgstr "正常价格"
 
 #. translators: %s: percentage
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:87
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:169
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:94
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:112
 #, php-format
 msgid "%s%% off"
 msgstr "优惠 %s%%"
 
+#. translators: %s: amount
+#. translators: %s: amount saved per item
+#. translators: %s: discount percentage
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:184
+#: src/PricingTable.php:346 src/PricingTable.php:352
+#, php-format
+msgid "%s off"
+msgstr "优惠 %s"
+
 #. translators: 1: "fixed" or "percentage", 2: "individual" or "mix & match"
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:104
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:193
 #, php-format
 msgid "Tiers (%1$s, %2$s)"
 msgstr "档位（%1$s，%2$s）"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:194
 msgid "percentage"
 msgstr "百分比"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:194
 msgid "fixed"
 msgstr "固定"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:106
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:195
 msgid "individual"
 msgstr "单独"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:106
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:195
 msgid "mix & match"
 msgstr "混合搭配"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:204
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:248
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:379
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109
-#: src/PricingTable.php:455 src/Settings/CustomOptions/TPTTextTemplate.php:143
+#: src/PricingTable.php:462 src/Settings/CustomOptions/TPTTextTemplate.php:143
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268
 #: views/addons/category-tiers/add-free.php:24
@@ -645,11 +774,13 @@ msgstr "混合搭配"
 #: views/addons/category-tiers/edit-free.php:34
 #: views/addons/category-tiers/edit.php:59
 #: views/addons/category-tiers/edit.php:82
-#: views/admin/components/tiered-pricing-rules-form.php:65
+#: views/admin/components/tiered-pricing-rules-form.php:73
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:285
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:722
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:351
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:461
@@ -664,91 +795,79 @@ msgstr "混合搭配"
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:190
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:211
+#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:225
+#: src/Addons/Tools/js-source/components/PricingTest.js:352
+#: src/Addons/Tools/js-source/components/PricingTest.js:534
+#: src/Addons/Tools/js-source/components/PricingTest.js:535
 msgid "Quantity"
 msgstr "数量"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
-#: src/PricingTable.php:459
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
-#: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
-#: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
-#: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
-#: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
-#: src/Addons/RequestAQuote/build/index.js:1
-#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
-#: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:190
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:213
-msgid "Discount"
-msgstr "折扣"
-
 #. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:147
-#, php-format
-msgid "Min <b>%s</b>"
-msgstr "最少 <b>%s</b>"
-
-#. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:151
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:240
 #, php-format
 msgid "Max <b>%s</b>"
 msgstr "最多 <b>%s</b>"
 
 #. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:155
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:244
 #, php-format
 msgid "Step <b>%s</b>"
 msgstr "步长 <b>%s</b>"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:21
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:236
+#: src/Addons/Tools/js-source/components/PricingTest.js:250
 msgid "Rule"
 msgstr "规则"
 
+#. translators: %d: priority number
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:30
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:266
+#, php-format, js-format
+msgid "Priority %d"
+msgstr "优先级 %d"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:34
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:475
+msgid "Cart rule"
+msgstr "购物车规则"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:35
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:43
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:471
+msgid "Product prices"
+msgstr "产品价格"
+
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:56
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:80
 #, php-format
 msgid "Starts %s"
 msgstr "于 %s 开始"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:60
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:84
 #, php-format
 msgid "Ended %s"
 msgstr "已于 %s 结束"
 
-#. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:74
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:252
-#, php-format, js-format
-msgid "Priority %d"
-msgstr "优先级 %d"
-
 #. translators: %d: number of rules
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:94
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:117
 #, php-format
 msgid "Overridden by %d rule"
 msgid_plural "Overridden by %d rules"
 msgstr[0] "被 %d 条规则覆盖"
 
 #. translators: %s: user's display name
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:118
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:141
 #, php-format
 msgid "%s is currently editing"
 msgstr "%s 正在编辑"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:12
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:13
 #: src/TierPricingTablePlugin.php:148
 #: views/admin/welcome-page/welcome-page.php:195
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -757,39 +876,65 @@ msgstr "%s 正在编辑"
 msgid "Settings"
 msgstr "设置"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:18
-msgid "prefer product"
-msgstr "优先产品"
-
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:19
-msgid "prefer product role prices"
-msgstr "优先产品角色价格"
-
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:20
-msgid "override product"
-msgstr "覆盖产品"
-
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:25
-msgid "Prefers product pricing"
-msgstr "优先使用产品定价"
+msgid "product kept"
+msgstr "保留产品设置"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:28
-msgid "Overrides product pricing"
-msgstr "覆盖产品定价"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:26
+msgid "product role prices kept"
+msgstr "保留产品角色价格"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:31
-msgid "Custom priorities"
-msgstr "自定义优先级"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:27
+msgid "rule overrides"
+msgstr "规则覆盖"
 
-#. translators: 1, 2, 3: the three priority choices
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:32
+msgid "Keeps product settings"
+msgstr "保留产品设置"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:35
+msgid "Overrides product settings"
+msgstr "覆盖产品设置"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:38
+msgid "Per setting"
+msgstr "按设置分别决定"
+
+#. translators: 1, 2, 3: the three choices
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:40
 #, php-format
 msgid "Base prices: %1$s. Tiers: %2$s. Quantity limits: %3$s."
 msgstr "基础价格：%1$s。档位：%2$s。数量限制：%3$s。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:40
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:34
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:45
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:47
+msgid "Store default"
+msgstr "商店默认"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:59
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:75
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:225
+msgid "Free shipping bar"
+msgstr "免运费进度条"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:59
+msgid "Customers see a progress bar towards the free shipping threshold."
+msgstr "客户会看到距离免运费门槛的进度条。"
+
+#. translators: %s: the discount line label
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:64
+#, php-format
+msgid "Label: %s"
+msgstr "标签：%s"
+
+#. translators: %s: the discount line label
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:64
+msgid "The discount line in the cart, at checkout and in e-mails."
+msgstr "购物车、结账页面和电子邮件中的折扣行。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:68
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:48
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:27
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:34
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:149
@@ -797,7 +942,7 @@ msgid "Default"
 msgstr "默认"
 
 #. translators: %d: number of rules
-#: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:392
+#: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:442
 #, php-format
 msgid ""
 "%d other rule has a higher priority and is applied instead of this rule for "
@@ -809,203 +954,365 @@ msgid_plural ""
 " Rule status box."
 msgstr[0] "另有 %d 条规则的优先级更高，对于两者都匹配的产品和客户，将应用那些规则而非本规则。请查看“规则状态”框中的“被以下规则覆盖”。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:147
+#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:165
 msgid "Premium feature"
 msgstr "高级功能"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:154
+#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:172
 msgid "Upgrade plan"
 msgstr "升级计划"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:43
-msgid "Making a pricing rule"
-msgstr "创建定价规则"
+#: src/Addons/GlobalTieredPricing/CPT/Form/RuleTypePointer.php:73
+msgid "Start with the rule type"
+msgstr "先选择规则类型"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:44
-#: views/admin/notifications/black-friday.php:43
-#: views/admin/notifications/feedback-discount.php:41
-msgid "Dismiss"
-msgstr "解雇"
+#: src/Addons/GlobalTieredPricing/CPT/Form/RuleTypePointer.php:79
+msgid "The tabs of the form follow the type you pick."
+msgstr "表单的选项卡会随所选类型而变化。"
 
-#. translators: 1: link "Pricing", 2: link "Quantity limits"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:52
-#, php-format
-msgid "Set the prices, tiers or quantity limits on the %1$s and %2$s tabs."
-msgstr "在%1$s和%2$s选项卡中设置价格、档位或数量限制。"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:24
+msgid "Tiers and the discount line label"
+msgstr "档位和折扣行标签"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:54
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:108
-msgid "Quantity limits"
-msgstr "数量限制"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:34
+msgid "Discount tiers"
+msgstr "折扣档位"
 
-#. translators: 1: link "products", 2: link "customers"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:62
-#, php-format
-msgid "Choose the %1$s and %2$s it covers. An empty list covers all of them."
-msgstr "选择它涵盖的%1$s和%2$s。列表为空则涵盖全部。"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:35
+msgid ""
+"The lines are counted after tiered prices, before shipping. The highest tier"
+" reached is used. Whether the subtotal includes tax is set on the Cart rules"
+" settings page."
+msgstr "各行在应用阶梯价格之后、运费之前计算，采用已达到的最高档位。小计是否含税，请在“购物车规则”设置页面中设置。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:63
-#: views/admin/notifications/activation-notification.php:41
-msgid "products"
-msgstr "产品"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:40
+msgid "Label in the cart"
+msgstr "购物车中的标签"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:64
-msgid "customers"
-msgstr "客户"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:44
+msgid "Discount line label"
+msgstr "折扣行标签"
 
-#. translators: %s: link "Priority Settings"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:72
-#, php-format
-msgid "Decide how it meets product-level pricing on the %s tab."
-msgstr "在%s选项卡中决定它如何与产品级定价配合。"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:47
+msgid ""
+"Shown in the cart, at checkout and in e-mails. Placeholders: {discount}, "
+"{threshold}."
+msgstr "显示在购物车、结账页面和电子邮件中。占位符：{discount}、{threshold}。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:73
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:13
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:22
-msgid "Priority Settings"
-msgstr "优先级设置"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:51
+msgid ""
+"The discount is applied as an automatic coupon, so WooCommerce computes it, "
+"shows it as one line and counts it in Analytics. The checkout block shows "
+"the rule title as the coupon code."
+msgstr "折扣以自动优惠券的方式应用，因此由 WooCommerce 计算，显示为一行，并计入分析报告。结账区块会将规则标题显示为优惠券代码。"
 
-#. translators: %s: link "Rule status box"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:81
+#. translators: %s: link "Customize the cart messages"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:55
 #, php-format
 msgid ""
-"Publish, then use \"Test this rule\" in the %s to see what a customer pays."
-msgstr "发布后，使用%s中的“测试此规则”查看客户支付的价格。"
+"%s: the message that leads to the next tier, the subtotal basis and how the "
+"discount behaves next to customer coupons, with a live preview of the cart, "
+"the checkout and the mini cart."
+msgstr "%s：引导客户达到下一档位的消息、小计基准，以及折扣与客户优惠券并用时的行为，并可实时预览购物车、结账页面和迷你购物车。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:82
-msgid "Rule status box"
-msgstr "规则状态框"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:56
+msgid "Customize the cart messages"
+msgstr "自定义购物车消息"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:89
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:22
+msgid "An amount or a number of items before checkout"
+msgstr "结账前的金额或商品数量"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:34
 msgid ""
-"When several rules match the same product and customer, the rule with the "
-"lowest priority number is applied. The Rule status box lists the rules that "
-"override the one you are editing."
-msgstr "当多条规则匹配同一产品和客户时，应用优先级数字最小的规则。“规则状态”框会列出覆盖您正在编辑的规则的那些规则。"
+"The cart and the checkout, classic pages and blocks, block the order until "
+"the counted lines reach the minimum. Every matching cart rule's minimum must"
+" be met. The messages are set on the Cart rules settings page."
+msgstr ""
+"购物车和结账页面（经典页面和区块）会阻止下单，直到计入的商品行达到最低要求。每条匹配的购物车规则的最低要求都必须满足。消息请在“购物车规则”设置页面中设置。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:91
-msgid "Read the guide"
-msgstr "阅读指南"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:39
+msgid "Minimum amount"
+msgstr "最低金额"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:93
-msgid "Don't show again"
-msgstr "不再显示"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:42
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:51
+msgid "No minimum"
+msgstr "无最低要求"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:48
+msgid "Minimum items"
+msgstr "最少商品数"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:55
+msgid ""
+"The counted lines are the ones matching the Products tab, or the whole cart "
+"when it is empty. The amount follows the subtotal basis of the Cart rules "
+"settings."
+msgstr "计入的商品行是与“产品”选项卡匹配的商品行；若该选项卡为空，则为整个购物车。金额遵循“购物车规则”设置中的小计基准。"
+
+#. translators: %s: link "Edit the minimum order messages"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:59
+#, php-format
+msgid "%s, with a live preview of the notice in the cart and at checkout."
+msgstr "%s，并可实时预览购物车和结账页面中的提示。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:60
+msgid "Edit the minimum order messages"
+msgstr "编辑最低订单消息"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:24
+msgid "Always, or from a subtotal or item count, and the progress bar"
+msgstr "始终免运费，或达到某个小计或商品数量后免运费，以及进度条"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:35
+msgid ""
+"The rule can grant free shipping: on every order it covers, or once the "
+"counted lines reach a subtotal or a number of items. Works with or without "
+"discount tiers; it only adds free shipping and never takes away what the "
+"shipping settings already give."
+msgstr ""
+"规则可以提供免运费：适用于其涵盖的每个订单，或在计入的商品行达到某个小计或商品数量后提供。可与折扣档位搭配使用，也可单独使用；它只会增加免运费，不会取消运费设置已提供的优惠。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:41
+msgid "Grant free shipping through this rule"
+msgstr "通过此规则提供免运费"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:50
+msgid "When"
+msgstr "条件"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:53
+msgid "On every order under this rule"
+msgstr "此规则下的每个订单"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:54
+msgid "From a subtotal of the counted lines"
+msgstr "计入商品行的小计达到"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:55
+msgid "From a number of items in the counted lines"
+msgstr "计入商品行的商品数量达到"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:64
+msgid "Subtotal or number of items"
+msgstr "小计或商品数量"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:65
+msgid ""
+"A subtotal in the store currency, or a number of items, as chosen above."
+msgstr "以商店货币计的小计，或商品数量，取决于上方的选择。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:77
+msgid ""
+"A progress bar towards the free shipping threshold (\"Add $40 more for free "
+"shipping\"), then a message once it is reached. It follows the rule the cart"
+" is under. Where it shows and how it looks is set for the whole store on the"
+" Cart rules settings page."
+msgstr ""
+"显示距离免运费门槛的进度条（“再买 $40 "
+"即可免运费”），达到后显示一条消息。它遵循购物车所适用的规则。显示位置和外观在“购物车规则”设置页面中为整个商店统一设置。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:83
+msgid "Show the free shipping bar for this rule"
+msgstr "为此规则显示免运费进度条"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:93
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:240
+msgid "Message until reached"
+msgstr "未达到时的消息"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:96
+msgid ""
+"Placeholders: {remaining}, {threshold}, {progress}. Leave it empty for the "
+"store message."
+msgstr "占位符：{remaining}、{threshold}、{progress}。留空则使用商店消息。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:103
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:243
+msgid "Message when reached"
+msgstr "达到时的消息"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:106
+msgid "Placeholder: {threshold}. Leave it empty for the store message."
+msgstr "占位符：{threshold}。留空则使用商店消息。"
+
+#. translators: 1: list of places, 2: link "Customize the free shipping bar",
+#. 3: shortcode
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:113
+#, php-format
+msgid ""
+"The bar shows in: %1$s. %2$s: the places, the colours and the store "
+"messages, with a live preview. The shortcode %3$s and the Free Shipping Bar "
+"block put it anywhere else, such as the header or the page of the Cart "
+"block; they refresh when something is added to the cart."
+msgstr ""
+"进度条显示在：%1$s。%2$s：显示位置、颜色和商店消息，并可实时预览。使用短代码 %3$s "
+"和“免运费进度条”区块，可将其放置到其他任何位置，例如页眉或购物车区块所在页面；添加商品到购物车时它们会刷新。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:115
+msgid "Customize the free shipping bar"
+msgstr "自定义免运费进度条"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:153
+msgid "no place of its own yet (only the shortcode and the block)"
+msgstr "暂无专属位置（仅限短代码和区块）"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:166
+msgid "Locations not covered by your other zones"
+msgstr "未被其他区域涵盖的地区"
+
+#. translators: %s: zone names
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:181
+#, php-format
+msgid "Free shipping methods that accept a free shipping coupon: %s."
+msgstr "接受免运费优惠券的免运费方式：%s。"
+
+#. translators: %s: link to the shipping settings
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:185
+#, php-format
+msgid ""
+"No Free shipping method accepts a coupon yet, so the threshold would change "
+"nothing. In %s, add a Free shipping method to the zone and set \"Free "
+"shipping requires\" to \"A valid free shipping coupon\" (or \"… OR "
+"coupon\")."
+msgstr ""
+"目前没有任何免运费方式接受优惠券，因此该门槛不会产生任何效果。请在 %s "
+"中，为该区域添加一个免运费方式，并将“免运费条件”设为“有效的免运费优惠券”（或“……或优惠券”）。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:186
+msgid "WooCommerce → Settings → Shipping"
+msgstr "WooCommerce → 设置 → 配送"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:19
 msgid "Configure regular and tiered pricing rules"
 msgstr "配置常规定价和分级定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:26
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:30
 msgid "Base Pricing"
 msgstr "基本定价"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:27
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:31
 msgid "Override the default regular product prices."
 msgstr "覆盖默认的常规产品价格。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39
-#: src/Addons/ImportExport/WoocommerceImportService.php:24
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:43
+#: src/Addons/ImportExport/WoocommerceImportService.php:26
 #: src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38
 #: src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:116
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:164
 #: src/Admin/ProductPage/TieredPricingTab.php:35
-#: src/Integrations/Plugins/WPAllImport.php:336 src/Settings/Settings.php:307
+#: src/Integrations/Plugins/WPAllImport.php:352 src/Settings/Settings.php:314
 msgid "Tiered Pricing"
 msgstr "分级定价"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:44
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:48
 msgid "Count quantities"
 msgstr "数量计算方式"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:46
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:50
 msgid "Per product"
 msgstr "按产品"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:51
 msgid "Across all products in this rule (mix and match)"
 msgstr "跨本规则中的所有产品（混合搭配）"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:54
 msgid ""
 "Mix and match adds up the quantities of every product this rule covers to "
 "reach a tier. Per product counts each product on its own."
 msgstr "混合搭配会把本规则涵盖的所有产品的数量相加来达到档位；按产品则分别计算每个产品的数量。"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:18
-msgid "Select products, categories, tags, or brands this rule applies to"
-msgstr "选择此规则适用的产品、类别、标签或品牌"
+msgid "Products, categories, tags or brands this rule covers"
+msgstr "此规则涵盖的产品、分类、标签或品牌"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:23
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:22
 msgid "Applies to products"
 msgstr "适用于产品"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:26
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:25
+msgid ""
+"For a cart rule these lists decide which cart lines count towards the tiers "
+"and the minimum, and which lines get the discount. Leave them empty to count"
+" the whole cart, except the products in the Exclusions section."
+msgstr "对于购物车规则，这些列表决定哪些购物车商品行计入档位和最低要求，以及哪些商品行享受折扣。留空则计入整个购物车，“排除”部分中的产品除外。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:28
 msgid ""
 "If no products, categories, tags, or brands are selected, this rule will "
 "apply to all products in your store, except those listed in the Exclusions "
 "section."
 msgstr "如果未选择任何产品、类别、标签或品牌，则此规则将适用于您商店中的所有产品，“排除”部分中列出的产品除外。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:153
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:174
 msgid "Search categories&hellip;"
 msgstr "搜索类别..."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:51
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:52
 msgid "Subcategories"
 msgstr "子分类"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:54
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
 msgid "Include subcategories"
 msgstr "包含子分类"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:56
 msgid ""
 "Products in subcategories of the selected categories match too. The excluded"
 " categories below follow the same switch."
 msgstr "所选分类的子分类中的产品也会匹配。下方的排除分类遵循同一开关。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:74
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:173
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
 msgid "Search tags&hellip;"
 msgstr "搜索标签..."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:116
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:215
 msgid "Search brands&hellip;"
 msgstr "搜索品牌…"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:120
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:221
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:141
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:242
 msgid "Search products&hellip;"
 msgstr "搜索产品..."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:131
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:86
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:152
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:87
 msgid "Exclusions"
 msgstr "排除情况"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:14
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:121
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:128
+msgid "Quantity limits"
+msgstr "数量限制"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:18
 msgid "Set minimum, maximum, and quantity step limits"
 msgstr "设置最小、最大和数量步骤限制"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:23
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:27
 msgid "Quantity Limits"
 msgstr "数量限制"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:25
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:29
 msgid ""
 "Applies to each product individually. If mix & match is enabled, the minimum"
 " quantity requirement will be shared across variations of a variable "
 "product."
 msgstr "单独适用于每个产品。如果启用混合匹配，最低数量要求将在可变产品的变体之间共享。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:38
 msgid "Variable Product Minimum Quantity"
 msgstr "可变产品最小数量"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:39
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:96
 #: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82
 msgid ""
@@ -1013,129 +1320,153 @@ msgid ""
 " separately, or to the combined total of all variations in the cart."
 msgstr "确定最低数量要求是单独适用于每个变体，还是购物车中所有变体的总和。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:45
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:83
 msgid "Global Settings"
 msgstr "全局设置"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:46
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:50
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:84
 msgid "Individual variation"
 msgstr "个体差异"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:51
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:85
 msgid "Variable product total (Mix & match)"
 msgstr "可变产品总数（混合搭配）"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:53
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:87
 msgid "Calculate minimum quantity by"
 msgstr "计算最小数量"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:17
-msgid "Manage how this rule interacts with product-level settings"
-msgstr "管理此规则如何与产品级设置交互"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:24
-msgid ""
-"Determine which rules take precedence when a product has both global and "
-"individual settings."
-msgstr "确定当产品同时具有全局设置和单独设置时哪些规则优先。"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:29
-msgid "Rule priority"
-msgstr "规则优先级"
-
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:18
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:31
-msgid "Use global settings"
-msgstr "使用全局设置"
+msgid "Product overrides"
+msgstr "产品覆盖"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:32
-msgid "Prefer product-level rules"
-msgstr "更喜欢产品级规则"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:34
-msgid "Override product-level rules"
-msgstr "覆盖产品级规则"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:22
+msgid "Which settings win when a product has its own"
+msgstr "产品自带设置时以哪个为准"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:36
-msgid "Custom component priorities"
-msgstr "自定义组件优先级"
+msgid "global rules override the product's settings"
+msgstr "全局规则覆盖产品设置"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:46
-msgid "Base Prices Priority"
-msgstr "基本价格优先"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:37
+msgid "the product's settings win"
+msgstr "以产品设置为准"
+
+#. translators: 1: "on" or "off", 2: what the store default does right now
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:41
+#, php-format
+msgid ""
+"A product can carry its own tiered prices, role prices and quantity limits. "
+"Decide what happens when this rule and the product both have a setting. "
+"\"Follow the store default\" uses the \"Prioritize global pricing rules\" "
+"switch under Settings → General → Price Calculation, which is %1$s right "
+"now: %2$s."
+msgstr ""
+"产品可以有自己的阶梯价格、角色价格和数量限制。请决定当此规则和产品都有某项设置时如何处理。“遵循商店默认”使用“设置 → 常规 → "
+"价格计算”下的“优先使用全局定价规则”开关，当前为%1$s：%2$s。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:42
+msgid "on"
+msgstr "开启"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:42
+msgid "off"
+msgstr "关闭"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:48
+msgid "When a product has its own pricing"
+msgstr "产品有自己的定价时"
+
+#. translators: %s: what the store default does right now
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:51
+#, php-format
+msgid "Follow the store default (right now: %s)"
+msgstr "遵循商店默认（当前：%s）"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:52
+msgid "Keep the product's settings"
+msgstr "保留产品设置"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:54
+msgid "This rule overrides them"
+msgstr "此规则将覆盖产品设置"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:56
+msgid "Decide per setting"
+msgstr "按设置分别决定"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:66
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:72
 msgid "Base prices"
 msgstr "基本价格"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:54
-msgid "Prefer product-level role prices"
-msgstr "更喜欢产品级角色价格"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:74
+msgid "Keep the product's role prices"
+msgstr "保留产品的角色价格"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:56
-msgid "Override all product-level prices"
-msgstr "覆盖所有产品级价格"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:76
+msgid "This rule overrides every product price"
+msgstr "此规则覆盖所有产品价格"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:62
-msgid "Prioritize product-specific role pricing over this global rule."
-msgstr "优先考虑特定于产品的角色定价，而不是此全局规则。"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:82
+msgid ""
+"Whether a product's own role prices stay in place or this rule's base prices"
+" replace them."
+msgstr "产品自带的角色价格是保持不变，还是被此规则的基础价格取代。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:68
-msgid "Tiered Prices Priority"
-msgstr "分级价格优先"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:75
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
 msgid "Tiered prices"
 msgstr "阶梯价格"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:77
-msgid "Prefer product-level tiers"
-msgstr "更喜欢产品级别"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:97
+msgid "Keep the product's tiers"
+msgstr "保留产品的档位"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:79
-msgid "Prefer product-level role tiers"
-msgstr "更喜欢产品级角色级别"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:99
+msgid "Keep the product's role tiers only"
+msgstr "仅保留产品的角色档位"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:81
-msgid "Override all product-level tiers"
-msgstr "覆盖所有产品级别"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
+msgid "This rule overrides every product tier"
+msgstr "此规则覆盖所有产品档位"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:108
 msgid "Mix & Match"
 msgstr "混合搭配"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:91
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:111
 msgid "Enable Mix & Match for product-level tiers"
 msgstr "为产品级别启用混合和匹配"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:115
 msgid ""
-"Prioritize product-specific tiered pricing over this global rule, and "
-"optionally enable Mix & Match for those inherited tiers."
-msgstr "优先考虑特定于产品的分层定价而不是此全局规则，并可以选择为这些继承的层级启用混合和匹配。"
+"Whether a product's own tiers stay in place or this rule's tiers replace "
+"them; Mix & Match can apply to the tiers kept from the product."
+msgstr "产品自带的档位是保持不变，还是被此规则的档位取代；“混合搭配”可应用于从产品保留的档位。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
-msgid "Quantity Limits Priority"
-msgstr "数量限制优先"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:130
+msgid "Keep the product's limits"
+msgstr "保留产品的限制"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:110
-msgid "Prefer product-level limits"
-msgstr "更喜欢产品级别限制"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:132
+msgid "Keep the product's role limits only"
+msgstr "仅保留产品的角色限制"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:112
-msgid "Prefer product-level role limits"
-msgstr "更喜欢产品级角色限制"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:134
+msgid "This rule overrides every product limit"
+msgstr "此规则覆盖所有产品限制"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:114
-msgid "Override all product-level limits"
-msgstr "覆盖所有产品级别限制"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:120
-msgid "Prioritize product-specific quantity limits over this global rule."
-msgstr "优先考虑特定于产品的数量限制，而不是此全局规则。"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:140
+msgid ""
+"Whether a product's own quantity limits stay in place or this rule's limits "
+"replace them."
+msgstr "产品自带的数量限制是保持不变，还是被此规则的限制取代。"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:15
 msgid "Users & Roles"
@@ -1145,41 +1476,50 @@ msgstr "用户和角色"
 msgid "Select the users or roles this rule applies to"
 msgstr "选择此规则适用的用户或角色"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:24
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:23
 msgid "Applies to users"
 msgstr "适用于用户"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:27
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:26
+msgid ""
+"The discount is given to these customers; leave roles and customers empty "
+"for everyone, except those in the Exclusions section. When several cart "
+"rules match a customer, the one with the higher priority applies, one "
+"discount per cart."
+msgstr ""
+"折扣适用于这些客户；角色和客户都留空则适用于所有人，“排除”部分中的除外。当多条购物车规则匹配同一客户时，应用优先级较高的一条，每个购物车只享受一次折扣。"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:29
 msgid ""
 "The rule will apply to all users if you do not specify user roles or "
 "specific customers (excluding those selected in the exclusions section)."
 msgstr "如果您未指定用户角色或特定客户（不包括在排除部分中选择的客户），则该规则将应用于所有用户。"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:33
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:94
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:95
 msgid "User roles"
 msgstr "用户角色"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:35
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:96
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:36
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:97
 #: src/Addons/GlobalTieredPricing/Formatter.php:27
 #: src/Addons/NonLoggedInUsers/Roles.php:15
-#: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:23
-#: src/Addons/Tools/PricingTest/RuleTester.php:166
+#: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:25
+#: src/Addons/Tools/PricingTest/RuleTester.php:223
 msgid "Guests (not logged in)"
 msgstr "访客（未登录）"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:40
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:104
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:41
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:105
 msgid "Select for a user role"
 msgstr "选择用户角色"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:54
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:55
 msgid "Manage user roles"
 msgstr "管理用户角色"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:76
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:124
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:77
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:125
 msgid "Select for a customer"
 msgstr "为客户选择"
 
@@ -1202,71 +1542,96 @@ msgstr "使用下面的优惠券代码升级您的套餐可享受 <b>20%</b> 折
 msgid "Upgrade your plan"
 msgstr "升级您的计划"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:415
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:243
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:100
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:17
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:43
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:53
+msgid "Cart rules settings"
+msgstr "购物车规则设置"
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:564
 msgid "The rule reactivated successfully."
 msgstr "规则已成功重新激活。"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:424
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
 msgid "The end date was before the start date, so it was cleared."
 msgstr "结束日期早于开始日期，因此已被清除。"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:460
-msgid "Create Your First Global Pricing Rule"
-msgstr "创建您的第一个全球定价规则"
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:605
+msgid "Create your first pricing rule"
+msgstr "创建您的第一条定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:465
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:610
 msgid ""
-"Global rules allow you to bulk-apply custom pricing, tiered discounts, and "
-"quantity limits to multiple products or categories simultaneously."
-msgstr "全局规则允许您同时将自定义定价、分级折扣和数量限制批量应用到多个产品或类别。"
+"A pricing rule gives many products one set of tiers, prices or quantity "
+"limits at once: by category, tag, brand or customer role. A cart rule works "
+"on the cart as a whole instead: an amount off from a subtotal or item count,"
+" free shipping, and a minimum order."
+msgstr ""
+"定价规则可一次性为多个产品设置同一组档位、价格或数量限制：按分类、标签、品牌或客户角色。购物车规则则作用于整个购物车：达到小计或商品数量后减免金额、免运费，以及最低订单。"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:473
-msgid "Create Rule"
-msgstr "创建规则"
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:618
+msgid "Create a pricing rule"
+msgstr "创建定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:566
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:567
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:711
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:712
 msgid "Pricing rule"
 msgstr "定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:568
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:569
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:713
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:714
 msgid "Add Pricing Rule"
 msgstr "添加定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:570
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:715
 msgid "Edit Pricing Rule"
 msgstr "编辑定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:571
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:716
 msgid "New Pricing Rule"
 msgstr "新定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:572
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:717
 msgid "View Pricing Rule"
 msgstr "查看定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:718
 msgid "Find Pricing Rule"
 msgstr "查找定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:574
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:719
 msgid "No pricing rules ware found"
 msgstr "未找到定价规则软件"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:575
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:720
 msgid "No pricing rule in trash"
 msgstr "垃圾没有定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:577
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:722
 msgid "Pricing rules"
 msgstr "定价规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:29
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:42
+msgid "All rule types"
+msgstr "所有规则类型"
+
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:44
+#: src/Admin/WelcomePage/WelcomePage.php:240 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:494
+msgid "Cart rules"
+msgstr "购物车规则"
+
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:47
+msgid "Filter by rule type"
+msgstr "按规则类型筛选"
+
+#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:31
 msgid "Test"
 msgstr "测试"
 
-#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:43
+#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:46
 msgid "Pricing test"
 msgstr "定价测试"
 
@@ -1278,138 +1643,140 @@ msgstr "规则状态"
 msgid "Save"
 msgstr "保存"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:69
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:73
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:70
+msgid "Rule type"
+msgstr "规则类型"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:88
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
 msgid "Priority"
 msgstr "优先级"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:74
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:93
 msgid ""
 "The rule with the lowest number is applied first. If two rules have the same"
 " number, the newer rule is applied first."
 msgstr "数字最小的规则最先应用。若两条规则数字相同，则较新的规则优先应用。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:80
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:99
 msgid "Schedule"
 msgstr "排期"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:84
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
 msgid "Start date"
 msgstr "开始日期"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:86
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:105
 msgid "End date"
 msgstr "结束日期"
 
 #. translators: %s: timezone, e.g. "Europe/Kyiv"
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:111
 #, php-format
 msgid "Whole days in the site timezone (%s). Leave a date empty for no limit."
 msgstr "按站点时区（%s）的整天计算。日期留空表示不限。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:122
 msgid "Overridden by"
 msgstr "被以下规则覆盖"
 
 #. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:114
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
 #, php-format
 msgid "priority %d"
 msgstr "优先级 %d"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:123
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
 msgid ""
 "These rules have a higher priority. When one of them matches the same "
 "product and customer, that rule is applied and the rule you are editing is "
 "skipped."
 msgstr "这些规则的优先级更高。当其中一条匹配相同的产品和客户时，将应用该规则并跳过您正在编辑的规则。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:132
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
 msgid "Test this rule"
 msgstr "测试此规则"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+msgid "What a cart gets, and which cart rule wins."
+msgstr "购物车可享受的优惠，以及哪条购物车规则生效。"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
 msgid "What a customer pays for a product, and which rule wins."
 msgstr "客户为某产品支付的价格，以及哪条规则胜出。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
 #: src/Addons/NonLoggedInUsers/Wholesale/CPT/ApplicationAdmin.php:333
 msgid "Move to Trash"
 msgstr "移至回收站"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
 msgid "Delete permanently"
 msgstr "永久删除"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:149
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:150
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:169
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:170
 msgid "Update"
 msgstr "更新"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:172
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:173
 msgid "Publish"
 msgstr "发布"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:349
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:400
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:156
+#: src/Addons/Tools/js-source/components/PricingTest.js:170
 msgid "Not published"
 msgstr "未发布"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:350
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:401
 msgid "Publish the rule to put it in force."
 msgstr "发布规则后即生效。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:359
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:410
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:28
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:153
+#: src/Addons/Tools/js-source/components/PricingTest.js:167
 msgid "Suspended"
 msgstr "暂停"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:360
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:411
 msgid "The rule is saved but does not apply until you reactivate it."
 msgstr "规则已保存，但在您重新激活之前不会生效。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:366
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:417
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:27
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:155
+#: src/Addons/Tools/js-source/components/PricingTest.js:169
 msgid "Expired"
 msgstr "已过期"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:368
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:419
 #, php-format
 msgid "Ended %s. Clear or move the end date to use the rule again."
 msgstr "已于 %s 结束。清除或推后结束日期即可再次使用该规则。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:374
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:425
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:29
 msgid "Skipped"
 msgstr "已跳过"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:375
-msgid ""
-"The rule changes neither prices nor quantity limits, so the storefront skips"
-" it. Set a price, tiers or a limit on the tabs on the left."
-msgstr "该规则既不改变价格也不改变数量限制，因此前台会跳过它。请在左侧选项卡中设置价格、档位或限制。"
-
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:381
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:432
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:26
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:154
+#: src/Addons/Tools/js-source/components/PricingTest.js:168
 msgid "Scheduled"
 msgstr "已排期"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:383
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:434
 #, php-format
 msgid "Starts %s."
 msgstr "于 %s 开始。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:390
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:441
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:25
 #: src/Admin/PluginInstaller/PluginInstaller.php:102
 #: src/Admin/PluginInstaller/PluginInstaller.php:148
@@ -1417,58 +1784,178 @@ msgid "Active"
 msgstr "积极的"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:393
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:444
 #, php-format
 msgid "Applies now, until %s."
 msgstr "现已生效，直至 %s。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:394
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:445
 msgid "Applies now."
 msgstr "现已生效。"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:404
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:460
+msgid ""
+"The rule changes neither prices nor quantity limits, so the storefront skips"
+" it. Set a price, tiers or a limit on the tabs on the left."
+msgstr "该规则既不改变价格也不改变数量限制，因此前台会跳过它。请在左侧选项卡中设置价格、档位或限制。"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:472
+msgid "Tiers and base prices per product."
+msgstr "每个产品的档位和基础价格。"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:476
+msgid ""
+"A discount, free shipping or a minimum order, based on the cart subtotal or "
+"item count."
+msgstr "基于购物车小计或商品数量的折扣、免运费或最低订单。"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:486
 msgid "Always"
 msgstr "始终"
 
 #. translators: 1: start date, 2: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:413
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:495
 #, php-format
 msgid "%1$s to %2$s"
 msgstr "%1$s 至 %2$s"
 
 #. translators: %s: start date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:418
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:500
 #, php-format
 msgid "From %s"
 msgstr "自 %s 起"
 
 #. translators: %s: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:422
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:504
 #, php-format
 msgid "Until %s"
 msgstr "直至 %s"
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:473
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:877
+msgid ""
+"The rule has no discount tiers, no free shipping threshold and no minimum "
+"order, so the storefront skips it. Add them on the Discount, Free shipping "
+"and Minimum order tabs."
+msgstr "此规则没有折扣档位、免运费门槛和最低订单，因此店面会跳过它。请在“折扣”“免运费”和“最低订单”选项卡中添加。"
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:881
+msgid ""
+"The rule gives a percentage discount, which the premium version applies, so "
+"the storefront skips it. Switch to a fixed amount off, or upgrade."
+msgstr "此规则提供百分比折扣，需由高级版应用，因此店面会跳过它。请改为固定金额减免，或升级。"
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:885
+msgid ""
+"The rule only sets a minimum order, which the premium version applies, so "
+"the storefront skips it."
+msgstr "此规则仅设置了最低订单，需由高级版应用，因此店面会跳过它。"
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:908
 msgid ""
 "The pricing rule does not affect either prices or product quantity. The rule"
 " will be skipped."
 msgstr "定价规则不会影响价格或产品数量。该规则将被跳过。"
 
 #. translators: %d: rule ID
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:802
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:1237
 #, php-format
 msgid "Rule #%d"
 msgstr "规则 #%d"
 
-#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:10
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:15
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:300
+#: src/Addons/Tools/js-source/components/PricingTest.js:314
 msgid "Global pricing rules"
 msgstr "全球定价规则"
 
-#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:64
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:84
 msgid "Create reusable pricing rules and apply them globally."
 msgstr "创建可重复使用的定价规则并在全球范围内应用它们。"
+
+#. translators: %s: role name
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/MinimumsMigration.php:89
+#, php-format
+msgid "Minimum order for %s"
+msgstr "%s 的最低订单"
+
+#. translators: %s: role name
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/MinimumsMigration.php:108
+#: src/Addons/NonLoggedInUsers/Roles.php:34
+#: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListFilter.php:31
+#: src/Addons/NonLoggedInUsers/Visibility/Admin/RuleText.php:31
+msgid "Guests"
+msgstr "访客"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:157
+msgid "Order discount {discount}"
+msgstr "订单折扣 {discount}"
+
+#. translators: %s: number of items
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:177
+#: src/Addons/Tools/PricingTest/CartTester.php:137
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s 件商品"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:52
+msgid "Add {remaining} more to get {discount} off your order."
+msgstr "再添加 {remaining} 即可享受订单立减 {discount}。"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:70
+msgid "Classic cart, under the cart totals"
+msgstr "经典购物车，位于购物车合计下方"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:71
+msgid "Classic checkout, under the order review total"
+msgstr "经典结账页，位于订单审核合计下方"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:72
+msgid "Mini cart (the cart widget)"
+msgstr "迷你购物车（购物车小工具）"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:73
+msgid "Product page, above the add to cart form"
+msgstr "产品页面，位于加入购物车表单上方"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:139
+msgid "Add {remaining} more for free shipping."
+msgstr "再添加 {remaining} 即可免运费。"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:150
+msgid "You have unlocked free shipping!"
+msgstr "您已解锁免运费！"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:108
+msgid "Follow the cart tax display setting"
+msgstr "遵循购物车税费显示设置"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:109
+msgid "Excluding tax"
+msgstr "不含税"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:110
+msgid "Including tax"
+msgstr "含税"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:177
+msgid "Loading the cart rules settings…"
+msgstr "正在加载购物车规则设置…"
+
+#. translators: %s: link to the pricing rules list
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:48
+#, php-format
+msgid ""
+"How the Order pricing rules read and look in the cart, at checkout, in the "
+"mini cart and on product pages: the discount behaviour and the next tier "
+"message, the minimum order messages, and where and how the free shipping bar"
+" shows. %s"
+msgstr ""
+"订单定价规则在购物车、结账页面、迷你购物车和产品页面中的显示内容与外观：折扣行为和下一档位消息、最低订单消息，以及免运费进度条的显示位置和样式。%s"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:49
+msgid "Back to the pricing rules"
+msgstr "返回定价规则"
 
 #: src/Addons/ImportExport/ImportExportAddon.php:8
 msgid "WooCommerce Import/Export"
@@ -1480,37 +1967,44 @@ msgid ""
 "exporter."
 msgstr "添加了与内置 WooCommerce 产品导入器和导出器的兼容性。"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:40
-#: src/Addons/ImportExport/WoocommerceImportService.php:27
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:133
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:130
+#: src/Addons/ImportExport/WoocommerceExportService.php:43
+#: src/Addons/ImportExport/WoocommerceImportService.php:29
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:159
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:178
 msgid "Fixed pricing rules"
 msgstr "固定定价规则"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:43
-#: src/Addons/ImportExport/WoocommerceImportService.php:28
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:135
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:132
-msgid "Percentage pricing rules"
-msgstr "百分比定价规则"
+#: src/Addons/ImportExport/WoocommerceExportService.php:44
+#: src/Addons/ImportExport/WoocommerceImportService.php:31
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:163
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:182
+msgid "Amount pricing rules"
+msgstr "金额定价规则"
 
 #: src/Addons/ImportExport/WoocommerceExportService.php:45
-#: src/Addons/ImportExport/WoocommerceImportService.php:26
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:137
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:126
-#: src/Integrations/Plugins/WPAllImport.php:117
-#: src/Integrations/Plugins/WPAllImport.php:223
-#: views/admin/components/tiered-pricing-rules-form.php:98
+#: src/Addons/ImportExport/WoocommerceImportService.php:28
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:165
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:174
+#: src/Integrations/Plugins/WPAllImport.php:125
+#: src/Integrations/Plugins/WPAllImport.php:239
+#: views/admin/components/tiered-pricing-rules-form.php:106
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:9
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Tiered pricing type"
 msgstr "阶梯定价类型"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:47
-#: src/Addons/ImportExport/WoocommerceImportService.php:29
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:139
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:128
+#: src/Addons/ImportExport/WoocommerceExportService.php:48
+#: src/Addons/ImportExport/WoocommerceImportService.php:30
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:161
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:180
+msgid "Percentage pricing rules"
+msgstr "百分比定价规则"
+
+#: src/Addons/ImportExport/WoocommerceExportService.php:50
+#: src/Addons/ImportExport/WoocommerceImportService.php:32
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:167
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:176
 #: views/admin/components/minimum-order-quantity-form.php:25
 msgid "Minimum order quantity"
 msgstr "最小订购量"
@@ -1605,7 +2099,7 @@ msgstr "产品名称"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735
-#: src/PricingTable.php:541 src/PricingTable.php:542
+#: src/PricingTable.php:548 src/PricingTable.php:549
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
 msgid "piece"
@@ -1767,6 +2261,7 @@ msgstr "最大折扣优先"
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:860
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297
+#: views/addons/global-rules/order-discount-form.php:39
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
@@ -1821,21 +2316,21 @@ msgstr "无法渲染预览。"
 msgid "Preview product"
 msgstr "预览产品"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:15
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:22
 msgid "Tiered pricing for manual orders"
 msgstr "手动订单的分级定价"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:19
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:26
 msgid "Apply tiered pricing to orders created manually in the admin area."
 msgstr "将分级定价应用于在管理区域中手动创建的订单。"
 
 #. translators: %1$s: item name, %2$s: original price, %3$s: new price
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:161
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:207
 #, php-format
 msgid "Tiered pricing recalculations for %1$s: %2$s → %3$s"
 msgstr "%1$s 的分级定价重新计算：%2$s → %3$s"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:207
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:258
 msgid "Re-calculate with tiered pricing"
 msgstr "重新计算阶梯定价"
 
@@ -1886,64 +2381,17 @@ msgid ""
 "Enforce minimum order quantities for products based on tiered pricing rules."
 msgstr "根据分级定价规则强制执行产品的最低订购数量。"
 
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:54
+#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:58
 msgid ""
 "A minimum order of {minimum} is required to check out. Your order subtotal "
 "is {subtotal}."
 msgstr "结账需最低订单金额 {minimum}。您的订单小计为 {subtotal}。"
 
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:58
+#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:62
 msgid ""
 "A minimum of {minimum} items is required to check out. Your cart has "
 "{count}."
 msgstr "结账需至少 {minimum} 件商品。您的购物车中有 {count} 件。"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:9
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:23
-msgid "Cart rules by role"
-msgstr "按角色设置购物车规则"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:13
-msgid ""
-"A minimum order amount or quantity for the whole cart per role, and payment "
-"or shipping methods limited to roles (the two groups below). Guests count as"
-" a role; a customer with several roles gets the strictest minimum. Off by "
-"default."
-msgstr ""
-"按角色设置整个购物车的最低订单金额或数量，并按角色限制付款或配送方式（下方两组）。访客视为一种角色；拥有多个角色的客户按最严格的最低要求计算。默认关闭。"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:27
-msgid ""
-"Applies the minimums below and the payment and shipping method limits of the"
-" next two groups in the cart and at checkout, for the classic pages and the "
-"blocks."
-msgstr "在购物车和结账时应用下方的最低要求以及后两组的付款和配送方式限制，适用于经典页面和区块。"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:30
-msgid "Minimum order"
-msgstr "最低订单"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:33
-msgid ""
-"Leave a cell empty for no minimum. The amount is the cart subtotal after "
-"tiered prices, before shipping."
-msgstr "单元格留空表示无最低要求。金额为应用阶梯价格后、运费前的购物车小计。"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:36
-msgid "Amount message"
-msgstr "金额提示信息"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:40
-msgid "Placeholders: {minimum}, {subtotal}."
-msgstr "占位符：{minimum}、{subtotal}。"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:43
-msgid "Quantity message"
-msgstr "数量提示信息"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:47
-msgid "Placeholders: {minimum}, {count}."
-msgstr "占位符：{minimum}、{count}。"
 
 #: src/Addons/NonLoggedInUsers/CartRules/PaymentMethodsSubsection.php:10
 msgid "Payment methods by role"
@@ -1962,21 +2410,6 @@ msgid ""
 "everyone."
 msgstr "每种已启用付款方式允许谁使用，例如仅批发客户可使用发票付款。方式留空则所有人均可使用。"
 
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:41
-#: views/addons/role-based-pricing/role.php:31
-msgid "Role"
-msgstr "角色"
-
-#. translators: %s: currency symbol
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:45
-#, php-format
-msgid "Minimum order amount (%s)"
-msgstr "最低订单金额（%s）"
-
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:48
-msgid "Minimum quantity"
-msgstr "最低数量"
-
 #: src/Addons/NonLoggedInUsers/CartRules/ShippingMethodsSubsection.php:12
 msgid "Shipping methods by role"
 msgstr "按角色设置配送方式"
@@ -1994,11 +2427,11 @@ msgid ""
 "everyone."
 msgstr "每个区域的每种配送方式允许谁使用，例如仅零售客户可享受免运费。方式留空则所有人均可使用。"
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:33
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:32
 msgid "Wholesale & Guest Users"
 msgstr "批发和访客用户"
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:37
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:36
 msgid ""
 "Hide prices or prevent purchasing for guests, close the store to visitors, "
 "show products and categories to selected roles only, set minimum orders and "
@@ -2008,14 +2441,14 @@ msgstr ""
 "对访客隐藏价格或禁止购买，对访客关闭商店，仅向所选角色显示产品和分类，按角色设置最低订单及付款或配送方式，并允许客户申请批发账户并进入审批队列。在“批发”选项卡下设置。"
 
 #. translators: %s: link to the settings
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:118
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:113
 #, php-format
 msgid ""
 "Wholesale registration is switched off. Enable it under %s. Only shop "
 "managers see this note."
 msgstr "批发注册已关闭。请在%s下启用。此提示仅商店管理员可见。"
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:119
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:114
 msgid "Tiered Pricing → Wholesale"
 msgstr "阶梯定价 → 批发"
 
@@ -2029,18 +2462,6 @@ msgstr "请输入 %s 进行购买"
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:52
 msgid "your account"
 msgstr "你的帐户"
-
-#. translators: %s: login page url
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:85
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:70
-#, php-format
-msgid "%s see prices"
-msgstr "%s 查看价格"
-
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:87
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:72
-msgid "Login"
-msgstr "登录"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:11
 msgid "Guest Users"
@@ -2091,13 +2512,6 @@ msgid ""
 "This message will be displayed instead of the price for non-logged-in users."
 msgstr "对于未登录的用户，将显示此消息而不是价格。"
 
-#. translators: %s: role name
-#: src/Addons/NonLoggedInUsers/Roles.php:34
-#: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListFilter.php:31
-#: src/Addons/NonLoggedInUsers/Visibility/Admin/RuleText.php:31
-msgid "Guests"
-msgstr "访客"
-
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryListColumn.php:26
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryListColumn.php:33
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListColumn.php:28
@@ -2138,7 +2552,7 @@ msgid "Hidden from %s"
 msgstr "对 %s 隐藏"
 
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductVisibilityFields.php:25
-#: src/Admin/ProductPage/TieredPricingTab.php:157
+#: src/Admin/ProductPage/TieredPricingTab.php:158
 msgid "Who can see this product"
 msgstr "谁可以查看此产品"
 
@@ -3185,6 +3599,8 @@ msgstr "我同意%s。"
 msgid "Already have an account? %s and apply from there."
 msgstr "已有账户？请先%s，然后在账户中申请。"
 
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:87
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:72
 #: src/Addons/NonLoggedInUsers/Wholesale/views/frontend/registration-form.php:159
 msgid "Log in"
 msgstr "登录"
@@ -3451,7 +3867,9 @@ msgstr "选择分层定价表相对于产品图像和详细信息的显示位置
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:84
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:412
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:227
 msgid "Where it shows"
 msgstr "显示位置"
 
@@ -3755,7 +4173,7 @@ msgstr "表格样式 #1、#5 和 #6 使用当前档位颜色的左边框标记�
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:360
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:371
-#: src/Admin/ProductPage/TieredPricingTab.php:122
+#: src/Admin/ProductPage/TieredPricingTab.php:123
 #: src/Settings/CustomOptions/TPTTextTemplate.php:212
 msgid "Unit label"
 msgstr "单位标签"
@@ -3977,9 +4395,13 @@ msgstr "客户要求"
 #: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:25
 #: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:25
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:459
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:389
+#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:351
+#: src/Addons/Tools/js-source/components/PricingTest.js:527
+#: src/Addons/Tools/js-source/components/PricingTest.js:647
 msgid "Product"
 msgstr "产品"
 
@@ -4002,10 +4424,12 @@ msgstr "单价"
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:111
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:179
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1095
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:480
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:214
+#: src/Addons/Tools/js-source/components/PricingTest.js:228
 msgid "Total"
 msgstr "全部的"
 
@@ -4074,8 +4498,8 @@ msgstr "引用"
 
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:386
 #: views/addons/user-based-pricing/user.php:41
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:397
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:656
 msgid "Customer"
 msgstr "顾客"
 
@@ -4390,7 +4814,7 @@ msgstr "正在提交..."
 
 #: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:213
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:36
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:40
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:101
 msgid "None"
@@ -4428,7 +4852,7 @@ msgid "Quote Request"
 msgstr "报价请求"
 
 #: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:29
-#: src/Admin/WelcomePage/WelcomePage.php:240
+#: src/Admin/WelcomePage/WelcomePage.php:245
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/App.js:141
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:133
@@ -4505,21 +4929,21 @@ msgstr "在前端请求报价是一项高级功能。此弹出窗口仅对管理
 msgid "Upgrade to Premium"
 msgstr "升级至高级版"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:125
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:151
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:166
 msgid "Regular pricing type"
 msgstr "常规定价类型"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:129
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:122
-#: src/Integrations/Plugins/WPAllImport.php:170
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:155
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:170
+#: src/Integrations/Plugins/WPAllImport.php:178
 #: views/admin/components/regular-pricing-form.php:106
 #: views/admin/components/regular-pricing-form.php:148
 msgid "Sale price"
 msgstr "销售价格"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:131
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:124
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:157
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:172
 #: src/Settings/CustomOptions/TPTTextTemplate.php:150
 #: src/Settings/CustomOptions/TPTTextTemplate.php:203
 #: views/addons/category-tiers/add-free.php:28
@@ -4529,19 +4953,19 @@ msgstr "销售价格"
 #: views/addons/category-tiers/edit.php:88
 #: views/admin/components/regular-pricing-form.php:38
 #: views/admin/components/regular-pricing-form.php:65
-#: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/components/tiered-pricing-rules-form.php:61
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:29
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage discount"
 msgstr "折扣百分比"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:173
+#: src/Addons/RoleBasedPricing/ProductManager.php:174
 msgid "Invalid role"
 msgstr "角色无效"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:179
-#: src/Addons/UserBasedPricing/ProductManager.php:185
+#: src/Addons/RoleBasedPricing/ProductManager.php:180
+#: src/Addons/UserBasedPricing/ProductManager.php:186
 msgid "Invalid nonce"
 msgstr "无效随机数"
 
@@ -4554,12 +4978,12 @@ msgid "Enable role-based pricing rules on individual products."
 msgstr "对单个产品启用基于角色的定价规则。"
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:34
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:35
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:38
 msgid "Taxable"
 msgstr "应纳税"
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:35
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:36
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:39
 msgid "Shipping only"
 msgstr "仅限运送"
 
@@ -4583,27 +5007,27 @@ msgstr "税"
 msgid "Set tax status and class"
 msgstr "设置纳税身份和类别"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:25
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:29
 msgid "Tax settings"
 msgstr "税务设置"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:26
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:30
 msgid ""
 "Override the default tax status and class for products matching this rule."
 msgstr "覆盖匹配此规则的产品的默认税务状态和类别。"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:32
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:35
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:49
 msgid "Tax status"
 msgstr "税务状况"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:46
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:49
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:270
 msgid "Standard"
 msgstr "标准"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:56
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:59
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:63
 msgid "Tax class"
 msgstr "税级"
@@ -4676,12 +5100,12 @@ msgstr "总节省行标签"
 msgid "Cart Display Options"
 msgstr "购物车显示选项"
 
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:72
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:97
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:74
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:99
 msgid "No label"
 msgstr "无标签"
 
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:104
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:106
 msgid "Tier label (regular price)"
 msgstr "等级标签（正常价格）"
 
@@ -4770,85 +5194,155 @@ msgstr "将“最佳价值”等自定义标签添加到特定定价层。"
 msgid "Manage Roles"
 msgstr "管理角色"
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:119
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:343
+#: src/Addons/Tools/API/ToolsEndpoints.php:130
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:586
 msgid "Pick a product first."
 msgstr "请先选择产品。"
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:123
+#: src/Addons/Tools/API/ToolsEndpoints.php:134
+#: src/Addons/Tools/API/ToolsEndpoints.php:156
 msgid "The customer could not be loaded."
 msgstr "无法加载客户。"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:62
-msgid "The product could not be loaded."
-msgstr "无法加载产品。"
-
-#. translators: %d: minimum quantity
-#: src/Addons/Tools/PricingTest/PricingTester.php:98
+#. translators: %d: line number
+#: src/Addons/Tools/PricingTest/CartTester.php:51
 #, php-format
-msgid "minimum %d"
-msgstr "最少 %d"
+msgid "The product of line %d could not be loaded."
+msgstr "无法加载第 %d 行的产品。"
 
-#. translators: %d: maximum quantity
-#: src/Addons/Tools/PricingTest/PricingTester.php:102
-#, php-format
-msgid "maximum %d"
-msgstr "最多 %d"
+#: src/Addons/Tools/PricingTest/CartTester.php:74
+msgid "Add at least one line to the cart."
+msgstr "请至少向购物车添加一行。"
 
-#. translators: %d: quantity step
-#: src/Addons/Tools/PricingTest/PricingTester.php:106
-#, php-format
-msgid "step %d"
-msgstr "步长 %d"
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:117
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:401
+#: src/Addons/Tools/PricingTest/CartTester.php:93
+#: src/Addons/Tools/PricingTest/PricingTester.php:123
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:660
 msgid "Visitor (not logged in)"
 msgstr "访客（未登录）"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:118
+#: src/Addons/Tools/PricingTest/CartTester.php:94
+#: src/Addons/Tools/PricingTest/PricingTester.php:124
 msgid "no role"
 msgstr "无角色"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:167
-msgid "See the rule's products and customers tabs."
-msgstr "请查看规则的“产品”和“客户”选项卡。"
+#. translators: 1: number of lines, 2: number of lines in the cart
+#: src/Addons/Tools/PricingTest/CartTester.php:258
+#, php-format
+msgid "%1$d of %2$d cart lines match the rule's products and are counted."
+msgstr "购物车的 %2$d 行中有 %1$d 行与规则的产品匹配并被计入。"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:181
+#: src/Addons/Tools/PricingTest/CartTester.php:259
+msgid "None of the cart lines matches the rule's products."
+msgstr "购物车中没有任何行与规则的产品匹配。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:261
 msgid ""
-"Because of the rule's priority settings, the product's own pricing is "
-"applied instead. The pricing log shows the decision."
-msgstr "由于规则的优先级设置，改为应用产品自身的定价。定价日志会显示该决定。"
+"The rule counts the whole cart (no products, categories, tags or brands "
+"selected)."
+msgstr "此规则计入整个购物车（未选择产品、分类、标签或品牌）。"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:187
+#: src/Addons/Tools/PricingTest/CartTester.php:272
+#: src/Addons/Tools/PricingTest/PricingTester.php:193
 msgid "The rule is not published, so the storefront ignores it."
 msgstr "该规则尚未发布，因此前台会忽略它。"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:190
+#: src/Addons/Tools/PricingTest/CartTester.php:275
+#: src/Addons/Tools/PricingTest/PricingTester.php:196
 msgid "The rule is suspended, so the storefront ignores it."
 msgstr "该规则已暂停，因此前台会忽略它。"
 
 #. translators: %s: date
-#: src/Addons/Tools/PricingTest/PricingTester.php:194
+#: src/Addons/Tools/PricingTest/CartTester.php:279
+#: src/Addons/Tools/PricingTest/PricingTester.php:200
 #, php-format
 msgid "The rule starts on %s, so the storefront ignores it until then."
 msgstr "该规则于 %s 开始，在此之前前台会忽略它。"
 
 #. translators: %s: date
-#: src/Addons/Tools/PricingTest/PricingTester.php:198
+#: src/Addons/Tools/PricingTest/CartTester.php:283
+#: src/Addons/Tools/PricingTest/PricingTester.php:204
 #, php-format
 msgid "The rule ended on %s, so the storefront ignores it."
 msgstr "该规则已于 %s 结束，因此前台会忽略它。"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:203
+#. translators: 1: tier threshold, 2: discount
+#: src/Addons/Tools/PricingTest/CartTester.php:297
+#, php-format
+msgid "The cart reaches the tier from %1$s: %2$s off."
+msgstr "购物车达到从 %1$s 起的档位：减免 %2$s。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:300
+msgid "The cart reaches the free shipping threshold."
+msgstr "购物车达到免运费门槛。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:304
+msgid ""
+"The rule has no discount tiers; the cart is below its free shipping "
+"threshold."
+msgstr "此规则没有折扣档位；购物车低于其免运费门槛。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:305
+msgid "The rule has no discount tiers; it only sets a minimum order."
+msgstr "此规则没有折扣档位；它只设置了最低订单。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:308
+msgid ""
+"The cart is below the rule's first tier. As the matching rule with the "
+"highest priority it holds the cart: rules below it are not applied."
+msgstr "购物车低于此规则的第一个档位。作为优先级最高的匹配规则，它会占用该购物车：其后的规则不会被应用。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:312
+msgid ""
+"Another matching cart rule has a higher priority and is the one in play. The"
+" rule with the lowest priority number is applied first; if two rules have "
+"the same number, the newer rule is applied first."
+msgstr "另一条匹配的购物车规则优先级更高，由它生效。优先级数字最小的规则最先应用；若两条规则数字相同，则较新的规则先应用。"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:318
+msgid "Its minimum order is checked for this cart: see the minimums above."
+msgstr "已对此购物车检查其最低订单：见上方的最低要求。"
+
+#: src/Addons/Tools/PricingTest/PricingTester.php:68
+msgid "The product could not be loaded."
+msgstr "无法加载产品。"
+
+#. translators: %d: minimum quantity
+#: src/Addons/Tools/PricingTest/PricingTester.php:104
+#, php-format
+msgid "minimum %d"
+msgstr "最少 %d"
+
+#. translators: %d: maximum quantity
+#: src/Addons/Tools/PricingTest/PricingTester.php:108
+#, php-format
+msgid "maximum %d"
+msgstr "最多 %d"
+
+#. translators: %d: quantity step
+#: src/Addons/Tools/PricingTest/PricingTester.php:112
+#, php-format
+msgid "step %d"
+msgstr "步长 %d"
+
+#: src/Addons/Tools/PricingTest/PricingTester.php:173
+msgid "See the rule's products and customers tabs."
+msgstr "请查看规则的“产品”和“客户”选项卡。"
+
+#: src/Addons/Tools/PricingTest/PricingTester.php:187
+msgid ""
+"Because of the rule's priority settings, the product's own pricing is "
+"applied instead. The pricing log shows the decision."
+msgstr "由于规则的优先级设置，改为应用产品自身的定价。定价日志会显示该决定。"
+
+#: src/Addons/Tools/PricingTest/PricingTester.php:209
 msgid ""
 "The rule changes neither prices nor quantity limits, so the storefront skips"
 " it."
 msgstr "该规则既不改变价格也不改变数量限制，因此前台会跳过它。"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:206
+#: src/Addons/Tools/PricingTest/PricingTester.php:212
 msgid ""
 "Another matching rule has a higher priority and is applied instead. The rule"
 " with the lowest priority number is applied first; if two rules have the "
@@ -4875,10 +5369,13 @@ msgid "The product has an excluded brand: %s."
 msgstr "该产品属于被排除的品牌：%s。"
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:49
+#: src/Addons/Tools/PricingTest/RuleTester.php:161
 msgid "The customer is listed under the excluded customers."
 msgstr "该客户在排除的客户列表中。"
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:53
+#: src/Addons/Tools/PricingTest/RuleTester.php:166
 #, php-format
 msgid "The customer has an excluded role: %s."
 msgstr "该客户拥有被排除的角色：%s。"
@@ -4951,68 +5448,87 @@ msgid ""
 msgstr "该规则适用于所有产品（未选择产品、分类、标签或品牌）。"
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:116
+#: src/Addons/Tools/PricingTest/RuleTester.php:176
 msgid "The rule applies to every customer (no roles or customers selected)."
 msgstr "该规则适用于所有客户（未选择角色或客户）。"
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:122
+#: src/Addons/Tools/PricingTest/RuleTester.php:179
 msgid "The customer is listed under the rule's customers."
 msgstr "该客户在规则的客户列表中。"
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:129
+#: src/Addons/Tools/PricingTest/RuleTester.php:184
 #, php-format
 msgid "The customer has the rule's role: %s."
 msgstr "该客户拥有规则指定的角色：%s。"
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:135
+#: src/Addons/Tools/PricingTest/RuleTester.php:189
 #, php-format
 msgid "This customer has the roles %s."
 msgstr "该客户拥有角色 %s。"
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:135
+#: src/Addons/Tools/PricingTest/RuleTester.php:189
 msgid "This customer has no role."
 msgstr "该客户没有角色。"
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:136
+#: src/Addons/Tools/PricingTest/RuleTester.php:190
 msgid ""
 "A visitor who is not logged in only matches rules that include \"Guests (not"
 " logged in)\" or have no customer limits."
 msgstr "未登录的访客只匹配包含“访客（未登录）”或没有客户限制的规则。"
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:139
+#: src/Addons/Tools/PricingTest/RuleTester.php:194
 #, php-format
 msgid "roles %s"
 msgstr "角色 %s"
 
+#. translators: %d: number of customers
 #: src/Addons/Tools/PricingTest/RuleTester.php:142
+#: src/Addons/Tools/PricingTest/RuleTester.php:198
 #, php-format
 msgid "%d selected customer"
 msgid_plural "%d selected customers"
 msgstr[0] "已选择 %d 位客户"
 
+#. translators: %s: the limits, e.g. "roles Wholesale and 2 selected
+#. customers"
 #: src/Addons/Tools/PricingTest/RuleTester.php:147
+#: src/Addons/Tools/PricingTest/RuleTester.php:204
 #, php-format
 msgid "The rule is limited to %s."
 msgstr "该规则仅限于%s。"
 
+#. translators: %s: the limits, e.g. "roles Wholesale and 2 selected
+#. customers"
 #: src/Addons/Tools/PricingTest/RuleTester.php:147
+#: src/Addons/Tools/PricingTest/RuleTester.php:204
 msgid "and"
 msgstr "和"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:181
+#: src/Addons/Tools/PricingTest/RuleTester.php:238
 msgid "a role price on the product"
 msgstr "产品上的角色价格"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:183
+#: src/Addons/Tools/PricingTest/RuleTester.php:240
 msgid "a customer price on the product"
 msgstr "产品上的客户专属价格"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:185
+#: src/Addons/Tools/PricingTest/RuleTester.php:242
 #: views/admin/notifications/activation-notification.php:44
 msgid "a global pricing rule"
 msgstr "全球定价规则"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:187
-#: src/Addons/Tools/PricingTest/RuleTester.php:189
+#: src/Addons/Tools/PricingTest/RuleTester.php:244
+#: src/Addons/Tools/PricingTest/RuleTester.php:246
 msgid "the product's own pricing"
 msgstr "产品自身的定价"
 
@@ -5033,7 +5549,7 @@ msgstr "工具"
 msgid "Access utilities for managing and cleaning up tiered pricing data."
 msgstr "访问用于管理和清理分层定价数据的实用程序。"
 
-#: src/Addons/UserBasedPricing/ProductManager.php:179
+#: src/Addons/UserBasedPricing/ProductManager.php:180
 msgid "Invalid user"
 msgstr "无效用户"
 
@@ -5272,45 +5788,45 @@ msgstr "可变产品"
 msgid "Tiers, quantity limits and how variations are priced together"
 msgstr "档位、数量限制以及变体如何合并计价"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:100
+#: src/Admin/ProductPage/TieredPricingTab.php:101
 msgid "Display"
 msgstr "显示"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:100
+#: src/Admin/ProductPage/TieredPricingTab.php:101
 msgid "Layout and unit label for this product"
 msgstr "此产品的布局和单位标签"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:112
+#: src/Admin/ProductPage/TieredPricingTab.php:113
 msgid "Pricing layout"
 msgstr "定价布局"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:113
+#: src/Admin/ProductPage/TieredPricingTab.php:114
 msgid "Override the global layout for this specific product."
 msgstr "覆盖此特定产品的全局布局。"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:129
+#: src/Admin/ProductPage/TieredPricingTab.php:130
 msgid "Singular (e.g. piece)"
 msgstr "单数（例如，一块）"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:135
+#: src/Admin/ProductPage/TieredPricingTab.php:136
 msgid "Plural (e.g. pieces)"
 msgstr "复数（例如，pieces）"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:146
+#: src/Admin/ProductPage/TieredPricingTab.php:147
 msgid "Displayed next to quantities. Leave empty to inherit global settings."
 msgstr "显示在数量旁边。留空以继承全局设置。"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:157
+#: src/Admin/ProductPage/TieredPricingTab.php:158
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:402
 msgid "Visibility"
 msgstr "可见性"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:260
+#: src/Admin/ProductPage/TieredPricingTab.php:261
 msgid "Role & Customer Prices"
 msgstr "角色和客户价格"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:260
+#: src/Admin/ProductPage/TieredPricingTab.php:261
 msgid "Prices for customer roles and individual customers"
 msgstr "客户角色和单个客户的价格"
 
@@ -5412,15 +5928,18 @@ msgstr "一次为多个产品设置价格"
 #: src/Admin/WelcomePage/WelcomePage.php:211
 msgid ""
 "A global pricing rule gives categories, tags, brands or customer roles one "
-"set of tiers."
-msgstr "全球定价规则可为类别、标签、品牌或客户角色统一设置一套档位。"
+"set of tiers, or takes an amount off the whole order and ships it free from "
+"a subtotal."
+msgstr "全局定价规则可为分类、标签、品牌或客户角色统一设置一组档位，或从整个订单中减免一笔金额，并在达到某个小计后免运费配送。"
 
 #: src/Admin/WelcomePage/WelcomePage.php:212
 msgid "Open the pricing rules"
 msgstr "打开定价规则"
 
 #: src/Admin/WelcomePage/WelcomePage.php:212 src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:313
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:327
+#: src/Addons/Tools/js-source/components/PricingTest.js:507
 msgid "Add a pricing rule"
 msgstr "添加定价规则"
 
@@ -5447,25 +5966,31 @@ msgid "Tiers travel with the WooCommerce CSV importer and exporter."
 msgstr "档位随 WooCommerce 的 CSV 导入导出工具一起迁移。"
 
 #: src/Admin/WelcomePage/WelcomePage.php:241
+msgid ""
+"A discount, free shipping with a progress bar and a minimum order on the "
+"whole cart, per role, products and dates."
+msgstr "对整个购物车提供折扣、带进度条的免运费和最低订单，可按角色、产品和日期设置。"
+
+#: src/Admin/WelcomePage/WelcomePage.php:246
 msgid "A quote form for customers who want a price on a large order."
 msgstr "为希望获得大批量订单报价的客户提供报价表单。"
 
-#: src/Admin/WelcomePage/WelcomePage.php:245
+#: src/Admin/WelcomePage/WelcomePage.php:250
 msgid "Pricing labels"
 msgstr "定价标签"
 
-#: src/Admin/WelcomePage/WelcomePage.php:246
+#: src/Admin/WelcomePage/WelcomePage.php:251
 msgid ""
 "Mark a tier as the best value or the most popular, with an icon and a "
 "colour."
 msgstr "通过图标和颜色，将某个档位标记为“最优惠”或“最受欢迎”。"
 
-#: src/Admin/WelcomePage/WelcomePage.php:250
+#: src/Admin/WelcomePage/WelcomePage.php:255
 #: src/Settings/Sections/Advanced/AdvancedSection.php:35
 msgid "Modules"
 msgstr "模块"
 
-#: src/Admin/WelcomePage/WelcomePage.php:251
+#: src/Admin/WelcomePage/WelcomePage.php:256
 msgid "Switch off the features you do not use under Advanced."
 msgstr "在“高级”中关闭您不使用的功能。"
 
@@ -5485,7 +6010,7 @@ msgid ""
 "Switcher."
 msgstr "使用 Aelia 货币切换器时正确转换和显示分层定价。"
 
-#: src/Integrations/Plugins/Curcy.php:79
+#: src/Integrations/Plugins/Curcy.php:88
 msgid ""
 "Convert and display tiered pricing correctly when using the CURCY "
 "multicurrency plugin."
@@ -5803,7 +6328,7 @@ msgstr "按选项定价"
 msgid "Live totals"
 msgstr "实时总价"
 
-#: src/Integrations/Plugins/WCCS.php:67
+#: src/Integrations/Plugins/WCCS.php:82
 msgid ""
 "Convert and display tiered pricing correctly when using the WooCommerce "
 "Currency Switcher by WP Experts."
@@ -5843,7 +6368,7 @@ msgid ""
 "Subscriptions plan, in both the initial and recurring totals."
 msgstr "对通过 WooCommerce Subscriptions 订阅计划购买的产品正确应用阶梯定价，包括首次和续费总额。"
 
-#: src/Integrations/Plugins/WOOCS.php:65
+#: src/Integrations/Plugins/WOOCS.php:80
 msgid ""
 "Convert and display tiered pricing correctly when using the FOX WooCommerce "
 "Currency Switcher."
@@ -5855,26 +6380,26 @@ msgid ""
 "Multicurrency."
 msgstr "使用 WooPayments 多货币时正确转换和显示分层定价。"
 
-#: src/Integrations/Plugins/WPAllImport.php:103
-#: src/Integrations/Plugins/WPAllImport.php:203
+#: src/Integrations/Plugins/WPAllImport.php:105
+#: src/Integrations/Plugins/WPAllImport.php:211
 msgid "Fixed Tiered prices"
 msgstr "固定阶梯价格"
 
-#: src/Integrations/Plugins/WPAllImport.php:106
-#: src/Integrations/Plugins/WPAllImport.php:208
+#: src/Integrations/Plugins/WPAllImport.php:108
+#: src/Integrations/Plugins/WPAllImport.php:216
 msgid ""
 "The format for the rules must be the following: "
 "quantity:price,quantity:price. For example: \"10:5,20:15\" where 10 and 20 "
 "are quantities and 5 and 15 are prices for those quantities."
 msgstr "规则的格式必须如下：数量：价格，数量：价格。例如：“10:5,20:15”，其中 10 和 20 是数量，5 和 15 是这些数量的价格。"
 
-#: src/Integrations/Plugins/WPAllImport.php:110
-#: src/Integrations/Plugins/WPAllImport.php:213
+#: src/Integrations/Plugins/WPAllImport.php:112
+#: src/Integrations/Plugins/WPAllImport.php:221
 msgid "Percentage Tiered prices"
 msgstr "百分比分级价格"
 
-#: src/Integrations/Plugins/WPAllImport.php:113
-#: src/Integrations/Plugins/WPAllImport.php:218
+#: src/Integrations/Plugins/WPAllImport.php:115
+#: src/Integrations/Plugins/WPAllImport.php:226
 msgid ""
 "Format for the rules must be the following: "
 "quantity:percent_discount,quantity:percent_discount. For example: "
@@ -5883,70 +6408,85 @@ msgid ""
 msgstr ""
 "规则的格式必须如下：数量：百分比折扣，数量：百分比折扣。例如：“10:5,20:15”，其中 10 和 20 是数量，5 和 15 是折扣金额。"
 
-#: src/Integrations/Plugins/WPAllImport.php:126
-#: src/Integrations/Plugins/WPAllImport.php:234
-msgid "The field must be either \"fixed\" or \"percentage\"."
-msgstr "该字段必须是“固定”或“百分比”。"
+#: src/Integrations/Plugins/WPAllImport.php:119
+#: src/Integrations/Plugins/WPAllImport.php:231
+msgid "Amount-off Tiered prices"
+msgstr "减额阶梯价格"
 
-#: src/Integrations/Plugins/WPAllImport.php:129
-#: src/Integrations/Plugins/WPAllImport.php:238
+#: src/Integrations/Plugins/WPAllImport.php:122
+#: src/Integrations/Plugins/WPAllImport.php:236
+msgid ""
+"Format for the rules must be the following: "
+"quantity:amount_off,quantity:amount_off. For example: \"10:5,20:15\" where "
+"10 and 20 are quantities and 5 and 15 are the amounts taken off the price of"
+" each unit."
+msgstr ""
+"规则格式必须如下：数量:减免金额,数量:减免金额。例如：“10:5,20:15”，其中 10 和 20 是数量，5 和 15 是每件商品价格的减免金额。"
+
+#: src/Integrations/Plugins/WPAllImport.php:134
+#: src/Integrations/Plugins/WPAllImport.php:250
+msgid "The field must be \"fixed\", \"percentage\" or \"amount\"."
+msgstr "该字段必须为 \"fixed\"、\"percentage\" 或 \"amount\"。"
+
+#: src/Integrations/Plugins/WPAllImport.php:137
+#: src/Integrations/Plugins/WPAllImport.php:254
 msgid "Minimum product quantity"
 msgstr "最小产品数量"
 
-#: src/Integrations/Plugins/WPAllImport.php:134
-#: src/Integrations/Plugins/WPAllImport.php:245
+#: src/Integrations/Plugins/WPAllImport.php:142
+#: src/Integrations/Plugins/WPAllImport.php:261
 msgid "The field must contain an integer value."
 msgstr "该字段必须包含整数值。"
 
-#: src/Integrations/Plugins/WPAllImport.php:149
+#: src/Integrations/Plugins/WPAllImport.php:157
 #: views/admin/components/regular-pricing-form.php:28
 msgid "Pricing type"
 msgstr "定价类型"
 
-#: src/Integrations/Plugins/WPAllImport.php:156
+#: src/Integrations/Plugins/WPAllImport.php:164
 msgid ""
 "The field must be either \"fixed\" or \"percentage\". This affect what "
 "fields will be used to grant a discount: sale and regular prices or "
 "percentage discount."
 msgstr "该字段必须是“固定”或“百分比”。这会影响哪些字段将用于授予折扣：销售价格和常规价格或百分比折扣。"
 
-#: src/Integrations/Plugins/WPAllImport.php:166
+#: src/Integrations/Plugins/WPAllImport.php:174
 msgid "Regular price for the role"
 msgstr "角色的正常价格"
 
-#: src/Integrations/Plugins/WPAllImport.php:175
+#: src/Integrations/Plugins/WPAllImport.php:183
 msgid "Sale price for the role"
 msgstr "角色售价"
 
-#: src/Integrations/Plugins/WPAllImport.php:179
+#: src/Integrations/Plugins/WPAllImport.php:187
 #: views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "折扣 （％）"
 
-#: src/Integrations/Plugins/WPAllImport.php:198
+#: src/Integrations/Plugins/WPAllImport.php:206
 msgid "Percentage discount for the role."
 msgstr "角色的百分比折扣。"
 
-#: src/Integrations/Plugins/WPAllImport.php:567
+#: src/Integrations/Plugins/WPAllImport.php:583
 msgid "Role-based import"
 msgstr "基于角色的导入"
 
-#: src/Integrations/Plugins/WPAllImport.php:884
+#: src/Integrations/Plugins/WPAllImport.php:900
 msgid "Import and update tiered pricing rules using WP All Import."
 msgstr "使用 WP All Import 导入和更新分层定价规则。"
 
-#: src/Integrations/Plugins/WPMLMulticurrency.php:125
+#: src/Integrations/Plugins/WPMLMulticurrency.php:135
 msgid ""
 "Convert and display tiered pricing correctly when using WPML Multicurrency."
 msgstr "使用 WPML 多货币时正确转换和显示分层定价。"
 
-#: src/Integrations/Plugins/WPMLMultilingual.php:143
+#: src/Integrations/Plugins/WPMLMultilingual.php:144
 msgid ""
 "Copy role-based and user-based tiered pricing to product translations when "
 "using WPML or Polylang."
 msgstr "使用 WPML 或 Polylang 时，将基于角色和基于用户的阶梯定价复制到产品翻译。"
 
-#: src/Integrations/Plugins/YithMulticurrency.php:67
+#: src/Integrations/Plugins/YithMulticurrency.php:78
 msgid ""
 "Convert and display tiered pricing correctly when using the YITH Multi "
 "Currency Switcher for WooCommerce."
@@ -5981,50 +6521,43 @@ msgstr ""
 "将分层定价数据添加到 Yoast 产品架构中，并引入用于 SEO 的 <b>%%lowest_price%%</b> 和 "
 "<b>%%price_range%%</b> 变量。"
 
-#. translators: %s: amount saved per item
-#. translators: %s: discount percentage
-#: src/PricingTable.php:339 src/PricingTable.php:345
-#, php-format
-msgid "%s off"
-msgstr "优惠 %s"
-
 #. translators: 1: discount percentage, 2: amount saved per item
-#: src/PricingTable.php:342
+#: src/PricingTable.php:349
 #, php-format
 msgid "%1$s off, save %2$s"
 msgstr "优惠 %1$s，每件节省 %2$s"
 
 #. translators: %d: number of tiers not listed
-#: src/PricingTable.php:429
+#: src/PricingTable.php:436
 #, php-format
 msgid "+%d more tier"
 msgid_plural "+%d more tiers"
 msgstr[0] "还有 %d 个档位"
 
-#: src/PricingTable.php:640
+#: src/PricingTable.php:647
 msgid ""
 "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or "
 "greater than your first pricing tier."
 msgstr "检测到定价冲突：您的最低订购数量等于或大于您的第一定价层。"
 
-#: src/PricingTable.php:648
+#: src/PricingTable.php:655
 msgid ""
 "To fix this, please ensure your first tiered pricing rule starts at a higher"
 " quantity than your Minimum Order Quantity."
 msgstr "要解决此问题，请确保您的第一级定价规则的起始数量高于您的最低订购数量。"
 
-#: src/PricingTable.php:652
+#: src/PricingTable.php:659
 msgid "Why?"
 msgstr "为什么？"
 
-#: src/PricingTable.php:653
+#: src/PricingTable.php:660
 msgid ""
 "The plugin automatically creates a base tier using your standard WooCommerce"
 " product price. This base tier covers any quantities ordered between the "
 "Minimum Order Quantity and your first discounted tier."
 msgstr "该插件使用您的标准 WooCommerce 产品价格自动创建基础层。此基本层涵盖最低订购数量和第一个折扣层之间的任何订购数量。"
 
-#: src/PricingTable.php:657
+#: src/PricingTable.php:664
 msgid "This notice is only visible to store administrators."
 msgstr "此通知仅对商店管理员可见。"
 
@@ -6950,7 +7483,7 @@ msgstr ""
 "U2Code Product Addons 和 %s 都在为您的产品添加字段，这通常会导致产品页面上的选项重复。建议只保留一个 — 我们推荐 "
 "U2Code Product Addons，以获得与阶梯定价的原生配合。"
 
-#: src/Settings/Settings.php:269
+#: src/Settings/Settings.php:276
 msgid "New"
 msgstr "新"
 
@@ -6998,8 +7531,8 @@ msgid "Role and customer prices"
 msgstr "角色和客户价格"
 
 #: src/TierPricingTablePlugin.php:248
-msgid "Cart rules by role: minimums, payment and shipping methods"
-msgstr "按角色设置购物车规则：最低限额、付款和配送方式"
+msgid "Payment and shipping methods by role"
+msgstr "按角色设置付款和配送方式"
 
 #: src/TierPricingTablePlugin.php:249
 msgid "Tax options by role"
@@ -7053,13 +7586,16 @@ msgstr "仅在高级版本中可用（您可以在设置中禁用此块）"
 
 #: views/addons/category-tiers/add-free.php:43
 #: views/addons/category-tiers/edit-free.php:59
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:186
 msgid "Upgrade"
 msgstr "升级"
 
 #: views/addons/category-tiers/add.php:69
 #: views/addons/category-tiers/edit-free.php:46
 #: views/addons/category-tiers/edit.php:100
-#: views/admin/components/tiered-pricing-rules-form.php:141
+#: views/addons/global-rules/order-discount-form.php:73
+#: views/admin/components/tiered-pricing-rules-form.php:153
 msgid "New tier"
 msgstr "新等级"
 
@@ -7076,6 +7612,46 @@ msgid ""
 "Assign percentage discounts for products that have this category. Rules can "
 "be overridden in product."
 msgstr "为具有此类别的产品指定百分比折扣。规则可以在产品中被覆盖。"
+
+#: views/addons/global-rules/free-shipping-bar.php:20
+msgid "Progress towards free shipping"
+msgstr "免运费进度"
+
+#: views/addons/global-rules/order-discount-form.php:21
+msgid "Tiers on"
+msgstr "档位依据"
+
+#: views/addons/global-rules/order-discount-form.php:24
+msgid "The subtotal of the counted lines"
+msgstr "计入商品行的小计"
+
+#: views/addons/global-rules/order-discount-form.php:27
+msgid "The number of items in the counted lines"
+msgstr "计入商品行的商品数量"
+
+#: views/addons/global-rules/order-discount-form.php:33
+msgid "Discount type"
+msgstr "折扣类型"
+
+#: views/addons/global-rules/order-discount-form.php:36
+msgid "Fixed amount"
+msgstr "固定金额"
+
+#: views/addons/global-rules/order-discount-form.php:39
+msgid "Percentage (premium)"
+msgstr "百分比（高级版）"
+
+#: views/addons/global-rules/order-discount-form.php:45
+msgid "Tiers"
+msgstr "档位"
+
+#: views/addons/global-rules/order-discount-form.php:79
+msgid ""
+"\"From\" is a subtotal in the store currency or a number of items, as chosen"
+" above. A fixed discount is an amount in the store currency; a percentage "
+"one is a number such as 10, taken off the discounted lines."
+msgstr ""
+"“起始值”是以商店货币计的小计或商品数量，取决于上方的选择。固定折扣是以商店货币计的金额；百分比折扣是 10 之类的数字，从享受折扣的商品行中扣除。"
 
 #: views/addons/global-rules/tiered-pricing-tab.php:60
 msgid ""
@@ -7102,6 +7678,10 @@ msgid ""
 "Role prices are a premium feature. The fields below are read-only in the "
 "free version."
 msgstr "角色价格是高级功能。以下字段在免费版中为只读。"
+
+#: views/addons/role-based-pricing/role.php:31
+msgid "Role"
+msgstr "角色"
 
 #: views/addons/role-based-pricing/role.php:36
 #: views/addons/user-based-pricing/user.php:46
@@ -7191,28 +7771,40 @@ msgstr "将折扣价格设置为"
 msgid "Leave blank to keep unchanged"
 msgstr "留空保持不变"
 
-#: views/admin/components/tiered-pricing-rules-form.php:105
+#: views/admin/components/tiered-pricing-rules-form.php:62
+msgid "Amount off"
+msgstr "减免金额"
+
+#: views/admin/components/tiered-pricing-rules-form.php:113
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:16
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Fixed prices"
 msgstr "固定价格"
 
-#: views/admin/components/tiered-pricing-rules-form.php:110
+#: views/admin/components/tiered-pricing-rules-form.php:118
 msgid "Percentage discounts"
 msgstr "折扣百分比"
 
-#: views/admin/components/tiered-pricing-rules-form.php:111
+#: views/admin/components/tiered-pricing-rules-form.php:119
 msgid "Percentage discounts (only in premium version)"
 msgstr "百分比折扣（仅限高级版）"
 
-#: views/admin/components/tiered-pricing-rules-form.php:125
+#: views/admin/components/tiered-pricing-rules-form.php:124
+msgid "Amount discounts"
+msgstr "金额折扣"
+
+#: views/admin/components/tiered-pricing-rules-form.php:137
 msgid "Tiered price"
 msgstr "阶梯价格"
 
 #: views/admin/notifications/activation-notification.php:25
 msgid "Thanks for installing the"
 msgstr "感谢您安装"
+
+#: views/admin/notifications/activation-notification.php:41
+msgid "products"
+msgstr "产品"
 
 #. translators: %1$s: product links, %2$s: categories
 #: views/admin/notifications/activation-notification.php:47
@@ -7221,6 +7813,11 @@ msgid ""
 "Add quantity-based pricing rules directly in the %1$s or create %2$s that "
 "will work for product categories and user roles."
 msgstr "直接在 %1$s 中添加基于数量的定价规则或创建适用于产品类别和用户角色的 %2$s。"
+
+#: views/admin/notifications/black-friday.php:43
+#: views/admin/notifications/feedback-discount.php:41
+msgid "Dismiss"
+msgstr "解雇"
 
 #: views/admin/notifications/black-friday.php:47
 msgid "Black Friday"
@@ -7458,26 +8055,31 @@ msgid "+ Add Column"
 msgstr "+ 添加栏目"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:59
 msgid "Bold"
 msgstr "粗体"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:60
 msgid "Italic"
 msgstr "斜体"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:61
 msgid "Strikethrough"
 msgstr "删除线"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:147
 msgid "Formatting"
 msgstr "格式"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:195
 msgid "Insert"
 msgstr "插入"
@@ -7521,9 +8123,11 @@ msgstr "节省进度条及其旁边的百分比。重置可恢复当前档位颜
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:232
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:235
 #: src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:23
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:184
 msgid "Available in the premium version."
 msgstr "高级版中可用。"
 
@@ -7620,7 +8224,9 @@ msgid "Upsell message"
 msgstr "追加销售提示信息"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:348
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:196
 msgid "Next tier message"
 msgstr "下一档位提示信息"
 
@@ -8097,27 +8703,30 @@ msgid "Click a variable to insert it."
 msgstr "点击变量即可插入。"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:193
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:176
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:454
 msgid "Cart"
 msgstr "大车"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
-msgid "Subtotal"
-msgstr "小计"
-
-#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:205
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:476
 msgid "Cart totals"
 msgstr "购物车合计"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:478
 msgid "Shipping"
 msgstr "配送"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:207
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:481
 msgid "Proceed to checkout"
 msgstr "前往结账"
@@ -8128,6 +8737,8 @@ msgid "Tiered pricing is switched off for shop and category pages."
 msgstr "商店和分类页面的阶梯定价已关闭。"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:263
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:352
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:408
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -8162,7 +8773,9 @@ msgid "Cart & Checkout"
 msgstr "购物车和结账"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:178
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:179
 #: src/Addons/LayoutConfigurator/js-source/components/Preview.js:295
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:177
@@ -8194,16 +8807,208 @@ msgid ""
 msgstr "为每个档位添加额外列：总价、每件节省、含税价格或您自定义的值。列需用其自身的按钮保存，保存后会显示在预览中。"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:306
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:314
 #: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:443
 msgid "Unsaved changes"
 msgstr "未保存的更改"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:307
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:315
 msgid "Save changes"
 msgstr "保存更改"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:164
+msgid "Sample product"
+msgstr "示例产品"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:176
+msgid "Order discount"
+msgstr "订单折扣"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+msgid "Flat rate:"
+msgstr "统一运费："
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:217
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:243
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:177
+msgid "Checkout"
+msgstr "结账"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:221
+msgid "Your order"
+msgstr "您的订单"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:224
+msgid "Place order"
+msgstr "下单"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:238
+msgid "Subtotal:"
+msgstr "小计："
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:242
+msgid "View cart"
+msgstr "查看购物车"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:252
+msgid ""
+"The bar is not placed on product pages. Tick \"Product page\" under \"Where "
+"it shows\" to add it above the add to cart form."
+msgstr "进度条未放置在产品页面。请勾选“显示位置”下的“产品页面”，将其添加到加入购物车表单上方。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:178
+msgid "Mini cart"
+msgstr "迷你购物车"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:185
+msgid ""
+"The free shipping bar needs the premium version; the preview shows what it "
+"would look like."
+msgstr "免运费进度条需要高级版；预览显示的是其外观。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:195
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:405
+msgid "Cart discount"
+msgstr "购物车折扣"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:196
+msgid ""
+"Shown under the cart totals, in the checkout order review and in the mini "
+"cart until the next tier is reached. Leave it empty to hide it. Not "
+"available in the Cart and Checkout blocks."
+msgstr "显示在购物车合计下方、结账订单审核和迷你购物车中，直到达到下一档位。留空则隐藏。购物车和结账区块中不可用。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:199
+msgid "Subtotal basis"
+msgstr "小计基准"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:199
+msgid ""
+"The subtotal the cart rules compare with their tiers and minimums: the cart "
+"lines after tiered prices, before shipping."
+msgstr "购物车规则用来与其档位和最低要求比较的小计：应用阶梯价格后、运费之前的购物车商品行。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:208
+msgid "Keep the discount next to customer coupons"
+msgstr "折扣与客户优惠券并用"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:209
+msgid ""
+"Switched off, a coupon the customer applies replaces the cart discount. An "
+"individual-use coupon always replaces it."
+msgstr "关闭后，客户使用的优惠券将取代购物车折扣。仅限单独使用的优惠券始终会取代它。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:217
+msgid "Amount not reached"
+msgstr "未达到金额"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:217
+msgid ""
+"Shown in the cart and at checkout, classic pages and blocks, while a cart "
+"rule's minimum amount is not met."
+msgstr "在购物车和结账页面（经典页面和区块）中，当未满足购物车规则的最低金额时显示。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:220
+msgid "Items not reached"
+msgstr "未达到数量"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:220
+msgid "Shown while a cart rule's minimum number of items is not met."
+msgstr "当未满足购物车规则的最少商品数量时显示。"
+
+#. translators: %s: shortcode
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:230
+#, js-format
+msgid ""
+"The bar is switched on per rule, on its Free shipping tab. The shortcode %s "
+"and the Free Shipping Bar block put it anywhere else, such as the header or "
+"the page of the Cart block."
+msgstr ""
+"进度条按规则开启，在规则的“免运费”选项卡中设置。使用短代码 %s 和“免运费进度条”区块，可将其放置到其他任何位置，例如页眉或购物车区块所在页面。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:240
+msgid "The store message; a rule can carry its own."
+msgstr "商店消息；规则可以有自己的消息。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:246
+#: src/Addons/TierLabels/build/index.js:2
+#: src/Addons/TierLabels/js-source/index.js:234
+msgid "Colours"
+msgstr "颜色"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:250
+msgid "Until reached"
+msgstr "未达到时"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:254
+msgid "Reached"
+msgstr "已达到"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:258
+msgid "Height"
+msgstr "高度"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:282
+msgid "Cart rules preview"
+msgstr "购物车规则预览"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:290
+msgid "Sample cart subtotal"
+msgstr "示例购物车小计"
+
+#. translators: 1: discount, 2: tier threshold, 3: free shipping threshold, 4:
+#. minimum amount, 5: minimum items
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:304
+#, js-format
+msgid ""
+"Sample rule: %1$s off from %2$s, free shipping from %3$s, a minimum of %4$s "
+"or %5$s items."
+msgstr "示例规则：满 %2$s 减 %1$s，满 %3$s 免运费，最低 %4$s 或 %5$s 件商品。"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:318
+msgid ""
+"Your rules set their own tiers, thresholds and minimums; the preview uses a "
+"sample rule. The real pages may look a bit different, depending on your "
+"theme."
+msgstr "您的规则会设置各自的档位、门槛和最低要求；预览使用的是示例规则。实际页面的外观可能因主题而略有不同。"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:7
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
@@ -9074,11 +9879,6 @@ msgid "Shape"
 msgstr "形状"
 
 #: src/Addons/TierLabels/build/index.js:2
-#: src/Addons/TierLabels/js-source/index.js:234
-msgid "Colours"
-msgstr "颜色"
-
-#: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:236
 msgid "Background"
 msgstr "背景色"
@@ -9507,44 +10307,59 @@ msgid "Save Role"
 msgstr "保存角色"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:135
+#: src/Addons/Tools/js-source/components/PricingTest.js:146
 msgid "Selected"
 msgstr "已选择"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:144
+#: src/Addons/Tools/js-source/components/PricingTest.js:155
 msgid "Matches and is applied"
 msgstr "匹配并已应用"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:145
+#: src/Addons/Tools/js-source/components/PricingTest.js:156
 msgid "Matches, but product pricing is applied"
 msgstr "匹配，但应用了产品定价"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:146
+#: src/Addons/Tools/js-source/components/PricingTest.js:157
 msgid "Matches, but a higher-priority rule is applied"
 msgstr "匹配，但应用了更高优先级的规则"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:147
+#: src/Addons/Tools/js-source/components/PricingTest.js:158
 msgid "Matches, but changes nothing"
 msgstr "匹配，但没有任何改变"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:148
+#: src/Addons/Tools/js-source/components/PricingTest.js:159
 msgid "Would match"
 msgstr "将会匹配"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:149
+#: src/Addons/Tools/js-source/components/PricingTest.js:160
 msgid "Does not match"
 msgstr "不匹配"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:161
+msgid "No counted line"
+msgstr "没有计入的商品行"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:162
+msgid "In play, below its first tier"
+msgstr "生效，低于第一个档位"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:163
+msgid "In play, minimum order only"
+msgstr "生效，仅有最低订单"
 
 #. translators: 1: rule title, 2: pricing source, e.g. "the product's own
 #. pricing"
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:172
+#: src/Addons/Tools/js-source/components/PricingTest.js:186
 #, js-format
 msgid ""
 "%1$s matches, but the prices come from %2$s because of the rule's priority "
@@ -9553,72 +10368,74 @@ msgstr "%1$s 匹配，但根据规则的优先级设置，价格来自%2$s。"
 
 #. translators: %s: rule title
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:177
+#: src/Addons/Tools/js-source/components/PricingTest.js:191
 #, js-format
 msgid "The prices come from %s."
 msgstr "价格来自 %s。"
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:179
+#: src/Addons/Tools/js-source/components/PricingTest.js:193
 msgid "No global pricing rule matches this product for this customer."
 msgstr "没有全局定价规则匹配此客户的此产品。"
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:168
+#: src/Addons/Tools/js-source/components/PricingTest.js:182
 msgid ""
 "No global pricing rule takes part: the Global pricing rules add-on is "
 "switched off."
 msgstr "没有全局定价规则参与：“全局定价规则”附加模块已关闭。"
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:195
+#: src/Addons/Tools/js-source/components/PricingTest.js:209
 #, js-format
 msgid "Source of the prices: %s."
 msgstr "价格来源：%s。"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:199
+#: src/Addons/Tools/js-source/components/PricingTest.js:213
 #, js-format
 msgid "Quantity limits: %s."
 msgstr "数量限制：%s。"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:200
+#: src/Addons/Tools/js-source/components/PricingTest.js:214
 msgid "No quantity limits."
 msgstr "无数量限制。"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:212
+#: src/Addons/Tools/js-source/components/PricingTest.js:226
+#: src/Addons/Tools/js-source/components/PricingTest.js:353
 msgid "Price per item"
 msgstr "每件价格"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:237
+#: src/Addons/Tools/js-source/components/PricingTest.js:251
 msgid "Verdict"
 msgstr "结论"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:238
+#: src/Addons/Tools/js-source/components/PricingTest.js:252
 msgid "Why"
 msgstr "原因"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:255
+#: src/Addons/Tools/js-source/components/PricingTest.js:269
 msgid "The rule you came from"
 msgstr "您所来自的规则"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:285
+#: src/Addons/Tools/js-source/components/PricingTest.js:299
+#: src/Addons/Tools/js-source/components/PricingTest.js:394
 msgid "for"
 msgstr "针对"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:291
+#: src/Addons/Tools/js-source/components/PricingTest.js:305
 msgid "What the customer pays"
 msgstr "客户支付的价格"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:301
+#: src/Addons/Tools/js-source/components/PricingTest.js:315
 msgid ""
 "Rules are matched in priority order: the lowest number first, and the newer "
 "rule first when numbers are equal. The first active rule that matches is "
@@ -9626,90 +10443,313 @@ msgid ""
 msgstr "规则按优先级顺序匹配：数字最小的优先，数字相同时较新的规则优先。第一条匹配的有效规则将被应用。"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:306
+#: src/Addons/Tools/js-source/components/PricingTest.js:320
 msgid ""
 "The Global pricing rules add-on is switched off (see the modules above), so "
 "no rule takes part in pricing."
 msgstr "“全局定价规则”附加模块已关闭（见上方模块），因此没有规则参与定价。"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:311
+#: src/Addons/Tools/js-source/components/PricingTest.js:325
 msgid "There are no global pricing rules yet."
 msgstr "尚无全局定价规则。"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:322
+#: src/Addons/Tools/js-source/components/PricingTest.js:336
 msgid "Pricing log"
 msgstr "定价日志"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:51
-#: src/Addons/Tools/js-source/components/PricingTest.js:372
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:354
+msgid "Line total"
+msgstr "行合计"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:355
+msgid "Source of the price"
+msgstr "价格来源"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:363
+msgid "tier"
+msgstr "档位"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:371
+msgid "Counted, including tax"
+msgstr "计入，含税"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:371
+msgid "Counted, excluding tax"
+msgstr "计入，不含税"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:393
+#, js-format
+msgid "A cart of %d line"
+msgid_plural "A cart of %d lines"
+msgstr[0] "包含 %d 行的购物车"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:400
+msgid "What the cart gets"
+msgstr "购物车可享受的优惠"
+
+#. translators: 1: discount, 2: counted amount or items, 3: amount taken off
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:412
+#, js-format
+msgid "%1$s off from the tier at %2$s, taken on %3$s counted: %4$s off."
+msgstr "按 %2$s 处的档位减免 %1$s，基于计入的 %3$s：减免 %4$s。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:418
+#, js-format
+msgid "Shown as \"%1$s\" (coupon %2$s)."
+msgstr "显示为“%1$s”（优惠券 %2$s）。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:419
+#, js-format
+msgid "%d line counted."
+msgid_plural "%d lines counted."
+msgstr[0] "%d 行已计入。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:424
+msgid "none."
+msgstr "无。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:424
+msgid ""
+"is in play for this cart, but the cart does not reach its first tier, and "
+"its minimum order (if any) is checked below."
+msgstr "对此购物车生效，但购物车未达到其第一个档位，其最低订单（如有）在下方检查。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:427
+msgid "none. No cart rule applies to this cart for this customer."
+msgstr "无。没有适用于此客户此购物车的购物车规则。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:427
+msgid "none. The Global pricing rules add-on is switched off."
+msgstr "无。“全局定价规则”附加模块已关闭。"
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:435
+msgid "yes: on every order under"
+msgstr "是：此规则下的每个订单"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:437
+#, js-format
+msgid "yes: the cart reaches %s of"
+msgstr "是：购物车达到 %s，属于"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:438
+msgid "A Free shipping method that requires a coupon becomes available."
+msgstr "将提供一个需要优惠券的免运费方式。"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:443
+msgid "not yet:"
+msgstr "尚未："
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:443
+#, js-format
+msgid "gives it from %s."
+msgstr "从 %s 起提供。"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:446
+msgid "none: the rule in play has no free shipping threshold."
+msgstr "无：生效的规则没有免运费门槛。"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:450
+#, js-format
+msgid "The free shipping bar shows %1$s: “%2$s”"
+msgstr "免运费进度条显示 %1$s：“%2$s”"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:456
+msgid "no cart rule sets a minimum for this cart."
+msgstr "没有购物车规则为此购物车设置最低要求。"
+
+#: src/Addons/Tools/build/index.js:6
+#: src/Addons/Tools/js-source/components/PricingTest.js:464
+#, js-format
+msgid "minimum %1$s, the cart counts %2$s"
+msgstr "最低 %1$s，购物车计入 %2$s"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:466
+#, js-format
+msgid "minimum %1$s items, the cart counts %2$s"
+msgstr "最少 %1$s 件商品，购物车计入 %2$s"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:468
+msgid "Met"
+msgstr "已满足"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:468
+msgid "Missed: checkout blocked"
+msgstr "未满足：结账被阻止"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:476
+msgid "Next tier"
+msgstr "下一档位"
+
+#. translators: 1: remaining amount or items, 2: discount, 3: threshold
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:481
+#, js-format
+msgid "add %1$s more to get %2$s off (the tier from %3$s of"
+msgstr "再添加 %1$s 即可减免 %2$s（从 %3$s 起的档位，属于"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:486
+msgid "none: the top tier is reached, or no rule with tiers is in play."
+msgstr "无：已达到最高档位，或没有带档位的规则生效。"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:495
+msgid ""
+"One cart rule is in play at a time: the first in priority order that covers "
+"the customer and counts a line. Every matching rule's minimum is checked."
+msgstr "同一时间只有一条购物车规则生效：按优先级顺序，第一条涵盖该客户且计入商品行的规则。每条匹配规则的最低要求都会被检查。"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:500
+msgid ""
+"The Global pricing rules add-on is switched off (see the modules above), so "
+"no rule takes part."
+msgstr "“全局定价规则”附加模块已关闭（见上方模块），因此没有规则参与。"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:505
+msgid "There are no cart rules yet."
+msgstr "还没有购物车规则。"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:523
+msgid "Cart lines"
+msgstr "购物车商品行"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:537
+msgid "Remove the line"
+msgstr "移除此行"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:540
+msgid "Add a line"
+msgstr "添加一行"
+
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:51
+#: src/Addons/Tools/js-source/components/PricingTest.js:615
 msgid "Pricing Test"
 msgstr "定价测试"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:374
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:617
 msgid ""
-"See what a customer pays for a product without opening the storefront: which"
-" global pricing rule applies and why, which one wins when several match, and"
-" the prices per quantity."
-msgstr "无需打开前台即可查看客户为某产品支付的价格：哪条全局定价规则适用及原因、多条规则匹配时哪条胜出，以及各数量对应的价格。"
+"See what a customer gets without opening the storefront: for a product, "
+"which pricing rule applies and the prices per quantity; for a cart, which "
+"cart rule is in play, its discount, the minimums and the next tier."
+msgstr ""
+"无需打开店面，即可查看客户能享受到的优惠：对于产品，适用哪条定价规则及各数量的价格；对于购物车，哪条购物车规则生效、其折扣、最低要求和下一档位。"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:382
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
 msgid "Checking the rule"
 msgstr "正在检查规则"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:382
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
+msgid ""
+"Build a cart and pick a customer; the rule is highlighted in the results."
+msgstr "创建一个购物车并选择客户；结果中会高亮显示相应规则。"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
 msgid "Pick a product and a customer; the rule is highlighted in the results."
 msgstr "选择一个产品和一位客户；该规则会在结果中高亮显示。"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:390
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:632
+msgid "What to test"
+msgstr "测试内容"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:636
+msgid "A product: its prices and the product rules"
+msgstr "产品：其价格和产品规则"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:640
+msgid "A cart: the cart rules, their discount and minimums"
+msgstr "购物车：购物车规则、其折扣和最低要求"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:648
 msgid "Type to search products and variations."
 msgstr "输入以搜索产品和变体。"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:405
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:664
 msgid "A customer"
 msgstr "某位客户"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:411
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:670
 msgid "Which customer"
 msgstr "哪位客户"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:412
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:671
 msgid "Type a name or an email address."
 msgstr "输入姓名或电子邮箱地址。"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:361
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:579
+#: src/Addons/Tools/js-source/components/PricingTest.js:604
 msgid "The test could not run. Reload the page and try again."
 msgstr "测试无法运行。请重新加载页面后重试。"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:425
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:561
+msgid "Add at least one product to the cart."
+msgstr "请至少向购物车添加一个产品。"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:684
 msgid "Testing…"
 msgstr "正在测试…"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:425
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:684
 msgid "Run the test"
 msgstr "运行测试"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:428
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:687
 msgid "Rules are tested as they are saved."
 msgstr "规则在保存时即进行测试。"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:46
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:46
 msgid "Roles Management"
 msgstr "角色管理"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:56
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:56
 msgid "Data Clean Up"
 msgstr "数据清理"
 
@@ -9752,6 +10792,14 @@ msgstr "显示折扣百分比"
 #: src/Blocks/build/index.js:510
 msgid "Main settings"
 msgstr "主要设置"
+
+#: src/Blocks/free-shipping-bar/index.js:21
+msgid ""
+"Free shipping bar: shows here when a cart rule with the free shipping bar "
+"covers the visitor. Switch the bar on under WooCommerce → Pricing rules → "
+"the rule → Free shipping."
+msgstr ""
+"免运费进度条：当带有免运费进度条的购物车规则涵盖访客时，在此显示。请在 WooCommerce → 定价规则 → 该规则 → 免运费 中开启进度条。"
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/premium-wrapper/block.json
 #: src/Addons/ReactProductEditorAddon/js/premium-wrapper/block.json
@@ -9796,3 +10844,37 @@ msgid ""
 "Tiered pricing widget. Must be used on the product page template. Find more "
 "options to customize in the plugin settings."
 msgstr "分层定价小部件。必须在产品页面模板上使用。在插件设置中找到更多自定义选项。"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block title"
+msgid "Free Shipping Bar"
+msgstr "免运费进度条"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block description"
+msgid ""
+"How far the cart is from the free shipping of a cart rule. Shows nothing "
+"when no rule with the bar covers the visitor."
+msgstr "购物车距离某条购物车规则的免运费还差多少。没有带进度条的规则涵盖访客时不显示任何内容。"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "free shipping"
+msgstr "免运费"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "progress"
+msgstr "进度"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "tiered pricing"
+msgstr "阶梯定价"
+
+#. translators: %s: login page url
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:85
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:70
+#, php-format
+msgid "%s to see prices"
+msgstr "%s后查看价格"

@@ -82,9 +82,9 @@ class NonLoggedInUsersService {
 	
 	public function getPriceMessage(): string {
 		// translators: %s: login page url
-		$default = sprintf( __( '%s see prices', 'tier-pricing-table' ),
+		$default = sprintf( __( '%s to see prices', 'tier-pricing-table' ),
 			sprintf( '<a href="%s">%s</a>', wc_get_account_endpoint_url( 'dashboard' ),
-				__( 'Login', 'tier-pricing-table' ) ) );
+				__( 'Log in', 'tier-pricing-table' ) ) );
 		
 		return get_option( Settings::SETTINGS_PREFIX . 'non_logged_in_users_price_message', $default );
 	}

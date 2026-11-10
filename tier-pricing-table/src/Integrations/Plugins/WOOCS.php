@@ -6,12 +6,27 @@ use TierPricingTable\PricingRule;
 class WOOCS extends PluginIntegrationAbstract {
 	
 	public function run() {
+		// Amount-off tiers are stored in the base currency: convert the amounts, the product price is converted by FOX.
+		add_filter( 'tiered_pricing_table/price/pricing_rule', function ( PricingRule $pricingRule ) {
+			global $WOOCS_STARTER;
+			
+			$product = $pricingRule->isAmount() && $WOOCS_STARTER ? wc_get_product( $pricingRule->getProductId() ) : null;
+			
+			if ( $product ) {
+				$pricingRule->setRules( array_map( function ( $amount ) use ( $WOOCS_STARTER, $product ) {
+					return (float) $WOOCS_STARTER->get_actual_obj()->raw_woocommerce_price( $amount, $product );
+				}, $pricingRule->getRules() ) );
+			}
+			
+			return $pricingRule;
+		}, 9999 );
+		
 		add_filter( 'tiered_pricing_table/price/price_by_rules',
 			function ( $productPrice, $quantity, $productId, $context, $place, PricingRule $pricingRule ) {
 			
 				global $WOOCS_STARTER;
 				
-				if ( $pricingRule->isPercentage() ) {
+				if ( $pricingRule->isPercentage() || $pricingRule->isAmount() ) {
 					return $productPrice;
 				}
 				

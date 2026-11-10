@@ -48,6 +48,13 @@ class PricingTable {
 
 		$settings = wp_parse_args( $settings, $this->getDefaultSettings( $parentProductID ) );
 
+		// shortcode and block attributes arrive as strings: "yes" / "no" for the two switches the views test as booleans
+		foreach ( array( 'show_discount_column', 'clickable_rows' ) as $switch ) {
+			if ( isset( $settings[ $switch ] ) && is_string( $settings[ $switch ] ) ) {
+				$settings[ $switch ] = wc_string_to_bool( $settings[ $switch ] );
+			}
+		}
+
 		// If the product is variable, but no specific variation is passed - check for default
 		if ( ! $variationID && TierPricingTablePlugin::isVariableProductSupported( $parentProduct ) ) {
 			$variationID = $this->getDefaultVariation( $parentProduct );

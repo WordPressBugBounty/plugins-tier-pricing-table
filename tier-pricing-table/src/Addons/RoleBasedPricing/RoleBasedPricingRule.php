@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Addons\RoleBasedPricing;
 
+use TierPricingTable\PriceManager;
+
 use Exception;
 
 class RoleBasedPricingRule {
@@ -15,6 +17,8 @@ class RoleBasedPricingRule {
 	protected $tieredPricingType = 'fixed';
 	protected $percentageTieredPricingRules = array();
 	protected $fixedTieredPricingRules = array();
+	
+	protected $amountTieredPricingRules = array();
 	protected $taxStatus = '';
 	protected $taxClass = '';
 	
@@ -93,8 +97,7 @@ class RoleBasedPricingRule {
 	}
 	
 	public function setTieredPricingType( string $tieredPricingType ) {
-		$this->tieredPricingType = in_array( $tieredPricingType,
-			array( 'fixed', 'percentage' ) ) ? $tieredPricingType : 'fixed';
+		$this->tieredPricingType = in_array( $tieredPricingType, PriceManager::getPricingTypes(), true ) ? $tieredPricingType : 'fixed';
 	}
 	
 	public function getPercentageTieredPricingRules(): array {
@@ -113,8 +116,23 @@ class RoleBasedPricingRule {
 		$this->fixedTieredPricingRules = $fixedTieredPricingRules;
 	}
 	
+	public function getAmountTieredPricingRules(): array {
+		return $this->amountTieredPricingRules;
+	}
+	
+	public function setAmountTieredPricingRules( array $amountTieredPricingRules ) {
+		$this->amountTieredPricingRules = $amountTieredPricingRules;
+	}
+	
 	public function getTieredPricingRules(): array {
-		return $this->getTieredPricingType() === 'percentage' ? $this->getPercentageTieredPricingRules() : $this->getFixedTieredPricingRules();
+		switch ( $this->getTieredPricingType() ) {
+			case 'percentage':
+				return $this->getPercentageTieredPricingRules();
+			case 'amount':
+				return $this->getAmountTieredPricingRules();
+		}
+		
+		return $this->getFixedTieredPricingRules();
 	}
 	
 	public function getTaxStatus(): string {
@@ -150,6 +168,7 @@ class RoleBasedPricingRule {
 			'tiered_pricing_type' => $this->getTieredPricingType(),
 			'percentage_rules'    => $this->getPercentageTieredPricingRules(),
 			'fixed_rules'         => $this->getFixedTieredPricingRules(),
+			'amount_rules'        => $this->getAmountTieredPricingRules(),
 			
 			// MOQ
 			'minimum'             => $this->getMinimumOrderQuantity(),
@@ -158,6 +177,42 @@ class RoleBasedPricingRule {
 			'tax_status'          => $this->getTaxStatus(),
 			'tax_class'           => $this->getTaxClass(),
 		);
+	}
+	
+	/**
+	 * The rule as product meta: meta key => value.
+	 */
+	public function getMetaData(): array {
+		
+		$data = array(
+			// Pricing
+			'tiered_price_pricing_type'  => $this->getPricingType(),
+			'tiered_price_regular_price' => $this->getRegularPrice(),
+			'tiered_price_sale_price'    => $this->getSalePrice(),
+			'tiered_price_discount'      => $this->getDiscount(),
+			'tiered_price_discount_type' => $this->getDiscountType(),
+			
+			// Tiered Pricing
+			'tiered_price_rules_type'    => $this->getTieredPricingType(),
+			'percentage_price_rules'     => $this->getPercentageTieredPricingRules(),
+			'fixed_price_rules'          => $this->getFixedTieredPricingRules(),
+			'amount_price_rules'         => $this->getAmountTieredPricingRules(),
+			
+			// MOQ
+			'tiered_price_minimum_qty'   => $this->getMinimumOrderQuantity(),
+			
+			// Tax
+			'tiered_price_tax_status'    => $this->getTaxStatus(),
+			'tiered_price_tax_class'     => $this->getTaxClass(),
+		);
+		
+		$meta = array();
+		
+		foreach ( $data as $key => $value ) {
+			$meta[ '_' . $this->getRole() . '_' . $key ] = $value;
+		}
+		
+		return $meta;
 	}
 	
 	/**
@@ -171,58 +226,41 @@ class RoleBasedPricingRule {
 			throw new Exception( 'Rule requires product id and role to be saved' );
 		}
 		
-		
-		$dataToUpdate = array(
-			// Pricing
-			'tiered_price_pricing_type'  => $this->getPricingType(),
-			'tiered_price_regular_price' => $this->getRegularPrice(),
-			'tiered_price_sale_price'    => $this->getSalePrice(),
-			'tiered_price_discount'      => $this->getDiscount(),
-			'tiered_price_discount_type' => $this->getDiscountType(),
-			
-			// Tiered Pricing
-			'tiered_price_rules_type'    => $this->getTieredPricingType(),
-			'percentage_price_rules'     => $this->getPercentageTieredPricingRules(),
-			'fixed_price_rules'          => $this->getFixedTieredPricingRules(),
-			
-			// MOQ
-			'tiered_price_minimum_qty'   => $this->getMinimumOrderQuantity(),
-			
-			// Tax
-			'tiered_price_tax_status'    => $this->getTaxStatus(),
-			'tiered_price_tax_class'     => $this->getTaxClass(),
-		);
-		
-		$role = $this->getRole();
-		
-		foreach ( $dataToUpdate as $key => $value ) {
-			$metaKey = "_{$role}_" . $key;
+		foreach ( $this->getMetaData() as $metaKey => $value ) {
 			update_post_meta( $this->getProductId(), $metaKey, $value );
 		}
 	}
 	
-	public static function build( int $productId, string $role ): self {
+	/**
+	 * Build the rule from the product meta. The "edit" context reads the stored values, without the display filters.
+	 */
+	public static function build( int $productId, string $role, string $context = 'view' ): self {
 		
 		$rule = new self( $productId, $role );
 		
 		// Regular pricing
-		$rule->setPricingType( RoleBasedPriceManager::getProductPricingType( $productId, $role ) );
-		$rule->setSalePrice( RoleBasedPriceManager::getProductSaleRolePrice( $productId, $role ) );
-		$rule->setRegularPrice( RoleBasedPriceManager::getProductRegularRolePrice( $productId, $role ) );
-		$rule->setDiscount( RoleBasedPriceManager::getProductDiscount( $productId, $role ) );
-		$rule->setDiscountType( RoleBasedPriceManager::getProductDiscountType( $productId, $role ) );
+		$rule->setPricingType( RoleBasedPriceManager::getProductPricingType( $productId, $role, $context ) );
+		$rule->setSalePrice( RoleBasedPriceManager::getProductSaleRolePrice( $productId, $role, $context ) );
+		$rule->setRegularPrice( RoleBasedPriceManager::getProductRegularRolePrice( $productId, $role, $context ) );
+		$rule->setDiscount( RoleBasedPriceManager::getProductDiscount( $productId, $role, $context ) );
+		$rule->setDiscountType( RoleBasedPriceManager::getProductDiscountType( $productId, $role, $context ) );
 		
 		// Tiered Pricing
-		$rule->setTieredPricingType( RoleBasedPriceManager::getPricingType( $productId, $role ) );
-		$rule->setPercentageTieredPricingRules( RoleBasedPriceManager::getPercentagePriceRules( $productId, $role ) );
-		$rule->setFixedTieredPricingRules( RoleBasedPriceManager::getFixedPriceRules( $productId, $role ) );
+		$rule->setTieredPricingType( RoleBasedPriceManager::getPricingType( $productId, $role, 'fixed', $context ) );
+		$rule->setPercentageTieredPricingRules( RoleBasedPriceManager::getPercentagePriceRules( $productId, $role, $context ) );
+		$rule->setFixedTieredPricingRules( RoleBasedPriceManager::getFixedPriceRules( $productId, $role, $context ) );
+		$rule->setAmountTieredPricingRules( RoleBasedPriceManager::getAmountPriceRules( $productId, $role, $context ) );
 		
 		// MOQ
-		$rule->setMinimumOrderQuantity( RoleBasedPriceManager::getProductQtyMin( $productId, $role ) );
+		$rule->setMinimumOrderQuantity( RoleBasedPriceManager::getProductQtyMin( $productId, $role, $context ) );
 		
 		// Tax
-		$rule->setTaxStatus( RoleBasedPriceManager::getProductTaxStatus( $productId, $role ) );
-		$rule->setTaxClass( RoleBasedPriceManager::getProductTaxClass( $productId, $role ) );
+		$rule->setTaxStatus( RoleBasedPriceManager::getProductTaxStatus( $productId, $role, $context ) );
+		$rule->setTaxClass( RoleBasedPriceManager::getProductTaxClass( $productId, $role, $context ) );
+		
+		if ( 'edit' === $context ) {
+			return $rule;
+		}
 		
 		return apply_filters( 'tiered_pricing_table/role_based/after_built_rule', $rule );
 	}
@@ -241,6 +279,7 @@ class RoleBasedPricingRule {
 		$rule->setTieredPricingType( isset( $data['tiered_pricing_type'] ) ? (string) $data['tiered_pricing_type'] : 'fixed' );
 		$rule->setPercentageTieredPricingRules( isset( $data['percentage_tiered_pricing_rules'] ) ? (array) $data['percentage_tiered_pricing_rules'] : array() );
 		$rule->setFixedTieredPricingRules( isset( $data['fixed_tiered_pricing_rules'] ) ? (array) $data['fixed_tiered_pricing_rules'] : array() );
+		$rule->setAmountTieredPricingRules( isset( $data['amount_tiered_pricing_rules'] ) ? (array) $data['amount_tiered_pricing_rules'] : array() );
 		
 		// MOQ
 		$rule->setMinimumOrderQuantity( isset( $data['minimum_order_quantity'] ) ? (int) $data['minimum_order_quantity'] : null );

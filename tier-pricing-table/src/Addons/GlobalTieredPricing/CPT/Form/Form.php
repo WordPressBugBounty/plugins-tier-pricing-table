@@ -2,6 +2,9 @@
 
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\ProductAndCategories;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Quantity;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\OrderDiscount;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\OrderMinimum;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\OrderShipping;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Pricing;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\Settings;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Tabs\UsersAndRoles;
@@ -12,6 +15,10 @@ use TierPricingTable\Core\ServiceContainerTrait;
 use WP_Post;
 
 class Form {
+
+	const NONCE_ACTION = 'tpt_global_rule_save';
+
+	const NONCE_FIELD = 'tpt_global_rule_nonce';
 
 	use ServiceContainerTrait;
 
@@ -26,18 +33,16 @@ class Form {
 
 	protected $pricingRuleInstance = null;
 
-	/**
-	 * @var Guide
-	 */
-	protected $guide;
-
 	public function __construct() {
 
-		$this->guide = new Guide();
+		new RuleTypePointer();
 
 		add_action( 'init', function () {
 			$tabs = array(
 					new Pricing( $this ),
+					new OrderDiscount( $this ),
+					new OrderShipping( $this ),
+					new OrderMinimum( $this ),
 					new ProductAndCategories( $this ),
 					new UsersAndRoles( $this ),
 					new Quantity( $this ),
@@ -113,8 +118,8 @@ class Form {
 
 			.tpt-global-pricing-rule-form__tabs {
 				width: 30%;
-				max-width: 300px;
-				min-width: 250px;
+				max-width: 280px;
+				min-width: 230px;
 			}
 
 			.tpt-global-pricing-rule-form-tab {
@@ -125,7 +130,7 @@ class Form {
 				cursor: pointer;
 				display: flex;
 				align-items: center;
-				padding: 15px 10px;
+				padding: 9px 10px;
 			}
 
 			.tpt-global-pricing-rule-form-tab:first-child {
@@ -144,13 +149,13 @@ class Form {
 			.tpt-global-pricing-rule-form-tab__icon {
 				transition: all .1s;
 				margin-right: 10px;
-				height: 40px;
+				height: 32px;
 				aspect-ratio: 1/1;
 				border-radius: 50%;
 				background: #f6f7f7;
 				text-align: center;
 				color: var(--wp-admin-theme-color, #2271b1);
-				font-size: 20px;
+				font-size: 15px;
 				font-weight: bold;
 				display: flex;
 				justify-content: center;
@@ -167,12 +172,15 @@ class Form {
 			}
 
 			.tpt-global-pricing-rule-form-tab__title h3 {
-				font-size: 1.1em;
+				font-size: 13px;
+				line-height: 1.3;
 				margin: 0;
 			}
 
 			.tpt-global-pricing-rule-form-tab__title div {
-				margin-top: 5px;
+				margin-top: 2px;
+				font-size: 12px;
+				line-height: 1.35;
 				color: #777;
 			}
 
@@ -199,7 +207,8 @@ class Form {
 				width: 75% !important;
 			}
 
-			.tpt-global-pricing-rule-form #tiered_pricing_type {
+			.tpt-global-pricing-rule-form #tiered_pricing_type,
+			.tpt-global-pricing-rule-form #tpt_order_discount_type {
 				max-width: 75%;
 				width: 75% !important;
 			}
@@ -212,7 +221,8 @@ class Form {
 					width: 100% !important;
 				}
 
-				.tpt-global-pricing-rule-form #tiered_pricing_type {
+				.tpt-global-pricing-rule-form #tiered_pricing_type,
+				.tpt-global-pricing-rule-form #tpt_order_discount_type {
 					max-width: 100%;
 					width: 100% !important;
 				}
@@ -231,6 +241,9 @@ class Form {
 				.tpt-global-pricing-rule-form-tab__icon {
 					display: none;
 				}
+				.tpt-global-pricing-rule-form-tab__title div {
+					display: none;
+				}
 
 				.tpt-global-pricing-rule-form-tab--active {
 					border-bottom: 3px solid var(--wp-admin-theme-color, #2271b1);
@@ -243,6 +256,18 @@ class Form {
 				}
 			}
 
+			/* the note under the order tiers: WooCommerce styles .description inline with a left margin */
+			.tpt-global-pricing-rule-form .tpt-order-tiers__description {
+				display: block;
+				margin: 8px 0 0;
+				padding: 0;
+				max-width: 75%;
+			}
+			/* Rule type (the box under the Rule status): product rules and order-total rules use different tabs */
+			.tpt-global-pricing-rule-form[data-kind="order"] [data-kinds="product"],
+			.tpt-global-pricing-rule-form[data-kind="product"] [data-kinds="order"] {
+				display: none !important;
+			}
 			/* Accordion styles */
 			.tpt-exclusions-accordion {
 				margin-top: 20px;
@@ -311,16 +336,41 @@ class Form {
 
 					jQuery('#' + target).addClass('tpt-global-pricing-rule-form-tab-content--active');
 				});
+
+				// Rule type (the box under the Rule status): product rules and order-total rules use different tabs
+				const form = jQuery('.tpt-global-pricing-rule-form');
+				const tabVisibleFor = function ($tab, kind) {
+					return String($tab.data('kinds') || 'product order').split(' ').indexOf(kind) !== -1;
+				};
+				const applyKind = function (kind) {
+					form.attr('data-kind', kind);
+					const checked = jQuery('input[name="tpt_rule_kind"][value="' + kind + '"]');
+					if (checked.data('label')) {
+						jQuery('.tpt-rule-box__kind-meta').text(checked.data('label'));
+					}
+					jQuery('.tpt-rule-kind-only').each(function () {
+						jQuery(this).toggle(jQuery(this).hasClass('tpt-rule-kind-only--' + kind));
+					});
+					const active = tabs.filter('.tpt-global-pricing-rule-form-tab--active');
+					if (!active.length || !tabVisibleFor(active, kind)) {
+						tabs.filter(function () { return tabVisibleFor(jQuery(this), kind); }).first().trigger('click');
+					}
+				};
+				jQuery(document).on('change', 'input[name="tpt_rule_kind"]', function () {
+					applyKind(jQuery(this).val());
+				});
+				applyKind(jQuery('input[name="tpt_rule_kind"]:checked').val() || 'product');
 			});
 		</script>
 		<?php
 	}
 
 	protected function render( WP_Post $post ) {
+		// the save handler only runs for this form: other save_post callers (trash, restore, translations, wp_update_post) keep the stored rule
+		wp_nonce_field( self::NONCE_ACTION, self::NONCE_FIELD );
+
 
 		$this->includeAssets();
-
-		$this->guide->render();
 
 		// a rule that changes nothing is flagged as "Skipped" by the Rule status box; no second notice here
 		if ( ! $this->isNewRule() ) {
@@ -328,11 +378,11 @@ class Form {
 		}
 
 		?>
-		<div class="tpt-global-pricing-rule-form">
+		<div class="tpt-global-pricing-rule-form" data-kind="<?php echo esc_attr( $this->getPricingRuleInstance( $post )->getKind() ); ?>">
 
 			<nav class="tpt-global-pricing-rule-form__tabs">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-					<div class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>"
+					<div class="tpt-global-pricing-rule-form-tab <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab--active' : '' ); ?>" data-kinds="<?php echo esc_attr( implode( ' ', $tab->getKinds() ) ); ?>"
 					     data-target="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 
 						<div class="tpt-global-pricing-rule-form-tab__icon" style="">
@@ -355,7 +405,7 @@ class Form {
 
 			<section class="tpt-global-pricing-rule-form__content woocommerce_options_panel">
 				<?php foreach ( $this->tabs as $tab ) : ?>
-					<div class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>"
+					<div class="tpt-global-pricing-rule-form-tab-content <?php echo esc_attr( $tab->getId() === $this->defaultTab ? 'tpt-global-pricing-rule-form-tab-content--active' : '' ); ?>" data-kinds="<?php echo esc_attr( implode( ' ', $tab->getKinds() ) ); ?>"
 					     id="tpt-global-pricing-rule-form-tab-<?php echo esc_attr( $tab->getId() ); ?>">
 						<?php
 							$tab->render( $this->getPricingRuleInstance( $post ) );

@@ -7,8 +7,8 @@ use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Addons\GlobalTieredPricing\RuleOverlaps;
 
 /**
- * The primary column: title, status badge, and a meta line with the priority, the date window and
- * the rules that take precedence over it. Row actions are appended by WordPress.
+ * The primary column: the rule type with its priority, the status badge, the title, and a meta line
+ * with the date window and the rules that take precedence over it. Row actions are appended by WordPress.
  */
 class Rule {
 
@@ -25,14 +25,38 @@ class Rule {
 		$id     = $rule->getId();
 		$post   = get_post( $id );
 		$status = $this->status( $post ? $post->post_status : 'publish', $rule );
-		$meta   = implode( ' <span class="tpt-rules-list__sep">·</span> ', $this->metaParts( $rule ) ); // escaped fragments
-		?>
+		$parts  = $this->metaParts( $rule );
+		/* translators: %d: priority number */
+		$priority = esc_html( sprintf( __( 'Priority %d', 'tier-pricing-table' ), $rule->getPriority() ) );
+		// the type line appears once both rule types exist; otherwise the priority stays in the meta line
+		$typed  = GlobalTieredPricingCPT::hasBothRuleKinds();
+		$kind   = $rule->isOrderRule()
+			? array( 'order', 'dashicons-cart', __( 'Cart rule', 'tier-pricing-table' ) )
+			: array( 'product', 'dashicons-tag', __( 'Product prices', 'tier-pricing-table' ) );
+
+		if ( ! $typed ) {
+			array_unshift( $parts, $priority );
+		}
+
+		$meta = implode( ' <span class="tpt-rules-list__sep">·</span> ', $parts ); // escaped fragments
+
+		if ( $typed ) :
+			?>
+			<div class="tpt-rules-list__kind tpt-rules-list__kind--<?php echo esc_attr( $kind[0] ); ?>">
+				<span class="dashicons <?php echo esc_attr( $kind[1] ); ?>"></span>
+				<span class="tpt-rules-list__tag tpt-rules-list__tag--kind"><?php echo esc_html( $kind[2] ); ?></span>
+				<span class="tpt-rules-list__sep">·</span>
+				<span><?php echo $priority; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+			</div>
+		<?php endif; ?>
 		<span class="tpt-rules-list__badge tpt-rules-list__badge--<?php echo esc_attr( $status['key'] ); ?>"><?php echo esc_html( $status['label'] ); ?></span>
 		<strong><a class="row-title" href="<?php echo esc_url( get_edit_post_link( $id ) ); ?>"><?php echo esc_html( $rule->getTitle() ); ?></a></strong>
 		<?php $this->renderLockInfo( $id ); ?>
-		<div class="tpt-rules-list__meta">
-			<?php echo wp_kses_post( $meta ); // nosemgrep ?>
-		</div>
+		<?php if ( $meta ) : ?>
+			<div class="tpt-rules-list__meta">
+				<?php echo wp_kses_post( $meta ); // nosemgrep ?>
+			</div>
+		<?php endif; ?>
 		<?php
 	}
 
@@ -70,8 +94,7 @@ class Rule {
 	 * @return string[] Escaped HTML fragments.
 	 */
 	protected function metaParts( GlobalPricingRule $rule ): array {
-		/* translators: %d: priority number */
-		$parts = array( esc_html( sprintf( __( 'Priority %d', 'tier-pricing-table' ), $rule->getPriority() ) ) );
+		$parts = array();
 
 		if ( $rule->hasSchedule() ) {
 			$parts[] = esc_html( StatusBox::scheduleSummary( $rule ) );

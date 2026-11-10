@@ -22,6 +22,6 @@ class TieredPricingType extends ProductField {
 	}
 	
 	public function getDescription(): string {
-		return 'Tiered pricing type. Can be either "percentage" or "fixed"';
+		return 'Tiered pricing type. Can be "fixed", "percentage" or "amount"';
 	}
 }

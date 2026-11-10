@@ -1,5 +1,10 @@
 <?php namespace TierPricingTable\Addons\GlobalTieredPricing;
 
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\FreeShippingBar;
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\MinimumsMigration;
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\OrderDiscountCartService;
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\OrderRulesCustomizer;
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\OrderRulesSettingsSection;
 use TierPricingTable\Addons\AbstractAddon;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\PricingTestLinks;
@@ -20,6 +25,21 @@ class GlobalTieredPricingAddon extends AbstractAddon {
 		new PricingTestLinks();
 		new GlobalTieredPricingCartManager();
 		new PricingService();
+		
+		// order rules: a discount on the cart as an automatic coupon, and the minimum order
+		new OrderDiscountCartService();
+		new FreeShippingBar();
+		new MinimumsMigration();
+		
+		// the store-wide options of the order rules: the "Order rules settings" section, listed in the settings
+		// navigation only while it is open, reached from the rule editor and the rules list, a customizer with
+		// a live preview
+		new OrderRulesCustomizer();
+		add_filter( 'tiered_pricing_table/settings/sections', function ( $sections ) {
+			$sections[] = new OrderRulesSettingsSection();
+			
+			return $sections;
+		} );
 		
 		GlobalPricingRulesRepository::getInstance();
 		

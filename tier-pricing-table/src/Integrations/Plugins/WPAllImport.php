@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Integrations\Plugins;
 
+use TierPricingTable\PriceManager;
+
 use TierPricingTable\TierPricingTablePlugin;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use PMXI_API, XmlImportParser;
@@ -113,17 +115,23 @@ class WPAllImport extends PluginIntegrationAbstract {
 				'description' => __( 'Format for the rules must be the following: quantity:percent_discount,quantity:percent_discount. For example: "10:5,20:15" where 10 and 20 are quantities and 5 and 15 are amounts of discount.',
 					'tier-pricing-table' ),
 			),
+			'_amount_price_rules'       => array(
+				'title'       => __( 'Amount-off Tiered prices', 'tier-pricing-table' ),
+				'type'        => 'text',
+				'unSerialize' => array( $this, 'unSerializeRules' ),
+				'description' => __( 'Format for the rules must be the following: quantity:amount_off,quantity:amount_off. For example: "10:5,20:15" where 10 and 20 are quantities and 5 and 15 are the amounts taken off the price of each unit.', 'tier-pricing-table' ),
+			),
 			'_tiered_price_rules_type'  => array(
 				'title'       => __( 'Tiered pricing type', 'tier-pricing-table' ),
 				'type'        => 'text',
 				'unSerialize' => function ( $data ) {
-					if ( in_array( $data, array( 'fixed', 'percentage' ) ) ) {
+					if ( in_array( $data, PriceManager::getPricingTypes(), true ) ) {
 						return $data;
 					}
 					
 					return 'fixed';
 				},
-				'description' => __( 'The field must be either "fixed" or "percentage".', 'tier-pricing-table' ),
+				'description' => __( 'The field must be "fixed", "percentage" or "amount".', 'tier-pricing-table' ),
 			),
 			'_tiered_price_minimum_qty' => array(
 				'title'       => __( 'Minimum product quantity', 'tier-pricing-table' ),
@@ -219,19 +227,27 @@ class WPAllImport extends PluginIntegrationAbstract {
 					'tier-pricing-table' ),
 			);
 			
+			$fields[ '_' . $role . '_amount_price_rules' ] = array(
+				'title'        => __( 'Amount-off Tiered prices', 'tier-pricing-table' ),
+				'type'         => 'role_field',
+				'is_sub_field' => true,
+				'role'         => $role,
+				'unSerialize'  => array( $this, 'unSerializeRules' ),
+				'description'  => __( 'Format for the rules must be the following: quantity:amount_off,quantity:amount_off. For example: "10:5,20:15" where 10 and 20 are quantities and 5 and 15 are the amounts taken off the price of each unit.', 'tier-pricing-table' ),
+			);
 			$fields[ '_' . $role . '_tiered_price_rules_type' ] = array(
 				'title'        => __( 'Tiered pricing type', 'tier-pricing-table' ),
 				'type'         => 'role_field',
 				'is_sub_field' => true,
 				'role'         => $role,
 				'unSerialize'  => function ( $data ) {
-					if ( in_array( $data, array( 'fixed', 'percentage' ) ) ) {
+					if ( in_array( $data, PriceManager::getPricingTypes(), true ) ) {
 						return $data;
 					}
 					
 					return 'fixed';
 				},
-				'description'  => __( 'The field must be either "fixed" or "percentage".', 'tier-pricing-table' ),
+				'description'  => __( 'The field must be "fixed", "percentage" or "amount".', 'tier-pricing-table' ),
 			);
 			
 			$fields[ '_' . $role . '_tiered_price_minimum_qty' ] = array(

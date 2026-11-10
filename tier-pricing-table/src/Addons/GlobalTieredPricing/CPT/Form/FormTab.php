@@ -28,8 +28,24 @@ abstract class FormTab {
 
 	abstract public function render( GlobalPricingRule $pricingRule );
 
+	/**
+	 * The rule types the tab belongs to: "product" (prices per product) and/or "order" (order-total discount).
+	 *
+	 * @return string[]
+	 */
+	public function getKinds(): array {
+		return GlobalPricingRule::getKinds();
+	}
+
+	/**
+	 * A hint shown only while the rule is of the given type.
+	 */
+	public function renderKindNote( string $kind, string $text ) {
+		$this->renderHint( $text, array( 'custom_class' => 'tpt-rule-kind-only tpt-rule-kind-only--' . $kind ) );
+	}
+
 	public function renderRadioOptions( $args = array(), $inline = false ) {
-		$args = wp_parse_args( $args, array( 'description' => '', 'desc_tip' => false ) );
+		$args = wp_parse_args( $args, array( 'description' => '', 'desc_tip' => false, 'disabled' => array() ) );
 		?>
 		<div class="tiered-pricing-form-block">
 			<label for="tpt_tiered_pricing_type">
@@ -47,6 +63,7 @@ abstract class FormTab {
 							       name="<?php echo esc_attr( $args['id'] ); ?>"
 							       value="<?php echo esc_attr( $optionId ); ?>"
 								<?php checked( $optionId, $args['value'] ); ?>
+								<?php disabled( in_array( $optionId, (array) $args['disabled'], true ) ); ?>
 							>
 							<?php echo esc_html( $optionLabel ); ?>
 						</label>
@@ -63,6 +80,7 @@ abstract class FormTab {
 									       name="<?php echo esc_attr( $args['id'] ); ?>"
 									       value="<?php echo esc_attr( $optionId ); ?>"
 											<?php checked( $optionId, $args['value'] ); ?>
+											<?php disabled( in_array( $optionId, (array) $args['disabled'], true ) ); ?>
 									>
 									<?php echo esc_html( $optionLabel ); ?>
 								</label>

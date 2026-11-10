@@ -29,9 +29,9 @@ class YouSaveService {
 			add_action( 'tiered_pricing_table/after_rendering_tiered_pricing', array( $this, 'renderAfterTable' ), 10, 3 );
 		}
 
-		add_shortcode( 'tiered_price_you_save', function ( $tag, $args ) {
+		add_shortcode( 'tiered_price_you_save', function ( $atts ) {
 
-			$args = wp_parse_args( $args, array(
+			$args = wp_parse_args( is_array( $atts ) ? $atts : array(), array(
 					'product_id'          => null,
 					'color'               => $this->getTextColor(),
 					'template'            => $this->getTemplate(),
@@ -72,6 +72,11 @@ class YouSaveService {
 
 		// Only the frontend script fills the badge; a REST consumer (the wishlist block, apps) would show its bare text.
 		if ( RestContext::isDispatching() ) {
+			return $priceHTML;
+		}
+
+		// the badge follows the quantity field of the product page; in a product grid there is none to follow
+		if ( false !== strpos( $priceHTML, 'data-display-context="shop-loop"' ) ) {
 			return $priceHTML;
 		}
 

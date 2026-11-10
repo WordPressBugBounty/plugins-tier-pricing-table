@@ -38,6 +38,12 @@ class WoocommerceExportService {
             2
         );
         add_filter(
+            'woocommerce_product_export_product_column_tiered_price_amount',
+            array($this, 'addExportAmountData'),
+            10,
+            2
+        );
+        add_filter(
             'woocommerce_product_export_product_column_tiered_price_type',
             array($this, 'addExportPricingTypeData'),
             10,
@@ -59,7 +65,10 @@ class WoocommerceExportService {
      * @return array $options
      */
     public function addExportColumn( $columns ) {
+        // Fixed prices, amount-off tiers and the type are free; percentage tiers and the minimum are premium.
         $columns['tiered_price_fixed'] = 'Tiered Pricing — ' . __( 'Fixed pricing rules', 'tier-pricing-table' );
+        $columns['tiered_price_amount'] = 'Tiered Pricing — ' . __( 'Amount pricing rules', 'tier-pricing-table' );
+        $columns['tiered_price_type'] = 'Tiered Pricing — ' . __( 'Tiered pricing type', 'tier-pricing-table' );
         return $columns;
     }
 
@@ -74,6 +83,8 @@ class WoocommerceExportService {
     public function addExportData( $product, $type = 'fixed' ) {
         if ( 'percentage' == $type ) {
             $tiered_pricing = PriceManager::getPercentagePriceRules( $product->get_id(), 'edit' );
+        } elseif ( 'amount' === $type ) {
+            $tiered_pricing = PriceManager::getAmountPriceRules( $product->get_id(), 'edit' );
         } else {
             $tiered_pricing = PriceManager::getFixedPriceRules( $product->get_id(), 'edit' );
         }
@@ -106,6 +117,18 @@ class WoocommerceExportService {
      */
     public function addExportPercentageData( $value, $product ) {
         return $this->addExportData( $product, 'percentage' );
+    }
+
+    /**
+     * Export amount-off pricing rules
+     *
+     * @param  mixed  $value
+     * @param  WC_product  $product
+     *
+     * @return mixed
+     */
+    public function addExportAmountData( $value, $product ) {
+        return $this->addExportData( $product, 'amount' );
     }
 
     /**

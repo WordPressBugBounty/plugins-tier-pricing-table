@@ -1,5 +1,6 @@
 <?php namespace TierPricingTable\Services\API;
 
+use TierPricingTable\Services\API\ProductFields\AmountTieredPricing;
 use TierPricingTable\Services\API\ProductFields\FixedTieredPricing;
 use TierPricingTable\Services\API\ProductFields\MinimumOrderQuantity;
 use TierPricingTable\Services\API\ProductFields\PercentageTieredPricing;
@@ -26,6 +27,7 @@ class WooCommerceRestAPI {
 			MinimumOrderQuantity::class,
 			RoleBasedPricingData::class,
 			PercentageTieredPricing::class,
+			AmountTieredPricing::class,
 		) );
 		
 		foreach ( $productFields as $productField ) {

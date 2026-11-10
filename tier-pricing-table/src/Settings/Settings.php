@@ -128,6 +128,7 @@ class Settings {
             'shop-loop-display' => 30,
             'tier-labels'       => 40,
             'request-a-quote'   => 50,
+            'order-rules'       => 60,
             'integrations'      => 70,
             'multicurrency'     => 80,
             'product-addons'    => 90,
@@ -221,10 +222,14 @@ class Settings {
 
 		<ul class="subsubsub" style="font-size: 1.1em; margin-top: 3px">
 			<?php 
-        $sectionsCount = count( $this->sections );
+        // sections reached through their own links are listed only while they are open
+        $navSections = array_values( array_filter( $this->sections, function ( $section ) {
+            return !$section->isHiddenFromNavigation() || $section->isActive();
+        } ) );
+        $sectionsCount = count( $navSections );
         ?>
 			<?php 
-        foreach ( $this->sections as $index => $section ) {
+        foreach ( $navSections as $index => $section ) {
             ?>
 				<li>
 					<?php 

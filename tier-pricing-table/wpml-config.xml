@@ -23,6 +23,7 @@
     <custom-fields>
         <custom-field action="copy">_fixed_price_rules</custom-field>
         <custom-field action="copy">_percentage_price_rules</custom-field>
+        <custom-field action="copy">_amount_price_rules</custom-field>
         <custom-field action="copy">_tiered_price_rules_type</custom-field>
         <custom-field action="copy">_tiered_price_minimum_qty</custom-field>
         <custom-field action="copy">_tiered_pricing_maximum_quantity</custom-field>

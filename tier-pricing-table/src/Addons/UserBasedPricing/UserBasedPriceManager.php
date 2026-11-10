@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Addons\UserBasedPricing;
 
+use TierPricingTable\PriceManager;
+
 use TierPricingTable\Forms\Form;
 
 class UserBasedPriceManager {
@@ -58,6 +60,10 @@ class UserBasedPriceManager {
 		return self::getPriceRules( $productId, $userId, 'percentage', $context );
 	}
 	
+	public static function getAmountPriceRules( int $productId, int $userId, string $context = 'view' ): array {
+		return self::getPriceRules( $productId, $userId, 'amount', $context );
+	}
+	
 	public static function getPriceRules(
 		int $productId,
 		int $userId,
@@ -67,11 +73,7 @@ class UserBasedPriceManager {
 		
 		$type = $type ? $type : self::getPricingType( $productId, $userId, 'fixed', $context );
 		
-		if ( 'fixed' === $type ) {
-			$rules = (array) get_post_meta( $productId, "_user_{$userId}_fixed_price_rules", true );
-		} else {
-			$rules = (array) get_post_meta( $productId, "_user_{$userId}_percentage_price_rules", true );
-		}
+		$rules = (array) get_post_meta( $productId, "_user_{$userId}" . PriceManager::getRulesMetaKey( (string) $type ), true );
 		
 		$rules = ! empty( $rules ) ? array_filter( $rules ) : array();
 		ksort( $rules );
@@ -94,7 +96,7 @@ class UserBasedPriceManager {
 		
 		$type = get_post_meta( $productId, "_user_{$userId}_tiered_price_rules_type", true );
 		
-		$type = in_array( $type, array( 'fixed', 'percentage' ) ) ? $type : $default;
+		$type = in_array( $type, PriceManager::getPricingTypes(), true ) ? $type : $default;
 		
 		if ( 'edit' !== $context ) {
 			return apply_filters( 'tiered_pricing_table/user_based_rules/price/type', $type, $userId, $productId );

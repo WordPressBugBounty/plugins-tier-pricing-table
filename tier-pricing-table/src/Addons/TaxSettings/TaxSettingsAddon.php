@@ -37,6 +37,8 @@ class TaxSettingsAddon extends AbstractAddon {
         new RoleBasedRulesIntegration();
         new TaxSettingsEndpoints();
         new Settings();
+        // the tax settings of global rules are free; the role-based tax options are premium
+        new ProductsTaxService();
     }
 
 }

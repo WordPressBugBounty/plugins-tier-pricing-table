@@ -19,14 +19,20 @@ class PricingTester {
 
 	const RULE_PARAM = 'tpt_rule';
 
+	const MODE_PARAM = 'tpt_mode';
+
 	/**
 	 * Link to the utility on the Advanced settings tab, optionally with a rule to highlight.
 	 */
-	public static function getUrl( int $ruleId = 0 ): string {
+	public static function getUrl( int $ruleId = 0, string $mode = 'product' ): string {
 		$url = admin_url( 'admin.php?page=wc-settings&tab=' . Settings::SETTINGS_PAGE . '&section=advanced' );
 
 		if ( $ruleId ) {
 			$url = add_query_arg( self::RULE_PARAM, $ruleId, $url );
+		}
+
+		if ( 'cart' === $mode ) {
+			$url = add_query_arg( self::MODE_PARAM, 'cart', $url );
 		}
 
 		return $url . '#' . self::TAB;

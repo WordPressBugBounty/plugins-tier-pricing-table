@@ -12,7 +12,7 @@ class WooPaymentsMulticurrency extends PluginIntegrationAbstract {
 				return $pricingRule;
 			}
 			
-			if ( $pricingRule->isFixed() ) {
+			if ( $pricingRule->isFixed() || $pricingRule->isAmount() ) {
 				$rules = [];
 				
 				foreach ( $pricingRule->getRules() as $quantity => $price ) {

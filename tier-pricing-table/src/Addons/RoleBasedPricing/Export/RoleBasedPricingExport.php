@@ -27,9 +27,15 @@ class RoleBasedPricingExport {
 					continue;
 				}
 				
+				// A role without its own pricing on the product exports empty type cells, not the type defaults ("flat",
+				// "fixed"), so the file shows which roles have prices.
 				$columns[] = array(
 					'column_title'    => $WPRole . '_tiered_price_pricing_type',
 					'export_callback' => function ( $value, WC_Product $product ) use ( $WPRole ) {
+						if ( ! RoleBasedPriceManager::roleHasRules( $WPRole, $product->get_id(), 'edit' ) ) {
+							return null;
+						}
+
 						return RoleBasedPriceManager::getProductPricingType( $product->get_id(), $WPRole, 'edit' );
 					},
 				);
@@ -88,9 +94,29 @@ class RoleBasedPricingExport {
 				);
 				
 				$columns[] = array(
+					'column_title'    => $WPRole . '_tiered_price_amount',
+					'export_callback' => function ( $value, WC_Product $product ) use ( $WPRole ) {
+						$amountRules = RoleBasedPriceManager::getPriceRules( $product->get_id(), $WPRole, 'amount', 'edit' );
+						
+						$str       = '';
+						$separator = TierPricingTablePlugin::getRulesSeparator();
+						
+						foreach ( $amountRules as $quantity => $amount ) {
+							$str .= $quantity . TierPricingTablePlugin::getRuleSeparator() . $amount . $separator;
+						}
+						
+						return mb_strlen( $str ) > 0 ? trim( $str, $separator ) : null;
+					},
+				);
+				
+				$columns[] = array(
 					'column_title'    => $WPRole . '_tiered_price_type',
 					'export_callback' => function ( $value, WC_Product $product ) use ( $WPRole ) {
-						return RoleBasedPriceManager::getPricingType( $product->get_id(), $WPRole, 'edit' );
+						if ( ! RoleBasedPriceManager::roleHasRules( $WPRole, $product->get_id(), 'edit' ) ) {
+							return null;
+						}
+
+						return RoleBasedPriceManager::getPricingType( $product->get_id(), $WPRole, 'fixed', 'edit' );
 					},
 				);
 				
@@ -133,6 +159,8 @@ class RoleBasedPricingExport {
 			$columns[ $WPRole . '_tiered_price_fixed' ]         = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Fixed pricing rules',
 					'tier-pricing-table' );
 			$columns[ $WPRole . '_tiered_price_percentage' ]    = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Percentage pricing rules',
+					'tier-pricing-table' );
+			$columns[ $WPRole . '_tiered_price_amount' ]        = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Amount pricing rules',
 					'tier-pricing-table' );
 			$columns[ $WPRole . '_tiered_price_type' ]          = 'Tiered Pricing — [' . $roleName . '] ' . __( 'Tiered pricing type',
 					'tier-pricing-table' );

@@ -79,6 +79,7 @@ class Settings {
 				'searchProductsNonce'  => wp_create_nonce( 'search-products' ),
 				'searchCustomersNonce' => wp_create_nonce( 'search-customers' ),
 				'pricingTest'          => array(
+					'mode'         => isset( $_GET[ PricingTester::MODE_PARAM ] ) && 'cart' === sanitize_key( $_GET[ PricingTester::MODE_PARAM ] ) ? 'cart' : 'product',
 					'rulesEnabled' => PricingTester::rulesEnabled(),
 					'rulesUrl'     => admin_url( 'edit.php?post_type=' . GlobalTieredPricingCPT::SLUG ),
 					'newRuleUrl'   => admin_url( 'post-new.php?post_type=' . GlobalTieredPricingCPT::SLUG ),

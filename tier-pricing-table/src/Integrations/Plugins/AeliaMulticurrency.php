@@ -15,7 +15,7 @@ class AeliaMulticurrency extends PluginIntegrationAbstract {
 			$from_currency = get_option( 'woocommerce_currency' );
 			$to_currency   = get_woocommerce_currency();
 			
-			if ( $pricingRule->isFixed() ) {
+			if ( $pricingRule->isFixed() || $pricingRule->isAmount() ) {
 				$_rules = [];
 				
 				foreach ( $pricingRule->getRules() as $quantity => $price ) {

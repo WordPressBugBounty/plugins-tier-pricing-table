@@ -70,7 +70,8 @@ class RuleOverlaps {
 	}
 	
 	public function overlap( GlobalPricingRule $a, GlobalPricingRule $b ): bool {
-		return self::schedulesIntersect( $a, $b, $this->now ) && $this->customersIntersect( $a, $b ) && $this->productsIntersect( $a, $b );
+		// a product rule and an order-total rule never compete: one prices products, the other discounts the cart
+		return $a->getKind() === $b->getKind() && self::schedulesIntersect( $a, $b, $this->now ) && $this->customersIntersect( $a, $b ) && $this->productsIntersect( $a, $b );
 	}
 	
 	/**

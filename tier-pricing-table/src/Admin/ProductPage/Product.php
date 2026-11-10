@@ -72,6 +72,8 @@ class Product {
             $productId
         );
         update_post_meta( $productId, '_fixed_price_rules', $tieredPricingData['fixed_tiered_pricing_rules'] );
+        update_post_meta( $productId, '_amount_price_rules', $tieredPricingData['amount_tiered_pricing_rules'] );
+        PriceManager::updatePriceRulesType( (int) $productId, PriceManager::getAvailablePricingType( $tieredPricingData['type'] ) );
     }
 
     /**
@@ -113,13 +115,16 @@ class Product {
         $type = PriceManager::getPricingType( $productId, 'fixed', 'edit' );
         $percentageRules = PriceManager::getPercentagePriceRules( $productId, 'edit' );
         $fixedRules = PriceManager::getFixedPriceRules( $productId, 'edit' );
+        $amountRules = PriceManager::getAmountPriceRules( $productId, 'edit' );
         TieredPricingRulesForm::render(
             $productId,
             null,
             $loop,
             $type,
             $percentageRules,
-            $fixedRules
+            $fixedRules,
+            null,
+            $amountRules
         );
     }
 

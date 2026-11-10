@@ -1,11 +1,12 @@
 <?php namespace TierPricingTable\Addons\Tools\API;
 
 use TierPricingTable\Addons\CustomColumns\CustomColumnsManager;
-use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\Guide;
+use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\RuleTypePointer;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\Addons\TaxSettings\API\TaxSettingsEndpoints;
 use TierPricingTable\Admin\Notifications\Notifications;
 use TierPricingTable\Admin\Tips\Tip;
+use TierPricingTable\Addons\Tools\PricingTest\CartTester;
 use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use WP_Error;
 use WP_REST_Request;
@@ -62,6 +63,16 @@ class ToolsEndpoints {
 					'user_id'    => array( 'type' => 'integer', 'default' => 0 ),
 					'rule_id'    => array( 'type' => 'integer', 'default' => 0 ),
 				),
+			),
+		) );
+		
+		register_rest_route( self::NAMESPACE, '/cart_test', array(
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'cartTest' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_woocommerce' );
+				},
 			),
 		) );
 		
@@ -132,6 +143,28 @@ class ToolsEndpoints {
 		return rest_ensure_response( $result );
 	}
 	
+	/**
+	 * The Pricing test for a cart: which order rule applies to a set of lines for a customer, the discount
+	 * and the minimums.
+	 */
+	public function cartTest( WP_REST_Request $request ) {
+		$items  = (array) $request->get_param( 'items' );
+		$userId = absint( $request->get_param( 'user_id' ) );
+		$ruleId = absint( $request->get_param( 'rule_id' ) );
+		
+		if ( $userId && ! get_user_by( 'id', $userId ) ) {
+			return new WP_Error( 'tpt_cart_test_customer', __( 'The customer could not be loaded.', 'tier-pricing-table' ), array( 'status' => 400 ) );
+		}
+		
+		$result = ( new CartTester() )->run( $items, $userId, $ruleId );
+		
+		if ( isset( $result['error'] ) ) {
+			return new WP_Error( 'tpt_cart_test', $result['error'], array( 'status' => 400 ) );
+		}
+		
+		return rest_ensure_response( $result );
+	}
+	
 	public function getRoles() {
 		global $wp_roles;
 		if ( ! isset( $wp_roles ) ) {
@@ -174,6 +207,7 @@ class ToolsEndpoints {
 			$metaKeysToDelete = array_merge( $metaKeysToDelete, array(
 				'_fixed_price_rules',
 				'_percentage_price_rules',
+				'_amount_price_rules',
 				'_tiered_price_rules_type',
 				'_tiered_price_minimum_qty',
 				'_tiered_pricing_maximum_quantity',
@@ -196,6 +230,7 @@ class ToolsEndpoints {
 					"_{$roleKey}_tiered_price_discount_type",
 					"_{$roleKey}_tiered_price_rules_type",
 					"_{$roleKey}_percentage_price_rules",
+					"_{$roleKey}_amount_price_rules",
 					"_{$roleKey}_fixed_price_rules",
 					"_{$roleKey}_tiered_price_minimum_qty",
 					"_{$roleKey}_tiered_pricing_maximum_quantity",
@@ -314,8 +349,8 @@ class ToolsEndpoints {
 			delete_option( $option );
 		}
 		
-		// the global rule guide is dismissed per user
-		delete_metadata( 'user', 0, Guide::USER_META, '', true );
+		// the rule type tip of the first rule is dismissed per user
+		RuleTypePointer::resetDismissals();
 		
 		// the raw deletes bypass the options cache
 		wp_cache_flush();

@@ -6,6 +6,15 @@ use TierPricingTable\PricingRule;
 class Curcy extends PluginIntegrationAbstract {
 	
 	public function run() {
+		// Amount-off tiers are stored in the base currency: convert the amounts, the product price is converted by CURCY.
+		add_filter( 'tiered_pricing_table/price/pricing_rule', function ( PricingRule $pricingRule ) {
+			if ( $pricingRule->isAmount() && function_exists( 'wmc_get_price' ) ) {
+				$pricingRule->setRules( array_map( 'wmc_get_price', $pricingRule->getRules() ) );
+			}
+			
+			return $pricingRule;
+		}, 9999 );
+		
 		add_filter( 'tiered_pricing_table/price/price_by_rules',
 			function ( $productPrice, $quantity, $productId, $context, $place, PricingRule $pricingRule ) {
 				
@@ -13,7 +22,7 @@ class Curcy extends PluginIntegrationAbstract {
 					return $productPrice;
 				}
 				
-				if ( $pricingRule->isPercentage() ) {
+				if ( $pricingRule->isPercentage() || $pricingRule->isAmount() ) {
 					return $productPrice;
 				}
 				

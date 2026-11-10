@@ -14,13 +14,45 @@ class PriceManager {
         return self::getPriceRules( $productId, 'percentage', $context );
     }
 
+    public static function getAmountPriceRules( $productId, string $context = 'view' ) : array {
+        return self::getPriceRules( $productId, 'amount', $context );
+    }
+
+    /**
+     * The tiered pricing types: "fixed" (a price per unit), "percentage" (a discount off the product
+     * price) and "amount" (an amount off the product price per unit).
+     *
+     * @return string[]
+     */
+    public static function getPricingTypes() : array {
+        return array('fixed', 'percentage', 'amount');
+    }
+
+    /**
+     * Whether the store's plan may use a tiered pricing type: fixed prices and amount-off tiers are free,
+     * percentage discounts are premium.
+     */
+    public static function isPricingTypeAvailable( string $type ) : bool {
+        return 'percentage' !== $type || tpt_fs()->can_use_premium_code();
+    }
+
+    /**
+     * The pricing type to use for a stored type: an unavailable type falls back to fixed prices.
+     */
+    public static function getAvailablePricingType( string $type ) : string {
+        return ( self::isPricingTypeAvailable( $type ) ? $type : 'fixed' );
+    }
+
+    /**
+     * The product meta key holding the tiers of a type (prefixed with the role or customer for their rules).
+     */
+    public static function getRulesMetaKey( string $type ) : string {
+        return ( in_array( $type, self::getPricingTypes(), true ) ? "_{$type}_price_rules" : '_fixed_price_rules' );
+    }
+
     public static function getPriceRules( $productId, ?string $type = null, string $context = 'view' ) : array {
         $type = ( $type ? $type : self::getPricingType( $productId, 'fixed', $context ) );
-        if ( 'fixed' === $type ) {
-            $rules = (array) get_post_meta( $productId, '_fixed_price_rules', true );
-        } else {
-            $rules = (array) get_post_meta( $productId, '_percentage_price_rules', true );
-        }
+        $rules = (array) get_post_meta( $productId, self::getRulesMetaKey( $type ), true );
         $rules = array_map( function ( $price ) {
             return floatval( $price );
         }, $rules );
@@ -69,6 +101,11 @@ class PriceManager {
                     $product = wc_get_product( $productId );
                     if ( $product ) {
                         $productPrice = self::getProductPriceWithPercentageDiscount( $product, $price, $context );
+                    }
+                } elseif ( $pricingRule->isAmount() ) {
+                    $product = wc_get_product( $productId );
+                    if ( $product ) {
+                        $productPrice = self::getProductPriceWithAmountDiscount( $product, $price, $context );
                     }
                 } else {
                     $productPrice = $price;
@@ -141,12 +178,37 @@ class PriceManager {
         return self::getPriceByPercentDiscount( $productPrice, $discount );
     }
 
+    /**
+     * The price of a product with an amount taken off per unit, never below zero. Starts from the same
+     * price as a percentage tier: the sale price, or the regular price when the setting says so.
+     *
+     * @param  WC_Product  $product
+     * @param  float|string  $amount
+     * @param  string  $context
+     *
+     * @return float
+     */
+    public static function getProductPriceWithAmountDiscount( WC_Product $product, $amount, string $context = 'view' ) : float {
+        $productPrice = ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price( $context ) : $product->get_price( $context ) );
+        return self::getPriceByAmountDiscount( $productPrice, $amount );
+    }
+
+    /**
+     * Take an amount off a price, never below zero. A negative amount is ignored.
+     *
+     * @param  float|string  $price
+     * @param  float|string  $amount
+     *
+     * @return float
+     */
+    public static function getPriceByAmountDiscount( $price, $amount ) : float {
+        return max( 0.0, (float) $price - max( 0.0, (float) $amount ) );
+    }
+
     public static function getPricingType( $productId, string $default = 'fixed', string $context = 'view' ) : string {
-        if ( !tpt_fs()->can_use_premium_code() ) {
-            return 'fixed';
-        }
         $type = get_post_meta( $productId, '_tiered_price_rules_type', true );
-        $type = ( in_array( $type, array('fixed', 'percentage') ) ? $type : $default );
+        $type = ( in_array( $type, self::getPricingTypes(), true ) ? $type : $default );
+        $type = self::getAvailablePricingType( $type );
         if ( 'edit' !== $context ) {
             return apply_filters( 'tiered_pricing_table/price/type', $type, $productId );
         }
@@ -160,7 +222,7 @@ class PriceManager {
      * @param  string  $type
      */
     public static function updatePriceRulesType( $productId, string $type ) {
-        if ( in_array( $type, array('percentage', 'fixed') ) ) {
+        if ( in_array( $type, self::getPricingTypes(), true ) ) {
             update_post_meta( $productId, '_tiered_price_rules_type', $type );
         }
     }

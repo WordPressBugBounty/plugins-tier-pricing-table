@@ -5,7 +5,7 @@ Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
 Requires at least: 5.0
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 8.2.1
+Stable tag: 8.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,7 @@ Create bulk, wholesale, and quantity-based pricing in WooCommerce with flexible 
 
 Easily set different prices based on quantity, user roles, or specific customers — and display them using beautiful, customizable pricing tables, blocks, or dropdowns.
 
-[youtube https://www.youtube.com/watch?v=MlyGAcfxaEQ]
+[youtube https://www.youtube.com/watch?v=0oWxsmwz67A]
 
 [**Live Demo**](https://demo.tiered-pricing.com/) | [**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Contact Us**](https://tiered-pricing.com/contact-us/) | [**Plugin Website**](https://tiered-pricing.com/)
 
@@ -28,10 +28,13 @@ Fine-tune pricing for any business model — from retail to wholesale — to ser
 📌 **Key features**:
 
 ✅ **Quantity-based pricing (Volume pricing)**
-Offer different prices based on the quantity purchased to encourage larger orders.
+Offer fixed prices, percentage discounts or an amount off per unit based on the quantity purchased to encourage larger orders.
 
 ✅ **Role and Customer based pricing**
 Create custom pricing for user roles or individual customers, including quantity-based discounts.
+
+✅ **Cart rules: order discounts, free shipping and minimum order**
+Take an amount off the whole cart once the subtotal or item count reaches a tier, give free shipping always or from a threshold with a progress bar, and require a minimum order, per role, products and dates. A settings page previews the cart, the checkout and the mini cart.
 
 ✅ **Minimum, Maximum & Step Quantity Controls**
 Define minimum and maximum purchase quantities, and enforce quantity increments.
@@ -62,6 +65,9 @@ Close the store to visitors, or show products and categories to selected roles o
 The clean interface and powerful functionality allow you to create any pricing strategy without complexity.
 
 ⚙️ **Advanced Features**
+✅ Amount-off Tiers – Take an amount off the unit price from a quantity, next to fixed tier prices.
+✅ Pricing Test – See what a product or a whole cart gets for any customer, and which rule wins, without opening the storefront.
+✅ Guest Users – Hide prices and prevent purchasing for visitors who are not logged in.
 ✅ Import & Export (WP All Import support).
 ✅ Pricing Labels – Create labels such as “Best Value” or “Most Popular” to make key pricing tiers stand out.
 ✅ Role Management – Create, edit, and delete user roles with ease.
@@ -74,11 +80,13 @@ And much more!
 💎 **Premium Extras**:
 
 *   Percentage quantity-based discounts
+*   Percentage cart rule discounts
 *   Role-based and customer-based pricing (including base prices and min/max order quantity)
 *   Role-based tax options (Override tax options for specific user roles)
 *   Custom columns for pricing table
-*   Option to hide prices and prevent purchasing for non-logged-in users
-*   Cart rules by role: a minimum order amount or quantity per role, payment and shipping methods limited to roles
+*   Minimum order amount or quantity per cart rule (roles, products, dates)
+*   Free shipping bar: a progress bar towards a cart rule's free shipping, in the cart, at checkout, in the mini cart, on product pages, or anywhere with a shortcode or block
+*   Payment and shipping methods limited to roles
 *   Min/Max order quantity control per product or category/tag/brand
 *   Cart upsells (motivates users to purchase more to get a discount)
 *   Totals on the product page
@@ -116,16 +124,18 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 1. Tiered pricing on the product page
 2. Layout configurator with live preview
 3. Tiered pricing on shop and category pages
-4. Wholesale registration and approval
-5. Private store and catalog visibility
-6. Role and customer pricing
-7. Cart rules by role
-8. Tiered pricing in the cart and upsells
-9. Request a quote
-10. Tier labels and badges
-11. Mix & Match pricing rules
-12. Roles management
-13. 3rd-party integrations
+4. Cart discounts, next-tier messages and the free shipping bar
+5. A cart rule: discount tiers, free shipping and a minimum order
+6. Pricing rules for categories, tags, brands and products
+7. Mix & Match pricing rule
+8. Role-based prices for a wholesale customer
+9. Wholesale registration
+10. Wholesale applications and approval
+11. Catalog visibility by role
+12. Request a quote
+13. Cart messages and free shipping bar settings
+14. Roles management
+15. 3rd-party integrations
 
 == Installation ==
 
@@ -182,6 +192,31 @@ Yes!
 Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
 
 == Changelog ==
+
+= 8.3.1 [2026-11-10] =
+* Fix: payment and shipping methods by role are visible again on the Wholesale settings tab.
+* Fix: the You save percentage could show one percent less than the real saving.
+* Fix: re-calculating a manual order uses the chosen customer's prices and their role's tax exemption.
+* Fix: importing a product export no longer gives every role an empty price rule.
+* Fix: amount-off tiers, for products and for roles, now import and export.
+* Fix: the product export no longer writes "edit" in the role tiered pricing type columns.
+* Fix: amount-off tiers are copied to WPML and Polylang translations.
+* Fix: the default message for guests reads "Log in to see prices".
+
+= 8.3.0 [2026-11-07] =
+* New: Cart rules, a second rule type: an amount off the whole cart from a subtotal or item count, applied as an automatic coupon, with a message about the next tier; percentage discounts in the premium version.
+* New: Cart rules give free shipping always or from a subtotal or item count, with a free shipping bar (premium) in the cart, at checkout, in the mini cart and on product pages, plus a shortcode and a block.
+* New: a Cart rules settings page with a live preview of the cart, the checkout and the mini cart.
+* New: quantity tiers can take an amount off per unit, in the free version too.
+* Improvement: the minimum order amount and quantity live in Cart rules (premium); the minimums of the cart rules by role become such rules on update.
+* Improvement: the Guest Users options and the Tax tab of global pricing rules are free.
+* Improvement: the rules list filters by rule type and marks each rule's type.
+* Improvement: the Priority Settings tab is now Product overrides, with plain wording.
+* Improvement: a tip at the rule type on the first pricing rule replaces the guide banner.
+* Fix: trashing or restoring a global pricing rule no longer wipes it.
+* Fix: two cart rules with the same title no longer share one discount.
+* Fix: the You save shortcode honours its attributes, and the savings badge no longer prints empty in product grids.
+* Fix: the table layout switches given as "no" in shortcodes and templates are honoured.
 
 = 8.2.1 [2026-11-02] =
 * New: a Getting started page with five setup steps, their live progress, a skip for the optional ones, and one-click install of the U2Code Multicurrency and Product Addons plugins.

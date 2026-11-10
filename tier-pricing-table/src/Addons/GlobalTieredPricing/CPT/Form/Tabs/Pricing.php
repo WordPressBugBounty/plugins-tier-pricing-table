@@ -19,6 +19,10 @@ class Pricing extends FormTab {
 		return __( 'Configure regular and tiered pricing rules', 'tier-pricing-table' );
 	}
 
+	public function getKinds(): array {
+		return array( GlobalPricingRule::KIND_PRODUCT );
+	}
+
 	public function render( GlobalPricingRule $pricingRule ) {
 		?>
 		<div>
@@ -54,7 +58,7 @@ class Pricing extends FormTab {
 				global $post;
 
 				TieredPricingRulesForm::render( $post->ID, null, null, $pricingRule->getTieredPricingType(),
-						$pricingRule->getPercentageTieredPricingRules(), $pricingRule->getFixedTieredPricingRules() );
+						$pricingRule->getPercentageTieredPricingRules(), $pricingRule->getFixedTieredPricingRules(), null, $pricingRule->getAmountTieredPricingRules() );
 			?>
 		</div>
 		<?php

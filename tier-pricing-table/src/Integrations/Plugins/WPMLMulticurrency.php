@@ -6,6 +6,15 @@ use woocommerce_wpml;
 class WPMLMulticurrency extends PluginIntegrationAbstract {
 	
 	public function run() {
+		// Amount-off tiers are stored in the base currency: convert the amounts, the product price is converted by WCML.
+		add_filter( 'tiered_pricing_table/price/pricing_rule', function ( PricingRule $pricingRule ) {
+			if ( $pricingRule->isAmount() && $this->isConversionNeeded() ) {
+				$pricingRule->setRules( array_map( array( $this, 'convertPrice' ), $pricingRule->getRules() ) );
+			}
+			
+			return $pricingRule;
+		}, 9999 );
+		
 		
 		add_filter( 'tiered_pricing_table/price/price_by_rules', function (
 			$productPrice,
@@ -16,7 +25,8 @@ class WPMLMulticurrency extends PluginIntegrationAbstract {
 			PricingRule $pricingRule
 		) {
 			
-			if ( $pricingRule->isPercentage() || ! $productPrice ) {
+			// Percentage and amount-off tiers start from the product price WCML has already converted.
+			if ( $pricingRule->isPercentage() || $pricingRule->isAmount() || ! $productPrice ) {
 				return $productPrice;
 			}
 

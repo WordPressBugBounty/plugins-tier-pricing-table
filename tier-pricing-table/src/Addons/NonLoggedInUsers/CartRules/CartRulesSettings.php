@@ -8,8 +8,6 @@ class CartRulesSettings {
 	const PREFIX = Settings::SETTINGS_PREFIX . 'cart_rules_';
 
 	public function __construct() {
-		new RoleMinimumsOption();
-
 		// WooCommerce keeps computed shipping rates in the session until its shipping version changes;
 		// a changed rule must show on the next cart load, not on the next cart change
 		foreach ( array( 'added_option', 'updated_option', 'deleted_option' ) as $hook ) {
@@ -31,11 +29,17 @@ class CartRulesSettings {
 		return get_option( self::optionId( $key ), $default );
 	}
 
+	/**
+	 * The switch of the versions before 8.2.2; the method limits apply whenever they are set now, and the
+	 * switch only decides whether the migrated minimum order rules start suspended.
+	 */
 	public static function isEnabled(): bool {
 		return 'yes' === self::get( 'enabled', 'no' );
 	}
 
 	/**
+	 * The minimums table of the versions before 8.2.2, read once to move it into order rules.
+	 *
 	 * @return array<string, array{amount: float, quantity: int}>
 	 */
 	public static function getMinimums(): array {

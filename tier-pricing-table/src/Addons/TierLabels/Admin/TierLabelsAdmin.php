@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Addons\TierLabels\Admin;
 
+use TierPricingTable\PriceManager;
+
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingRule;
 use TierPricingTable\Addons\TierLabels\TierLabelsManager;
@@ -119,14 +121,15 @@ class TierLabelsAdmin {
 		$_value = array(
 				'fixed'      => array(),
 				'percentage' => array(),
+			'amount'     => array(),
 		);
 
-		foreach ( array( 'fixed', 'percentage' ) as $pricingType ) {
+		foreach ( PriceManager::getPricingTypes() as $pricingType ) {
 
 			$value = Form::getFieldValue( 'tier_label_' . $pricingType, $role, $loop, $customPrefix, $request );
 
 			$value   = is_array( $value ) ? $value : array();
-			$amounts = 'fixed' === $pricingType ? $data['fixed_quantities'] : $data['percentage_quantities'];
+			$amounts = isset( $data[ $pricingType . '_quantities' ] ) ? (array) $data[ $pricingType . '_quantities' ] : array();
 
 			foreach ( $value as $key => $itemValue ) {
 				if ( ! empty( $amounts[ $key ] ) ) {
@@ -189,14 +192,16 @@ class TierLabelsAdmin {
 
 		$percentageValues = $this->getValue( $entityId, 'percentage', $role );
 		$fixedValues      = $this->getValue( $entityId, 'fixed', $role );
+		$amountValues     = $this->getValue( $entityId, 'amount', $role );
 
-		if ( empty( $percentageValues ) || empty( $fixedValues ) ) {
+		if ( empty( $percentageValues ) || empty( $fixedValues ) || empty( $amountValues ) ) {
 			if ( $isProductRule ) {
 				$product = wc_get_product( $entityId );
 				if ( $product && $product->get_parent_id() ) {
 					$percentageValues = $percentageValues ?: $this->getValue( $product->get_parent_id(), 'percentage',
 							$role );
 					$fixedValues      = $fixedValues ?: $this->getValue( $product->get_parent_id(), 'fixed', $role );
+					$amountValues     = $amountValues ? $amountValues : $this->getValue( $product->get_parent_id(), 'amount', $role );
 				}
 			}
 		}
@@ -209,10 +214,15 @@ class TierLabelsAdmin {
 			return ! is_null( $this->manager->getLabel( $value ) );
 		} );
 
+		$amountValues = array_filter( $amountValues, function ( $value ) {
+			return ! is_null( $this->manager->getLabel( $value ) );
+		} );
+
 		$firstRowValue = $this->getFirstRowValue( $entityId, 'fixed', $role );
 
 		$pricingRule->data['tier_labels']['percentage'] = $percentageValues;
 		$pricingRule->data['tier_labels']['fixed']      = $fixedValues;
+		$pricingRule->data['tier_labels']['amount']     = $amountValues;
 
 		return $pricingRule;
 	}

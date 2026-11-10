@@ -1,5 +1,6 @@
 <?php namespace TierPricingTable\Addons\GlobalTieredPricing\CPT\Columns;
 
+use TierPricingTable\Addons\GlobalTieredPricing\OrderDiscounts\OrderDiscount;
 use Exception;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Core\ServiceContainerTrait;
@@ -27,9 +28,89 @@ class Pricing {
 			<?php
 		}
 
+		if ( $rule->isOrderRule() ) {
+			$this->renderOrderTiers( $rule );
+
+			return;
+		}
+
 		$this->renderBasePrice( $rule );
 		$this->renderTiers( $rule );
 		$this->renderQuantityLimits( $rule );
+	}
+
+	/**
+	 * An order rule: the scope, its minimum order, and its tiers as a small table.
+	 */
+	protected function renderOrderTiers( GlobalPricingRule $rule ) {
+		$chips = array();
+
+		if ( $rule->getOrderMinimumAmount() ) {
+			/* translators: %s: amount */
+			$chips[] = sprintf( __( 'Min <b>%s</b>', 'tier-pricing-table' ), wc_price( $rule->getOrderMinimumAmount() ) );
+		}
+
+		if ( $rule->getOrderMinimumQuantity() ) {
+			/* translators: %s: number of items */
+			$chips[] = sprintf( __( 'Min <b>%s items</b>', 'tier-pricing-table' ), esc_html( number_format_i18n( $rule->getOrderMinimumQuantity() ) ) );
+		}
+
+		if ( $chips ) {
+			$this->renderLine( __( 'Minimum order', 'tier-pricing-table' ), $chips );
+		}
+
+		if ( $rule->hasOrderFreeShipping() ) {
+			if ( 'always' === $rule->getOrderFreeShipping() ) {
+				$chip = __( '<b>always</b>', 'tier-pricing-table' );
+			} else {
+				$from = 'quantity' === $rule->getOrderFreeShipping()
+					? esc_html( OrderDiscount::formatThreshold( (float) $rule->getOrderFreeShippingFrom(), true ) )
+					: wc_price( $rule->getOrderFreeShippingFrom() );
+				/* translators: %s: subtotal or number of items */
+				$chip = sprintf( __( 'from <b>%s</b>', 'tier-pricing-table' ), $from );
+			}
+			$chips = array( $chip );
+			if ( $rule->isOrderShippingBarEnabled() ) {
+				$chips[] = __( 'with the progress bar', 'tier-pricing-table' );
+			}
+			$this->renderLine( __( 'Free shipping', 'tier-pricing-table' ), $chips );
+		}
+
+		$tiers = $rule->getOrderTiers();
+
+		if ( empty( $tiers ) ) {
+			return;
+		}
+
+		$percentage = 'percentage' === $rule->getOrderDiscountType();
+		$items      = $rule->isOrderBasisQuantity();
+		$label      = sprintf(
+			/* translators: 1: "fixed amount off" or "percentage off", 2: "by subtotal" or "by item count" */
+			__( 'Cart discount (%1$s, %2$s)', 'tier-pricing-table' ),
+			$percentage ? __( 'percentage off', 'tier-pricing-table' ) : __( 'fixed amount off', 'tier-pricing-table' ),
+			$items ? __( 'by item count', 'tier-pricing-table' ) : __( 'by subtotal', 'tier-pricing-table' )
+		);
+		?>
+		<div class="tpt-rules-list__line tpt-rules-list__line--chips">
+			<span class="tpt-rules-list__muted"><?php echo esc_html( $label ); ?></span>
+		</div>
+		<table class="tpt-rules-list__tiers">
+			<thead>
+			<tr>
+				<th><?php echo $items ? esc_html__( 'Items', 'tier-pricing-table' ) : esc_html__( 'Subtotal', 'tier-pricing-table' ); ?></th>
+				<th><?php esc_html_e( 'Discount', 'tier-pricing-table' ); ?></th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach ( $tiers as $tier ) : ?>
+				<tr>
+					<td><?php echo $items ? esc_html( number_format_i18n( (int) ceil( $tier['from'] ) ) ) : wp_kses_post( wc_price( $tier['from'] ) ); ?>+</td>
+					<td class="is-tier"><?php echo $percentage ? esc_html( OrderDiscount::formatDiscount( (float) $tier['discount'], true ) ) : wp_kses_post( wc_price( $tier['discount'] ) ); ?></td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php
 	}
 
 	protected function renderBasePrice( GlobalPricingRule $rule ) {
@@ -62,7 +143,8 @@ class Pricing {
 	 */
 	protected function renderTiers( GlobalPricingRule $rule ) {
 		$percentage = 'percentage' === $rule->getTieredPricingType();
-		$tiers      = $percentage ? $rule->getPercentageTieredPricingRules() : $rule->getFixedTieredPricingRules();
+		$amountOff  = 'amount' === $rule->getTieredPricingType();
+		$tiers      = $percentage ? $rule->getPercentageTieredPricingRules() : ( $amountOff ? $rule->getAmountTieredPricingRules() : $rule->getFixedTieredPricingRules() );
 
 		if ( empty( $tiers ) ) {
 			return;
@@ -95,7 +177,14 @@ class Pricing {
 		foreach ( $quantities as $index => $quantity ) {
 			$next    = $quantities[ $index + 1 ] ?? null;
 			$label   = null === $next ? number_format_i18n( $quantity ) . '+' : $this->quantityLabel( $quantity, $next - 1, $ranges );
-			$value   = $percentage ? esc_html( $values[ $index ] . '%' ) : wc_price( $values[ $index ] );
+			if ( $percentage ) {
+				$value = esc_html( $values[ $index ] . '%' );
+			} elseif ( $amountOff ) {
+				/* translators: %s: amount */
+				$value = sprintf( esc_html__( '%s off', 'tier-pricing-table' ), wc_price( $values[ $index ] ) );
+			} else {
+				$value = wc_price( $values[ $index ] );
+			}
 			$rows[]  = array( $label, $value, true );
 		}
 

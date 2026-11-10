@@ -20,13 +20,15 @@ class PricingTestLinks {
 			return $actions;
 		}
 
+		$rule = GlobalPricingRule::build( $post->ID );
+
 		// a skipped rule changes nothing, so there is nothing to test
-		if ( 'publish' === $post->post_status && 'skipped' === GlobalPricingRule::build( $post->ID )->getEffectiveStatus() ) {
+		if ( 'publish' === $post->post_status && 'skipped' === $rule->getEffectiveStatus() ) {
 			return $actions;
 		}
 
 		// a new tab: the test is a side trip from the list or the editor, and the editor may hold unsaved changes
-		$actions['tpt_pricing_test'] = sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( PricingTester::getUrl( $post->ID ) ), esc_html__( 'Test', 'tier-pricing-table' ) );
+		$actions['tpt_pricing_test'] = sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( PricingTester::getUrl( $post->ID, $rule->isOrderRule() ? 'cart' : 'product' ) ), esc_html__( 'Test', 'tier-pricing-table' ) );
 
 		return $actions;
 	}
@@ -34,7 +36,8 @@ class PricingTestLinks {
 	public function addListButton() {
 		$screen = get_current_screen();
 
-		if ( ! $screen || GlobalTieredPricingCPT::SLUG !== $screen->post_type || ! PricingTester::isAvailable() ) {
+		// nothing to test on the blank state, before the first rule
+		if ( ! $screen || GlobalTieredPricingCPT::SLUG !== $screen->post_type || ! PricingTester::isAvailable() || ! GlobalTieredPricingCPT::hasAnyRules() ) {
 			return;
 		}
 		?>

@@ -39,7 +39,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.2.1';
+	const VERSION = '8.3.1';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -245,7 +245,7 @@ class TierPricingTablePlugin {
 		return array(
 			__( 'Percentage discounts by quantity', 'tier-pricing-table' ),
 			__( 'Role and customer prices', 'tier-pricing-table' ),
-			__( 'Cart rules by role: minimums, payment and shipping methods', 'tier-pricing-table' ),
+			__( 'Payment and shipping methods by role', 'tier-pricing-table' ),
 			__( 'Tax options by role', 'tier-pricing-table' ),
 			__( 'Minimum, maximum and step quantities', 'tier-pricing-table' ),
 			__( 'Custom table columns', 'tier-pricing-table' ),

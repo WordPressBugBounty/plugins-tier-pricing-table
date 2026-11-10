@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Addons\ImportExport;
 
+use TierPricingTable\PriceManager;
+
 use TierPricingTable\TierPricingTablePlugin;
 use WC_Product;
 
@@ -26,6 +28,7 @@ class WoocommerceImportService {
 				'tiered_price_type'       => __( 'Tiered pricing type', 'tier-pricing-table' ),
 				'tiered_price_fixed'      => __( 'Fixed pricing rules', 'tier-pricing-table' ),
 				'tiered_price_percentage' => __( 'Percentage pricing rules', 'tier-pricing-table' ),
+				'tiered_price_amount'     => __( 'Amount pricing rules', 'tier-pricing-table' ),
 				'tiered_price_minimum'    => __( 'Minimum order quantity', 'tier-pricing-table' ),
 			),
 		);
@@ -40,6 +43,7 @@ class WoocommerceImportService {
 		
 		$columns['Tiered Pricing — Fixed pricing rules']      = 'tiered_price_fixed';
 		$columns['Tiered Pricing — Percentage pricing rules'] = 'tiered_price_percentage';
+		$columns['Tiered Pricing — Amount pricing rules']     = 'tiered_price_amount';
 		$columns['Tiered Pricing — Tiered pricing type']      = 'tiered_price_type';
 		$columns['Tiered Pricing — Minimum order quantity']   = 'tiered_price_minimum';
 		
@@ -65,9 +69,14 @@ class WoocommerceImportService {
 			$product->update_meta_data( '_percentage_price_rules', $percentage );
 		}
 		
+		if ( isset( $data['tiered_price_amount'] ) ) {
+			$amount = self::decodeExport( $data['tiered_price_amount'] );
+			$product->update_meta_data( '_amount_price_rules', $amount );
+		}
+		
 		if ( isset( $data['tiered_price_type'] ) ) {
 			
-			if ( in_array( $data['tiered_price_type'], array( 'fixed', 'percentage' ) ) ) {
+			if ( in_array( $data['tiered_price_type'], PriceManager::getPricingTypes(), true ) ) {
 				$product->update_meta_data( '_tiered_price_rules_type', $data['tiered_price_type'] );
 			}
 		}

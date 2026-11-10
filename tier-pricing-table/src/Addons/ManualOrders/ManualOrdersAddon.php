@@ -11,6 +11,13 @@ class ManualOrdersAddon extends AbstractAddon {
 
 	protected $items = array();
 
+	/**
+	 * Customer the order is re-calculated for, per order ID.
+	 *
+	 * @var int[]
+	 */
+	protected $customers = array();
+
 	public function getName(): string {
 		return __( 'Tiered pricing for manual orders', 'tier-pricing-table' );
 	}
@@ -117,11 +124,50 @@ class ManualOrdersAddon extends AbstractAddon {
 		return $quantity;
 	}
 
+	/**
+	 * The customer to price the order for: the one picked in the order form (sent with the re-calculation, so an
+	 * order that is not saved yet is priced for the right customer), or the order's saved customer.
+	 *
+	 * @param  int  $orderId
+	 * @param  array  $items  Posted order items form.
+	 *
+	 * @return int User ID, 0 for a guest.
+	 */
+	protected function getRecalculationCustomerId( int $orderId, array $items ): int {
+		if ( isset( $items['tiered_pricing_customer_id'] ) ) {
+			$customerId = absint( $items['tiered_pricing_customer_id'] );
+
+			return $customerId && get_userdata( $customerId ) ? $customerId : 0;
+		}
+
+		$order = wc_get_order( $orderId );
+
+		return $order ? (int) $order->get_customer_id() : 0;
+	}
+
 	public function run() {
 
 		// Store items before calculating
 		add_action( 'woocommerce_before_save_order_items', function ( $orderId, $items ) {
 			$this->items[ $orderId ] = $items;
+
+			if ( empty( $items['calculate_tiered_pricing'] ) ) {
+				return;
+			}
+
+			$this->customers[ $orderId ] = $this->getRecalculationCustomerId( (int) $orderId, (array) $items );
+
+			$order = wc_get_order( $orderId );
+
+			if ( $order ) {
+				/**
+				 * Fires before an order created in the admin is re-calculated with tiered pricing.
+				 *
+				 * @param  WC_Order  $order
+				 * @param  int  $customerId  The customer the order is priced for, 0 for a guest.
+				 */
+				do_action( 'tiered_pricing_table/manual_orders/before_recalculation', $order, $this->customers[ $orderId ] );
+			}
 		}, 10, 2 );
 
 		add_action( 'woocommerce_before_save_order_item', function ( WC_Order_Item $item ) {
@@ -137,7 +183,7 @@ class ManualOrdersAddon extends AbstractAddon {
 			// Need to be calculated with tiered pricing
 			if ( ! empty( $this->items[ $item->get_order_id() ]['calculate_tiered_pricing'] ) ) {
 
-				$GLOBALS['tpt_current_user_id'] = $item->get_order()->get_customer_id();
+				$GLOBALS['tpt_current_user_id'] = $this->customers[ $item->get_order_id() ] ?? $item->get_order()->get_customer_id();
 
 				$itemPrice = $this->getItemPrice( $item );
 
@@ -177,6 +223,7 @@ class ManualOrdersAddon extends AbstractAddon {
 			<tr style="display: none;">
 				<td>
 					<input type="checkbox" name="calculate_tiered_pricing">
+					<input type="hidden" name="tiered_pricing_customer_id" value="" disabled>
 				</td>
 			</tr>
 			<?php
@@ -188,6 +235,10 @@ class ManualOrdersAddon extends AbstractAddon {
 				jQuery(document).ready(function ($) {
 					$('#woocommerce-order-items').on('click', '.calculate-tiered-pricing', function () {
 						jQuery('[name=calculate_tiered_pricing]').prop('checked', true);
+
+						// Price for the customer picked in the form, even before the order is saved.
+						var $customer = jQuery('#customer_user');
+						jQuery('[name=tiered_pricing_customer_id]').val($customer.length ? ($customer.val() || '0') : '').prop('disabled', !$customer.length);
 
 						jQuery('#woocommerce-order-items button.calculate-action').trigger('click');
 					});

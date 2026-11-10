@@ -148,6 +148,63 @@ class RuleTester {
 		);
 	}
 
+	/**
+	 * Why a rule covers, or does not cover, a customer: the customer half of explain(), for order rules.
+	 *
+	 * @return array{matches: bool, reasons: string[]}
+	 */
+	public function explainCustomer( GlobalPricingRule $rule, WP_User $user ): array {
+		$roles   = GlobalPricingRule::rolesOf( $user );
+		$reasons = array();
+
+		if ( $user->ID && in_array( $user->ID, array_map( 'intval', $rule->getExcludedUsers() ), true ) ) {
+			$reasons[] = __( 'The customer is listed under the excluded customers.', 'tier-pricing-table' );
+		}
+		$excludedRoles = array_intersect( $roles, $rule->getExcludedUserRoles() );
+		if ( $excludedRoles ) {
+			/* translators: %s: role names */
+			$reasons[] = sprintf( __( 'The customer has an excluded role: %s.', 'tier-pricing-table' ), $this->roleNames( $excludedRoles ) );
+		}
+		if ( $reasons ) {
+			return array( 'matches' => false, 'reasons' => $reasons );
+		}
+
+		$includedRoles = $rule->getIncludedUserRoles();
+		$includedUsers = array_map( 'intval', $rule->getIncludedUsers() );
+
+		if ( empty( $includedRoles ) && empty( $includedUsers ) ) {
+			return array( 'matches' => true, 'reasons' => array( __( 'The rule applies to every customer (no roles or customers selected).', 'tier-pricing-table' ) ) );
+		}
+		if ( $user->ID && in_array( $user->ID, $includedUsers, true ) ) {
+			return array( 'matches' => true, 'reasons' => array( __( 'The customer is listed under the rule\'s customers.', 'tier-pricing-table' ) ) );
+		}
+		$roleHit = array_intersect( $roles, $includedRoles );
+		if ( $roleHit ) {
+			/* translators: %s: role names */
+			return array( 'matches' => true, 'reasons' => array( sprintf( __( 'The customer has the rule\'s role: %s.', 'tier-pricing-table' ), $this->roleNames( $roleHit ) ) ) );
+		}
+
+		$who = $user->ID
+			/* translators: %s: role names */
+			? ( $user->roles ? sprintf( __( 'This customer has the roles %s.', 'tier-pricing-table' ), $this->roleNames( $user->roles ) ) : __( 'This customer has no role.', 'tier-pricing-table' ) )
+			: __( 'A visitor who is not logged in only matches rules that include "Guests (not logged in)" or have no customer limits.', 'tier-pricing-table' );
+		$limits = array();
+		if ( $includedRoles ) {
+			/* translators: %s: role names */
+			$limits[] = sprintf( __( 'roles %s', 'tier-pricing-table' ), $this->roleNames( $includedRoles ) );
+		}
+		if ( $includedUsers ) {
+			/* translators: %d: number of customers */
+			$limits[] = sprintf( _n( '%d selected customer', '%d selected customers', count( $includedUsers ), 'tier-pricing-table' ), count( $includedUsers ) );
+		}
+
+		return array(
+			'matches' => false,
+			/* translators: %s: the limits, e.g. "roles Wholesale and 2 selected customers" */
+			'reasons' => array( sprintf( __( 'The rule is limited to %s.', 'tier-pricing-table' ), implode( ' ' . __( 'and', 'tier-pricing-table' ) . ' ', $limits ) ), $who ),
+		);
+	}
+
 	protected function termNames( array $ids, string $taxonomy ): string {
 		$names = array();
 		foreach ( $ids as $id ) {

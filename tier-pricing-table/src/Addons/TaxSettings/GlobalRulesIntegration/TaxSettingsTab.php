@@ -17,6 +17,10 @@ class TaxSettingsTab extends FormTab {
 		return __( 'Set tax status and class', 'tier-pricing-table' );
 	}
 
+	public function getKinds(): array {
+		return array( GlobalPricingRule::KIND_PRODUCT );
+	}
+
 	public function render( GlobalPricingRule $pricingRule ) {
 		?>
 		<div class="tiered-pricing-form-row">
@@ -24,7 +28,6 @@ class TaxSettingsTab extends FormTab {
 				<?php
 					$this->renderSectionTitle( __( 'Tax settings', 'tier-pricing-table' ), array(
 							'description'      => __( 'Override the default tax status and class for products matching this rule.', 'tier-pricing-table' ),
-							'only_for_premium' => true,
 					) );
 
 					$this->renderSelect( array(
@@ -37,7 +40,7 @@ class TaxSettingsTab extends FormTab {
 									'none'     => __( 'None', 'tier-pricing-table' ),
 							),
 							'value'    => $pricingRule->getTaxStatus(),
-							'disabled' => ! tpt_fs()->can_use_premium_code__premium_only(),
+							'disabled' => false,
 					), false );
 
 					$tax_classes     = \WC_Tax::get_tax_classes();
@@ -56,7 +59,7 @@ class TaxSettingsTab extends FormTab {
 							'title'    => __( 'Tax class', 'tier-pricing-table' ),
 							'options'  => $classes_options,
 							'value'    => $pricingRule->getTaxClass(),
-							'disabled' => ! tpt_fs()->can_use_premium_code__premium_only(),
+							'disabled' => false,
 					), false );
 				?>
 			</div>

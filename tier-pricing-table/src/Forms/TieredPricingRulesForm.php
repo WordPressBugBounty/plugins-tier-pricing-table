@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Forms;
 
 use TierPricingTable\Core\ServiceContainer;
+use TierPricingTable\PriceManager;
 
 class TieredPricingRulesForm {
 
@@ -11,7 +12,8 @@ class TieredPricingRulesForm {
 		$tieredPricingType = 'fixed',
 		$percentageRule = array(),
 		$fixedRules = array(),
-		$customPrefix = null
+		$customPrefix = null,
+		$amountRules = array()
 	) {
 		ServiceContainer::getInstance()->getFileManager()->includeTemplate( 'admin/components/tiered-pricing-rules-form.php',
 			array(
@@ -20,6 +22,7 @@ class TieredPricingRulesForm {
 				'tiered_pricing_type' => $tieredPricingType,
 				'percentage_rules'    => $percentageRule,
 				'fixed_rules'         => $fixedRules,
+				'amount_rules'        => $amountRules,
 				'custom_prefix'       => $customPrefix,
 				'entity_id'           => $entityId,
 			) );
@@ -37,7 +40,7 @@ class TieredPricingRulesForm {
 
 		$fields = array(
 			'type'                  => function ( $pricingType ) {
-				return in_array( $pricingType, array( 'fixed', 'percentage' ) ) ? $pricingType : 'fixed';
+				return in_array( $pricingType, PriceManager::getPricingTypes(), true ) ? $pricingType : 'fixed';
 			},
 			'percentage_quantities' => function ( $quantities ) {
 				return is_array( $quantities ) ? $quantities : array();
@@ -50,6 +53,12 @@ class TieredPricingRulesForm {
 			},
 			'fixed_prices'          => function ( $prices ) {
 				return is_array( $prices ) ? $prices : array();
+			},
+			'amount_quantities'     => function ( $quantities ) {
+				return is_array( $quantities ) ? $quantities : array();
+			},
+			'amount_discounts'      => function ( $discounts ) {
+				return is_array( $discounts ) ? $discounts : array();
 			},
 		);
 
@@ -89,5 +98,20 @@ class TieredPricingRulesForm {
 		}
 
 		$data['percentage_tiered_pricing_rules'] = $percentageRules;
+		
+		// Amount off per unit: any positive amount; the storefront never goes below zero.
+		$amountRules = array();
+		
+		foreach ( $data['amount_quantities'] as $key => $amount ) {
+			if ( ! empty( $amount ) && ! empty( $data['amount_discounts'][ $key ] ) && ! array_key_exists( $amount, $amountRules ) ) {
+				$discount = (float) wc_format_decimal( $data['amount_discounts'][ $key ] );
+				
+				if ( $discount > 0 ) {
+					$amountRules[ $amount ] = wc_format_decimal( $data['amount_discounts'][ $key ] );
+				}
+			}
+		}
+		
+		$data['amount_tiered_pricing_rules'] = $amountRules;
 	}
 }

@@ -17,7 +17,7 @@ class AppliesTo {
 	}
 
 	public function render( GlobalPricingRule $rule ) {
-		$this->renderLine( 'dashicons-archive', $this->productsText( $rule ), $this->productExceptionsText( $rule ) );
+		$this->renderLine( $rule->isOrderRule() ? 'dashicons-cart' : 'dashicons-archive', $this->productsText( $rule ), $this->productExceptionsText( $rule ) );
 		$this->renderLine( 'dashicons-admin-users', $this->customersText( $rule ), $this->customerExceptionsText( $rule ) );
 	}
 
@@ -47,7 +47,12 @@ class AppliesTo {
 			$this->named( __( 'Brands', 'tier-pricing-table' ), $this->termNames( $rule->getIncludedProductBrands() ) ),
 		) );
 
-		return $parts ? implode( ' · ', $parts ) : esc_html__( 'All products', 'tier-pricing-table' );
+		if ( $parts ) {
+			return implode( ' · ', $parts );
+		}
+
+		// an Order rule without product conditions counts every line of the cart
+		return $rule->isOrderRule() ? esc_html__( 'The whole cart', 'tier-pricing-table' ) : esc_html__( 'All products', 'tier-pricing-table' );
 	}
 
 	protected function productExceptionsText( GlobalPricingRule $rule ): string {

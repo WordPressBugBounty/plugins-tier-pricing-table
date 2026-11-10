@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Addons\UserBasedPricing;
 
+use TierPricingTable\PriceManager;
+
 use Exception;
 
 class UserBasedPricingRule {
@@ -15,6 +17,8 @@ class UserBasedPricingRule {
 	protected $tieredPricingType = 'fixed';
 	protected $percentageTieredPricingRules = array();
 	protected $fixedTieredPricingRules = array();
+	
+	protected $amountTieredPricingRules = array();
 	protected $taxStatus = '';
 	protected $taxClass = '';
 	
@@ -93,8 +97,7 @@ class UserBasedPricingRule {
 	}
 	
 	public function setTieredPricingType( string $tieredPricingType ) {
-		$this->tieredPricingType = in_array( $tieredPricingType,
-			array( 'fixed', 'percentage' ) ) ? $tieredPricingType : 'fixed';
+		$this->tieredPricingType = in_array( $tieredPricingType, PriceManager::getPricingTypes(), true ) ? $tieredPricingType : 'fixed';
 	}
 	
 	public function getPercentageTieredPricingRules(): array {
@@ -113,8 +116,23 @@ class UserBasedPricingRule {
 		$this->fixedTieredPricingRules = $fixedTieredPricingRules;
 	}
 	
+	public function getAmountTieredPricingRules(): array {
+		return $this->amountTieredPricingRules;
+	}
+	
+	public function setAmountTieredPricingRules( array $amountTieredPricingRules ) {
+		$this->amountTieredPricingRules = $amountTieredPricingRules;
+	}
+	
 	public function getTieredPricingRules(): array {
-		return $this->getTieredPricingType() === 'percentage' ? $this->getPercentageTieredPricingRules() : $this->getFixedTieredPricingRules();
+		switch ( $this->getTieredPricingType() ) {
+			case 'percentage':
+				return $this->getPercentageTieredPricingRules();
+			case 'amount':
+				return $this->getAmountTieredPricingRules();
+		}
+		
+		return $this->getFixedTieredPricingRules();
 	}
 	
 	public function getTaxStatus(): string {
@@ -150,6 +168,7 @@ class UserBasedPricingRule {
 			'tiered_pricing_type' => $this->getTieredPricingType(),
 			'percentage_rules'    => $this->getPercentageTieredPricingRules(),
 			'fixed_rules'         => $this->getFixedTieredPricingRules(),
+			'amount_rules'        => $this->getAmountTieredPricingRules(),
 			
 			// MOQ
 			'minimum'             => $this->getMinimumOrderQuantity(),
@@ -183,6 +202,7 @@ class UserBasedPricingRule {
 			'tiered_price_rules_type'    => $this->getTieredPricingType(),
 			'percentage_price_rules'     => $this->getPercentageTieredPricingRules(),
 			'fixed_price_rules'          => $this->getFixedTieredPricingRules(),
+			'amount_price_rules'         => $this->getAmountTieredPricingRules(),
 			
 			// MOQ
 			'tiered_price_minimum_qty'   => $this->getMinimumOrderQuantity(),
@@ -215,6 +235,7 @@ class UserBasedPricingRule {
 		$rule->setTieredPricingType( UserBasedPriceManager::getPricingType( $productId, $userId ) );
 		$rule->setPercentageTieredPricingRules( UserBasedPriceManager::getPercentagePriceRules( $productId, $userId ) );
 		$rule->setFixedTieredPricingRules( UserBasedPriceManager::getFixedPriceRules( $productId, $userId ) );
+		$rule->setAmountTieredPricingRules( UserBasedPriceManager::getAmountPriceRules( $productId, $userId ) );
 		
 		// MOQ
 		$rule->setMinimumOrderQuantity( UserBasedPriceManager::getProductQtyMin( $productId, $userId ) );
@@ -240,6 +261,7 @@ class UserBasedPricingRule {
 		$rule->setTieredPricingType( isset( $data['tiered_pricing_type'] ) ? (string) $data['tiered_pricing_type'] : 'fixed' );
 		$rule->setPercentageTieredPricingRules( isset( $data['percentage_tiered_pricing_rules'] ) ? (array) $data['percentage_tiered_pricing_rules'] : array() );
 		$rule->setFixedTieredPricingRules( isset( $data['fixed_tiered_pricing_rules'] ) ? (array) $data['fixed_tiered_pricing_rules'] : array() );
+		$rule->setAmountTieredPricingRules( isset( $data['amount_tiered_pricing_rules'] ) ? (array) $data['amount_tiered_pricing_rules'] : array() );
 		
 		// MOQ
 		$rule->setMinimumOrderQuantity( isset( $data['minimum_order_quantity'] ) ? (int) $data['minimum_order_quantity'] : null );

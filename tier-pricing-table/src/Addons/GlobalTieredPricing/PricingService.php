@@ -112,6 +112,9 @@ class PricingService {
             $updateTieredPricing = true;
         }
         if ( $updateRegularPricing ) {
+            // the tax settings are free
+            $pricingRule->pricingData['tax_status'] = $globalPricingRule->getTaxStatus();
+            $pricingRule->pricingData['tax_class'] = $globalPricingRule->getTaxClass();
         }
         if ( $updateMinimum || $updateMixAndMatch ) {
         }
@@ -140,6 +143,9 @@ class PricingService {
      * @return PricingRule
      */
     public function addPricing( PricingRule $pricingRule, GlobalPricingRule $globalPricingRule ) : PricingRule {
+        // the tax settings are free
+        $pricingRule->pricingData['tax_status'] = $globalPricingRule->getTaxStatus();
+        $pricingRule->pricingData['tax_class'] = $globalPricingRule->getTaxClass();
         $pricingRule->setRules( $globalPricingRule->getTieredPricingRules() );
         $pricingRule->setType( $globalPricingRule->getTieredPricingType() );
         $pricingRule->provider = 'global-rules';

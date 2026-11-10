@@ -1,10 +1,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.2.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
-"POT-Creation-Date: 2026-10-28T13:31:01+00:00\n"
-"PO-Revision-Date: 2026-11-02 14:56+0000\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.3.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tier-pricing-table\n"
+"POT-Creation-Date: 2026-11-10T15:53:33+00:00\n"
+"PO-Revision-Date: 2026-11-07 16:00+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: fr_FR\n"
 "Language: fr_FR\n"
@@ -120,7 +120,7 @@ msgstr ""
 "Affichez un message de vente incitative dans le panier indiquant le nombre "
 "d'articles nécessaires pour atteindre le niveau tarifaire suivant."
 
-#: src/Addons/CartUpsells/CartUpsellsService.php:229
+#: src/Addons/CartUpsells/CartUpsellsService.php:235
 #: src/Addons/CartUpsells/UpsellsSubsection.php:43
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
 msgid ""
@@ -163,6 +163,7 @@ msgstr ""
 "panier au niveau suivant et met à jour le panier."
 
 #: src/Addons/CartUpsells/UpsellsSubsection.php:58
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:82
 msgid "Progress bar"
 msgstr "Barre de progression"
 
@@ -293,9 +294,11 @@ msgid "Prefix for lowest price"
 msgstr "Préfixe du prix le plus bas"
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:61
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:399
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:444
 #: src/Managers/FormatPriceManager.php:320
+#: views/addons/global-rules/order-discount-form.php:55
 msgid "From"
 msgstr "Depuis"
 
@@ -385,17 +388,17 @@ msgstr ""
 msgid "Add Custom Columns"
 msgstr "Ajouter des colonnes personnalisées"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:168
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:174
 msgid "(first row)"
 msgstr "(première rangée)"
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:179
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:185
 msgid "Custom columns are available only in the premium version."
 msgstr ""
 "Les colonnes personnalisées sont disponibles uniquement dans la version "
 "premium."
 
-#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:182
+#: src/Addons/CustomColumns/Columns/CustomDataColumn.php:188
 msgid "Upgrade you plan"
 msgstr "Mettez à niveau votre plan"
 
@@ -441,19 +444,21 @@ msgid "Saving per item"
 msgstr "Économie par article"
 
 #: src/Addons/CustomColumns/Schema.php:23
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:381
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746
-#: src/PricingTable.php:457 src/Settings/CustomOptions/TPTTextTemplate.php:207
+#: src/PricingTable.php:464 src/Settings/CustomOptions/TPTTextTemplate.php:207
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278
-#: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/components/tiered-pricing-rules-form.php:60
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:69
 #: src/Addons/CustomColumns/js-source/index.js:286
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:728
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:894
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1167
@@ -527,7 +532,7 @@ msgid "Suspend"
 msgstr "Suspendre"
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:54
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:412
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:561
 msgid "The rule suspended successfully."
 msgstr "La règle a été suspendue avec succès."
 
@@ -537,8 +542,8 @@ msgstr "S'applique à"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:44
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:123
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:222
 msgid "Products"
 msgstr "Produits"
 
@@ -547,35 +552,39 @@ msgid "Categories and subcategories"
 msgstr "Catégories et sous-catégories"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:45
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:32
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:139
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:160
 msgid "Categories"
 msgstr "Catégories"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:60
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:159
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
 msgid "Tags"
 msgstr "Balises"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:47
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
 msgid "Brands"
 msgstr "Marques"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
+msgid "The whole cart"
+msgstr "Tout le panier"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
 msgid "All products"
 msgstr "Tous les produits"
 
 #. translators: %s: list of names
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:62
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:78
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:83
 #, php-format
 msgid "except %s"
 msgstr "sauf %s"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:72
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryVisibilityFields.php:32
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:23
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:27
@@ -583,101 +592,221 @@ msgstr "sauf %s"
 msgid "Roles"
 msgstr "Rôles"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:68
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:62
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:110
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:73
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:63
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:111
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:88
 msgid "Customers"
 msgstr "Clients"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:71
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:76
 msgid "All customers"
 msgstr "Tous les clients"
 
 #. translators: %d: number of further items
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:96
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:101
 #, php-format
 msgid "+%d more"
 msgstr "+%d de plus"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:15
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:53
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:16
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:15
 msgid "Pricing"
 msgstr "Tarifs"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:40
+#. translators: %s: amount
+#. translators: %s: quantity
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:236
+#, php-format
+msgid "Min <b>%s</b>"
+msgstr "Min. <b>%s</b>"
+
+#. translators: %s: number of items
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:55
+#, php-format
+msgid "Min <b>%s items</b>"
+msgstr "Min. <b>%s articles</b>"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:59
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:18
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:32
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:216
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:455
+msgid "Minimum order"
+msgstr "Commande minimum"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:64
+msgid "<b>always</b>"
+msgstr "<b>toujours</b>"
+
+#. translators: %s: subtotal or number of items
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:70
+#, php-format
+msgid "from <b>%s</b>"
+msgstr "à partir de <b>%s</b>"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:74
+msgid "with the progress bar"
+msgstr "avec la barre de progression"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:76
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:20
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:40
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:196
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:431
+msgid "Free shipping"
+msgstr "Livraison gratuite"
+
+#. translators: 1: "fixed amount off" or "percentage off", 2: "by subtotal" or
+#. "by item count"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:89
+#, php-format
+msgid "Cart discount (%1$s, %2$s)"
+msgstr "Remise sur le panier (%1$s, %2$s)"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:90
+msgid "percentage off"
+msgstr "remise en pourcentage"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:90
+msgid "fixed amount off"
+msgstr "remise d'un montant fixe"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:91
+msgid "by item count"
+msgstr "par nombre d'articles"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:91
+msgid "by subtotal"
+msgstr "par sous-total"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
+msgid "Items"
+msgstr "Articles"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
+#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:173
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
+#: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
+msgid "Subtotal"
+msgstr "Sous-total"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:101
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:20
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
+#: src/PricingTable.php:466
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
+#: views/addons/global-rules/order-discount-form.php:61
+#: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
+#: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
+#: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
+#: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
+#: src/Addons/RequestAQuote/build/index.js:1
+#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
+#: src/Addons/TierLabels/build/index.js:1
+#: src/Addons/TierLabels/js-source/index.js:190
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:227
+msgid "Discount"
+msgstr "Rabais"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:121
 msgid "Regular"
 msgstr "Régulier"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:43
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:124
 msgid "Sale"
 msgstr "Promo"
 
 #. translators: 1: percentage, 2: "sale price" or "regular price"
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:48
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:129
 #, php-format
 msgid "Discount <b>%1$s%%</b> off the %2$s"
 msgstr "Remise de <b>%1$s %%</b> sur le %2$s"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:131
 msgid "sale price"
 msgstr "prix promo"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:131
 msgid "regular price"
 msgstr "prix régulier"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:136
 msgid "Base price"
 msgstr "Prix de base"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:78
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:127
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:120
-#: src/Integrations/Plugins/WPAllImport.php:161
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:160
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:153
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:168
+#: src/Integrations/Plugins/WPAllImport.php:169
 #: views/admin/components/regular-pricing-form.php:119
 #: views/admin/components/regular-pricing-form.php:129
 msgid "Regular price"
 msgstr "Prix ​​régulier"
 
 #. translators: %s: percentage
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:87
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:169
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:94
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:112
 #, php-format
 msgid "%s%% off"
 msgstr "%s %% de remise"
 
+#. translators: %s: amount
+#. translators: %s: amount saved per item
+#. translators: %s: discount percentage
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:184
+#: src/PricingTable.php:346 src/PricingTable.php:352
+#, php-format
+msgid "%s off"
+msgstr "%s de remise"
+
 #. translators: 1: "fixed" or "percentage", 2: "individual" or "mix & match"
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:104
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:193
 #, php-format
 msgid "Tiers (%1$s, %2$s)"
 msgstr "Niveaux (%1$s, %2$s)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:194
 msgid "percentage"
 msgstr "pourcentage"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:194
 msgid "fixed"
 msgstr "fixe"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:106
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:195
 msgid "individual"
 msgstr "individuel"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:106
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:195
 msgid "mix & match"
 msgstr "Mix & Match"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:115
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:159
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:204
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:248
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:379
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:109
-#: src/PricingTable.php:455 src/Settings/CustomOptions/TPTTextTemplate.php:143
+#: src/PricingTable.php:462 src/Settings/CustomOptions/TPTTextTemplate.php:143
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268
 #: views/addons/category-tiers/add-free.php:24
@@ -685,11 +814,13 @@ msgstr "Mix & Match"
 #: views/addons/category-tiers/edit-free.php:34
 #: views/addons/category-tiers/edit.php:59
 #: views/addons/category-tiers/edit.php:82
-#: views/admin/components/tiered-pricing-rules-form.php:65
+#: views/admin/components/tiered-pricing-rules-form.php:73
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:285
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:722
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:351
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:461
@@ -704,79 +835,67 @@ msgstr "Mix & Match"
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:78
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:190
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:211
+#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:225
+#: src/Addons/Tools/js-source/components/PricingTest.js:352
+#: src/Addons/Tools/js-source/components/PricingTest.js:534
+#: src/Addons/Tools/js-source/components/PricingTest.js:535
 msgid "Quantity"
 msgstr "Quantité"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:116
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
-#: src/PricingTable.php:459
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
-#: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:734
-#: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:34
-#: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
-#: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
-#: src/Addons/RequestAQuote/build/index.js:1
-#: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:79
-#: src/Addons/TierLabels/build/index.js:1
-#: src/Addons/TierLabels/js-source/index.js:190
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:213
-msgid "Discount"
-msgstr "Rabais"
-
 #. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:147
-#, php-format
-msgid "Min <b>%s</b>"
-msgstr "Min. <b>%s</b>"
-
-#. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:151
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:240
 #, php-format
 msgid "Max <b>%s</b>"
 msgstr "Max. <b>%s</b>"
 
 #. translators: %s: quantity
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:155
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:244
 #, php-format
 msgid "Step <b>%s</b>"
 msgstr "Pas <b>%s</b>"
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:21
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:236
+#: src/Addons/Tools/js-source/components/PricingTest.js:250
 msgid "Rule"
 msgstr "Règle"
 
+#. translators: %d: priority number
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:30
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:266
+#, php-format, js-format
+msgid "Priority %d"
+msgstr "Priorité %d"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:34
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:475
+msgid "Cart rule"
+msgstr "Règle de panier"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:35
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:43
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:471
+msgid "Product prices"
+msgstr "Prix des produits"
+
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:56
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:80
 #, php-format
 msgid "Starts %s"
 msgstr "Débute le %s"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:60
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:84
 #, php-format
 msgid "Ended %s"
 msgstr "Terminée le %s"
 
-#. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:74
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:252
-#, php-format, js-format
-msgid "Priority %d"
-msgstr "Priorité %d"
-
 #. translators: %d: number of rules
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:94
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:117
 #, php-format
 msgid "Overridden by %d rule"
 msgid_plural "Overridden by %d rules"
@@ -784,12 +903,12 @@ msgstr[0] "Remplacée par %d règle"
 msgstr[1] "Remplacée par %d règles"
 
 #. translators: %s: user's display name
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:118
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:141
 #, php-format
 msgid "%s is currently editing"
 msgstr "%s est en train de modifier"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:12
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:13
 #: src/TierPricingTablePlugin.php:148
 #: views/admin/welcome-page/welcome-page.php:195
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -798,39 +917,69 @@ msgstr "%s est en train de modifier"
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:18
-msgid "prefer product"
-msgstr "préférer le produit"
-
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:19
-msgid "prefer product role prices"
-msgstr "préférer les prix de rôle du produit"
-
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:20
-msgid "override product"
-msgstr "remplacer le produit"
-
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:25
-msgid "Prefers product pricing"
-msgstr "Préfère la tarification du produit"
+msgid "product kept"
+msgstr "produit conservé"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:28
-msgid "Overrides product pricing"
-msgstr "Remplace la tarification du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:26
+msgid "product role prices kept"
+msgstr "prix par rôle du produit conservés"
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:31
-msgid "Custom priorities"
-msgstr "Priorités personnalisées"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:27
+msgid "rule overrides"
+msgstr "la règle remplace"
 
-#. translators: 1, 2, 3: the three priority choices
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:32
+msgid "Keeps product settings"
+msgstr "Conserve les réglages du produit"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:35
+msgid "Overrides product settings"
+msgstr "Remplace les réglages du produit"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:38
+msgid "Per setting"
+msgstr "Réglage par réglage"
+
+#. translators: 1, 2, 3: the three choices
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:40
 #, php-format
 msgid "Base prices: %1$s. Tiers: %2$s. Quantity limits: %3$s."
 msgstr "Prix de base : %1$s. Niveaux : %2$s. Limites de quantité : %3$s."
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:40
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:34
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:45
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:47
+msgid "Store default"
+msgstr "Valeur par défaut de la boutique"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:59
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:75
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:225
+msgid "Free shipping bar"
+msgstr "Barre de livraison gratuite"
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:59
+msgid "Customers see a progress bar towards the free shipping threshold."
+msgstr ""
+"Vos clients voient une barre de progression vers le seuil de livraison "
+"gratuite."
+
+#. translators: %s: the discount line label
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:64
+#, php-format
+msgid "Label: %s"
+msgstr "Libellé : %s"
+
+#. translators: %s: the discount line label
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:64
+msgid "The discount line in the cart, at checkout and in e-mails."
+msgstr ""
+"La ligne de remise dans le panier, à la validation de la commande et dans "
+"les e-mails."
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/Settings.php:68
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:48
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:27
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:34
 #: src/Settings/Sections/GeneralSection/GeneralSection.php:149
@@ -838,7 +987,7 @@ msgid "Default"
 msgstr "Défaut"
 
 #. translators: %d: number of rules
-#: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:392
+#: src/Addons/GlobalTieredPricing/CPT/Form/Form.php:442
 #, php-format
 msgid ""
 "%d other rule has a higher priority and is applied instead of this rule for "
@@ -857,135 +1006,315 @@ msgstr[1] ""
 "celle-ci pour les produits et les clients qu'elles ont en commun. Voir "
 "« Remplacée par » dans l'encadré Statut de la règle."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:147
+#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:165
 msgid "Premium feature"
 msgstr "Fonctionnalité premium"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:154
+#: src/Addons/GlobalTieredPricing/CPT/Form/FormTab.php:172
 msgid "Upgrade plan"
 msgstr "Plan de mise à niveau"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:43
-msgid "Making a pricing rule"
-msgstr "Créer une règle de tarification"
+#: src/Addons/GlobalTieredPricing/CPT/Form/RuleTypePointer.php:73
+msgid "Start with the rule type"
+msgstr "Commencez par le type de règle"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:44
-#: views/admin/notifications/black-friday.php:43
-#: views/admin/notifications/feedback-discount.php:41
-msgid "Dismiss"
-msgstr "Rejeter"
+#: src/Addons/GlobalTieredPricing/CPT/Form/RuleTypePointer.php:79
+msgid "The tabs of the form follow the type you pick."
+msgstr "Les onglets du formulaire dépendent du type choisi."
 
-#. translators: 1: link "Pricing", 2: link "Quantity limits"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:52
-#, php-format
-msgid "Set the prices, tiers or quantity limits on the %1$s and %2$s tabs."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:24
+msgid "Tiers and the discount line label"
+msgstr "Niveaux et libellé de la ligne de remise"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:34
+msgid "Discount tiers"
+msgstr "Niveaux de remise"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:35
+msgid ""
+"The lines are counted after tiered prices, before shipping. The highest tier"
+" reached is used. Whether the subtotal includes tax is set on the Cart rules"
+" settings page."
 msgstr ""
-"Définissez les prix, les niveaux ou les limites de quantité dans les onglets"
-" %1$s et %2$s."
+"Les lignes sont comptées après les prix échelonnés et avant la livraison. Le"
+" niveau le plus élevé atteint s'applique. L'inclusion de la taxe dans le "
+"sous-total se règle sur la page de réglages des règles de panier."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:54
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:108
-msgid "Quantity limits"
-msgstr "Limites de quantité"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:40
+msgid "Label in the cart"
+msgstr "Libellé dans le panier"
 
-#. translators: 1: link "products", 2: link "customers"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:62
-#, php-format
-msgid "Choose the %1$s and %2$s it covers. An empty list covers all of them."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:44
+msgid "Discount line label"
+msgstr "Libellé de la ligne de remise"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:47
+msgid ""
+"Shown in the cart, at checkout and in e-mails. Placeholders: {discount}, "
+"{threshold}."
 msgstr ""
-"Choisissez les %1$s et les %2$s qu'elle couvre. Une liste vide les couvre "
-"tous."
+"Affiché dans le panier, à la validation de la commande et dans les e-mails. "
+"Variables : {discount}, {threshold}."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:63
-#: views/admin/notifications/activation-notification.php:41
-msgid "products"
-msgstr "produits"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:64
-msgid "customers"
-msgstr "clients"
-
-#. translators: %s: link "Priority Settings"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:72
-#, php-format
-msgid "Decide how it meets product-level pricing on the %s tab."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:51
+msgid ""
+"The discount is applied as an automatic coupon, so WooCommerce computes it, "
+"shows it as one line and counts it in Analytics. The checkout block shows "
+"the rule title as the coupon code."
 msgstr ""
-"Décidez comment elle se combine avec la tarification au niveau du produit "
-"dans l'onglet %s."
+"La remise est appliquée comme un coupon automatique : WooCommerce la "
+"calcule, l'affiche sur une seule ligne et la compte dans Analytics. Le bloc "
+"de validation de commande affiche le titre de la règle comme code promo."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:73
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:13
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:22
-msgid "Priority Settings"
-msgstr "Paramètres de priorité"
-
-#. translators: %s: link "Rule status box"
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:81
+#. translators: %s: link "Customize the cart messages"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:55
 #, php-format
 msgid ""
-"Publish, then use \"Test this rule\" in the %s to see what a customer pays."
+"%s: the message that leads to the next tier, the subtotal basis and how the "
+"discount behaves next to customer coupons, with a live preview of the cart, "
+"the checkout and the mini cart."
 msgstr ""
-"Publiez, puis utilisez « Tester cette règle » dans l'%s pour voir ce qu'un "
-"client paie."
+"%s : le message qui mène au niveau suivant, la base du sous-total et le "
+"comportement de la remise avec les coupons des clients, avec un aperçu en "
+"direct du panier, de la validation de commande et du mini panier."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:82
-msgid "Rule status box"
-msgstr "encadré Statut de la règle"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:56
+msgid "Customize the cart messages"
+msgstr "Personnaliser les messages du panier"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:89
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:22
+msgid "An amount or a number of items before checkout"
+msgstr "Un montant ou un nombre d'articles avant la validation de la commande"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:34
 msgid ""
-"When several rules match the same product and customer, the rule with the "
-"lowest priority number is applied. The Rule status box lists the rules that "
-"override the one you are editing."
+"The cart and the checkout, classic pages and blocks, block the order until "
+"the counted lines reach the minimum. Every matching cart rule's minimum must"
+" be met. The messages are set on the Cart rules settings page."
 msgstr ""
-"Lorsque plusieurs règles correspondent au même produit et au même client, la"
-" règle avec le numéro de priorité le plus bas s'applique. L'encadré Statut "
-"de la règle liste les règles qui remplacent celle que vous modifiez."
+"Le panier et la validation de la commande, pages classiques et blocs, "
+"bloquent la commande tant que les lignes comptées n'atteignent pas le "
+"minimum. Le minimum de chaque règle de panier correspondante doit être "
+"respecté. Les messages se règlent sur la page de réglages des règles de "
+"panier."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:91
-msgid "Read the guide"
-msgstr "Lire le guide"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:39
+msgid "Minimum amount"
+msgstr "Montant minimum"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Guide.php:93
-msgid "Don't show again"
-msgstr "Ne plus afficher"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:42
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:51
+msgid "No minimum"
+msgstr "Aucun minimum"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:48
+msgid "Minimum items"
+msgstr "Nombre d'articles minimum"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:55
+msgid ""
+"The counted lines are the ones matching the Products tab, or the whole cart "
+"when it is empty. The amount follows the subtotal basis of the Cart rules "
+"settings."
+msgstr ""
+"Les lignes comptées sont celles qui correspondent à l'onglet Produits, ou "
+"tout le panier s'il est vide. Le montant suit la base de sous-total des "
+"réglages des règles de panier."
+
+#. translators: %s: link "Edit the minimum order messages"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:59
+#, php-format
+msgid "%s, with a live preview of the notice in the cart and at checkout."
+msgstr ""
+"%s, avec un aperçu en direct de l'avis dans le panier et à la validation de "
+"la commande."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderMinimum.php:60
+msgid "Edit the minimum order messages"
+msgstr "Modifier les messages de commande minimum"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:24
+msgid "Always, or from a subtotal or item count, and the progress bar"
+msgstr ""
+"Toujours, ou à partir d'un sous-total ou d'un nombre d'articles, et la barre"
+" de progression"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:35
+msgid ""
+"The rule can grant free shipping: on every order it covers, or once the "
+"counted lines reach a subtotal or a number of items. Works with or without "
+"discount tiers; it only adds free shipping and never takes away what the "
+"shipping settings already give."
+msgstr ""
+"La règle peut accorder la livraison gratuite : sur chaque commande "
+"concernée, ou dès que les lignes comptées atteignent un sous-total ou un "
+"nombre d'articles. Elle fonctionne avec ou sans niveaux de remise ; elle "
+"ajoute seulement la livraison gratuite et ne retire jamais ce que les "
+"réglages de livraison accordent déjà."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:41
+msgid "Grant free shipping through this rule"
+msgstr "Accorder la livraison gratuite avec cette règle"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:50
+msgid "When"
+msgstr "Quand"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:53
+msgid "On every order under this rule"
+msgstr "Sur chaque commande concernée par cette règle"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:54
+msgid "From a subtotal of the counted lines"
+msgstr "À partir d'un sous-total des lignes comptées"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:55
+msgid "From a number of items in the counted lines"
+msgstr "À partir d'un nombre d'articles dans les lignes comptées"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:64
+msgid "Subtotal or number of items"
+msgstr "Sous-total ou nombre d'articles"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:65
+msgid ""
+"A subtotal in the store currency, or a number of items, as chosen above."
+msgstr ""
+"Un sous-total dans la devise de la boutique, ou un nombre d'articles, selon "
+"votre choix ci-dessus."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:77
+msgid ""
+"A progress bar towards the free shipping threshold (\"Add $40 more for free "
+"shipping\"), then a message once it is reached. It follows the rule the cart"
+" is under. Where it shows and how it looks is set for the whole store on the"
+" Cart rules settings page."
+msgstr ""
+"Une barre de progression vers le seuil de livraison gratuite (« Ajoutez 40 $"
+" pour la livraison gratuite »), puis un message une fois le seuil atteint. "
+"Elle suit la règle dont dépend le panier. Les emplacements et l'apparence se"
+" règlent pour toute la boutique sur la page de réglages des règles de "
+"panier."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:83
+msgid "Show the free shipping bar for this rule"
+msgstr "Afficher la barre de livraison gratuite pour cette règle"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:93
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:240
+msgid "Message until reached"
+msgstr "Message avant le seuil"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:96
+msgid ""
+"Placeholders: {remaining}, {threshold}, {progress}. Leave it empty for the "
+"store message."
+msgstr ""
+"Variables : {remaining}, {threshold}, {progress}. Laissez vide pour utiliser"
+" le message de la boutique."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:103
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:243
+msgid "Message when reached"
+msgstr "Message une fois le seuil atteint"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:106
+msgid "Placeholder: {threshold}. Leave it empty for the store message."
+msgstr ""
+"Variable : {threshold}. Laissez vide pour utiliser le message de la "
+"boutique."
+
+#. translators: 1: list of places, 2: link "Customize the free shipping bar",
+#. 3: shortcode
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:113
+#, php-format
+msgid ""
+"The bar shows in: %1$s. %2$s: the places, the colours and the store "
+"messages, with a live preview. The shortcode %3$s and the Free Shipping Bar "
+"block put it anywhere else, such as the header or the page of the Cart "
+"block; they refresh when something is added to the cart."
+msgstr ""
+"La barre s'affiche dans : %1$s. %2$s : les emplacements, les couleurs et les"
+" messages de la boutique, avec un aperçu en direct. Le shortcode %3$s et le "
+"bloc Free Shipping Bar l'affichent n'importe où ailleurs, par exemple dans "
+"l'en-tête ou sur la page du bloc Panier ; ils se rafraîchissent lorsqu'un "
+"article est ajouté au panier."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:115
+msgid "Customize the free shipping bar"
+msgstr "Personnaliser la barre de livraison gratuite"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:153
+msgid "no place of its own yet (only the shortcode and the block)"
+msgstr "pas encore d'emplacement propre (uniquement le shortcode et le bloc)"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:166
+msgid "Locations not covered by your other zones"
+msgstr "Zones non couvertes par vos autres zones"
+
+#. translators: %s: zone names
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:181
+#, php-format
+msgid "Free shipping methods that accept a free shipping coupon: %s."
+msgstr ""
+"Méthodes de livraison gratuite qui acceptent un coupon de livraison "
+"gratuite : %s."
+
+#. translators: %s: link to the shipping settings
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:185
+#, php-format
+msgid ""
+"No Free shipping method accepts a coupon yet, so the threshold would change "
+"nothing. In %s, add a Free shipping method to the zone and set \"Free "
+"shipping requires\" to \"A valid free shipping coupon\" (or \"… OR "
+"coupon\")."
+msgstr ""
+"Aucune méthode de livraison gratuite n'accepte encore de coupon : le seuil "
+"ne changerait donc rien. Dans %s, ajoutez une méthode de livraison gratuite "
+"à la zone et réglez « La livraison gratuite nécessite » sur « Un coupon de "
+"livraison gratuite valide » (ou « … OU coupon »)."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:186
+msgid "WooCommerce → Settings → Shipping"
+msgstr "WooCommerce → Réglages → Expédition"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:19
 msgid "Configure regular and tiered pricing rules"
 msgstr "Configurer des règles de tarification régulières et échelonnées"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:26
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:30
 msgid "Base Pricing"
 msgstr "Prix ​​de base"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:27
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:31
 msgid "Override the default regular product prices."
 msgstr "Remplacez les prix réguliers par défaut des produits."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:39
-#: src/Addons/ImportExport/WoocommerceImportService.php:24
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:43
+#: src/Addons/ImportExport/WoocommerceImportService.php:26
 #: src/Addons/ReactProductEditorAddon/Sections/MainSection.php:38
 #: src/Addons/ReactProductEditorAddon/TieredPricingGroup.php:21
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:116
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:164
 #: src/Admin/ProductPage/TieredPricingTab.php:35
-#: src/Integrations/Plugins/WPAllImport.php:336 src/Settings/Settings.php:307
+#: src/Integrations/Plugins/WPAllImport.php:352 src/Settings/Settings.php:314
 msgid "Tiered Pricing"
 msgstr "Tarification échelonnée"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:44
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:48
 msgid "Count quantities"
 msgstr "Comptage des quantités"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:46
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:50
 msgid "Per product"
 msgstr "Par produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:51
 msgid "Across all products in this rule (mix and match)"
 msgstr "Sur tous les produits de cette règle (mix and match)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:50
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Pricing.php:54
 msgid ""
 "Mix and match adds up the quantities of every product this rule covers to "
 "reach a tier. Per product counts each product on its own."
@@ -995,16 +1324,25 @@ msgstr ""
 "séparément."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:18
-msgid "Select products, categories, tags, or brands this rule applies to"
-msgstr ""
-"Sélectionnez des produits, des catégories, des tags ou des marques auxquels "
-"cette règle s'applique."
+msgid "Products, categories, tags or brands this rule covers"
+msgstr "Produits, catégories, étiquettes ou marques concernés par cette règle"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:23
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:22
 msgid "Applies to products"
 msgstr "S'applique aux produits"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:26
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:25
+msgid ""
+"For a cart rule these lists decide which cart lines count towards the tiers "
+"and the minimum, and which lines get the discount. Leave them empty to count"
+" the whole cart, except the products in the Exclusions section."
+msgstr ""
+"Pour une règle de panier, ces listes déterminent quelles lignes du panier "
+"comptent pour les niveaux et le minimum, et quelles lignes reçoivent la "
+"remise. Laissez-les vides pour compter tout le panier, sauf les produits de "
+"la section Exclusions."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:28
 msgid ""
 "If no products, categories, tags, or brands are selected, this rule will "
 "apply to all products in your store, except those listed in the Exclusions "
@@ -1014,20 +1352,20 @@ msgstr ""
 "s'appliquera à tous les produits de votre boutique, à l'exception de ceux "
 "répertoriés dans la section Exclusions."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:153
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:174
 msgid "Search categories&hellip;"
 msgstr "Rechercher des catégories…"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:51
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:52
 msgid "Subcategories"
 msgstr "Sous-catégories"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:54
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
 msgid "Include subcategories"
 msgstr "Inclure les sous-catégories"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:56
 msgid ""
 "Products in subcategories of the selected categories match too. The excluded"
 " categories below follow the same switch."
@@ -1035,35 +1373,41 @@ msgstr ""
 "Les produits des sous-catégories des catégories sélectionnées correspondent "
 "aussi. Les catégories exclues ci-dessous suivent le même réglage."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:74
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:173
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
 msgid "Search tags&hellip;"
 msgstr "Rechercher des balises…"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:116
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:215
 msgid "Search brands&hellip;"
 msgstr "Rechercher des marques…"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:120
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:221
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:141
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:242
 msgid "Search products&hellip;"
 msgstr "Rechercher des produits…"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:131
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:86
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:152
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:87
 msgid "Exclusions"
 msgstr "Exclusions"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:14
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:121
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:128
+msgid "Quantity limits"
+msgstr "Limites de quantité"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:18
 msgid "Set minimum, maximum, and quantity step limits"
 msgstr "Définir des limites minimales, maximales et d'étapes de quantité"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:23
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:27
 msgid "Quantity Limits"
 msgstr "Limites de quantité"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:25
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:29
 msgid ""
 "Applies to each product individually. If mix & match is enabled, the minimum"
 " quantity requirement will be shared across variations of a variable "
@@ -1073,11 +1417,11 @@ msgstr ""
 "la quantité minimale requise sera partagée entre les variantes d'un produit "
 "variable."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:38
 msgid "Variable Product Minimum Quantity"
 msgstr "Quantité minimale de produit variable"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:35
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:39
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:96
 #: src/Settings/Sections/GeneralSection/Subsections/CalculationSubsection.php:82
 msgid ""
@@ -1087,140 +1431,163 @@ msgstr ""
 "Déterminez si l'exigence de quantité minimale s'applique à chaque variante "
 "séparément ou au total combiné de toutes les variantes du panier."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:45
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:83
 msgid "Global Settings"
 msgstr "Paramètres globaux"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:46
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:50
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:84
 msgid "Individual variation"
 msgstr "Variation individuelle"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:47
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:51
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:85
 msgid "Variable product total (Mix & match)"
 msgstr "Total de produits variable (Mix & match)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:49
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Quantity.php:53
 #: src/Admin/ProductPage/AdvanceOptionsForVariableProduct.php:87
 msgid "Calculate minimum quantity by"
 msgstr "Calculer la quantité minimale par"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:17
-msgid "Manage how this rule interacts with product-level settings"
-msgstr ""
-"Gérer la façon dont cette règle interagit avec les paramètres au niveau du "
-"produit"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:24
-msgid ""
-"Determine which rules take precedence when a product has both global and "
-"individual settings."
-msgstr ""
-"Déterminez quelles règles sont prioritaires lorsqu'un produit possède à la "
-"fois des paramètres globaux et individuels."
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:29
-msgid "Rule priority"
-msgstr "Priorité des règles"
-
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:18
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:31
-msgid "Use global settings"
-msgstr "Utiliser les paramètres globaux"
+msgid "Product overrides"
+msgstr "Priorité sur les produits"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:32
-msgid "Prefer product-level rules"
-msgstr "Préférer les règles au niveau du produit"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:34
-msgid "Override product-level rules"
-msgstr "Remplacer les règles au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:22
+msgid "Which settings win when a product has its own"
+msgstr "Quels réglages l'emportent quand un produit a les siens"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:36
-msgid "Custom component priorities"
-msgstr "Priorités des composants personnalisés"
+msgid "global rules override the product's settings"
+msgstr "les règles globales remplacent les réglages du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:46
-msgid "Base Prices Priority"
-msgstr "Priorité aux prix de base"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:37
+msgid "the product's settings win"
+msgstr "les réglages du produit l'emportent"
+
+#. translators: 1: "on" or "off", 2: what the store default does right now
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:41
+#, php-format
+msgid ""
+"A product can carry its own tiered prices, role prices and quantity limits. "
+"Decide what happens when this rule and the product both have a setting. "
+"\"Follow the store default\" uses the \"Prioritize global pricing rules\" "
+"switch under Settings → General → Price Calculation, which is %1$s right "
+"now: %2$s."
+msgstr ""
+"Un produit peut avoir ses propres prix échelonnés, prix par rôle et limites "
+"de quantité. Choisissez ce qui se passe quand cette règle et le produit ont "
+"tous deux un réglage. « Suivre la valeur par défaut de la boutique » utilise"
+" l'option « Donner la priorité aux règles de tarification globales » sous "
+"Réglages → Général → Calcul des prix, actuellement %1$s : %2$s."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:42
+msgid "on"
+msgstr "activée"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:42
+msgid "off"
+msgstr "désactivée"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:48
+msgid "When a product has its own pricing"
+msgstr "Quand un produit a ses propres prix"
+
+#. translators: %s: what the store default does right now
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:51
+#, php-format
+msgid "Follow the store default (right now: %s)"
+msgstr "Suivre la valeur par défaut de la boutique (actuellement : %s)"
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:52
+msgid "Keep the product's settings"
+msgstr "Conserver les réglages du produit"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:54
+msgid "This rule overrides them"
+msgstr "Cette règle les remplace"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:56
+msgid "Decide per setting"
+msgstr "Choisir réglage par réglage"
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:66
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:72
 msgid "Base prices"
 msgstr "Prix ​​de base"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:54
-msgid "Prefer product-level role prices"
-msgstr "Préférer les prix des rôles au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:74
+msgid "Keep the product's role prices"
+msgstr "Conserver les prix par rôle du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:56
-msgid "Override all product-level prices"
-msgstr "Remplacer tous les prix au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:76
+msgid "This rule overrides every product price"
+msgstr "Cette règle remplace tous les prix du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:62
-msgid "Prioritize product-specific role pricing over this global rule."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:82
+msgid ""
+"Whether a product's own role prices stay in place or this rule's base prices"
+" replace them."
 msgstr ""
-"Donnez la priorité à la tarification des rôles spécifiques au produit par "
-"rapport à cette règle globale."
+"Indique si les prix par rôle propres au produit restent en place ou si les "
+"prix de base de cette règle les remplacent."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:68
-msgid "Tiered Prices Priority"
-msgstr "Priorité aux prix échelonnés"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:75
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
 msgid "Tiered prices"
 msgstr "Tarifs échelonnés"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:77
-msgid "Prefer product-level tiers"
-msgstr "Préférer les niveaux au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:97
+msgid "Keep the product's tiers"
+msgstr "Conserver les niveaux du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:79
-msgid "Prefer product-level role tiers"
-msgstr "Préférer les niveaux de rôle au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:99
+msgid "Keep the product's role tiers only"
+msgstr "Conserver uniquement les niveaux par rôle du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:81
-msgid "Override all product-level tiers"
-msgstr "Remplacer tous les niveaux au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
+msgid "This rule overrides every product tier"
+msgstr "Cette règle remplace tous les niveaux du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:88
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:108
 msgid "Mix & Match"
 msgstr "Mélanger et assortir"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:91
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:111
 msgid "Enable Mix & Match for product-level tiers"
 msgstr "Activer Mix & Match pour les niveaux au niveau du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:95
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:115
 msgid ""
-"Prioritize product-specific tiered pricing over this global rule, and "
-"optionally enable Mix & Match for those inherited tiers."
+"Whether a product's own tiers stay in place or this rule's tiers replace "
+"them; Mix & Match can apply to the tiers kept from the product."
 msgstr ""
-"Donnez la priorité à la tarification échelonnée spécifique au produit par "
-"rapport à cette règle globale et activez éventuellement Mix & Match pour ces"
-" niveaux hérités."
+"Indique si les niveaux propres au produit restent en place ou si les niveaux"
+" de cette règle les remplacent ; Mix & Match peut s'appliquer aux niveaux "
+"conservés du produit."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:101
-msgid "Quantity Limits Priority"
-msgstr "Priorité des limites de quantité"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:130
+msgid "Keep the product's limits"
+msgstr "Conserver les limites du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:110
-msgid "Prefer product-level limits"
-msgstr "Préférer les limites au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:132
+msgid "Keep the product's role limits only"
+msgstr "Conserver uniquement les limites par rôle du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:112
-msgid "Prefer product-level role limits"
-msgstr "Préférer les limites de rôles au niveau du produit"
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:134
+msgid "This rule overrides every product limit"
+msgstr "Cette règle remplace toutes les limites du produit"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:114
-msgid "Override all product-level limits"
-msgstr "Remplacer toutes les limites au niveau du produit"
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:120
-msgid "Prioritize product-specific quantity limits over this global rule."
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/Settings.php:140
+msgid ""
+"Whether a product's own quantity limits stay in place or this rule's limits "
+"replace them."
 msgstr ""
-"Donnez la priorité aux limites de quantité spécifiques aux produits par "
-"rapport à cette règle globale."
+"Indique si les limites de quantité propres au produit restent en place ou si"
+" les limites de cette règle les remplacent."
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:15
 msgid "Users & Roles"
@@ -1231,11 +1598,23 @@ msgid "Select the users or roles this rule applies to"
 msgstr ""
 "Sélectionnez les utilisateurs ou les rôles auxquels cette règle s'applique"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:24
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:23
 msgid "Applies to users"
 msgstr "S'applique aux utilisateurs"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:27
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:26
+msgid ""
+"The discount is given to these customers; leave roles and customers empty "
+"for everyone, except those in the Exclusions section. When several cart "
+"rules match a customer, the one with the higher priority applies, one "
+"discount per cart."
+msgstr ""
+"La remise est accordée à ces clients ; laissez les rôles et les clients "
+"vides pour tout le monde, sauf ceux de la section Exclusions. Quand "
+"plusieurs règles de panier correspondent à un client, celle dont la priorité"
+" est la plus élevée s'applique, avec une seule remise par panier."
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:29
 msgid ""
 "The rule will apply to all users if you do not specify user roles or "
 "specific customers (excluding those selected in the exclusions section)."
@@ -1244,31 +1623,31 @@ msgstr ""
 "rôles d'utilisateur ou de clients spécifiques (à l'exclusion de ceux "
 "sélectionnés dans la section exclusions)."
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:33
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:94
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:34
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:95
 msgid "User roles"
 msgstr "Rôles des utilisateurs"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:35
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:96
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:36
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:97
 #: src/Addons/GlobalTieredPricing/Formatter.php:27
 #: src/Addons/NonLoggedInUsers/Roles.php:15
-#: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:23
-#: src/Addons/Tools/PricingTest/RuleTester.php:166
+#: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:25
+#: src/Addons/Tools/PricingTest/RuleTester.php:223
 msgid "Guests (not logged in)"
 msgstr "Invités (non connectés)"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:40
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:104
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:41
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:105
 msgid "Select for a user role"
 msgstr "Sélectionner pour un rôle d'utilisateur"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:54
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:55
 msgid "Manage user roles"
 msgstr "Gérer les rôles des utilisateurs"
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:76
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:124
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:77
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:125
 msgid "Select for a customer"
 msgstr "Sélectionner pour un client"
 
@@ -1295,75 +1674,101 @@ msgstr ""
 msgid "Upgrade your plan"
 msgstr "Améliorez votre forfait"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:415
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:243
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:100
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:17
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:43
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:53
+msgid "Cart rules settings"
+msgstr "Réglages des règles de panier"
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:564
 msgid "The rule reactivated successfully."
 msgstr "La règle a été réactivée avec succès."
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:424
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
 msgid "The end date was before the start date, so it was cleared."
 msgstr ""
 "La date de fin était antérieure à la date de début, elle a donc été effacée."
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:460
-msgid "Create Your First Global Pricing Rule"
-msgstr "Créez votre première règle de tarification globale"
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:605
+msgid "Create your first pricing rule"
+msgstr "Créez votre première règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:465
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:610
 msgid ""
-"Global rules allow you to bulk-apply custom pricing, tiered discounts, and "
-"quantity limits to multiple products or categories simultaneously."
+"A pricing rule gives many products one set of tiers, prices or quantity "
+"limits at once: by category, tag, brand or customer role. A cart rule works "
+"on the cart as a whole instead: an amount off from a subtotal or item count,"
+" free shipping, and a minimum order."
 msgstr ""
-"Les règles globales vous permettent d'appliquer en masse des prix "
-"personnalisés, des remises échelonnées et des limites de quantité à "
-"plusieurs produits ou catégories simultanément."
+"Une règle de tarification donne à de nombreux produits un même ensemble de "
+"niveaux, de prix ou de limites de quantité à la fois : par catégorie, "
+"étiquette, marque ou rôle client. Une règle de panier agit au contraire sur "
+"l'ensemble du panier : une remise à partir d'un sous-total ou d'un nombre "
+"d'articles, la livraison gratuite et une commande minimum."
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:473
-msgid "Create Rule"
-msgstr "Créer une règle"
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:618
+msgid "Create a pricing rule"
+msgstr "Créer une règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:566
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:567
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:711
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:712
 msgid "Pricing rule"
 msgstr "Règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:568
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:569
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:713
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:714
 msgid "Add Pricing Rule"
 msgstr "Ajouter une règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:570
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:715
 msgid "Edit Pricing Rule"
 msgstr "Modifier la règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:571
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:716
 msgid "New Pricing Rule"
 msgstr "Nouvelle règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:572
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:717
 msgid "View Pricing Rule"
 msgstr "Afficher la règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:718
 msgid "Find Pricing Rule"
 msgstr "Rechercher une règle de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:574
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:719
 msgid "No pricing rules ware found"
 msgstr "Aucun logiciel de règles de tarification trouvé"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:575
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:720
 msgid "No pricing rule in trash"
 msgstr "Aucune règle de tarification à la poubelle"
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:577
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:722
 msgid "Pricing rules"
 msgstr "Règles de tarification"
 
-#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:29
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:42
+msgid "All rule types"
+msgstr "Tous les types de règles"
+
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:44
+#: src/Admin/WelcomePage/WelcomePage.php:240 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:494
+msgid "Cart rules"
+msgstr "Règles de panier"
+
+#: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:47
+msgid "Filter by rule type"
+msgstr "Filtrer par type de règle"
+
+#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:31
 msgid "Test"
 msgstr "Tester"
 
-#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:43
+#: src/Addons/GlobalTieredPricing/CPT/PricingTestLinks.php:46
 msgid "Pricing test"
 msgstr "Test de tarification"
 
@@ -1375,12 +1780,16 @@ msgstr "Statut de la règle"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:69
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:73
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:70
+msgid "Rule type"
+msgstr "Type de règle"
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:88
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
 msgid "Priority"
 msgstr "Priorité"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:74
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:93
 msgid ""
 "The rule with the lowest number is applied first. If two rules have the same"
 " number, the newer rule is applied first."
@@ -1388,37 +1797,37 @@ msgstr ""
 "La règle avec le numéro le plus bas s'applique en premier. Si deux règles "
 "ont le même numéro, la plus récente s'applique en premier."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:80
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:99
 msgid "Schedule"
 msgstr "Planification"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:84
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
 msgid "Start date"
 msgstr "Date de début"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:86
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:105
 msgid "End date"
 msgstr "Date de fin"
 
 #. translators: %s: timezone, e.g. "Europe/Kyiv"
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:111
 #, php-format
 msgid "Whole days in the site timezone (%s). Leave a date empty for no limit."
 msgstr ""
 "Jours entiers dans le fuseau horaire du site (%s). Laissez une date vide "
 "pour ne pas imposer de limite."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:122
 msgid "Overridden by"
 msgstr "Remplacée par"
 
 #. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:114
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
 #, php-format
 msgid "priority %d"
 msgstr "priorité %d"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:123
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
 msgid ""
 "These rules have a higher priority. When one of them matches the same "
 "product and customer, that rule is applied and the rule you are editing is "
@@ -1428,76 +1837,110 @@ msgstr ""
 " même produit et au même client, c'est elle qui s'applique et la règle que "
 "vous modifiez est ignorée."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:132
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
 msgid "Test this rule"
 msgstr "Tester cette règle"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+msgid "What a cart gets, and which cart rule wins."
+msgstr "Ce que reçoit un panier, et quelle règle de panier l'emporte."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
 msgid "What a customer pays for a product, and which rule wins."
 msgstr "Ce qu'un client paie pour un produit, et quelle règle l'emporte."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
 #: src/Addons/NonLoggedInUsers/Wholesale/CPT/ApplicationAdmin.php:333
 msgid "Move to Trash"
 msgstr "Mettre à la corbeille"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
 msgid "Delete permanently"
 msgstr "Supprimer définitivement"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:149
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:150
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:169
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:170
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:172
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:173
 msgid "Publish"
 msgstr "Publier"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:349
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:400
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:156
+#: src/Addons/Tools/js-source/components/PricingTest.js:170
 msgid "Not published"
 msgstr "Non publiée"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:350
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:401
 msgid "Publish the rule to put it in force."
 msgstr "Publiez la règle pour la mettre en vigueur."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:359
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:410
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:28
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:153
+#: src/Addons/Tools/js-source/components/PricingTest.js:167
 msgid "Suspended"
 msgstr "Suspendu"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:360
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:411
 msgid "The rule is saved but does not apply until you reactivate it."
 msgstr ""
 "La règle est enregistrée mais ne s'applique pas tant que vous ne la "
 "réactivez pas."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:366
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:417
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:27
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:155
+#: src/Addons/Tools/js-source/components/PricingTest.js:169
 msgid "Expired"
 msgstr "Expirée"
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:368
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:419
 #, php-format
 msgid "Ended %s. Clear or move the end date to use the rule again."
 msgstr ""
 "Terminée le %s. Effacez ou déplacez la date de fin pour réutiliser la règle."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:374
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:425
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:29
 msgid "Skipped"
 msgstr "Ignorée"
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:375
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:432
+#: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:26
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:168
+msgid "Scheduled"
+msgstr "Planifiée"
+
+#. translators: %s: date
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:434
+#, php-format
+msgid "Starts %s."
+msgstr "Débute le %s."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:441
+#: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:25
+#: src/Admin/PluginInstaller/PluginInstaller.php:102
+#: src/Admin/PluginInstaller/PluginInstaller.php:148
+msgid "Active"
+msgstr "Actif"
+
+#. translators: %s: date
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:444
+#, php-format
+msgid "Applies now, until %s."
+msgstr "S'applique dès maintenant, jusqu'au %s."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:445
+msgid "Applies now."
+msgstr "S'applique dès maintenant."
+
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:460
 msgid ""
 "The rule changes neither prices nor quantity limits, so the storefront skips"
 " it. Set a price, tiers or a limit on the tabs on the left."
@@ -1506,59 +1949,68 @@ msgstr ""
 "l'ignore donc. Définissez un prix, des niveaux ou une limite dans les "
 "onglets de gauche."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:381
-#: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:26
-#: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:154
-msgid "Scheduled"
-msgstr "Planifiée"
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:472
+msgid "Tiers and base prices per product."
+msgstr "Niveaux et prix de base par produit."
 
-#. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:383
-#, php-format
-msgid "Starts %s."
-msgstr "Débute le %s."
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:476
+msgid ""
+"A discount, free shipping or a minimum order, based on the cart subtotal or "
+"item count."
+msgstr ""
+"Une remise, la livraison gratuite ou une commande minimum, selon le sous-"
+"total ou le nombre d'articles du panier."
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:390
-#: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:25
-#: src/Admin/PluginInstaller/PluginInstaller.php:102
-#: src/Admin/PluginInstaller/PluginInstaller.php:148
-msgid "Active"
-msgstr "Actif"
-
-#. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:393
-#, php-format
-msgid "Applies now, until %s."
-msgstr "S'applique dès maintenant, jusqu'au %s."
-
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:394
-msgid "Applies now."
-msgstr "S'applique dès maintenant."
-
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:404
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:486
 msgid "Always"
 msgstr "Toujours"
 
 #. translators: 1: start date, 2: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:413
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:495
 #, php-format
 msgid "%1$s to %2$s"
 msgstr "Du %1$s au %2$s"
 
 #. translators: %s: start date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:418
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:500
 #, php-format
 msgid "From %s"
 msgstr "À partir du %s"
 
 #. translators: %s: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:422
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:504
 #, php-format
 msgid "Until %s"
 msgstr "Jusqu'au %s"
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:473
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:877
+msgid ""
+"The rule has no discount tiers, no free shipping threshold and no minimum "
+"order, so the storefront skips it. Add them on the Discount, Free shipping "
+"and Minimum order tabs."
+msgstr ""
+"La règle n'a ni niveaux de remise, ni seuil de livraison gratuite, ni "
+"commande minimum : la boutique l'ignore. Ajoutez-les dans les onglets "
+"Remise, Livraison gratuite et Commande minimum."
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:881
+msgid ""
+"The rule gives a percentage discount, which the premium version applies, so "
+"the storefront skips it. Switch to a fixed amount off, or upgrade."
+msgstr ""
+"La règle accorde une remise en pourcentage, que seule la version premium "
+"applique : la boutique l'ignore. Passez à une remise d'un montant fixe, ou "
+"passez à la version premium."
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:885
+msgid ""
+"The rule only sets a minimum order, which the premium version applies, so "
+"the storefront skips it."
+msgstr ""
+"La règle définit uniquement une commande minimum, que seule la version "
+"premium applique : la boutique l'ignore."
+
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:908
 msgid ""
 "The pricing rule does not affect either prices or product quantity. The rule"
 " will be skipped."
@@ -1567,22 +2019,114 @@ msgstr ""
 "La règle sera ignorée."
 
 #. translators: %d: rule ID
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:802
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:1237
 #, php-format
 msgid "Rule #%d"
 msgstr "Règle n° %d"
 
-#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:10
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:15
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:300
+#: src/Addons/Tools/js-source/components/PricingTest.js:314
 msgid "Global pricing rules"
 msgstr "Règles de tarification mondiales"
 
-#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:64
+#: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:84
 msgid "Create reusable pricing rules and apply them globally."
 msgstr ""
 "Créez des règles de tarification réutilisables et appliquez-les à l’échelle "
 "mondiale."
+
+#. translators: %s: role name
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/MinimumsMigration.php:89
+#, php-format
+msgid "Minimum order for %s"
+msgstr "Commande minimum de %s"
+
+#. translators: %s: role name
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/MinimumsMigration.php:108
+#: src/Addons/NonLoggedInUsers/Roles.php:34
+#: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListFilter.php:31
+#: src/Addons/NonLoggedInUsers/Visibility/Admin/RuleText.php:31
+msgid "Guests"
+msgstr "Invités"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:157
+msgid "Order discount {discount}"
+msgstr "Remise sur la commande {discount}"
+
+#. translators: %s: number of items
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:177
+#: src/Addons/Tools/PricingTest/CartTester.php:137
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "%s article"
+msgstr[1] "%s articles"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:52
+msgid "Add {remaining} more to get {discount} off your order."
+msgstr ""
+"Ajoutez {remaining} de plus pour obtenir {discount} de remise sur votre "
+"commande."
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:70
+msgid "Classic cart, under the cart totals"
+msgstr "Panier classique, sous les totaux du panier"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:71
+msgid "Classic checkout, under the order review total"
+msgstr "Validation de commande classique, sous le total du récapitulatif"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:72
+msgid "Mini cart (the cart widget)"
+msgstr "Mini panier (le widget du panier)"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:73
+msgid "Product page, above the add to cart form"
+msgstr "Page produit, au-dessus du formulaire d'ajout au panier"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:139
+msgid "Add {remaining} more for free shipping."
+msgstr "Ajoutez {remaining} de plus pour la livraison gratuite."
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscountSettings.php:150
+msgid "You have unlocked free shipping!"
+msgstr "Vous bénéficiez de la livraison gratuite !"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:108
+msgid "Follow the cart tax display setting"
+msgstr "Suivre le réglage d'affichage des taxes du panier"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:109
+msgid "Excluding tax"
+msgstr "Hors taxes"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:110
+msgid "Including tax"
+msgstr "Taxes comprises"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:177
+msgid "Loading the cart rules settings…"
+msgstr "Chargement des réglages des règles de panier…"
+
+#. translators: %s: link to the pricing rules list
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:48
+#, php-format
+msgid ""
+"How the Order pricing rules read and look in the cart, at checkout, in the "
+"mini cart and on product pages: the discount behaviour and the next tier "
+"message, the minimum order messages, and where and how the free shipping bar"
+" shows. %s"
+msgstr ""
+"Comment les règles de tarification de commande s'affichent dans le panier, à"
+" la validation de la commande, dans le mini panier et sur les pages "
+"produit : le comportement de la remise et le message du niveau suivant, les "
+"messages de commande minimum, et où et comment la barre de livraison "
+"gratuite s'affiche. %s"
+
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesSettingsSection.php:49
+msgid "Back to the pricing rules"
+msgstr "Retour aux règles de tarification"
 
 #: src/Addons/ImportExport/ImportExportAddon.php:8
 msgid "WooCommerce Import/Export"
@@ -1596,37 +2140,44 @@ msgstr ""
 "Ajoute la compatibilité avec l’importateur et l’exportateur de produits "
 "WooCommerce intégrés."
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:40
-#: src/Addons/ImportExport/WoocommerceImportService.php:27
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:133
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:130
+#: src/Addons/ImportExport/WoocommerceExportService.php:43
+#: src/Addons/ImportExport/WoocommerceImportService.php:29
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:159
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:178
 msgid "Fixed pricing rules"
 msgstr "Règles de tarification fixe"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:43
-#: src/Addons/ImportExport/WoocommerceImportService.php:28
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:135
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:132
-msgid "Percentage pricing rules"
-msgstr "Règles de tarification au pourcentage"
+#: src/Addons/ImportExport/WoocommerceExportService.php:44
+#: src/Addons/ImportExport/WoocommerceImportService.php:31
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:163
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:182
+msgid "Amount pricing rules"
+msgstr "Règles de tarification par montant"
 
 #: src/Addons/ImportExport/WoocommerceExportService.php:45
-#: src/Addons/ImportExport/WoocommerceImportService.php:26
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:137
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:126
-#: src/Integrations/Plugins/WPAllImport.php:117
-#: src/Integrations/Plugins/WPAllImport.php:223
-#: views/admin/components/tiered-pricing-rules-form.php:98
+#: src/Addons/ImportExport/WoocommerceImportService.php:28
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:165
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:174
+#: src/Integrations/Plugins/WPAllImport.php:125
+#: src/Integrations/Plugins/WPAllImport.php:239
+#: views/admin/components/tiered-pricing-rules-form.php:106
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:9
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Tiered pricing type"
 msgstr "Type de tarification échelonnée"
 
-#: src/Addons/ImportExport/WoocommerceExportService.php:47
-#: src/Addons/ImportExport/WoocommerceImportService.php:29
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:139
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:128
+#: src/Addons/ImportExport/WoocommerceExportService.php:48
+#: src/Addons/ImportExport/WoocommerceImportService.php:30
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:161
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:180
+msgid "Percentage pricing rules"
+msgstr "Règles de tarification au pourcentage"
+
+#: src/Addons/ImportExport/WoocommerceExportService.php:50
+#: src/Addons/ImportExport/WoocommerceImportService.php:32
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:167
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:176
 #: views/admin/components/minimum-order-quantity-form.php:25
 msgid "Minimum order quantity"
 msgstr "Quantité minimale de commande"
@@ -1723,7 +2274,7 @@ msgstr "Nom du produit"
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735
-#: src/PricingTable.php:541 src/PricingTable.php:542
+#: src/PricingTable.php:548 src/PricingTable.php:549
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
 msgid "piece"
@@ -1886,6 +2437,7 @@ msgstr "Plus forte remise en premier"
 #: src/Addons/LayoutConfigurator/LayoutConfigurator.php:860
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297
+#: views/addons/global-rules/order-discount-form.php:39
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:13
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
@@ -1949,23 +2501,23 @@ msgstr "L'aperçu n'a pas pu être généré."
 msgid "Preview product"
 msgstr "Produit d'aperçu"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:15
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:22
 msgid "Tiered pricing for manual orders"
 msgstr "Tarification échelonnée pour les commandes manuelles"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:19
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:26
 msgid "Apply tiered pricing to orders created manually in the admin area."
 msgstr ""
 "Appliquez une tarification échelonnée aux commandes créées manuellement dans"
 " la zone d'administration."
 
 #. translators: %1$s: item name, %2$s: original price, %3$s: new price
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:161
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:207
 #, php-format
 msgid "Tiered pricing recalculations for %1$s: %2$s → %3$s"
 msgstr "Recalculs de tarification échelonnée pour %1$s : %2$s → %3$s"
 
-#: src/Addons/ManualOrders/ManualOrdersAddon.php:207
+#: src/Addons/ManualOrders/ManualOrdersAddon.php:258
 msgid "Re-calculate with tiered pricing"
 msgstr "Recalculez avec une tarification échelonnée"
 
@@ -2022,7 +2574,7 @@ msgstr ""
 "Appliquez des quantités minimales de commande pour les produits en fonction "
 "de règles de tarification échelonnées."
 
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:54
+#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:58
 msgid ""
 "A minimum order of {minimum} is required to check out. Your order subtotal "
 "is {subtotal}."
@@ -2030,70 +2582,13 @@ msgstr ""
 "Une commande minimum de {minimum} est requise pour valider la commande. Le "
 "sous-total de votre commande est de {subtotal}."
 
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:58
+#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSettings.php:62
 msgid ""
 "A minimum of {minimum} items is required to check out. Your cart has "
 "{count}."
 msgstr ""
 "Un minimum de {minimum} articles est requis pour valider la commande. Votre "
 "panier en contient {count}."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:9
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:23
-msgid "Cart rules by role"
-msgstr "Règles de panier par rôle"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:13
-msgid ""
-"A minimum order amount or quantity for the whole cart per role, and payment "
-"or shipping methods limited to roles (the two groups below). Guests count as"
-" a role; a customer with several roles gets the strictest minimum. Off by "
-"default."
-msgstr ""
-"Un montant ou une quantité minimum de commande pour l'ensemble du panier par"
-" rôle, et des moyens de paiement ou des méthodes de livraison limités à "
-"certains rôles (les deux groupes ci-dessous). Les invités comptent comme un "
-"rôle ; un client ayant plusieurs rôles se voit appliquer le minimum le plus "
-"strict. Désactivé par défaut."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:27
-msgid ""
-"Applies the minimums below and the payment and shipping method limits of the"
-" next two groups in the cart and at checkout, for the classic pages and the "
-"blocks."
-msgstr ""
-"Applique les minimums ci-dessous ainsi que les restrictions de moyens de "
-"paiement et de méthodes de livraison des deux groupes suivants dans le "
-"panier et à la validation de commande, pour les pages classiques comme pour "
-"les blocs."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:30
-msgid "Minimum order"
-msgstr "Commande minimum"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:33
-msgid ""
-"Leave a cell empty for no minimum. The amount is the cart subtotal after "
-"tiered prices, before shipping."
-msgstr ""
-"Laissez une cellule vide pour ne pas imposer de minimum. Le montant est le "
-"sous-total du panier après application des prix échelonnés, hors livraison."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:36
-msgid "Amount message"
-msgstr "Message pour le montant"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:40
-msgid "Placeholders: {minimum}, {subtotal}."
-msgstr "Variables : {minimum}, {subtotal}."
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:43
-msgid "Quantity message"
-msgstr "Message pour la quantité"
-
-#: src/Addons/NonLoggedInUsers/CartRules/CartRulesSubsection.php:47
-msgid "Placeholders: {minimum}, {count}."
-msgstr "Variables : {minimum}, {count}."
 
 #: src/Addons/NonLoggedInUsers/CartRules/PaymentMethodsSubsection.php:10
 msgid "Payment methods by role"
@@ -2118,21 +2613,6 @@ msgstr ""
 "sur facture réservé aux clients grossistes. Laissez un moyen vide pour le "
 "laisser accessible à tous."
 
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:41
-#: views/addons/role-based-pricing/role.php:31
-msgid "Role"
-msgstr "Rôle"
-
-#. translators: %s: currency symbol
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:45
-#, php-format
-msgid "Minimum order amount (%s)"
-msgstr "Montant minimum de commande (%s)"
-
-#: src/Addons/NonLoggedInUsers/CartRules/RoleMinimumsOption.php:48
-msgid "Minimum quantity"
-msgstr "Quantité minimum"
-
 #: src/Addons/NonLoggedInUsers/CartRules/ShippingMethodsSubsection.php:12
 msgid "Shipping methods by role"
 msgstr "Méthodes de livraison par rôle"
@@ -2156,11 +2636,11 @@ msgstr ""
 " livraison gratuite réservée aux particuliers. Laissez une méthode vide pour"
 " la laisser accessible à tous."
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:33
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:32
 msgid "Wholesale & Guest Users"
 msgstr "Vente en gros et utilisateurs invités"
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:37
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:36
 msgid ""
 "Hide prices or prevent purchasing for guests, close the store to visitors, "
 "show products and categories to selected roles only, set minimum orders and "
@@ -2175,7 +2655,7 @@ msgstr ""
 " gros."
 
 #. translators: %s: link to the settings
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:118
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:113
 #, php-format
 msgid ""
 "Wholesale registration is switched off. Enable it under %s. Only shop "
@@ -2184,7 +2664,7 @@ msgstr ""
 "L'inscription grossiste est désactivée. Activez-la sous %s. Seuls les "
 "gestionnaires de boutique voient cette note."
 
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:119
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersAddon.php:114
 msgid "Tiered Pricing → Wholesale"
 msgstr "Tarification échelonnée → Vente en gros"
 
@@ -2198,18 +2678,6 @@ msgstr "Veuillez entrer %s pour effectuer un achat"
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:52
 msgid "your account"
 msgstr "votre compte"
-
-#. translators: %s: login page url
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:85
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:70
-#, php-format
-msgid "%s see prices"
-msgstr "%s voir les prix"
-
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:87
-#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:72
-msgid "Login"
-msgstr "Se connecter"
 
 #: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:11
 msgid "Guest Users"
@@ -2266,13 +2734,6 @@ msgstr ""
 "Ce message sera affiché à la place du prix pour les utilisateurs non "
 "connectés."
 
-#. translators: %s: role name
-#: src/Addons/NonLoggedInUsers/Roles.php:34
-#: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListFilter.php:31
-#: src/Addons/NonLoggedInUsers/Visibility/Admin/RuleText.php:31
-msgid "Guests"
-msgstr "Invités"
-
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryListColumn.php:26
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryListColumn.php:33
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductListColumn.php:28
@@ -2316,7 +2777,7 @@ msgid "Hidden from %s"
 msgstr "Masqué pour %s"
 
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/ProductVisibilityFields.php:25
-#: src/Admin/ProductPage/TieredPricingTab.php:157
+#: src/Admin/ProductPage/TieredPricingTab.php:158
 msgid "Who can see this product"
 msgstr "Qui peut voir ce produit"
 
@@ -3462,6 +3923,8 @@ msgid "Already have an account? %s and apply from there."
 msgstr ""
 "Vous avez déjà un compte ? %s et faites votre demande depuis celui-ci."
 
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:87
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:72
 #: src/Addons/NonLoggedInUsers/Wholesale/views/frontend/registration-form.php:159
 msgid "Log in"
 msgstr "Connectez-vous"
@@ -3758,7 +4221,9 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:84
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:412
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:227
 msgid "Where it shows"
 msgstr "Où l'afficher"
 
@@ -4098,7 +4563,7 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:360
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:371
-#: src/Admin/ProductPage/TieredPricingTab.php:122
+#: src/Admin/ProductPage/TieredPricingTab.php:123
 #: src/Settings/CustomOptions/TPTTextTemplate.php:212
 msgid "Unit label"
 msgstr "Etiquette de l'unité"
@@ -4331,9 +4796,13 @@ msgstr "Demande du client"
 #: src/Addons/RequestAQuote/views/emails/plain/admin-quote-request.php:25
 #: src/Addons/RequestAQuote/views/emails/plain/customer-quote-request.php:25
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:459
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:389
+#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:351
+#: src/Addons/Tools/js-source/components/PricingTest.js:527
+#: src/Addons/Tools/js-source/components/PricingTest.js:647
 msgid "Product"
 msgstr "Produit"
 
@@ -4356,10 +4825,12 @@ msgstr "Prix ​​unitaire"
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:111
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:179
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1095
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:480
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:214
+#: src/Addons/Tools/js-source/components/PricingTest.js:228
 msgid "Total"
 msgstr "Total"
 
@@ -4428,8 +4899,8 @@ msgstr "Citation"
 
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:386
 #: views/addons/user-based-pricing/user.php:41
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:397
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:656
 msgid "Customer"
 msgstr "Client"
 
@@ -4759,7 +5230,7 @@ msgstr "Soumission..."
 
 #: src/Addons/RequestAQuote/Integration/PricingRulesIntegration.php:213
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:36
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:37
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:40
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:101
 msgid "None"
@@ -4800,7 +5271,7 @@ msgid "Quote Request"
 msgstr "Demande de devis"
 
 #: src/Addons/RequestAQuote/Models/RequestQuoteForm.php:29
-#: src/Admin/WelcomePage/WelcomePage.php:240
+#: src/Admin/WelcomePage/WelcomePage.php:245
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/App.js:141
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:133
@@ -4881,21 +5352,21 @@ msgstr ""
 msgid "Upgrade to Premium"
 msgstr "Passer à Premium"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:125
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:118
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:151
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:166
 msgid "Regular pricing type"
 msgstr "Type de tarification régulière"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:129
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:122
-#: src/Integrations/Plugins/WPAllImport.php:170
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:155
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:170
+#: src/Integrations/Plugins/WPAllImport.php:178
 #: views/admin/components/regular-pricing-form.php:106
 #: views/admin/components/regular-pricing-form.php:148
 msgid "Sale price"
 msgstr "Prix ​​de vente"
 
-#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:131
-#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:124
+#: src/Addons/RoleBasedPricing/Export/RoleBasedPricingExport.php:157
+#: src/Addons/RoleBasedPricing/Import/RoleBasedPricingImport.php:172
 #: src/Settings/CustomOptions/TPTTextTemplate.php:150
 #: src/Settings/CustomOptions/TPTTextTemplate.php:203
 #: views/addons/category-tiers/add-free.php:28
@@ -4905,19 +5376,19 @@ msgstr "Prix ​​de vente"
 #: views/addons/category-tiers/edit.php:88
 #: views/admin/components/regular-pricing-form.php:38
 #: views/admin/components/regular-pricing-form.php:65
-#: views/admin/components/tiered-pricing-rules-form.php:55
+#: views/admin/components/tiered-pricing-rules-form.php:61
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/Forms/Percentage/Row.js:29
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Percentage discount"
 msgstr "Pourcentage de remise"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:173
+#: src/Addons/RoleBasedPricing/ProductManager.php:174
 msgid "Invalid role"
 msgstr "Rôle invalide"
 
-#: src/Addons/RoleBasedPricing/ProductManager.php:179
-#: src/Addons/UserBasedPricing/ProductManager.php:185
+#: src/Addons/RoleBasedPricing/ProductManager.php:180
+#: src/Addons/UserBasedPricing/ProductManager.php:186
 msgid "Invalid nonce"
 msgstr "Occasion invalide"
 
@@ -4933,12 +5404,12 @@ msgstr ""
 "individuels."
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:34
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:35
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:38
 msgid "Taxable"
 msgstr "Imposable"
 
 #: src/Addons/TaxSettings/GlobalRulesIntegration/GlobalRules.php:35
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:36
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:39
 msgid "Shipping only"
 msgstr "Expédition uniquement"
 
@@ -4962,29 +5433,29 @@ msgstr "Impôt"
 msgid "Set tax status and class"
 msgstr "Définir le statut fiscal et la classe"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:25
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:29
 msgid "Tax settings"
 msgstr "Paramètres fiscaux"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:26
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:30
 msgid ""
 "Override the default tax status and class for products matching this rule."
 msgstr ""
 "Remplacez le statut fiscal et la classe par défaut pour les produits "
 "correspondant à cette règle."
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:32
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:35
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:49
 msgid "Tax status"
 msgstr "Statut fiscal"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:46
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:49
 #: src/Addons/TaxSettings/build/index.js:1
 #: src/Addons/TaxSettings/js-source/App.js:270
 msgid "Standard"
 msgstr "Standard"
 
-#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:56
+#: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:59
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:63
 msgid "Tax class"
 msgstr "Classe fiscale"
@@ -5071,12 +5542,12 @@ msgstr "Libellé de la ligne des économies totales"
 msgid "Cart Display Options"
 msgstr "Options d'affichage du panier"
 
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:72
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:97
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:74
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:99
 msgid "No label"
 msgstr "Pas d'étiquette"
 
-#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:104
+#: src/Addons/TierLabels/Admin/TierLabelsAdmin.php:106
 msgid "Tier label (regular price)"
 msgstr "Étiquette de niveau (prix régulier)"
 
@@ -5167,53 +5638,160 @@ msgstr ""
 msgid "Manage Roles"
 msgstr "Gérer les rôles"
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:119
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:343
+#: src/Addons/Tools/API/ToolsEndpoints.php:130
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:586
 msgid "Pick a product first."
 msgstr "Choisissez d'abord un produit."
 
-#: src/Addons/Tools/API/ToolsEndpoints.php:123
+#: src/Addons/Tools/API/ToolsEndpoints.php:134
+#: src/Addons/Tools/API/ToolsEndpoints.php:156
 msgid "The customer could not be loaded."
 msgstr "Le client n'a pas pu être chargé."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:62
+#. translators: %d: line number
+#: src/Addons/Tools/PricingTest/CartTester.php:51
+#, php-format
+msgid "The product of line %d could not be loaded."
+msgstr "Le produit de la ligne %d n'a pas pu être chargé."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:74
+msgid "Add at least one line to the cart."
+msgstr "Ajoutez au moins une ligne au panier."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:93
+#: src/Addons/Tools/PricingTest/PricingTester.php:123
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:660
+msgid "Visitor (not logged in)"
+msgstr "Visiteur (non connecté)"
+
+#: src/Addons/Tools/PricingTest/CartTester.php:94
+#: src/Addons/Tools/PricingTest/PricingTester.php:124
+msgid "no role"
+msgstr "aucun rôle"
+
+#. translators: 1: number of lines, 2: number of lines in the cart
+#: src/Addons/Tools/PricingTest/CartTester.php:258
+#, php-format
+msgid "%1$d of %2$d cart lines match the rule's products and are counted."
+msgstr ""
+"%1$d lignes du panier sur %2$d correspondent aux produits de la règle et "
+"sont comptées."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:259
+msgid "None of the cart lines matches the rule's products."
+msgstr "Aucune ligne du panier ne correspond aux produits de la règle."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:261
+msgid ""
+"The rule counts the whole cart (no products, categories, tags or brands "
+"selected)."
+msgstr ""
+"La règle compte tout le panier (aucun produit, catégorie, étiquette ni "
+"marque sélectionné)."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:272
+#: src/Addons/Tools/PricingTest/PricingTester.php:193
+msgid "The rule is not published, so the storefront ignores it."
+msgstr "La règle n'est pas publiée, la boutique l'ignore donc."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:275
+#: src/Addons/Tools/PricingTest/PricingTester.php:196
+msgid "The rule is suspended, so the storefront ignores it."
+msgstr "La règle est suspendue, la boutique l'ignore donc."
+
+#. translators: %s: date
+#: src/Addons/Tools/PricingTest/CartTester.php:279
+#: src/Addons/Tools/PricingTest/PricingTester.php:200
+#, php-format
+msgid "The rule starts on %s, so the storefront ignores it until then."
+msgstr "La règle débute le %s, la boutique l'ignore donc jusque-là."
+
+#. translators: %s: date
+#: src/Addons/Tools/PricingTest/CartTester.php:283
+#: src/Addons/Tools/PricingTest/PricingTester.php:204
+#, php-format
+msgid "The rule ended on %s, so the storefront ignores it."
+msgstr "La règle s'est terminée le %s, la boutique l'ignore donc."
+
+#. translators: 1: tier threshold, 2: discount
+#: src/Addons/Tools/PricingTest/CartTester.php:297
+#, php-format
+msgid "The cart reaches the tier from %1$s: %2$s off."
+msgstr "Le panier atteint le niveau à partir de %1$s : %2$s de remise."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:300
+msgid "The cart reaches the free shipping threshold."
+msgstr "Le panier atteint le seuil de livraison gratuite."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:304
+msgid ""
+"The rule has no discount tiers; the cart is below its free shipping "
+"threshold."
+msgstr ""
+"La règle n'a pas de niveaux de remise ; le panier est sous son seuil de "
+"livraison gratuite."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:305
+msgid "The rule has no discount tiers; it only sets a minimum order."
+msgstr ""
+"La règle n'a pas de niveaux de remise ; elle définit uniquement une commande"
+" minimum."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:308
+msgid ""
+"The cart is below the rule's first tier. As the matching rule with the "
+"highest priority it holds the cart: rules below it are not applied."
+msgstr ""
+"Le panier est sous le premier niveau de la règle. Comme règle correspondante"
+" de priorité la plus élevée, elle retient le panier : les règles de priorité"
+" inférieure ne sont pas appliquées."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:312
+msgid ""
+"Another matching cart rule has a higher priority and is the one in play. The"
+" rule with the lowest priority number is applied first; if two rules have "
+"the same number, the newer rule is applied first."
+msgstr ""
+"Une autre règle de panier correspondante a une priorité plus élevée et c'est"
+" elle qui s'applique. La règle dont le numéro de priorité est le plus bas "
+"est appliquée en premier ; si deux règles ont le même numéro, la plus "
+"récente est appliquée en premier."
+
+#: src/Addons/Tools/PricingTest/CartTester.php:318
+msgid "Its minimum order is checked for this cart: see the minimums above."
+msgstr ""
+"Sa commande minimum est vérifiée pour ce panier : voir les minimums ci-"
+"dessus."
+
+#: src/Addons/Tools/PricingTest/PricingTester.php:68
 msgid "The product could not be loaded."
 msgstr "Le produit n'a pas pu être chargé."
 
 #. translators: %d: minimum quantity
-#: src/Addons/Tools/PricingTest/PricingTester.php:98
+#: src/Addons/Tools/PricingTest/PricingTester.php:104
 #, php-format
 msgid "minimum %d"
 msgstr "%d minimum"
 
 #. translators: %d: maximum quantity
-#: src/Addons/Tools/PricingTest/PricingTester.php:102
+#: src/Addons/Tools/PricingTest/PricingTester.php:108
 #, php-format
 msgid "maximum %d"
 msgstr "%d maximum"
 
 #. translators: %d: quantity step
-#: src/Addons/Tools/PricingTest/PricingTester.php:106
+#: src/Addons/Tools/PricingTest/PricingTester.php:112
 #, php-format
 msgid "step %d"
 msgstr "pas de %d"
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:117
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:401
-msgid "Visitor (not logged in)"
-msgstr "Visiteur (non connecté)"
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:118
-msgid "no role"
-msgstr "aucun rôle"
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:167
+#: src/Addons/Tools/PricingTest/PricingTester.php:173
 msgid "See the rule's products and customers tabs."
 msgstr "Voir les onglets Produits et Clients de la règle."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:181
+#: src/Addons/Tools/PricingTest/PricingTester.php:187
 msgid ""
 "Because of the rule's priority settings, the product's own pricing is "
 "applied instead. The pricing log shows the decision."
@@ -5222,27 +5800,7 @@ msgstr ""
 "produit s'applique à la place. Le journal de tarification montre la "
 "décision."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:187
-msgid "The rule is not published, so the storefront ignores it."
-msgstr "La règle n'est pas publiée, la boutique l'ignore donc."
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:190
-msgid "The rule is suspended, so the storefront ignores it."
-msgstr "La règle est suspendue, la boutique l'ignore donc."
-
-#. translators: %s: date
-#: src/Addons/Tools/PricingTest/PricingTester.php:194
-#, php-format
-msgid "The rule starts on %s, so the storefront ignores it until then."
-msgstr "La règle débute le %s, la boutique l'ignore donc jusque-là."
-
-#. translators: %s: date
-#: src/Addons/Tools/PricingTest/PricingTester.php:198
-#, php-format
-msgid "The rule ended on %s, so the storefront ignores it."
-msgstr "La règle s'est terminée le %s, la boutique l'ignore donc."
-
-#: src/Addons/Tools/PricingTest/PricingTester.php:203
+#: src/Addons/Tools/PricingTest/PricingTester.php:209
 msgid ""
 "The rule changes neither prices nor quantity limits, so the storefront skips"
 " it."
@@ -5250,7 +5808,7 @@ msgstr ""
 "La règle ne modifie ni les prix ni les limites de quantité, la boutique "
 "l'ignore donc."
 
-#: src/Addons/Tools/PricingTest/PricingTester.php:206
+#: src/Addons/Tools/PricingTest/PricingTester.php:212
 msgid ""
 "Another matching rule has a higher priority and is applied instead. The rule"
 " with the lowest priority number is applied first; if two rules have the "
@@ -5281,10 +5839,13 @@ msgid "The product has an excluded brand: %s."
 msgstr "Le produit a une marque exclue : %s."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:49
+#: src/Addons/Tools/PricingTest/RuleTester.php:161
 msgid "The customer is listed under the excluded customers."
 msgstr "Le client figure parmi les clients exclus."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:53
+#: src/Addons/Tools/PricingTest/RuleTester.php:166
 #, php-format
 msgid "The customer has an excluded role: %s."
 msgstr "Le client a un rôle exclu : %s."
@@ -5362,29 +5923,38 @@ msgstr ""
 " ou marque sélectionné)."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:116
+#: src/Addons/Tools/PricingTest/RuleTester.php:176
 msgid "The rule applies to every customer (no roles or customers selected)."
 msgstr ""
 "La règle s'applique à tous les clients (aucun rôle ni client sélectionné)."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:122
+#: src/Addons/Tools/PricingTest/RuleTester.php:179
 msgid "The customer is listed under the rule's customers."
 msgstr "Le client figure parmi les clients de la règle."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:129
+#: src/Addons/Tools/PricingTest/RuleTester.php:184
 #, php-format
 msgid "The customer has the rule's role: %s."
 msgstr "Le client a le rôle de la règle : %s."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:135
+#: src/Addons/Tools/PricingTest/RuleTester.php:189
 #, php-format
 msgid "This customer has the roles %s."
 msgstr "Ce client a les rôles %s."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:135
+#: src/Addons/Tools/PricingTest/RuleTester.php:189
 msgid "This customer has no role."
 msgstr "Ce client n'a aucun rôle."
 
 #: src/Addons/Tools/PricingTest/RuleTester.php:136
+#: src/Addons/Tools/PricingTest/RuleTester.php:190
 msgid ""
 "A visitor who is not logged in only matches rules that include \"Guests (not"
 " logged in)\" or have no customer limits."
@@ -5392,42 +5962,52 @@ msgstr ""
 "Un visiteur non connecté ne correspond qu'aux règles qui incluent « Invités "
 "(non connectés) » ou qui n'ont aucune restriction de clients."
 
+#. translators: %s: role names
 #: src/Addons/Tools/PricingTest/RuleTester.php:139
+#: src/Addons/Tools/PricingTest/RuleTester.php:194
 #, php-format
 msgid "roles %s"
 msgstr "rôles %s"
 
+#. translators: %d: number of customers
 #: src/Addons/Tools/PricingTest/RuleTester.php:142
+#: src/Addons/Tools/PricingTest/RuleTester.php:198
 #, php-format
 msgid "%d selected customer"
 msgid_plural "%d selected customers"
 msgstr[0] "%d client sélectionné"
 msgstr[1] "%d clients sélectionnés"
 
+#. translators: %s: the limits, e.g. "roles Wholesale and 2 selected
+#. customers"
 #: src/Addons/Tools/PricingTest/RuleTester.php:147
+#: src/Addons/Tools/PricingTest/RuleTester.php:204
 #, php-format
 msgid "The rule is limited to %s."
 msgstr "La règle est limitée à : %s."
 
+#. translators: %s: the limits, e.g. "roles Wholesale and 2 selected
+#. customers"
 #: src/Addons/Tools/PricingTest/RuleTester.php:147
+#: src/Addons/Tools/PricingTest/RuleTester.php:204
 msgid "and"
 msgstr "et"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:181
+#: src/Addons/Tools/PricingTest/RuleTester.php:238
 msgid "a role price on the product"
 msgstr "un prix de rôle sur le produit"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:183
+#: src/Addons/Tools/PricingTest/RuleTester.php:240
 msgid "a customer price on the product"
 msgstr "un prix client sur le produit"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:185
+#: src/Addons/Tools/PricingTest/RuleTester.php:242
 #: views/admin/notifications/activation-notification.php:44
 msgid "a global pricing rule"
 msgstr "une règle de tarification mondiale"
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:187
-#: src/Addons/Tools/PricingTest/RuleTester.php:189
+#: src/Addons/Tools/PricingTest/RuleTester.php:244
+#: src/Addons/Tools/PricingTest/RuleTester.php:246
 msgid "the product's own pricing"
 msgstr "la tarification propre du produit"
 
@@ -5452,7 +6032,7 @@ msgstr ""
 "Accédez aux utilitaires de gestion et de nettoyage des données de "
 "tarification par niveaux."
 
-#: src/Addons/UserBasedPricing/ProductManager.php:179
+#: src/Addons/UserBasedPricing/ProductManager.php:180
 msgid "Invalid user"
 msgstr "Utilisateur invalide"
 
@@ -5716,47 +6296,47 @@ msgstr "Produit variable"
 msgid "Tiers, quantity limits and how variations are priced together"
 msgstr "Niveaux, limites de quantité et tarification combinée des variantes"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:100
+#: src/Admin/ProductPage/TieredPricingTab.php:101
 msgid "Display"
 msgstr "Affichage"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:100
+#: src/Admin/ProductPage/TieredPricingTab.php:101
 msgid "Layout and unit label for this product"
 msgstr "Mise en page et étiquette d'unité pour ce produit"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:112
+#: src/Admin/ProductPage/TieredPricingTab.php:113
 msgid "Pricing layout"
 msgstr "Disposition des prix"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:113
+#: src/Admin/ProductPage/TieredPricingTab.php:114
 msgid "Override the global layout for this specific product."
 msgstr "Remplacez la présentation globale de ce produit spécifique."
 
-#: src/Admin/ProductPage/TieredPricingTab.php:129
+#: src/Admin/ProductPage/TieredPricingTab.php:130
 msgid "Singular (e.g. piece)"
 msgstr "Singulier (par exemple pièce)"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:135
+#: src/Admin/ProductPage/TieredPricingTab.php:136
 msgid "Plural (e.g. pieces)"
 msgstr "Pluriel (par exemple morceaux)"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:146
+#: src/Admin/ProductPage/TieredPricingTab.php:147
 msgid "Displayed next to quantities. Leave empty to inherit global settings."
 msgstr ""
 "Affiché à côté des quantités. Laissez vide pour hériter des paramètres "
 "globaux."
 
-#: src/Admin/ProductPage/TieredPricingTab.php:157
+#: src/Admin/ProductPage/TieredPricingTab.php:158
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:402
 msgid "Visibility"
 msgstr "Visibilité"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:260
+#: src/Admin/ProductPage/TieredPricingTab.php:261
 msgid "Role & Customer Prices"
 msgstr "Prix ​​des rôles et des clients"
 
-#: src/Admin/ProductPage/TieredPricingTab.php:260
+#: src/Admin/ProductPage/TieredPricingTab.php:261
 msgid "Prices for customer roles and individual customers"
 msgstr "Prix pour les rôles de clients et les clients individuels"
 
@@ -5872,17 +6452,21 @@ msgstr "Tarifer plusieurs produits à la fois"
 #: src/Admin/WelcomePage/WelcomePage.php:211
 msgid ""
 "A global pricing rule gives categories, tags, brands or customer roles one "
-"set of tiers."
+"set of tiers, or takes an amount off the whole order and ships it free from "
+"a subtotal."
 msgstr ""
-"Une règle de tarification mondiale donne aux catégories, tags, marques ou "
-"rôles de clients un même jeu de niveaux."
+"Une règle de tarification globale donne à des catégories, étiquettes, "
+"marques ou rôles client un même ensemble de niveaux, ou retire un montant de"
+" toute la commande et l'expédie gratuitement à partir d'un sous-total."
 
 #: src/Admin/WelcomePage/WelcomePage.php:212
 msgid "Open the pricing rules"
 msgstr "Ouvrir les règles de tarification"
 
 #: src/Admin/WelcomePage/WelcomePage.php:212 src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:313
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:327
+#: src/Addons/Tools/js-source/components/PricingTest.js:507
 msgid "Add a pricing rule"
 msgstr "Ajouter une règle de tarification"
 
@@ -5913,16 +6497,24 @@ msgstr ""
 "WooCommerce."
 
 #: src/Admin/WelcomePage/WelcomePage.php:241
+msgid ""
+"A discount, free shipping with a progress bar and a minimum order on the "
+"whole cart, per role, products and dates."
+msgstr ""
+"Une remise, la livraison gratuite avec une barre de progression et une "
+"commande minimum sur tout le panier, par rôle, produits et dates."
+
+#: src/Admin/WelcomePage/WelcomePage.php:246
 msgid "A quote form for customers who want a price on a large order."
 msgstr ""
 "Un formulaire de devis pour les clients qui souhaitent un prix sur une "
 "commande importante."
 
-#: src/Admin/WelcomePage/WelcomePage.php:245
+#: src/Admin/WelcomePage/WelcomePage.php:250
 msgid "Pricing labels"
 msgstr "Étiquettes de niveau"
 
-#: src/Admin/WelcomePage/WelcomePage.php:246
+#: src/Admin/WelcomePage/WelcomePage.php:251
 msgid ""
 "Mark a tier as the best value or the most popular, with an icon and a "
 "colour."
@@ -5930,12 +6522,12 @@ msgstr ""
 "Signalez un niveau comme le meilleur rapport qualité-prix ou le plus "
 "populaire, avec une icône et une couleur."
 
-#: src/Admin/WelcomePage/WelcomePage.php:250
+#: src/Admin/WelcomePage/WelcomePage.php:255
 #: src/Settings/Sections/Advanced/AdvancedSection.php:35
 msgid "Modules"
 msgstr "Modules"
 
-#: src/Admin/WelcomePage/WelcomePage.php:251
+#: src/Admin/WelcomePage/WelcomePage.php:256
 msgid "Switch off the features you do not use under Advanced."
 msgstr "Désactivez les fonctionnalités que vous n'utilisez pas sous Avancé."
 
@@ -5959,7 +6551,7 @@ msgstr ""
 "Convertissez et affichez correctement les tarifs échelonnés lorsque vous "
 "utilisez l'Aelia Currency Switcher."
 
-#: src/Integrations/Plugins/Curcy.php:79
+#: src/Integrations/Plugins/Curcy.php:88
 msgid ""
 "Convert and display tiered pricing correctly when using the CURCY "
 "multicurrency plugin."
@@ -6315,7 +6907,7 @@ msgstr "Tarification par option"
 msgid "Live totals"
 msgstr "Totaux en direct"
 
-#: src/Integrations/Plugins/WCCS.php:67
+#: src/Integrations/Plugins/WCCS.php:82
 msgid ""
 "Convert and display tiered pricing correctly when using the WooCommerce "
 "Currency Switcher by WP Experts."
@@ -6370,7 +6962,7 @@ msgstr ""
 " abonnement WooCommerce Subscriptions, dans le total initial comme dans les "
 "totaux récurrents."
 
-#: src/Integrations/Plugins/WOOCS.php:65
+#: src/Integrations/Plugins/WOOCS.php:80
 msgid ""
 "Convert and display tiered pricing correctly when using the FOX WooCommerce "
 "Currency Switcher."
@@ -6386,13 +6978,13 @@ msgstr ""
 "Convertissez et affichez correctement les prix échelonnés lorsque vous "
 "utilisez WooPayments Multicurrency."
 
-#: src/Integrations/Plugins/WPAllImport.php:103
-#: src/Integrations/Plugins/WPAllImport.php:203
+#: src/Integrations/Plugins/WPAllImport.php:105
+#: src/Integrations/Plugins/WPAllImport.php:211
 msgid "Fixed Tiered prices"
 msgstr "Tarifs échelonnés fixes"
 
-#: src/Integrations/Plugins/WPAllImport.php:106
-#: src/Integrations/Plugins/WPAllImport.php:208
+#: src/Integrations/Plugins/WPAllImport.php:108
+#: src/Integrations/Plugins/WPAllImport.php:216
 msgid ""
 "The format for the rules must be the following: "
 "quantity:price,quantity:price. For example: \"10:5,20:15\" where 10 and 20 "
@@ -6402,13 +6994,13 @@ msgstr ""
 " exemple : \"10:5,20:15\" où 10 et 20 sont les quantités et 5 et 15 sont les"
 " prix de ces quantités."
 
-#: src/Integrations/Plugins/WPAllImport.php:110
-#: src/Integrations/Plugins/WPAllImport.php:213
+#: src/Integrations/Plugins/WPAllImport.php:112
+#: src/Integrations/Plugins/WPAllImport.php:221
 msgid "Percentage Tiered prices"
 msgstr "Prix ​​dégressifs en pourcentage"
 
-#: src/Integrations/Plugins/WPAllImport.php:113
-#: src/Integrations/Plugins/WPAllImport.php:218
+#: src/Integrations/Plugins/WPAllImport.php:115
+#: src/Integrations/Plugins/WPAllImport.php:226
 msgid ""
 "Format for the rules must be the following: "
 "quantity:percent_discount,quantity:percent_discount. For example: "
@@ -6419,27 +7011,45 @@ msgstr ""
 "quantité : percent_discount. Par exemple : \"10:5,20:15\" où 10 et 20 sont "
 "des quantités et 5 et 15 sont des montants de remise."
 
-#: src/Integrations/Plugins/WPAllImport.php:126
-#: src/Integrations/Plugins/WPAllImport.php:234
-msgid "The field must be either \"fixed\" or \"percentage\"."
-msgstr "Le champ doit être soit « fixe », soit « pourcentage »."
+#: src/Integrations/Plugins/WPAllImport.php:119
+#: src/Integrations/Plugins/WPAllImport.php:231
+msgid "Amount-off Tiered prices"
+msgstr "Prix échelonnés avec montant de remise"
 
-#: src/Integrations/Plugins/WPAllImport.php:129
-#: src/Integrations/Plugins/WPAllImport.php:238
+#: src/Integrations/Plugins/WPAllImport.php:122
+#: src/Integrations/Plugins/WPAllImport.php:236
+msgid ""
+"Format for the rules must be the following: "
+"quantity:amount_off,quantity:amount_off. For example: \"10:5,20:15\" where "
+"10 and 20 are quantities and 5 and 15 are the amounts taken off the price of"
+" each unit."
+msgstr ""
+"Le format des règles doit être le suivant : "
+"quantité:montant,quantité:montant. Par exemple : « 10:5,20:15 » où 10 et 20 "
+"sont des quantités et 5 et 15 sont les montants retirés du prix de chaque "
+"unité."
+
+#: src/Integrations/Plugins/WPAllImport.php:134
+#: src/Integrations/Plugins/WPAllImport.php:250
+msgid "The field must be \"fixed\", \"percentage\" or \"amount\"."
+msgstr "Le champ doit être « fixed », « percentage » ou « amount »."
+
+#: src/Integrations/Plugins/WPAllImport.php:137
+#: src/Integrations/Plugins/WPAllImport.php:254
 msgid "Minimum product quantity"
 msgstr "Quantité minimale de produit"
 
-#: src/Integrations/Plugins/WPAllImport.php:134
-#: src/Integrations/Plugins/WPAllImport.php:245
+#: src/Integrations/Plugins/WPAllImport.php:142
+#: src/Integrations/Plugins/WPAllImport.php:261
 msgid "The field must contain an integer value."
 msgstr "Le champ doit contenir une valeur entière."
 
-#: src/Integrations/Plugins/WPAllImport.php:149
+#: src/Integrations/Plugins/WPAllImport.php:157
 #: views/admin/components/regular-pricing-form.php:28
 msgid "Pricing type"
 msgstr "Type de prix"
 
-#: src/Integrations/Plugins/WPAllImport.php:156
+#: src/Integrations/Plugins/WPAllImport.php:164
 msgid ""
 "The field must be either \"fixed\" or \"percentage\". This affect what "
 "fields will be used to grant a discount: sale and regular prices or "
@@ -6449,41 +7059,41 @@ msgstr ""
 "champs qui seront utilisés pour accorder une remise : prix de vente et prix "
 "réguliers ou pourcentage de remise."
 
-#: src/Integrations/Plugins/WPAllImport.php:166
+#: src/Integrations/Plugins/WPAllImport.php:174
 msgid "Regular price for the role"
 msgstr "Prix ​​régulier pour le rôle"
 
-#: src/Integrations/Plugins/WPAllImport.php:175
+#: src/Integrations/Plugins/WPAllImport.php:183
 msgid "Sale price for the role"
 msgstr "Prix ​​de vente du rôle"
 
-#: src/Integrations/Plugins/WPAllImport.php:179
+#: src/Integrations/Plugins/WPAllImport.php:187
 #: views/admin/components/regular-pricing-form.php:75
 msgid "Discount (%)"
 msgstr "Rabais (%)"
 
-#: src/Integrations/Plugins/WPAllImport.php:198
+#: src/Integrations/Plugins/WPAllImport.php:206
 msgid "Percentage discount for the role."
 msgstr "Pourcentage de remise pour le rôle."
 
-#: src/Integrations/Plugins/WPAllImport.php:567
+#: src/Integrations/Plugins/WPAllImport.php:583
 msgid "Role-based import"
 msgstr "Importation basée sur les rôles"
 
-#: src/Integrations/Plugins/WPAllImport.php:884
+#: src/Integrations/Plugins/WPAllImport.php:900
 msgid "Import and update tiered pricing rules using WP All Import."
 msgstr ""
 "Importez et mettez à jour les règles de tarification échelonnée à l’aide de "
 "WP All Import."
 
-#: src/Integrations/Plugins/WPMLMulticurrency.php:125
+#: src/Integrations/Plugins/WPMLMulticurrency.php:135
 msgid ""
 "Convert and display tiered pricing correctly when using WPML Multicurrency."
 msgstr ""
 "Convertissez et affichez correctement les tarifs échelonnés lorsque vous "
 "utilisez WPML Multicurrency."
 
-#: src/Integrations/Plugins/WPMLMultilingual.php:143
+#: src/Integrations/Plugins/WPMLMultilingual.php:144
 msgid ""
 "Copy role-based and user-based tiered pricing to product translations when "
 "using WPML or Polylang."
@@ -6491,7 +7101,7 @@ msgstr ""
 "Copie la tarification échelonnée par rôle et par utilisateur vers les "
 "traductions des produits avec WPML ou Polylang."
 
-#: src/Integrations/Plugins/YithMulticurrency.php:67
+#: src/Integrations/Plugins/YithMulticurrency.php:78
 msgid ""
 "Convert and display tiered pricing correctly when using the YITH Multi "
 "Currency Switcher for WooCommerce."
@@ -6534,28 +7144,21 @@ msgstr ""
 "et introduisez les variables <b>%%lowest_price%%</b> et "
 "<b>%%price_range%%</b> pour le référencement."
 
-#. translators: %s: amount saved per item
-#. translators: %s: discount percentage
-#: src/PricingTable.php:339 src/PricingTable.php:345
-#, php-format
-msgid "%s off"
-msgstr "%s de remise"
-
 #. translators: 1: discount percentage, 2: amount saved per item
-#: src/PricingTable.php:342
+#: src/PricingTable.php:349
 #, php-format
 msgid "%1$s off, save %2$s"
 msgstr "%1$s de remise, économisez %2$s"
 
 #. translators: %d: number of tiers not listed
-#: src/PricingTable.php:429
+#: src/PricingTable.php:436
 #, php-format
 msgid "+%d more tier"
 msgid_plural "+%d more tiers"
 msgstr[0] "+%d autre niveau"
 msgstr[1] "+%d autres niveaux"
 
-#: src/PricingTable.php:640
+#: src/PricingTable.php:647
 msgid ""
 "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or "
 "greater than your first pricing tier."
@@ -6563,7 +7166,7 @@ msgstr ""
 "Conflit de prix détecté : votre quantité minimale de commande est égale ou "
 "supérieure à votre premier niveau tarifaire."
 
-#: src/PricingTable.php:648
+#: src/PricingTable.php:655
 msgid ""
 "To fix this, please ensure your first tiered pricing rule starts at a higher"
 " quantity than your Minimum Order Quantity."
@@ -6572,11 +7175,11 @@ msgstr ""
 "tarification échelonnée commence à une quantité supérieure à votre quantité "
 "minimale de commande."
 
-#: src/PricingTable.php:652
+#: src/PricingTable.php:659
 msgid "Why?"
 msgstr "Pourquoi?"
 
-#: src/PricingTable.php:653
+#: src/PricingTable.php:660
 msgid ""
 "The plugin automatically creates a base tier using your standard WooCommerce"
 " product price. This base tier covers any quantities ordered between the "
@@ -6587,7 +7190,7 @@ msgstr ""
 "quantités commandées entre la quantité minimale de commande et votre premier"
 " niveau de remise."
 
-#: src/PricingTable.php:657
+#: src/PricingTable.php:664
 msgid "This notice is only visible to store administrators."
 msgstr "Cet avis n'est visible que par les administrateurs du magasin."
 
@@ -7640,7 +8243,7 @@ msgstr ""
 "n'en garder qu'un — nous recommandons U2Code Product Addons pour son "
 "intégration native avec la tarification échelonnée."
 
-#: src/Settings/Settings.php:269
+#: src/Settings/Settings.php:276
 msgid "New"
 msgstr "Nouveau"
 
@@ -7690,10 +8293,8 @@ msgid "Role and customer prices"
 msgstr "Prix des rôles et des clients"
 
 #: src/TierPricingTablePlugin.php:248
-msgid "Cart rules by role: minimums, payment and shipping methods"
-msgstr ""
-"Règles de panier par rôle : minimums, moyens de paiement et méthodes de "
-"livraison"
+msgid "Payment and shipping methods by role"
+msgstr "Moyens de paiement et méthodes de livraison par rôle"
 
 #: src/TierPricingTablePlugin.php:249
 msgid "Tax options by role"
@@ -7749,13 +8350,16 @@ msgstr ""
 
 #: views/addons/category-tiers/add-free.php:43
 #: views/addons/category-tiers/edit-free.php:59
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:186
 msgid "Upgrade"
 msgstr "Mise à niveau"
 
 #: views/addons/category-tiers/add.php:69
 #: views/addons/category-tiers/edit-free.php:46
 #: views/addons/category-tiers/edit.php:100
-#: views/admin/components/tiered-pricing-rules-form.php:141
+#: views/addons/global-rules/order-discount-form.php:73
+#: views/admin/components/tiered-pricing-rules-form.php:153
 msgid "New tier"
 msgstr "Nouveau niveau"
 
@@ -7774,6 +8378,49 @@ msgid ""
 msgstr ""
 "Attribuez des remises en pourcentage pour les produits appartenant à cette "
 "catégorie. Les règles peuvent être remplacées dans le produit."
+
+#: views/addons/global-rules/free-shipping-bar.php:20
+msgid "Progress towards free shipping"
+msgstr "Progression vers la livraison gratuite"
+
+#: views/addons/global-rules/order-discount-form.php:21
+msgid "Tiers on"
+msgstr "Niveaux selon"
+
+#: views/addons/global-rules/order-discount-form.php:24
+msgid "The subtotal of the counted lines"
+msgstr "Le sous-total des lignes comptées"
+
+#: views/addons/global-rules/order-discount-form.php:27
+msgid "The number of items in the counted lines"
+msgstr "Le nombre d'articles dans les lignes comptées"
+
+#: views/addons/global-rules/order-discount-form.php:33
+msgid "Discount type"
+msgstr "Type de remise"
+
+#: views/addons/global-rules/order-discount-form.php:36
+msgid "Fixed amount"
+msgstr "Montant fixe"
+
+#: views/addons/global-rules/order-discount-form.php:39
+msgid "Percentage (premium)"
+msgstr "Pourcentage (premium)"
+
+#: views/addons/global-rules/order-discount-form.php:45
+msgid "Tiers"
+msgstr "Niveaux"
+
+#: views/addons/global-rules/order-discount-form.php:79
+msgid ""
+"\"From\" is a subtotal in the store currency or a number of items, as chosen"
+" above. A fixed discount is an amount in the store currency; a percentage "
+"one is a number such as 10, taken off the discounted lines."
+msgstr ""
+"« À partir de » est un sous-total dans la devise de la boutique ou un nombre"
+" d'articles, selon votre choix ci-dessus. Une remise fixe est un montant "
+"dans la devise de la boutique ; une remise en pourcentage est un nombre tel "
+"que 10, retiré des lignes remisées."
 
 #: views/addons/global-rules/tiered-pricing-tab.php:60
 msgid ""
@@ -7804,6 +8451,10 @@ msgid ""
 msgstr ""
 "Les prix par rôle sont une fonctionnalité premium. Les champs ci-dessous "
 "sont en lecture seule dans la version gratuite."
+
+#: views/addons/role-based-pricing/role.php:31
+msgid "Role"
+msgstr "Rôle"
 
 #: views/addons/role-based-pricing/role.php:36
 #: views/addons/user-based-pricing/user.php:46
@@ -7899,28 +8550,40 @@ msgstr "Fixez le prix réduit comme"
 msgid "Leave blank to keep unchanged"
 msgstr "Laisser vide pour rester inchangé"
 
-#: views/admin/components/tiered-pricing-rules-form.php:105
+#: views/admin/components/tiered-pricing-rules-form.php:62
+msgid "Amount off"
+msgstr "Montant de remise"
+
+#: views/admin/components/tiered-pricing-rules-form.php:113
 #: src/Addons/ReactProductEditorAddon/js-source/src/tiered-pricing/Components/TieredPricingForm/TieredPricingType.js:16
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
 #: src/Addons/ReactProductEditorAddon/js/tiered-pricing/index.js:1
 msgid "Fixed prices"
 msgstr "Prix ​​fixes"
 
-#: views/admin/components/tiered-pricing-rules-form.php:110
+#: views/admin/components/tiered-pricing-rules-form.php:118
 msgid "Percentage discounts"
 msgstr "Remises en pourcentage"
 
-#: views/admin/components/tiered-pricing-rules-form.php:111
+#: views/admin/components/tiered-pricing-rules-form.php:119
 msgid "Percentage discounts (only in premium version)"
 msgstr "Remises en pourcentage (uniquement dans la version premium)"
 
-#: views/admin/components/tiered-pricing-rules-form.php:125
+#: views/admin/components/tiered-pricing-rules-form.php:124
+msgid "Amount discounts"
+msgstr "Remises par montant"
+
+#: views/admin/components/tiered-pricing-rules-form.php:137
 msgid "Tiered price"
 msgstr "Prix ​​échelonné"
 
 #: views/admin/notifications/activation-notification.php:25
 msgid "Thanks for installing the"
 msgstr "Merci d'avoir installé le"
+
+#: views/admin/notifications/activation-notification.php:41
+msgid "products"
+msgstr "produits"
 
 #. translators: %1$s: product links, %2$s: categories
 #: views/admin/notifications/activation-notification.php:47
@@ -7932,6 +8595,11 @@ msgstr ""
 "Ajoutez des règles de tarification basées sur la quantité directement dans "
 "les %1$s ou créez des %2$s qui fonctionneront pour les catégories de "
 "produits et les rôles d'utilisateur."
+
+#: views/admin/notifications/black-friday.php:43
+#: views/admin/notifications/feedback-discount.php:41
+msgid "Dismiss"
+msgstr "Rejeter"
 
 #: views/admin/notifications/black-friday.php:47
 msgid "Black Friday"
@@ -8181,26 +8849,31 @@ msgid "+ Add Column"
 msgstr "+ Ajouter une colonne"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:59
 msgid "Bold"
 msgstr "Gras"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:60
 msgid "Italic"
 msgstr "Italique"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:61
 msgid "Strikethrough"
 msgstr "Barré"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:147
 msgid "Formatting"
 msgstr "Mise en forme"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/TemplateEditor.js:195
 msgid "Insert"
 msgstr "Insérer"
@@ -8250,9 +8923,11 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:232
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:235
 #: src/Addons/LayoutConfigurator/js-source/components/CustomColumns.js:23
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:184
 msgid "Available in the premium version."
 msgstr "Disponible dans la version premium."
 
@@ -8362,7 +9037,9 @@ msgid "Upsell message"
 msgstr "Message de vente incitative"
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:348
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:196
 msgid "Next tier message"
 msgstr "Message du niveau suivant"
 
@@ -8879,27 +9556,30 @@ msgid "Click a variable to insert it."
 msgstr "Cliquez sur une variable pour l'insérer."
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:193
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:176
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:454
 msgid "Cart"
 msgstr "Panier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
-#: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
-msgid "Subtotal"
-msgstr "Sous-total"
-
-#: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:205
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:476
 msgid "Cart totals"
 msgstr "Totaux du panier"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:478
 msgid "Shipping"
 msgstr "Expédition"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:207
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:481
 msgid "Proceed to checkout"
 msgstr "Valider la commande"
@@ -8912,6 +9592,8 @@ msgstr ""
 "catégorie."
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:263
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:352
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:408
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -8950,7 +9632,9 @@ msgid "Cart & Checkout"
 msgstr "Panier et validation de commande"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:178
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:179
 #: src/Addons/LayoutConfigurator/js-source/components/Preview.js:295
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:177
@@ -8988,16 +9672,234 @@ msgstr ""
 "leur propre bouton et apparaissent dans l'aperçu une fois enregistrées."
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:306
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:314
 #: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:443
 msgid "Unsaved changes"
 msgstr "Modifications non enregistrées"
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
 #: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:307
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:315
 msgid "Save changes"
 msgstr "Enregistrer les modifications"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:164
+msgid "Sample product"
+msgstr "Produit exemple"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:176
+msgid "Order discount"
+msgstr "Remise sur la commande"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+msgid "Flat rate:"
+msgstr "Forfait :"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:217
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:243
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:177
+msgid "Checkout"
+msgstr "Commande"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:221
+msgid "Your order"
+msgstr "Votre commande"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:224
+msgid "Place order"
+msgstr "Passer la commande"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:238
+msgid "Subtotal:"
+msgstr "Sous-total :"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:242
+msgid "View cart"
+msgstr "Voir le panier"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:252
+msgid ""
+"The bar is not placed on product pages. Tick \"Product page\" under \"Where "
+"it shows\" to add it above the add to cart form."
+msgstr ""
+"La barre n'est pas placée sur les pages produit. Cochez « Page produit » "
+"sous « Où l'afficher » pour l'ajouter au-dessus du formulaire d'ajout au "
+"panier."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:178
+msgid "Mini cart"
+msgstr "Mini panier"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:185
+msgid ""
+"The free shipping bar needs the premium version; the preview shows what it "
+"would look like."
+msgstr ""
+"La barre de livraison gratuite nécessite la version premium ; l'aperçu "
+"montre son rendu."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:195
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:405
+msgid "Cart discount"
+msgstr "Remise sur le panier"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:196
+msgid ""
+"Shown under the cart totals, in the checkout order review and in the mini "
+"cart until the next tier is reached. Leave it empty to hide it. Not "
+"available in the Cart and Checkout blocks."
+msgstr ""
+"Affiché sous les totaux du panier, dans le récapitulatif de la validation de"
+" commande et dans le mini panier jusqu'à ce que le niveau suivant soit "
+"atteint. Laissez vide pour le masquer. Non disponible dans les blocs Panier "
+"et Validation de commande."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:199
+msgid "Subtotal basis"
+msgstr "Base du sous-total"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:199
+msgid ""
+"The subtotal the cart rules compare with their tiers and minimums: the cart "
+"lines after tiered prices, before shipping."
+msgstr ""
+"Le sous-total que les règles de panier comparent à leurs niveaux et "
+"minimums : les lignes du panier après les prix échelonnés, avant la "
+"livraison."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:208
+msgid "Keep the discount next to customer coupons"
+msgstr "Conserver la remise avec les coupons des clients"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:209
+msgid ""
+"Switched off, a coupon the customer applies replaces the cart discount. An "
+"individual-use coupon always replaces it."
+msgstr ""
+"Désactivée, un coupon appliqué par le client remplace la remise sur le "
+"panier. Un coupon à usage individuel la remplace toujours."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:217
+msgid "Amount not reached"
+msgstr "Montant non atteint"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:217
+msgid ""
+"Shown in the cart and at checkout, classic pages and blocks, while a cart "
+"rule's minimum amount is not met."
+msgstr ""
+"Affiché dans le panier et à la validation de la commande, pages classiques "
+"et blocs, tant que le montant minimum d'une règle de panier n'est pas "
+"atteint."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:220
+msgid "Items not reached"
+msgstr "Nombre d'articles non atteint"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:220
+msgid "Shown while a cart rule's minimum number of items is not met."
+msgstr ""
+"Affiché tant que le nombre d'articles minimum d'une règle de panier n'est "
+"pas atteint."
+
+#. translators: %s: shortcode
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:230
+#, js-format
+msgid ""
+"The bar is switched on per rule, on its Free shipping tab. The shortcode %s "
+"and the Free Shipping Bar block put it anywhere else, such as the header or "
+"the page of the Cart block."
+msgstr ""
+"La barre s'active règle par règle, dans son onglet Livraison gratuite. Le "
+"shortcode %s et le bloc Free Shipping Bar l'affichent n'importe où ailleurs,"
+" par exemple dans l'en-tête ou sur la page du bloc Panier."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:240
+msgid "The store message; a rule can carry its own."
+msgstr "Le message de la boutique ; une règle peut avoir le sien."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:246
+#: src/Addons/TierLabels/build/index.js:2
+#: src/Addons/TierLabels/js-source/index.js:234
+msgid "Colours"
+msgstr "Couleurs"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:250
+msgid "Until reached"
+msgstr "Avant le seuil"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:254
+msgid "Reached"
+msgstr "Seuil atteint"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:258
+msgid "Height"
+msgstr "Hauteur"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:282
+msgid "Cart rules preview"
+msgstr "Aperçu des règles de panier"
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:2
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:290
+msgid "Sample cart subtotal"
+msgstr "Sous-total du panier exemple"
+
+#. translators: 1: discount, 2: tier threshold, 3: free shipping threshold, 4:
+#. minimum amount, 5: minimum items
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:304
+#, js-format
+msgid ""
+"Sample rule: %1$s off from %2$s, free shipping from %3$s, a minimum of %4$s "
+"or %5$s items."
+msgstr ""
+"Règle exemple : %1$s de remise à partir de %2$s, livraison gratuite à partir"
+" de %3$s, un minimum de %4$s ou %5$s articles."
+
+#: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
+#: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:318
+msgid ""
+"Your rules set their own tiers, thresholds and minimums; the preview uses a "
+"sample rule. The real pages may look a bit different, depending on your "
+"theme."
+msgstr ""
+"Vos règles définissent leurs propres niveaux, seuils et minimums ; l'aperçu "
+"utilise une règle exemple. Les vraies pages peuvent être un peu différentes,"
+" selon votre thème."
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/role-based-pricing/Components/PremiumUpgradeNotice.js:7
 #: src/Addons/ReactProductEditorAddon/js/role-based-pricing/index.js:1
@@ -9912,11 +10814,6 @@ msgid "Shape"
 msgstr "Forme"
 
 #: src/Addons/TierLabels/build/index.js:2
-#: src/Addons/TierLabels/js-source/index.js:234
-msgid "Colours"
-msgstr "Couleurs"
-
-#: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:236
 msgid "Background"
 msgstr "Arrière-plan"
@@ -10373,44 +11270,59 @@ msgid "Save Role"
 msgstr "Enregistrer le rôle"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:135
+#: src/Addons/Tools/js-source/components/PricingTest.js:146
 msgid "Selected"
 msgstr "Sélectionné"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:144
+#: src/Addons/Tools/js-source/components/PricingTest.js:155
 msgid "Matches and is applied"
 msgstr "Correspond et s'applique"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:145
+#: src/Addons/Tools/js-source/components/PricingTest.js:156
 msgid "Matches, but product pricing is applied"
 msgstr "Correspond, mais la tarification du produit s'applique"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:146
+#: src/Addons/Tools/js-source/components/PricingTest.js:157
 msgid "Matches, but a higher-priority rule is applied"
 msgstr "Correspond, mais une règle plus prioritaire s'applique"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:147
+#: src/Addons/Tools/js-source/components/PricingTest.js:158
 msgid "Matches, but changes nothing"
 msgstr "Correspond, mais ne change rien"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:148
+#: src/Addons/Tools/js-source/components/PricingTest.js:159
 msgid "Would match"
 msgstr "Correspondrait"
 
 #: src/Addons/Tools/build/index.js:1
-#: src/Addons/Tools/js-source/components/PricingTest.js:149
+#: src/Addons/Tools/js-source/components/PricingTest.js:160
 msgid "Does not match"
 msgstr "Ne correspond pas"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:161
+msgid "No counted line"
+msgstr "Aucune ligne comptée"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:162
+msgid "In play, below its first tier"
+msgstr "Appliquée, sous son premier niveau"
+
+#: src/Addons/Tools/build/index.js:1
+#: src/Addons/Tools/js-source/components/PricingTest.js:163
+msgid "In play, minimum order only"
+msgstr "Appliquée, commande minimum uniquement"
 
 #. translators: 1: rule title, 2: pricing source, e.g. "the product's own
 #. pricing"
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:172
+#: src/Addons/Tools/js-source/components/PricingTest.js:186
 #, js-format
 msgid ""
 "%1$s matches, but the prices come from %2$s because of the rule's priority "
@@ -10421,20 +11333,20 @@ msgstr ""
 
 #. translators: %s: rule title
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:177
+#: src/Addons/Tools/js-source/components/PricingTest.js:191
 #, js-format
 msgid "The prices come from %s."
 msgstr "Les prix ont pour source %s."
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:179
+#: src/Addons/Tools/js-source/components/PricingTest.js:193
 msgid "No global pricing rule matches this product for this customer."
 msgstr ""
 "Aucune règle de tarification globale ne correspond à ce produit pour ce "
 "client."
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:168
+#: src/Addons/Tools/js-source/components/PricingTest.js:182
 msgid ""
 "No global pricing rule takes part: the Global pricing rules add-on is "
 "switched off."
@@ -10443,54 +11355,56 @@ msgstr ""
 "tarification globales est désactivé."
 
 #: src/Addons/Tools/build/index.js:2
-#: src/Addons/Tools/js-source/components/PricingTest.js:195
+#: src/Addons/Tools/js-source/components/PricingTest.js:209
 #, js-format
 msgid "Source of the prices: %s."
 msgstr "Source des prix : %s."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:199
+#: src/Addons/Tools/js-source/components/PricingTest.js:213
 #, js-format
 msgid "Quantity limits: %s."
 msgstr "Limites de quantité : %s."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:200
+#: src/Addons/Tools/js-source/components/PricingTest.js:214
 msgid "No quantity limits."
 msgstr "Aucune limite de quantité."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:212
+#: src/Addons/Tools/js-source/components/PricingTest.js:226
+#: src/Addons/Tools/js-source/components/PricingTest.js:353
 msgid "Price per item"
 msgstr "Prix par article"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:237
+#: src/Addons/Tools/js-source/components/PricingTest.js:251
 msgid "Verdict"
 msgstr "Résultat"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:238
+#: src/Addons/Tools/js-source/components/PricingTest.js:252
 msgid "Why"
 msgstr "Pourquoi"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:255
+#: src/Addons/Tools/js-source/components/PricingTest.js:269
 msgid "The rule you came from"
 msgstr "La règle d'où vous venez"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:285
+#: src/Addons/Tools/js-source/components/PricingTest.js:299
+#: src/Addons/Tools/js-source/components/PricingTest.js:394
 msgid "for"
 msgstr "pour"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:291
+#: src/Addons/Tools/js-source/components/PricingTest.js:305
 msgid "What the customer pays"
 msgstr "Ce que le client paie"
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:301
+#: src/Addons/Tools/js-source/components/PricingTest.js:315
 msgid ""
 "Rules are matched in priority order: the lowest number first, and the newer "
 "rule first when numbers are equal. The first active rule that matches is "
@@ -10501,7 +11415,7 @@ msgstr ""
 "règle active qui correspond s'applique."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:306
+#: src/Addons/Tools/js-source/components/PricingTest.js:320
 msgid ""
 "The Global pricing rules add-on is switched off (see the modules above), so "
 "no rule takes part in pricing."
@@ -10510,88 +11424,330 @@ msgstr ""
 "ci-dessus), aucune règle n'intervient donc dans la tarification."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:311
+#: src/Addons/Tools/js-source/components/PricingTest.js:325
 msgid "There are no global pricing rules yet."
 msgstr "Il n'y a pas encore de règle de tarification globale."
 
 #: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:322
+#: src/Addons/Tools/js-source/components/PricingTest.js:336
 msgid "Pricing log"
 msgstr "Journal de tarification"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:51
-#: src/Addons/Tools/js-source/components/PricingTest.js:372
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:354
+msgid "Line total"
+msgstr "Total de la ligne"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:355
+msgid "Source of the price"
+msgstr "Origine du prix"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:363
+msgid "tier"
+msgstr "niveau"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:371
+msgid "Counted, including tax"
+msgstr "Comptés, taxes comprises"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:371
+msgid "Counted, excluding tax"
+msgstr "Comptés, hors taxes"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:393
+#, js-format
+msgid "A cart of %d line"
+msgid_plural "A cart of %d lines"
+msgstr[0] "Un panier de %d ligne"
+msgstr[1] "Un panier de %d lignes"
+
+#: src/Addons/Tools/build/index.js:3
+#: src/Addons/Tools/js-source/components/PricingTest.js:400
+msgid "What the cart gets"
+msgstr "Ce que reçoit le panier"
+
+#. translators: 1: discount, 2: counted amount or items, 3: amount taken off
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:412
+#, js-format
+msgid "%1$s off from the tier at %2$s, taken on %3$s counted: %4$s off."
+msgstr ""
+"%1$s de remise à partir du niveau de %2$s, calculée sur %3$s comptés : %4$s "
+"de remise."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:418
+#, js-format
+msgid "Shown as \"%1$s\" (coupon %2$s)."
+msgstr "Affichée comme « %1$s » (coupon %2$s)."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:419
+#, js-format
+msgid "%d line counted."
+msgid_plural "%d lines counted."
+msgstr[0] "%d ligne comptée."
+msgstr[1] "%d lignes comptées."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:424
+msgid "none."
+msgstr "aucune."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:424
+msgid ""
+"is in play for this cart, but the cart does not reach its first tier, and "
+"its minimum order (if any) is checked below."
+msgstr ""
+"s'applique à ce panier, mais le panier n'atteint pas son premier niveau, et "
+"sa commande minimum (le cas échéant) est vérifiée ci-dessous."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:427
+msgid "none. No cart rule applies to this cart for this customer."
+msgstr ""
+"aucune. Aucune règle de panier ne s'applique à ce panier pour ce client."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:427
+msgid "none. The Global pricing rules add-on is switched off."
+msgstr "aucune. Le module Règles de tarification globales est désactivé."
+
+#: src/Addons/Tools/build/index.js:4
+#: src/Addons/Tools/js-source/components/PricingTest.js:435
+msgid "yes: on every order under"
+msgstr "oui : sur chaque commande dans le cadre de"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:437
+#, js-format
+msgid "yes: the cart reaches %s of"
+msgstr "oui : le panier atteint %s de"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:438
+msgid "A Free shipping method that requires a coupon becomes available."
+msgstr ""
+"Une méthode de livraison gratuite qui exige un coupon devient disponible."
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:443
+msgid "not yet:"
+msgstr "pas encore :"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:443
+#, js-format
+msgid "gives it from %s."
+msgstr "l'accorde à partir de %s."
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:446
+msgid "none: the rule in play has no free shipping threshold."
+msgstr "aucune : la règle appliquée n'a pas de seuil de livraison gratuite."
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:450
+#, js-format
+msgid "The free shipping bar shows %1$s: “%2$s”"
+msgstr "La barre de livraison gratuite s'affiche %1$s : « %2$s »"
+
+#: src/Addons/Tools/build/index.js:5
+#: src/Addons/Tools/js-source/components/PricingTest.js:456
+msgid "no cart rule sets a minimum for this cart."
+msgstr "aucune règle de panier ne définit de minimum pour ce panier."
+
+#: src/Addons/Tools/build/index.js:6
+#: src/Addons/Tools/js-source/components/PricingTest.js:464
+#, js-format
+msgid "minimum %1$s, the cart counts %2$s"
+msgstr "minimum %1$s, le panier compte %2$s"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:466
+#, js-format
+msgid "minimum %1$s items, the cart counts %2$s"
+msgstr "minimum %1$s articles, le panier compte %2$s"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:468
+msgid "Met"
+msgstr "Respecté"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:468
+msgid "Missed: checkout blocked"
+msgstr "Non respecté : validation de la commande bloquée"
+
+#: src/Addons/Tools/build/index.js:7
+#: src/Addons/Tools/js-source/components/PricingTest.js:476
+msgid "Next tier"
+msgstr "Niveau suivant"
+
+#. translators: 1: remaining amount or items, 2: discount, 3: threshold
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:481
+#, js-format
+msgid "add %1$s more to get %2$s off (the tier from %3$s of"
+msgstr ""
+"ajoutez %1$s de plus pour obtenir %2$s de remise (le niveau à partir de %3$s"
+" de"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:486
+msgid "none: the top tier is reached, or no rule with tiers is in play."
+msgstr ""
+"aucun : le niveau supérieur est atteint, ou aucune règle avec niveaux n'est "
+"appliquée."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:495
+msgid ""
+"One cart rule is in play at a time: the first in priority order that covers "
+"the customer and counts a line. Every matching rule's minimum is checked."
+msgstr ""
+"Une seule règle de panier s'applique à la fois : la première dans l'ordre de"
+" priorité qui concerne le client et compte une ligne. Le minimum de chaque "
+"règle correspondante est vérifié."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:500
+msgid ""
+"The Global pricing rules add-on is switched off (see the modules above), so "
+"no rule takes part."
+msgstr ""
+"Le module Règles de tarification globales est désactivé (voir les modules "
+"ci-dessus) : aucune règle n'est donc prise en compte."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:505
+msgid "There are no cart rules yet."
+msgstr "Il n'y a pas encore de règle de panier."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:523
+msgid "Cart lines"
+msgstr "Lignes du panier"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:537
+msgid "Remove the line"
+msgstr "Supprimer la ligne"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:540
+msgid "Add a line"
+msgstr "Ajouter une ligne"
+
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:51
+#: src/Addons/Tools/js-source/components/PricingTest.js:615
 msgid "Pricing Test"
 msgstr "Test de tarification"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:374
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:617
 msgid ""
-"See what a customer pays for a product without opening the storefront: which"
-" global pricing rule applies and why, which one wins when several match, and"
-" the prices per quantity."
+"See what a customer gets without opening the storefront: for a product, "
+"which pricing rule applies and the prices per quantity; for a cart, which "
+"cart rule is in play, its discount, the minimums and the next tier."
 msgstr ""
-"Voyez ce qu'un client paie pour un produit sans ouvrir la boutique : quelle "
-"règle de tarification globale s'applique et pourquoi, laquelle l'emporte "
-"quand plusieurs correspondent, et les prix par quantité."
+"Voyez ce que reçoit un client sans ouvrir la boutique : pour un produit, "
+"quelle règle de tarification s'applique et les prix par quantité ; pour un "
+"panier, quelle règle de panier s'applique, sa remise, les minimums et le "
+"niveau suivant."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:382
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
 msgid "Checking the rule"
 msgstr "Vérification de la règle"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:382
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
+msgid ""
+"Build a cart and pick a customer; the rule is highlighted in the results."
+msgstr ""
+"Composez un panier et choisissez un client ; la règle est mise en évidence "
+"dans les résultats."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:625
 msgid "Pick a product and a customer; the rule is highlighted in the results."
 msgstr ""
 "Choisissez un produit et un client ; la règle est mise en évidence dans les "
 "résultats."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:390
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:632
+msgid "What to test"
+msgstr "Ce qu'il faut tester"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:636
+msgid "A product: its prices and the product rules"
+msgstr "Un produit : ses prix et les règles de produit"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:640
+msgid "A cart: the cart rules, their discount and minimums"
+msgstr "Un panier : les règles de panier, leur remise et leurs minimums"
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:648
 msgid "Type to search products and variations."
 msgstr "Saisissez pour rechercher des produits et des variations."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:405
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:664
 msgid "A customer"
 msgstr "Un client"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:411
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:670
 msgid "Which customer"
 msgstr "Quel client"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:412
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:671
 msgid "Type a name or an email address."
 msgstr "Saisissez un nom ou une adresse e-mail."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:361
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:579
+#: src/Addons/Tools/js-source/components/PricingTest.js:604
 msgid "The test could not run. Reload the page and try again."
 msgstr "Le test n'a pas pu s'exécuter. Rechargez la page et réessayez."
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:425
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:561
+msgid "Add at least one product to the cart."
+msgstr "Ajoutez au moins un produit au panier."
+
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:684
 msgid "Testing…"
 msgstr "Test en cours…"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:425
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:684
 msgid "Run the test"
 msgstr "Lancer le test"
 
-#: src/Addons/Tools/build/index.js:3
-#: src/Addons/Tools/js-source/components/PricingTest.js:428
+#: src/Addons/Tools/build/index.js:8
+#: src/Addons/Tools/js-source/components/PricingTest.js:687
 msgid "Rules are tested as they are saved."
 msgstr "Les règles sont testées telles qu'elles sont enregistrées."
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:46
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:46
 msgid "Roles Management"
 msgstr "Gestion des rôles"
 
-#: src/Addons/Tools/build/index.js:3 src/Addons/Tools/js-source/App.js:56
+#: src/Addons/Tools/build/index.js:8 src/Addons/Tools/js-source/App.js:56
 msgid "Data Clean Up"
 msgstr "Nettoyage des données"
 
@@ -10634,6 +11790,16 @@ msgstr "Afficher le pourcentage de réduction"
 #: src/Blocks/build/index.js:510
 msgid "Main settings"
 msgstr "Paramètres principaux"
+
+#: src/Blocks/free-shipping-bar/index.js:21
+msgid ""
+"Free shipping bar: shows here when a cart rule with the free shipping bar "
+"covers the visitor. Switch the bar on under WooCommerce → Pricing rules → "
+"the rule → Free shipping."
+msgstr ""
+"Barre de livraison gratuite : s'affiche ici quand une règle de panier avec "
+"la barre de livraison gratuite concerne le visiteur. Activez la barre sous "
+"WooCommerce → Règles de tarification → la règle → Livraison gratuite."
 
 #: src/Addons/ReactProductEditorAddon/js-source/src/premium-wrapper/block.json
 #: src/Addons/ReactProductEditorAddon/js/premium-wrapper/block.json
@@ -10682,3 +11848,40 @@ msgstr ""
 "Widget de tarification échelonnée. Doit être utilisé sur le modèle de page "
 "produit. Trouvez plus d'options à personnaliser dans les paramètres du "
 "plugin."
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block title"
+msgid "Free Shipping Bar"
+msgstr "Free Shipping Bar"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block description"
+msgid ""
+"How far the cart is from the free shipping of a cart rule. Shows nothing "
+"when no rule with the bar covers the visitor."
+msgstr ""
+"Indique ce qui sépare le panier de la livraison gratuite d'une règle de "
+"panier. N'affiche rien quand aucune règle avec la barre ne concerne le "
+"visiteur."
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "free shipping"
+msgstr "livraison gratuite"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "progress"
+msgstr "progression"
+
+#: src/Blocks/free-shipping-bar/block.json
+msgctxt "block keyword"
+msgid "tiered pricing"
+msgstr "tarification échelonnée"
+
+#. translators: %s: login page url
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersService.php:85
+#: src/Addons/NonLoggedInUsers/NonLoggedInUsersSubsection.php:70
+#, php-format
+msgid "%s to see prices"
+msgstr "%s pour voir les prix"

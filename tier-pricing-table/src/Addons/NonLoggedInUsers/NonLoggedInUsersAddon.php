@@ -10,7 +10,6 @@ use TierPricingTable\Addons\NonLoggedInUsers\Wholesale\Frontend\RegistrationForm
 use TierPricingTable\Addons\NonLoggedInUsers\Wholesale\Services\LoginRedirect;
 use TierPricingTable\Addons\NonLoggedInUsers\CartRules\CartRulesService;
 use TierPricingTable\Addons\NonLoggedInUsers\CartRules\CartRulesSettings;
-use TierPricingTable\Addons\NonLoggedInUsers\CartRules\CartRulesSubsection;
 use TierPricingTable\Addons\NonLoggedInUsers\CartRules\PaymentMethodsSubsection;
 use TierPricingTable\Addons\NonLoggedInUsers\CartRules\ShippingMethodsSubsection;
 use TierPricingTable\Addons\NonLoggedInUsers\Visibility\Admin\CategoryListColumn;
@@ -75,21 +74,16 @@ class NonLoggedInUsersAddon extends AbstractAddon {
             // the shortcode stays known, so a page that carries it explains itself to the store owner
             add_shortcode( RegistrationForm::SHORTCODE, array($this, 'renderDisabledNote') );
         }
-        return;
-        // premium: the guest options and the cart rules
+        // the guest options (hide prices, prevent purchasing) are free
         add_action( 'init', function () {
             $this->getContainer()->initService( NonLoggedInUsersService::class );
         } );
-        if ( CartRulesSettings::isEnabled() ) {
-            new CartRulesService();
-        }
     }
 
     public function addSettingsSubsection( $subsections ) {
-        // the private store is free; the cart rules and the guest options are premium and are shown
+        // the private store and the guest options are free; the method limits are premium and are shown
         // locked in the free version (PremiumSettingsManager)
         $subsections[] = PrivateStoreSubsection::class;
-        $subsections[] = CartRulesSubsection::class;
         $subsections[] = PaymentMethodsSubsection::class;
         $subsections[] = ShippingMethodsSubsection::class;
         $subsections[] = NonLoggedInUsersSubsection::class;

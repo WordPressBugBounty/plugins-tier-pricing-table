@@ -2,7 +2,12 @@
 
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\FormTab;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
+use TierPricingTable\Addons\TieredPricingCart\CartOptionsSubsection;
 
+/**
+ * What happens when a product has its own pricing settings next to this rule: the rule wins, the product's
+ * settings stay, or a choice per setting (base prices, tiers, quantity limits). Product rules only.
+ */
 class Settings extends FormTab {
 	
 	public function getId(): string {
@@ -10,30 +15,45 @@ class Settings extends FormTab {
 	}
 	
 	public function getTitle(): string {
-		return __( 'Priority Settings', 'tier-pricing-table' );
+		return __( 'Product overrides', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Manage how this rule interacts with product-level settings', 'tier-pricing-table' );
+		return __( 'Which settings win when a product has its own', 'tier-pricing-table' );
 	}
 	
+	public function getKinds(): array {
+		return array( GlobalPricingRule::KIND_PRODUCT );
+	}
+
 	public function render( GlobalPricingRule $pricingRule ) {
 		
-		$this->renderSectionTitle( __( 'Priority Settings', 'tier-pricing-table' ) );
+		$this->renderSectionTitle( __( 'Product overrides', 'tier-pricing-table' ) );
 		
-		$this->renderHint( __( 'Determine which rules take precedence when a product has both global and individual settings.',
-			'tier-pricing-table' ) );
+		// the store default is the "Prioritize global pricing rules" switch: say what it does right now
+		$storeDefaultOverrides = CartOptionsSubsection::globalRulesOverrideProductLevelRules();
+		$storeDefaultEffect    = $storeDefaultOverrides
+			? __( 'global rules override the product\'s settings', 'tier-pricing-table' )
+			: __( 'the product\'s settings win', 'tier-pricing-table' );
+		
+		$this->renderHint( sprintf(
+			/* translators: 1: "on" or "off", 2: what the store default does right now */
+			__( 'A product can carry its own tiered prices, role prices and quantity limits. Decide what happens when this rule and the product both have a setting. "Follow the store default" uses the "Prioritize global pricing rules" switch under Settings → General → Price Calculation, which is %1$s right now: %2$s.', 'tier-pricing-table' ),
+			$storeDefaultOverrides ? __( 'on', 'tier-pricing-table' ) : __( 'off', 'tier-pricing-table' ),
+			$storeDefaultEffect
+		) );
 		
 		$this->renderRadioOptions( array(
 			'id'      => '_tpt_settings_priority_type',
-			'title'   => __( 'Rule priority', 'tier-pricing-table' ),
+			'title'   => __( 'When a product has its own pricing', 'tier-pricing-table' ),
 			'options' => array(
-				'default'        => __( 'Use global settings', 'tier-pricing-table' ),
-				'prefer-product' => __( 'Prefer product-level rules',
+				/* translators: %s: what the store default does right now */
+				'default'        => sprintf( __( 'Follow the store default (right now: %s)', 'tier-pricing-table' ), $storeDefaultEffect ),
+				'prefer-product' => __( 'Keep the product\'s settings',
 					'tier-pricing-table' ),
-				'override'       => __( 'Override product-level rules',
+				'override'       => __( 'This rule overrides them',
 					'tier-pricing-table' ),
-				'flexible'       => __( 'Custom component priorities',
+				'flexible'       => __( 'Decide per setting',
 					'tier-pricing-table' ),
 			),
 			'value'   => $pricingRule->getSettings()->getPriorityType(),
@@ -43,7 +63,7 @@ class Settings extends FormTab {
 
 		<div class="tpt_settings_advanced_priority_settings hidden">
 			<?php
-				$this->renderSectionTitle( __( 'Base Prices Priority', 'tier-pricing-table' ) );
+				$this->renderSectionTitle( __( 'Base prices', 'tier-pricing-table' ) );
 			?>
 			<div class="tpt_settings_regular_pricing">
 				<?php
@@ -51,21 +71,21 @@ class Settings extends FormTab {
 						'id'      => '_tpt_settings_regular_pricing_priority_type',
 						'title'   => __( 'Base prices', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-role-based-product' => __( 'Prefer product-level role prices',
+							'prefer-role-based-product' => __( 'Keep the product\'s role prices',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override all product-level prices',
+							'override'                  => __( 'This rule overrides every product price',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getRegularPricingPriority(),
 					) );
 					
-					$this->renderHint( __( 'Prioritize product-specific role pricing over this global rule.',
+					$this->renderHint( __( 'Whether a product\'s own role prices stay in place or this rule\'s base prices replace them.',
 						'tier-pricing-table' ) );
 				?>
 			</div>
 			
 			<?php
-				$this->renderSectionTitle( __( 'Tiered Prices Priority', 'tier-pricing-table' ) );
+				$this->renderSectionTitle( __( 'Tiered prices', 'tier-pricing-table' ) );
 			?>
 
 			<div class="tpt_settings_tiered_pricing">
@@ -74,11 +94,11 @@ class Settings extends FormTab {
 						'id'      => '_tpt_settings_tiered_pricing_priority_type',
 						'title'   => __( 'Tiered prices', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-product'            => __( 'Prefer product-level tiers',
+							'prefer-product'            => __( 'Keep the product\'s tiers',
 								'tier-pricing-table' ),
-							'prefer-role-based-product' => __( 'Prefer product-level role tiers',
+							'prefer-role-based-product' => __( 'Keep the product\'s role tiers only',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override all product-level tiers',
+							'override'                  => __( 'This rule overrides every product tier',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getTieredPricingPriority(),
@@ -92,13 +112,13 @@ class Settings extends FormTab {
 							'tier-pricing-table' ),
 					) );
 					
-					$this->renderHint( __( 'Prioritize product-specific tiered pricing over this global rule, and optionally enable Mix & Match for those inherited tiers.',
+					$this->renderHint( __( 'Whether a product\'s own tiers stay in place or this rule\'s tiers replace them; Mix & Match can apply to the tiers kept from the product.',
 						'tier-pricing-table' ) );
 				?>
 			</div>
 			
 			<?php
-				$this->renderSectionTitle( __( 'Quantity Limits Priority', 'tier-pricing-table' ) );
+				$this->renderSectionTitle( __( 'Quantity limits', 'tier-pricing-table' ) );
 			?>
 
 			<div class="tpt_settings_quantity_limits">
@@ -107,17 +127,17 @@ class Settings extends FormTab {
 						'id'      => '_tpt_settings_quantity_limits_priority_type',
 						'title'   => __( 'Quantity limits', 'tier-pricing-table' ),
 						'options' => array(
-							'prefer-product'            => __( 'Prefer product-level limits',
+							'prefer-product'            => __( 'Keep the product\'s limits',
 								'tier-pricing-table' ),
-							'prefer-role-based-product' => __( 'Prefer product-level role limits',
+							'prefer-role-based-product' => __( 'Keep the product\'s role limits only',
 								'tier-pricing-table' ),
-							'override'                  => __( 'Override all product-level limits',
+							'override'                  => __( 'This rule overrides every product limit',
 								'tier-pricing-table' ),
 						),
 						'value'   => $pricingRule->getSettings()->getQuantityLimitsPriority(),
 					) );
 					
-					$this->renderHint( __( 'Prioritize product-specific quantity limits over this global rule.',
+					$this->renderHint( __( 'Whether a product\'s own quantity limits stay in place or this rule\'s limits replace them.',
 						'tier-pricing-table' ) );
 				?>
 			</div>

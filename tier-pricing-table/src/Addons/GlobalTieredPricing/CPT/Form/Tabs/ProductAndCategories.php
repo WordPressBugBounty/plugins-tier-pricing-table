@@ -15,16 +15,17 @@ class ProductAndCategories extends FormTab {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Select products, categories, tags, or brands this rule applies to', 'tier-pricing-table' );
+		return __( 'Products, categories, tags or brands this rule covers', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
-		
 		$this->renderSectionTitle( __( 'Applies to products', 'tier-pricing-table' ) );
 		
+		// one hint per rule type: the form shows the one matching the type picked in the status box
+		$this->renderKindNote( GlobalPricingRule::KIND_ORDER, __( 'For a cart rule these lists decide which cart lines count towards the tiers and the minimum, and which lines get the discount. Leave them empty to count the whole cart, except the products in the Exclusions section.', 'tier-pricing-table' ) );
+		
 		if ( empty( $pricingRule->getIncludedProductCategories() ) && empty( $pricingRule->getIncludedProducts() ) ) {
-			$this->renderHint( __( 'If no products, categories, tags, or brands are selected, this rule will apply to all products in your store, except those listed in the Exclusions section.',
-				'tier-pricing-table' ) );
+			$this->renderKindNote( GlobalPricingRule::KIND_PRODUCT, __( 'If no products, categories, tags, or brands are selected, this rule will apply to all products in your store, except those listed in the Exclusions section.', 'tier-pricing-table' ) );
 		}
 		
 		$this->renderSelect2( array(
@@ -54,6 +55,26 @@ class ProductAndCategories extends FormTab {
 			'label'       => __( 'Include subcategories', 'tier-pricing-table' ),
 			'description' => __( 'Products in subcategories of the selected categories match too. The excluded categories below follow the same switch.', 'tier-pricing-table' ),
 		) );
+		?>
+		<script>
+			jQuery( function ( $ ) {
+				// "Include subcategories" matters only once a category is chosen, included or excluded
+				var $box    = $( 'input[name="tpt_include_subcategories"]' ).closest( '.tiered-pricing-form-block' );
+				var $fields = $( '#tpt_included_categories, #tpt_excluded_categories, [name="tpt_included_categories[]"], [name="tpt_excluded_categories[]"]' );
+				var toggle  = function () {
+					var chosen = false;
+					$fields.each( function () {
+						if ( ( $( this ).val() || [] ).length ) {
+							chosen = true;
+						}
+					} );
+					$box.toggle( chosen );
+				};
+				$( document ).on( 'change', '#tpt_included_categories, #tpt_excluded_categories, [name="tpt_included_categories[]"], [name="tpt_excluded_categories[]"]', toggle );
+				toggle();
+			} );
+		</script>
+		<?php
 		
 		$this->renderSelect2( array(
 			'id'            => 'tpt_included_tags',

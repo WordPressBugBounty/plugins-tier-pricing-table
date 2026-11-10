@@ -18,6 +18,10 @@ class Quantity extends FormTab {
 		return __( 'Set minimum, maximum, and quantity step limits', 'tier-pricing-table' );
 	}
 
+	public function getKinds(): array {
+		return array( GlobalPricingRule::KIND_PRODUCT );
+	}
+
 	public function render( GlobalPricingRule $pricingRule ) {
 
 		$this->renderSectionTitle( __( 'Quantity Limits', 'tier-pricing-table' ), array(

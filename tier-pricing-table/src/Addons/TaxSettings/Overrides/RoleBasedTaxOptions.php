@@ -1,6 +1,8 @@
 <?php namespace TierPricingTable\Addons\TaxSettings\Overrides;
 
+use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPriceManager;
 use TierPricingTable\Addons\TaxSettings\API\TaxSettingsEndpoints;
+use WC_Order;
 
 class RoleBasedTaxOptions {
 	
@@ -17,6 +19,9 @@ class RoleBasedTaxOptions {
 		
 		// Exempt
 		add_action( 'wp', array( $this, 'setTaxExempt' ), 99 );
+
+		// Orders created in the admin: re-calculating with tiered pricing applies the customer's tax exemption.
+		add_action( 'tiered_pricing_table/manual_orders/before_recalculation', array( $this, 'setOrderTaxExempt' ), 10, 2 );
 	}
 	
 	protected function getActiveRoleSettings() {
@@ -106,5 +111,39 @@ class RoleBasedTaxOptions {
 		if ( $roleSettings && isset( $roleSettings['tax_exempt'] ) && $roleSettings['tax_exempt'] ) {
 			WC()->customer->set_is_vat_exempt( true );
 		}
+	}
+
+	/**
+	 * Marks an order created in the admin as tax exempt when its customer's role is tax exempt, the way the checkout
+	 * does for the cart. WooCommerce then removes the taxes when it calculates the order. An exemption set here is
+	 * lifted again when the order is re-calculated for a customer whose role is not exempt.
+	 *
+	 * @param  WC_Order  $order
+	 * @param  int  $customerId  0 for a guest.
+	 */
+	public function setOrderTaxExempt( WC_Order $order, int $customerId ) {
+		$settings = get_option( TaxSettingsEndpoints::OPTION_KEY, array() );
+		$user     = $customerId ? get_userdata( $customerId ) : false;
+		$roles    = $user ? (array) $user->roles : array( RoleBasedPriceManager::GUEST_ROLE );
+		$exempt   = false;
+
+		foreach ( $roles as $role ) {
+			if ( isset( $settings[ $role ] ) ) {
+				$exempt = ! empty( $settings[ $role ]['tax_exempt'] );
+				break;
+			}
+		}
+
+		if ( $exempt ) {
+			$order->update_meta_data( 'is_vat_exempt', 'yes' );
+			$order->update_meta_data( '_tpt_vat_exempt_by_role', 'yes' );
+		} elseif ( 'yes' === $order->get_meta( '_tpt_vat_exempt_by_role' ) ) {
+			$order->update_meta_data( 'is_vat_exempt', 'no' );
+			$order->delete_meta_data( '_tpt_vat_exempt_by_role' );
+		} else {
+			return;
+		}
+
+		$order->save();
 	}
 }

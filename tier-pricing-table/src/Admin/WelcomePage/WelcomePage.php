@@ -208,7 +208,7 @@ class WelcomePage {
 			array(
 				'id'     => 'rules',
 				'title'    => __( 'Price many products at once', 'tier-pricing-table' ),
-				'text'     => __( 'A global pricing rule gives categories, tags, brands or customer roles one set of tiers.', 'tier-pricing-table' ),
+				'text'     => __( 'A global pricing rule gives categories, tags, brands or customer roles one set of tiers, or takes an amount off the whole order and ships it free from a subtotal.', 'tier-pricing-table' ),
 				'button'   => $rules ? __( 'Open the pricing rules', 'tier-pricing-table' ) : __( 'Add a pricing rule', 'tier-pricing-table' ),
 				'url'      => $rules ? admin_url( 'edit.php?post_type=' . GlobalTieredPricingCPT::SLUG ) : admin_url( 'post-new.php?post_type=' . GlobalTieredPricingCPT::SLUG ),
 				'done'     => $rules > 0,
@@ -235,6 +235,11 @@ class WelcomePage {
 					'title' => __( 'Import and export', 'tier-pricing-table' ),
 					'text'  => __( 'Tiers travel with the WooCommerce CSV importer and exporter.', 'tier-pricing-table' ),
 					'url'   => TierPricingTablePlugin::getDocumentationURL() . '#import-and-export',
+				),
+				array(
+					'title' => __( 'Cart rules', 'tier-pricing-table' ),
+					'text'  => __( 'A discount, free shipping with a progress bar and a minimum order on the whole cart, per role, products and dates.', 'tier-pricing-table' ),
+					'url'   => TierPricingTablePlugin::getDocumentationURL() . '#order-rules',
 				),
 				array(
 					'title' => __( 'Request a quote', 'tier-pricing-table' ),

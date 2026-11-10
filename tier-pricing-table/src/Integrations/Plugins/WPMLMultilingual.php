@@ -13,6 +13,7 @@ class WPMLMultilingual extends PluginIntegrationAbstract {
 	const DYNAMIC_KEY_SUFFIXES = array(
 		'fixed_price_rules',
 		'percentage_price_rules',
+		'amount_price_rules',
 		'tiered_price_rules_type',
 		'tiered_price_minimum_qty',
 		'tiered_price_regular_price',

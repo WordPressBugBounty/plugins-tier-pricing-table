@@ -143,6 +143,9 @@ class CartUpsellsService {
                         if ( $pricingRule->isFixed() ) {
                             $nextPrice = $prevPrice;
                             $currentPrice = $iterator->current();
+                        } elseif ( $pricingRule->isAmount() ) {
+                            $nextPrice = PriceManager::getProductPriceWithAmountDiscount( $product, $prevPrice );
+                            $currentPrice = PriceManager::getProductPriceWithAmountDiscount( $product, $iterator->current() );
                         } else {
                             $nextPrice = PriceManager::getProductPriceWithPercentageDiscount( $product, $prevPrice );
                             $currentPrice = PriceManager::getProductPriceWithPercentageDiscount( $product, $iterator->current() );
@@ -159,6 +162,9 @@ class CartUpsellsService {
                         $product = wc_get_product( $this->getProductId( $cartItem ) );
                         if ( $pricingRule->isFixed() ) {
                             $nextPrice = $prevPrice;
+                            $currentPrice = $product->get_price();
+                        } elseif ( $pricingRule->isAmount() ) {
+                            $nextPrice = PriceManager::getProductPriceWithAmountDiscount( $product, $prevPrice );
                             $currentPrice = $product->get_price();
                         } else {
                             $nextPrice = PriceManager::getProductPriceWithPercentageDiscount( $product, $prevPrice );

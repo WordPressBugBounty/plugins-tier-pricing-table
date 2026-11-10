@@ -641,7 +641,10 @@ class LayoutPreview {
 		// Forget any rule cached for this id earlier in the request so the sample tiers apply.
 		try {
 			$cache = new \ReflectionProperty( PriceManager::class, 'pricingRules' );
-			$cache->setAccessible( true );
+
+			if ( PHP_VERSION_ID < 80100 ) {
+				$cache->setAccessible( true ); // no effect since PHP 8.1, deprecated in 8.5
+			}
 			$rules = (array) $cache->getValue();
 			unset( $rules[ $productId ] );
 			$cache->setValue( null, $rules );

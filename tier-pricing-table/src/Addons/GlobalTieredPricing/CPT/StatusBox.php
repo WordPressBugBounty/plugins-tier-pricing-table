@@ -64,6 +64,25 @@ class StatusBox {
 					<?php endif; ?>
 				</div>
 
+				<?php // the rule type: product prices (the default) or the order total; the tabs on the left follow it ?>
+				<details class="tpt-rule-box__section tpt-rule-box__section--kind" <?php echo $isNew ? 'open' : ''; ?>>
+					<summary>
+						<span><?php esc_html_e( 'Rule type', 'tier-pricing-table' ); ?></span>
+						<span class="tpt-rule-box__meta tpt-rule-box__kind-meta"><?php echo esc_html( $rule->isOrderRule() ? __( 'Cart rule', 'tier-pricing-table' ) : __( 'Product prices', 'tier-pricing-table' ) ); ?></span>
+					</summary>
+					<div class="tpt-rule-box__body">
+						<?php foreach ( self::kindOptions() as $kind => $option ) : ?>
+							<label class="tpt-rule-box__kind">
+								<input type="radio" name="tpt_rule_kind" value="<?php echo esc_attr( $kind ); ?>" data-label="<?php echo esc_attr( $option['label'] ); ?>" <?php checked( $kind, $rule->getKind() ); ?>>
+								<span class="tpt-rule-box__kind-text">
+									<strong><?php echo esc_html( $option['label'] ); ?></strong>
+									<span class="description"><?php echo esc_html( $option['hint'] ); ?></span>
+								</span>
+							</label>
+						<?php endforeach; ?>
+					</div>
+				</details>
+
 				<details class="tpt-rule-box__section">
 					<summary>
 						<span><?php esc_html_e( 'Priority', 'tier-pricing-table' ); ?></span>
@@ -126,11 +145,12 @@ class StatusBox {
 				<?php endif; ?>
 
 				<?php // no test link for a skipped rule: the test could only say it changes nothing ?>
+				<?php // an order rule is tested with a cart, a product rule with a product ?>
 				<?php if ( ! $isNew && PricingTester::isAvailable() && ! ( $published && 'skipped' === $rule->getEffectiveStatus() ) ) : ?>
 					<p class="tpt-rule-box__test">
 						<span class="dashicons dashicons-search"></span>
-						<a href="<?php echo esc_url( PricingTester::getUrl( $post->ID ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Test this rule', 'tier-pricing-table' ); ?></a>
-						<span class="description"><?php esc_html_e( 'What a customer pays for a product, and which rule wins.', 'tier-pricing-table' ); ?></span>
+						<a href="<?php echo esc_url( PricingTester::getUrl( $post->ID, $rule->isOrderRule() ? 'cart' : 'product' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Test this rule', 'tier-pricing-table' ); ?></a>
+						<span class="description"><?php echo esc_html( $rule->isOrderRule() ? __( 'What a cart gets, and which cart rule wins.', 'tier-pricing-table' ) : __( 'What a customer pays for a product, and which rule wins.', 'tier-pricing-table' ) ); ?></span>
 					</p>
 				<?php endif; ?>
 			</div>
@@ -315,6 +335,37 @@ class StatusBox {
 				font-weight: 600;
 			}
 
+			/* the Rule type options: the box's label rule makes labels blocks, so these are more specific */
+			.tpt-rule-box__body .tpt-rule-box__kind {
+				display: flex;
+				gap: 8px;
+				align-items: flex-start;
+				margin: 0 0 10px;
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.tpt-rule-box__body .tpt-rule-box__kind:last-child {
+				margin-bottom: 0;
+			}
+
+			.tpt-rule-box__body .tpt-rule-box__kind input[type="radio"] {
+				flex: 0 0 auto;
+				width: 16px;
+				height: 16px;
+				margin: 2px 0 0;
+			}
+
+			.tpt-rule-box__body .tpt-rule-box__kind-text {
+				display: flex;
+				flex-direction: column;
+				line-height: 1.4;
+			}
+
+			.tpt-rule-box__body .tpt-rule-box__kind-text .description {
+				margin: 0;
+			}
+
 			.tpt-rule-box__test {
 				display: flex;
 				flex-wrap: wrap;
@@ -372,7 +423,7 @@ class StatusBox {
 				return array(
 					'key'    => 'skipped',
 					'label'  => __( 'Skipped', 'tier-pricing-table' ),
-					'detail' => __( 'The rule changes neither prices nor quantity limits, so the storefront skips it. Set a price, tiers or a limit on the tabs on the left.', 'tier-pricing-table' ),
+					'detail' => self::skippedReason( $rule ),
 					'icon'   => 'dashicons-warning',
 				);
 			case 'scheduled':
@@ -393,6 +444,37 @@ class StatusBox {
 				? sprintf( __( 'Applies now, until %s.', 'tier-pricing-table' ), wp_date( $format, $rule->getEndTimestamp() ) )
 				: __( 'Applies now.', 'tier-pricing-table' ),
 			'icon'   => 'dashicons-yes-alt',
+		);
+	}
+
+	/**
+	 * Why the storefront skips a rule: the validation's own message, which names what is missing.
+	 */
+	public static function skippedReason( GlobalPricingRule $rule ): string {
+		try {
+			$rule->validatePricing();
+		} catch ( \Exception $e ) {
+			return $e->getMessage();
+		}
+		
+		return __( 'The rule changes neither prices nor quantity limits, so the storefront skips it. Set a price, tiers or a limit on the tabs on the left.', 'tier-pricing-table' );
+	}
+	
+	/**
+	 * The rule types with their labels and one-line hints.
+	 *
+	 * @return array<string, array{label: string, hint: string}>
+	 */
+	public static function kindOptions(): array {
+		return array(
+			GlobalPricingRule::KIND_PRODUCT => array(
+				'label' => __( 'Product prices', 'tier-pricing-table' ),
+				'hint'  => __( 'Tiers and base prices per product.', 'tier-pricing-table' ),
+			),
+			GlobalPricingRule::KIND_ORDER   => array(
+				'label' => __( 'Cart rule', 'tier-pricing-table' ),
+				'hint'  => __( 'A discount, free shipping or a minimum order, based on the cart subtotal or item count.', 'tier-pricing-table' ),
+			),
 		);
 	}
 

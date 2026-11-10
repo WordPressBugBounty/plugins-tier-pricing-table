@@ -16,8 +16,6 @@ class PremiumSettingsManager {
 		'tier_pricing_table__subsection_summary-description',
 		'tier_pricing_table__subsection_cart-description',
 		'tier_pricing_table__subsection_cart-upsells-description',
-		'tier_pricing_table__subsection_non-logged-in-users-description',
-		'tier_pricing_table__subsection_cart-rules-description',
 		'tier_pricing_table__subsection_payment-methods-description',
 		'tier_pricing_table__subsection_shipping-methods-description',
 		'tier_pricing_table__subsection_rank_math-description',

@@ -5,6 +5,17 @@ use TierPricingTable\PricingRule;
 class YithMulticurrency extends PluginIntegrationAbstract {
 
 	public function run() {
+		// Amount-off tiers are stored in the base currency: convert the amounts, the product price is converted by YITH.
+		add_filter( 'tiered_pricing_table/price/pricing_rule', function ( PricingRule $pricingRule ) {
+			if ( $pricingRule->isAmount() && function_exists( 'yith_wcmcs_convert_price' ) ) {
+				$pricingRule->setRules( array_map( function ( $amount ) {
+					return (float) yith_wcmcs_convert_price( $amount );
+				}, $pricingRule->getRules() ) );
+			}
+			
+			return $pricingRule;
+		}, 9999 );
+		
 		add_filter( 'tiered_pricing_table/price/price_by_rules',
 			function ( $productPrice, $quantity, $productId, $context, $place, PricingRule $pricingRule ) {
 
@@ -12,7 +23,7 @@ class YithMulticurrency extends PluginIntegrationAbstract {
 					return $productPrice;
 				}
 
-				if ( $pricingRule->isPercentage() ) {
+				if ( $pricingRule->isPercentage() || $pricingRule->isAmount() ) {
 					return $productPrice;
 				}
 
