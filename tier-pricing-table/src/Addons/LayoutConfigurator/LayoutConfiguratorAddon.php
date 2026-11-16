@@ -11,11 +11,11 @@ class LayoutConfiguratorAddon extends AbstractAddon {
 	const SLUG = 'layout-configurator';
 	
 	public function getName(): string {
-		return __( 'Layout Configurator', 'tier-pricing-table' );
+		return __( 'Layout customizer', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Visual editor for the product page pricing layout with a live preview. Switch it off to get the classic layout settings rows back.', 'tier-pricing-table' );
+		return __( 'Design the pricing table, shop grid and cart display with a live preview. When off, the same options show as plain settings.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -24,6 +24,10 @@ class LayoutConfiguratorAddon extends AbstractAddon {
 	
 	public function getSlug(): string {
 		return self::SLUG;
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRODUCT_PAGE;
 	}
 	
 	/**

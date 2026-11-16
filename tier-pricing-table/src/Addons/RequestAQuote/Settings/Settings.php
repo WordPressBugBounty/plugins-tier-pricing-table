@@ -57,7 +57,12 @@ class Settings {
 
 			$isPremium  = tpt_fs()->can_use_premium_code__premium_only() ? 'true' : 'false';
 			$upgradeUrl = tpt_fs()->get_upgrade_url();
-			$script     = "window.tptRequestAQuote = { isPremium: {$isPremium}, upgradeUrl: '" . esc_url( $upgradeUrl ) . "' };";
+			$script     = 'window.tptRequestAQuote = ' . wp_json_encode( array(
+					'isPremium'  => 'true' === $isPremium,
+					'upgradeUrl' => esc_url_raw( $upgradeUrl ),
+					// the largest file this server accepts, for the File Upload fields
+					'maxUpload'  => size_format( wp_max_upload_size() ),
+			) ) . ';';
 			wp_add_inline_script( 'tiered-pricing/feature/request-a-quote', $script, 'before' );
 
 			wp_set_script_translations( 'tiered-pricing/feature/request-a-quote', 'tier-pricing-table',

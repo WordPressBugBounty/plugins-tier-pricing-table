@@ -19,11 +19,11 @@ class ManualOrdersAddon extends AbstractAddon {
 	protected $customers = array();
 
 	public function getName(): string {
-		return __( 'Tiered pricing for manual orders', 'tier-pricing-table' );
+		return __( 'Tiered prices in admin orders', 'tier-pricing-table' );
 	}
 
 	public function getDescription(): string {
-		return __( 'Apply tiered pricing to orders created manually in the admin area.', 'tier-pricing-table' );
+		return __( 'A "Re-calculate with tiered pricing" button for orders you create or edit, priced for the order\'s customer and role.', 'tier-pricing-table' );
 	}
 
 	public function getIcon(): string {
@@ -32,6 +32,10 @@ class ManualOrdersAddon extends AbstractAddon {
 
 	public function getSlug(): string {
 		return 'manual-orders';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_WHOLESALE;
 	}
 
 	public function getItemPrice( WC_Order_Item_Product $item ) {

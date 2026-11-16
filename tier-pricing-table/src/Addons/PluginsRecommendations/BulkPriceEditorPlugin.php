@@ -67,7 +67,7 @@ class BulkPriceEditorPlugin extends Tip {
 							</a>
 
 							<a target="_blank"
-							   href="https://www.youtube.com/watch?v=nPA4j53w0iw">
+							   href="https://www.youtube.com/watch?v=akJFoYdc43I">
 								<?php esc_html_e( 'View video', 'tier-pricing-table' ); ?>
 								<svg style="
 							width: 0.8rem;

@@ -5,7 +5,7 @@ use TierPricingTable\PricingRule;
 
 class OptionsAdapter extends AbstractLayoutAdapter {
 
-	public function 	registerHooks() {
+	public function registerHooks() {
 		add_action( 'tiered_pricing_table/options/after_options', array( $this, 'renderFormPrompt' ), 10, 1 );
 		add_action( 'tiered_pricing_table/options/options', array( $this, 'render' ), 10, 2 );
 	}
@@ -25,7 +25,8 @@ class OptionsAdapter extends AbstractLayoutAdapter {
 				'form' => $form,
 				'productId' => $productId,
 				'optionsStyle' => $optionsStyle,
-				'buttonHtml' => $this->getQuoteButtonHtml( $form, $productId, 'button alt wp-element-button', 'padding: 5px 10px;' )
+				'addsToList' => $this->addsToList( $form ),
+				'buttonHtml' => $this->getQuoteButtonHtml( $form, $productId, 'button alt wp-element-button', self::ENTRY_BUTTON_STYLE )
 			),
 			plugin_dir_path( dirname( __DIR__ ) ) . 'views/'
 		);

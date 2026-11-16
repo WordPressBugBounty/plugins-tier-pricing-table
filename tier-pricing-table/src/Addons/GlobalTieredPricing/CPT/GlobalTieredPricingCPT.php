@@ -486,6 +486,25 @@ class GlobalTieredPricingCPT {
         $taxClass = ( isset( $postedData['tpt_tax_class'] ) ? sanitize_text_field( $postedData['tpt_tax_class'] ) : '' );
         $pricingRule->setTaxStatus( $taxStatus );
         $pricingRule->setTaxClass( $taxClass );
+        // Base pricing: flat regular and sale prices are free, a percentage discount is premium. Without premium a
+        // stored percentage setting stays as it is unless "Flat prices" is chosen (its radio is the one posted).
+        if ( tpt_fs()->can_use_premium_code() ) {
+            $pricingRule->setPricingType( $regularPricingData['pricing_type'] );
+            $pricingRule->setRegularPrice( $regularPricingData['regular_price'] );
+            $pricingRule->setSalePrice( $regularPricingData['sale_price'] );
+            $pricingRule->setDiscount( $regularPricingData['discount'] );
+            $pricingRule->setDiscountType( $regularPricingData['discount_type'] );
+        } elseif ( 'flat' === RegularPricingForm::getFieldValue(
+            'pricing_type',
+            null,
+            null,
+            '',
+            $postedData
+        ) ) {
+            $pricingRule->setPricingType( 'flat' );
+            $pricingRule->setRegularPrice( $regularPricingData['regular_price'] );
+            $pricingRule->setSalePrice( $regularPricingData['sale_price'] );
+        }
         $includedCategoriesIds = ( isset( $postedData['tpt_included_categories'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_categories'] ) ) : array() );
         $includedTagsIds = ( isset( $postedData['tpt_included_tags'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_tags'] ) ) : array() );
         $includedBrandsIds = ( isset( $postedData['tpt_included_brands'] ) ? array_filter( array_map( 'intval', (array) $postedData['tpt_included_brands'] ) ) : array() );

@@ -1,0 +1,487 @@
+/*
+ * The quote buttons. Secondary by default, so Add to cart stays the main action of the product page.
+ * Loaded on shop pages; small on purpose.
+ */
+
+/* outlined: takes the text colour around it, whatever the theme's buttons look like */
+.tpt-quote-button--outline,
+.tpt-quote-button--outline:visited,
+.tpt-quote-button--outline:focus {
+	background: transparent !important;
+	background-image: none !important;
+	color: inherit !important;
+	border: 1px solid currentColor !important;
+	box-shadow: none !important;
+	text-decoration: none !important;
+}
+
+.tpt-quote-button--outline:hover,
+.tpt-quote-button--outline:active {
+	background: rgba(127, 127, 127, 0.14) !important;
+	color: inherit !important;
+}
+
+/* a button keeps its text on one line; the label next to it wraps instead */
+.tpt-quote-button {
+	white-space: nowrap;
+}
+
+/* a text link */
+.tpt-quote-button--link {
+	display: inline-block;
+	padding: 4px 0;
+	background: none;
+	border: 0;
+	color: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.tpt-quote-button:focus-visible,
+.tpt-request-quote-trigger:focus-visible,
+.tpt-add-to-quote:focus-visible,
+.tpt-cart-to-quote:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+/* next to Add to cart */
+.tpt-quote-next-to-cart {
+	margin-left: 10px;
+}
+
+[dir="rtl"] .tpt-quote-next-to-cart {
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+/* the button by itself: a product without an add to cart form or a pricing table */
+.tpt-quote-standalone {
+	clear: both;
+	margin: 15px 0;
+}
+
+.tpt-quote-standalone .tpt-quote-next-to-cart {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* narrow screens: under Add to cart, full width, with room between them */
+@media (max-width: 480px) {
+	.tpt-quote-next-to-cart {
+		display: block;
+		clear: both;
+		box-sizing: border-box;
+		width: 100%;
+		margin: 10px 0 0 !important;
+		text-align: center;
+	}
+}
+
+/* fingers need room */
+@media (pointer: coarse) {
+	.tpt-quote-button,
+	.tpt-quote-next-to-cart {
+		min-height: 44px;
+		box-sizing: border-box;
+	}
+
+	a.tpt-quote-button:not(.tpt-quote-button--link),
+	a.tpt-quote-next-to-cart {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.tpt-quote-button--link {
+		padding: 10px 0;
+	}
+}
+
+@media (pointer: coarse) and (max-width: 480px) {
+	a.tpt-quote-next-to-cart {
+		display: flex;
+	}
+}
+
+/* ==========================================================================
+   The quote entry inside a pricing layout
+   One entry in every layout: a label and a button. The whole entry presses the button.
+   ========================================================================== */
+
+[data-tpt-quote-row] {
+	cursor: pointer;
+}
+
+/* label and button on one row; when they do not fit side by side the button drops under the label
+   and takes the full width (the label is never squeezed into one word per line) */
+.tpt-quote-entry {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px 12px;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.tiered-pricing-table-row > .tpt-quote-entry {
+	gap: 6px 12px;
+	flex-wrap: wrap;
+}
+
+.tpt-quote-entry__label {
+	flex: 9999 1 7.5em;
+	min-width: 0;
+	text-align: left;
+}
+
+[dir="rtl"] .tpt-quote-entry__label {
+	text-align: right;
+}
+
+.tpt-quote-entry > .tpt-request-quote-trigger {
+	flex: 1 0 auto;
+	box-sizing: border-box;
+	max-width: 100%;
+	text-align: center;
+	white-space: normal;
+}
+
+.tpt-quote-entry > .tpt-quote-button--link {
+	flex-grow: 0;
+}
+
+/* a message about the entry (choose the options first, the list is full) takes its own line */
+.tpt-quote-entry > .tpt-quote-inline-error {
+	flex: 1 1 100%;
+	margin-top: 0;
+}
+
+/* --- table ---------------------------------------------------------------------------------------- */
+
+/* the row is about as tall as a price row, and set apart from them */
+.tpt-quote-entry-cell > .tpt-quote-entry,
+.tiered-pricing-table-row > .tpt-quote-entry {
+	margin-top: -5px;
+	margin-bottom: -5px;
+}
+
+.tiered-pricing-option .tpt-quote-entry,
+.tiered-pricing-dropdown-option > .tpt-quote-entry {
+	margin-top: -4px;
+	margin-bottom: -4px;
+}
+
+tr.tpt-request-quote-integrated-row > td.tpt-quote-entry-cell {
+	border-top: 1px dashed rgba(127, 127, 127, .5);
+	vertical-align: middle;
+}
+
+/* the button takes the corners of the table design */
+.tiered-pricing-table--style-2 .tpt-quote-entry > .tpt-request-quote-trigger,
+.tiered-pricing-options--style-5 .tpt-quote-entry > .tpt-request-quote-trigger {
+	border-radius: 8px;
+}
+
+.tiered-pricing-table--style-3 .tpt-quote-entry > .tpt-request-quote-trigger,
+.tiered-pricing-dropdown--style-1 .tpt-quote-entry > .tpt-request-quote-trigger {
+	border-radius: 999px;
+}
+
+.tiered-pricing-table--style-5 .tpt-quote-entry > .tpt-request-quote-trigger,
+.tiered-pricing-table--style-6 .tpt-quote-entry > .tpt-request-quote-trigger,
+.tiered-pricing-options--style-4 .tpt-quote-entry > .tpt-request-quote-trigger {
+	border-radius: 6px;
+}
+
+/* --- horizontal table: a strip under the table ------------------------------------------------------ */
+
+.tpt-quote-entry--under-table {
+	box-sizing: border-box;
+	padding: 6px 10px;
+	border: 1px solid #666;
+	border-top: 0;
+	border-radius: 0 0 3px 3px;
+}
+
+.tiered-pricing-horizontal-table:has(+ .tpt-quote-entry--under-table) {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+/* --- options: an icon where the price options have their radio circle ------------------------------- */
+
+.tpt-quote-entry__icon {
+	display: block;
+	width: 18px;
+	height: 18px;
+	background-color: currentColor;
+	opacity: .6;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 5h16v11H10l-6 4z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 5h16v11H10l-6 4z' fill='none' stroke='black' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.tpt-quote-entry--list .tpt-quote-entry__icon {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M12 8v8M8 12h8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='9' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M12 8v8M8 12h8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.tiered-pricing-options--slim .tpt-quote-entry__icon {
+	width: 16px;
+	height: 16px;
+}
+
+/* cards: the entry is one more card, built like the price cards: the sign where they have the radio circle,
+   the label where they have their title, the button at the bottom where they have the price */
+.tiered-pricing-options--style-4 .tpt-request-quote-integrated-option .tpt-quote-entry {
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	gap: 8px;
+	width: 100%;
+	margin: 0;
+}
+
+.tiered-pricing-options--style-4 .tpt-request-quote-integrated-option .tpt-quote-entry__label {
+	flex: 1 1 auto;
+}
+
+.tiered-pricing-options--style-4 .tpt-request-quote-integrated-option .tpt-quote-entry > .tpt-request-quote-trigger {
+	flex: 0 0 auto;
+	margin-top: auto;
+}
+
+/* steps: the entry is not a step; the line ends at the last price */
+.tiered-pricing-options--style-6 .tiered-pricing-option.tpt-request-quote-integrated-option {
+	grid-template-columns: 28px minmax(0, 1fr);
+}
+
+.tiered-pricing-options--style-6 .tiered-pricing-option.tpt-request-quote-integrated-option::before {
+	display: none;
+}
+
+.tiered-pricing-options--style-6 .tiered-pricing-option:has(+ .tpt-request-quote-integrated-option)::before {
+	bottom: 50%;
+}
+
+/* --- dropdown: the entry stays in view while the list scrolls ---------------------------------------- */
+
+.tiered-pricing-dropdown__list ul {
+	background-color: inherit;
+}
+
+/* opaque whatever the pointer does: the price lines scroll under it */
+.tiered-pricing-dropdown-option.tpt-request-quote-integrated-dropdown-option {
+	position: sticky;
+	bottom: 0;
+	z-index: 1;
+	background-color: inherit !important;
+	border-top: 1px dashed rgba(127, 127, 127, .5);
+}
+
+.tiered-pricing-dropdown__list .tiered-pricing-dropdown-option.tpt-request-quote-integrated-dropdown-option:focus,
+.tiered-pricing-dropdown__list .tiered-pricing-dropdown-option.tpt-request-quote-integrated-dropdown-option:focus-within {
+	background-image: linear-gradient(rgba(127, 127, 127, .1), rgba(127, 127, 127, .1));
+}
+
+/* --- plain text: one more line, the action is a text link --------------------------------------------- */
+
+.tpt-request-quote-integrated-plain-text-line .tpt-quote-button--link {
+	display: inline;
+	padding: 0;
+	margin: 0 0 0 .3em;
+	min-height: 0;
+}
+
+[dir="rtl"] .tpt-request-quote-integrated-plain-text-line .tpt-quote-button--link {
+	margin: 0 .3em 0 0;
+}
+
+/* check list: the same slot as the check marks, with its own sign */
+.tiered-pricing-plain-texts--style-1 .tiered-pricing-plain-text.tpt-request-quote-integrated-plain-text-line::before {
+	border-style: dashed;
+	border-color: #9ca3af;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 5.5v9M5.5 10h9' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* --- blocks: the whole block is the button ------------------------------------------------------------ */
+
+.tiered-pricing-blocks .tiered-pricing-block.tpt-request-quote-integrated-block {
+	border: 1px dashed rgba(107, 114, 128, .7);
+	background-color: transparent;
+	box-shadow: none;
+	transform: none;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* the label on top, the action under it, in every design */
+.tpt-request-quote-integrated-block .tiered-pricing-block__quantity {
+	margin-top: 0;
+}
+
+.tpt-request-quote-integrated-block .tiered-pricing-block__price {
+	margin-top: 2px;
+}
+
+.tpt-quote-block__action > span::after {
+	content: "\2192";
+	display: inline-block;
+	margin-left: .35em;
+	transition: transform .15s ease;
+}
+
+[dir="rtl"] .tpt-quote-block__action > span::after {
+	content: "\2190";
+	margin: 0 .35em 0 0;
+}
+
+.tpt-request-quote-integrated-block:focus-visible .tpt-quote-block__action > span::after {
+	transform: translateX(3px);
+}
+
+[dir="rtl"] .tpt-request-quote-integrated-block:focus-visible .tpt-quote-block__action > span::after {
+	transform: translateX(-3px);
+}
+
+/* adding to the quote list: a plus in front instead of the arrow */
+.tpt-quote-entry--list .tpt-quote-block__action > span::after {
+	content: none;
+}
+
+.tpt-quote-entry--list .tpt-quote-block__action > span::before {
+	content: "+";
+	margin-right: .3em;
+}
+
+[dir="rtl"] .tpt-quote-entry--list .tpt-quote-block__action > span::before {
+	margin: 0 0 0 .3em;
+}
+
+.tiered-pricing-blocks .tiered-pricing-block.tpt-request-quote-integrated-block:focus-visible {
+	border-color: currentColor;
+	box-shadow: none;
+}
+
+.tpt-request-quote-integrated-block:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+/* the label is not a quantity here: no coloured band */
+.tiered-pricing-blocks--style-1 .tiered-pricing-block.tpt-request-quote-integrated-block .tiered-pricing-block__quantity {
+	background: transparent !important;
+	color: inherit;
+	padding-bottom: 0;
+}
+
+/* grid: the entry is one more cell with the grid's own lines */
+.tiered-pricing-blocks--style-6 .tiered-pricing-block.tpt-request-quote-integrated-block {
+	border: 0;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+/* and the last row fills the width, so no empty cell with open borders is left beside or before the entry */
+.tiered-pricing-blocks--style-6:has(.tpt-request-quote-integrated-block) {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tiered-pricing-blocks--style-6:has(.tpt-request-quote-integrated-block) > .tiered-pricing-block {
+	flex: 1 1 200px;
+	box-sizing: border-box;
+	min-width: 0;
+}
+
+/* --- pointer and keyboard feedback: the entry answers before it is pressed ----------------------------- */
+
+tr[data-tpt-quote-row]:focus-within > td,
+div.tiered-pricing-table-row[data-tpt-quote-row]:focus-within,
+.tpt-quote-entry--under-table:focus-within,
+.tpt-request-quote-integrated-option:focus-within,
+.tpt-request-quote-integrated-block:focus-visible {
+	background-image: linear-gradient(rgba(127, 127, 127, .1), rgba(127, 127, 127, .1));
+}
+
+/* only where a pointer hovers: on touch screens a hover look would stay after the tap */
+@media (hover: hover) {
+	tr[data-tpt-quote-row]:hover > td,
+	div.tiered-pricing-table-row[data-tpt-quote-row]:hover,
+	.tpt-quote-entry--under-table:hover,
+	.tpt-request-quote-integrated-option:hover,
+	.tpt-request-quote-integrated-block:hover {
+		background-image: linear-gradient(rgba(127, 127, 127, .1), rgba(127, 127, 127, .1));
+	}
+
+	[data-tpt-quote-row]:hover .tpt-quote-button--outline {
+		background: rgba(127, 127, 127, .14) !important;
+	}
+
+	[data-tpt-quote-row]:hover .tpt-quote-button--link {
+		text-decoration-thickness: 2px;
+	}
+
+	.tiered-pricing-blocks .tiered-pricing-block.tpt-request-quote-integrated-block:hover {
+		border-color: currentColor;
+		box-shadow: none;
+	}
+
+	.tpt-request-quote-integrated-block:hover .tpt-quote-block__action > span::after {
+		transform: translateX(3px);
+	}
+
+	[dir="rtl"] .tpt-request-quote-integrated-block:hover .tpt-quote-block__action > span::after {
+		transform: translateX(-3px);
+	}
+
+	.tiered-pricing-dropdown__list .tiered-pricing-dropdown-option.tpt-request-quote-integrated-dropdown-option:hover {
+		background-image: linear-gradient(rgba(127, 127, 127, .1), rgba(127, 127, 127, .1));
+	}
+}
+
+/* --- already in the quote list: the label says so ------------------------------------------------------ */
+
+[data-tpt-quote-label].tpt-quote-label--in-list {
+	color: #1a7f37;
+}
+
+[data-tpt-quote-label].tpt-quote-label--in-list::before {
+	content: "";
+	display: inline-block;
+	width: .85em;
+	height: .85em;
+	margin-right: .35em;
+	vertical-align: -.05em;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+[dir="rtl"] [data-tpt-quote-label].tpt-quote-label--in-list::before {
+	margin: 0 0 0 .35em;
+}
+
+/* --- fingers need room --------------------------------------------------------------------------------- */
+
+@media (pointer: coarse) {
+	.tpt-request-quote-integrated-block {
+		min-height: 44px;
+		box-sizing: border-box;
+	}
+
+	.tpt-request-quote-integrated-plain-text-line {
+		padding-top: 8px;
+		padding-bottom: 8px;
+	}
+
+	.tpt-request-quote-integrated-plain-text-line .tpt-quote-button--link {
+		padding: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tpt-quote-block__action > span::after {
+		transition: none;
+	}
+}

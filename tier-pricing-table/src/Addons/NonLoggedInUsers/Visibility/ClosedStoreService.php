@@ -6,13 +6,17 @@ use WP_Error;
 /**
  * Closed store: visitors who are not logged in are sent to the login page. My Account (login,
  * registration, lost password), the wholesale registration page and the pages chosen in the settings
- * stay open; the Store API's product routes are closed to visitors too.
+ * stay open. Visitors get no products from the REST APIs or the feeds either, and cannot buy.
  */
 class ClosedStoreService {
 
 	public function __construct() {
 		add_action( 'template_redirect', array( $this, 'guard' ), 1 );
 		add_filter( 'rest_pre_dispatch', array( $this, 'guardStoreApi' ), 10, 3 );
+		// after WooCommerce, which sets post__in on product feeds and archives (loop_shop_post_in)
+		add_action( 'pre_get_posts', array( $this, 'emptyProductQueries' ), 1000 );
+		add_filter( 'woocommerce_is_purchasable', array( $this, 'filterPurchasable' ), 20 );
+		add_filter( 'woocommerce_variation_is_purchasable', array( $this, 'filterPurchasable' ), 20 );
 		add_filter( 'woocommerce_login_redirect', array( $this, 'redirectBack' ), 20 );
 	}
 
@@ -57,22 +61,95 @@ class ClosedStoreService {
 	}
 
 	/**
-	 * Visitors get no product data from the Store API while the store is closed.
+	 * While the store is closed, visitors get nothing from the Store API (it answers under /wc/store/v1 and
+	 * /wc/store alike) but their empty cart, nothing from WooCommerce's catalog routes for AI agents, and no
+	 * products or product categories from WordPress's own routes.
 	 *
 	 * @param  mixed  $result
 	 * @param  \WP_REST_Server  $server
 	 * @param  \WP_REST_Request  $request
 	 */
 	public function guardStoreApi( $result, $server, $request ) {
-		if ( null !== $result || ! VisibilitySettings::isClosedStore() || is_user_logged_in() ) {
+		if ( null !== $result || ! self::isClosedFor() ) {
 			return $result;
 		}
 
-		if ( preg_match( '#^/wc/store/v\d+/products#', (string) $request->get_route() ) ) {
+		$route = (string) $request->get_route();
+
+		// reading the cart stays: a mini cart on an open page asks for it
+		$readsCart = 'GET' === $request->get_method() && preg_match( '#^/wc/store(?:/v\d+)?/cart/?$#', $route );
+
+		$closed = ( preg_match( '#^/wc/store(?:/|$)#', $route ) && ! $readsCart )
+		          || preg_match( '#^/wc/ucp(?:/|$)#', $route )
+		          || preg_match( '#^/wp/v2/(?:product|product_variation|product_cat|product_tag|product_brand)(?:/|$)#', $route );
+
+		if ( $closed ) {
 			return new WP_Error( 'tpt_closed_store', __( 'Please log in to browse the store.', 'tier-pricing-table' ), array( 'status' => 401 ) );
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Product queries made for visitors through the REST APIs (search included) and the feeds find nothing
+	 * while the store is closed. Other post types in the same query stay.
+	 *
+	 * @param  \WP_Query  $query
+	 */
+	public function emptyProductQueries( $query ) {
+		if ( ! self::isClosedFor() || ! ( ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || $query->is_feed() ) ) {
+			return;
+		}
+
+		$productTypes = array( 'product', 'product_variation' );
+		$postType     = $query->get( 'post_type' );
+
+		if ( 'any' === $postType ) {
+			$postType = array_values( get_post_types( array( 'exclude_from_search' => false ) ) );
+		}
+
+		$types = array_filter( (array) $postType );
+
+		if ( $types && array_intersect( $types, $productTypes ) ) {
+			$others = array_values( array_diff( $types, $productTypes ) );
+
+			if ( $others ) {
+				$query->set( 'post_type', $others );
+			} else {
+				$query->set( 'post__in', array( 0 ) );
+			}
+
+			return;
+		}
+
+		// a product category or tag feed names no post type
+		if ( $query->is_tax( get_object_taxonomies( 'product' ) ) ) {
+			$query->set( 'post__in', array( 0 ) );
+		}
+	}
+
+	/**
+	 * Nothing can be bought by a visitor while the store is closed: no add-to-cart links, no cart and no checkout
+	 * (WooCommerce takes products that cannot be bought out of the cart before checkout).
+	 *
+	 * @param  bool  $purchasable
+	 *
+	 * @return bool
+	 */
+	public function filterPurchasable( $purchasable ) {
+		return $purchasable && ! self::isClosedFor();
+	}
+
+	/**
+	 * Whether the store is closed to the current visitor. Background work (cron, WP-CLI) is not a visitor:
+	 * product feeds for marketplaces and subscription renewals keep working.
+	 */
+	public static function isClosedFor(): bool {
+		if ( ! VisibilitySettings::isClosedStore() || is_user_logged_in() ) {
+			return false;
+		}
+
+		return ! wp_doing_cron() && ! ( defined( 'WP_CLI' ) && WP_CLI );
 	}
 
 	/**

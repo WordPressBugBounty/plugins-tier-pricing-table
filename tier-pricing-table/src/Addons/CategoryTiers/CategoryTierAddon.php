@@ -151,6 +151,10 @@ class CategoryTierAddon extends AbstractAddon {
         return 'category-tiered-pricing';
     }
 
+    public function getGroup() : string {
+        return self::GROUP_PRICING;
+    }
+
     protected function isActiveByDefault() : bool {
         return false;
     }

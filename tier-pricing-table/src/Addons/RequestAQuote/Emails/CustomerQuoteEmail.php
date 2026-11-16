@@ -21,7 +21,8 @@ class CustomerQuoteEmail extends \WC_Email {
 		// Call parent constructor
 		parent::__construct();
 		
-		$this->customer_email = '';
+		// a customer e-mail: WooCommerce lists the customer as the recipient and sends it in the site's language
+		$this->customer_email = true;
 		
 		add_action( 'tiered_pricing_table/request_quote/quote_request_submitted', array( $this, 'trigger' ), 10, 1 );
 	}
@@ -44,7 +45,7 @@ class CustomerQuoteEmail extends \WC_Email {
 		$this->setup_locale();
 		
 		// Determine the customer's email address
-		$this->recipient = $this->getCustomerEmail( $postId );
+		$this->recipient = $this->getCustomerEmail();
 		
 		if ( $this->is_enabled() && $this->get_recipient() ) {
 			$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(),
@@ -54,50 +55,25 @@ class CustomerQuoteEmail extends \WC_Email {
 		$this->restore_locale();
 	}
 	
-	private function getCustomerEmail( $postId ) {
-		$formId = $this->object->getMeta('_form_id');
-		if ( ! $formId ) {
-			return $this->get_fallback_email();
+	/**
+	 * The address saved with the request (from the form's first Email field), or the customer's account e-mail.
+	 *
+	 * @return string
+	 */
+	private function getCustomerEmail(): string {
+		$email = (string) $this->object->getCustomerEmail();
+
+		if ( is_email( $email ) ) {
+			return $email;
 		}
-		
-		$form = RequestQuoteForm::get( $formId );
-		
-		if ( ! $form ) {
-			return $this->get_fallback_email();
-		}
-		
-		// Find the first field with type === 'email'
-		$emailFieldName = '';
-		$formFields     = $form->getFields();
-		foreach ( $formFields as $field ) {
-			if ( isset( $field['type'] ) && $field['type'] === 'email' && ! empty( $field['name'] ) ) {
-				$emailFieldName = $field['name'];
-				break;
-			}
-		}
-		
-		if ( $emailFieldName ) {
-			$email = $this->object->getMeta( '_' . $emailFieldName );
-			if ( is_email( $email ) ) {
-				return $email;
-			}
-		}
-		
-		return $this->get_fallback_email();
-	}
-	
-	private function get_fallback_email() {
-		if ( is_user_logged_in() ) {
-			$user = wp_get_current_user();
-			
-			return $user->user_email;
-		}
-		
-		return '';
+
+		$user = $this->object->getUserId() ? get_userdata( $this->object->getUserId() ) : false;
+
+		return $user && is_email( $user->user_email ) ? (string) $user->user_email : '';
 	}
 	
 	public function get_default_subject() {
-		return __( '[{site_title}] Thank you for your Quote Request for {product_name}', 'tier-pricing-table' );
+		return __( '[{site_title}] Your quote request #{quote_number}: {product_name}', 'tier-pricing-table' );
 	}
 	
 	public function get_default_heading() {
@@ -171,14 +147,23 @@ class CustomerQuoteEmail extends \WC_Email {
 			if ( $product ) {
 				$productName = $product->get_name();
 			}
+
+			// a quote list request: "Bolt and 2 more products"
+			if ( $this->object->isList() ) {
+				$productName = $this->object->getSummaryName();
+			}
 		}
 		
 		$string = str_replace( '{product_name}', $productName, $string );
+
+		// the number the customer saw when they sent the request ("Your request number is #123")
+		$quoteNumber = $this->object instanceof \TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest ? (string) $this->object->getId() : '123';
+		$string      = str_replace( '{quote_number}', $quoteNumber, $string );
 		
 		return parent::format_string( $string );
 	}
 	
-			public function get_submitted_fields() {
+	public function get_submitted_fields() {
 		if ( ! $this->object || ! ( $this->object instanceof \TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest ) ) {
 			return array(
 				array( 'label' => __( 'Sample Name', 'tier-pricing-table' ), 'value' => 'John Doe' ),
@@ -186,22 +171,7 @@ class CustomerQuoteEmail extends \WC_Email {
 			);
 		}
 		
-		$customFields = $this->object->getCustomFields();
-		$fields = array();
-		
-		foreach ( $customFields as $key => $fieldData ) {
-			if ( ! is_array( $fieldData ) ) {
-				$fieldData = array( 'label' => ucfirst( str_replace('_', ' ', $key) ), 'value' => $fieldData );
-			}
-			$label = isset($fieldData['label']) && !empty($fieldData['label']) ? $fieldData['label'] : ucfirst( str_replace('_', ' ', $key) );
-			$value = isset($fieldData['value']) ? $fieldData['value'] : '';
-			
-			$fields[] = array(
-				'label' => $label,
-				'value' => $value,
-			);
-		}
-		
-		return $fields;
+		// files: their name only; the customer cannot open the store's copy
+		return $this->object->getSubmittedFields( false );
 	}
 }

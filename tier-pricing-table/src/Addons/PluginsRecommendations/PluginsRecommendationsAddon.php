@@ -5,11 +5,11 @@ use TierPricingTable\Addons\AbstractAddon;
 class PluginsRecommendationsAddon extends AbstractAddon {
 	
 	public function getName(): string {
-		return __( 'Plugins recommendations', 'tier-pricing-table' );
+		return __( 'Plugin tips', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Show recommendations for related plugins and addons.', 'tier-pricing-table' );
+		return __( 'Short tips on the product edit screen about our other WooCommerce plugins, such as a bulk price editor. Each tip can be closed.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -18,6 +18,10 @@ class PluginsRecommendationsAddon extends AbstractAddon {
 	
 	public function getSlug(): string {
 		return 'plugins-recommendations';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_TOOLS;
 	}
 	
 	public function run() {

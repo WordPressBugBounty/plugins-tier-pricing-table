@@ -110,6 +110,14 @@ class PricingRule {
 	public function isAmount(): bool {
 		return $this->getType() === 'amount';
 	}
+
+	/**
+	 * The pricing was set for the shopper: by their role or for them as a customer. A global rule set to keep the
+	 * product's own settings keeps this pricing, whether or not it has tiers.
+	 */
+	public function isSetForShopper(): bool {
+		return in_array( $this->provider, array( 'role-based', 'user-based' ), true );
+	}
 	
 	public function getTierPrice( $quantity, bool $withTaxes = true, $place = 'shop', ?bool $round = null ) {
 		return PriceManager::getPriceByRules( $quantity, $this->getProductId(), 'view', $place, $withTaxes, $this,

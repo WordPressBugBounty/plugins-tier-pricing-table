@@ -12,7 +12,7 @@ use TierPricingTable\Addons\GlobalTieredPricing\CPT\PricingTestLinks;
 class GlobalTieredPricingAddon extends AbstractAddon {
 	
 	public function getName(): string {
-		return __( 'Global pricing rules', 'tier-pricing-table' );
+		return __( 'Pricing rules', 'tier-pricing-table' );
 	}
 	
 	public function run() {
@@ -81,7 +81,7 @@ class GlobalTieredPricingAddon extends AbstractAddon {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Create reusable pricing rules and apply them globally.', 'tier-pricing-table' );
+		return __( 'Price whole categories, tags or brands at once, by role or customer, plus cart rules for order discounts and free shipping. Under WooCommerce → Pricing rules.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -90,5 +90,9 @@ class GlobalTieredPricingAddon extends AbstractAddon {
 	
 	public function getSlug(): string {
 		return 'global-tier-pricing';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRICING;
 	}
 }

@@ -1,0 +1,808 @@
+/* Tiered Pricing Table: the quote list page, the drawer and the floating button.
+   Colors follow the theme: surfaces from block theme presets when there are any, lines from the text color. */
+
+.tpt-quote-list,
+.tpt-quote-drawer,
+.tpt-quote-fab,
+.tpt-quote-toast {
+	--tpt-ql-surface: var(--wp--preset--color--base, #fff);
+	--tpt-ql-text: var(--wp--preset--color--contrast, #1d2327);
+	--tpt-ql-border: rgba(0, 0, 0, .12);
+	--tpt-ql-muted: rgba(0, 0, 0, .6);
+	--tpt-ql-soft: rgba(0, 0, 0, .04);
+	--tpt-ql-good: #1a7f37;
+	--tpt-ql-radius: 6px;
+}
+
+/* Secondary text (SKU, "each", notes) is smaller, not paler: on the page it takes the theme's own text colour,
+   which is often already a grey, so anything lighter fails the 4.5:1 contrast minimum. The drawer sets its
+   own dark text, where a little lighter still passes. */
+.tpt-quote-list {
+	--tpt-ql-muted: currentColor;
+}
+
+.tpt-quote-drawer {
+	--tpt-ql-muted: rgba(0, 0, 0, .72);
+}
+
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+	.tpt-quote-list,
+	.tpt-quote-drawer {
+		--tpt-ql-border: color-mix(in srgb, currentColor 14%, transparent);
+		--tpt-ql-soft: color-mix(in srgb, currentColor 4%, transparent);
+	}
+
+	.tpt-quote-drawer {
+		--tpt-ql-muted: color-mix(in srgb, currentColor 78%, transparent);
+	}
+}
+
+.tpt-quote-list [hidden],
+.tpt-quote-drawer[hidden],
+.tpt-quote-drawer [hidden],
+.tpt-quote-fab[hidden],
+.tpt-quote-toast[hidden],
+.tpt-quote-list[hidden] {
+	display: none !important;
+}
+
+/* --- lines (shared by the page and the drawer) ------------------------------------------------- */
+
+.tpt-ql-lines {
+	display: grid;
+	gap: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-top: 1px solid var(--tpt-ql-border);
+}
+
+.tpt-ql-line {
+	display: grid;
+	grid-template-columns: 64px minmax(0, 1fr) auto minmax(110px, auto) 32px;
+	grid-template-areas: "image info qty price remove";
+	gap: 16px;
+	align-items: center;
+	margin: 0;
+	padding: 16px 0;
+	border-bottom: 1px solid var(--tpt-ql-border);
+	transition: opacity .15s ease;
+}
+
+.tpt-ql-line.is-updating {
+	opacity: .55;
+}
+
+.tpt-ql-line__image {
+	grid-area: image;
+	width: 64px;
+	height: 64px;
+	object-fit: cover;
+	border-radius: var(--tpt-ql-radius);
+	background: var(--tpt-ql-soft);
+}
+
+.tpt-ql-line__info {
+	grid-area: info;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.tpt-ql-line__name {
+	font-weight: 600;
+	color: inherit;
+	text-decoration: none;
+	overflow-wrap: anywhere;
+}
+
+.tpt-ql-line__name:hover,
+.tpt-ql-line__name:focus-visible {
+	text-decoration: underline;
+}
+
+.tpt-ql-line__attributes,
+.tpt-ql-line__sku {
+	font-size: .875em;
+	color: var(--tpt-ql-muted);
+}
+
+.tpt-ql-line__hint {
+	font-size: .85em;
+	color: var(--tpt-ql-good);
+}
+
+.tpt-ql-line__qty {
+	grid-area: qty;
+	display: inline-flex;
+	align-items: stretch;
+	border: 1px solid var(--tpt-ql-border);
+	border-radius: var(--tpt-ql-radius);
+	overflow: hidden;
+}
+
+.tpt-quote-list .tpt-ql-step,
+.tpt-quote-drawer .tpt-ql-step {
+	width: 36px;
+	min-height: 36px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.tpt-quote-list .tpt-ql-step:hover:not(:disabled),
+.tpt-quote-drawer .tpt-ql-step:hover:not(:disabled) {
+	background: var(--tpt-ql-soft);
+}
+
+.tpt-quote-list .tpt-ql-step:disabled,
+.tpt-quote-drawer .tpt-ql-step:disabled {
+	opacity: .35;
+	cursor: default;
+}
+
+.tpt-quote-list .tpt-ql-line__input,
+.tpt-quote-drawer .tpt-ql-line__input {
+	width: 64px;
+	min-height: 36px;
+	margin: 0;
+	padding: 0 4px;
+	border: 0;
+	border-inline: 1px solid var(--tpt-ql-border);
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-align: center;
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+.tpt-ql-line__input::-webkit-outer-spin-button,
+.tpt-ql-line__input::-webkit-inner-spin-button {
+	margin: 0;
+	-webkit-appearance: none;
+}
+
+.tpt-ql-line__price {
+	grid-area: price;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 2px;
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+.tpt-ql-line__unit,
+.tpt-ql-line__on-request {
+	font-size: .85em;
+	color: var(--tpt-ql-muted);
+}
+
+.tpt-quote-list .tpt-ql-line__remove,
+.tpt-quote-drawer .tpt-ql-line__remove {
+	grid-area: remove;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	color: var(--tpt-ql-muted);
+	cursor: pointer;
+}
+
+.tpt-quote-list .tpt-ql-line__remove:hover,
+.tpt-quote-drawer .tpt-ql-line__remove:hover {
+	background: var(--tpt-ql-soft);
+	color: inherit;
+}
+
+.tpt-ql-line :focus-visible,
+.tpt-quote-drawer :focus-visible,
+.tpt-quote-fab:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+.tpt-ql-summary {
+	display: grid;
+	gap: 4px;
+	justify-items: end;
+	padding: 16px 0 0;
+	text-align: right;
+}
+
+.tpt-ql-summary p {
+	margin: 0;
+}
+
+.tpt-ql-summary__total {
+	display: flex;
+	gap: 12px;
+	align-items: baseline;
+	font-size: 1.1em;
+	font-variant-numeric: tabular-nums;
+}
+
+.tpt-ql-summary__note {
+	max-width: 46ch;
+	font-size: .85em;
+	color: var(--tpt-ql-muted);
+}
+
+.tpt-ql-error {
+	color: #b32d2e;
+}
+
+/* --- the list page ---------------------------------------------------------------------------------- */
+
+.tpt-quote-list {
+	container-type: inline-size;
+	display: grid;
+	gap: 32px;
+}
+
+.tpt-quote-list__loading,
+.tpt-ql-empty {
+	margin: 0;
+	color: var(--tpt-ql-muted);
+}
+
+.tpt-quote-list__empty,
+.tpt-quote-list__success {
+	display: grid;
+	gap: 12px;
+	justify-items: start;
+	padding: 32px;
+	border: 1px solid var(--tpt-ql-border);
+	border-radius: var(--tpt-ql-radius);
+}
+
+.tpt-quote-list__empty p,
+.tpt-quote-list__success p {
+	margin: 0;
+}
+
+.tpt-quote-list__empty-title,
+.tpt-quote-list__success-title {
+	font-size: 1.25em;
+	font-weight: 600;
+}
+
+.tpt-quote-list__success:focus {
+	outline: none;
+}
+
+.tpt-quote-list__form {
+	display: grid;
+	gap: 16px;
+	max-width: 640px;
+}
+
+.tpt-quote-list__form-title {
+	margin: 0;
+	font-size: 1.25em;
+}
+
+.tpt-quote-list__form .tpt-quote-fields-container {
+	display: grid;
+	gap: 16px;
+}
+
+.tpt-quote-list__form .tpt-quote-field-wrapper {
+	margin: 0;
+}
+
+.tpt-quote-list__message {
+	color: #b32d2e;
+	white-space: pre-line;
+}
+
+.tpt-quote-list__message:empty {
+	display: none;
+}
+
+.tpt-quote-list__submit {
+	justify-self: start;
+}
+
+.tpt-quote-list__notice {
+	padding: 12px 16px;
+	border-left: 4px solid #dba617;
+	background: rgba(219, 166, 23, .08);
+}
+
+/* narrow pages: each line is a card, quantity and price under the name */
+@container (max-width: 600px) {
+	.tpt-ql-line {
+		grid-template-columns: 56px minmax(0, 1fr) 32px;
+		grid-template-areas:
+			"image info remove"
+			"image qty price";
+		row-gap: 10px;
+	}
+
+	.tpt-ql-line__image {
+		width: 56px;
+		height: 56px;
+	}
+
+	.tpt-ql-line__price {
+		justify-self: end;
+	}
+}
+
+/* --- the drawer ----------------------------------------------------------------------------------------- */
+
+.tpt-quote-drawer {
+	position: fixed;
+	z-index: 100000;
+	inset: 0;
+	color: var(--tpt-ql-text);
+}
+
+.tpt-quote-drawer__overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, .4);
+	animation: tpt-ql-fade .2s ease;
+}
+
+.tpt-quote-drawer__panel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	width: min(440px, 100%);
+	background: var(--tpt-ql-surface);
+	box-shadow: -8px 0 32px rgba(0, 0, 0, .18);
+	animation: tpt-ql-slide .22s ease;
+	container-type: inline-size;
+}
+
+.tpt-quote-drawer__panel:focus {
+	outline: none;
+}
+
+.tpt-quote-drawer__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 18px 20px;
+	border-bottom: 1px solid var(--tpt-ql-border);
+}
+
+.tpt-quote-drawer__title {
+	margin: 0;
+	font-size: 1.15em;
+	line-height: 1.3;
+}
+
+.tpt-quote-drawer__count {
+	font-weight: 400;
+	color: var(--tpt-ql-muted);
+}
+
+.tpt-quote-drawer .tpt-quote-drawer__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+}
+
+.tpt-quote-drawer .tpt-quote-drawer__close:hover {
+	background: var(--tpt-ql-soft);
+}
+
+.tpt-quote-drawer__status {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	padding: 10px 20px;
+	background: rgba(26, 127, 55, .08);
+	color: var(--tpt-ql-good);
+	font-weight: 600;
+}
+
+.tpt-quote-drawer__status::before {
+	content: "";
+	flex: none;
+	width: 16px;
+	height: 16px;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.tpt-quote-drawer__lines {
+	flex: 1;
+	overflow-y: auto;
+	padding: 0 20px;
+	overscroll-behavior: contain;
+}
+
+.tpt-quote-drawer__lines .tpt-ql-lines {
+	border-top: 0;
+}
+
+.tpt-quote-drawer__lines > .tpt-ql-empty,
+.tpt-quote-drawer__lines > .tpt-ql-error {
+	padding: 24px 0;
+}
+
+/* the drawer's lines: compact, quantity and price under the name */
+.tpt-ql-lines--compact .tpt-ql-line {
+	grid-template-columns: 52px minmax(0, 1fr) 32px;
+	grid-template-areas:
+		"image info remove"
+		"image qty price";
+	row-gap: 10px;
+	padding: 14px 0;
+}
+
+.tpt-ql-lines--compact .tpt-ql-line__image {
+	width: 52px;
+	height: 52px;
+}
+
+.tpt-ql-lines--compact .tpt-ql-line__price {
+	justify-self: end;
+}
+
+.tpt-quote-drawer__lines .tpt-ql-summary {
+	padding-bottom: 16px;
+}
+
+.tpt-quote-drawer__footer {
+	display: grid;
+	gap: 8px;
+	padding: 16px 20px 20px;
+	border-top: 1px solid var(--tpt-ql-border);
+}
+
+.tpt-quote-drawer__total:empty {
+	display: none;
+}
+
+.tpt-quote-drawer .tpt-quote-drawer__cta {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.tpt-quote-drawer .tpt-quote-drawer__continue {
+	margin: 0;
+	padding: 8px;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+html.tpt-quote-drawer-open {
+	overflow: hidden;
+}
+
+/* phones: the drawer is a sheet from the bottom */
+@media (max-width: 600px) {
+	.tpt-quote-drawer__panel {
+		top: auto;
+		left: 0;
+		width: 100%;
+		max-height: 88vh;
+		border-radius: 14px 14px 0 0;
+		box-shadow: 0 -8px 32px rgba(0, 0, 0, .18);
+		animation-name: tpt-ql-rise;
+	}
+}
+
+/* --- the floating button, the toast, buttons on shop pages and the cart ------------------------------ */
+
+.tpt-quote-fab {
+	position: fixed;
+	z-index: 99990;
+	right: 20px;
+	/* above the phone's home indicator and above a bar the theme fixes to the bottom (--tpt-quote-fab-lift is
+	   measured by the script) */
+	bottom: calc(20px + env(safe-area-inset-bottom, 0px) + var(--tpt-quote-fab-lift, 0px));
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	padding: 12px 16px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--tpt-ql-text);
+	color: var(--tpt-ql-surface);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, .22);
+	font: inherit;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.tpt-quote-fab__count {
+	min-width: 22px;
+	padding: 3px 6px;
+	border-radius: 999px;
+	background: var(--tpt-ql-surface);
+	color: var(--tpt-ql-text);
+	font-size: 13px;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+}
+
+.tpt-quote-toast {
+	position: fixed;
+	z-index: 100001;
+	left: 50%;
+	bottom: 24px;
+	max-width: min(480px, calc(100% - 32px));
+	padding: 12px 16px;
+	border-radius: var(--tpt-ql-radius);
+	background: var(--tpt-ql-text);
+	color: var(--tpt-ql-surface);
+	box-shadow: 0 6px 20px rgba(0, 0, 0, .22);
+	transform: translateX(-50%);
+}
+
+/* shop cards: a secondary button on its own line under Add to cart (quote-button.css draws it) */
+.tpt-add-to-quote-wrap {
+	margin: 8px 0 0;
+}
+
+.tpt-add-to-quote--loop {
+	cursor: pointer;
+}
+
+.tpt-add-to-quote-wrap .tpt-in-quote-note {
+	display: flex;
+	margin: 6px auto 0;
+}
+
+/* the cart: a secondary button as wide as the checkout button */
+.tpt-cart-to-quote-wrap {
+	margin: 12px 0 0;
+	text-align: center;
+}
+
+.tpt-cart-to-quote {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+
+@media (pointer: coarse) {
+	a.tpt-cart-to-quote.tpt-quote-button {
+		display: flex;
+	}
+}
+
+.tpt-cart-to-quote.is-busy,
+.tpt-add-to-quote.is-busy {
+	opacity: .5;
+	pointer-events: none;
+}
+
+@keyframes tpt-ql-fade {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes tpt-ql-slide {
+	from {
+		transform: translateX(24px);
+		opacity: 0;
+	}
+}
+
+@keyframes tpt-ql-rise {
+	from {
+		transform: translateY(24px);
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tpt-quote-drawer__overlay,
+	.tpt-quote-drawer__panel {
+		animation: none;
+	}
+
+	.tpt-ql-line {
+		transition: none;
+	}
+}
+
+/* honeypot: off screen, never seen or reached by people (also in quote-form.css) */
+.tpt-quote-list .tpt-quote-hp {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* --- notes beside buttons, the page status, the header link ---------------------------------------- */
+
+.tpt-in-quote-note {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin: 8px 0 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: #1a7f37;
+	font: inherit;
+	font-size: .9em;
+	cursor: pointer;
+}
+
+.tpt-in-quote-note::before {
+	content: "";
+	width: 14px;
+	height: 14px;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.tpt-in-quote-note:hover {
+	text-decoration: underline;
+}
+
+.tpt-quote-next-to-cart + .tpt-in-quote-note {
+	display: flex;
+}
+
+.tpt-quote-inline-error {
+	margin: 8px 0 0;
+	padding: 8px 12px;
+	border-left: 3px solid #b32d2e;
+	background: rgba(179, 45, 46, .06);
+	color: #b32d2e;
+	font-size: .9em;
+}
+
+.tpt-quote-list__status {
+	margin: 0;
+	padding: 12px 16px;
+	border-left: 4px solid #1a7f37;
+	background: rgba(26, 127, 55, .08);
+}
+
+.tpt-quote-list__sent-title {
+	font-weight: 600;
+}
+
+.tpt-quote-list__sent-list {
+	margin: 0;
+	padding-left: 1.2em;
+}
+
+.tpt-quote-list-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.tpt-quote-list-link__count {
+	min-width: 20px;
+	padding: 2px 6px;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, .08);
+	font-size: .8em;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.tpt-quick-order__to-quote:disabled {
+	cursor: not-allowed;
+	opacity: .5;
+}
+
+/* wide pages: the list on the left, the form on the right */
+@container (min-width: 900px) {
+	.tpt-quote-list {
+		grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+		align-items: start;
+		column-gap: 48px;
+	}
+
+	.tpt-quote-list__status,
+	.tpt-quote-list__empty,
+	.tpt-quote-list__success {
+		grid-column: 1 / -1;
+	}
+
+	.tpt-quote-list__form {
+		position: sticky;
+		top: 24px;
+	}
+}
+
+/* the stepper keeps its own width, the unit price stays on one line, the form uses the page's font */
+.tpt-ql-line__qty {
+	justify-self: start;
+}
+
+.tpt-ql-line__unit {
+	white-space: nowrap;
+}
+
+.tpt-quote-list__form textarea,
+.tpt-quote-list__form input,
+.tpt-quote-list__form select {
+	font: inherit;
+}
+
+/* --- fingers need room: 44px controls on touch screens ----------------------------------------------- */
+
+@media (pointer: coarse) {
+	.tpt-quote-list .tpt-ql-step,
+	.tpt-quote-drawer .tpt-ql-step {
+		width: 44px;
+		min-height: 44px;
+	}
+
+	.tpt-quote-list .tpt-ql-line__input,
+	.tpt-quote-drawer .tpt-ql-line__input {
+		width: 56px;
+		min-height: 44px;
+	}
+
+	.tpt-quote-list .tpt-ql-line__remove,
+	.tpt-quote-drawer .tpt-ql-line__remove,
+	.tpt-quote-drawer .tpt-quote-drawer__close {
+		width: 44px;
+		height: 44px;
+	}
+
+	.tpt-in-quote-note {
+		min-height: 44px;
+	}
+}
+
+.tpt-ql-line__limits {
+	font-size: .85em;
+	color: var(--tpt-ql-muted);
+}
+
+/* the line under the send button sits where the button is: on the left */
+.tpt-quote-list__submit-note {
+	text-align: left;
+}
+

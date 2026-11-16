@@ -6,11 +6,11 @@ use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 class CatalogPricesAddon extends AbstractAddon {
 	
 	public function getName(): string {
-		return __( 'Shop & Categories Price Format', 'tier-pricing-table' );
+		return __( 'Lowest price and price range', 'tier-pricing-table' );
 	}
 	
 	public function getDescription() {
-		return __( 'Manage how tiered pricing appears in catalogs, loops, and widgets.', 'tier-pricing-table' );
+		return __( 'Shows "From $19.80" or a price range for products with tiers, in the shop and as the product page price.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -19,6 +19,10 @@ class CatalogPricesAddon extends AbstractAddon {
 	
 	public function getSlug() {
 		return 'catalog-prices';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_SHOP_CART;
 	}
 	
 	public function run() {

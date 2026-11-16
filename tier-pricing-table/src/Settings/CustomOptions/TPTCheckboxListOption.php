@@ -18,9 +18,19 @@ class TPTCheckboxListOption {
 
 			$chosen = array_map( 'sanitize_text_field', array_filter( (array) $rawValue, 'is_scalar' ) );
 
-			// the category search has no fixed option list: keep term ids
+			// the category search has no fixed option list: keep term ids (a slug, from an older search box, is looked up)
 			if ( 'category-search' === ( $option['display'] ?? '' ) ) {
-				return implode( ',', array_filter( array_map( 'intval', $chosen ) ) );
+				$termIds = array_map( function ( $chosenValue ) {
+					if ( is_numeric( $chosenValue ) ) {
+						return (int) $chosenValue;
+					}
+
+					$term = get_term_by( 'slug', $chosenValue, 'product_cat' );
+
+					return $term ? (int) $term->term_id : 0;
+				}, $chosen );
+
+				return implode( ',', array_unique( array_filter( $termIds ) ) );
 			}
 
 			$known = array_map( 'strval', array_keys( (array) ( $option['options'] ?? array() ) ) );
@@ -62,7 +72,7 @@ class TPTCheckboxListOption {
 			<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 				<input type="hidden" name="<?php echo esc_attr( $value['id'] ); ?>[]" value="">
 				<?php if ( 'category-search' === $value['display'] ) : ?>
-					<select id="<?php echo esc_attr( $value['id'] ); ?>" name="<?php echo esc_attr( $value['id'] ); ?>[]" multiple="multiple" class="wc-category-search" style="width: 400px;" data-placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>" data-action="woocommerce_json_search_categories" data-allow_clear="true">
+					<select id="<?php echo esc_attr( $value['id'] ); ?>" name="<?php echo esc_attr( $value['id'] ); ?>[]" multiple="multiple" class="wc-category-search" style="width: 400px;" data-placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>" data-action="woocommerce_json_search_categories" data-return_id="true" data-allow_clear="true">
 						<?php foreach ( $chosen as $termId ) : ?>
 							<?php $term = get_term( (int) $termId, 'product_cat' ); ?>
 							<?php if ( $term && ! is_wp_error( $term ) ) : ?>

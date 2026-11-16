@@ -1,12 +1,13 @@
 <?php namespace TierPricingTable\Addons\RequestAQuote\CPT;
 
 use TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest;
+use TierPricingTable\Addons\RequestAQuote\QuoteFiles;
 use TierPricingTable\TierPricingTablePlugin;
 
 class QuoteRequestAdmin {
 
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'addMetaBoxes' ) );
+		add_action( 'add_meta_boxes', array( $this, 'addMetaBoxes' ), 10, 2 );
 		add_action( 'save_post', array( $this, 'savePost' ), 10, 2 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'adminAssets' ) );
 
@@ -20,6 +21,19 @@ class QuoteRequestAdmin {
 		add_filter( 'handle_bulk_actions-edit-' . QuoteRequestCPT::POST_TYPE, array( $this, 'processBulkActions' ), 10,
 				3 );
 		add_action( 'admin_notices', array( $this, 'bulkActionNotices' ) );
+
+		// the request screen: opening a request reads it, and it starts with the request's number
+		add_action( 'load-post.php', array( $this, 'markReadOnOpen' ) );
+		add_action( 'edit_form_top', array( $this, 'renderHeading' ) );
+
+		// the list: no Quick Edit, the number first, sorting, search by number
+		add_filter( 'post_row_actions', array( $this, 'removeQuickEdit' ), 10, 2 );
+		add_filter( 'list_table_primary_column', array( $this, 'setPrimaryColumn' ), 10, 2 );
+		add_filter( 'manage_edit-' . QuoteRequestCPT::POST_TYPE . '_sortable_columns', array( $this, 'setSortableColumns' ) );
+		add_action( 'pre_get_posts', array( $this, 'searchByNumber' ) );
+		add_action( 'admin_notices', array( $this, 'conversionNotices' ) );
+
+		QuoteFiles::registerDownloadHandler();
 	}
 
 	public function adminAssets() {
@@ -27,23 +41,146 @@ class QuoteRequestAdmin {
 		if ( QuoteRequestCPT::POST_TYPE === $post_type ) {
 			wp_enqueue_style( 'tpt-quote-admin', plugins_url( '../assets/css/admin-quote-request.css', __FILE__ ),
 					array(), TierPricingTablePlugin::VERSION );
+
+			// live totals while prices are typed, and a question before an order is created
 			wp_enqueue_script( 'tpt-quote-admin', plugins_url( '../assets/js/admin-quote-request.js', __FILE__ ),
-					array( 'jquery' ), TierPricingTablePlugin::VERSION, true );
+					array(), TierPricingTablePlugin::VERSION, true );
+			wp_localize_script( 'tpt-quote-admin', 'tptQuoteAdmin', array(
+					'currency'       => array(
+							'symbol'            => html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, 'UTF-8' ),
+							'format'            => html_entity_decode( get_woocommerce_price_format(), ENT_QUOTES, 'UTF-8' ),
+							'decimals'          => wc_get_price_decimals(),
+							'decimalSeparator'  => wc_get_price_decimal_separator(),
+							'thousandSeparator' => wc_get_price_thousand_separator(),
+					),
+					'confirmConvert' => __( 'Create a WooCommerce order from this request? Unsaved changes to quantities and prices are saved first.', 'tier-pricing-table' ),
+			) );
 		}
 	}
 
-	public function addMetaBoxes() {
+	public function addMetaBoxes( $postType = '', $post = null ) {
+		$isList = $post instanceof \WP_Post && QuoteRequestCPT::POST_TYPE === $post->post_type && ( new QuoteRequest( $post ) )->isList();
+
 		add_meta_box( 'tier_pricing_table_quote_details', __( 'Customer Request', 'tier-pricing-table' ),
 				array( $this, 'renderDetailsMetaBox' ), QuoteRequestCPT::POST_TYPE, 'normal', 'high' );
 
-		add_meta_box( 'tier_pricing_table_quote_product', __( 'Product', 'tier-pricing-table' ),
+		add_meta_box( 'tier_pricing_table_quote_product', $isList ? __( 'Products', 'tier-pricing-table' ) : __( 'Product', 'tier-pricing-table' ),
 				array( $this, 'renderProductMetaBox' ), QuoteRequestCPT::POST_TYPE, 'normal', 'high' );
 
-		add_meta_box( 'tier_pricing_table_quote_customer', __( 'User', 'tier-pricing-table' ), array( $this, 'renderCustomerMetaBox' ),
+		add_meta_box( 'tier_pricing_table_quote_customer', __( 'Customer', 'tier-pricing-table' ), array( $this, 'renderCustomerMetaBox' ),
 				QuoteRequestCPT::POST_TYPE, 'side', 'high' );
+
+		add_meta_box( 'tier_pricing_table_quote_notes', __( 'Notes', 'tier-pricing-table' ), array( $this, 'renderNotesMetaBox' ),
+				QuoteRequestCPT::POST_TYPE, 'side', 'default' );
 
 		add_meta_box( 'tier_pricing_table_quote_actions', __( 'Quote Actions', 'tier-pricing-table' ),
 				array( $this, 'renderActionsMetaBox' ), QuoteRequestCPT::POST_TYPE, 'side', 'high' );
+	}
+
+	/**
+	 * Opening a new request marks it as read, so the unread count goes down by itself. "Mark as Unread" in the
+	 * list brings it back.
+	 */
+	public function markReadOnOpen() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- opening a screen, not a form submission
+		$postId = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0;
+
+		if ( ! $postId || QuoteRequestCPT::POST_TYPE !== get_post_type( $postId ) || 'unread' !== get_post_status( $postId ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			return;
+		}
+
+		$quote = new QuoteRequest( $postId );
+		$quote->setStatus( 'read' );
+		$quote->save();
+	}
+
+	/**
+	 * The top of the request screen: the number the customer was given, what they asked for and when.
+	 *
+	 * @param  \WP_Post  $post
+	 */
+	public function renderHeading( $post ) {
+		if ( ! $post instanceof \WP_Post || QuoteRequestCPT::POST_TYPE !== $post->post_type ) {
+			return;
+		}
+
+		$quote = new QuoteRequest( $post );
+		?>
+		<div class="tpt-quote-heading">
+			<h2>
+				<?php
+					/* translators: %s: request number */
+					echo esc_html( sprintf( __( 'Request #%s', 'tier-pricing-table' ), $post->ID ) );
+				?>
+			</h2>
+			<p>
+				<?php echo esc_html( $quote->isList() ? $quote->getSummaryName() : (string) ( wc_get_product( $quote->getProductId() ) ? wc_get_product( $quote->getProductId() )->get_name() : '' ) ); ?>
+				&middot;
+				<?php
+					/* translators: 1: date, 2: time */
+					echo esc_html( sprintf( __( 'received %1$s at %2$s', 'tier-pricing-table' ), get_the_date( '', $post ), get_the_time( '', $post ) ) );
+				?>
+			</p>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Notes only the store sees.
+	 */
+	public function renderNotesMetaBox( $post ) {
+		$quote = new QuoteRequest( $post );
+		?>
+		<label class="screen-reader-text" for="tier_pricing_table_quote_note"><?php esc_html_e( 'Notes', 'tier-pricing-table' ); ?></label>
+		<textarea name="tier_pricing_table_quote_note" id="tier_pricing_table_quote_note" rows="5" style="width: 100%;"
+		          placeholder="<?php esc_attr_e( 'For you and your team: what was agreed, when to follow up.', 'tier-pricing-table' ); ?>"><?php echo esc_textarea( (string) $quote->getMeta( '_internal_note' ) ); ?></textarea>
+		<p class="description" style="margin: 6px 0 0;"><?php esc_html_e( 'The customer never sees these notes.', 'tier-pricing-table' ); ?></p>
+		<?php
+	}
+
+	public function removeQuickEdit( $actions, $post ) {
+		if ( $post instanceof \WP_Post && QuoteRequestCPT::POST_TYPE === $post->post_type ) {
+			unset( $actions['inline hide-if-no-js'] );
+
+			if ( isset( $actions['edit'] ) ) {
+				$actions['edit'] = '<a href="' . esc_url( (string) get_edit_post_link( $post->ID ) ) . '">' . esc_html__( 'Open', 'tier-pricing-table' ) . '</a>';
+			}
+		}
+
+		return $actions;
+	}
+
+	public function setPrimaryColumn( $default, $screenId ) {
+		return 'edit-' . QuoteRequestCPT::POST_TYPE === $screenId ? 'request' : $default;
+	}
+
+	public function setSortableColumns( $columns ) {
+		$columns['request']  = 'ID';
+		$columns['received'] = 'date';
+
+		return $columns;
+	}
+
+	/**
+	 * Searching "#123" or "123" in the list finds that request.
+	 *
+	 * @param  \WP_Query  $query
+	 */
+	public function searchByNumber( $query ) {
+		if ( ! is_admin() || ! $query->is_main_query() || QuoteRequestCPT::POST_TYPE !== $query->get( 'post_type' ) ) {
+			return;
+		}
+
+		$search = trim( (string) $query->get( 's' ) );
+
+		if ( preg_match( '/^#?(\d+)$/', $search, $match ) && QuoteRequestCPT::POST_TYPE === get_post_type( (int) $match[1] ) ) {
+			$query->set( 'p', (int) $match[1] );
+			$query->set( 's', '' );
+		}
 	}
 
 	public function renderDetailsMetaBox( $post ) {
@@ -68,14 +205,18 @@ class QuoteRequestAdmin {
 					<div class="tpt-quote-field">
 						<label><?php echo esc_html( $label ); ?></label>
 						<?php
-							if ( isset( $fieldData['type'] ) && $fieldData['type'] === 'file' && ! empty( $value ) && filter_var( $value,
-											FILTER_VALIDATE_URL ) ) :
-								$fileName = basename( parse_url( $value, PHP_URL_PATH ) );
+							if ( isset( $fieldData['type'] ) && $fieldData['type'] === 'file' && ! empty( $value ) ) :
+								// files are private: store managers download them through WordPress
+								$fileName = QuoteFiles::getFileName( $fieldData );
 								?>
 								<span>
-						<a href="<?php echo esc_url( $value ); ?>" target="_blank"
-						   style="color: #2271b1; font-weight: 500; text-decoration: underline;"><?php echo esc_html( $fileName ); ?></a>
-					</span>
+								<?php if ( QuoteFiles::getStoredPath( $fieldData ) ) : ?>
+									<a href="<?php echo esc_url( QuoteFiles::getDownloadUrl( (int) $post->ID, (string) $key ) ); ?>"
+									   style="color: #2271b1; font-weight: 500; text-decoration: underline;"><?php echo esc_html( $fileName ); ?></a>
+								<?php else : ?>
+									<?php echo esc_html( $fileName ); ?>
+								<?php endif; ?>
+								</span>
 							<?php else : ?>
 								<span><?php echo esc_html( $value ); ?></span>
 							<?php endif; ?>
@@ -89,6 +230,15 @@ class QuoteRequestAdmin {
 
 	public function renderProductMetaBox( $post ) {
 		$quote     = new QuoteRequest( $post );
+
+		// a quote list request: every product with its own quantity and unit price
+		if ( $quote->isList() ) {
+			$this->renderItems( $quote );
+			$this->renderConversion( $quote );
+
+			return;
+		}
+
 		$productId = $quote->getProductId();
 		$quantity  = $quote->getQuantity();
 		$price     = $quote->getPrice();
@@ -102,7 +252,7 @@ class QuoteRequestAdmin {
 			return;
 		}
 		?>
-		<table class="tpt-quote-table">
+		<table class="tpt-quote-table" data-tpt-quote-items>
 			<thead>
 			<tr>
 				<th><?php esc_html_e( 'Product', 'tier-pricing-table' ); ?></th>
@@ -112,7 +262,7 @@ class QuoteRequestAdmin {
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
+			<tr data-tpt-quote-line>
 				<td style="display: flex; align-items: center; gap: 12px;">
 					<div style="width: 48px; height: 48px; border-radius: 4px; overflow: hidden; border: 1px solid #e5e5e5; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #fff;">
 						<?php echo wp_kses_post( $product->get_image( array( 48, 48 ) ) ); ?>
@@ -129,20 +279,25 @@ class QuoteRequestAdmin {
 					</div>
 				</td>
 				<td>
-					<input type="number" min="1" step="1" name="tier_pricing_table_quote_quantity"
+					<input type="number" min="1" step="1" name="tier_pricing_table_quote_quantity" data-tpt-quote-qty
+					       aria-label="<?php esc_attr_e( 'Quantity', 'tier-pricing-table' ); ?>"
 					       value="<?php echo esc_attr( $quantity ? $quantity : 1 ); ?>"
 					       style="width: 80px;">
 				</td>
 				<td>
-					<input type="number" step="0.01" name="tier_pricing_table_quote_price"
-					       value="<?php echo esc_attr( $price ); ?>"
-					       style="width: 100px;">
+					<span class="tpt-quote-price-field">
+						<span class="tpt-quote-currency"><?php echo esc_html( html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, 'UTF-8' ) ); ?></span>
+						<input type="number" step="any" min="0" name="tier_pricing_table_quote_price" data-tpt-quote-price
+						       aria-label="<?php esc_attr_e( 'Unit Price', 'tier-pricing-table' ); ?>"
+						       value="<?php echo esc_attr( $price ); ?>"
+						       style="width: 100px;">
+					</span>
 				</td>
 				<td>
-					<strong>
+					<strong data-tpt-quote-line-total>
 						<?php
-							$total = (float) $price * (int) $quantity;
-							echo wp_kses_post( wc_price( $total ) );
+							// a price is often still to be set: no total until then
+							echo is_numeric( $price ) ? wp_kses_post( wc_price( (float) $price * max( 1, (int) $quantity ) ) ) : '&ndash;';
 						?>
 					</strong>
 				</td>
@@ -150,13 +305,107 @@ class QuoteRequestAdmin {
 			</tbody>
 		</table>
 
+		<?php
+		$this->renderConversion( $quote );
+	}
+
+	/**
+	 * The products of a quote list request: each with its quantity and unit price to edit, and the total.
+	 */
+	protected function renderItems( QuoteRequest $quote ) {
+		$items = $quote->getItems();
+		$total = $quote->getItemsTotal();
+		?>
+		<table class="tpt-quote-table tpt-quote-table--items" data-tpt-quote-items>
+			<thead>
+			<tr>
+				<th><?php esc_html_e( 'Product', 'tier-pricing-table' ); ?></th>
+				<th><?php esc_html_e( 'Quantity', 'tier-pricing-table' ); ?></th>
+				<th><?php esc_html_e( 'Unit Price', 'tier-pricing-table' ); ?></th>
+				<th><?php esc_html_e( 'Total', 'tier-pricing-table' ); ?></th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach ( $items as $index => $item ) : ?>
+				<?php
+				$product   = wc_get_product( $item['product_id'] );
+				$editId    = $product ? ( $product->get_parent_id() ?: $product->get_id() ) : 0;
+				$lineTotal = is_numeric( $item['price'] ) ? (float) $item['price'] * $item['quantity'] : null;
+				?>
+				<tr data-tpt-quote-line>
+					<td style="display: flex; align-items: center; gap: 12px;">
+						<div style="width: 48px; height: 48px; border-radius: 4px; overflow: hidden; border: 1px solid #e5e5e5; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #fff;">
+							<?php if ( $product ) : ?>
+								<?php echo wp_kses_post( $product->get_image( array( 48, 48 ) ) ); ?>
+							<?php endif; ?>
+						</div>
+						<div>
+							<strong>
+								<?php if ( $editId ) : ?>
+									<a href="<?php echo esc_url( get_edit_post_link( $editId ) ); ?>" target="_blank"><?php echo esc_html( $item['name'] ); ?></a>
+								<?php else : ?>
+									<?php echo esc_html( $item['name'] ); ?>
+								<?php endif; ?>
+							</strong>
+							<?php if ( '' !== $item['sku'] ) : ?>
+								<div style="font-size: 12px; color: #646970; margin-top: 4px;">
+									<?php esc_html_e( 'SKU:', 'tier-pricing-table' ); ?> <?php echo esc_html( $item['sku'] ); ?>
+								</div>
+							<?php endif; ?>
+							<?php if ( ! $product ) : ?>
+								<div style="font-size: 12px; color: #b32d2e; margin-top: 4px;"><?php esc_html_e( 'Product not found.', 'tier-pricing-table' ); ?></div>
+							<?php endif; ?>
+						</div>
+					</td>
+					<td>
+						<input type="number" min="1" step="1" name="tier_pricing_table_quote_items[<?php echo esc_attr( $index ); ?>][quantity]" data-tpt-quote-qty
+						       aria-label="<?php esc_attr_e( 'Quantity', 'tier-pricing-table' ); ?>"
+						       value="<?php echo esc_attr( $item['quantity'] ); ?>" style="width: 80px;">
+					</td>
+					<td>
+						<span class="tpt-quote-price-field">
+							<span class="tpt-quote-currency"><?php echo esc_html( html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES, 'UTF-8' ) ); ?></span>
+							<input type="number" step="any" min="0" name="tier_pricing_table_quote_items[<?php echo esc_attr( $index ); ?>][price]" data-tpt-quote-price
+							       aria-label="<?php esc_attr_e( 'Unit Price', 'tier-pricing-table' ); ?>"
+							       value="<?php echo esc_attr( $item['price'] ); ?>" style="width: 100px;">
+						</span>
+					</td>
+					<td>
+						<strong data-tpt-quote-line-total><?php echo null !== $lineTotal ? wp_kses_post( wc_price( $lineTotal ) ) : '&ndash;'; ?></strong>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+			<tfoot>
+			<tr>
+				<th colspan="3" style="text-align: right;"><?php esc_html_e( 'Total', 'tier-pricing-table' ); ?></th>
+				<td><strong data-tpt-quote-total><?php echo null !== $total ? wp_kses_post( wc_price( $total ) ) : '&ndash;'; ?></strong></td>
+			</tr>
+			</tfoot>
+		</table>
+		<?php
+	}
+
+	/**
+	 * The Convert to Order button, or the order the request became.
+	 */
+	protected function renderConversion( QuoteRequest $quote ) {
+		?>
 		<div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e5e5; display: flex; justify-content: flex-end; align-items: center;">
 			<?php if ( $quote->getConvertedOrderId() ) : ?>
+				<?php
+				// the order's own edit link: orders are not posts when WooCommerce stores them in its own tables (HPOS)
+				$convertedOrder = wc_get_order( $quote->getConvertedOrderId() );
+				?>
 				<p style="margin:0;">
 					<?php esc_html_e( 'Converted to Order:', 'tier-pricing-table' ); ?>
-					<a href="<?php echo esc_url( get_edit_post_link( $quote->getConvertedOrderId() ) ); ?>">
+					<?php if ( $convertedOrder ) : ?>
+						<a href="<?php echo esc_url( $convertedOrder->get_edit_order_url() ); ?>">
+							<strong>#<?php echo esc_html( $convertedOrder->get_order_number() ); ?></strong>
+						</a>
+					<?php else : ?>
 						<strong>#<?php echo esc_html( $quote->getConvertedOrderId() ); ?></strong>
-					</a>
+					<?php endif; ?>
 				</p>
 			<?php else : ?>
 				<input type="submit" name="tpt_convert_to_order" class="button button-primary"
@@ -181,8 +430,11 @@ class QuoteRequestAdmin {
 								'unread' ); ?>><?php esc_html_e( 'Unread', 'tier-pricing-table' ); ?></option>
 						<option value="read" <?php selected( $quote->getStatus(), 'read' ); ?>><?php esc_html_e( 'Read',
 									'tier-pricing-table' ); ?></option>
+						<?php // "Converted" comes with an order: Convert to Order sets it ?>
+						<?php if ( $quote->getConvertedOrderId() || 'converted' === $quote->getStatus() ) : ?>
 						<option value="converted" <?php selected( $quote->getStatus(),
 								'converted' ); ?>><?php esc_html_e( 'Converted', 'tier-pricing-table' ); ?></option>
+						<?php endif; ?>
 						<option value="rejected" <?php selected( $quote->getStatus(),
 								'rejected' ); ?>><?php esc_html_e( 'Rejected', 'tier-pricing-table' ); ?></option>
 					</select>
@@ -218,7 +470,7 @@ class QuoteRequestAdmin {
 				</div>
 				<div id="publishing-action">
 					<span class="spinner"></span>
-					<input type="submit" name="save" id="publish" class="button button-primary button-large"
+					<input type="submit" name="save" id="publish" class="button button-large"
 					       value="<?php esc_attr_e( 'Save Quote', 'tier-pricing-table' ); ?>">
 				</div>
 			</div>
@@ -277,10 +529,17 @@ class QuoteRequestAdmin {
 			</div>
 
 			<?php if ( $email ) : ?>
-				<div style="font-size: 13px; color: #50575e; margin-bottom: 20px;">
-					<a href="mailto:<?php echo esc_attr( $email ); ?>"
-					   style="text-decoration: none; color: inherit;"><?php echo esc_html( $email ); ?></a>
+				<div style="font-size: 13px; color: #50575e; margin-bottom: 12px; word-break: break-all;">
+					<?php echo esc_html( $email ); ?>
 				</div>
+				<?php
+					/* translators: %s: request number */
+					$replySubject = sprintf( __( 'Your quote request #%s', 'tier-pricing-table' ), $post->ID );
+				?>
+				<a href="<?php echo esc_url( 'mailto:' . $email . '?subject=' . rawurlencode( $replySubject ) ); ?>" class="button"
+				   style="width: 100%; text-align: center; display: block; margin-bottom: 8px;">
+					<?php esc_html_e( 'Reply by e-mail', 'tier-pricing-table' ); ?>
+				</a>
 			<?php endif; ?>
 
 			<?php if ( $userId && $user ) : ?>
@@ -319,48 +578,132 @@ class QuoteRequestAdmin {
 
 		$quote = new QuoteRequest( $post_id );
 
-		if ( isset( $_POST['tier_pricing_table_quote_price'] ) ) {
-			$quote->setPrice( wc_format_decimal( $_POST['tier_pricing_table_quote_price'] ) );
+		// a quote list request: each product's quantity and unit price (the products themselves stay)
+		if ( $quote->isList() && isset( $_POST['tier_pricing_table_quote_items'] ) && is_array( $_POST['tier_pricing_table_quote_items'] ) ) {
+			$posted = wp_unslash( $_POST['tier_pricing_table_quote_items'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- each value is cleaned below
+			$items  = $quote->getItems();
+
+			foreach ( $items as $index => $item ) {
+				if ( empty( $posted[ $index ] ) || ! is_array( $posted[ $index ] ) ) {
+					continue;
+				}
+
+				if ( isset( $posted[ $index ]['quantity'] ) ) {
+					$items[ $index ]['quantity'] = max( 1, (int) $posted[ $index ]['quantity'] );
+				}
+
+				if ( isset( $posted[ $index ]['price'] ) ) {
+					$price = wc_format_decimal( sanitize_text_field( (string) $posted[ $index ]['price'] ) );
+
+					// empty is allowed (not priced yet), a negative price is not
+					if ( '' === $price || (float) $price >= 0 ) {
+						$items[ $index ]['price'] = $price;
+					}
+				}
+			}
+
+			$quote->setItems( $items );
 		}
 
-		if ( isset( $_POST['tier_pricing_table_quote_quantity'] ) ) {
+		if ( ! $quote->isList() && isset( $_POST['tier_pricing_table_quote_price'] ) ) {
+			$price = wc_format_decimal( wp_unslash( $_POST['tier_pricing_table_quote_price'] ) );
+
+			// empty is allowed (not priced yet), a negative price is not
+			if ( '' === $price || (float) $price >= 0 ) {
+				$quote->setPrice( $price );
+			}
+		}
+
+		if ( ! $quote->isList() && isset( $_POST['tier_pricing_table_quote_quantity'] ) ) {
 			$quote->setQuantity( (int) $_POST['tier_pricing_table_quote_quantity'] );
 		}
 
+		if ( isset( $_POST['tier_pricing_table_quote_note'] ) ) {
+			$quote->updateMetaData( '_internal_note', sanitize_textarea_field( wp_unslash( $_POST['tier_pricing_table_quote_note'] ) ) );
+		}
+
 		if ( isset( $_POST['tier_pricing_table_quote_status'] ) ) {
-			$quote->setStatus( sanitize_text_field( $_POST['tier_pricing_table_quote_status'] ) );
+			$status  = sanitize_key( wp_unslash( $_POST['tier_pricing_table_quote_status'] ) );
+			$allowed = array( 'unread', 'read', 'rejected' );
+
+			// "Converted" comes with an order: Convert to Order sets it
+			if ( $quote->getConvertedOrderId() ) {
+				$allowed[] = 'converted';
+			}
+
+			if ( in_array( $status, $allowed, true ) ) {
+				$quote->setStatus( $status );
+			}
 		}
 
 		// Handle Conversion to Order
 		if ( isset( $_POST['tpt_convert_to_order'] ) && ! $quote->getConvertedOrderId() ) {
-			$productId = $quote->getProductId();
-			$quantity  = $quote->getQuantity();
-			$price     = $quote->getPrice();
+			// every product of the request (one for a single product's form); products without a price
+			// (typical for quote-only products) leave the unit price empty: the owner sets it
+			$lines   = array();
+			$problem = null;
 
-			$order = wc_create_order();
-			$order->add_product( wc_get_product( $productId ), $quantity, array(
-					'subtotal' => $price * $quantity,
-					'total'    => $price * $quantity,
+			foreach ( $quote->getItems() as $item ) {
+				$product = wc_get_product( $item['product_id'] );
+
+				if ( ! $product ) {
+					$problem = 'product_missing';
+					break;
+				}
+
+				if ( ! is_numeric( $item['price'] ) || (float) $item['price'] < 0 ) {
+					$problem = 'price_required';
+				}
+
+				$lines[] = array( $product, max( 1, $item['quantity'] ), (float) $item['price'] );
+			}
+
+			if ( ! $lines && ! $problem ) {
+				$problem = 'product_missing';
+			}
+
+			if ( $problem ) {
+				remove_action( 'save_post', array( $this, 'savePost' ), 10 );
+				$quote->save();
+
+				add_filter( 'redirect_post_location', function ( $location ) use ( $problem ) {
+					return add_query_arg( 'tpt_quote_conversion_error', $problem, remove_query_arg( 'message', $location ) );
+				} );
+
+				return;
+			}
+
+			$order = wc_create_order( array(
+					'customer_id' => $this->getOrderCustomerId( $quote ),
+					'created_via' => 'tpt-quote-request',
 			) );
 
+			foreach ( $lines as list( $product, $quantity, $price ) ) {
+				$order->add_product( $product, $quantity, array(
+					'subtotal' => $price * $quantity,
+					'total'    => $price * $quantity,
+				) );
+			}
+
+			// the customer's details first: taxes are worked out for their address
+			$this->fillOrderCustomer( $order, $quote );
 			$order->calculate_totals();
 
-			// Add customer note
-			// Add customer note
-			$customFields = $quote->getCustomFields();
-			$notes        = "Quote Request Notes:\n";
-			foreach ( $customFields as $k => $fieldData ) {
-				if ( ! is_array( $fieldData ) ) {
-					$fieldData = array( 'label' => ucfirst( str_replace( '_', ' ', $k ) ), 'value' => $fieldData );
-				}
-				$label = isset( $fieldData['label'] ) && ! empty( $fieldData['label'] ) ? $fieldData['label'] : ucfirst( str_replace( '_',
-						' ', $k ) );
-				$value = isset( $fieldData['value'] ) ? $fieldData['value'] : '';
+			// The customer's answers, with download links for their files
+			$notes = "Quote Request Notes:\n";
 
-				$notes .= $label . ": " . $value . "\n";
+			foreach ( $quote->getSubmittedFields( true ) as $field ) {
+				$notes .= $field['label'] . ': ' . $field['value'] . ( $field['url'] ? ' (' . $field['url'] . ')' : '' ) . "\n";
 			}
 			$order->update_meta_data( 'quote_request_notes', $notes );
+			$order->update_meta_data( '_tpt_quote_request_id', (int) $quote->getId() );
 			$order->save();
+
+			$order->add_order_note( sprintf(
+			/* translators: %s: link to the quote request */
+					__( 'Created from quote request %s.', 'tier-pricing-table' ),
+					'<a href="' . esc_url( (string) get_edit_post_link( $quote->getId(), 'raw' ) ) . '">#' . (int) $quote->getId() . '</a>'
+			) . "\n\n" . trim( $notes ) );
 
 			// Update quote
 			remove_action( 'save_post', array( $this, 'savePost' ), 10, 2 );
@@ -379,14 +722,60 @@ class QuoteRequestAdmin {
 		$quote->save();
 	}
 
+	/**
+	 * The customer account the request was sent from, if it still exists.
+	 */
+	protected function getOrderCustomerId( QuoteRequest $quote ): int {
+		$userId = $quote->getUserId();
+
+		return $userId && get_userdata( $userId ) ? $userId : 0;
+	}
+
+	/**
+	 * The order gets the customer's details: their account's saved addresses when they were logged in, and the
+	 * name and e-mail from the request. With a billing e-mail the store can send WooCommerce's payment link.
+	 */
+	protected function fillOrderCustomer( \WC_Order $order, QuoteRequest $quote ) {
+		$userId = $this->getOrderCustomerId( $quote );
+
+		if ( $userId ) {
+			try {
+				$customer = new \WC_Customer( $userId );
+
+				$order->set_address( $customer->get_billing(), 'billing' );
+				$order->set_address( $customer->get_shipping(), 'shipping' );
+			} catch ( \Exception $e ) {
+				// an account WooCommerce cannot load: the request's own details below still apply
+				unset( $e );
+			}
+		}
+
+		$name = trim( wp_strip_all_tags( (string) $quote->getCustomerName() ) );
+
+		if ( '' !== $name && '' === $order->get_billing_first_name() && '' === $order->get_billing_last_name() ) {
+			$parts = preg_split( '/\s+/', $name, 2 );
+
+			$order->set_billing_first_name( $parts[0] );
+			$order->set_billing_last_name( $parts[1] ?? '' );
+		}
+
+		// the address the customer asked to be answered at
+		$email = sanitize_email( (string) $quote->getCustomerEmail() );
+
+		if ( is_email( $email ) ) {
+			$order->set_billing_email( $email );
+		}
+	}
+
 	public function setCustomColumns( $columns ) {
 		$columns = array(
 				'cb'       => '<input type="checkbox" />',
-				'title'    => __( 'Quote', 'tier-pricing-table' ),
+				'request'  => __( 'Request', 'tier-pricing-table' ),
 				'customer' => __( 'Customer', 'tier-pricing-table' ),
-				'product'  => __( 'Product', 'tier-pricing-table' ),
+				'product'  => __( 'Products', 'tier-pricing-table' ),
+				'value'    => __( 'Value', 'tier-pricing-table' ),
 				'status'   => __( 'Status', 'tier-pricing-table' ),
-				'date'     => __( 'Date', 'tier-pricing-table' ),
+				'received' => __( 'Received', 'tier-pricing-table' ),
 		);
 
 		return $columns;
@@ -396,6 +785,14 @@ class QuoteRequestAdmin {
 		$quote                = new QuoteRequest( $post_id );
 
 		switch ( $column ) {
+			case 'request':
+				// the number the customer was given; bold while unread
+				?>
+				<a class="row-title" href="<?php echo esc_url( (string) get_edit_post_link( $post_id ) ); ?>"
+				   style="font-weight: <?php echo 'unread' === $quote->getStatus() ? '700' : '400'; ?>;">#<?php echo esc_html( $post_id ); ?></a>
+				<?php
+				break;
+
 			case 'customer':
 				$name = $quote->getCustomerName();
 				$email        = $quote->getCustomerEmail();
@@ -408,20 +805,46 @@ class QuoteRequestAdmin {
 				break;
 
 			case 'product':
-				$productId = $quote->getProductId();
-				$quantity     = $quote->getQuantity();
+				// every product with its quantity; a long list is cut after three
+				$items = $quote->getItems();
+				$shown = array_slice( $items, 0, 3 );
+				$more  = count( $items ) - count( $shown );
 
-				$product = wc_get_product( $productId );
-				if ( $product ) :
-					?>
-					<a href="<?php echo esc_url( get_edit_post_link( $product->get_id() ) ); ?>"><strong><?php echo wp_kses_post( $product->get_name() ); ?></strong></a>
-					<br>
-					<small><?php esc_html_e( 'Qty:',
-								'tier-pricing-table' ); ?><?php echo esc_html( $quantity ? $quantity : 1 ); ?></small>
-				<?php
-				else :
+				if ( empty( $items ) ) {
 					echo '&mdash;';
+					break;
+				}
+
+				foreach ( $shown as $item ) :
+					?>
+					<div><?php echo esc_html( $item['name'] ); ?> &times; <?php echo esc_html( $item['quantity'] ); ?></div>
+					<?php
+				endforeach;
+
+				if ( $more > 0 ) :
+					?>
+					<small>
+						<?php
+						// translators: %d: number of other products.
+						echo esc_html( sprintf( _n( '+ %d more product', '+ %d more products', $more, 'tier-pricing-table' ), $more ) );
+						?>
+					</small>
+					<?php
 				endif;
+				break;
+
+			case 'value':
+				// quantity times unit price, once every line has a price
+				$total = $quote->getItemsTotal();
+
+				echo null !== $total ? wp_kses_post( wc_price( $total ) ) : '&mdash;';
+				break;
+
+			case 'received':
+				echo esc_html( get_the_date( '', $post_id ) );
+				?>
+				<br><small><?php echo esc_html( get_the_time( '', $post_id ) ); ?></small>
+				<?php
 				break;
 
 			case 'status':
@@ -480,10 +903,19 @@ class QuoteRequestAdmin {
 				$meta_query = array();
 			}
 
+			// the request's product, or any product of a quote list request
 			$meta_query[] = array(
-					'key'     => '_product_id',
-					'value'   => absint( $_GET['tpt_product_filter'] ),
-					'compare' => '=',
+					'relation' => 'OR',
+					array(
+							'key'     => '_product_id',
+							'value'   => absint( $_GET['tpt_product_filter'] ),
+							'compare' => '=',
+					),
+					array(
+							'key'     => QuoteRequest::ITEM_PRODUCT_META,
+							'value'   => absint( $_GET['tpt_product_filter'] ),
+							'compare' => '=',
+					),
 			);
 
 			$query->set( 'meta_query', $meta_query );
@@ -491,6 +923,9 @@ class QuoteRequestAdmin {
 	}
 
 	public function registerBulkActions( $bulk_actions ) {
+		// "Edit" opens WordPress's bulk editor (status, author), which means nothing for requests
+		unset( $bulk_actions['edit'] );
+
 		$bulk_actions['tpt_mark_unread']   = __( 'Mark as Unread', 'tier-pricing-table' );
 		$bulk_actions['tpt_mark_read']     = __( 'Mark as Read', 'tier-pricing-table' );
 		$bulk_actions['tpt_mark_rejected'] = __( 'Mark as Rejected', 'tier-pricing-table' );
@@ -521,6 +956,33 @@ class QuoteRequestAdmin {
 		$redirect_to = add_query_arg( 'tpt_bulk_action', $doaction, $redirect_to );
 
 		return $redirect_to;
+	}
+
+	/**
+	 * Why Convert to Order stopped, on the quote edit screen.
+	 */
+	public function conversionNotices() {
+		if ( empty( $_GET['tpt_quote_conversion_error'] ) ) {
+			return;
+		}
+
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+
+		if ( ! $screen || QuoteRequestCPT::POST_TYPE !== $screen->post_type ) {
+			return;
+		}
+
+		$problem = sanitize_key( wp_unslash( $_GET['tpt_quote_conversion_error'] ) );
+
+		if ( 'price_required' === $problem ) {
+			$message = __( 'Enter a unit price, then click Convert to Order again. Your other changes are saved.', 'tier-pricing-table' );
+		} elseif ( 'product_missing' === $problem ) {
+			$message = __( 'The product in this quote no longer exists, so it cannot be converted to an order.', 'tier-pricing-table' );
+		} else {
+			return;
+		}
+
+		echo '<div class="notice notice-error is-dismissible"><p>' . esc_html( $message ) . '</p></div>';
 	}
 
 	public function bulkActionNotices() {

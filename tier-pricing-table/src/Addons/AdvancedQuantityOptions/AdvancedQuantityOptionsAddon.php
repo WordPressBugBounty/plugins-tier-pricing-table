@@ -5,18 +5,17 @@ namespace TierPricingTable\Addons\AdvancedQuantityOptions;
 use TierPricingTable\Addons\AbstractAddon;
 use TierPricingTable\Addons\AdvancedQuantityOptions\API\MaximumOrderQuantity;
 use TierPricingTable\Addons\AdvancedQuantityOptions\API\QuantityStep;
-use TierPricingTable\Addons\AdvancedQuantityOptions\ProductEditor\ProductEditor;
 class AdvancedQuantityOptionsAddon extends AbstractAddon {
     const MAXIMUM_QUANTITY_BASE_META_KEY = 'maximum_quantity';
 
     const GROUP_OF_QUANTITY_BASE_META_KEY = 'group_of_quantity';
 
     public function getName() : string {
-        return __( 'Advanced product quantity options', 'tier-pricing-table' );
+        return __( 'Maximum and quantity step', 'tier-pricing-table' );
     }
 
     public function getDescription() : string {
-        return __( 'Set maximum, and step quantities for products.', 'tier-pricing-table' );
+        return __( 'Adds a maximum order quantity and a quantity step, such as packs of 10, to products and rules.', 'tier-pricing-table' );
     }
 
     public function getIcon() : string {
@@ -27,12 +26,15 @@ class AdvancedQuantityOptionsAddon extends AbstractAddon {
         return 'additional-product-quantity-options';
     }
 
+    public function getGroup() : string {
+        return self::GROUP_PRICING;
+    }
+
     public function run() {
         $form = new AdvancedQuantityOptionsForm();
         new RoleBasedOptions($form);
         new ProductOptions($form);
         new GlobalPricingOptions($form);
-        new ProductEditor();
     }
 
 }

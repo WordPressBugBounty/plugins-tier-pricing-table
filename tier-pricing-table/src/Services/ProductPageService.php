@@ -313,7 +313,8 @@ class ProductPageService {
 		if ( $product ) {
 			$parentProduct = wc_get_product( $product->get_parent_id() );
 
-			if ( $parentProduct ) {
+			// anyone may call this: only products the visitor may see (not drafts, private or hidden ones)
+			if ( $parentProduct && ProductAccess::canView( $product ) ) {
 				PricingTable::getInstance()->renderPricingTableHTML( $parentProduct, $product, $renderSettings );
 			}
 

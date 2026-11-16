@@ -6,6 +6,7 @@ use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
 use TierPricingTable\Core\ServiceContainer;
 use TierPricingTable\PricingTable;
+use TierPricingTable\Services\ProductAccess;
 class ElementorWidget extends Widget_Base {
     public function get_name() : string {
         return 'tiered-pricing-table';
@@ -193,6 +194,11 @@ class ElementorWidget extends Widget_Base {
             $productId = $post->ID;
         }
         $args['display'] = true;
+        // the widget can name any product: only products the visitor may see (not drafts, private or hidden ones)
+        $product = wc_get_product( $productId );
+        if ( !$product || !ProductAccess::canView( $product ) ) {
+            return;
+        }
         PricingTable::getInstance()->renderPricingTable( $productId, null, $args );
     }
 

@@ -13,6 +13,12 @@ use WP_User;
 class ApplicationService {
 
 	/**
+	 * The roles a plain shopper has, which the wholesale role replaces on approval.
+	 */
+	public const SHOPPER_ROLES = array( 'customer', 'subscriber' );
+
+
+	/**
 	 * Whether the registration form has to ask for a password (WooCommerce can generate one instead).
 	 */
 	public static function needsPassword(): bool {
@@ -30,6 +36,11 @@ class ApplicationService {
 	 */
 	public function submit( array $input, ?WP_User $currentUser ) {
 		$isGuest = null === $currentUser;
+
+		// an administrator testing the form must not turn their own account into a wholesale customer's
+		if ( $currentUser && self::isStoreStaff( $currentUser ) ) {
+			return new WP_Error( 'staff', __( 'Accounts that manage the store cannot apply for wholesale. Log out to send an application.', 'tier-pricing-table' ) );
+		}
 
 		$fields = Settings::getFormFields();
 
@@ -179,11 +190,19 @@ class ApplicationService {
 		$user = $application->getUser();
 		$role = $application->getRequestedRole() ?: Settings::getRole();
 
-		if ( ! $user || ! $role || ! wp_roles()->is_role( $role ) ) {
+		if ( ! $user || ! $role || ! wp_roles()->is_role( $role ) || self::isStoreStaff( $user ) ) {
 			return false;
 		}
 
-		$user->set_role( $role );
+		// The wholesale role takes the place of the plain shopper roles only; any other role stays (set_role
+		// would take every role away, an administrator's too)
+		foreach ( self::SHOPPER_ROLES as $shopperRole ) {
+			if ( $shopperRole !== $role && in_array( $shopperRole, (array) $user->roles, true ) ) {
+				$user->remove_role( $shopperRole );
+			}
+		}
+
+		$user->add_role( $role );
 
 		if ( ! $application->setStatus( WholesaleApplication::STATUS_APPROVED, $decidedBy ) ) {
 			return false;
@@ -205,9 +224,14 @@ class ApplicationService {
 		$role = $application->getRequestedRole() ?: Settings::getRole();
 		$user = $application->getUser();
 
-		// an approved application that is rejected later takes the role away again
+		// an approved application that is rejected later takes the wholesale role away again, and only that role
 		if ( $application->isApproved() && $user && $role && in_array( $role, (array) $user->roles, true ) ) {
-			$user->set_role( 'customer' );
+			$user->remove_role( $role );
+
+			// back to a plain shopper, as before the approval
+			if ( ! array_intersect( self::SHOPPER_ROLES, (array) $user->roles ) ) {
+				$user->add_role( 'customer' );
+			}
 		}
 
 		if ( ! $application->setStatus( WholesaleApplication::STATUS_REJECTED, $decidedBy, $reason ) ) {
@@ -217,6 +241,13 @@ class ApplicationService {
 		do_action( 'tiered_pricing_table/wholesale/application_rejected', $application->getId(), $application, $decidedBy );
 
 		return true;
+	}
+
+	/**
+	 * Whether the user runs the store (administrators, shop managers). Such accounts never get the wholesale role.
+	 */
+	public static function isStoreStaff( WP_User $user ): bool {
+		return user_can( $user, 'manage_woocommerce' ) || user_can( $user, 'manage_options' );
 	}
 
 	/**

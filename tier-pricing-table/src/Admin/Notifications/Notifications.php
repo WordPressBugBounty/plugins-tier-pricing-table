@@ -47,7 +47,7 @@ class Notifications {
 			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
 			$id    = isset( $_GET['notification_id'] ) ? sanitize_text_field( wp_unslash( $_GET['notification_id'] ) ) : '';
 
-			if ( $id && wp_verify_nonce( $nonce, self::SNOOZE_NOTIFICATION_ACTION ) ) {
+			if ( $id && wp_verify_nonce( $nonce, self::SNOOZE_NOTIFICATION_ACTION ) && self::canManage() ) {
 				$snoozed        = $this->getSnoozedNotifications();
 				$snoozed[ $id ] = time() + self::SNOOZE_PERIOD;
 
@@ -84,7 +84,7 @@ class Notifications {
 		add_action( 'admin_post_' . self::CLOSE_NOTIFICATION_ACTION, function () {
 			$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : false;
 			
-			if ( ! wp_verify_nonce( $nonce, self::CLOSE_NOTIFICATION_ACTION ) ) {
+			if ( ! wp_verify_nonce( $nonce, self::CLOSE_NOTIFICATION_ACTION ) || ! self::canManage() ) {
 				return wp_safe_redirect( wp_get_referer() );
 			}
 			
@@ -100,7 +100,18 @@ class Notifications {
 		} );
 	}
 	
+	/**
+	 * The plugin's notices are for the people who run the store: they see, close and snooze them for the whole
+	 * site. Other admin users (authors, contributors) neither see nor change them.
+	 */
+	public static function canManage(): bool {
+		return current_user_can( 'manage_woocommerce' );
+	}
+
 	public function initNotifications() {
+		if ( ! self::canManage() ) {
+			return;
+		}
 		
 		foreach ( $this->getNotifications() as $notification ) {
 			if ( $notification->isActive() ) {

@@ -5,11 +5,11 @@ use TierPricingTable\Addons\AbstractAddon;
 class ImportExportAddon extends AbstractAddon {
 	
 	public function getName(): string {
-		return __( 'WooCommerce Import/Export', 'tier-pricing-table' );
+		return __( 'CSV import and export', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Adds compatibility with the built-in WooCommerce product importer and exporter.', 'tier-pricing-table' );
+		return __( 'Tiered pricing columns in WooCommerce\'s product CSV importer and exporter, with one set of columns per role.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -18,6 +18,10 @@ class ImportExportAddon extends AbstractAddon {
 	
 	public function getSlug(): string {
 		return 'import-export';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_TOOLS;
 	}
 	
 	public function run() {

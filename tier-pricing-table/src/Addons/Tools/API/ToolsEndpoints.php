@@ -3,9 +3,12 @@
 use TierPricingTable\Addons\CustomColumns\CustomColumnsManager;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\Form\RuleTypePointer;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+use TierPricingTable\Addons\RequestAQuote\Models\RequestQuoteForm;
 use TierPricingTable\Addons\TaxSettings\API\TaxSettingsEndpoints;
 use TierPricingTable\Admin\Notifications\Notifications;
 use TierPricingTable\Admin\Tips\Tip;
+use TierPricingTable\Core\ServiceContainer;
+use TierPricingTable\Settings\Settings;
 use TierPricingTable\Addons\Tools\PricingTest\CartTester;
 use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use WP_Error;
@@ -116,6 +119,53 @@ class ToolsEndpoints {
 				},
 			),
 		) );
+		
+		// the "Cache" tab: the switch saves as it changes
+		register_rest_route( self::NAMESPACE, '/cache', array(
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'saveCache' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+				'args'                => array(
+					'enabled' => array( 'type' => 'boolean', 'required' => true ),
+				),
+			),
+		) );
+		
+		register_rest_route( self::NAMESPACE, '/purge_cache', array(
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( $this, 'purgeCache' ),
+				'permission_callback' => function () {
+					return current_user_can( 'manage_options' );
+				},
+			),
+		) );
+	}
+	
+	/**
+	 * The cache switch as the "Cache" tab shows it.
+	 *
+	 * @return array{enabled: bool}
+	 */
+	public static function getCacheState(): array {
+		return array(
+			'enabled' => ServiceContainer::getInstance()->getCache()->isEnabled(),
+		);
+	}
+	
+	public function saveCache( WP_REST_Request $request ) {
+		update_option( Settings::SETTINGS_PREFIX . 'cache_enabled', rest_sanitize_boolean( $request->get_param( 'enabled' ) ) ? 'yes' : 'no' );
+		
+		return rest_ensure_response( self::getCacheState() );
+	}
+	
+	public function purgeCache() {
+		ServiceContainer::getInstance()->getCache()->purge();
+		
+		return rest_ensure_response( array( 'purged' => true ) );
 	}
 	
 	/**
@@ -333,15 +383,36 @@ class ToolsEndpoints {
 	}
 	
 	/**
+	 * Options the reset keeps although they carry the plugin's prefix: they hold the store's content, not
+	 * settings. Products and pricing rules point to quote forms by ID, as quote requests do.
+	 */
+	public const RESET_KEEPS = array( RequestQuoteForm::OPTION );
+
+	/**
+	 * The options the reset deletes: every option with one of the plugin's prefixes, except RESET_KEEPS.
+	 *
+	 * @return string[]
+	 */
+	public static function getResetOptionNames(): array {
+		global $wpdb;
+
+		$names = array();
+
+		foreach ( array( 'tier_pricing_table_', 'tiered_pricing_table/', CustomColumnsManager::CUSTOM_COLUMNS_OPTION_NAME, 'tpt_section_badge_seen_' ) as $prefix ) {
+			$names = array_merge( $names, $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( $prefix ) . '%' ) ) );
+		}
+
+		return array_values( array_diff( array_unique( $names ), self::RESET_KEEPS ) );
+	}
+
+	/**
 	 * Back to a fresh install: every option of the plugin, the labels and the custom columns, the
 	 * role tax overrides, the dismissed tips, badges and guides. Products, pricing rules, quote
-	 * requests and wholesale applications are kept.
+	 * forms, quote requests and wholesale applications are kept.
 	 */
 	public function resetSettings( WP_REST_Request $request ) {
-		global $wpdb;
-		
-		foreach ( array( 'tier_pricing_table_', 'tiered_pricing_table/', CustomColumnsManager::CUSTOM_COLUMNS_OPTION_NAME, 'tpt_section_badge_seen_' ) as $prefix ) {
-			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( $prefix ) . '%' ) );
+		foreach ( self::getResetOptionNames() as $option ) {
+			delete_option( $option );
 		}
 		
 		// dismissed tips, badges and notices come back; the activation date stays, it is history, not a setting
@@ -352,7 +423,7 @@ class ToolsEndpoints {
 		// the rule type tip of the first rule is dismissed per user
 		RuleTypePointer::resetDismissals();
 		
-		// the raw deletes bypass the options cache
+		// cached prices and pricing tables were built with the old settings
 		wp_cache_flush();
 		
 		// the first-run defaults again, the theme colour included; must come after the deletes
@@ -461,6 +532,27 @@ class ToolsEndpoints {
 			return rest_ensure_response( array( 'success' => false, 'message' => 'Role not found.' ) );
 		}
 		
+		// Administrator keeps every capability: taking one away can lock everyone out of the site
+		if ( 'administrator' === $roleKey ) {
+			return rest_ensure_response( array(
+				'success' => false,
+				'message' => __( 'The Administrator role cannot be changed here.', 'tier-pricing-table' ),
+			) );
+		}
+		
+		$lost = $this->getCapabilitiesTheEditorWouldLose( $roleKey, is_array( $capabilities ) ? $capabilities : array() );
+		
+		if ( $lost ) {
+			return rest_ensure_response( array(
+				'success' => false,
+				'message' => sprintf(
+					/* translators: %s: capability names, for example "manage_options, edit_users" */
+					__( 'Not saved: you have this role, and without %s you could no longer manage the store or this screen. Keep those capabilities, or change the role from another administrator account.', 'tier-pricing-table' ),
+					implode( ', ', $lost )
+				),
+			) );
+		}
+		
 		foreach ( $role->capabilities as $cap => $granted ) {
 			$role->remove_cap( $cap );
 		}
@@ -472,6 +564,49 @@ class ToolsEndpoints {
 		}
 		
 		return rest_ensure_response( array( 'success' => true, 'message' => 'Role capabilities updated.' ) );
+	}
+	
+	/**
+	 * The capabilities the current user needs to run the store and this screen that they would no longer have if the
+	 * role, which they hold, kept only the given capabilities (none of their other roles granting them).
+	 *
+	 * @param  string  $roleKey
+	 * @param  array  $newCapabilities  The capability names the role would keep.
+	 *
+	 * @return string[]
+	 */
+	protected function getCapabilitiesTheEditorWouldLose( string $roleKey, array $newCapabilities ): array {
+		$user = wp_get_current_user();
+		
+		if ( ! $user || ! in_array( $roleKey, (array) $user->roles, true ) ) {
+			return array();
+		}
+		
+		$needed = array( 'manage_options', 'manage_woocommerce', 'edit_users', 'promote_users' );
+		$lost   = array();
+		
+		foreach ( $needed as $cap ) {
+			if ( ! $user->has_cap( $cap ) || in_array( $cap, $newCapabilities, true ) ) {
+				continue;
+			}
+			
+			$elsewhere = false;
+			
+			foreach ( (array) $user->roles as $otherRole ) {
+				$other = $otherRole !== $roleKey ? get_role( $otherRole ) : null;
+				
+				if ( $other && $other->has_cap( $cap ) ) {
+					$elsewhere = true;
+					break;
+				}
+			}
+			
+			if ( ! $elsewhere && empty( $user->caps[ $cap ] ) ) {
+				$lost[] = $cap;
+			}
+		}
+		
+		return $lost;
 	}
 	
 	public function deleteRole( WP_REST_Request $request ) {

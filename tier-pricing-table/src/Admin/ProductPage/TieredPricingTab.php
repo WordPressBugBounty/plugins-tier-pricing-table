@@ -146,25 +146,25 @@ class TieredPricingTab {
         $productBaseUnitName = self::getProductBaseUnitName( $post->ID );
         ?>
 
-						<input type="text"
-							   value="<?php 
+						<span class="tpt-unit-label-inputs">
+							<input type="text"
+								   value="<?php 
         echo esc_attr( $productBaseUnitName['singular'] );
         ?>"
-							   placeholder="<?php 
+								   placeholder="<?php 
         esc_attr_e( 'Singular (e.g. piece)', 'tier-pricing-table' );
         ?>"
-							   style="width: 24%; margin-right: 20px;"
-							   name="_tiered_pricing_base_unit_name[singular]">
+								   name="_tiered_pricing_base_unit_name[singular]">
 
-						<input type="text"
-							   value="<?php 
+							<input type="text"
+								   value="<?php 
         echo esc_attr( $productBaseUnitName['plural'] );
         ?>"
-							   placeholder="<?php 
+								   placeholder="<?php 
         esc_attr_e( 'Plural (e.g. pieces)', 'tier-pricing-table' );
         ?>"
-							   style="width: 24%"
-							   name="_tiered_pricing_base_unit_name[plural]">
+								   name="_tiered_pricing_base_unit_name[plural]">
+						</span>
 					</p>
 
 					<div style="    padding: 0 20px 0px 162px;
@@ -263,6 +263,7 @@ class TieredPricingTab {
             'variable'   => '<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline>',
             'visibility' => '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>',
             'roles'      => '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>',
+            'quote'      => '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line>',
         );
         if ( empty( $paths[$name] ) ) {
             return '';

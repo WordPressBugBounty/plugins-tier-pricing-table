@@ -6,11 +6,11 @@ use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 class PricingSummaryAddon extends AbstractAddon {
 	
 	public function getName() {
-		return __( 'Pricing Summary', 'tier-pricing-table' );
+		return __( 'Pricing summary', 'tier-pricing-table' );
 	}
 	
 	public function getDescription() {
-		return __( 'Display a dynamic pricing summary showing the total cost of the selected quantity.', 'tier-pricing-table' );
+		return __( 'A quantity × price block with the total near the pricing table, updated as the quantity changes.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -19,6 +19,10 @@ class PricingSummaryAddon extends AbstractAddon {
 	
 	public function getSlug() {
 		return 'pricing-summary';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRODUCT_PAGE;
 	}
 	
 	public function run() {

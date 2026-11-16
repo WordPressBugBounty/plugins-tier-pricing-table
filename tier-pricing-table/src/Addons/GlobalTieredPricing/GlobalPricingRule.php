@@ -890,8 +890,16 @@ class GlobalPricingRule {
 		
 		// only the fields of the chosen pricing type reach the storefront: a discount left over from
 		// "percentage" changes nothing in "flat" mode, and the other way round
+		// a percentage discount is premium: without it only flat prices apply
+		$percentageSkipped = false;
+		
 		if ( 'percentage' === $this->getPricingType() ) {
 			$valid = (float) $this->getDiscount() > 0;
+			
+			if ( $valid && ! tpt_fs()->can_use_premium_code() ) {
+				$valid             = false;
+				$percentageSkipped = true;
+			}
 		} else {
 			$valid = ! Form::isEmpty( $this->getRegularPrice() ) || ! Form::isEmpty( $this->getSalePrice() );
 		}
@@ -903,6 +911,11 @@ class GlobalPricingRule {
 		$valid = $valid || $this->getSettings()->getPriorityType() === 'flexible';
 		
 		$valid = apply_filters( 'tiered_pricing_table/global_pricing/validation', $valid, $this );
+		
+		if ( ! $valid && $percentageSkipped ) {
+			throw new Exception( esc_html__( 'The rule gives a percentage discount, which the premium version applies, so the storefront skips it. Set flat prices instead, or upgrade.',
+				'tier-pricing-table' ) );
+		}
 		
 		if ( ! $valid ) {
 			throw new Exception( esc_html__( 'The pricing rule does not affect either prices or product quantity. The rule will be skipped.',
@@ -1543,16 +1556,28 @@ class GlobalPricingRule {
 	}
 	
 	/**
+	 * Term ids of variation parents read in this request: parent id => taxonomy => ids.
+	 *
+	 * @var array<int, array<string, int[]>>
+	 */
+	protected static $parentTermIds = array();
+	
+	/**
+	 * @var bool
+	 */
+	protected static $forgettingTerms = false;
+	
+	/**
 	 * Whether the product falls under the rule's product conditions: not excluded, and included when the
 	 * rule limits its products.
 	 */
 	public function matchesProduct( WC_Product $product ): bool {
-		
-		$parentProduct = $product->is_type( array(
-			'variation',
-			'subscription-variation',
-		) ) ? wc_get_product( $product->get_parent_id() ) : $product;
-		
+
+		// A variation matches by its own id and its parent's: the parent product itself is only needed
+		// for its categories, tags and brands (self::getProductTermIds()).
+		$productId = $product->get_id();
+		$parentId  = self::isVariation( $product ) ? $product->get_parent_id() : $productId;
+
 		/**
 		 * 1. Check for product exclusion
 		 *
@@ -1561,8 +1586,7 @@ class GlobalPricingRule {
 		$excludedProducts = $this->translateIds( $this->getExcludedProducts(), 'product' );
 
 		if ( ! empty( $excludedProducts ) ) {
-			if ( in_array( $product->get_id(), $excludedProducts ) || in_array( $parentProduct->get_id(),
-					$excludedProducts ) ) {
+			if ( in_array( $productId, $excludedProducts ) || in_array( $parentId, $excludedProducts ) ) {
 				return false;
 			}
 		}
@@ -1570,7 +1594,7 @@ class GlobalPricingRule {
 		$excludedProductCategories = $this->translateIds( $this->getEffectiveExcludedCategories(), 'product_cat' );
 
 		if ( ! empty( $excludedProductCategories ) ) {
-			if ( ! empty( array_intersect( $parentProduct->get_category_ids(), $excludedProductCategories ) ) ) {
+			if ( ! empty( array_intersect( self::getProductTermIds( $product, 'product_cat' ), $excludedProductCategories ) ) ) {
 				return false;
 			}
 		}
@@ -1578,7 +1602,7 @@ class GlobalPricingRule {
 		$excludedProductTags = $this->translateIds( $this->getExcludedProductTags(), 'product_tag' );
 
 		if ( ! empty( $excludedProductTags ) ) {
-			if ( ! empty( array_intersect( $parentProduct->get_tag_ids(), $excludedProductTags ) ) ) {
+			if ( ! empty( array_intersect( self::getProductTermIds( $product, 'product_tag' ), $excludedProductTags ) ) ) {
 				return false;
 			}
 		}
@@ -1586,13 +1610,7 @@ class GlobalPricingRule {
 		$excludedProductBrands = $this->translateIds( $this->getExcludedProductBrands(), 'product_brand' );
 
 		if ( ! empty( $excludedProductBrands ) ) {
-			$productBrands = wp_get_post_terms( $parentProduct->get_id(), 'product_brand', array( 'fields' => 'ids' ) );
-
-			if ( is_wp_error( $productBrands ) ) {
-				$productBrands = [];
-			}
-
-			if ( ! empty( array_intersect( $productBrands, $excludedProductBrands ) ) ) {
+			if ( ! empty( array_intersect( self::getProductTermIds( $product, 'product_brand' ), $excludedProductBrands ) ) ) {
 				return false;
 			}
 		}
@@ -1611,8 +1629,7 @@ class GlobalPricingRule {
 		if ( ! empty( $includedProducts ) ) {
 			$productLimitations = true;
 
-			if ( in_array( $product->get_id(), $includedProducts ) || in_array( $parentProduct->get_id(),
-					$includedProducts ) ) {
+			if ( in_array( $productId, $includedProducts ) || in_array( $parentId, $includedProducts ) ) {
 				$productMatched = true;
 			}
 		}
@@ -1622,7 +1639,7 @@ class GlobalPricingRule {
 		if ( ! empty( $includedProductCategories ) ) {
 			$productLimitations = true;
 
-			if ( ! empty( array_intersect( $parentProduct->get_category_ids(), $includedProductCategories ) ) ) {
+			if ( ! empty( array_intersect( self::getProductTermIds( $product, 'product_cat' ), $includedProductCategories ) ) ) {
 				$productMatched = true;
 			}
 		}
@@ -1632,7 +1649,7 @@ class GlobalPricingRule {
 		if ( ! empty( $includedProductTags ) ) {
 			$productLimitations = true;
 
-			if ( ! empty( array_intersect( $parentProduct->get_tag_ids(), $includedProductTags ) ) ) {
+			if ( ! empty( array_intersect( self::getProductTermIds( $product, 'product_tag' ), $includedProductTags ) ) ) {
 				$productMatched = true;
 			}
 		}
@@ -1642,13 +1659,7 @@ class GlobalPricingRule {
 		if ( ! empty( $includedProductBrands ) ) {
 			$productLimitations = true;
 
-			$productBrands = wp_get_post_terms( $parentProduct->get_id(), 'product_brand', array( 'fields' => 'ids' ) );
-
-			if ( is_wp_error( $productBrands ) ) {
-				$productBrands = [];
-			}
-
-			if ( ! empty( array_intersect( $productBrands, $includedProductBrands ) ) ) {
+			if ( ! empty( array_intersect( self::getProductTermIds( $product, 'product_brand' ), $includedProductBrands ) ) ) {
 				$productMatched = true;
 			}
 		}
@@ -1665,6 +1676,75 @@ class GlobalPricingRule {
 	 * Whether the customer falls under the rule's customer conditions: not excluded, and included when
 	 * the rule limits its customers.
 	 */
+	/**
+	 * The term ids a product is matched by: a product's own, a variation's parent's.
+	 *
+	 * Every variation is checked against every rule, so a parent's terms are read once per request
+	 * (self::$parentTermIds) instead of loading the parent product for each check.
+	 */
+	protected static function getProductTermIds( WC_Product $product, string $taxonomy ): array {
+		
+		if ( ! self::isVariation( $product ) ) {
+			if ( 'product_cat' === $taxonomy ) {
+				return $product->get_category_ids();
+			}
+			
+			if ( 'product_tag' === $taxonomy ) {
+				return $product->get_tag_ids();
+			}
+			
+			return self::readBrandIds( $product->get_id() );
+		}
+		
+		$parentId = $product->get_parent_id();
+		
+		if ( ! isset( self::$parentTermIds[ $parentId ][ $taxonomy ] ) ) {
+			self::forgetTermsOnChange();
+			
+			if ( 'product_brand' === $taxonomy ) {
+				self::$parentTermIds[ $parentId ][ $taxonomy ] = self::readBrandIds( $parentId );
+			} else {
+				// categories and tags come from one load of the parent
+				$parent = wc_get_product( $parentId );
+				
+				self::$parentTermIds[ $parentId ]['product_cat'] = $parent ? $parent->get_category_ids() : array();
+				self::$parentTermIds[ $parentId ]['product_tag'] = $parent ? $parent->get_tag_ids() : array();
+			}
+		}
+		
+		return self::$parentTermIds[ $parentId ][ $taxonomy ];
+	}
+	
+	protected static function readBrandIds( int $productId ): array {
+		$brandIds = wp_get_post_terms( $productId, 'product_brand', array( 'fields' => 'ids' ) );
+		
+		return is_wp_error( $brandIds ) ? array() : array_map( 'intval', $brandIds );
+	}
+	
+	protected static function isVariation( WC_Product $product ): bool {
+		return $product->is_type( array( 'variation', 'subscription-variation' ) );
+	}
+	
+	/**
+	 * A parent's stored terms are dropped when its terms change or it is saved later in the same request
+	 * (imports, bulk edits).
+	 */
+	protected static function forgetTermsOnChange() {
+		
+		if ( self::$forgettingTerms ) {
+			return;
+		}
+		
+		self::$forgettingTerms = true;
+		
+		$forget = function ( $objectId ) {
+			unset( self::$parentTermIds[ (int) $objectId ] );
+		};
+		
+		add_action( 'set_object_terms', $forget );
+		add_action( 'clean_post_cache', $forget );
+	}
+	
 	public function matchesUser( WP_User $user ): bool {
 		
 		/**

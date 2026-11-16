@@ -12,11 +12,11 @@ use WC_Product;
 use WP_Block;
 class ProductCatalogLoop extends AbstractAddon {
     public function getName() : string {
-        return __( 'Shop & Categories', 'tier-pricing-table' );
+        return __( 'Tiers in the shop grid', 'tier-pricing-table' );
     }
 
     public function getDescription() : string {
-        return __( 'Display tiered pricing tables on the shop and category pages.', 'tier-pricing-table' );
+        return __( 'Shows the tiers and a "Save up to" badge in product cards on shop, category and search pages.', 'tier-pricing-table' );
     }
 
     public function getIcon() : string {
@@ -25,6 +25,10 @@ class ProductCatalogLoop extends AbstractAddon {
 
     public function getSlug() : string {
         return 'shop-loop-display';
+    }
+
+    public function getGroup() : string {
+        return self::GROUP_SHOP_CART;
     }
 
     public function getRenderAttributes() : array {

@@ -10,7 +10,7 @@ use WP_Error;
 class MinQuantity extends AbstractAddon {
 
 	public function getName(): string {
-		return __( 'Minimum order quantity validation', 'tier-pricing-table' );
+		return __( 'Minimum order quantity', 'tier-pricing-table' );
 	}
 
 	public function run() {
@@ -290,7 +290,7 @@ class MinQuantity extends AbstractAddon {
 	}
 
 	public function getDescription(): string {
-		return __( 'Enforce minimum order quantities for products based on tiered pricing rules.',
+		return __( 'Applies the minimum set on products and rules: the quantity field starts there, and a smaller quantity in the cart is raised to it.',
 				'tier-pricing-table' );
 	}
 
@@ -300,5 +300,9 @@ class MinQuantity extends AbstractAddon {
 
 	public function getSlug(): string {
 		return 'minimum-quantity';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRICING;
 	}
 }

@@ -22,7 +22,9 @@ class PlainTextAdapter extends AbstractLayoutAdapter {
 				'form'           => $form,
 				'productId'      => $pricingRule->getProductId(),
 				'plainTextStyle' => $settings['plain_text_style'] ?? 'default',
-				'buttonHtml'     => $this->getQuoteButtonHtml( $form, $pricingRule->getProductId(), '', '' )
+				'addsToList'     => $this->addsToList( $form ),
+				// a layout made of text lines: the action is a text link, whatever the form's button style
+				'buttonHtml'     => $this->getQuoteButtonHtml( $form, $pricingRule->getProductId(), '', '', 'tpt-raq-link', false, 'link' )
 			),
 			plugin_dir_path( dirname( __DIR__ ) ) . 'views/'
 		);

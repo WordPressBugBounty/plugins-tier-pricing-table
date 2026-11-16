@@ -16,3 +16,14 @@ mark.tpt-quote-status.status-unread { background: #f8dda7; color: #94660c; }
 mark.tpt-quote-status.status-read { background: #c8d7e1; color: #2e4453; }
 mark.tpt-quote-status.status-converted { background: #c6e1c6; color: #5b841b; }
 mark.tpt-quote-status.status-rejected { background: #e5e5e5; color: #777; }
+
+/* The request screen: the number first, then what the customer sent */
+.tpt-quote-heading { margin: 12px 0 16px; }
+.tpt-quote-heading h2 { margin: 0 0 4px; font-size: 20px; line-height: 1.3; }
+.tpt-quote-heading p { margin: 0; color: #50575e; font-size: 13px; }
+.tpt-quote-price-field { display: inline-flex; align-items: center; gap: 6px; }
+.tpt-quote-currency { color: #50575e; }
+.column-request { width: 90px; }
+.column-value { width: 110px; }
+.column-received { width: 130px; }
+

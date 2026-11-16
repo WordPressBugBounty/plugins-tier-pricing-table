@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "tiered-pricing-table/quick-order",
+	"version": "1.0.0",
+	"title": "Quick Order Form",
+	"category": "woocommerce",
+	"icon": "list-view",
+	"description": "A one-page order form: search by name or SKU, paste a list or upload a CSV, see the tier price of every line and add it all to the cart.",
+	"keywords": [ "quick order", "bulk order", "order form", "wholesale", "tiered pricing" ],
+	"supports": {
+		"html": false,
+		"multiple": false,
+		"align": [ "wide", "full" ],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {},
+	"textdomain": "tier-pricing-table",
+	"editorScript": "file:./index.js"
+}

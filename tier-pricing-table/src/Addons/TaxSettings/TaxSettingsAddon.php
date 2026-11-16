@@ -10,19 +10,23 @@ use TierPricingTable\Addons\TaxSettings\Settings\Settings;
 use TierPricingTable\Addons\TaxSettings\Overrides\RoleBasedTaxOptions;
 class TaxSettingsAddon extends AbstractAddon {
     public function getName() : string {
-        return __( 'Tax Options', 'tier-pricing-table' );
+        return __( 'Tax by role', 'tier-pricing-table' );
     }
 
     public function getDescription() : string {
-        return __( 'Manage tax overrides and display options for user roles and global pricing rules.', 'tier-pricing-table' );
+        return __( 'Tax-exempt roles, prices shown with or without tax per role, and a tax status and class in role and global rules.', 'tier-pricing-table' );
     }
 
     public function getIcon() : string {
-        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>';
+        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2zM3 22l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20z"/></svg>';
     }
 
     public function getSlug() : string {
         return 'tax-settings';
+    }
+
+    public function getGroup() : string {
+        return self::GROUP_PRICING;
     }
 
     public function isEnabled() : bool {

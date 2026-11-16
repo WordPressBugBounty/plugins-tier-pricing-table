@@ -32,9 +32,12 @@ class ProductVisibilityService {
 		add_action( 'pre_get_posts', array( $this, 'filterQuery' ) );
 		add_filter( 'woocommerce_rest_product_object_query', array( $this, 'filterRestQuery' ), 10, 2 );
 		add_filter( 'woocommerce_related_products', array( $this, 'filterIds' ) );
+		// WooCommerce sets post__in from this list on shop pages, and WordPress then ignores post__not_in
+		add_filter( 'loop_shop_post_in', array( $this, 'filterPostIn' ) );
 		add_filter( 'woocommerce_product_get_upsell_ids', array( $this, 'filterIds' ) );
 		add_filter( 'woocommerce_product_get_cross_sell_ids', array( $this, 'filterIds' ) );
 		add_filter( 'woocommerce_product_is_visible', array( $this, 'filterIsVisible' ), 10, 2 );
+		add_filter( 'tiered_pricing_table/product/can_view', array( $this, 'filterCanView' ), 10, 3 );
 		add_filter( 'woocommerce_is_purchasable', array( $this, 'filterIsPurchasable' ), 10, 2 );
 		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'validateAddToCart' ), 10, 2 );
 		add_action( 'woocommerce_check_cart_items', array( $this, 'checkCartItems' ) );
@@ -257,7 +260,8 @@ class ProductVisibilityService {
 
 		$postType = $query->get( 'post_type' );
 		$types    = array_filter( (array) $postType );
-		$isProduct = in_array( 'product', $types, true );
+		// a query for variations only (the Store API's ?type=variation&parent=) leaves out those of hidden products too
+		$isProduct = (bool) array_intersect( array( 'product', 'product_variation' ), $types );
 		$isBroad   = $query->is_main_query() && ( $query->is_search() || $query->is_post_type_archive( 'product' ) || $query->is_tax( get_object_taxonomies( 'product' ) ) );
 
 		if ( ! $isProduct && ! $isBroad ) {
@@ -275,17 +279,88 @@ class ProductVisibilityService {
 			return;
 		}
 
-		$query->set( 'post__not_in', array_values( array_unique( array_merge( (array) $query->get( 'post__not_in' ), $hidden ) ) ) );
+		foreach ( $this->excludeHidden( $query->query_vars, $hidden ) as $key => $value ) {
+			$query->set( $key, $value );
+		}
 	}
 
 	public function filterRestQuery( array $args, $request ): array {
 		$hidden = $this->getHiddenProducts();
 
-		if ( $hidden ) {
-			$args['post__not_in'] = array_values( array_unique( array_merge( (array) ( $args['post__not_in'] ?? array() ), $hidden ) ) );
+		return $hidden ? array_merge( $args, $this->excludeHidden( $args, $hidden ) ) : $args;
+	}
+
+	/**
+	 * The query variables that keep hidden products, and the variations of hidden products, out of a query.
+	 * WordPress ignores post__not_in when the query names its posts (p, post__in: "include=" in the REST APIs),
+	 * so hidden products are also taken out of those lists.
+	 *
+	 * @param  array  $vars  The query's variables.
+	 * @param  int[]  $hidden
+	 *
+	 * @return array The variables to set.
+	 */
+	protected function excludeHidden( array $vars, array $hidden ): array {
+		$set = array(
+			'post__not_in'        => array_values( array_unique( array_merge( array_map( 'intval', (array) ( $vars['post__not_in'] ?? array() ) ), $hidden ) ) ),
+			'post_parent__not_in' => array_values( array_unique( array_merge( array_map( 'intval', (array) ( $vars['post_parent__not_in'] ?? array() ) ), $hidden ) ) ),
+		);
+
+		$postIn = array_filter( array_map( 'intval', (array) ( $vars['post__in'] ?? array() ) ) );
+
+		if ( $postIn ) {
+			$left            = array_values( array_diff( $postIn, $hidden ) );
+			$set['post__in'] = $left ? $left : array( 0 );
 		}
 
-		return $args;
+		if ( ! empty( $vars['p'] ) && in_array( (int) $vars['p'], $hidden, true ) ) {
+			$set['p']        = 0;
+			$set['post__in'] = array( 0 );
+		}
+
+		$parentIn = array_filter( array_map( 'intval', (array) ( $vars['post_parent__in'] ?? array() ) ) );
+
+		if ( $parentIn ) {
+			$left                   = array_values( array_diff( $parentIn, $hidden ) );
+			$set['post_parent__in'] = $left ? $left : array( 0 );
+		}
+
+		if ( isset( $vars['post_parent'] ) && is_numeric( $vars['post_parent'] ) && in_array( (int) $vars['post_parent'], $hidden, true ) ) {
+			$set['post__in'] = array( 0 );
+		}
+
+		return $set;
+	}
+
+	/**
+	 * The shortcode, the Elementor widget and the variation pricing table show nothing of a hidden product.
+	 *
+	 * @param  bool  $canView
+	 * @param  WC_Product  $product
+	 * @param  WC_Product  $root
+	 */
+	public function filterCanView( $canView, $product, $root ): bool {
+		return $canView && $root instanceof WC_Product && ! $this->isProductHidden( $root->get_id() );
+	}
+
+	/**
+	 * A list of product IDs a shop page is limited to (filter plugins fill it) loses the hidden ones. An empty
+	 * list means no limit and stays empty; a list of hidden products only finds nothing.
+	 *
+	 * @param  mixed  $ids
+	 *
+	 * @return mixed
+	 */
+	public function filterPostIn( $ids ) {
+		$ids = array_filter( array_map( 'intval', (array) $ids ) );
+
+		if ( ! $ids ) {
+			return array();
+		}
+
+		$left = array_values( array_diff( $ids, $this->getHiddenProducts() ) );
+
+		return $left ? $left : array( 0 );
 	}
 
 	public function filterIds( $ids ) {
@@ -367,7 +442,8 @@ class ProductVisibilityService {
 	}
 
 	/**
-	 * The Store API's single product and single category routes return nothing hidden.
+	 * The single product and single category routes of the Store API and of WordPress return nothing hidden.
+	 * Lists are filtered in the product query itself.
 	 *
 	 * @param  mixed  $result
 	 * @param  \WP_REST_Server  $server
@@ -380,11 +456,21 @@ class ProductVisibilityService {
 
 		$route = (string) $request->get_route();
 
-		if ( preg_match( '#^/wc/store/v\d+/products/categories/(\d+)$#', $route, $m ) ) {
+		// The Store API answers the same routes under /wc/store/v1 and /wc/store
+		if ( preg_match( '#^/wc/store(?:/v\d+)?/products/categories/(\d+)$#', $route, $m ) ) {
 			return $this->isCategoryHidden( (int) $m[1] ) ? $this->notFound() : $result;
 		}
 
-		if ( preg_match( '#^/wc/store/v\d+/products/([^/]+)$#', $route, $m ) ) {
+		// WordPress's own routes for products and product categories
+		if ( preg_match( '#^/wp/v2/product/(\d+)$#', $route, $m ) ) {
+			return $this->isProductHidden( (int) $m[1] ) ? $this->notFound() : $result;
+		}
+
+		if ( preg_match( '#^/wp/v2/product_cat/(\d+)$#', $route, $m ) ) {
+			return $this->isCategoryHidden( (int) $m[1] ) ? $this->notFound() : $result;
+		}
+
+		if ( preg_match( '#^/wc/store(?:/v\d+)?/products/([^/]+)$#', $route, $m ) ) {
 			$productId = is_numeric( $m[1] ) ? (int) $m[1] : 0;
 
 			if ( ! $productId ) {

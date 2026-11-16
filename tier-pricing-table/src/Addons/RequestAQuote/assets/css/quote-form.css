@@ -27,17 +27,103 @@
 	color: inherit;
 }
 
+.tpt-quote-modal-content:focus {
+	outline: none;
+}
+
+/* a real button, large enough for a finger, dark enough to read */
 .tpt-quote-modal-close {
-	color: #aaa;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 44px;
+	height: 44px;
+	margin: -8px -8px -8px 8px;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: transparent;
+	box-shadow: none;
+	color: #50575e;
 	font-size: 28px;
 	font-weight: bold;
+	line-height: 1;
 	cursor: pointer;
 }
 
 .tpt-quote-modal-close:hover, .tpt-quote-modal-close:focus {
-	color: black;
+	background: rgba(0, 0, 0, .06);
+	color: #000;
 	text-decoration: none;
-	cursor: pointer;
+}
+
+.tpt-quote-modal-close:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+/* the price under the product name: the theme often greys prices, which fails the contrast minimum here */
+.tpt-quote-modal .tpt-quote-product-info .price,
+.tpt-quote-modal .tpt-quote-product-info .price .amount,
+.tpt-quote-modal .tpt-quote-variation-attributes {
+	color: inherit;
+}
+
+.tpt-quote-form-message:empty {
+	display: none;
+}
+
+.tpt-quote-error {
+	margin-bottom: 10px;
+	padding: 8px 12px;
+	border-left: 3px solid #b32d2e;
+	background: rgba(179, 45, 46, .06);
+	color: #8a1f20;
+	white-space: pre-line;
+}
+
+/* after sending: the request number and what was sent, in place of the form */
+.tpt-quote-success {
+	padding: 4px 0 8px;
+}
+
+.tpt-quote-success:focus {
+	outline: none;
+}
+
+.tpt-quote-success__title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 12px;
+	font-size: 1.15em;
+	font-weight: 700;
+	color: #1a7f37;
+}
+
+.tpt-quote-success__title::before {
+	content: "";
+	flex: 0 0 auto;
+	width: 20px;
+	height: 20px;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.tpt-quote-success p {
+	margin: 0 0 10px;
+}
+
+.tpt-quote-success__close {
+	margin-top: 8px;
+}
+
+.tpt-quote-submit-note {
+	margin: 8px 0 0;
+	font-size: .9em;
+	text-align: center;
 }
 
 .tpt-quote-field-wrapper {
@@ -71,4 +157,13 @@
 	margin-right: 8px;
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+/* honeypot: off screen, never seen or reached by people */
+.tpt-quote-hp {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
 }

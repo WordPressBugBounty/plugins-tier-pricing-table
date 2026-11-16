@@ -6,11 +6,11 @@ use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 class YouSaveAddon extends AbstractAddon {
 	
 	public function getName() {
-		return __( '"You Save" Badge', 'tier-pricing-table' );
+		return __( 'Savings badge', 'tier-pricing-table' );
 	}
 	
 	public function getDescription() {
-		return __( 'Display a badge showing customers how much they save when tiered pricing is applied.', 'tier-pricing-table' );
+		return __( 'Shows "You save …" for the selected quantity next to the price or above the add-to-cart button.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -19,6 +19,10 @@ class YouSaveAddon extends AbstractAddon {
 	
 	public function getSlug() {
 		return 'you-save';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRODUCT_PAGE;
 	}
 	
 	public function run() {

@@ -20,16 +20,25 @@ if ( !defined( 'ABSPATH' ) ) {
 echo esc_attr( $productId );
 ?>" class="tpt-quote-modal"
      style="display:none;">
-	<div class="tpt-quote-modal-content">
+	<div class="tpt-quote-modal-content" role="dialog" aria-modal="true" tabindex="-1"
+	     aria-labelledby="tpt-quote-modal-title-<?php 
+echo esc_attr( $productId );
+?>">
 		<div class="tpt-quote-modal-header"
 		     style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-			<h3 class="tpt-quote-modal-title" style="margin: 0; font-size: 22px; line-height: 1.2;">
+			<h3 class="tpt-quote-modal-title" id="tpt-quote-modal-title-<?php 
+echo esc_attr( $productId );
+?>"
+			    style="margin: 0; font-size: 22px; line-height: 1.2;">
 				<?php 
 $modalTitle = $form->toArray()['modal_title'] ?? '';
 echo esc_html( ( $modalTitle ?: __( 'Request a Quote', 'tier-pricing-table' ) ) );
 ?>
 			</h3>
-			<span class="tpt-quote-modal-close" style="line-height: 1; cursor: pointer;">&times;</span>
+			<button type="button" class="tpt-quote-modal-close"
+			        aria-label="<?php 
+esc_attr_e( 'Close', 'tier-pricing-table' );
+?>">&times;</button>
 		</div>
 		<form class="tpt-quote-form-element" style="margin: 0">
 			<?php 
@@ -57,6 +66,19 @@ echo esc_attr( $form->getId() );
 echo esc_attr( $productId );
 ?>">
 
+			<?php 
+// honeypot: hidden from people, filled by bots
+?>
+			<div class="tpt-quote-hp" aria-hidden="true">
+				<label for="tpt_quote_website_url_<?php 
+echo esc_attr( $productId );
+?>">Website URL</label>
+				<input type="text" name="tpt_quote_website_url" id="tpt_quote_website_url_<?php 
+echo esc_attr( $productId );
+?>"
+				       value="" tabindex="-1" autocomplete="off">
+			</div>
+
 			<div class="tpt-quote-product-info"
 			     style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #e5e5e5;">
 				<?php 
@@ -75,13 +97,13 @@ if ( $image_id = $product->get_image_id() ) {
 					        style="display: block; font-size: 16px;"><?php 
 echo esc_html( $product->get_name() );
 ?></strong>
-					<div class="price" style="font-size: 14px; opacity: 0.8; margin-top: 4px;">
+					<div class="price" style="font-size: 14px; margin-top: 4px;">
 						<?php 
 echo wp_kses_post( $product->get_price_html() );
 ?>
 					</div>
 					<div class="tpt-quote-variation-attributes"
-					     style="font-size: 13px; opacity: 0.7; margin-top: 4px; display: none;"></div>
+					     style="font-size: 13px; margin-top: 4px; display: none;"></div>
 				</div>
 			</div>
 
@@ -91,7 +113,7 @@ $formDisplay->renderFormFields( $form, $productId );
 ?>
 			</div>
 
-			<div class="tpt-quote-form-message"></div>
+			<div class="tpt-quote-form-message" role="alert"></div>
 			<button type="submit" class="button alt wp-element-button"
 			        style="width: 100%; margin-top: 10px;">
 				<?php 
@@ -99,6 +121,15 @@ $btnText = $form->toArray()['submit_button_text'] ?? '';
 echo esc_html( ( $btnText ?: __( 'Submit Request', 'tier-pricing-table' ) ) );
 ?>
 			</button>
+			<?php 
+if ( '' !== $form->getSubmitNote() ) {
+    ?>
+				<p class="tpt-quote-submit-note"><?php 
+    echo esc_html( $form->getSubmitNote() );
+    ?></p>
+			<?php 
+}
+?>
 		</form>
 	</div>
 </div>

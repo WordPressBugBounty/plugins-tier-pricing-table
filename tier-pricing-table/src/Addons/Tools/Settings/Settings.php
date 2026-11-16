@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\Tools\Settings;
 
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
+use TierPricingTable\Addons\Tools\API\ToolsEndpoints;
 use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use TierPricingTable\Settings\Settings as MainSettings;
 
@@ -8,7 +9,8 @@ class Settings {
 
 	public function __construct() {
 
-		// the utilities panel on the Advanced tab, between the modules and the cache settings
+		// the utilities panel at the top of the Advanced tab, above the modules; its "Cache" tab holds the cache
+		// switch and the purge button (the cache itself keeps working with this add-on off)
 		add_filter( 'tiered_pricing_table/settings/tools_settings', function ( $settings ) {
 			return array_merge( array(
 				array(
@@ -17,7 +19,7 @@ class Settings {
 				),
 				array(
 					'title' => __( 'Utilities', 'tier-pricing-table' ),
-					'desc'  => __( 'Manage roles, test what a customer pays, and clean up tiered pricing data.', 'tier-pricing-table' ),
+					'desc'  => __( 'Manage roles, test what a customer pays, clean up tiered pricing data, and control the cache.', 'tier-pricing-table' ),
 					'id'    => MainSettings::SETTINGS_PREFIX . 'tools_utilities',
 					'type'  => 'title',
 				),
@@ -41,7 +43,7 @@ class Settings {
 		add_action( 'woocommerce_admin_field_tiered-pricing_tools-ui', function () {
 			?>
 			<tr valign="top">
-				<td colspan="2" class="forminp">
+				<td colspan="2" class="forminp" style="padding: 0;">
 					<div id="tiered-pricing__feature__tools"></div>
 				</td>
 			</tr>
@@ -78,6 +80,7 @@ class Settings {
 				'ajaxUrl'              => admin_url( 'admin-ajax.php' ),
 				'searchProductsNonce'  => wp_create_nonce( 'search-products' ),
 				'searchCustomersNonce' => wp_create_nonce( 'search-customers' ),
+				'cache'                => ToolsEndpoints::getCacheState(),
 				'pricingTest'          => array(
 					'mode'         => isset( $_GET[ PricingTester::MODE_PARAM ] ) && 'cart' === sanitize_key( $_GET[ PricingTester::MODE_PARAM ] ) ? 'cart' : 'product',
 					'rulesEnabled' => PricingTester::rulesEnabled(),

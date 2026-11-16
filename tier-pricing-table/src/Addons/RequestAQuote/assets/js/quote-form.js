@@ -19,12 +19,81 @@ jQuery(document).ready(function ($) {
 		this.previousActiveElement = null;
 
 		this.init = function () {
+			this.upgradeMarkup();
 			this.bindEvents();
 		};
 
+		/**
+		 * The popup is a dialog for assistive technology. The plugin's template says so itself; a copy of an
+		 * older template in a theme gets the same here.
+		 */
+		this.upgradeMarkup = function () {
+			const i18n = window.tptQuoteFormConfig.i18n || {};
+			const $content = this.$modal.find('.tpt-quote-modal-content');
+			const $title = this.$modal.find('.tpt-quote-modal-title');
+			const $close = this.$modal.find('.tpt-quote-modal-close');
+
+			if (!$content.attr('role')) {
+				if (!$title.attr('id')) {
+					$title.attr('id', 'tpt-quote-modal-title-' + this.productId);
+				}
+
+				$content.attr({ role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': $title.attr('id'), tabindex: '-1' });
+			}
+
+			if ($close.length && !$close.is('button')) {
+				$close.attr({ role: 'button', tabindex: '0', 'aria-label': i18n.close || 'Close' });
+				$close.on('keydown', (e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						this.close();
+					}
+				});
+			}
+
+			this.$modal.find('.tpt-quote-form-message').attr('role', 'alert');
+		};
+
+		this.getFocusable = function () {
+			return this.$modal.find('a[href], button, input, select, textarea, [tabindex]').filter(function () {
+				const $el = $(this);
+
+				return $el.is(':visible') && !$el.is(':disabled') && $el.attr('tabindex') !== '-1' && $el.attr('type') !== 'hidden';
+			});
+		};
+
 		this.handleKeyDown = (e) => {
-			if (e.key === 'Escape' && this.isOpen()) {
+			if (!this.isOpen()) {
+				return;
+			}
+
+			if (e.key === 'Escape') {
 				this.close();
+
+				return;
+			}
+
+			// Tab stays inside the popup
+			if (e.key === 'Tab') {
+				const $focusable = this.getFocusable();
+
+				if (!$focusable.length) {
+					e.preventDefault();
+
+					return;
+				}
+
+				const first = $focusable[0];
+				const last = $focusable[$focusable.length - 1];
+				const inside = this.$modal[0].contains(document.activeElement);
+
+				if (e.shiftKey && (document.activeElement === first || !inside)) {
+					e.preventDefault();
+					last.focus();
+				} else if (!e.shiftKey && (document.activeElement === last || !inside)) {
+					e.preventDefault();
+					first.focus();
+				}
 			}
 		};
 
@@ -54,7 +123,7 @@ jQuery(document).ready(function ($) {
 			
 			// Focus first input field for accessibility
 			setTimeout(() => {
-				this.$modal.find('input:visible, textarea:visible').not('[type="hidden"], .tpt-quote-modal-close').first().focus();
+				this.$modal.find('input:visible, textarea:visible').not('[type="hidden"], [tabindex="-1"], .tpt-quote-modal-close').first().focus();
 			}, 50);
 			
 			$(document).on('keydown', this.handleKeyDown);
@@ -63,11 +132,50 @@ jQuery(document).ready(function ($) {
 		this.close = function () {
 			this.$modal.hide();
 			$(document).off('keydown', this.handleKeyDown);
-			
+
+			// after a sent request the popup starts fresh next time
+			if (this.$modal.find('.tpt-quote-success').length) {
+				this.$modal.find('.tpt-quote-success').remove();
+				this.$modal.find('form.tpt-quote-form-element').show()[0].reset();
+			}
+
 			// Restore focus
 			if (this.previousActiveElement) {
 				this.previousActiveElement.focus();
 			}
+		};
+
+		/**
+		 * The request is sent: say so in the popup, with its number and where the copy went, instead of
+		 * reloading the page.
+		 */
+		this.showSuccess = function (response, email) {
+			const i18n = window.tptQuoteFormConfig.i18n || {};
+			const $form = this.$modal.find('form.tpt-quote-form-element');
+			const $panel = $('<div class="tpt-quote-success" tabindex="-1" role="status"></div>');
+
+			$panel.append($('<p class="tpt-quote-success__title"></p>').text(i18n.successTitle || 'Your request is sent'));
+
+			if (this.config.success_message) {
+				// the store's own message: text with the safe markup the form builder allows
+				$panel.append($('<div class="tpt-quote-success__message"></div>').html(this.config.success_message));
+			}
+
+			if (response && response.post_id) {
+				$panel.append($('<p></p>').text((i18n.reference || 'Your request number is %s.').replace('%s', '#' + response.post_id)));
+			}
+
+			if (email && this.config.enable_customer_email !== false) {
+				$panel.append($('<p></p>').text((i18n.copySent || 'We e-mailed a copy to %s.').replace('%s', email)));
+			}
+
+			const $button = $('<button type="button" class="button wp-element-button tpt-quote-success__close"></button>').text(i18n.close || 'Close');
+
+			$button.on('click', () => this.close());
+			$panel.append($button);
+
+			$form.hide().after($panel);
+			$panel.trigger('focus');
 		};
 
 		this.updateState = function (newState) {
@@ -97,63 +205,186 @@ jQuery(document).ready(function ($) {
 			if (this.state.priceHtml) {
 				this.$modal.find('.tpt-quote-product-info .price').html(this.state.priceHtml);
 			}
+
+			// a variation's options under the product name ("Color: Blue, Size: Large")
+			const summary = (this.state.variationId && this.state.variationId > 0) ? this.getVariationSummary() : '';
+
+			this.$modal.find('.tpt-quote-variation-attributes').text(summary).toggle(summary !== '');
+		};
+
+		/**
+		 * The options chosen in the product's own form: the classic form's selects, or the hidden inputs of the
+		 * block form, whose rows carry the attribute name and the option labels in data-wp-context.
+		 */
+		this.getVariationSummary = function () {
+			let $form = $('form.variations_form[data-product_id="' + this.productId + '"]').first();
+
+			if (!$form.length) {
+				$form = $('form.variations_form, form.wc-block-add-to-cart-with-options').first();
+			}
+
+			const parts = [];
+
+			$form.find('select[name^="attribute_"], input[type="hidden"][name^="attribute_"]').each(function () {
+				const $input = $(this);
+				const value = String($input.val() || '');
+
+				if (!value) {
+					return;
+				}
+
+				let name = '';
+				let label = '';
+
+				if ($input.is('select')) {
+					const id = $input.attr('id');
+
+					name = id ? $form.find('label[for="' + id + '"]').first().text() : '';
+					name = name || $input.closest('tr').find('th').first().text();
+					label = $input.find('option:selected').text();
+				} else {
+					let context = {};
+
+					try {
+						context = JSON.parse($input.parent().attr('data-wp-context') || '{}') || {};
+					} catch (error) {
+						context = {};
+					}
+
+					const option = (context.variationAttributeOptions || []).find((item) => String(item.value) === value);
+
+					name = context.name || '';
+					label = option ? option.label : '';
+				}
+
+				name = $.trim(name).replace(/:$/, '');
+				label = $.trim(label) || value;
+
+				parts.push(name ? name + ': ' + label : label);
+			});
+
+			return parts.join(', ');
+		};
+
+		// only http and https addresses are followed after a request is sent
+		this.isWebAddress = function (url) {
+			if (!url) {
+				return false;
+			}
+
+			try {
+				const target = new URL(url, window.location.href);
+
+				return target.protocol === 'http:' || target.protocol === 'https:';
+			} catch (error) {
+				return false;
+			}
+		};
+
+		this.showError = function (message) {
+			// one line per field the server rejected; the container is a live region, so it is announced
+			const $message = $('<div class="tpt-quote-error"></div>').text(message);
+			this.$modal.find('.tpt-quote-form-message').empty().append($message);
 		};
 
 		this.submit = function (e) {
 			e.preventDefault();
 			const $form = $(e.currentTarget);
+			const config = window.tptQuoteFormConfig;
+			const i18n = config.i18n || {};
+			const $submitBtn = $form.find('button[type="submit"]');
 
-			const submitData = (token) => {
+			if ($submitBtn.prop('disabled')) {
+				return;
+			}
+
+			const originalBtnText = $submitBtn.text();
+
+			const setBusy = (busy) => {
+				$submitBtn.prop('disabled', busy).text(busy ? (i18n.defaultSubmittingText || 'Submitting...') : originalBtnText);
+			};
+
+			const submitData = (token, nonceRefreshed) => {
 				let formData = new FormData($form[0]);
 				if (token) {
 					formData.append('g-recaptcha-response', token);
 				}
 
-				const $submitBtn = $form.find('button[type="submit"]');
-				const originalBtnText = $submitBtn.text();
-
 				$.ajax({
-					url: window.tptQuoteFormConfig.restUrl,
+					url: config.restUrl,
 					method: 'POST',
 					data: formData,
 					processData: false,
 					contentType: false,
 					beforeSend: (xhr) => {
-						xhr.setRequestHeader('X-WP-Nonce', window.tptQuoteFormConfig.nonce);
-						const submittingText = window.tptQuoteFormConfig.i18n?.defaultSubmittingText || 'Submitting...';
-						$submitBtn.prop('disabled', true).text(submittingText);
-						this.$modal.find('.tpt-quote-form-message').empty();
+						// only logged-in customers have a nonce; guests send none
+						if (config.nonce) {
+							xhr.setRequestHeader('X-WP-Nonce', config.nonce);
+						}
 					},
 					success: (response) => {
 						const successAction = this.config.success_action || 'message';
-						if (successAction === 'redirect' && this.config.success_redirect_url) {
+						if (successAction === 'redirect' && this.isWebAddress(this.config.success_redirect_url)) {
 							window.location.href = this.config.success_redirect_url;
 						} else {
-							const currentUrl = new URL(window.location.href);
-							currentUrl.searchParams.set('tier_pricing_table_quote_success', '1');
-							currentUrl.searchParams.set('form_id', this.config.id);
-							window.location.href = currentUrl.toString();
+							const email = $.trim($form.find('input[type="email"]').first().val() || '');
+
+							setBusy(false);
+							this.showSuccess(response, email);
 						}
 					},
 					error: (xhr) => {
-						const msg = xhr.responseJSON?.message || 'An error occurred.';
-						this.$modal.find('.tpt-quote-form-message').html(`<div style="color: red; margin-bottom: 10px;">${msg}</div>`);
-					},
-					complete: () => {
-						$submitBtn.prop('disabled', false).text(originalBtnText);
+						// The page is older than its nonce (a tab left open for a day): get a fresh one and send again
+						if (!nonceRefreshed && xhr.status === 403 && xhr.responseJSON?.code === 'rest_cookie_invalid_nonce' && config.ajaxUrl) {
+							$.post(config.ajaxUrl, { action: config.nonceAction || 'tpt_quote_nonce' })
+								.done((response) => {
+									config.nonce = response?.data?.nonce || '';
+									submitData(token, true);
+								})
+								.fail(() => {
+									this.showError(xhr.responseJSON?.message || i18n.genericError || 'An error occurred.');
+									setBusy(false);
+								});
+							return;
+						}
+
+						// no answer at all: the connection, not the request
+						this.showError(xhr.responseJSON?.message || (0 === xhr.status ? i18n.networkError : '') || i18n.genericError || 'An error occurred.');
+						setBusy(false);
 					}
 				});
 			};
 
-			if (this.config?.recaptcha_site_key && this.config?.recaptcha_secret_key && typeof grecaptcha !== 'undefined') {
-				grecaptcha.ready(() => {
-					grecaptcha.execute(this.config.recaptcha_site_key, { action: 'submit' }).then((token) => {
-						submitData(token);
-					});
-				});
-			} else {
+			this.$modal.find('.tpt-quote-form-message').empty();
+			setBusy(true);
+
+			// Without reCAPTCHA keys the REST nonce protects the form
+			if (!config.recaptchaSiteKey) {
 				submitData(null);
+				return;
 			}
+
+			// With keys, every request needs a fresh reCAPTCHA v3 token (they expire after two minutes)
+			if (typeof window.grecaptcha === 'undefined' || typeof window.grecaptcha.ready !== 'function') {
+				this.showError(i18n.recaptchaUnavailable || 'The spam check could not load. Please reload the page and try again.');
+				setBusy(false);
+				return;
+			}
+
+			const onTokenError = (error) => {
+				window.console && console.error('Tiered Pricing Table: reCAPTCHA error', error);
+				this.showError(i18n.recaptchaFailed || 'The spam check failed. Please try again.');
+				setBusy(false);
+			};
+
+			window.grecaptcha.ready(() => {
+				try {
+					Promise.resolve(window.grecaptcha.execute(config.recaptchaSiteKey, { action: config.recaptchaAction || 'tpt_quote_request' }))
+						.then((token) => token ? submitData(token) : onTokenError('empty token'), onTokenError);
+				} catch (error) {
+					onTokenError(error);
+				}
+			});
 		};
 	};
 
@@ -220,7 +451,50 @@ jQuery(document).ready(function ($) {
 		};
 
 		this.bindGlobalEvents = function () {
-			$(document).on('click', '.tpt-request-quote-trigger', (e) => {
+			// quote buttons are links with role="button": a button also answers the Space key
+			$(document).on('keydown', '.tpt-request-quote-trigger, .tpt-add-to-quote, .tpt-cart-to-quote', (e) => {
+				if ((e.key === ' ' || e.key === 'Spacebar') && !e.isDefaultPrevented() && !$(e.currentTarget).is('button')) {
+					e.preventDefault();
+					e.currentTarget.click();
+				}
+			});
+
+			// the whole row of a pricing layout opens its quote button (not a click on the button itself)
+			if (!window.tptQuoteRowClicks) {
+				window.tptQuoteRowClicks = true;
+
+				$(document).on('click', '[data-tpt-quote-row]', (e) => {
+					if ($(e.target).closest('a, button, input, select, textarea, label').length) {
+						return;
+					}
+
+					const trigger = document.getElementById($(e.currentTarget).attr('data-tpt-quote-row'));
+
+					if (trigger) {
+						trigger.click();
+					}
+				});
+
+				// an entry that is a button itself (a pricing block) answers Enter and Space
+				$(document).on('keydown', '[data-tpt-quote-row][role="button"]', (e) => {
+					const isKey = e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar';
+
+					if (!isKey || e.target !== e.currentTarget || e.isDefaultPrevented()) {
+						return;
+					}
+
+					e.preventDefault();
+
+					const trigger = document.getElementById($(e.currentTarget).attr('data-tpt-quote-row'));
+
+					if (trigger) {
+						trigger.click();
+					}
+				});
+			}
+
+			// buttons of forms that add to the quote list belong to quote-list.js: no form opens for them
+			$(document).on('click', '.tpt-request-quote-trigger:not(.tpt-quote-to-list)', (e) => {
 				e.preventDefault();
 				this.openForTrigger($(e.currentTarget));
 			});
@@ -260,9 +534,9 @@ jQuery(document).ready(function ($) {
 
 			let $trigger;
 			if (productId) {
-				$trigger = $(`.tpt-request-quote-trigger[data-product-id="${productId}"], .tpt-request-quote-trigger[data-parent-id="${productId}"]`).first();
+				$trigger = $(`.tpt-request-quote-trigger[data-product-id="${productId}"]:not(.tpt-quote-to-list), .tpt-request-quote-trigger[data-parent-id="${productId}"]:not(.tpt-quote-to-list)`).first();
 			} else {
-				$trigger = $('.tpt-request-quote-trigger').first();
+				$trigger = $('.tpt-request-quote-trigger:not(.tpt-quote-to-list)').first();
 			}
 
 			if ($trigger.length) {

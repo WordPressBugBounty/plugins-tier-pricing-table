@@ -22,7 +22,7 @@ class DropdownAdapter extends AbstractLayoutAdapter {
 			array(
 				'form' => $form,
 				'productId' => $productId,
-				'buttonHtml' => $this->getQuoteButtonHtml( $form, $productId, 'button alt wp-element-button', 'padding: 5px 10px; margin: 0;' )
+				'buttonHtml' => $this->getQuoteButtonHtml( $form, $productId, 'button alt wp-element-button', self::ENTRY_BUTTON_STYLE )
 			),
 			plugin_dir_path( dirname( __DIR__ ) ) . 'views/'
 		);

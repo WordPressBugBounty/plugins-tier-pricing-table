@@ -6,11 +6,11 @@ use TierPricingTable\Addons\LayoutConfigurator\LayoutConfiguratorAddon;
 class TieredPricingCartAddon extends AbstractAddon {
 	
 	public function getName() {
-		return __( 'Cart Display Options', 'tier-pricing-table' );
+		return __( 'Tiered prices in the cart', 'tier-pricing-table' );
 	}
 	
 	public function getDescription() {
-		return __( 'Manage how tiered pricing and discounts appear on the cart page.', 'tier-pricing-table' );
+		return __( 'Charges the tier price in the cart and checkout, and sets how discounted items look there. Turn off only if another plugin prices the cart.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -19,6 +19,10 @@ class TieredPricingCartAddon extends AbstractAddon {
 	
 	public function getSlug() {
 		return 'cart-options';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_SHOP_CART;
 	}
 	
 	public function run() {

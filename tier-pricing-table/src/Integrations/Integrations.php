@@ -17,6 +17,7 @@ use TierPricingTable\Integrations\Plugins\WCPProductBundles;
 use TierPricingTable\Integrations\Plugins\WooPaymentsMulticurrency;
 use TierPricingTable\Integrations\Plugins\WombatProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceDeposits;
+use TierPricingTable\Integrations\Plugins\ExpressCheckout;
 use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceSubscriptions;
 use TierPricingTable\Integrations\Plugins\WOOCS;
@@ -64,6 +65,7 @@ class Integrations {
 			WooCommerceSubscriptions::class,
 			ProductBundles::class,
 			WooCommerceDeposits::class,
+			ExpressCheckout::class,
 			WOOCS::class,
 			WCPA::class,
 			AeliaMulticurrency::class,

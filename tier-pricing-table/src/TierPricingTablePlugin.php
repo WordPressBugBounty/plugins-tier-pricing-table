@@ -39,7 +39,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.3.1';
+	const VERSION = '8.4.0';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -64,7 +64,8 @@ class TierPricingTablePlugin {
 				
 				FeaturesUtil::declare_compatibility( 'custom_order_tables', $mainFile );
 				FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $mainFile );
-				FeaturesUtil::declare_compatibility( 'product_block_editor', $mainFile );
+				// The block-based product editor (deprecated in WooCommerce 10.1, removed in 11.0) has no fields from this plugin.
+				FeaturesUtil::declare_compatibility( 'product_block_editor', $mainFile, false );
 			}
 		} );
 	}

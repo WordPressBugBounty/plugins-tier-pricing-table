@@ -188,7 +188,9 @@ class PriceManager {
      *
      * @return float
      */
-    public static function getProductPriceWithAmountDiscount( WC_Product $product, $amount, string $context = 'view' ) : float {
+    public static function getProductPriceWithAmountDiscount( WC_Product $product, $amount, ?string $context = 'view' ) : float {
+        // layout templates ask without a context (null), as they do for percentage tiers
+        $context = $context ?? 'view';
         $productPrice = ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price( $context ) : $product->get_price( $context ) );
         return self::getPriceByAmountDiscount( $productPrice, $amount );
     }

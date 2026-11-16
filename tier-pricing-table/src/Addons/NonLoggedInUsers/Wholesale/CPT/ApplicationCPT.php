@@ -55,9 +55,10 @@ class ApplicationCPT {
 			'show_in_rest'        => false,
 			'query_var'           => false,
 			'rewrite'             => false,
-			'capability_type'     => 'post',
-			'capabilities'        => array( 'create_posts' => 'do_not_allow' ),
-			'map_meta_cap'        => true,
+			// Applications hold applicants' names, e-mails, phone numbers and companies: only store managers
+			// (manage_woocommerce) may see or change them, not every user who can write posts
+			'capabilities'        => self::getCapabilities(),
+			'map_meta_cap'        => false,
 			'has_archive'         => false,
 			'hierarchical'        => false,
 			'supports'            => false,
@@ -73,6 +74,39 @@ class ApplicationCPT {
 				'path'      => 'edit.php?post_type=' . self::POST_TYPE,
 			) );
 		}
+	}
+
+	/**
+	 * Every capability of the post type granted by manage_woocommerce (administrators and shop managers).
+	 * Applications come only from the registration form, so nobody creates one in the admin.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function getCapabilities(): array {
+		$capabilities = array();
+
+		foreach ( array(
+			'edit_post',
+			'read_post',
+			'delete_post',
+			'edit_posts',
+			'edit_others_posts',
+			'delete_posts',
+			'publish_posts',
+			'read_private_posts',
+			'read',
+			'delete_private_posts',
+			'delete_published_posts',
+			'delete_others_posts',
+			'edit_private_posts',
+			'edit_published_posts',
+		) as $capability ) {
+			$capabilities[ $capability ] = 'manage_woocommerce';
+		}
+
+		$capabilities['create_posts'] = 'do_not_allow';
+
+		return $capabilities;
 	}
 
 	protected function registerPostStatuses() {

@@ -2,44 +2,21 @@
 /**
  * Request a Quote Horizontal Table Integrated Template.
  *
+ * The quote entry is a strip under the horizontal table, as wide as the table: a column of its own would
+ * be pushed out of sight on narrow screens.
+ *
  * This template can be overridden by copying it to yourtheme/tiered-pricing-table/integrated/horizontal-table.php.
  *
  * @var \TierPricingTable\Addons\RequestAQuote\Models\RequestQuoteForm $form
  * @var int $productId
- * @var bool $hasQty
- * @var bool $hasDiscount
- * @var bool $hasPrice
- * @var int $customColumns
  * @var string $buttonHtml
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="tiered-pricing-horizontal-table-column tiered-pricing-horizontal-table__values tpt-request-quote-integrated-column"
-	 style="cursor: pointer;"
-	 onclick="document.getElementById('tpt-raq-table-<?php echo esc_attr( $productId ); ?>').click();">
-	<?php if ( $hasQty ) : ?>
-		<div class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--quantity">
-			<span><?php echo esc_html( $form->getIntegratedLabelText() ); ?></span>
-		</div>
-	<?php endif; ?>
-
-	<?php if ( $hasDiscount ) : ?>
-		<div class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--discount">
-			<span></span>
-		</div>
-	<?php endif; ?>
-
-	<?php if ( $hasPrice ) : ?>
-		<div class="tiered-pricing-horizontal-table-cell tiered-pricing-horizontal-table-cell--price">
-			<span>
-				<?php echo wp_kses_post( $buttonHtml ); ?>
-			</span>
-		</div>
-	<?php endif; ?>
-
-	<?php for ( $i = 0; $i < (int) ( $customColumns ?? 0 ); $i++ ) : ?>
-		<div class="tiered-pricing-horizontal-table-cell"></div>
-	<?php endfor; ?>
+<div class="tpt-quote-entry tpt-quote-entry--under-table"
+	 data-tpt-quote-row="tpt-raq-table-<?php echo esc_attr( $productId ); ?>">
+	<span class="tpt-quote-entry__label" data-tpt-quote-label><?php echo esc_html( $form->getIntegratedLabelText() ); ?></span>
+	<?php echo wp_kses_post( $buttonHtml ); ?>
 </div>

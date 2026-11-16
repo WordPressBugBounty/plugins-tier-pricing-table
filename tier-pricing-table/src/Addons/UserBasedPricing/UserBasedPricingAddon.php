@@ -3,11 +3,12 @@
 namespace TierPricingTable\Addons\UserBasedPricing;
 
 use TierPricingTable\Addons\AbstractAddon;
+use TierPricingTable\Addons\RoleCustomerPricing\RoleCustomerPricingAddon;
 class UserBasedPricingAddon extends AbstractAddon {
     const SETTING_ENABLE_KEY = 'enable_user_based_pricing_addon';
 
     public function getName() : string {
-        return __( 'User-based pricing rules on individual products', 'tier-pricing-table' );
+        return __( 'Customer prices on products', 'tier-pricing-table' );
     }
 
     public function isActive() : bool {
@@ -15,7 +16,7 @@ class UserBasedPricingAddon extends AbstractAddon {
     }
 
     public function getDescription() : string {
-        return __( 'Enable customer-based pricing rules on individual products.', 'tier-pricing-table' );
+        return __( 'Give one customer their own price, tiers and quantity limits on a product, for negotiated accounts.', 'tier-pricing-table' );
     }
 
     public function getIcon() : string {
@@ -24,6 +25,21 @@ class UserBasedPricingAddon extends AbstractAddon {
 
     public function getSlug() : string {
         return 'user-based-rules';
+    }
+
+    public function getGroup() : string {
+        return self::GROUP_PRICING;
+    }
+
+    /**
+     * No card of its own: the "Role and customer prices" module switches it.
+     */
+    public function addToAddonsSettings( $addons ) {
+        return $addons;
+    }
+
+    public function isEnabled() : bool {
+        return RoleCustomerPricingAddon::isPartEnabled( RoleCustomerPricingAddon::CUSTOMER_PART );
     }
 
     public function run() {

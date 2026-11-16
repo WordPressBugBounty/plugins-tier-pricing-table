@@ -80,9 +80,10 @@ class ProductManager {
      */
     public function getUserRowHtml() {
         $nonce = ( isset( $_GET['nonce'] ) ? sanitize_text_field( $_GET['nonce'] ) : false );
-        if ( wp_verify_nonce( $nonce, self::GET_USER_ROW_HTML__ACTION ) ) {
+        $productId = ( isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0 );
+        // the row is part of the product editor: only for users who may edit the product
+        if ( wp_verify_nonce( $nonce, self::GET_USER_ROW_HTML__ACTION ) && $productId && current_user_can( 'edit_post', $productId ) ) {
             $userId = ( isset( $_GET['user_id'] ) ? intval( $_GET['user_id'] ) : 0 );
-            $productId = ( isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0 );
             $loop = ( isset( $_GET['loop'] ) && '' !== $_GET['loop'] ? intval( $_GET['loop'] ) : null );
             $user = get_userdata( $userId );
             $product = wc_get_product( $productId );

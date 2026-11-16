@@ -39,7 +39,7 @@ class PricingService {
                     $pricingRule = $this->addFlexibleGlobalPricing( $pricingRule, $globalPricingRule );
                 } elseif ( 'prefer-product' === $priority ) {
                     // Do not modify if there are pricing rules set (in product or role-based or category-based)
-                    if ( !empty( $pricingRule->getRules() ) || 'role-based' === $pricingRule->provider ) {
+                    if ( !empty( $pricingRule->getRules() ) || $pricingRule->isSetForShopper() ) {
                         $pricingRule->logPricingModification( '[global rule]: There is pricing at product-level - do not modify the rule' );
                         return $pricingRule;
                     } else {
@@ -70,7 +70,7 @@ class PricingService {
          * Regular prices
          */
         if ( $globalPricingRule->getSettings()->getRegularPricingPriority() === 'prefer-role-based-product' ) {
-            if ( $pricingRule->provider !== 'role-based' ) {
+            if ( !$pricingRule->isSetForShopper() ) {
                 $updateRegularPricing = true;
             }
         } else {
@@ -82,7 +82,7 @@ class PricingService {
         $updateMinimum = false;
         $updateMixAndMatch = false;
         if ( $globalPricingRule->getSettings()->getQuantityLimitsPriority() === 'prefer-role-based-product' ) {
-            if ( $pricingRule->provider !== 'role-based' ) {
+            if ( !$pricingRule->isSetForShopper() ) {
                 $updateMinimum = true;
                 $updateMixAndMatch = true;
             }
@@ -101,7 +101,7 @@ class PricingService {
          * Tiered Pricing
          */
         if ( $globalPricingRule->getSettings()->getTieredPricingPriority() === 'prefer-role-based-product' ) {
-            if ( $pricingRule->provider !== 'role-based' ) {
+            if ( !$pricingRule->isSetForShopper() ) {
                 $updateTieredPricing = true;
             }
         } elseif ( $globalPricingRule->getSettings()->getTieredPricingPriority() === 'prefer-product' ) {
@@ -112,6 +112,9 @@ class PricingService {
             $updateTieredPricing = true;
         }
         if ( $updateRegularPricing ) {
+            if ( $this->applyBasePricing( $pricingRule, $globalPricingRule ) ) {
+                $pricingRule->logPricingModification( '[global rule]: Regular pricing was updated by global rule' );
+            }
             // the tax settings are free
             $pricingRule->pricingData['tax_status'] = $globalPricingRule->getTaxStatus();
             $pricingRule->pricingData['tax_class'] = $globalPricingRule->getTaxClass();
@@ -135,6 +138,23 @@ class PricingService {
     }
 
     /**
+     * The rule's base price: flat regular and sale prices in every version, a percentage discount with premium only.
+     *
+     * @return bool whether the rule's base pricing was applied
+     */
+    protected function applyBasePricing( PricingRule $pricingRule, GlobalPricingRule $globalPricingRule ) : bool {
+        if ( 'percentage' === $globalPricingRule->getPricingType() && !tpt_fs()->can_use_premium_code() ) {
+            return false;
+        }
+        $pricingRule->pricingData['sale_price'] = $globalPricingRule->getSalePrice();
+        $pricingRule->pricingData['regular_price'] = $globalPricingRule->getRegularPrice();
+        $pricingRule->pricingData['discount'] = $globalPricingRule->getDiscount();
+        $pricingRule->pricingData['discount_type'] = $globalPricingRule->getDiscountType();
+        $pricingRule->pricingData['pricing_type'] = $globalPricingRule->getPricingType();
+        return true;
+    }
+
+    /**
      * Main function to filter pricing rules with global pricing rule data
      *
      * @param  PricingRule  $pricingRule
@@ -143,6 +163,7 @@ class PricingService {
      * @return PricingRule
      */
     public function addPricing( PricingRule $pricingRule, GlobalPricingRule $globalPricingRule ) : PricingRule {
+        $this->applyBasePricing( $pricingRule, $globalPricingRule );
         // the tax settings are free
         $pricingRule->pricingData['tax_status'] = $globalPricingRule->getTaxStatus();
         $pricingRule->pricingData['tax_class'] = $globalPricingRule->getTaxClass();

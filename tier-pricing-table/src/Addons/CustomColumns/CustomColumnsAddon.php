@@ -18,7 +18,7 @@ class CustomColumnsAddon extends AbstractAddon {
 	}
 
 	public function getDescription(): string {
-		return __( 'Add custom columns to your pricing table.', 'tier-pricing-table' );
+		return __( 'Extra columns in the pricing table: your own values per tier, or prices with or without tax, row totals and savings.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -27,6 +27,10 @@ class CustomColumnsAddon extends AbstractAddon {
 
 	public function getSlug(): string {
 		return 'custom-columns';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRODUCT_PAGE;
 	}
 
 	public function run() {

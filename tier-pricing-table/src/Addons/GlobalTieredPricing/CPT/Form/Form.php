@@ -208,6 +208,7 @@ class Form {
 			}
 
 			.tpt-global-pricing-rule-form #tiered_pricing_type,
+			.tpt-global-pricing-rule-form #tpt_order_basis,
 			.tpt-global-pricing-rule-form #tpt_order_discount_type {
 				max-width: 75%;
 				width: 75% !important;
@@ -222,6 +223,7 @@ class Form {
 				}
 
 				.tpt-global-pricing-rule-form #tiered_pricing_type,
+				.tpt-global-pricing-rule-form #tpt_order_basis,
 				.tpt-global-pricing-rule-form #tpt_order_discount_type {
 					max-width: 100%;
 					width: 100% !important;

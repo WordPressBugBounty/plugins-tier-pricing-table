@@ -48,6 +48,13 @@ class PricingTable {
 
 		$settings = wp_parse_args( $settings, $this->getDefaultSettings( $parentProductID ) );
 
+		// design styles become part of a template file name: only plain names (style-3), never a path
+		foreach ( array( 'table_style', 'blocks_style', 'options_style', 'dropdown_style', 'plain_text_style' ) as $styleKey ) {
+			if ( isset( $settings[ $styleKey ] ) && ! preg_match( '/^[a-z0-9_-]+$/', (string) $settings[ $styleKey ] ) ) {
+				$settings[ $styleKey ] = 'default';
+			}
+		}
+
 		// shortcode and block attributes arrive as strings: "yes" / "no" for the two switches the views test as booleans
 		foreach ( array( 'show_discount_column', 'clickable_rows' ) as $switch ) {
 			if ( isset( $settings[ $switch ] ) && is_string( $settings[ $switch ] ) ) {

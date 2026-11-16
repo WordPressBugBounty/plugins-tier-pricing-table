@@ -42,7 +42,8 @@ class ReactivateAction {
 		if ( wp_verify_nonce( $nonce, self::ACTION ) ) {
 			$ruleId = isset( $_GET['rule_id'] ) ? intval( $_GET['rule_id'] ) : false;
 
-			if ( $ruleId ) {
+			// a pricing rule the user may edit, not any post: the nonce alone is not enough
+			if ( $ruleId && GlobalTieredPricingCPT::SLUG === get_post_type( $ruleId ) && current_user_can( 'edit_post', $ruleId ) ) {
 				$rule = GlobalPricingRule::build( $ruleId );
 
 				if ( false !== get_post_status( $ruleId ) ) {
@@ -50,8 +51,7 @@ class ReactivateAction {
 					$rule->reactivate();
 					$rule->save();
 					
-					$this->getContainer()->getAdminNotifier()->flash( __( 'The rule reactivated successfully.', 'tier-pricing-table
-' ), AdminNotifier::SUCCESS, true );
+					$this->getContainer()->getAdminNotifier()->flash( __( 'The rule reactivated successfully.', 'tier-pricing-table' ), AdminNotifier::SUCCESS, true );
 				}
 			}
 

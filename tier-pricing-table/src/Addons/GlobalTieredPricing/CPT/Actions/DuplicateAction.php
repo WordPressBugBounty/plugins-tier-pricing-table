@@ -45,7 +45,10 @@ class DuplicateAction {
 				
 				$originalPost = get_post( $ruleId );
 				
-				if ( $originalPost && $originalPost->post_type === GlobalTieredPricingCPT::SLUG ) {
+				// the user may read the rule and create rules: the nonce alone is not enough
+				$canCreate = current_user_can( get_post_type_object( GlobalTieredPricingCPT::SLUG )->cap->create_posts );
+				
+				if ( $originalPost && $originalPost->post_type === GlobalTieredPricingCPT::SLUG && $canCreate && current_user_can( 'edit_post', $ruleId ) ) {
 					
 					$newPostArgs = array(
 						'post_title'  => $originalPost->post_title . ' ' . __( '(Copy)', 'tier-pricing-table' ),

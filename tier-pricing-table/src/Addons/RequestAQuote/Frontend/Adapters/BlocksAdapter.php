@@ -30,6 +30,7 @@ class BlocksAdapter extends AbstractLayoutAdapter {
 				'productId' => $productId,
 				'blocksStyle' => $blocksStyle,
 				'promptText' => $promptText,
+				'addsToList' => $this->addsToList( $form ),
 				'buttonHtml' => $this->getQuoteButtonHtml( $form, $productId, '', '', 'tpt-raq-link', true )
 			),
 			plugin_dir_path( dirname( __DIR__ ) ) . 'views/'

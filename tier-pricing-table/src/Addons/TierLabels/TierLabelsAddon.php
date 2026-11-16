@@ -9,11 +9,11 @@ use TierPricingTable\Addons\TierLabels\Settings\Settings;
 class TierLabelsAddon extends AbstractAddon {
 	
 	public function getName(): string {
-		return __( 'Badges & Labels', 'tier-pricing-table' );
+		return __( 'Tier labels', 'tier-pricing-table' );
 	}
 	
 	public function getDescription(): string {
-		return __( 'Add custom labels like "Best Value" to specific pricing tiers.', 'tier-pricing-table' );
+		return __( 'Labels such as "Best value" or "Most popular" on chosen tiers, designed under Settings → Badges & Labels.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -22,6 +22,10 @@ class TierLabelsAddon extends AbstractAddon {
 	
 	public function getSlug(): string {
 		return 'tier-labels';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_PRODUCT_PAGE;
 	}
 	
 	public function run() {

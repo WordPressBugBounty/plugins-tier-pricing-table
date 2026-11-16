@@ -17,6 +17,11 @@ class TableAdapter extends AbstractLayoutAdapter {
 		if ( ! $form ) {
 			return;
 		}
+
+		// a table inside a tooltip is no place for a button: it stands by itself under the price
+		if ( $this->isInTooltip( $pricingRule->getProductId() ) ) {
+			return;
+		}
 		
 		$isDivTable = strpos( $templateName, 'style-' ) !== false;
 		
@@ -42,7 +47,7 @@ class TableAdapter extends AbstractLayoutAdapter {
 			'span'        => $span,
 			'buttonHtml'  => $this->getQuoteButtonHtml( $form, $pricingRule->getProductId(),
 				$isDivTable ? 'button wp-element-button' : 'button wp-element-button alt',
-				'padding: 5px 10px;margin:0; float:right', 'tpt-raq-table' ),
+				self::ENTRY_BUTTON_STYLE, 'tpt-raq-table' ),
 		), plugin_dir_path( dirname( __DIR__ ) ) . 'views/' );
 	}
 }

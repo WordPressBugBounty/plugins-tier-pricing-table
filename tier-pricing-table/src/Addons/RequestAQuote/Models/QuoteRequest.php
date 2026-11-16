@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\RequestAQuote\Models;
 
 use TierPricingTable\Addons\RequestAQuote\CPT\QuoteRequestCPT;
+use TierPricingTable\Addons\RequestAQuote\QuoteFiles;
 
 class QuoteRequest {
 	
@@ -18,9 +19,17 @@ class QuoteRequest {
 		'customerEmail'    => '',
 		'customFields'     => array(),
 		'convertedOrderId' => 0,
+		'items'            => array(),
 	);
 	
 	protected array $metaData = array();
+	
+	/**
+	 * Meta keys set through addMetaData() or updateMetaData() since the last save.
+	 *
+	 * @var array<string, true>
+	 */
+	protected array $metaChanges = array();
 	
 	protected array $changes = array();
 	
@@ -88,6 +97,7 @@ class QuoteRequest {
 			'customerEmail'    => $this->metaData['_email'] ?? '',
 			'customFields'     => $customFields,
 			'convertedOrderId' => $this->metaData['_converted_order_id'] ?? 0,
+			'items'            => is_array( $this->metaData['_items'] ?? null ) ? $this->metaData['_items'] : array(),
 		) );
 		
 		$this->applyChanges();
@@ -138,18 +148,25 @@ class QuoteRequest {
 			'customerEmail'    => '_email',
 			'customFields'     => '_custom_fields',
 			'convertedOrderId' => '_converted_order_id',
+			'items'            => '_items',
 		);
 		
 		foreach ( $meta_mapping as $prop => $meta_key ) {
 			if ( array_key_exists( $prop, $this->changes ) ) {
 				update_post_meta( $this->getId(), $meta_key, $this->changes[ $prop ] );
+				
+				$this->metaData[ $meta_key ] = $this->changes[ $prop ];
+				unset( $this->metaChanges[ $meta_key ] );
 			}
 		}
 		
-		// Save direct meta changes
-		foreach ( $this->metaData as $key => $value ) {
-			update_post_meta( $this->getId(), $key, $value );
+		// Save direct meta changes. Only the keys changed since loading: writing back every value read earlier
+		// would undo the property changes saved above and WordPress's own meta (edit lock).
+		foreach ( array_keys( $this->metaChanges ) as $key ) {
+			update_post_meta( $this->getId(), $key, $this->metaData[ $key ] );
 		}
+		
+		$this->metaChanges = array();
 		
 		$this->applyChanges();
 		
@@ -267,6 +284,153 @@ class QuoteRequest {
 		$this->setProp( 'convertedOrderId', (int) $value );
 	}
 	
+	/**
+	 * Whether the request came from the quote list (several products) rather than one product's form.
+	 */
+	public function isList(): bool {
+		return ! empty( $this->getProp( 'items' ) );
+	}
+
+	/**
+	 * The requested products, one line each: product_id (a product or a variation), name, sku, quantity and
+	 * price (the unit price, '' when there is none). A request for one product is one line made from its
+	 * product, quantity and price.
+	 *
+	 * @return array<int, array{product_id: int, name: string, sku: string, quantity: int, price: string}>
+	 */
+	public function getItems(): array {
+		$items = $this->getProp( 'items' );
+
+		if ( ! empty( $items ) && is_array( $items ) ) {
+			$lines = array();
+
+			foreach ( $items as $item ) {
+				if ( is_array( $item ) && ! empty( $item['product_id'] ) ) {
+					$lines[] = self::normalizeItem( $item );
+				}
+			}
+
+			return $lines;
+		}
+
+		if ( ! $this->getProductId() ) {
+			return array();
+		}
+
+		$product = wc_get_product( $this->getProductId() );
+
+		return array(
+			self::normalizeItem( array(
+				'product_id' => $this->getProductId(),
+				// a variation with its options: "Hoodie (Color: Blue, Logo: Yes)"
+				'name'       => $product ? \TierPricingTable\Addons\RequestAQuote\QuoteList\QuoteListService::getDisplayName( $product ) : '',
+				'sku'        => $product ? $product->get_sku() : '',
+				'quantity'   => $this->getQuantity(),
+				'price'      => $this->getPrice(),
+			) ),
+		);
+	}
+
+	/**
+	 * Set the requested products (a quote list request). The first one is also kept as the request's product,
+	 * so lists, filters and integrations that read one product keep working.
+	 *
+	 * @param  array  $items  Lines as getItems() returns them.
+	 */
+	public function setItems( array $items ) {
+		$lines = array();
+
+		foreach ( $items as $item ) {
+			if ( is_array( $item ) && ! empty( $item['product_id'] ) ) {
+				$lines[] = self::normalizeItem( $item );
+			}
+		}
+
+		$this->setProp( 'items', $lines );
+
+		if ( $lines ) {
+			$this->setProductId( $lines[0]['product_id'] );
+			$this->setQuantity( array_sum( wp_list_pluck( $lines, 'quantity' ) ) );
+			$this->setPrice( '' );
+		}
+	}
+
+	/**
+	 * What the request is for, in a few words: the product's name, or the first product's name and how many more.
+	 */
+	public function getSummaryName(): string {
+		$items = $this->getItems();
+
+		if ( ! $items ) {
+			return '';
+		}
+
+		$first = '' !== $items[0]['name'] ? $items[0]['name'] : (string) get_the_title( $items[0]['product_id'] );
+		$more  = count( $items ) - 1;
+
+		// translators: 1: the first product's name, 2: how many other products.
+		return $more ? sprintf( _n( '%1$s and %2$d more product', '%1$s and %2$d more products', $more, 'tier-pricing-table' ), $first, $more ) : $first;
+	}
+
+	/**
+	 * The sum of every priced line, or null when a line has no price.
+	 */
+	public function getItemsTotal(): ?float {
+		$total = 0.0;
+
+		foreach ( $this->getItems() as $item ) {
+			if ( ! is_numeric( $item['price'] ) ) {
+				return null;
+			}
+
+			$total += (float) $item['price'] * $item['quantity'];
+		}
+
+		return $total;
+	}
+
+	/**
+	 * Meta key with one row per product (and parent product) of a list request, for filtering by product.
+	 */
+	public const ITEM_PRODUCT_META = '_item_product_id';
+
+	/**
+	 * The products and parent products of the lines, each once.
+	 *
+	 * @param  array  $items
+	 *
+	 * @return int[]
+	 */
+	public static function getItemProductIds( array $items ): array {
+		$ids = array();
+
+		foreach ( $items as $item ) {
+			$product = ! empty( $item['product_id'] ) ? wc_get_product( (int) $item['product_id'] ) : null;
+
+			if ( $product ) {
+				$ids[] = $product->get_id();
+
+				if ( $product->get_parent_id() ) {
+					$ids[] = $product->get_parent_id();
+				}
+			}
+		}
+
+		return array_values( array_unique( $ids ) );
+	}
+
+	protected static function normalizeItem( array $item ): array {
+		$price = $item['price'] ?? '';
+
+		return array(
+			'product_id' => (int) $item['product_id'],
+			'name'       => sanitize_text_field( (string) ( $item['name'] ?? '' ) ),
+			'sku'        => sanitize_text_field( (string) ( $item['sku'] ?? '' ) ),
+			'quantity'   => max( 1, (int) ( $item['quantity'] ?? 1 ) ),
+			'price'      => is_numeric( $price ) && (float) $price >= 0 ? (string) $price : '',
+		);
+	}
+
 	public function getMeta( $key ) {
 		return $this->metaData[ $key ] ?? '';
 	}
@@ -275,15 +439,17 @@ class QuoteRequest {
 		if ( $unique && isset( $this->metaData[ $key ] ) ) {
 			return;
 		}
-		$this->metaData[ $key ] = $value;
+		$this->metaData[ $key ]    = $value;
+		$this->metaChanges[ $key ] = true;
 	}
 	
 	public function updateMetaData( $key, $value ) {
-		$this->metaData[ $key ] = $value;
+		$this->metaData[ $key ]    = $value;
+		$this->metaChanges[ $key ] = true;
 	}
 	
 	public function deleteMetaData( $key ) {
-		unset( $this->metaData[ $key ] );
+		unset( $this->metaData[ $key ], $this->metaChanges[ $key ] );
 		if ( $this->getId() ) {
 			delete_post_meta( $this->getId(), $key );
 		}
@@ -291,6 +457,44 @@ class QuoteRequest {
 	
 	public function getMetaData(): array {
 		return $this->metaData;
+	}
+
+	/**
+	 * The customer's answers as label and value pairs, for e-mails and order notes. A file shows its name;
+	 * with $fileLinks it also has 'url', the store manager's download link (it needs a login).
+	 *
+	 * @param  bool  $fileLinks
+	 *
+	 * @return array<int, array{label: string, value: string, url: string}>
+	 */
+	public function getSubmittedFields( bool $fileLinks = false ): array {
+		$fields = array();
+
+		foreach ( $this->getCustomFields() as $key => $fieldData ) {
+			if ( ! is_array( $fieldData ) ) {
+				$fieldData = array( 'value' => $fieldData );
+			}
+
+			$label = ! empty( $fieldData['label'] ) ? (string) $fieldData['label'] : ucfirst( str_replace( '_', ' ', (string) $key ) );
+			$value = isset( $fieldData['value'] ) && is_scalar( $fieldData['value'] ) ? (string) $fieldData['value'] : '';
+			$url   = '';
+
+			if ( 'file' === ( $fieldData['type'] ?? '' ) && '' !== $value ) {
+				$value = QuoteFiles::getFileName( $fieldData );
+
+				if ( $fileLinks && $this->getId() ) {
+					$url = QuoteFiles::getDownloadUrl( $this->getId(), (string) $key );
+				}
+			}
+
+			$fields[] = array(
+				'label' => $label,
+				'value' => $value,
+				'url'   => $url,
+			);
+		}
+
+		return $fields;
 	}
 	
 		public function getCustomerName() {

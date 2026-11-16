@@ -16,8 +16,8 @@ use TierPricingTable\Addons\NonLoggedInUsers\NonLoggedInUsersAddon;
 use TierPricingTable\Addons\PluginsRecommendations\PluginsRecommendationsAddon;
 use TierPricingTable\Addons\PricingSummary\PricingSummaryAddon;
 use TierPricingTable\Addons\ProductCatalogLoop\ProductCatalogLoop;
-use TierPricingTable\Addons\ReactProductEditorAddon\ReactProductEditorAddon;
 use TierPricingTable\Addons\RoleBasedPricing\RoleBasedPricingAddon;
+use TierPricingTable\Addons\RoleCustomerPricing\RoleCustomerPricingAddon;
 use TierPricingTable\Addons\UserBasedPricing\UserBasedPricingAddon;
 use TierPricingTable\Addons\TaxSettings\TaxSettingsAddon;
 use TierPricingTable\Addons\TieredPricingCart\TieredPricingCartAddon;
@@ -39,6 +39,7 @@ class Addons {
             ManualOrdersAddon::class                                         => new ManualOrdersAddon(),
             GlobalTieredPricingAddon::class                                  => new GlobalTieredPricingAddon(),
             CouponsAddon::class                                              => new CouponsAddon(),
+            RoleCustomerPricingAddon::class                                  => new RoleCustomerPricingAddon(),
             RoleBasedPricingAddon::class                                     => new RoleBasedPricingAddon(),
             UserBasedPricingAddon::class                                     => new UserBasedPricingAddon(),
             CategoryTierAddon::class                                         => new CategoryTierAddon(),
@@ -46,7 +47,6 @@ class Addons {
             PluginsRecommendationsAddon::class                               => new PluginsRecommendationsAddon(),
             CustomColumnsAddon::class                                        => new CustomColumnsAddon(),
             ProductCatalogLoop::class                                        => new ProductCatalogLoop(),
-            ReactProductEditorAddon::class                                   => new ReactProductEditorAddon(),
             LayoutConfiguratorAddon::class                                   => new LayoutConfiguratorAddon(),
             TaxSettingsAddon::class                                          => new TaxSettingsAddon(),
             TierLabelsAddon::class                                           => new TierLabelsAddon(),
@@ -59,6 +59,7 @@ class Addons {
             NonLoggedInUsersAddon::class                                     => new NonLoggedInUsersAddon(),
             \TierPricingTable\Addons\ImportExport\ImportExportAddon::class   => new \TierPricingTable\Addons\ImportExport\ImportExportAddon(),
             \TierPricingTable\Addons\RequestAQuote\RequestAQuoteAddon::class => new \TierPricingTable\Addons\RequestAQuote\RequestAQuoteAddon(),
+            \TierPricingTable\Addons\QuickOrder\QuickOrderAddon::class       => new \TierPricingTable\Addons\QuickOrder\QuickOrderAddon(),
         );
         $addons = apply_filters( 'tiered_pricing_table/addons/list', $addons );
         foreach ( $addons as $addon ) {

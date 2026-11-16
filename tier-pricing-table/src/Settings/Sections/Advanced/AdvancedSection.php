@@ -1,23 +1,21 @@
 <?php namespace TierPricingTable\Settings\Sections\Advanced;
 
-use TierPricingTable\Core\ServiceContainer;
-use TierPricingTable\Settings\CustomOptions\TPTLinkButton;
-use TierPricingTable\Settings\CustomOptions\TPTSwitchOption;
+use TierPricingTable\Addons\AbstractAddon;
+use TierPricingTable\Settings\CustomOptions\TPTFeatureFlagOption;
 use TierPricingTable\Settings\Sections\SectionAbstract;
 use TierPricingTable\Settings\Settings;
 
 /**
- * The "Advanced" tab: the module switches, the Tools add-on's utilities (roles, data clean-up),
- * the cache and the debug mode. The former "Tools" tab lives here since 7.2.1; its old links still work.
+ * The "Advanced" tab: the Tools add-on's utilities (roles, pricing test, cache, data clean-up), then the module
+ * switches. The former "Tools" tab lives here since 7.2.1; its old links still work.
  */
 class AdvancedSection extends SectionAbstract {
 
 	public function getSettings() {
+		// Utilities first, then the modules; the cache switch lives in the Utilities panel ("Cache" tab)
 		return array_merge(
-			$this->getModulesSettings(),
 			(array) apply_filters( 'tiered_pricing_table/settings/tools_settings', array() ),
-			$this->getCacheSettings(),
-			$this->getDebugSettings()
+			$this->getModulesSettings()
 		);
 	}
 
@@ -33,13 +31,38 @@ class AdvancedSection extends SectionAbstract {
 		$settings = array(
 			array(
 				'title' => __( 'Modules', 'tier-pricing-table' ),
-				'desc'  => __( 'You can disable or enable specific plugin features.', 'tier-pricing-table' ),
+				'desc'  => __( 'Switch off the features your store does not use. A module that is off does not load at all.', 'tier-pricing-table' ),
 				'id'    => Settings::SETTINGS_PREFIX . 'advanced',
 				'type'  => 'title',
 			),
 		);
 
-		$settings = array_merge( $settings, (array) apply_filters( 'tiered_pricing_table/settings/advanced_settings', array() ) );
+		$modules = (array) apply_filters( 'tiered_pricing_table/settings/advanced_settings', array() );
+		$groups  = self::getModuleGroups();
+		$byGroup = array_fill_keys( array_keys( $groups ), array() );
+
+		foreach ( $modules as $module ) {
+			$group = isset( $module['group'], $groups[ $module['group'] ] ) ? $module['group'] : AbstractAddon::GROUP_TOOLS;
+
+			$byGroup[ $group ][] = $module;
+		}
+
+		foreach ( $byGroup as $group => $groupModules ) {
+			if ( empty( $groupModules ) ) {
+				continue;
+			}
+
+			$settings[] = array(
+				'type'  => TPTFeatureFlagOption::GROUP_TYPE,
+				'title' => $groups[ $group ],
+				'group' => $group,
+			);
+
+			foreach ( $groupModules as $module ) {
+				$module['group'] = $group;
+				$settings[]      = $module;
+			}
+		}
 
 		$settings[] = array(
 			'type' => 'sectionend',
@@ -49,61 +72,34 @@ class AdvancedSection extends SectionAbstract {
 		return $settings;
 	}
 
-	protected function getCacheSettings(): array {
+	/**
+	 * The groups of the Modules screen, in display order. Modules without a known group are listed under Tools.
+	 *
+	 * @return array<string, string>
+	 */
+	public static function getModuleGroups(): array {
 		return array(
-			array(
-				'title' => __( 'Cache', 'tier-pricing-table' ),
-				'desc'  => __( 'Cache improves performance making the plugin not calculate data on each request. Disable to debug issues.', 'tier-pricing-table' ),
-				'id'    => Settings::SETTINGS_PREFIX . 'cache_section',
-				'type'  => 'title',
-			),
-			array(
-				'title'   => __( 'Enabled', 'tier-pricing-table' ),
-				'id'      => Settings::SETTINGS_PREFIX . 'cache_enabled',
-				'type'    => TPTSwitchOption::FIELD_TYPE,
-				'default' => 'yes',
-			),
-			array(
-				'title'        => __( 'Purge', 'tier-pricing-table' ),
-				'button_text'  => __( 'Purge cache', 'tier-pricing-table' ),
-				'button_class' => 'button button-large',
-				'button_link'  => ServiceContainer::getInstance()->getCache()->getPurgeURL(),
-				'type'         => TPTLinkButton::FIELD_TYPE,
-			),
-			array(
-				'type' => 'sectionend',
-				'id'   => Settings::SETTINGS_PREFIX . 'cache_section',
-			),
-		);
-	}
-
-	protected function getDebugSettings(): array {
-		return array(
-			array(
-				'title' => __( 'Debug', 'tier-pricing-table' ),
-				'desc'  => __( 'Debug mode is useful when you need to track what pricing rule is applying for a cart item.', 'tier-pricing-table' ),
-				'id'    => Settings::SETTINGS_PREFIX . 'debug_section',
-				'type'  => 'title',
-			),
-			array(
-				'title'   => __( 'Enabled', 'tier-pricing-table' ),
-				'id'      => Settings::SETTINGS_PREFIX . 'debug_enabled',
-				'type'    => TPTSwitchOption::FIELD_TYPE,
-				'default' => 'no',
-			),
-			array(
-				'type' => 'sectionend',
-				'id'   => Settings::SETTINGS_PREFIX . 'debug_section',
-			),
+			AbstractAddon::GROUP_PRICING      => __( 'Pricing rules', 'tier-pricing-table' ),
+			AbstractAddon::GROUP_PRODUCT_PAGE => __( 'Product page', 'tier-pricing-table' ),
+			AbstractAddon::GROUP_SHOP_CART    => __( 'Shop and cart', 'tier-pricing-table' ),
+			AbstractAddon::GROUP_WHOLESALE    => __( 'Wholesale and orders', 'tier-pricing-table' ),
+			AbstractAddon::GROUP_TOOLS        => __( 'Tools', 'tier-pricing-table' ),
 		);
 	}
 
 	public function getSectionCSS(): string {
-		// only the modules table (the first one) is a grid; the utilities, cache and debug tables keep the default rows
-		return '.form-table:first-of-type tbody { display: flex; flex-wrap: wrap; margin: 10px 0 20px 0; }
-		.form-table:first-of-type tr { display: block; border-bottom: none; padding-bottom: 0; }
-		.form-table:first-of-type th { display: none; }
-		.form-table:first-of-type td { padding: 0 !important; width: 100%; }';
+		// only the modules table (the one with the module cards) is a grid; the utilities table keeps its rows.
+		// The cards themselves are styled in assets/admin/style.css (.tpt-feature-flag-*).
+		// less space above the headings and under the descriptions than WooCommerce's default (about 38px above,
+		// 13px under); the gap between a heading and its description stays WooCommerce's.
+		// Printed through esc_html(): no ">" and no quotes in these selectors.
+		return '#mainform h2 { margin-top: 28px; }
+		#mainform div[id$=-description] p { margin: 0 0 12px; }
+		#mainform .form-table { margin-top: 0; }
+		.form-table:has(.tpt-feature-flag-item) tbody { display: flex; flex-wrap: wrap; margin: 4px -6px 24px; }
+		.form-table:has(.tpt-feature-flag-item) tr { display: block; border-bottom: none; padding-bottom: 0; }
+		.form-table:has(.tpt-feature-flag-item) th { display: none; }
+		.form-table:has(.tpt-feature-flag-item) td { padding: 0 !important; width: 100%; }';
 	}
 
 	public static function deleteOptions() {
@@ -111,6 +107,8 @@ class AdvancedSection extends SectionAbstract {
 		delete_option( Settings::SETTINGS_PREFIX . '_addon_category-tiered-pricing' );
 		delete_option( Settings::SETTINGS_PREFIX . '_addon_manual-orders' );
 		delete_option( Settings::SETTINGS_PREFIX . '_addon_role-based-rules' );
+		delete_option( Settings::SETTINGS_PREFIX . '_addon_user-based-rules' );
+		delete_option( Settings::SETTINGS_PREFIX . '_addon_role-customer-prices' );
 		delete_option( Settings::SETTINGS_PREFIX . '_addon_global-tier-pricing' );
 		delete_option( Settings::SETTINGS_PREFIX . '_addon_minimum-quantity' );
 		delete_option( Settings::SETTINGS_PREFIX . 'advanced' );

@@ -185,6 +185,11 @@ class FileManager {
 	 */
 	public function locateTemplate( $template, $default_path = '' ) {
 		
+		// a template is a name inside the plugin's or the theme's template folders: never a path that leaves them
+		if ( ! is_string( $template ) || ! preg_match( '#^[A-Za-z0-9_\-/]+\.php$#', $template ) || false !== strpos( $template, '..' ) || 0 === strpos( $template, '/' ) ) {
+			return '';
+		}
+		
 		if ( $default_path ) {
 			$file = trailingslashit( $default_path ) . $template;
 		} else {

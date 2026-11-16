@@ -19,7 +19,6 @@ use TierPricingTable\Settings\Sections\Advanced\AdvancedSection;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
 use TierPricingTable\Settings\Sections\Integrations\IntegrationSection;
 use TierPricingTable\Settings\Sections\Multicurrency\MulticurrencySection;
-use TierPricingTable\Settings\Sections\ProductAddons\ProductAddonsSection;
 use TierPricingTable\Settings\Sections\SectionAbstract;
 use TierPricingTable\TierPricingTablePlugin;
 /**
@@ -82,6 +81,9 @@ class Settings {
                 TierPricingTablePlugin::VERSION,
                 true
             );
+            wp_localize_script( $assetName, 'tptModulesI18n', array(
+                'count' => __( '%1$d of %2$d on', 'tier-pricing-table' ),
+            ) );
             wp_enqueue_script( $assetName );
         } );
     }
@@ -131,7 +133,6 @@ class Settings {
             'order-rules'       => 60,
             'integrations'      => 70,
             'multicurrency'     => 80,
-            'product-addons'    => 90,
             'advanced'          => 120,
         ) );
         // Stable sort: usort() is only guaranteed stable on PHP 8+, so tie-break on the original index.
@@ -153,7 +154,6 @@ class Settings {
             new GeneralSection(),
             new AdvancedSection(),
             new MulticurrencySection(),
-            new ProductAddonsSection(),
             new IntegrationSection()
         ) );
         $this->sections = $this->sortSections( $this->sections );

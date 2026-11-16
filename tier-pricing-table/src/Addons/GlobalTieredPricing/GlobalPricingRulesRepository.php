@@ -64,8 +64,8 @@ class GlobalPricingRulesRepository {
 		
 		$user = $user ? $user : TierPricingTablePlugin::getCurrentUser();
 		
-		// Cache
-		if ( ! isset( $this->matchedPricingRules[ $user->ID ][ $product->get_id() ] ) ) {
+		// Cache, "no rule" included: most products match no rule, and their prices are read many times per page
+		if ( ! array_key_exists( $product->get_id(), $this->matchedPricingRules[ $user->ID ] ?? array() ) ) {
 			
 			$matchedRule = null;
 			

@@ -2,6 +2,7 @@
 
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\PricingTable;
+use TierPricingTable\Services\ProductAccess;
 
 class PricingTableShortcode {
 
@@ -36,7 +37,8 @@ class PricingTableShortcode {
 
 		ob_start();
 
-		if ( $product ) {
+		// any post can name any product: only products the visitor may see (not drafts, private or hidden ones)
+		if ( $product && ProductAccess::canView( $product ) ) {
 			PricingTable::getInstance()->renderPricingTable( $product->get_id(), null, $args );
 		}
 

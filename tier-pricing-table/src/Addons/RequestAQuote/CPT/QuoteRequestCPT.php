@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\RequestAQuote\CPT;
 
 use Automattic\WooCommerce\Admin\PageController;
+use TierPricingTable\Addons\RequestAQuote\QuoteFiles;
 
 class QuoteRequestCPT {
 
@@ -17,17 +18,17 @@ class QuoteRequestCPT {
 			return;
 		}
 
-		$quote = \TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest::get( $postId );
-		if ( ! $quote ) {
+		$quote = new \TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest( $postId );
+		if ( ! $quote->getId() ) {
 			return;
 		}
 
-		$customFields = $quote->getCustomFields();
-		if ( is_array( $customFields ) ) {
-			foreach ( $customFields as $field ) {
-				if ( ! empty( $field['file_path'] ) && file_exists( $field['file_path'] ) ) {
-					unlink( $field['file_path'] );
-				}
+		// only files the form uploaded, which live in the uploads folder
+		foreach ( $quote->getCustomFields() as $field ) {
+			$filePath = QuoteFiles::getStoredPath( $field );
+
+			if ( $filePath ) {
+				wp_delete_file( $filePath );
 			}
 		}
 	}
@@ -58,11 +59,15 @@ class QuoteRequestCPT {
 			'show_in_menu'       => false, // We will add it manually as a WooCommerce submenu
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => 'tpt-quote-request' ),
-			'capability_type'    => 'post',
+			// Requests hold customers' names, e-mails and files: only store managers (manage_woocommerce) may
+			// see or change them, not every user who can write posts
+			'capabilities'       => self::getCapabilities(),
+			'map_meta_cap'       => false,
 			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'custom-fields' ),
+			// no title field and no WordPress "Custom Fields" box: the request screen shows what the customer sent
+			'supports'           => false,
 		);
 
 		register_post_type( self::POST_TYPE, $args );
@@ -82,6 +87,40 @@ class QuoteRequestCPT {
 		}
 	}
 	
+	/**
+	 * Every capability of the post type, all granted by manage_woocommerce (administrators and shop managers).
+	 *
+	 * @return array<string, string>
+	 */
+	public static function getCapabilities(): array {
+		$capabilities = array();
+
+		foreach ( array(
+			'edit_post',
+			'read_post',
+			'delete_post',
+			'edit_posts',
+			'edit_others_posts',
+			'delete_posts',
+			'publish_posts',
+			'read_private_posts',
+			'read',
+			'delete_private_posts',
+			'delete_published_posts',
+			'delete_others_posts',
+			'edit_private_posts',
+			'edit_published_posts',
+			'create_posts',
+		) as $capability ) {
+			$capabilities[ $capability ] = 'manage_woocommerce';
+		}
+
+		// requests come from customers: nobody adds one by hand (no "Add New" in the admin)
+		$capabilities['create_posts'] = 'do_not_allow';
+
+		return $capabilities;
+	}
+
 	private function registerPostStatuses() {
 		register_post_status( 'unread', array(
 			'label'                     => _x( 'Unread', 'quote request status', 'tier-pricing-table' ),

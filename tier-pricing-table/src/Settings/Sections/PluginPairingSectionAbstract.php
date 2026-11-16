@@ -30,11 +30,6 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 	abstract public function getOwnPluginIconAsset(): string;
 
 	/**
-	 * Asset path of the plugin's wp.org banner (772×250), relative to the assets directory.
-	 */
-	abstract public function getOwnPluginBannerAsset(): string;
-
-	/**
 	 * @return array<int, string>
 	 */
 	abstract public function getOwnPluginPills(): array;
@@ -157,9 +152,9 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 					</div>
 				<?php endforeach; ?>
 
-				<?php $this->renderSupportedPlugins(); ?>
-
 				<?php $this->renderPromo( array_key_first( $competitors ) ); ?>
+
+				<?php $this->renderSupportedPlugins(); ?>
 
 			<?php else : ?>
 
@@ -168,9 +163,9 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 					<p><?php echo esc_html( $this->getIntroText() ); ?></p>
 				</div>
 
-				<?php $this->renderSupportedPlugins(); ?>
-
 				<?php $this->renderPromo(); ?>
+
+				<?php $this->renderSupportedPlugins(); ?>
 
 			<?php endif; ?>
 
@@ -179,19 +174,19 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 	}
 
 	protected function renderSupportedPlugins() {
+		$plugins = array_values( $this->getSupportedPlugins() );
+		$last    = count( $plugins ) - 1;
 		?>
-		<div class="tpt-pairing__plugins">
-			<span class="tpt-pairing__plugins-label"><?php esc_html_e( 'Works with', 'tier-pricing-table' ); ?></span>
-			<?php foreach ( $this->getSupportedPlugins() as $plugin ) : ?>
-				<span class="tpt-pairing__plugin <?php echo $plugin['active'] ? 'tpt-pairing__plugin--active' : ''; ?>">
-					<i aria-hidden="true"></i>
-					<?php echo esc_html( $plugin['name'] ); ?>
-					<?php if ( $plugin['active'] ) : ?>
-						<em><?php esc_html_e( 'active', 'tier-pricing-table' ); ?></em>
-					<?php endif; ?>
-				</span>
+		<p class="tpt-pairing__plugins">
+			<?php esc_html_e( 'Also works with', 'tier-pricing-table' ); ?>
+			<?php foreach ( $plugins as $index => $plugin ) : ?>
+				<?php if ( $plugin['active'] ) : ?>
+					<strong class="tpt-pairing__plugin--active"><?php echo esc_html( $plugin['name'] ); ?> (<?php esc_html_e( 'active', 'tier-pricing-table' ); ?>)</strong><?php echo $index < $last ? ',' : '.'; ?>
+				<?php else : ?>
+					<?php echo esc_html( $plugin['name'] ) . ( $index < $last ? ',' : '.' ); ?>
+				<?php endif; ?>
 			<?php endforeach; ?>
-		</div>
+		</p>
 		<?php
 	}
 
@@ -199,13 +194,6 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 	 * WordPress.org slug of the U2Code plugin (its plugin directory when installed from there).
 	 */
 	abstract public function getOwnPluginWporgSlug(): string;
-
-	/**
-	 * Worked examples of the pairing: title => one or two sentences with figures.
-	 *
-	 * @return array<int, array{title: string, text: string}>
-	 */
-	abstract public function getExamples(): array;
 
 	/**
 	 * Plugin header names the installed copy may carry (the wp.org build and the premium build).
@@ -276,25 +264,17 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 		);
 	}
 
-	protected function renderExamples() {
-		$examples = $this->getExamples();
+	/**
+	 * Under the button when another plugin of the kind is active: what to do after switching.
+	 *
+	 * @param  string  $competitorSlug  integration slug of the detected plugin
+	 */
+	public function getSwitchNote( string $competitorSlug ): string {
+		$plugins = $this->getSupportedPlugins();
+		$name    = $plugins[ $competitorSlug ]['name'] ?? $competitorSlug;
 
-		if ( empty( $examples ) ) {
-			return;
-		}
-		?>
-		<div class="tpt-pairing__examples">
-			<h4 class="tpt-pairing__examples-title"><?php esc_html_e( 'How it works together', 'tier-pricing-table' ); ?></h4>
-			<div class="tpt-pairing__examples-grid">
-				<?php foreach ( $examples as $example ) : ?>
-					<div class="tpt-pairing__example">
-						<strong><?php echo esc_html( $example['title'] ); ?></strong>
-						<span><?php echo esc_html( $example['text'] ); ?></span>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-		<?php
+		/* translators: %s: the plugin in use now */
+		return sprintf( __( 'Once it is active, deactivate %s so only one plugin does the job.', 'tier-pricing-table' ), $name );
 	}
 
 	protected function renderPromo( string $detectedCompetitor = '' ) {
@@ -310,12 +290,10 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 			: $this->getOwnPluginName();
 		?>
 		<div class="tpt-pairing__promo tpt-pairing__promo--<?php echo esc_attr( $this->getSlug() ); ?>">
-			<div class="tpt-pairing__promo-glow" aria-hidden="true"></div>
-
 			<div class="tpt-pairing__promo-content">
 				<div class="tpt-pairing__promo-head">
 					<span class="tpt-pairing__promo-icon">
-						<img src="<?php echo esc_url( $iconURL ); ?>" width="52" height="52" alt="">
+						<img src="<?php echo esc_url( $iconURL ); ?>" width="36" height="36" alt="">
 					</span>
 					<div class="tpt-pairing__promo-title">
 						<h4><?php echo esc_html( $title ); ?></h4>
@@ -340,34 +318,30 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 				<?php $action = $this->getInstallAction(); ?>
 				<div class="tpt-pairing__promo-actions">
 					<?php if ( 'wporg' === $action['kind'] ) : ?>
-						<a class="tpt-pairing__promo-cta" href="<?php echo esc_url( $action['url'] ); ?>" target="_blank" rel="noopener">
+						<a class="button button-primary" href="<?php echo esc_url( $action['url'] ); ?>" target="_blank" rel="noopener">
 							<?php echo esc_html( $action['label'] ); ?>
-							<svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 						</a>
 					<?php else : ?>
-						<?php PluginInstaller::renderButton( PluginInstaller::describe( $this ), array( 'class' => 'tpt-pairing__promo-cta', 'reload' => true ) ); ?>
+						<?php PluginInstaller::renderButton( PluginInstaller::describe( $this ), array( 'class' => 'button button-primary', 'reload' => true ) ); ?>
 					<?php endif; ?>
-					<a class="tpt-pairing__promo-link" target="_blank" rel="noopener" href="<?php echo esc_url( $this->getOwnPluginSiteURL() . $utm ); ?>">
+					<a class="button" target="_blank" rel="noopener" href="<?php echo esc_url( $this->getOwnPluginSiteURL() . $utm ); ?>">
 						<?php esc_html_e( 'Learn more', 'tier-pricing-table' ); ?>
 					</a>
-					<span class="tpt-pairing__promo-trust"><?php esc_html_e( 'Same team, one support channel for both plugins.', 'tier-pricing-table' ); ?></span>
 				</div>
-				<?php if ( 'wporg' !== $action['kind'] ) : ?>
-					<p class="tpt-pairing__promo-note">
-						<?php if ( 'install' === $action['kind'] ) : ?>
-							<?php esc_html_e( 'Installs from WordPress.org. Once activated, the pairing switches on by itself; you can manage it under Integrations.', 'tier-pricing-table' ); ?>
-						<?php else : ?>
-							<?php esc_html_e( 'The plugin is installed but inactive. Once activated, the pairing switches on by itself; you can manage it under Integrations.', 'tier-pricing-table' ); ?>
-						<?php endif; ?>
-					</p>
-				<?php endif; ?>
-			</div>
-
-			<div class="tpt-pairing__promo-banner" aria-hidden="true">
-				<img src="<?php echo esc_url( $this->getContainer()->getFileManager()->locateAsset( $this->getOwnPluginBannerAsset() ) ); ?>" width="772" height="250" alt="">
+				<p class="tpt-pairing__promo-note">
+					<?php
+					if ( $detectedCompetitor ) {
+						// switching: the other plugin has to go once this one is active, or both act on the prices
+						echo esc_html( $this->getSwitchNote( $detectedCompetitor ) );
+					} elseif ( 'install' === $action['kind'] ) {
+						esc_html_e( 'Installs from WordPress.org and pairs with tiered pricing by itself.', 'tier-pricing-table' );
+					} elseif ( 'activate' === $action['kind'] ) {
+						esc_html_e( 'Installed but not active. It pairs with tiered pricing by itself once active.', 'tier-pricing-table' );
+					}
+					?>
+				</p>
 			</div>
 		</div>
-		<?php $this->renderExamples(); ?>
 		<?php
 	}
 }

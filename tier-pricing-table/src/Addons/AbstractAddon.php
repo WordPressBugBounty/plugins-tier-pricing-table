@@ -9,6 +9,13 @@ abstract class AbstractAddon {
 	
 	use ServiceContainerTrait;
 	
+	// Groups of the Modules screen (Settings → Advanced), in display order there
+	const GROUP_PRICING      = 'pricing';
+	const GROUP_PRODUCT_PAGE = 'product-page';
+	const GROUP_SHOP_CART    = 'shop-and-cart';
+	const GROUP_WHOLESALE    = 'wholesale';
+	const GROUP_TOOLS        = 'tools';
+	
 	public function __construct() {
 		add_filter( 'tiered_pricing_table/settings/advanced_settings', array(
 			$this,
@@ -23,6 +30,7 @@ abstract class AbstractAddon {
 			'default' => $this->isActiveByDefault() ? 'yes' : 'no',
 			'desc'    => $this->getDescription(),
 			'icon'    => $this->getIcon(),
+			'group'   => $this->getGroup(),
 			'type'    => TPTFeatureFlagOption::FIELD_TYPE,
 		);
 		
@@ -48,6 +56,13 @@ abstract class AbstractAddon {
 		$settings = \TierPricingTable\Core\ServiceContainer::getInstance()->getSettings();
 		
 		return 'yes' === $settings->get( '_addon_' . $slug, $activeByDefault ? 'yes' : 'no' );
+	}
+	
+	/**
+	 * The group the module is listed under on the Modules screen (one of the GROUP_ constants).
+	 */
+	public function getGroup(): string {
+		return self::GROUP_TOOLS;
 	}
 	
 	abstract public function getName();

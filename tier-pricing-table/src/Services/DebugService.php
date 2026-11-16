@@ -1,12 +1,16 @@
 <?php namespace TierPricingTable\Services;
 
 /*
- * Class DebugService
+ * Pricing details under the pricing table and every cart item: the rule that set the price, its tiers, limits
+ * and change log, for the shopper's real session (cart, currency, coupons).
+ *
+ * A developer tool without a setting (the Pricing test covers what a store owner needs). Switch it on with
+ *     add_filter( 'tiered_pricing_table/debug/enabled', '__return_true' );
+ * It shows only to users who can manage WooCommerce.
  *
  * @package TierPricingTable/Services
  */
 
-use TierPricingTable\Core\ServiceContainer;
 use TierPricingTable\PriceManager;
 use TierPricingTable\PricingRule;
 
@@ -14,7 +18,7 @@ class DebugService {
 
 	public function __construct() {
 
-		if ( ServiceContainer::getInstance()->getSettings()->get( 'debug_enabled', 'no' ) !== 'yes' ) {
+		if ( ! apply_filters( 'tiered_pricing_table/debug/enabled', false ) ) {
 			return;
 		}
 
@@ -91,6 +95,11 @@ class DebugService {
 	}
 
 	protected function formatPricingRule( PricingRule $pricingRule, ?array $cartItem = null ) {
+
+		// never to shoppers: the details name the store's rules and link to their edit screens
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			return;
+		}
 
 		$data = $this->getPricingRuleData( $pricingRule, $cartItem );
 		?>

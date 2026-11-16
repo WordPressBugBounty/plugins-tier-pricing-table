@@ -55,23 +55,27 @@ class WoocommerceImportService {
 	 */
 	public function processImport( WC_Product $product, array $data ): WC_Product {
 		
-		if ( isset( $data['tiered_price_fixed'] ) ) {
-			
-			$fixed = self::decodeExport( $data['tiered_price_fixed'] );
-			
-			$product->update_meta_data( '_fixed_price_rules', $fixed );
-		}
+		$columns = array(
+			'tiered_price_fixed'      => '_fixed_price_rules',
+			'tiered_price_percentage' => '_percentage_price_rules',
+			'tiered_price_amount'     => '_amount_price_rules',
+		);
 		
-		if ( isset( $data['tiered_price_percentage'] ) ) {
+		foreach ( $columns as $column => $metaKey ) {
+			if ( ! isset( $data[ $column ] ) ) {
+				continue;
+			}
 			
-			$percentage = self::decodeExport( $data['tiered_price_percentage'] );
+			$rules = self::decodeExportCell( (string) $data[ $column ] );
 			
-			$product->update_meta_data( '_percentage_price_rules', $percentage );
-		}
-		
-		if ( isset( $data['tiered_price_amount'] ) ) {
-			$amount = self::decodeExport( $data['tiered_price_amount'] );
-			$product->update_meta_data( '_amount_price_rules', $amount );
+			// a cell that is not empty but cannot be read (a spreadsheet turned "20:100" into "21:40:00") keeps the
+			// product's tiers as they are instead of erasing them; the import log says which cell was skipped
+			if ( null === $rules ) {
+				self::logSkippedCell( $product, $column, (string) $data[ $column ] );
+				continue;
+			}
+			
+			$product->update_meta_data( $metaKey, $rules );
 		}
 		
 		if ( isset( $data['tiered_price_type'] ) ) {
@@ -89,6 +93,48 @@ class WoocommerceImportService {
 		}
 		
 		return $product;
+	}
+	
+	/**
+	 * Decode a tier cell of the import file. An empty cell clears the tiers (an empty array); a cell with any rule
+	 * that cannot be read gives null, so the product's tiers are left as they are.
+	 *
+	 * @param  string  $data
+	 *
+	 * @return array|null
+	 */
+	public static function decodeExportCell( string $data ): ?array {
+		if ( '' === trim( $data ) ) {
+			return array();
+		}
+		
+		$separators = preg_quote( ':=' . TierPricingTablePlugin::getRuleSeparator(), '/' );
+		
+		foreach ( explode( TierPricingTablePlugin::getRulesSeparator(), $data ) as $rule ) {
+			if ( '' !== trim( $rule ) && ! preg_match( '/^\s*(\d+)\s*[' . $separators . ']\s*(\d+(?:\.\d+)?)\s*$/', $rule ) ) {
+				return null;
+			}
+		}
+		
+		return self::decodeExport( $data );
+	}
+	
+	/**
+	 * A line in WooCommerce's logs (WooCommerce, Status, Logs, source "tiered-pricing-import") for a tier cell the
+	 * import left out.
+	 */
+	protected static function logSkippedCell( WC_Product $product, string $column, string $value ) {
+		if ( ! function_exists( 'wc_get_logger' ) ) {
+			return;
+		}
+		
+		wc_get_logger()->warning( sprintf(
+			'Product %1$s (%2$s): the column "%3$s" could not be read and was skipped, the product keeps its tiers. Value: "%4$s". Write tiers as quantity=price, for example 10=90,20=80.',
+			$product->get_id() ? '#' . $product->get_id() : 'new',
+			$product->get_sku() ? $product->get_sku() : $product->get_name(),
+			$column,
+			substr( $value, 0, 200 )
+		), array( 'source' => 'tiered-pricing-import' ) );
 	}
 	
 	/**

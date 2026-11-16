@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\RequestAQuote\Emails;
 
 use TierPricingTable\Addons\RequestAQuote\CPT\QuoteRequestCPT;
+use TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest;
 use TierPricingTable\Addons\RequestAQuote\Models\RequestQuoteForm;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -55,8 +56,31 @@ class AdminQuoteEmail extends \WC_Email {
 		$this->restore_locale();
 	}
 	
+	/**
+	 * Replying to the notification writes to the customer who asked for the quote, not to the store.
+	 *
+	 * @return string
+	 */
+	public function get_headers() {
+		$headers = (string) parent::get_headers();
+		$email   = $this->object instanceof QuoteRequest ? (string) $this->object->getCustomerEmail() : '';
+
+		if ( ! is_email( $email ) ) {
+			return $headers;
+		}
+
+		// no line breaks (header injection), quotes, angle brackets or commas (wp_mail splits Reply-To on commas)
+		$name = $this->object->getCustomerName();
+		$name = is_scalar( $name ) ? trim( str_replace( array( "\r", "\n", '"', '<', '>', ',' ), '', wp_strip_all_tags( (string) $name ) ) ) : '';
+
+		// WooCommerce sets the store's own address as Reply-To on e-mails that are not about an order
+		$headers = (string) preg_replace( '/^Reply-to:[^\n]*\n?/im', '', $headers );
+
+		return $headers . 'Reply-to: ' . ( '' !== $name ? $name . ' ' : '' ) . '<' . $email . ">\r\n";
+	}
+
 	public function get_default_subject() {
-		return __( '[{site_title}] New Quote Request for {product_name}', 'tier-pricing-table' );
+		return __( '[{site_title}] New quote request #{quote_number}: {product_name}', 'tier-pricing-table' );
 	}
 	
 	public function get_default_heading() {
@@ -140,14 +164,23 @@ class AdminQuoteEmail extends \WC_Email {
 			if ( $product ) {
 				$productName = $product->get_name();
 			}
+
+			// a quote list request: "Bolt and 2 more products"
+			if ( $this->object->isList() ) {
+				$productName = $this->object->getSummaryName();
+			}
 		}
 		
 		$string = str_replace( '{product_name}', $productName, $string );
+
+		// the number the customer saw when they sent the request ("Your request number is #123")
+		$quoteNumber = $this->object instanceof \TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest ? (string) $this->object->getId() : '123';
+		$string      = str_replace( '{quote_number}', $quoteNumber, $string );
 		
 		return parent::format_string( $string );
 	}
 	
-			public function get_submitted_fields() {
+	public function get_submitted_fields() {
 		if ( ! $this->object || ! ( $this->object instanceof \TierPricingTable\Addons\RequestAQuote\Models\QuoteRequest ) ) {
 			return array(
 				array( 'label' => __( 'Sample Name', 'tier-pricing-table' ), 'value' => 'John Doe' ),
@@ -155,22 +188,7 @@ class AdminQuoteEmail extends \WC_Email {
 			);
 		}
 		
-		$customFields = $this->object->getCustomFields();
-		$fields = array();
-		
-		foreach ( $customFields as $key => $fieldData ) {
-			if ( ! is_array( $fieldData ) ) {
-				$fieldData = array( 'label' => ucfirst( str_replace('_', ' ', $key) ), 'value' => $fieldData );
-			}
-			$label = isset($fieldData['label']) && !empty($fieldData['label']) ? $fieldData['label'] : ucfirst( str_replace('_', ' ', $key) );
-			$value = isset($fieldData['value']) ? $fieldData['value'] : '';
-			
-			$fields[] = array(
-				'label' => $label,
-				'value' => $value,
-			);
-		}
-		
-		return $fields;
+		// files: their name and the store manager's download link
+		return $this->object->getSubmittedFields( true );
 	}
 }

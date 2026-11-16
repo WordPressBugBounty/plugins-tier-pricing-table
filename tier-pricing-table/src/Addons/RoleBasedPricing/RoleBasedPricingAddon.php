@@ -5,11 +5,12 @@ namespace TierPricingTable\Addons\RoleBasedPricing;
 use TierPricingTable\Addons\AbstractAddon;
 use TierPricingTable\Addons\RoleBasedPricing\Export\RoleBasedPricingExport;
 use TierPricingTable\Addons\RoleBasedPricing\Import\RoleBasedPricingImport;
+use TierPricingTable\Addons\RoleCustomerPricing\RoleCustomerPricingAddon;
 class RoleBasedPricingAddon extends AbstractAddon {
     const SETTING_ENABLE_KEY = 'enable_role_based_pricing_addon';
 
     public function getName() : string {
-        return __( 'Role-based pricing rules on individual products', 'tier-pricing-table' );
+        return __( 'Role prices on products', 'tier-pricing-table' );
     }
 
     public function isActive() : bool {
@@ -17,7 +18,7 @@ class RoleBasedPricingAddon extends AbstractAddon {
     }
 
     public function getDescription() : string {
-        return __( 'Enable role-based pricing rules on individual products.', 'tier-pricing-table' );
+        return __( 'Give a role, such as Wholesale, its own price, tiers and quantity limits on a product\'s Tiered Pricing tab.', 'tier-pricing-table' );
     }
 
     public function getIcon() : string {
@@ -26,6 +27,21 @@ class RoleBasedPricingAddon extends AbstractAddon {
 
     public function getSlug() : string {
         return 'role-based-rules';
+    }
+
+    public function getGroup() : string {
+        return self::GROUP_PRICING;
+    }
+
+    /**
+     * No card of its own: the "Role and customer prices" module switches it.
+     */
+    public function addToAddonsSettings( $addons ) {
+        return $addons;
+    }
+
+    public function isEnabled() : bool {
+        return RoleCustomerPricingAddon::isPartEnabled( RoleCustomerPricingAddon::ROLE_PART );
     }
 
     public function run() {

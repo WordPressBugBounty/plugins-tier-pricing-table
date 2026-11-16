@@ -27,10 +27,9 @@ class Pricing extends FormTab {
 		?>
 		<div>
 			<?php
+				// Flat prices are in the free version; the form marks the percentage discount as premium itself.
 				$this->renderSectionTitle( __( 'Base Pricing', 'tier-pricing-table' ), array(
-						'description'      => __( 'Override the default regular product prices.',
-								'tier-pricing-table' ),
-						'only_for_premium' => true,
+						'description' => __( 'Override the default regular product prices.', 'tier-pricing-table' ),
 				) );
 
 				RegularPricingForm::render( null, null, $pricingRule->getRegularPrice(), $pricingRule->getSalePrice(),

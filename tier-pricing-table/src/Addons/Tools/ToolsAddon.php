@@ -11,7 +11,7 @@ class ToolsAddon extends AbstractAddon {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Access utilities for managing and cleaning up tiered pricing data.', 'tier-pricing-table' );
+		return __( 'Pricing test, roles management, data clean-up and the cache switch, under Settings → Advanced → Utilities. The cache keeps working when this is off.', 'tier-pricing-table' );
 	}
 	
 	public function getIcon(): string {
@@ -20,6 +20,10 @@ class ToolsAddon extends AbstractAddon {
 	
 	public function getSlug(): string {
 		return 'tools';
+	}
+
+	public function getGroup(): string {
+		return self::GROUP_TOOLS;
 	}
 	
 	public function run() {

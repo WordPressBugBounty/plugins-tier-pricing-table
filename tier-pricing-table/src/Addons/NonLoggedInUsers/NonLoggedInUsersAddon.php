@@ -29,11 +29,11 @@ use TierPricingTable\Addons\NonLoggedInUsers\Wholesale\Settings\Settings as Whol
  */
 class NonLoggedInUsersAddon extends AbstractAddon {
     public function getName() {
-        return __( 'Wholesale & Guest Users', 'tier-pricing-table' );
+        return __( 'Wholesale and guests', 'tier-pricing-table' );
     }
 
     public function getDescription() {
-        return __( 'Hide prices or prevent purchasing for guests, close the store to visitors, show products and categories to selected roles only, set minimum orders and payment or shipping methods per role, and let customers apply for a wholesale account with an approval queue. Set up under the Wholesale tab.', 'tier-pricing-table' );
+        return __( 'Wholesale sign-up with approval, a private store, hidden prices or products for guests, and payment or shipping methods by role. Set up on the Wholesale tab.', 'tier-pricing-table' );
     }
 
     public function getIcon() : string {
@@ -42,6 +42,10 @@ class NonLoggedInUsersAddon extends AbstractAddon {
 
     public function getSlug() {
         return 'non-logged-in-users';
+    }
+
+    public function getGroup() : string {
+        return self::GROUP_WHOLESALE;
     }
 
     public function run() {
