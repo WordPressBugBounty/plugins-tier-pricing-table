@@ -43,6 +43,13 @@ class RuleTester {
 				$reasons[] = sprintf( $message, $this->termNames( $hit, $taxonomy ) );
 			}
 		}
+		if ( $rule->getExcludedAttributes() ) {
+			$hit = $rule->getExcludedAttributeHits( $product );
+			if ( $hit ) {
+				/* translators: %s: attribute values such as "Size: Large" */
+				$reasons[] = sprintf( __( 'The product has an excluded attribute value: %s.', 'tier-pricing-table' ), $this->attributeNames( $hit ) );
+			}
+		}
 
 		// 2. customer exclusions
 		if ( $user->ID && in_array( $user->ID, array_map( 'intval', $rule->getExcludedUsers() ), true ) ) {
@@ -107,6 +114,23 @@ class RuleTester {
 		}
 
 		$reasons = $matched ? $matched : array( __( 'The rule applies to every product (no products, categories, tags or brands selected).', 'tier-pricing-table' ) );
+
+		// attribute values narrow the products above
+		if ( $rule->getIncludedAttributes() ) {
+			if ( ! $rule->matchesIncludedAttributes( $product ) ) {
+				/* translators: %s: attribute values such as "Size: Large" */
+				$why = array( sprintf( __( 'The rule is limited to the attribute values %s, and the product does not have them.', 'tier-pricing-table' ), $this->attributeNames( $rule->getIncludedAttributes() ) ) );
+				$any = $this->anyAttributes( $product, $rule->getIncludedAttributes() );
+				if ( $any ) {
+					/* translators: %s: attribute names */
+					$why[] = sprintf( __( 'This variation is set to "Any %s", which matches no value chosen in a rule.', 'tier-pricing-table' ), $any );
+				}
+
+				return array( 'matches' => false, 'reasons' => $why );
+			}
+			/* translators: %s: attribute values such as "Size: Large" */
+			$reasons[] = sprintf( __( 'The product has the rule\'s attribute values: %s.', 'tier-pricing-table' ), $this->attributeNames( $rule->getIncludedAttributeHits( $product ) ) );
+		}
 
 		// 4. and 5. customer limitations
 		$includedRoles = $rule->getIncludedUserRoles();
@@ -203,6 +227,39 @@ class RuleTester {
 			/* translators: %s: the limits, e.g. "roles Wholesale and 2 selected customers" */
 			'reasons' => array( sprintf( __( 'The rule is limited to %s.', 'tier-pricing-table' ), implode( ' ' . __( 'and', 'tier-pricing-table' ) . ' ', $limits ) ), $who ),
 		);
+	}
+
+	/**
+	 * "Attribute: value" for each term id.
+	 */
+	protected function attributeNames( array $ids ): string {
+		$names = array();
+		foreach ( $ids as $id ) {
+			$term    = get_term( (int) $id );
+			$names[] = $term instanceof \WP_Term ? wc_attribute_label( $term->taxonomy ) . ': ' . $term->name : '#' . (int) $id;
+		}
+
+		return implode( ', ', $names );
+	}
+
+	/**
+	 * The attributes of the rule's values that a variation leaves on "Any …".
+	 */
+	protected function anyAttributes( WC_Product $product, array $ids ): string {
+		if ( ! $product->is_type( array( 'variation', 'subscription-variation' ) ) ) {
+			return '';
+		}
+
+		$own   = (array) $product->get_attributes();
+		$names = array();
+		foreach ( $ids as $id ) {
+			$term = get_term( (int) $id );
+			if ( $term instanceof \WP_Term && array_key_exists( $term->taxonomy, $own ) && '' === (string) $own[ $term->taxonomy ] ) {
+				$names[ $term->taxonomy ] = wc_attribute_label( $term->taxonomy );
+			}
+		}
+
+		return implode( ', ', $names );
 	}
 
 	protected function termNames( array $ids, string $taxonomy ): string {

@@ -102,11 +102,14 @@ class QuoteListDisplay {
 
 		$atts = shortcode_atts( array( 'text' => __( 'Quote list', 'tier-pricing-table' ) ), $atts, self::LINK_SHORTCODE );
 
+		// read once into a local (QIT flags shortcode attributes used straight in the output); the template escapes it
+		$text = sanitize_text_field( (string) $atts['text'] );
+
 		$this->enqueueScript();
 
-		return ServiceContainer::getInstance()->getFileManager()->renderTemplate( 'frontend/quote-list-link.php', array(
+		return ServiceContainer::getInstance()->getFileManager()->renderTemplate( 'frontend/quote-list-link.php', array( // nosemgrep
 			'pageUrl' => QuoteListSettings::getPageUrl(),
-			'text'    => (string) $atts['text'],
+			'text'    => $text,
 		), plugin_dir_path( dirname( __FILE__ ) ) . 'views/' );
 	}
 

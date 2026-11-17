@@ -261,6 +261,7 @@ return array(
     'TierPricingTable\\Forms\\RegularPricingForm' => $baseDir . '/src/Forms/RegularPricingForm.php',
     'TierPricingTable\\Forms\\TieredPricingRulesForm' => $baseDir . '/src/Forms/TieredPricingRulesForm.php',
     'TierPricingTable\\Freemius' => $baseDir . '/src/Freemius.php',
+    'TierPricingTable\\Frontend\\BlockQuantityLimits' => $baseDir . '/src/Frontend/BlockQuantityLimits.php',
     'TierPricingTable\\Frontend\\Frontend' => $baseDir . '/src/Frontend/Frontend.php',
     'TierPricingTable\\Frontend\\PricingTableShortcode' => $baseDir . '/src/Frontend/PricingTableShortcode.php',
     'TierPricingTable\\Integrations\\Integrations' => $baseDir . '/src/Integrations/Integrations.php',

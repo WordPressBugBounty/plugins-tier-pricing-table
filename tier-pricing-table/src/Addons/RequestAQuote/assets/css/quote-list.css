@@ -575,13 +575,24 @@ html.tpt-quote-drawer-open {
 	transform: translateX(-50%);
 }
 
-/* shop cards: a secondary button on its own line under Add to cart (quote-button.css draws it) */
+/* shop cards: a secondary button on its own line under Add to cart (quote-button.css draws it). The gap is padding:
+   block themes lay product cards out with flex and reset their children's margins. */
 .tpt-add-to-quote-wrap {
-	margin: 8px 0 0;
+	margin: 0;
+	padding-top: 8px;
 }
 
 .tpt-add-to-quote--loop {
+	display: inline-block;
 	cursor: pointer;
+}
+
+/* block product grids: as wide as their Add to cart button */
+:where(.wc-block-product, .wp-block-woocommerce-product-template > li) .tpt-add-to-quote--loop {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	text-align: center;
 }
 
 .tpt-add-to-quote-wrap .tpt-in-quote-note {

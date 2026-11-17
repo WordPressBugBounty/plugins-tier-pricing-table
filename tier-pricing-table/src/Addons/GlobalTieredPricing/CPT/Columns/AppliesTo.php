@@ -47,12 +47,68 @@ class AppliesTo {
 			$this->named( __( 'Brands', 'tier-pricing-table' ), $this->termNames( $rule->getIncludedProductBrands() ) ),
 		) );
 
+		$attributes = $this->attributeValues( $rule->getIncludedAttributes() );
+
 		if ( $parts ) {
-			return implode( ' · ', $parts );
+			/* translators: 1: the products, categories, tags or brands a rule covers, 2: attribute values such as "Size: Large" */
+			return $attributes ? sprintf( esc_html__( '%1$s, only with %2$s', 'tier-pricing-table' ), implode( ' · ', $parts ), $attributes ) : implode( ' · ', $parts );
+		}
+
+		if ( $attributes ) {
+			return $rule->isOrderRule()
+				/* translators: %s: attribute values such as "Size: Large" */
+				? sprintf( esc_html__( 'Cart lines with %s', 'tier-pricing-table' ), $attributes )
+				/* translators: %s: attribute values such as "Size: Large" */
+				: sprintf( esc_html__( 'All products with %s', 'tier-pricing-table' ), $attributes );
 		}
 
 		// an Order rule without product conditions counts every line of the cart
 		return $rule->isOrderRule() ? esc_html__( 'The whole cart', 'tier-pricing-table' ) : esc_html__( 'All products', 'tier-pricing-table' );
+	}
+
+	/**
+	 * Attribute values grouped by attribute, "Size: Large, XL; Colour: Blue" (alternatives within an
+	 * attribute, all attributes must match). Escaped HTML.
+	 */
+	protected function attributeValues( array $ids ): string {
+		$groups = array();
+
+		foreach ( $ids as $id ) {
+			$term = get_term( (int) $id );
+
+			if ( ! $term instanceof WP_Term ) {
+				continue;
+			}
+
+			$editLink                    = get_edit_term_link( $term );
+			$groups[ $term->taxonomy ][] = $this->link( is_string( $editLink ) ? $editLink : '', $term->name );
+		}
+
+		$texts = array();
+
+		foreach ( $groups as $taxonomy => $names ) {
+			$texts[] = esc_html( wc_attribute_label( $taxonomy ) ) . ': ' . $this->shorten( $names );
+		}
+
+		return implode( '; ', $texts );
+	}
+
+	/**
+	 * @return string[] Escaped HTML, "Attribute: value" each.
+	 */
+	protected function attributeNames( array $ids ): array {
+		$names = array();
+
+		foreach ( $ids as $id ) {
+			$term = get_term( (int) $id );
+
+			if ( $term instanceof WP_Term ) {
+				$editLink = get_edit_term_link( $term );
+				$names[]  = esc_html( wc_attribute_label( $term->taxonomy ) ) . ': ' . $this->link( is_string( $editLink ) ? $editLink : '', $term->name );
+			}
+		}
+
+		return $names;
 	}
 
 	protected function productExceptionsText( GlobalPricingRule $rule ): string {
@@ -60,7 +116,8 @@ class AppliesTo {
 			$this->productNames( $rule->getExcludedProducts() ),
 			$this->termNames( $rule->getExcludedProductCategories() ),
 			$this->termNames( $rule->getExcludedProductTags() ),
-			$this->termNames( $rule->getExcludedProductBrands() )
+			$this->termNames( $rule->getExcludedProductBrands() ),
+			$this->attributeNames( $rule->getExcludedAttributes() )
 		);
 
 		/* translators: %s: list of names */

@@ -123,7 +123,7 @@ class SubmitQuoteEndpoint extends WP_REST_Controller {
         if ( is_user_logged_in() ) {
             return 'tpt_quote_rate_u' . get_current_user_id();
         }
-        $ip = ( class_exists( 'WC_Geolocation' ) ? \WC_Geolocation::get_ip_address() : $_SERVER['REMOTE_ADDR'] ?? '' );
+        $ip = ( class_exists( 'WC_Geolocation' ) ? \WC_Geolocation::get_ip_address() : (( isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '' )) );
         // hashed with the site's salt: the address itself is not stored
         return 'tpt_quote_rate_' . substr( wp_hash( (string) $ip ), 0, 32 );
     }
@@ -280,7 +280,7 @@ class SubmitQuoteEndpoint extends WP_REST_Controller {
             'message' => __( 'Your quote request has been submitted successfully!', 'tier-pricing-table' ),
             'post_id' => 0,
         ) );
-        $fileUploadResult = $this->processFileUploads( $form, $customFields );
+        $fileUploadResult = $this->processFileUploads( $form, $customFields, (array) $request->get_file_params() );
         if ( is_wp_error( $fileUploadResult ) ) {
             return $fileUploadResult;
         }
@@ -519,14 +519,14 @@ class SubmitQuoteEndpoint extends WP_REST_Controller {
      *
      * @return true|WP_Error
      */
-    private function processFileUploads( RequestQuoteForm $form, array &$customFields ) {
+    private function processFileUploads( RequestQuoteForm $form, array &$customFields, array $files ) {
         $uploads = array();
         foreach ( $form->getFields() as $fieldConfig ) {
             if ( !is_array( $fieldConfig ) || 'file' !== ($fieldConfig['type'] ?? '') || empty( $fieldConfig['name'] ) ) {
                 continue;
             }
             $key = (string) $fieldConfig['name'];
-            $file = ( isset( $_FILES[$key] ) && is_array( $_FILES[$key] ) ? $_FILES[$key] : null );
+            $file = ( isset( $files[$key] ) && is_array( $files[$key] ) ? $files[$key] : null );
             $hasFile = $file && !empty( $file['name'] ) && is_string( $file['name'] ) && isset( $file['error'] ) && UPLOAD_ERR_NO_FILE !== (int) $file['error'];
             if ( !$hasFile ) {
                 if ( !empty( $fieldConfig['required'] ) ) {

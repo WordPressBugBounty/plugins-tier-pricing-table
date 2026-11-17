@@ -92,8 +92,9 @@ class AdvancedSection extends SectionAbstract {
 		// The cards themselves are styled in assets/admin/style.css (.tpt-feature-flag-*).
 		// less space above the headings and under the descriptions than WooCommerce's default (about 38px above,
 		// 13px under); the gap between a heading and its description stays WooCommerce's.
-		// Printed through esc_html(): no ">" and no quotes in these selectors.
-		return '#mainform h2 { margin-top: 28px; }
+		// Printed through esc_html(): no ">" and no quotes in these selectors. The panel titles inside the
+		// tools (Data Clean Up) are h2 too: they keep the panel's own spacing.
+		return '#mainform h2:not(.components-panel__body-title) { margin-top: 28px; }
 		#mainform div[id$=-description] p { margin: 0 0 12px; }
 		#mainform .form-table { margin-top: 0; }
 		.form-table:has(.tpt-feature-flag-item) tbody { display: flex; flex-wrap: wrap; margin: 4px -6px 24px; }

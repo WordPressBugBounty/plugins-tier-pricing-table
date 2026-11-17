@@ -45,10 +45,12 @@ class LayoutConfigurator {
 		'layout_spacing'          => '',
 		'cell_padding'            => '',
 		'discount_badge_color'    => '',
-		'table_active_border'     => 'yes',
+		'table_active_border'     => 'no',
 		'selected_quantity_color' => '#3858e9',
 		'show_discount_column'    => 'yes',
 		'discount_format'         => 'percentage',
+		// one store-wide choice: discount percentages as whole numbers everywhere (product pages, shop pages)
+		'round_discount_percentage' => 'no',
 		// options / dropdown layouts
 		'options_option_text'                 => '',
 		'options_show_default_option'         => 'yes',
@@ -307,6 +309,7 @@ class LayoutConfigurator {
 		'shop_loop_display_layout', 'shop_loop_display_pricing_table_style', 'shop_loop_display_pricing_blocks_style', 'shop_loop_display_pricing_options_style',
 		'shop_loop_display_pricing_dropdown_style', 'shop_loop_display_pricing_plain_text_style', 'shop_loop_display_quantity_type', 'shop_loop_display_tiers_order',
 		'shop_loop_display_discount_format', 'shop_loop_display_layout_settings', 'shop_loop_display_position',
+		'round_discount_percentage',
 	);
 
 	/**
@@ -326,6 +329,7 @@ class LayoutConfigurator {
 			'quantity_type'                  => array( 'range', 'static' ),
 			'tiers_order'                    => array( 'asc', 'desc' ),
 			'discount_format'                => array( 'percentage', 'amount', 'both' ),
+			'round_discount_percentage'      => array( 'no', 'yes' ),
 			'product_page_price_format'      => array( 'custom', 'same_as_catalog' ),
 			'you_save_style'                 => array( 'text', 'pill', 'outline' ),
 			'you_save_position'              => array( 'price', 'before_add_to_cart', 'after_table' ),
@@ -491,6 +495,17 @@ class LayoutConfigurator {
 	}
 
 	/**
+	 * The product image of the previews: WooCommerce's current placeholder, bundled with the plugin so the
+	 * preview looks the same on every store, whatever placeholder the store sets or its WooCommerce version
+	 * ships (older ones have a white image that disappears in the skeleton).
+	 */
+	public static function getPreviewPlaceholder(): string {
+		$url = ServiceContainer::getInstance()->getFileManager()->locateAsset( 'admin/images/preview-placeholder.webp' );
+		
+		return (string) apply_filters( 'tiered_pricing_table/layout_configurator/preview_placeholder', $url );
+	}
+	
+	/**
 	 * Whether premium code is available (the woocommerce.com build has no Freemius and is always premium).
 	 */
 	public static function isPremium(): bool {
@@ -583,13 +598,18 @@ class LayoutConfigurator {
 		}
 		$defaults['shop_loop_display_enabled']               = 'no';
 		$defaults['shop_loop_display_position']              = 'woocommerce_after_shop_loop_item__6';
-		$defaults['shop_loop_display_pricing_table_style']      = self::catalogStyle( 'table', GeneralSection::getPricingTableStyle() );
+		// a new store's shop pages get a compact table of their own; one that saved before keeps the earlier defaults
+		$layout = \TierPricingTable\Addons\ProductCatalogLoop\Settings\ProductCatalogLoopSettingsSection::class;
+		$defaults['shop_loop_display_pricing_table_style']      = self::catalogStyle( 'table', $layout::getLayoutDefault( 'pricing_table_style' ) ?: GeneralSection::getPricingTableStyle() );
 		$defaults['shop_loop_display_pricing_blocks_style']     = self::catalogStyle( 'blocks', GeneralSection::getPricingBlocksStyle() );
 		$defaults['shop_loop_display_pricing_options_style']    = self::catalogStyle( 'options', GeneralSection::getPricingOptionsStyle() );
 		$defaults['shop_loop_display_pricing_dropdown_style']   = self::catalogStyle( 'dropdown', GeneralSection::getPricingDropdownStyle() );
 		$defaults['shop_loop_display_pricing_plain_text_style'] = self::catalogStyle( 'plain-text', GeneralSection::getPricingPlainTextStyle() );
-		$defaults['shop_loop_display_discount_column_title'] = __( 'Discount', 'tier-pricing-table' );
-		$defaults['shop_loop_display_layout_settings']       = 'default';
+		$defaults['shop_loop_display_discount_column_title'] = $layout::getLayoutDefault( 'discount_column_title' );
+		$defaults['shop_loop_display_layout_settings']       = $layout::getLayoutDefault( 'layout_settings' );
+		$defaults['shop_loop_display_cell_padding']          = $layout::getLayoutDefault( 'cell_padding' );
+		$defaults['shop_loop_display_table_active_border']   = $layout::getLayoutDefault( 'table_active_border' );
+		$defaults['shop_loop_display_selected_quantity_color'] = $layout::getLayoutDefault( 'selected_quantity_color' );
 		$defaults['shop_loop_display_use_reduced_styles']    = 'yes';
 		$defaults['shop_loop_display_dynamic_price']         = 'yes';
 		$defaults['shop_loop_display_show_quantity_field']   = 'no';
@@ -630,7 +650,7 @@ class LayoutConfigurator {
 		$settings = ServiceContainer::getInstance()->getSettings();
 		$values   = array();
 		// options where an empty string is a value of its own (an empty header hides that column)
-		$keepEmpty = array( 'shop_loop_display_title', 'shop_loop_display_quantity_column_title', 'shop_loop_display_discount_column_title', 'shop_loop_display_price_column_title' );
+		$keepEmpty = array( 'shop_loop_display_title', 'shop_loop_display_quantity_column_title', 'shop_loop_display_discount_column_title', 'shop_loop_display_price_column_title', 'shop_loop_display_cell_padding', 'shop_loop_display_layout_spacing' );
 		foreach ( self::getCatalogDefaults() as $id => $default ) {
 			$value         = $settings->get( $id, $default );
 			$values[ $id ] = is_scalar( $value ) && ( '' !== $value || in_array( $id, $keepEmpty, true ) ) ? (string) $value : (string) $default;
@@ -792,7 +812,7 @@ class LayoutConfigurator {
 				'cart_upsell_template'           => array( 'tp_required_quantity', 'tp_next_price', 'tp_next_discount', 'tp_actual_discount' ),
 				'badge_template'                 => array( 'tp_max_discount', 'tp_lowest_price', 'tp_lowest_quantity', 'tp_max_saving' ),
 			),
-			'placeholder'   => function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src( 'woocommerce_single' ) : '',
+			'placeholder'   => self::getPreviewPlaceholder(),
 			'youSave'       => self::isYouSaveAvailable(),
 			'youSaveOptions' => array(
 				'styles'    => array(

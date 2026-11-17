@@ -276,6 +276,7 @@ class ComposerStaticInitf6da27eb3c107eed44ce0823439221c3
         'TierPricingTable\\Forms\\RegularPricingForm' => __DIR__ . '/../..' . '/src/Forms/RegularPricingForm.php',
         'TierPricingTable\\Forms\\TieredPricingRulesForm' => __DIR__ . '/../..' . '/src/Forms/TieredPricingRulesForm.php',
         'TierPricingTable\\Freemius' => __DIR__ . '/../..' . '/src/Freemius.php',
+        'TierPricingTable\\Frontend\\BlockQuantityLimits' => __DIR__ . '/../..' . '/src/Frontend/BlockQuantityLimits.php',
         'TierPricingTable\\Frontend\\Frontend' => __DIR__ . '/../..' . '/src/Frontend/Frontend.php',
         'TierPricingTable\\Frontend\\PricingTableShortcode' => __DIR__ . '/../..' . '/src/Frontend/PricingTableShortcode.php',
         'TierPricingTable\\Integrations\\Integrations' => __DIR__ . '/../..' . '/src/Integrations/Integrations.php',

@@ -147,7 +147,7 @@ $formId    = 'tpt-wholesale-form';
 		<?php endif; ?>
 
 		<p class="form-row tpt-wholesale__submit">
-			<button type="submit" class="button woocommerce-button"><?php echo esc_html( $submitText ); ?></button>
+			<button type="submit" class="button woocommerce-button wp-element-button"><?php echo esc_html( $submitText ); ?></button>
 		</p>
 
 		<?php if ( ! $user ) : ?>

@@ -15,7 +15,7 @@ class ProductAndCategories extends FormTab {
 	}
 	
 	public function getDescription(): string {
-		return __( 'Products, categories, tags or brands this rule covers', 'tier-pricing-table' );
+		return __( 'Products, categories, tags, brands or attribute values this rule covers', 'tier-pricing-table' );
 	}
 	
 	public function render( GlobalPricingRule $pricingRule ) {
@@ -25,8 +25,32 @@ class ProductAndCategories extends FormTab {
 		$this->renderKindNote( GlobalPricingRule::KIND_ORDER, __( 'For a cart rule these lists decide which cart lines count towards the tiers and the minimum, and which lines get the discount. Leave them empty to count the whole cart, except the products in the Exclusions section.', 'tier-pricing-table' ) );
 		
 		if ( empty( $pricingRule->getIncludedProductCategories() ) && empty( $pricingRule->getIncludedProducts() ) ) {
-			$this->renderKindNote( GlobalPricingRule::KIND_PRODUCT, __( 'If no products, categories, tags, or brands are selected, this rule will apply to all products in your store, except those listed in the Exclusions section.', 'tier-pricing-table' ) );
+			$this->renderKindNote( GlobalPricingRule::KIND_PRODUCT, __( 'Leave these empty to apply the rule to all products, except the exclusions.', 'tier-pricing-table' ) );
 		}
+		
+		$this->renderSelect2( array(
+			'id'            => 'tpt_included_products',
+			'label'         => __( 'Products', 'tier-pricing-table' ),
+			'value'         => ( function () use ( $pricingRule ) {
+				$options = [];
+				
+				foreach ( $pricingRule->getIncludedProducts() as $productId ) {
+					$product = wc_get_product( $productId );
+					
+					if ( $product ) {
+						if ( ! $product->get_sku() ) {
+							$options[ $productId ] = $product->get_name();
+						} else {
+							$options[ $productId ] = $product->get_name() . ' (' . $product->get_sku() . ')';
+						}
+					}
+				}
+				
+				return $options;
+			} )(),
+			'placeholder'   => __( 'Search products&hellip;', 'tier-pricing-table' ),
+			'search_action' => 'woocommerce_json_search_products_and_variations',
+		) );
 		
 		$this->renderSelect2( array(
 			'id'            => 'tpt_included_categories',
@@ -118,34 +142,22 @@ class ProductAndCategories extends FormTab {
 			) );
 		}
 		
+		
 		$this->renderSelect2( array(
-			'id'            => 'tpt_included_products',
-			'label'         => __( 'Products', 'tier-pricing-table' ),
-			'value'         => ( function () use ( $pricingRule ) {
-				$options = [];
-				
-				foreach ( $pricingRule->getIncludedProducts() as $productId ) {
-					$product = wc_get_product( $productId );
-					
-					if ( $product ) {
-						if ( ! $product->get_sku() ) {
-							$options[ $productId ] = $product->get_name();
-						} else {
-							$options[ $productId ] = $product->get_name() . ' (' . $product->get_sku() . ')';
-						}
-					}
-				}
-				
-				return $options;
-			} )(),
-			'placeholder'   => __( 'Search products&hellip;', 'tier-pricing-table' ),
-			'search_action' => 'woocommerce_json_search_products_and_variations',
+			'id'            => 'tpt_included_attributes',
+			'label'         => __( 'Attributes', 'tier-pricing-table' ),
+			'value'         => $this->attributeOptions( $pricingRule->getIncludedAttributes() ),
+			'placeholder'   => __( 'Search attributes&hellip;', 'tier-pricing-table' ),
+			'search_action' => LookupService::ATTRIBUTES_SEARCH_ACTION,
+			'desc_tip'      => false,
+			'description'   => __( 'Only products and variations with these values get the rule. Values of the same attribute match any of them; values of different attributes must all match.', 'tier-pricing-table' ),
 		) );
 		
 		$hasExclusions = ! empty( $pricingRule->getExcludedProductCategories() ) ||
 		                 ! empty( $pricingRule->getExcludedProductTags() ) ||
 		                 ! empty( $pricingRule->getExcludedProductBrands() ) ||
-		                 ! empty( $pricingRule->getExcludedProducts() );
+		                 ! empty( $pricingRule->getExcludedProducts() ) ||
+		                 ! empty( $pricingRule->getExcludedAttributes() );
 		?>
 		<details class="tpt-exclusions-accordion" <?php echo $hasExclusions ? 'open' : ''; ?>>
 			<summary>
@@ -154,6 +166,32 @@ class ProductAndCategories extends FormTab {
 			</summary>
 			<div class="tpt-exclusions-accordion-content">
 		<?php
+		
+		$this->renderSelect2( array(
+			'id'            => 'tpt_excluded_products',
+			'label'         => __( 'Products', 'tier-pricing-table' ),
+			'value'         => ( function () use ( $pricingRule ) {
+				$options = [];
+				
+				foreach ( $pricingRule->getExcludedProducts() as $productId ) {
+					$product = wc_get_product( $productId );
+					
+					if ( ! $product ) {
+						continue;
+					}
+					
+					if ( ! $product->get_sku() ) {
+						$options[ $productId ] = $product->get_name();
+					} else {
+						$options[ $productId ] = $product->get_name() . ' (' . $product->get_sku() . ')';
+					}
+				}
+				
+				return $options;
+			} )(),
+			'placeholder'   => __( 'Search products&hellip;', 'tier-pricing-table' ),
+			'search_action' => 'woocommerce_json_search_products_and_variations',
+		) );
 		
 		$this->renderSelect2( array(
 			'id'            => 'tpt_excluded_categories',
@@ -217,36 +255,36 @@ class ProductAndCategories extends FormTab {
 			) );
 		}
 		
+		
 		$this->renderSelect2( array(
-			'id'            => 'tpt_excluded_products',
-			'label'         => __( 'Products', 'tier-pricing-table' ),
-			'value'         => ( function () use ( $pricingRule ) {
-				$options = [];
-				
-				foreach ( $pricingRule->getExcludedProducts() as $productId ) {
-					$product = wc_get_product( $productId );
-					
-					if ( ! $product ) {
-						continue;
-					}
-					
-					if ( ! $product->get_sku() ) {
-						$options[ $productId ] = $product->get_name();
-					} else {
-						$options[ $productId ] = $product->get_name() . ' (' . $product->get_sku() . ')';
-					}
-				}
-				
-				return $options;
-			} )(),
-			'placeholder'   => __( 'Search products&hellip;', 'tier-pricing-table' ),
-			'search_action' => 'woocommerce_json_search_products_and_variations',
+			'id'            => 'tpt_excluded_attributes',
+			'label'         => __( 'Attributes', 'tier-pricing-table' ),
+			'value'         => $this->attributeOptions( $pricingRule->getExcludedAttributes() ),
+			'placeholder'   => __( 'Search attributes&hellip;', 'tier-pricing-table' ),
+			'search_action' => LookupService::ATTRIBUTES_SEARCH_ACTION,
 		) );
 
 		?>
 			</div>
 		</details>
 		<?php
+	}
+	
+	/**
+	 * The chosen attribute values as select2 options: term id => "Attribute: value".
+	 */
+	protected function attributeOptions( array $termIds ): array {
+		$options = array();
+		
+		foreach ( $termIds as $termId ) {
+			$term = get_term( (int) $termId );
+			
+			if ( $term instanceof \WP_Term ) {
+				$options[ $termId ] = LookupService::getAttributeTermLabel( $term );
+			}
+		}
+		
+		return $options;
 	}
 	
 	public function getIcon(): string {

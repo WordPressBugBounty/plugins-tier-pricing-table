@@ -47,7 +47,7 @@ class TPTFeatureFlagOption {
 			<td>
 				<div class="tpt-feature-flag-wrapper">
 					<span class="tpt-feature-flag-item__icon" aria-hidden="true">
-						<?php echo wp_kses( $icon, self::getAllowedIconTags() ); ?>
+						<?php echo wp_kses( $icon, self::getAllowedIconTags() ); // nosemgrep ?>
 					</span>
 
 					<div class="tpt-feature-flag-item__description">

@@ -13,12 +13,14 @@ class LookupService {
 	const CATEGORIES_SEARCH_ACTION = 'woocommerce_json_search_tpt_categories';
 	const TAGS_SEARCH_ACTION       = 'woocommerce_json_search_tpt_tags';
 	const BRANDS_SEARCH_ACTION     = 'woocommerce_json_search_tpt_brands';
+	const ATTRIBUTES_SEARCH_ACTION = 'woocommerce_json_search_tpt_attributes';
 	const CUSTOMERS_SEARCH_ACTION  = 'woocommerce_json_search_tpt_customers';
 
 	public function __construct() {
 		add_action( 'wp_ajax_' . self::CATEGORIES_SEARCH_ACTION, array( $this, 'categoriesSearchHandler' ) );
 		add_action( 'wp_ajax_' . self::TAGS_SEARCH_ACTION, array( $this, 'tagsSearchHandler' ) );
 		add_action( 'wp_ajax_' . self::BRANDS_SEARCH_ACTION, array( $this, 'brandsSearchHandler' ) );
+		add_action( 'wp_ajax_' . self::ATTRIBUTES_SEARCH_ACTION, array( $this, 'attributesSearchHandler' ) );
 		add_action( 'wp_ajax_' . self::CUSTOMERS_SEARCH_ACTION, array( $this, 'customersSearchHandler' ) );
 	}
 
@@ -176,6 +178,58 @@ class LookupService {
 		}
 
 		wp_send_json( array() );
+	}
+
+	/**
+	 * Values of the global product attributes, labelled "Attribute: value". Searching for an attribute's
+	 * name lists its values too, so "size" offers every size.
+	 */
+	public function attributesSearchHandler() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json( array() );
+		}
+
+		$search     = isset( $_GET['term'] ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
+		$taxonomies = array_values( array_filter( wc_get_attribute_taxonomy_names(), 'taxonomy_exists' ) );
+
+		if ( '' === $search || empty( $taxonomies ) ) {
+			wp_send_json( array() );
+		}
+
+		$found = get_terms( array(
+			'taxonomy'   => $taxonomies,
+			'hide_empty' => false,
+			'name__like' => $search,
+			'number'     => 30,
+		) );
+		$found = is_wp_error( $found ) ? array() : (array) $found;
+
+		$byName = array_values( array_filter( $taxonomies, function ( $taxonomy ) use ( $search ) {
+			return false !== stripos( wc_attribute_label( $taxonomy ), $search );
+		} ) );
+
+		if ( $byName ) {
+			$values = get_terms( array(
+				'taxonomy'   => $byName,
+				'hide_empty' => false,
+				'number'     => 50,
+			) );
+			$found  = array_merge( $found, is_wp_error( $values ) ? array() : (array) $values );
+		}
+
+		$options = array();
+
+		foreach ( $found as $term ) {
+			if ( $term instanceof WP_Term ) {
+				$options[ $term->term_id ] = self::getAttributeTermLabel( $term );
+			}
+		}
+
+		wp_send_json( $options );
+	}
+
+	public static function getAttributeTermLabel( WP_Term $term ): string {
+		return wc_attribute_label( $term->taxonomy ) . ': ' . $term->name;
 	}
 
 	public static function getCategoryLabel( WP_Term $category ): string {

@@ -26,10 +26,16 @@ class RuleOverlaps {
 	 */
 	protected $now;
 	
-	public function __construct( ?callable $productTerms = null, ?callable $userRoles = null, ?int $now = null ) {
+	/**
+	 * @var callable(int): ?string The attribute (taxonomy) of an attribute value's term id.
+	 */
+	protected $attributeOf;
+	
+	public function __construct( ?callable $productTerms = null, ?callable $userRoles = null, ?int $now = null, ?callable $attributeOf = null ) {
 		$this->productTerms = $productTerms ? $productTerms : array( $this, 'readProductTerms' );
 		$this->userRoles    = $userRoles ? $userRoles : array( $this, 'readUserRoles' );
 		$this->now          = null === $now ? time() : $now;
+		$this->attributeOf  = $attributeOf ? $attributeOf : array( $this, 'readAttributeOf' );
 	}
 	
 	/**
@@ -87,6 +93,10 @@ class RuleOverlaps {
 	}
 	
 	protected function productsIntersect( GlobalPricingRule $a, GlobalPricingRule $b ): bool {
+		if ( $this->attributesApart( $a, $b ) ) {
+			return false;
+		}
+		
 		$aLimited = $this->hasProductLimits( $a );
 		$bLimited = $this->hasProductLimits( $b );
 		
@@ -103,6 +113,60 @@ class RuleOverlaps {
 		}
 		
 		return $this->productScopesShare( $a, $b );
+	}
+	
+	/**
+	 * Whether the rules' attribute values keep them on different items: both ask for different values of the
+	 * same attribute (Print: Laser vs Print: Screen), or one excludes every value the other asks for. A
+	 * product with both values (not a variation) is not counted: such rules compete only on it.
+	 */
+	protected function attributesApart( GlobalPricingRule $a, GlobalPricingRule $b ): bool {
+		$aIncluded = $this->byAttribute( $a->getIncludedAttributes() );
+		$bIncluded = $this->byAttribute( $b->getIncludedAttributes() );
+		
+		foreach ( array_intersect_key( $aIncluded, $bIncluded ) as $attribute => $values ) {
+			if ( ! array_intersect( $values, $bIncluded[ $attribute ] ) ) {
+				return true;
+			}
+		}
+		
+		foreach ( array( array( $aIncluded, $b ), array( $bIncluded, $a ) ) as list( $included, $other ) ) {
+			$excluded = self::ints( $other->getExcludedAttributes() );
+			
+			foreach ( $included as $values ) {
+				if ( $excluded && ! array_diff( $values, $excluded ) ) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * @return array<string, int[]> attribute => term ids
+	 */
+	protected function byAttribute( array $termIds ): array {
+		$grouped = array();
+		
+		foreach ( self::ints( $termIds ) as $termId ) {
+			$attribute = call_user_func( $this->attributeOf, $termId );
+			
+			if ( $attribute ) {
+				$grouped[ $attribute ][] = $termId;
+			}
+		}
+		
+		return $grouped;
+	}
+	
+	/**
+	 * Default attribute resolver.
+	 */
+	public function readAttributeOf( int $termId ): ?string {
+		$term = get_term( $termId );
+		
+		return $term instanceof \WP_Term ? $term->taxonomy : null;
 	}
 	
 	protected function hasProductLimits( GlobalPricingRule $rule ): bool {

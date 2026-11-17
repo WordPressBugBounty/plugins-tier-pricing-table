@@ -130,7 +130,7 @@ class Form {
 				cursor: pointer;
 				display: flex;
 				align-items: center;
-				padding: 9px 10px;
+				padding: 15px 10px;
 			}
 
 			.tpt-global-pricing-rule-form-tab:first-child {

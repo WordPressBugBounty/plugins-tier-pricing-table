@@ -8,6 +8,7 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 use WC_Product;
+use WP_Term;
 use WP_User;
 
 class GlobalPricingRule {
@@ -249,6 +250,28 @@ class GlobalPricingRule {
 	 * @var array
 	 */
 	public $excludedProductBrands = array();
+	
+	/**
+	 * Included attribute values: term ids of global product attributes (pa_*). They narrow the rule to the
+	 * products and variations with these values, on top of the products, categories, tags and brands.
+	 *
+	 * @var array
+	 */
+	public $includedAttributes = array();
+	
+	/**
+	 * Excluded attribute values: term ids of global product attributes (pa_*).
+	 *
+	 * @var array
+	 */
+	public $excludedAttributes = array();
+	
+	/**
+	 * The attribute values resolved to slugs, by term id list and language: see self::attributeSlugs().
+	 *
+	 * @var array<string, array<string, array<int, string>>>
+	 */
+	protected $attributeSlugs = array();
 	
 	/**
 	 * Included products
@@ -559,7 +582,8 @@ class GlobalPricingRule {
 	}
 	
 	/**
-	 * Whether the rule has any product condition (included or excluded products, categories, tags, brands).
+	 * Whether the rule has any product condition (included or excluded products, categories, tags, brands,
+	 * attribute values).
 	 */
 	public function hasProductConditions(): bool {
 		$conditions = array(
@@ -567,10 +591,12 @@ class GlobalPricingRule {
 			$this->getIncludedProductCategories(),
 			$this->getIncludedProductTags(),
 			$this->getIncludedProductBrands(),
+			$this->getIncludedAttributes(),
 			$this->getExcludedProducts(),
 			$this->getExcludedProductCategories(),
 			$this->getExcludedProductTags(),
 			$this->getExcludedProductBrands(),
+			$this->getExcludedAttributes(),
 		);
 		
 		return (bool) array_filter( $conditions );
@@ -1038,6 +1064,24 @@ class GlobalPricingRule {
 		$this->excludedProductBrands = $excludedProductBrands;
 	}
 	
+	public function getIncludedAttributes(): array {
+		return $this->includedAttributes;
+	}
+	
+	public function getExcludedAttributes(): array {
+		return $this->excludedAttributes;
+	}
+	
+	public function setIncludedAttributes( array $includedAttributes ) {
+		$this->includedAttributes = $includedAttributes;
+		$this->attributeSlugs     = array();
+	}
+	
+	public function setExcludedAttributes( array $excludedAttributes ) {
+		$this->excludedAttributes = $excludedAttributes;
+		$this->attributeSlugs     = array();
+	}
+	
 	public function getIncludedProducts(): array {
 		return $this->includedProducts;
 	}
@@ -1311,6 +1355,7 @@ class GlobalPricingRule {
 			'included_tags'         => $this->getIncludedProductTags(),
 			'included_brands'       => $this->getIncludedProductBrands(),
 			'included_products'     => $this->getIncludedProducts(),
+			'included_attributes'   => $this->getIncludedAttributes(),
 			'included_users'        => $this->getIncludedUsers(),
 			'included_users_role'   => $this->getIncludedUserRoles(),
 			
@@ -1318,6 +1363,7 @@ class GlobalPricingRule {
 			'excluded_tags'       => $this->getExcludedProductTags(),
 			'excluded_brands'     => $this->getExcludedProductBrands(),
 			'excluded_products'   => $this->getExcludedProducts(),
+			'excluded_attributes' => $this->getExcludedAttributes(),
 			'excluded_users'      => $this->getExcludedUsers(),
 			'excluded_users_role' => $this->getExcludedUserRoles(),
 			
@@ -1375,6 +1421,7 @@ class GlobalPricingRule {
 			'_tpt_included_tags'         => $this->getIncludedProductTags(),
 			'_tpt_included_brands'       => $this->getIncludedProductBrands(),
 			'_tpt_included_products'     => $this->getIncludedProducts(),
+			'_tpt_included_attributes'   => $this->getIncludedAttributes(),
 			'_tpt_included_users'        => $this->getIncludedUsers(),
 			'_tpt_included_user_roles'   => $this->getIncludedUserRoles(),
 			
@@ -1382,6 +1429,7 @@ class GlobalPricingRule {
 			'_tpt_excluded_tags'       => $this->getExcludedProductTags(),
 			'_tpt_excluded_brands'     => $this->getExcludedProductBrands(),
 			'_tpt_excluded_products'   => $this->getExcludedProducts(),
+			'_tpt_excluded_attributes' => $this->getExcludedAttributes(),
 			'_tpt_excluded_users'      => $this->getExcludedUsers(),
 			'_tpt_excluded_user_roles' => $this->getExcludedUserRoles(),
 			
@@ -1458,6 +1506,8 @@ class GlobalPricingRule {
 			(array) get_post_meta( $ruleId, '_tpt_included_brands', true ) ) );
 		$includedProductsIds   = array_filter( array_map( 'intval',
 			(array) get_post_meta( $ruleId, '_tpt_included_products', true ) ) );
+		$includedAttributes    = array_filter( array_map( 'intval',
+			(array) get_post_meta( $ruleId, '_tpt_included_attributes', true ) ) );
 		$includedUsersRole     = array_filter( (array) get_post_meta( $ruleId, '_tpt_included_user_roles', true ),
 			array( self::class, 'isSelectableRole' ) );
 		$includedUsers         = array_filter( array_map( 'intval',
@@ -1472,6 +1522,8 @@ class GlobalPricingRule {
 			(array) get_post_meta( $ruleId, '_tpt_excluded_brands', true ) ) );
 		$excludedProductsIds   = array_filter( array_map( 'intval',
 			(array) get_post_meta( $ruleId, '_tpt_excluded_products', true ) ) );
+		$excludedAttributes    = array_filter( array_map( 'intval',
+			(array) get_post_meta( $ruleId, '_tpt_excluded_attributes', true ) ) );
 		$excludedUsersRole     = array_filter( (array) get_post_meta( $ruleId, '_tpt_excluded_user_roles', true ),
 			array( self::class, 'isSelectableRole' ) );
 		$excludedUsers         = array_filter( array_map( 'intval',
@@ -1491,6 +1543,7 @@ class GlobalPricingRule {
 		$priceRule->setIncludedUsers( $includedUsers );
 		$priceRule->setIncludedUsersRole( $includedUsersRole );
 		$priceRule->setIncludedProducts( $includedProductsIds );
+		$priceRule->setIncludedAttributes( array_values( $includedAttributes ) );
 		
 		$priceRule->setExcludedProductCategories( $excludedCategoriesIds );
 		$priceRule->setExcludedProductTags( $excludedTagsIds );
@@ -1498,6 +1551,7 @@ class GlobalPricingRule {
 		$priceRule->setExcludedUsers( $excludedUsers );
 		$priceRule->setExcludedUsersRole( $excludedUsersRole );
 		$priceRule->setExcludedProducts( $excludedProductsIds );
+		$priceRule->setExcludedAttributes( array_values( $excludedAttributes ) );
 		
 		$priceRule->setIsSuspended( $isSuspended );
 		
@@ -1615,6 +1669,10 @@ class GlobalPricingRule {
 			}
 		}
 		
+		if ( ! empty( $this->getExcludedAttributes() ) && ! empty( $this->getExcludedAttributeHits( $product ) ) ) {
+			return false;
+		}
+		
 		/**
 		 * 3. Check for rule limitation for specific products
 		 *
@@ -1669,7 +1727,165 @@ class GlobalPricingRule {
 			return false;
 		}
 		
+		// 4. Attribute values narrow what the lists above cover (or the whole store when they are empty)
+		if ( ! empty( $this->getIncludedAttributes() ) && ! $this->matchesIncludedAttributes( $product ) ) {
+			return false;
+		}
+		
 		return true;
+	}
+	
+	/**
+	 * Whether the product has the rule's attribute values: one of the chosen values for every attribute
+	 * the rule names (values of one attribute are alternatives, different attributes must all match).
+	 */
+	public function matchesIncludedAttributes( WC_Product $product ): bool {
+		$byAttribute = $this->attributeSlugs( $this->getIncludedAttributes() );
+		
+		// values that no longer exist (deleted terms) never widen the rule to every product
+		if ( empty( $byAttribute ) ) {
+			return empty( $this->getIncludedAttributes() );
+		}
+		
+		foreach ( $byAttribute as $taxonomy => $slugs ) {
+			if ( ! array_intersect( $slugs, self::getAttributeValues( $product, $taxonomy ) ) ) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * The rule's included attribute values (term ids as saved) the product has.
+	 *
+	 * @return int[]
+	 */
+	public function getIncludedAttributeHits( WC_Product $product ): array {
+		return $this->attributeHits( $product, $this->getIncludedAttributes() );
+	}
+	
+	/**
+	 * The rule's excluded attribute values (term ids as saved) the product has: any one excludes it.
+	 *
+	 * @return int[]
+	 */
+	public function getExcludedAttributeHits( WC_Product $product ): array {
+		return $this->attributeHits( $product, $this->getExcludedAttributes() );
+	}
+	
+	/**
+	 * @return int[]
+	 */
+	protected function attributeHits( WC_Product $product, array $termIds ): array {
+		$hits = array();
+		
+		foreach ( $this->attributeSlugs( $termIds ) as $taxonomy => $slugs ) {
+			$hits = array_merge( $hits, array_keys( array_intersect( $slugs, self::getAttributeValues( $product, $taxonomy ) ) ) );
+		}
+		
+		return $hits;
+	}
+	
+	/**
+	 * Attribute values grouped by attribute: taxonomy => array( term id as saved => slug ). The slug is the
+	 * one of the current language (WPML), since a variation stores the slug of its value.
+	 *
+	 * Resolved once per list and language: products are checked against every rule many times per page.
+	 *
+	 * @return array<string, array<int, string>>
+	 */
+	protected function attributeSlugs( array $termIds ): array {
+		
+		if ( empty( $termIds ) ) {
+			return array();
+		}
+		
+		$key = implode( ',', $termIds ) . '|' . (string) apply_filters( 'wpml_current_language', '' );
+		
+		if ( isset( $this->attributeSlugs[ $key ] ) ) {
+			return $this->attributeSlugs[ $key ];
+		}
+		
+		if ( function_exists( '_prime_term_caches' ) ) {
+			_prime_term_caches( array_map( 'intval', $termIds ), false );
+		}
+		
+		$byAttribute = array();
+		
+		foreach ( $termIds as $termId ) {
+			$term = get_term( (int) $termId );
+			
+			if ( ! $term instanceof WP_Term ) {
+				continue;
+			}
+			
+			$translatedId = $this->translateIds( array( $term->term_id ), $term->taxonomy )[0];
+			
+			if ( (int) $translatedId !== (int) $term->term_id ) {
+				$translated = get_term( $translatedId, $term->taxonomy );
+				$term       = $translated instanceof WP_Term ? $translated : $term;
+			}
+			
+			$byAttribute[ $term->taxonomy ][ (int) $termId ] = (string) $term->slug;
+		}
+		
+		$this->attributeSlugs[ $key ] = $byAttribute;
+		
+		return $byAttribute;
+	}
+	
+	/**
+	 * The values (slugs) a product has for a global attribute. A variation has the one value it is set to,
+	 * or none when it is set to "Any …": the rule cannot know which value the customer picked. For an
+	 * attribute the variations do not use, a variation has its parent's values.
+	 *
+	 * @return string[]
+	 */
+	public static function getAttributeValues( WC_Product $product, string $taxonomy ): array {
+		$productId = $product->get_id();
+		
+		if ( self::isVariation( $product ) ) {
+			$own = (array) $product->get_attributes(); // taxonomy => slug, "" for "Any …"
+			
+			if ( array_key_exists( $taxonomy, $own ) ) {
+				return '' === (string) $own[ $taxonomy ] ? array() : array( (string) $own[ $taxonomy ] );
+			}
+			
+			$productId = $product->get_parent_id();
+		}
+		
+		// the object term cache: primed with the products of a shop page, cleared when the terms change
+		$terms = get_the_terms( $productId, $taxonomy );
+		
+		if ( ! is_array( $terms ) ) {
+			return array();
+		}
+		
+		return array_map( function ( $term ) {
+			return (string) $term->slug;
+		}, $terms );
+	}
+	
+	/**
+	 * Keeps the posted term ids that are values of a global product attribute.
+	 *
+	 * @param  mixed  $termIds
+	 *
+	 * @return int[]
+	 */
+	public static function sanitizeAttributeTermIds( $termIds ): array {
+		$valid = array();
+		
+		foreach ( array_unique( array_filter( array_map( 'intval', (array) $termIds ) ) ) as $termId ) {
+			$term = get_term( $termId );
+			
+			if ( $term instanceof WP_Term && taxonomy_is_product_attribute( $term->taxonomy ) ) {
+				$valid[] = $termId;
+			}
+		}
+		
+		return $valid;
 	}
 	
 	/**

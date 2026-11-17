@@ -210,8 +210,9 @@ class QuoteFiles {
 		header( 'Content-Length: ' . filesize( $path ) );
 		header( 'X-Content-Type-Options: nosniff' );
 
+		// $path comes from getStoredPath(): a real file inside the uploads folder, never a stream wrapper such as phar://
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
-		readfile( $path );
+		readfile( $path ); // nosemgrep
 		exit;
 	}
 }

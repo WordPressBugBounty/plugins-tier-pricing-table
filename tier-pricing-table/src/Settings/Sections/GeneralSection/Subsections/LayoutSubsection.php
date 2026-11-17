@@ -209,7 +209,7 @@ class LayoutSubsection extends SubsectionAbstract {
 				'title'   => __( 'Active tier left border', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'table_active_border',
 				'type'    => TPTSwitchOption::FIELD_TYPE,
-				'default' => 'yes',
+				'default' => 'no',
 				'desc'    => __( 'Table styles #1, #5 and #6 mark the active tier with a left border in the active tier color. Switch it off to keep the row highlight only.', 'tier-pricing-table' ),
 			),
 			array(
@@ -306,6 +306,13 @@ class LayoutSubsection extends SubsectionAbstract {
 				'desc'         => __( 'How the discount column and discount badges show a tier\'s discount.', 'tier-pricing-table' ),
 				'desc_tip'     => false,
 				'default'      => 'percentage',
+			),
+			array(
+				'title'   => __( 'Round percentages', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'round_discount_percentage',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'no',
+				'desc'    => __( 'Show discounts as whole numbers: 10% instead of 9.99%.', 'tier-pricing-table' ),
 			),
 			array(
 				'title'   => __( 'Show original price crossed out', 'tier-pricing-table' ),

@@ -56,7 +56,7 @@ $unitPrice = $quotePost instanceof \TierPricingTable\Addons\RequestAQuote\Models
 $listTotal = $isQuoteList ? $quotePost->getItemsTotal() : null;
 
 if ( null !== $listTotal ) {
-	echo esc_html__( 'Total', 'tier-pricing-table' ) . ': ' . html_entity_decode( wp_strip_all_tags( wc_price( $listTotal ) ), ENT_QUOTES, get_bloginfo( 'charset' ) ) . "\n";
+	echo esc_html__( 'Total', 'tier-pricing-table' ) . ': ' . esc_html( html_entity_decode( wp_strip_all_tags( wc_price( $listTotal ) ), ENT_QUOTES, get_bloginfo( 'charset' ) ) ) . "\n";
 }
 
 if ( is_numeric( $unitPrice ) ) {
@@ -64,8 +64,8 @@ if ( is_numeric( $unitPrice ) ) {
 		return html_entity_decode( wp_strip_all_tags( wc_price( $amount ) ), ENT_QUOTES, get_bloginfo( 'charset' ) );
 	};
 
-	echo esc_html__( 'Unit Price', 'tier-pricing-table' ) . ': ' . $plainPrice( (float) $unitPrice ) . "\n";
-	echo esc_html__( 'Total', 'tier-pricing-table' ) . ': ' . $plainPrice( (float) $unitPrice * max( 1, $quotePost->getQuantity() ) ) . "\n";
+	echo esc_html__( 'Unit Price', 'tier-pricing-table' ) . ': ' . esc_html( $plainPrice( (float) $unitPrice ) ) . "\n";
+	echo esc_html__( 'Total', 'tier-pricing-table' ) . ': ' . esc_html( $plainPrice( (float) $unitPrice * max( 1, $quotePost->getQuantity() ) ) ) . "\n";
 }
 
 echo "\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n";

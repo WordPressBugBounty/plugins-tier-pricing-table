@@ -147,7 +147,7 @@ class FormsEndpoint extends WP_REST_Controller {
 					}
 
 					$path[]  = $term->name;
-					$items[] = array( 'id' => (int) $term->term_id, 'label' => html_entity_decode( implode( ' › ', array_filter( $path ) ) ) );
+					$items[] = array( 'id' => (int) $term->term_id, 'label' => html_entity_decode( implode( ' › ', array_filter( $path ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8' ) );
 				}
 
 				return rest_ensure_response( $items );
@@ -167,7 +167,7 @@ class FormsEndpoint extends WP_REST_Controller {
 					$product = wc_get_product( $id );
 
 					if ( $product && ! $product->get_parent_id() ) {
-						$items[] = array( 'id' => (int) $id, 'label' => html_entity_decode( wp_strip_all_tags( $product->get_formatted_name() ) ) );
+						$items[] = array( 'id' => (int) $id, 'label' => html_entity_decode( wp_strip_all_tags( $product->get_formatted_name() ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8' ) );
 					}
 				}
 

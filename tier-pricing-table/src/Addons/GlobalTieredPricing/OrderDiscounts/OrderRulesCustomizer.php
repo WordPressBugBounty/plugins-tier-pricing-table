@@ -117,6 +117,7 @@ class OrderRulesCustomizer {
 				'bar_reached_message' => array( 'threshold' ),
 			),
 			'shortcode'    => FreeShippingBar::SHORTCODE,
+			'placeholder'  => \TierPricingTable\Addons\LayoutConfigurator\LayoutConfigurator::getPreviewPlaceholder(),
 			'currency'     => array(
 				'symbol'            => html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8' ),
 				'position'          => get_option( 'woocommerce_currency_pos', 'left' ),

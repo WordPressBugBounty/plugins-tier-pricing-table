@@ -5,6 +5,7 @@ use TierPricingTable\Admin\ProductPage\TieredPricingTab;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Frontend\Frontend;
 use TierPricingTable\Settings\Sections\GeneralSection\GeneralSection;
+use TierPricingTable\Settings\Settings;
 use WC_Product;
 use WC_Product_Data_Store_CPT;
 use WC_Product_Variable;
@@ -295,7 +296,8 @@ class PricingTable {
 	 * @return string HTML
 	 */
 	/**
-	 * Decimals shown on a percentage discount ("10.14%" with 2, "10%" with 0).
+	 * Decimals shown on a percentage discount ("10.14%" with 2, "10%" with 0): none when the store rounds
+	 * percentages to whole numbers (the "Round percentages" setting), two otherwise.
 	 *
 	 * @param  float  $percent  The discount percentage.
 	 * @param  WC_Product|null  $product
@@ -307,12 +309,13 @@ class PricingTable {
 		/**
 		 * Filter the number of decimals of displayed percentage discounts.
 		 *
-		 * @param  int  $decimals  Default 2. Return 0 to show whole numbers.
+		 * @param  int  $decimals  0 when the "Round percentages" setting is on, 2 otherwise.
 		 * @param  float  $percent  The discount percentage before rounding.
 		 * @param  WC_Product|null  $product
 		 * @param  PricingRule|null  $pricingRule
 		 */
-		$decimals = apply_filters( 'tiered_pricing_table/discount/decimals', 2, $percent, $product, $pricingRule );
+		$default  = 'yes' === get_option( Settings::SETTINGS_PREFIX . 'round_discount_percentage', 'no' ) ? 0 : 2;
+		$decimals = apply_filters( 'tiered_pricing_table/discount/decimals', $default, $percent, $product, $pricingRule );
 
 		return max( 0, (int) $decimals );
 	}
@@ -482,7 +485,7 @@ class PricingTable {
 				'layout_spacing'        => $this->getContainer()->getSettings()->get( 'layout_spacing', '' ),
 				'cell_padding'          => $this->getContainer()->getSettings()->get( 'cell_padding', '' ),
 				'discount_badge_color'  => $this->getContainer()->getSettings()->get( 'discount_badge_color', '' ),
-				'active_tier_border'    => $this->getContainer()->getSettings()->get( 'table_active_border', 'yes' ),
+				'active_tier_border'    => $this->getContainer()->getSettings()->get( 'table_active_border', 'no' ),
 				'tiers_order'           => $this->getContainer()->getSettings()->get( 'tiers_order', 'asc' ),
 				'tooltip_border'        => $this->getContainer()->getSettings()->get( 'tooltip_border',
 								'yes' ) === 'yes',

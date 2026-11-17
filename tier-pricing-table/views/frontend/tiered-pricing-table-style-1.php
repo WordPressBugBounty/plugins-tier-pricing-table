@@ -275,7 +275,7 @@
 
 		<?php echo esc_attr( '#' . $id ); ?> .tiered-pricing--active {
 			background-color: <?php echo esc_attr( Settings::hex2rgba( $settings['active_tier_color'], 0.06 ) ); ?> !important;
-			border-left-color: <?php echo esc_attr( 'no' === ( $settings['active_tier_border'] ?? 'yes' ) ? 'transparent' : $settings['active_tier_color'] ); ?> !important;
+			border-left-color: <?php echo esc_attr( 'yes' !== ( $settings['active_tier_border'] ?? 'no' ) ? 'transparent' : $settings['active_tier_color'] ); ?> !important;
 		}
 
 		<?php echo esc_attr( '#' . $id ); ?> .tiered-pricing-table-row-discount:not(.tiered-pricing-table-row-discount--empty) {

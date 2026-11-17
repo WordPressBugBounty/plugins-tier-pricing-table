@@ -1,4 +1,22 @@
 /* Wholesale registration form and status box. The inputs use WooCommerce's form-row classes, so the theme's form styling applies. */
+
+/* Base field styles for themes that do not style WooCommerce form fields (block themes): :where() keeps them at zero
+   specificity, so any theme rule wins. */
+:where(.tpt-wholesale__form) :where(input.input-text, select.input-text, textarea.input-text) {
+	padding: .6em .75em;
+	border: 1px solid rgba(0, 0, 0, .25);
+	border-radius: 4px;
+	background-color: #fff;
+	color: inherit;
+	font: inherit;
+	line-height: 1.4;
+}
+
+:where(.tpt-wholesale__form) :where(input.input-text, select.input-text, textarea.input-text):focus {
+	border-color: currentColor;
+	outline: 2px solid transparent;
+	box-shadow: 0 0 0 1px currentColor;
+}
 .tpt-wholesale {
 	max-width: 640px;
 }

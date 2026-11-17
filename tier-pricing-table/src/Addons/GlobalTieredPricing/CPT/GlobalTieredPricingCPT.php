@@ -523,12 +523,14 @@ class GlobalTieredPricingCPT {
         $pricingRule->setIncludedProductTags( $includedTagsIds );
         $pricingRule->setIncludedProductBrands( $includedBrandsIds );
         $pricingRule->setIncludedProducts( $includedProductsIds );
+        $pricingRule->setIncludedAttributes( GlobalPricingRule::sanitizeAttributeTermIds( $postedData['tpt_included_attributes'] ?? array() ) );
         $pricingRule->setIncludedUsersRole( $includedUsersRole );
         $pricingRule->setIncludedUsers( $includedUsers );
         $pricingRule->setExcludedProductCategories( $excludedCategoriesIds );
         $pricingRule->setExcludedProductTags( $excludedTagsIds );
         $pricingRule->setExcludedProductBrands( $excludedBrandsIds );
         $pricingRule->setExcludedProducts( $excludedProductsIds );
+        $pricingRule->setExcludedAttributes( GlobalPricingRule::sanitizeAttributeTermIds( $postedData['tpt_excluded_attributes'] ?? array() ) );
         $pricingRule->setExcludedUsersRole( $excludedUsersRole );
         $pricingRule->setExcludedUsers( $excludedUsers );
         // Status, priority and schedule come from the Rule status box; other save paths keep the stored values

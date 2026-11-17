@@ -59,6 +59,7 @@ class GeneralSection extends SectionAbstract {
 		delete_option( Settings::SETTINGS_PREFIX . 'head_quantity_text' );
 		delete_option( Settings::SETTINGS_PREFIX . 'head_price_text' );
 		delete_option( Settings::SETTINGS_PREFIX . 'show_discount_column' );
+		delete_option( Settings::SETTINGS_PREFIX . 'round_discount_percentage' );
 		delete_option( Settings::SETTINGS_PREFIX . 'head_discount_text' );
 		delete_option( Settings::SETTINGS_PREFIX . 'table_quantity_measurement' );
 		delete_option( Settings::SETTINGS_PREFIX . 'blocks_quantity_measurement' );

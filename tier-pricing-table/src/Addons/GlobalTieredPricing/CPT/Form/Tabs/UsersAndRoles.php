@@ -26,7 +26,7 @@ class UsersAndRoles extends FormTab {
 		$this->renderKindNote( GlobalPricingRule::KIND_ORDER, __( 'The discount is given to these customers; leave roles and customers empty for everyone, except those in the Exclusions section. When several cart rules match a customer, the one with the higher priority applies, one discount per cart.', 'tier-pricing-table' ) );
 
 		if ( empty( $pricingRule->getIncludedUserRoles() ) && empty( $pricingRule->getIncludedUsers() ) ) {
-			$this->renderKindNote( GlobalPricingRule::KIND_PRODUCT, __( 'The rule will apply to all users if you do not specify user roles or specific customers (excluding those selected in the exclusions section).', 'tier-pricing-table' ) );
+			$this->renderKindNote( GlobalPricingRule::KIND_PRODUCT, __( 'Leave these empty to apply the rule to all customers, except the exclusions.', 'tier-pricing-table' ) );
 		}
 
 		$this->renderSelect2( array(

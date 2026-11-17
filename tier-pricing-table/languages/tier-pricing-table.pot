@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce Tiered Price Table 8.4.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wt-release\n"
+"Project-Id-Version: WooCommerce Tiered Price Table 8.4.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tiered-pricing-table\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-15T22:30:14+00:00\n"
+"POT-Creation-Date: 2026-11-17T16:50:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tier-pricing-table\n"
@@ -102,7 +102,7 @@ msgstr ""
 
 #: src/Addons/CartUpsells/CartUpsellsService.php:235
 #: src/Addons/CartUpsells/UpsellsSubsection.php:43
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:411
 msgid "Add <b>{tp_required_quantity}</b> more to get <b>{tp_next_price}</b> each"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 #: src/Addons/CatalogPrices/CatalogPricesService.php:41
 #: src/Addons/CatalogPrices/CatalogPricesService.php:46
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:68
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:398
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:402
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:436
 #: src/Managers/FormatPriceManager.php:281
 msgid "From {tp_lowest_price} instead of {tp_original_price}"
@@ -183,7 +183,7 @@ msgstr ""
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:38
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1184
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1193
 msgid "Apply to variable products"
 msgstr ""
 
@@ -205,22 +205,22 @@ msgstr ""
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:53
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:65
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:836
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1216
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1225
 msgid "Custom template"
 msgstr ""
 
 #. translators: %s: example price
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:57
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:828
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848
 #, php-format
 msgid "e.g. From %s"
 msgstr ""
 
 #. translators: 1: lowest example price, 2: highest example price
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:59
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:833
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853
 #, php-format
 msgid "e.g. %1$s - %2$s"
 msgstr ""
@@ -239,7 +239,7 @@ msgstr ""
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:80
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:61
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:399
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:403
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:444
 #: src/Managers/FormatPriceManager.php:320
 #: views/addons/global-rules/order-discount-form.php:55
@@ -251,7 +251,7 @@ msgid "Text displayed before the lowest price (e.g., <b>From $10.00</b>)."
 msgstr ""
 
 #: src/Addons/CatalogPrices/CatalogPricesSubsection.php:89
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:826
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:846
 #: src/Addons/ProductCatalogLoop/ProductCatalogLoop.php:461
 msgid "Lowest price"
 msgstr ""
@@ -391,10 +391,10 @@ msgstr ""
 
 #: src/Addons/CustomColumns/Schema.php:23
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:381
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:385
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:397
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:746
-#: src/PricingTable.php:471
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:791
+#: src/PricingTable.php:474
 #: src/Settings/CustomOptions/TPTTextTemplate.php:207
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:276
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:278
@@ -406,10 +406,10 @@ msgstr ""
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:213
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:728
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:894
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1167
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:903
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1176
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:460
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/EmptyState.js:80
@@ -430,7 +430,7 @@ msgid "Number"
 msgstr ""
 
 #: src/Addons/CustomColumns/Schema.php:25
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:799
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:819
 #: src/Addons/NonLoggedInUsers/Wholesale/Settings/FormFields.php:17
 #: src/Addons/YouSave/YouSaveSubsection.php:66
 #: src/Addons/CustomColumns/build/index.js:1
@@ -467,22 +467,22 @@ msgid "Failed to duplicate rule."
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/ReactivateAction.php:36
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:60
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:57
 msgid "Reactivate"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/ReactivateAction.php:54
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:571
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:573
 msgid "The rule reactivated successfully."
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:37
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:62
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:59
 msgid "Suspend"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Actions/SuspendAction.php:55
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:568
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:570
 msgid "The rule suspended successfully."
 msgstr ""
 
@@ -492,8 +492,8 @@ msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:44
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:14
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:123
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:222
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:33
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:172
 #: src/Addons/QuickOrder/QuickOrderSettingsSection.php:98
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:67
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:775
@@ -509,30 +509,48 @@ msgid "Categories and subcategories"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:45
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:33
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:160
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:57
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:198
 #: src/Addons/RequestAQuote/build/index.js:5
 #: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:235
 msgid "Categories"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:46
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:81
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:180
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:105
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:218
 msgid "Tags"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:47
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:102
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:201
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:126
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:239
 msgid "Brands"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
+#. translators: 1: the products, categories, tags or brands a rule covers, 2: attribute values such as "Size: Large"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:54
+#, php-format
+msgid "%1$s, only with %2$s"
+msgstr ""
+
+#. translators: %s: attribute values such as "Size: Large"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:60
+#, php-format
+msgid "Cart lines with %s"
+msgstr ""
+
+#. translators: %s: attribute values such as "Size: Large"
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:62
+#, php-format
+msgid "All products with %s"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:66
 msgid "The whole cart"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:55
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:66
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/build/index.js:4
 #: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:206
@@ -541,13 +559,13 @@ msgid "All products"
 msgstr ""
 
 #. translators: %s: list of names
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:67
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:83
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:124
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:140
 #, php-format
 msgid "except %s"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:72
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:129
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/CategoryVisibilityFields.php:32
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:23
 #: src/Addons/NonLoggedInUsers/Visibility/Admin/RoleChecklist.php:27
@@ -557,19 +575,19 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:73
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:130
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:63
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:111
 #: src/Admin/ProductPage/RoleCustomerPricingUI.php:88
 msgid "Customers"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:76
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:133
 msgid "All customers"
 msgstr ""
 
 #. translators: %d: number of further items
-#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:101
+#: src/Addons/GlobalTieredPricing/CPT/Columns/AppliesTo.php:158
 #, php-format
 msgid "+%d more"
 msgstr ""
@@ -623,7 +641,7 @@ msgstr ""
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderShipping.php:40
 #: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderDiscount.php:196
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:183
 #: src/Addons/Tools/build/index.js:4
 #: src/Addons/Tools/js-source/components/PricingTest.js:431
 msgid "Free shipping"
@@ -658,8 +676,8 @@ msgstr ""
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:100
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:173
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:213
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:462
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:477
 msgid "Subtotal"
@@ -668,11 +686,9 @@ msgstr ""
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:101
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:205
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/OrderDiscount.php:20
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:380
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:591
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:390
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:744
-#: src/PricingTable.php:473
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:384
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:674
+#: src/PricingTable.php:476
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:271
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:273
 #: views/addons/global-rules/order-discount-form.php:61
@@ -734,8 +750,8 @@ msgstr ""
 #. translators: %s: amount saved per item
 #. translators: %s: discount percentage
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:184
-#: src/PricingTable.php:353
-#: src/PricingTable.php:359
+#: src/PricingTable.php:356
+#: src/PricingTable.php:362
 #, php-format
 msgid "%s off"
 msgstr ""
@@ -764,14 +780,14 @@ msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:204
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Pricing.php:248
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:379
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:383
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:383
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:742
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:787
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:259
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:283
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:323
 #: src/Addons/RequestAQuote/CPT/QuoteRequestAdmin.php:362
-#: src/PricingTable.php:469
+#: src/PricingTable.php:472
 #: src/Settings/CustomOptions/TPTTextTemplate.php:143
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:266
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:268
@@ -787,7 +803,7 @@ msgstr ""
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:213
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:722
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:351
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:461
@@ -833,15 +849,15 @@ msgid "Priority %d"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:34
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:475
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:70
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:466
 msgid "Cart rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Columns/Rule.php:35
 #: src/Addons/GlobalTieredPricing/CPT/KindFilter.php:43
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:71
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:471
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:70
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:462
 msgid "Product prices"
 msgstr ""
 
@@ -944,7 +960,7 @@ msgstr ""
 #: src/Addons/TaxSettings/GlobalRulesIntegration/TaxSettingsTab.php:48
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:27
 #: src/Addons/TaxSettings/RoleBasedRulesIntegration/RoleBasedRulesIntegration.php:34
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:149
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:150
 msgid "Default"
 msgstr ""
 
@@ -1181,7 +1197,7 @@ msgid "Mix and match adds up the quantities of every product this rule covers to
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:18
-msgid "Products, categories, tags or brands this rule covers"
+msgid "Products, categories, tags, brands or attribute values this rule covers"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:22
@@ -1193,42 +1209,56 @@ msgid "For a cart rule these lists decide which cart lines count towards the tie
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:28
-msgid "If no products, categories, tags, or brands are selected, this rule will apply to all products in your store, except those listed in the Exclusions section."
+msgid "Leave these empty to apply the rule to all products, except the exclusions."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:47
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:174
-msgid "Search categories&hellip;"
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:52
-msgid "Subcategories"
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:55
-msgid "Include subcategories"
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:56
-msgid "Products in subcategories of the selected categories match too. The excluded categories below follow the same switch."
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:95
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:194
-msgid "Search tags&hellip;"
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:116
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:215
-msgid "Search brands&hellip;"
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:141
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:242
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:51
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:192
 msgid "Search products&hellip;"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:152
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:71
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:212
+msgid "Search categories&hellip;"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:76
+msgid "Subcategories"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:79
+msgid "Include subcategories"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:80
+msgid "Products in subcategories of the selected categories match too. The excluded categories below follow the same switch."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:119
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:232
+msgid "Search tags&hellip;"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:140
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:253
+msgid "Search brands&hellip;"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:148
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:261
+msgid "Attributes"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:150
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:263
+msgid "Search attributes&hellip;"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:153
+msgid "Only products and variations with these values get the rule. Values of the same attribute match any of them; values of different attributes must all match."
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/ProductAndCategories.php:164
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:87
 msgid "Exclusions"
 msgstr ""
@@ -1413,7 +1443,7 @@ msgid "The discount is given to these customers; leave roles and customers empty
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:29
-msgid "The rule will apply to all users if you do not specify user roles or specific customers (excluding those selected in the exclusions section)."
+msgid "Leave these empty to apply the rule to all customers, except the exclusions."
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/Form/Tabs/UsersAndRoles.php:34
@@ -1426,7 +1456,7 @@ msgstr ""
 #: src/Addons/GlobalTieredPricing/Formatter.php:27
 #: src/Addons/NonLoggedInUsers/Roles.php:15
 #: src/Addons/RoleBasedPricing/RoleBasedPriceManager.php:25
-#: src/Addons/Tools/PricingTest/RuleTester.php:223
+#: src/Addons/Tools/PricingTest/RuleTester.php:280
 msgid "Guests (not logged in)"
 msgstr ""
 
@@ -1468,57 +1498,57 @@ msgstr ""
 msgid "Cart rules settings"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:580
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:582
 msgid "The end date was before the start date, so it was cleared."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:612
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:614
 msgid "Create your first pricing rule"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:617
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:619
 msgid "A pricing rule gives many products one set of tiers, prices or quantity limits at once: by category, tag, brand or customer role. A cart rule works on the cart as a whole instead: an amount off from a subtotal or item count, free shipping, and a minimum order."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:625
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:627
 msgid "Create a pricing rule"
-msgstr ""
-
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:718
-#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:719
-msgid "Pricing rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:720
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:721
-msgid "Add Pricing Rule"
+msgid "Pricing rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:722
-msgid "Edit Pricing Rule"
-msgstr ""
-
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:723
-msgid "New Pricing Rule"
+msgid "Add Pricing Rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:724
-msgid "View Pricing Rule"
+msgid "Edit Pricing Rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:725
-msgid "Find Pricing Rule"
+msgid "New Pricing Rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:726
-msgid "No pricing rules ware found"
+msgid "View Pricing Rule"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:727
-msgid "No pricing rule in trash"
+msgid "Find Pricing Rule"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:728
+msgid "No pricing rules ware found"
 msgstr ""
 
 #: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:729
+msgid "No pricing rule in trash"
+msgstr ""
+
+#: src/Addons/GlobalTieredPricing/CPT/GlobalTieredPricingCPT.php:731
 #: src/Addons/GlobalTieredPricing/GlobalTieredPricingAddon.php:15
 #: src/Settings/Sections/Advanced/AdvancedSection.php:82
 msgid "Pricing rules"
@@ -1555,104 +1585,104 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:70
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:69
 msgid "Rule type"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:88
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:87
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:91
 msgid "Priority"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:93
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:92
 msgid "The rule with the lowest number is applied first. If two rules have the same number, the newer rule is applied first."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:99
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:98
 msgid "Schedule"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:103
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:102
 msgid "Start date"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:105
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:104
 msgid "End date"
 msgstr ""
 
 #. translators: %s: timezone, e.g. "Europe/Kyiv"
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:111
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:110
 #, php-format
 msgid "Whole days in the site timezone (%s). Leave a date empty for no limit."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:122
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:121
 msgid "Overridden by"
 msgstr ""
 
 #. translators: %d: priority number
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:133
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:132
 #, php-format
 msgid "priority %d"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:142
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:141
 msgid "These rules have a higher priority. When one of them matches the same product and customer, that rule is applied and the rule you are editing is skipped."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:151
 msgid "Test this rule"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
 msgid "What a cart gets, and which cart rule wins."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:153
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:152
 msgid "What a customer pays for a product, and which rule wins."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:161
 #: src/Addons/NonLoggedInUsers/Wholesale/CPT/ApplicationAdmin.php:333
 msgid "Move to Trash"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:162
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:161
 msgid "Delete permanently"
 msgstr ""
 
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:168
 #: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:169
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:170
 msgid "Update"
 msgstr ""
 
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:171
 #: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:172
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:173
 msgid "Publish"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:400
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:391
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/PricingTest.js:170
 msgid "Not published"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:401
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:392
 msgid "Publish the rule to put it in force."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:410
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:401
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:28
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/PricingTest.js:167
 msgid "Suspended"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:411
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:402
 msgid "The rule is saved but does not apply until you reactivate it."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:417
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:408
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:27
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/PricingTest.js:169
@@ -1660,17 +1690,17 @@ msgid "Expired"
 msgstr ""
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:419
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:410
 #, php-format
 msgid "Ended %s. Clear or move the end date to use the rule again."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:425
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:416
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:29
 msgid "Skipped"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:432
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:423
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:26
 #: src/Addons/Tools/build/index.js:1
 #: src/Addons/Tools/js-source/components/PricingTest.js:168
@@ -1678,12 +1708,12 @@ msgid "Scheduled"
 msgstr ""
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:434
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:425
 #, php-format
 msgid "Starts %s."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:441
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:432
 #: src/Addons/GlobalTieredPricing/CPT/StatusViews.php:25
 #: src/Admin/PluginInstaller/PluginInstaller.php:102
 #: src/Admin/PluginInstaller/PluginInstaller.php:148
@@ -1691,71 +1721,71 @@ msgid "Active"
 msgstr ""
 
 #. translators: %s: date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:444
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:435
 #, php-format
 msgid "Applies now, until %s."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:445
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:436
 msgid "Applies now."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:460
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:451
 msgid "The rule changes neither prices nor quantity limits, so the storefront skips it. Set a price, tiers or a limit on the tabs on the left."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:472
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:463
 msgid "Tiers and base prices per product."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:476
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:467
 msgid "A discount, free shipping or a minimum order, based on the cart subtotal or item count."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:486
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:477
 msgid "Always"
 msgstr ""
 
 #. translators: 1: start date, 2: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:495
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:486
 #, php-format
 msgid "%1$s to %2$s"
 msgstr ""
 
 #. translators: %s: start date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:500
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:491
 #, php-format
 msgid "From %s"
 msgstr ""
 
 #. translators: %s: end date
-#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:504
+#: src/Addons/GlobalTieredPricing/CPT/StatusBox.php:495
 #, php-format
 msgid "Until %s"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:877
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:903
 msgid "The rule has no discount tiers, no free shipping threshold and no minimum order, so the storefront skips it. Add them on the Discount, Free shipping and Minimum order tabs."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:881
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:907
 msgid "The rule gives a percentage discount, which the premium version applies, so the storefront skips it. Switch to a fixed amount off, or upgrade."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:885
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:911
 msgid "The rule only sets a minimum order, which the premium version applies, so the storefront skips it."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:916
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:942
 msgid "The rule gives a percentage discount, which the premium version applies, so the storefront skips it. Set flat prices instead, or upgrade."
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:921
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:947
 msgid "The pricing rule does not affect either prices or product quantity. The rule will be skipped."
 msgstr ""
 
 #. translators: %d: rule ID
-#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:1250
+#: src/Addons/GlobalTieredPricing/GlobalPricingRule.php:1294
 #, php-format
 msgid "Rule #%d"
 msgstr ""
@@ -1831,7 +1861,7 @@ msgstr ""
 msgid "Including tax"
 msgstr ""
 
-#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:177
+#: src/Addons/GlobalTieredPricing/OrderDiscounts/OrderRulesCustomizer.php:178
 msgid "Loading the cart rules settings…"
 msgstr ""
 
@@ -1893,39 +1923,39 @@ msgstr ""
 msgid "Minimum order quantity"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:377
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:381
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:442
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:178
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:330
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:179
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:337
 msgid "<strong>Buy {tp_quantity} pieces and save {tp_rounded_discount}%</strong>"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:378
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:382
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:461
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:202
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:353
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:203
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:360
 msgid "<strong>Buy {tp_quantity} pieces</strong>"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:382
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:386
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:470
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:185
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:365
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:186
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:372
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each and save {tp_rounded_discount}%</strong>"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:383
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:387
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:492
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:390
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:397
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price} each</strong>"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:389
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:393
 #: src/Addons/YouSave/YouSaveSubsection.php:52
 msgid "You save {tp_ys_total_price}"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:393
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:397
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:470
 #: src/Addons/PricingSummary/SummarySubsection.php:78
 #: views/frontend/tiered-pricing-options-style-1.php:165
@@ -1945,13 +1975,13 @@ msgstr ""
 msgid "Total:"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:394
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:398
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:471
 #: src/Addons/PricingSummary/SummarySubsection.php:85
 msgid "Each: "
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:403
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:407
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:58
 #: src/Addons/TieredPricingCart/CartOptionsSubsection.php:71
 #: src/Addons/LayoutConfigurator/build/index.js:1
@@ -1961,7 +1991,7 @@ msgstr ""
 msgid "Total savings"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:489
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:493
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:318
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:343
@@ -1972,14 +2002,14 @@ msgstr ""
 msgid "Product name"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:544
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:545
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:559
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:560
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:375
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:376
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:734
-#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:735
-#: src/PricingTable.php:555
-#: src/PricingTable.php:556
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:779
+#: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:780
+#: src/PricingTable.php:558
+#: src/PricingTable.php:559
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:255
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:256
 msgid "piece"
@@ -1987,178 +2017,178 @@ msgid_plural "pieces"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:652
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:661
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:672
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:681
 msgid "Above the add to cart button"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:653
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:662
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:673
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:682
 msgid "Below the add to cart button"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:654
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:665
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:674
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:685
 msgid "Above the product title"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:655
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:675
 msgid "Below the product title"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:663
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:683
 msgid "Above the add to cart form"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:664
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:684
 msgid "Below the add to cart form"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:666
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:686
 msgid "Before the product summary"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:667
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:687
 msgid "After the product summary"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:722
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:742
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:43
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:289
+#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:292
 msgid "Pricing Display"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:800
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:820
 #: src/Addons/YouSave/YouSaveSubsection.php:67
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:24
 msgid "Pill"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:801
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:821
 #: src/Addons/YouSave/YouSaveSubsection.php:68
 msgid "Outlined"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:804
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:824
 #: src/Addons/YouSave/YouSaveSubsection.php:77
 msgid "Under the price"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:805
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:825
 #: src/Addons/YouSave/YouSaveSubsection.php:78
 msgid "Above the add-to-cart button"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:806
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:826
 #: src/Addons/YouSave/YouSaveSubsection.php:79
 msgid "After the pricing layout"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:814
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:834
 #: src/Addons/PricingSummary/SummarySubsection.php:68
 msgid "Detailed"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:815
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:835
 #: src/Addons/PricingSummary/SummarySubsection.php:69
 msgid "Compact"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:816
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:836
 #: src/Addons/PricingSummary/SummarySubsection.php:70
 msgid "Inline labels"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:831
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:851
 msgid "Price range"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:837
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857
 msgid "Your own text built from variables"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:843
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:863
 msgid "Match shop & categories"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:844
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:864
 msgid "Lowest price or a price range, as on the shop page"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:847
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:867
 msgid "Price for the selected quantity"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:848
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:868
 msgid "Follows the quantity the customer enters"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:872
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:296
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:153
 msgid "Range"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:852
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:872
 msgid "10 - 24 pieces"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:873
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:297
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:154
 msgid "Static values"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:853
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:873
 msgid "10 pieces"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:876
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:328
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:184
 msgid "Ascending"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:856
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:876
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:332
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:188
 msgid "Smallest quantity first"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:877
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:329
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:185
 msgid "Descending"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:857
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:877
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:333
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:189
 msgid "Biggest discount first"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:860
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:880
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:413
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:297
 #: views/addons/global-rules/order-discount-form.php:39
 msgid "Percentage"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:861
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:881
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:414
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:298
 msgid "Amount saved"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:862
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:882
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:415
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:299
 msgid "Both"
 msgstr ""
 
-#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:940
+#: src/Addons/LayoutConfigurator/LayoutConfigurator.php:960
 msgid "Loading the layout configurator…"
 msgstr ""
 
@@ -2180,7 +2210,7 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/LayoutPreview.php:229
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:324
+#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:326
 msgid "The preview could not be rendered."
 msgstr ""
 
@@ -2848,7 +2878,7 @@ msgstr ""
 
 #: src/Addons/NonLoggedInUsers/Wholesale/Frontend/RegistrationForm.php:53
 #: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:427
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:206
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:209
 msgid "The spam check failed. Please try again."
 msgstr ""
 
@@ -3469,7 +3499,7 @@ msgstr ""
 
 #: src/Addons/PricingSummary/PricingSummaryAddon.php:9
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1037
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1046
 msgid "Pricing summary"
 msgstr ""
 
@@ -3549,7 +3579,7 @@ msgstr ""
 
 #: src/Addons/PricingSummary/SummarySubsection.php:64
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1063
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1072
 msgid "Summary layout"
 msgstr ""
 
@@ -3709,7 +3739,7 @@ msgstr ""
 
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:121
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1113
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1122
 msgid "Bulk savings badge"
 msgstr ""
 
@@ -3868,8 +3898,8 @@ msgstr ""
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:578
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:612
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:637
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:990
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1154
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:999
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1163
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:165
 msgid "Auto"
@@ -3968,7 +3998,7 @@ msgstr ""
 #: src/Addons/ProductCatalogLoop/Settings/ProductCatalogLoopSettingsSection.php:403
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:285
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:846
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:855
 msgid "Show discount"
 msgstr ""
 
@@ -4145,14 +4175,14 @@ msgstr ""
 #. translators: %s: product SKU
 #. translators: %s: SKU
 #: src/Addons/QuickOrder/QuickOrderDisplay.php:182
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:181
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:184
 #, php-format
 msgid "SKU: %s"
 msgstr ""
 
 #. translators: %s: product name
 #: src/Addons/QuickOrder/QuickOrderDisplay.php:184
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:173
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:176
 #, php-format
 msgid "Quantity of %s"
 msgstr ""
@@ -4161,7 +4191,7 @@ msgstr ""
 #. translators: %s: id of a product or category that no longer exists
 #. translators: %s: product, category or role name
 #: src/Addons/QuickOrder/QuickOrderDisplay.php:186
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:171
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:174
 #: src/Addons/RequestAQuote/build/index.js:4
 #: src/Addons/RequestAQuote/js-source/src/components/ItemPicker.js:305
 #, php-format,js-format
@@ -4238,14 +4268,14 @@ msgstr ""
 
 #: src/Addons/QuickOrder/QuickOrderDisplay.php:208
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:242
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:260
 msgid "View cart"
 msgstr ""
 
 #: src/Addons/QuickOrder/QuickOrderDisplay.php:209
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:217
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:243
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:235
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:261
 #: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:185
 msgid "Checkout"
 msgstr ""
@@ -4300,15 +4330,15 @@ msgstr ""
 msgid "Your session has expired. Reload the page and try again."
 msgstr ""
 
-#: src/Addons/QuickOrder/QuickOrderService.php:431
+#: src/Addons/QuickOrder/QuickOrderService.php:448
 msgid "This product is not available."
 msgstr ""
 
-#: src/Addons/QuickOrder/QuickOrderService.php:445
+#: src/Addons/QuickOrder/QuickOrderService.php:462
 msgid "Choose the options of this product on its page."
 msgstr ""
 
-#: src/Addons/QuickOrder/QuickOrderService.php:461
+#: src/Addons/QuickOrder/QuickOrderService.php:478
 msgid "This product could not be added to the cart."
 msgstr ""
 
@@ -4530,7 +4560,7 @@ msgstr ""
 #: views/frontend/quick-order/form.php:84
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:195
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:213
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:459
 #: src/Addons/Tools/build/index.js:3
 #: src/Addons/Tools/build/index.js:8
@@ -4606,8 +4636,8 @@ msgstr ""
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:179
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1095
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:184
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1104
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:480
 #: src/Addons/Tools/build/index.js:3
 #: src/Addons/Tools/js-source/components/PricingTest.js:228
@@ -4970,7 +5000,7 @@ msgid "The quote list is not available."
 msgstr ""
 
 #: src/Addons/RequestAQuote/Frontend/API/SubmitQuoteEndpoint.php:204
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:195
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:198
 #: src/Addons/RequestAQuote/QuoteList/QuoteListService.php:170
 msgid "Your quote list is empty."
 msgstr ""
@@ -5146,14 +5176,14 @@ msgstr ""
 #. translators: %s: request number, like #123
 #. translators: %s: request number
 #: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:433
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:208
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:211
 #, php-format
 msgid "Your request number is %s."
 msgstr ""
 
 #. translators: %s: e-mail address
 #: src/Addons/RequestAQuote/Frontend/QuoteFormDisplay.php:435
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:202
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:205
 #, php-format
 msgid "We e-mailed a copy to %s."
 msgstr ""
@@ -5292,117 +5322,117 @@ msgstr ""
 msgid "Quote list"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:166
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:169
 msgid "Added to your quote list."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:167
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:170
 msgid "The products were added to your quote list."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:168
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:171
 msgid "Quantity updated."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:169
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:172
 msgid "Removed from your quote list."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:174
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:177
 msgid "Decrease quantity"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:175
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:178
 msgid "Increase quantity"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:176
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:179
 msgid "each"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:177
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:180
 msgid "Price on request"
 msgstr ""
 
 #. translators: 1: how many more, 2: price
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:179
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:182
 #, php-format
 msgid "Add %1$s more for %2$s each"
 msgstr ""
 
 #. translators: %s: the smallest quantity that can be requested
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:183
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:186
 #, php-format
 msgid "Min. %s"
 msgstr ""
 
 #. translators: %s: the quantity step, like 5 for 5, 10, 15
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:185
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:188
 #, php-format
 msgid "in steps of %s"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:186
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:189
 msgid "Estimated total"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:187
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:190
 msgid "Estimated with your current prices. The final price is in the quote we send you."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:188
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:191
 msgid "We will send you prices in the quote."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:189
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:192
 msgid "Choose the product options first."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:190
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:193
 msgid "Your quote list is full. Send this request first, then start a new one."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:191
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:194
 msgid "Some products are no longer available and were removed from your list."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:192
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:195
 msgid "Your quote list could not be loaded. Please reload the page."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:193
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:196
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:194
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:197
 msgid "Your cart is empty."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:196
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:199
 msgid "In your quote list"
 msgstr ""
 
 #. translators: %s: quantity
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:198
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:201
 #, php-format
 msgid "In your quote list (%s)"
 msgstr ""
 
 #. translators: %s: quantity
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:200
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:203
 #, php-format
 msgid "Already in your quote list: the quantity is now %s."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:203
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:206
 msgid "The products in your cart were added to your quote list. Your cart stays as it is."
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:204
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:207
 msgid "You asked for a quote for:"
 msgstr ""
 
-#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:205
+#: src/Addons/RequestAQuote/QuoteList/QuoteListDisplay.php:208
 msgid "Sending…"
 msgstr ""
 
@@ -5953,129 +5983,153 @@ msgstr ""
 msgid "The product has an excluded brand: %s."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:49
-#: src/Addons/Tools/PricingTest/RuleTester.php:161
+#. translators: %s: attribute values such as "Size: Large"
+#: src/Addons/Tools/PricingTest/RuleTester.php:50
+#, php-format
+msgid "The product has an excluded attribute value: %s."
+msgstr ""
+
+#: src/Addons/Tools/PricingTest/RuleTester.php:56
+#: src/Addons/Tools/PricingTest/RuleTester.php:185
 msgid "The customer is listed under the excluded customers."
 msgstr ""
 
 #. translators: %s: role names
-#: src/Addons/Tools/PricingTest/RuleTester.php:53
-#: src/Addons/Tools/PricingTest/RuleTester.php:166
+#: src/Addons/Tools/PricingTest/RuleTester.php:60
+#: src/Addons/Tools/PricingTest/RuleTester.php:190
 #, php-format
 msgid "The customer has an excluded role: %s."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:64
+#: src/Addons/Tools/PricingTest/RuleTester.php:71
 msgid "The product is listed under the rule's products."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:65
+#: src/Addons/Tools/PricingTest/RuleTester.php:72
 #, php-format
 msgid "The product is in the rule's category: %s."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:66
+#: src/Addons/Tools/PricingTest/RuleTester.php:73
 #, php-format
 msgid "The product has the rule's tag: %s."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:67
+#: src/Addons/Tools/PricingTest/RuleTester.php:74
 #, php-format
 msgid "The product has the rule's brand: %s."
 msgstr ""
 
 #. translators: %s: category names
-#: src/Addons/Tools/PricingTest/RuleTester.php:86
+#: src/Addons/Tools/PricingTest/RuleTester.php:93
 #, php-format
 msgid "categories %s and their subcategories"
 msgstr ""
 
 #. translators: %s: category names
-#: src/Addons/Tools/PricingTest/RuleTester.php:88
+#: src/Addons/Tools/PricingTest/RuleTester.php:95
 #, php-format
 msgid "categories %s"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:93
+#: src/Addons/Tools/PricingTest/RuleTester.php:100
 #, php-format
 msgid "tags %s"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:96
+#: src/Addons/Tools/PricingTest/RuleTester.php:103
 #, php-format
 msgid "brands %s"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:99
+#: src/Addons/Tools/PricingTest/RuleTester.php:106
 #, php-format
 msgid "%d selected product"
 msgid_plural "%d selected products"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:101
+#: src/Addons/Tools/PricingTest/RuleTester.php:108
 #, php-format
 msgid "The product is in %s."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:101
+#: src/Addons/Tools/PricingTest/RuleTester.php:108
 msgid "The product has no category."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:105
+#: src/Addons/Tools/PricingTest/RuleTester.php:112
 #, php-format
 msgid "The rule is limited to %s, and the product is in none of them."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:109
+#: src/Addons/Tools/PricingTest/RuleTester.php:116
 msgid "The rule applies to every product (no products, categories, tags or brands selected)."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:116
-#: src/Addons/Tools/PricingTest/RuleTester.php:176
+#. translators: %s: attribute values such as "Size: Large"
+#: src/Addons/Tools/PricingTest/RuleTester.php:122
+#, php-format
+msgid "The rule is limited to the attribute values %s, and the product does not have them."
+msgstr ""
+
+#. translators: %s: attribute names
+#: src/Addons/Tools/PricingTest/RuleTester.php:126
+#, php-format
+msgid "This variation is set to \"Any %s\", which matches no value chosen in a rule."
+msgstr ""
+
+#. translators: %s: attribute values such as "Size: Large"
+#: src/Addons/Tools/PricingTest/RuleTester.php:132
+#, php-format
+msgid "The product has the rule's attribute values: %s."
+msgstr ""
+
+#: src/Addons/Tools/PricingTest/RuleTester.php:140
+#: src/Addons/Tools/PricingTest/RuleTester.php:200
 msgid "The rule applies to every customer (no roles or customers selected)."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:122
-#: src/Addons/Tools/PricingTest/RuleTester.php:179
+#: src/Addons/Tools/PricingTest/RuleTester.php:146
+#: src/Addons/Tools/PricingTest/RuleTester.php:203
 msgid "The customer is listed under the rule's customers."
 msgstr ""
 
 #. translators: %s: role names
-#: src/Addons/Tools/PricingTest/RuleTester.php:129
-#: src/Addons/Tools/PricingTest/RuleTester.php:184
+#: src/Addons/Tools/PricingTest/RuleTester.php:153
+#: src/Addons/Tools/PricingTest/RuleTester.php:208
 #, php-format
 msgid "The customer has the rule's role: %s."
 msgstr ""
 
 #. translators: %s: role names
-#: src/Addons/Tools/PricingTest/RuleTester.php:135
-#: src/Addons/Tools/PricingTest/RuleTester.php:189
+#: src/Addons/Tools/PricingTest/RuleTester.php:159
+#: src/Addons/Tools/PricingTest/RuleTester.php:213
 #, php-format
 msgid "This customer has the roles %s."
 msgstr ""
 
 #. translators: %s: role names
-#: src/Addons/Tools/PricingTest/RuleTester.php:135
-#: src/Addons/Tools/PricingTest/RuleTester.php:189
+#: src/Addons/Tools/PricingTest/RuleTester.php:159
+#: src/Addons/Tools/PricingTest/RuleTester.php:213
 msgid "This customer has no role."
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:136
-#: src/Addons/Tools/PricingTest/RuleTester.php:190
+#: src/Addons/Tools/PricingTest/RuleTester.php:160
+#: src/Addons/Tools/PricingTest/RuleTester.php:214
 msgid "A visitor who is not logged in only matches rules that include \"Guests (not logged in)\" or have no customer limits."
 msgstr ""
 
 #. translators: %s: role names
-#: src/Addons/Tools/PricingTest/RuleTester.php:139
-#: src/Addons/Tools/PricingTest/RuleTester.php:194
+#: src/Addons/Tools/PricingTest/RuleTester.php:163
+#: src/Addons/Tools/PricingTest/RuleTester.php:218
 #, php-format
 msgid "roles %s"
 msgstr ""
 
 #. translators: %d: number of customers
-#: src/Addons/Tools/PricingTest/RuleTester.php:142
-#: src/Addons/Tools/PricingTest/RuleTester.php:198
+#: src/Addons/Tools/PricingTest/RuleTester.php:166
+#: src/Addons/Tools/PricingTest/RuleTester.php:222
 #, php-format
 msgid "%d selected customer"
 msgid_plural "%d selected customers"
@@ -6083,33 +6137,33 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: the limits, e.g. "roles Wholesale and 2 selected customers"
-#: src/Addons/Tools/PricingTest/RuleTester.php:147
-#: src/Addons/Tools/PricingTest/RuleTester.php:204
+#: src/Addons/Tools/PricingTest/RuleTester.php:171
+#: src/Addons/Tools/PricingTest/RuleTester.php:228
 #, php-format
 msgid "The rule is limited to %s."
 msgstr ""
 
 #. translators: %s: the limits, e.g. "roles Wholesale and 2 selected customers"
-#: src/Addons/Tools/PricingTest/RuleTester.php:147
-#: src/Addons/Tools/PricingTest/RuleTester.php:204
+#: src/Addons/Tools/PricingTest/RuleTester.php:171
+#: src/Addons/Tools/PricingTest/RuleTester.php:228
 msgid "and"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:238
+#: src/Addons/Tools/PricingTest/RuleTester.php:295
 msgid "a role price on the product"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:240
+#: src/Addons/Tools/PricingTest/RuleTester.php:297
 msgid "a customer price on the product"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:242
+#: src/Addons/Tools/PricingTest/RuleTester.php:299
 #: views/admin/notifications/activation-notification.php:44
 msgid "a global pricing rule"
 msgstr ""
 
-#: src/Addons/Tools/PricingTest/RuleTester.php:244
-#: src/Addons/Tools/PricingTest/RuleTester.php:246
+#: src/Addons/Tools/PricingTest/RuleTester.php:301
+#: src/Addons/Tools/PricingTest/RuleTester.php:303
 msgid "the product's own pricing"
 msgstr ""
 
@@ -6144,7 +6198,7 @@ msgstr ""
 
 #: src/Addons/YouSave/YouSaveAddon.php:9
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:948
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:957
 msgid "Savings badge"
 msgstr ""
 
@@ -6194,8 +6248,8 @@ msgstr ""
 
 #: src/Addons/YouSave/YouSaveSubsection.php:83
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:984
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1148
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:993
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1157
 msgid "Badge colour"
 msgstr ""
 
@@ -6622,7 +6676,7 @@ msgstr ""
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:56
 #: src/TierPricingTablePlugin.php:315
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:841
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:850
 #: src/Blocks/build/index.js:757
 #: src/Blocks/src/panels/MainOptionsPanel/DisplayTypePanel.js:19
 #: src/Blocks/build/index.js:497
@@ -6636,7 +6690,7 @@ msgstr ""
 #: src/Integrations/Plugins/Elementor/ElementorWidget.php:64
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:662
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1073
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1082
 #: src/Addons/RequestAQuote/build/index.js:5
 #: src/Addons/RequestAQuote/js-source/src/components/FormEdit.js:668
 #: src/Addons/TierLabels/build/index.js:2
@@ -6976,36 +7030,36 @@ msgid "Add tiered pricing data to the Yoast product schema and introduce <b>%%lo
 msgstr ""
 
 #. translators: 1: discount percentage, 2: amount saved per item
-#: src/PricingTable.php:356
+#: src/PricingTable.php:359
 #, php-format
 msgid "%1$s off, save %2$s"
 msgstr ""
 
 #. translators: %d: number of tiers not listed
-#: src/PricingTable.php:443
+#: src/PricingTable.php:446
 #, php-format
 msgid "+%d more tier"
 msgid_plural "+%d more tiers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/PricingTable.php:654
+#: src/PricingTable.php:657
 msgid "Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier."
 msgstr ""
 
-#: src/PricingTable.php:662
+#: src/PricingTable.php:665
 msgid "To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity."
 msgstr ""
 
-#: src/PricingTable.php:666
+#: src/PricingTable.php:669
 msgid "Why?"
 msgstr ""
 
-#: src/PricingTable.php:667
+#: src/PricingTable.php:670
 msgid "The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier."
 msgstr ""
 
-#: src/PricingTable.php:671
+#: src/PricingTable.php:674
 msgid "This notice is only visible to store administrators."
 msgstr ""
 
@@ -7147,9 +7201,9 @@ msgstr ""
 #: src/Settings/Sections/Advanced/AdvancedSection.php:83
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:187
+#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:188
 #: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:187
-#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:295
+#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:297
 #: src/Addons/TierLabels/build/index.js:1
 #: src/Addons/TierLabels/js-source/index.js:177
 msgid "Product page"
@@ -7163,17 +7217,17 @@ msgstr ""
 msgid "Wholesale and orders"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:104
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:105
 msgid "General"
 msgstr ""
 
 #. translators: %d: style number
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:152
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:153
 #, php-format
 msgid "Style #%d"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/GeneralSection.php:192
+#: src/Settings/Sections/GeneralSection/GeneralSection.php:193
 msgid "<strong>Buy {tp_quantity} pieces for {tp_price}</strong>"
 msgstr ""
 
@@ -7384,7 +7438,7 @@ msgstr ""
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:234
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:854
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:863
 msgid "Tooltip border"
 msgstr ""
 
@@ -7410,77 +7464,85 @@ msgid "How the discount column and discount badges show a tier's discount."
 msgstr ""
 
 #: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:311
+msgid "Round percentages"
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:315
+msgid "Show discounts as whole numbers: 10% instead of 9.99%."
+msgstr ""
+
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:318
 #: src/Settings/Sections/GeneralSection/Subsections/ProductPagePriceSubsection.php:56
 msgid "Show original price crossed out"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:315
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:322
 msgid "Pricing options will show a crossed-out regular price next to the discounted tier price."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:320
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:327
 msgid "Show total calculated price for selected option"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:324
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:331
 msgid "The selected pricing option will dynamically display the total calculated cost."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:328
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:335
 msgid "Pricing option text template"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:339
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:346
 msgid "Use the variables above to build the template for the pricing option."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:343
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:350
 msgid "Show base price (no discount) option"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:347
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:354
 msgid "Display an option for the regular product price (e.g. 1 item) where no tier discount is applied."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:351
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:358
 msgid "Base price option template"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:359
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:366
 msgid "Customize the template for the base price option."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:363
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:370
 msgid "Pricing string template"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:375
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:382
 msgid "Use the variables above to build the template for the pricing string."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:379
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:386
 msgid "Show first tier pricing string"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:383
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:390
 msgid "Show the tier with a regular product price. This is the first pricing tier where no discount is offered."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:388
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:395
 msgid "First tier pricing string template"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:398
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:405
 msgid "Set up the first pricing tier template where a discount is not offered."
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:402
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:409
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:879
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:888
 msgid "Make pricing tiers clickable"
 msgstr ""
 
-#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:406
+#: src/Settings/Sections/GeneralSection/Subsections/LayoutSubsection.php:413
 msgid "Allow customers to click on a pricing tier (table row, block, or option) to automatically select that quantity."
 msgstr ""
 
@@ -8219,7 +8281,7 @@ msgstr ""
 #: views/frontend/quick-order/form.php:120
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:263
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:281
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:352
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:408
 #: src/Addons/RequestAQuote/build/index.js:1
@@ -8250,7 +8312,7 @@ msgstr ""
 #: src/Addons/CustomColumns/build/index.js:1
 #: src/Addons/CustomColumns/js-source/index.js:66
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1194
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1203
 msgid "Format"
 msgstr ""
 
@@ -8380,7 +8442,7 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:198
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:985
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:994
 msgid "Auto: the badge follows the active tier colour."
 msgstr ""
 
@@ -8431,9 +8493,9 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:274
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1001
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1082
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1136
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1010
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1091
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1145
 #: src/Addons/RequestAQuote/build/index.js:1
 #: src/Addons/RequestAQuote/js-source/src/components/FormsList.js:56
 msgid "Position"
@@ -8656,8 +8718,8 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:641
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:994
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1158
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1003
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1167
 msgid "Reset"
 msgstr ""
 
@@ -8703,247 +8765,252 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
 #: src/Addons/LayoutConfigurator/js-source/components/Controls.js:754
+msgid "Round percentages (10% instead of 9.99%)"
+msgstr ""
+
+#: src/Addons/LayoutConfigurator/build/index.js:1
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:763
 msgid "Tooltip icon"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:754
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:763
 msgid "Colour and size of the icon shown next to the price."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:774
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:783
 msgid "Option text"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:775
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:784
 msgid "Text of each pricing option. Click a variable to insert it."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:786
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:795
 msgid "Base price option"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:791
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:800
 msgid "Show an option for the regular price (no discount)"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:809
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:818
 msgid "Pricing string"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:810
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:819
 msgid "Text shown for each pricing tier. Click a variable to insert it."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:821
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:830
 msgid "First tier"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:825
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:834
 msgid "Show the regular price tier (no discount)"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:862
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:918
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:871
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:927
 msgid "Show the original price crossed out"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:870
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:879
 msgid "Show the total for the selected option"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:880
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:889
 msgid "Clicking a tier selects its quantity."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:896
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1170
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:905
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1179
 msgid "Price display"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:906
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:915
 msgid "Price behaviour"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:910
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:919
 msgid "Update the price on quantity change"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:911
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:920
 msgid "The main price follows the quantity the customer enters."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:919
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:928
 msgid "Next to the discounted tier price."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:926
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:935
 msgid "Show the total price (price × quantity)"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:927
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:936
 msgid "Instead of the price per item."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:934
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:943
 msgid "Also for products without tiered pricing"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:951
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1115
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:960
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1124
 msgid "Badge"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:952
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:961
 msgid "Shown when the selected quantity has a discount. Also available as the [tiered_price_you_save] shortcode."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:957
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:966
 msgid "Show the savings badge"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:972
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:981
 msgid "Style"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:972
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:981
 msgid "Text: the colour as text colour. Pill: a filled label with white text. Outlined: a bordered label."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:985
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1149
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:994
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1158
 msgid "Reset for the active tier colour."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1012
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1021
 msgid "Badge options"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1016
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1025
 msgid "Include the WooCommerce sale discount"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1017
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1026
 msgid "An existing sale discount counts towards the savings."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1024
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1053
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1033
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1062
 msgid "Show for products without tiered pricing"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1025
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1034
 msgid "For regular sale products."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1040
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1049
 msgid "Summary block"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1041
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1050
 msgid "Quantity, price per item and total for the selected quantity, near the pricing layout."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1046
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1055
 msgid "Show the pricing summary block"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1077
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1086
 msgid "e.g. Your order"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1091
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1100
 msgid "Labels"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1101
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1110
 msgid "Each"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1116
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1125
 msgid "A badge on the product image with the biggest discount the product's tiers give. Shows whether or not the pricing does, in the lists \"Where it shows\" allows."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1121
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1130
 msgid "Show a bulk savings badge"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1149
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1158
 msgid "Auto: the active tier colour."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1171
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1180
 msgid "The price shown in the product grid for products with tiered pricing."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1176
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1185
 msgid "Replace the regular price"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1177
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1186
 msgid "Show the lowest tier price or a price range instead."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1185
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1194
 msgid "Lowest and highest prices across all variations."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1205
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1214
 msgid "Prefix for the lowest price"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:1
-#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1217
+#: src/Addons/LayoutConfigurator/js-source/components/Controls.js:1226
 msgid "Click a variable to insert it."
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:193
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:211
 #: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:184
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:454
 msgid "Cart"
@@ -8951,21 +9018,21 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:205
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:223
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:476
 msgid "Cart totals"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:183
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:478
 msgid "Shipping"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:207
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:225
 #: src/Addons/LayoutConfigurator/js-source/skeleton.js:481
 msgid "Proceed to checkout"
 msgstr ""
@@ -8986,24 +9053,24 @@ msgid "Not shown automatically: the pricing layout appears where you place the s
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:189
-#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:295
+#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:190
+#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:297
 msgid "Shop & category pages"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:192
-#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:295
+#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:193
+#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:297
 msgid "Cart & Checkout"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:308
+#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:310
 msgid "Layout preview"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
-#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:327
+#: src/Addons/LayoutConfigurator/js-source/components/Preview.js:329
 msgid "The real product page may look a bit different, depending on your theme."
 msgstr ""
 
@@ -9019,7 +9086,7 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
-#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:315
+#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:318
 #: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:322
 #: src/Addons/TierLabels/build/index.js:2
 #: src/Addons/TierLabels/js-source/index.js:447
@@ -9028,43 +9095,43 @@ msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/index.js:96
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:3
-#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:316
+#: src/Addons/LayoutConfigurator/js-source/components/LayoutConfigurator.js:319
 #: src/Addons/LayoutConfigurator/js-source/components/OrderRulesCustomizer.js:323
 msgid "Save changes"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:164
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:169
 msgid "Sample product"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:176
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:181
 msgid "Order discount"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:178
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:183
 msgid "Flat rate:"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:221
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:239
 msgid "Your order"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:224
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:242
 msgid "Place order"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:238
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:256
 msgid "Subtotal:"
 msgstr ""
 
 #: src/Addons/LayoutConfigurator/build/order-rules-customizer.js:1
-#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:252
+#: src/Addons/LayoutConfigurator/js-source/cart-skeleton.js:270
 msgid "The bar is not placed on product pages. Tick \"Product page\" under \"Where it shows\" to add it above the add to cart form."
 msgstr ""
 

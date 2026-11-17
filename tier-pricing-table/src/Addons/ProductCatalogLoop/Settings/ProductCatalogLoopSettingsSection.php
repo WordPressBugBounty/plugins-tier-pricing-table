@@ -223,7 +223,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'desc'     => __( 'Choose whether to inherit the layout from the product page or use a custom layout for catalogs.',
 					'tier-pricing-table' ),
 				'desc_tip' => true,
-				'default'  => 'default',
+				'default'  => self::getLayoutDefault( 'layout_settings' ),
 			),
 			array(
 				'title'    => __( 'Catalog layout', 'tier-pricing-table' ),
@@ -315,7 +315,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'title'             => __( 'Cell padding', 'tier-pricing-table' ),
 				'id'                => self::getOptionID( 'cell_padding' ),
 				'type'              => 'number',
-				'default'           => '',
+				'default'           => self::getLayoutDefault( 'cell_padding' ),
 				'css'               => 'width: 6em;',
 				'custom_attributes' => array( 'min' => 0, 'max' => 30, 'step' => 1, 'placeholder' => __( 'Auto', 'tier-pricing-table' ) ),
 				'desc'              => __( 'Padding inside the cells of the table and horizontal table layouts, in pixels. Leave empty to keep each design style\'s own padding; a value also overrides the theme\'s cell padding.', 'tier-pricing-table' ),
@@ -339,7 +339,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'id'      => self::getOptionID( 'selected_quantity_color' ),
 				'type'    => 'color',
 				'css'     => 'width:6em;',
-				'default' => '#3858e9',
+				'default' => self::getLayoutDefault( 'selected_quantity_color' ),
 			),
 			array(
 				'title'   => __( 'Discount badge color', 'tier-pricing-table' ),
@@ -353,7 +353,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 				'title'   => __( 'Active tier left border', 'tier-pricing-table' ),
 				'id'      => self::getOptionID( 'table_active_border' ),
 				'type'    => TPTSwitchOption::FIELD_TYPE,
-				'default' => 'yes',
+				'default' => self::getLayoutDefault( 'table_active_border' ),
 				'desc'    => __( 'Table styles #1, #5 and #6 mark the active tier with a left border in the active tier color. Switch it off to keep the row highlight only.', 'tier-pricing-table' ),
 			),
 			array(
@@ -387,7 +387,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 			),
 			array(
 				'title'   => __( 'Discount column title', 'tier-pricing-table' ),
-				'default' => __( 'Discount', 'tier-pricing-table' ),
+				'default' => self::getLayoutDefault( 'discount_column_title' ),
 				'id'      => self::getOptionID( 'discount_column_title' ),
 				'desc'    => __( 'Leave empty to not show this column.', 'tier-pricing-table' ),
 				'type'    => 'text',
@@ -645,8 +645,52 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 		);
 	}
 	
+	/**
+	 * Whether the store has saved its shop page settings at some point. Only a settings save writes these
+	 * two options (the customizer saves every shop option with the page).
+	 */
+	public static function hasSavedSettings(): bool {
+		return false !== get_option( self::getOptionID( 'enabled' ) ) || false !== get_option( self::getOptionID( 'layout_settings' ) );
+	}
+
+	/**
+	 * Default of a shop page layout option. A store that has never saved its shop page settings starts with
+	 * a compact table of its own: design style #1, 4px cell padding, no discount column, no active tier left
+	 * border, the product page's active tier colour. A store that saved them before keeps the earlier defaults
+	 * (the product page layout, its table style, the style's own padding, a Discount column, the left border)
+	 * for any option it never stored.
+	 *
+	 * @param  string  $option  layout_settings, pricing_table_style, cell_padding, discount_column_title,
+	 *                          table_active_border or selected_quantity_color.
+	 *
+	 * @return string
+	 */
+	public static function getLayoutDefault( string $option ): string {
+		if ( self::hasSavedSettings() ) {
+			$defaults = array(
+				'layout_settings'         => 'default',
+				'pricing_table_style'     => '', // the product page style
+				'cell_padding'            => '',
+				'discount_column_title'   => __( 'Discount', 'tier-pricing-table' ),
+				'table_active_border'     => 'yes',
+				'selected_quantity_color' => '#3858e9',
+			);
+		} else {
+			$defaults = array(
+				'layout_settings'         => 'custom',
+				'pricing_table_style'     => 'style-1',
+				'cell_padding'            => '4',
+				'discount_column_title'   => '',
+				'table_active_border'     => 'no',
+				'selected_quantity_color' => (string) get_option( Settings::SETTINGS_PREFIX . 'selected_quantity_color', '#3858e9' ),
+			);
+		}
+
+		return $defaults[ $option ] ?? '';
+	}
+
 	public static function isCustomLayoutSettings(): bool {
-		return 'custom' === get_option( self::getOptionID( 'layout_settings' ), 'default' );
+		return 'custom' === get_option( self::getOptionID( 'layout_settings' ), self::getLayoutDefault( 'layout_settings' ) );
 	}
 	
 	public static function getLayoutType(): string {
@@ -655,10 +699,11 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	
 	/**
 	 * Catalog design styles. Until a catalog style is saved, the product page style applies (that is how
-	 * catalogs always rendered before they had their own style options).
+	 * catalogs always rendered before they had their own style options); a new store's table starts at
+	 * style #1 (see getLayoutDefault()).
 	 */
 	public static function getTableStyle(): string {
-		return self::catalogStyle( 'table', (string) get_option( self::getOptionID( 'pricing_table_style' ), '' ) ?: GeneralSection::getPricingTableStyle() );
+		return self::catalogStyle( 'table', (string) get_option( self::getOptionID( 'pricing_table_style' ), self::getLayoutDefault( 'pricing_table_style' ) ) ?: GeneralSection::getPricingTableStyle() );
 	}
 	
 	public static function getBlocksStyle(): string {
@@ -699,7 +744,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	}
 	
 	public static function getCellPadding(): string {
-		return (string) get_option( self::getOptionID( 'cell_padding' ), '' );
+		return (string) get_option( self::getOptionID( 'cell_padding' ), self::getLayoutDefault( 'cell_padding' ) );
 	}
 	
 	public static function getTiersOrder(): string {
@@ -711,7 +756,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	}
 	
 	public static function getSelectedQuantityColor(): string {
-		return get_option( self::getOptionID( 'selected_quantity_color' ), '#3858e9' );
+		return get_option( self::getOptionID( 'selected_quantity_color' ), self::getLayoutDefault( 'selected_quantity_color' ) );
 	}
 	
 	public static function getDiscountBadgeColor(): string {
@@ -719,7 +764,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 	}
 	
 	public static function getActiveTierBorder(): string {
-		return 'no' === get_option( self::getOptionID( 'table_active_border' ), 'yes' ) ? 'no' : 'yes';
+		return 'no' === get_option( self::getOptionID( 'table_active_border' ), self::getLayoutDefault( 'table_active_border' ) ) ? 'no' : 'yes';
 	}
 	
 	public static function getTableQuantityMeasurement(): array {
@@ -741,7 +786,7 @@ class ProductCatalogLoopSettingsSection extends SectionAbstract {
 			'head_quantity_text' => get_option( self::getOptionID( 'quantity_column_title' ),
 				__( 'Quantity', 'tier-pricing-table' ) ),
 			'head_discount_text' => get_option( self::getOptionID( 'discount_column_title' ),
-				__( 'Discount', 'tier-pricing-table' ) ),
+				self::getLayoutDefault( 'discount_column_title' ) ),
 			'head_price_text'    => get_option( self::getOptionID( 'price_column_title' ),
 				__( 'Price', 'tier-pricing-table' ) ),
 		);

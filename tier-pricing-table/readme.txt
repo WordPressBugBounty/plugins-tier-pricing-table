@@ -1,128 +1,107 @@
 === Tiered Pricing Table for WooCommerce ===
 
 Contributors: bycrik, freemius
-Tags: woocommerce, tiered pricing, dynamic price, price, wholesale
-Requires at least: 5.0
+Tags: tiered pricing, bulk discount, quantity discount, wholesale, b2b
+Requires at least: 6.4
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 8.4.0
+Stable tag: 8.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Create bulk, wholesale, and quantity-based pricing in WooCommerce with flexible tables, role-based pricing, and powerful upsells.
+Bulk and quantity discounts, wholesale and B2B prices, and cart rules for WooCommerce. Show tiered prices as tables, blocks or options.
 
 == Description ==
 
-**Tiered Pricing Table for WooCommerce** lets you create bulk discounts, wholesale pricing, and quantity-based offers to increase average order value.
-
-Easily set different prices based on quantity, user roles, or specific customers — and display them using beautiful, customizable pricing tables, blocks, or dropdowns.
+**Tiered Pricing Table for WooCommerce** gives customers a lower price when they buy more. Set quantity tiers on a product, or one pricing rule for a whole category, brand or customer role, and show the tiers as a clear table, blocks or options on product and shop pages.
 
 [youtube https://www.youtube.com/watch?v=0oWxsmwz67A]
 
-[**Live Demo**](https://demo.tiered-pricing.com/) | [**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Contact Us**](https://tiered-pricing.com/contact-us/) | [**Plugin Website**](https://tiered-pricing.com/)
+[**Live demo**](https://demo.tiered-pricing.com/) | [**Documentation**](https://tiered-pricing.com/documentation/user/) | [**Video tutorials**](https://tiered-pricing.com/category/how-to/) | [**Contact us**](https://tiered-pricing.com/contact-us/)
 
-You can apply custom pricing to individual products or categories, all users, specific user roles, or customer accounts.
+= Who it is for =
 
-Fine-tune pricing for any business model — from retail to wholesale — to serve different customer groups effortlessly.
+* **Retail stores** with bulk discounts: "Buy 10, pay $8 each".
+* **Wholesale and B2B stores**: separate prices for wholesale customers, a registration form with approval, and a private catalog.
+* **Print shops and made-to-order products**: a price per piece that drops as the order grows.
 
-📌 **Key features**:
+= Quantity tiers on products =
 
-✅ **Quantity-based pricing (Volume pricing)**
-Offer fixed prices, percentage discounts or an amount off per unit based on the quantity purchased to encourage larger orders.
+Give a product, or a single variation, its own tiers: a fixed price per unit or an amount off the unit price from the quantity you choose. Tiers work with simple and variable products, in the cart, and on orders you create in WP admin.
 
-✅ **Role and Customer based pricing**
-Create custom pricing for user roles or individual customers, including quantity-based discounts.
+= Pricing rules for many products at once =
 
-✅ **Cart rules: order discounts, free shipping and minimum order**
-Take an amount off the whole cart once the subtotal or item count reaches a tier, give free shipping always or from a threshold with a progress bar, and require a minimum order, per role, products and dates. A settings page previews the cart, the checkout and the mini cart.
+One rule can cover the whole store, or chosen categories, tags, brands, products and attribute values, such as every variation with "Print: Laser engraving". Limit a rule to customer roles, single customers or visitors who are not logged in, schedule it for a sale, and set which rule wins where two meet. The Pricing test shows which rule a product gets for any customer, and why.
 
-✅ **Minimum, Maximum & Step Quantity Controls**
-Define minimum and maximum purchase quantities, and enforce quantity increments.
+= Show prices your way =
 
-✅ **Discount-friendly price formatting**
-Display pricing in a way that highlights savings, including the lowest price, a price range or even a custom template.
+Seven layouts for product pages and shop pages, styled in a live preview:
 
-✅ **Request a Quote and quote list**
-Let customers ask for a price on one product, or collect several products in a quote list and send one request. Build the form with your own fields, show it on all products or chosen categories and roles, and turn a request into an order with one click.
+* Table (7 styles)
+* Blocks (9 styles)
+* Options (7 styles)
+* Dropdown
+* Horizontal table
+* Plain text
+* Tooltip
 
-✅ **Quick Order Form**
-A one-page order form for bulk and repeat buyers: search by name or SKU, paste a list or upload a CSV, see the tier price of every line and add everything to the cart at once. Add it as a block, a shortcode or a My Account tab.
+Add a savings message such as "You save $9.99", put a label such as "Best value" on a tier, and round discounts to whole percentages. Place the table anywhere with the Tiered Pricing block, the `[tiered-pricing-table]` shortcode or the Elementor widget.
 
-✅ **Wholesale registration & approval**
-Let customers apply for a wholesale account with a customizable form, approve them in a queue, and give them the wholesale role automatically. Four e-mails keep everyone informed.
+= Cart rules =
 
-✅ **Private store & catalog visibility**
-Close the store to visitors, or show products and categories to selected roles only for wholesale-only or retail-only catalogs.
+Take an amount off the whole cart once the subtotal or the number of items reaches a tier, and give free shipping always or from a subtotal or item count. Limit each rule to roles, products and dates, and check the cart, checkout and mini cart in a live preview.
 
-✅ **Flexible pricing display (product page & catalog)**
- Display tiered pricing in the format that best fits your store:
-➖ **Table (5 styles)**
-➖ **Blocks (5 styles)**
-➖ **Options (4 styles)**
-➖ **Dropdown**
-➖ **Horizontal Table**
-➖ **Plain text**
-➖ **Tooltip**
-*See screenshots for examples*
+= Wholesale and B2B =
 
-The clean interface and powerful functionality allow you to create any pricing strategy without complexity.
+* **Wholesale registration**: a form of your own fields, an approval queue, and the wholesale role given on approval. Four e-mails keep you and the customer informed.
+* **Private store**: close the shop to visitors, or show products and categories to chosen roles only.
+* **Guests**: hide prices and the Add to cart button from visitors who are not logged in.
+* **Roles**: create, edit and delete customer roles.
 
-⚙️ **Advanced Features**
-✅ Amount-off Tiers – Take an amount off the unit price from a quantity, next to fixed tier prices.
-✅ Pricing Test – See what a product or a whole cart gets for any customer, and which rule wins, without opening the storefront.
-✅ Guest Users – Hide prices and prevent purchasing for visitors who are not logged in.
-✅ Import & Export (WP All Import support).
-✅ Pricing Labels – Create labels such as “Best Value” or “Most Popular” to make key pricing tiers stand out.
-✅ Role Management – Create, edit, and delete user roles with ease.
-✅ Built-in Caching – Improve performance with integrated caching.
-✅ REST API – Read and update tiered pricing through the WooCommerce REST API.
-✅ Savings Display – Show customers how much they save with customizable messages such as “You Save: $9.99”.
+= Quick order form =
 
-And much more!
+A one-page order form for bulk and repeat buyers: search by name or SKU, paste a list or upload a CSV, see each line's tier price, and add everything to the cart at once. Add it as a block, a shortcode or a My Account tab.
 
-💎 **Premium Extras**:
+= Built for real stores =
 
-*   Percentage quantity-based discounts
-*   Request a Quote and the quote list for your customers (in the free version administrators can try the forms)
-*   Quick order form for chosen roles only, such as your wholesale accounts
-*   Percentage cart rule discounts
-*   Role-based and customer-based pricing (including base prices and min/max order quantity)
-*   Role-based tax options (Override tax options for specific user roles)
-*   Custom columns for pricing table
-*   Minimum order amount or quantity per cart rule (roles, products, dates)
-*   Free shipping bar: a progress bar towards a cart rule's free shipping, in the cart, at checkout, in the mini cart, on product pages, or anywhere with a shortcode or block
-*   Payment and shipping methods limited to roles
-*   Min/Max order quantity control per product or category/tag/brand
-*   Cart upsells (motivates users to purchase more to get a discount)
-*   Totals on the product page
-*   Clickable tiered pricing
-*   Show the lowest price or a range of prices instead of default product price
-*   Show the tiered price in the cart as a discount
+* Works with classic and block themes, including the Cart and Checkout blocks.
+* Compatible with High-Performance Order Storage (HPOS).
+* A built-in cache keeps shop pages fast in large catalogs.
+* Import and export with the WooCommerce CSV importer and WP All Import.
+* Read and update tiered prices through the WooCommerce REST API.
+* Translated into 10 languages.
 
-**Works Seamlessly with 3rd-party plugins**:
+= Premium =
 
-⭐  **WP All Import**
-⭐  **Elementor**
-⭐️  **WPML**
-⭐️  **WPML Multicurrency**
-⭐️  **WooCommerce Product Add-ons**
-⭐️  **Aelia Multicurrency**
-⭐️  **Yith Request a Quote**
-⭐️  **Request a Quote by Addify**
-⭐️  **Product Bundles for WooCommerce**
-⭐️  **WOOCS** (WooCommerce Currency Switcher by FOX)
-⭐️  **WCCS** (WooCommerce Currency Switcher by WP Experts)
-⭐️  **WCPA** (WooCommerce Custom Product Addons)
-⭐️  **Product Fields** (Product Addons by StudioWombat)
-⭐️  **WooCommerce Deposits**
-⭐️  **Mix&Match for WooCommerce**
-⭐️  **Yoast and Rank Math SEO plugins**
+Premium adds:
 
-**Get more information about the [Tiered Pricing Table for WooCommerce](https://tiered-pricing.com/)**
+* Percentage quantity discounts, on products and in pricing rules
+* Role and customer prices on the product itself, including base prices
+* Minimum, maximum and step quantities per product, category or rule
+* Request a Quote and a quote list for your customers (in the free version administrators can try the forms)
+* The quick order form for chosen roles only, such as your wholesale accounts
+* Cart rules with percentage discounts, a minimum order and a free shipping bar
+* Payment and shipping methods limited to roles
+* Tax options per role
+* Your own columns in the pricing table
+* The lowest price or a price range instead of the regular price
+* The tier price shown in the cart as a discount, and the total savings at checkout
+* Upsell messages in the cart, such as "Add 5 more to save 10%"
+* Totals on the product page, and choosing a quantity by clicking its tier
+* A quantity field on shop pages
 
-Feel free to **[Contact us](https://tiered-pricing.com/contact-us/)** if you have any questions.
+See the plans on the [plugin website](https://tiered-pricing.com/).
 
-Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin works in action.
+= Works with =
+
+* WPML and WooCommerce Multilingual, including multicurrency
+* Aelia Currency Switcher, WOOCS (FOX) and WCCS (WP Experts) currency switchers
+* WP All Import
+* Elementor
+* WooCommerce Product Add-ons, WCPA (Custom Product Addons) and Product Fields by StudioWombat
+* Product Bundles, Mix and Match, and WooCommerce Deposits
+* YITH Request a Quote and Request a Quote by Addify
+* Yoast SEO and Rank Math
 
 == Screenshots ==
 
@@ -144,59 +123,69 @@ Set up a **[demo](https://demo.tiered-pricing.com/)** to see how the plugin work
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/tier-price-table` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Go to **WooCommerce → Settings → Tiered Pricing** to configure the plugin
-
-After installing the plugin, configure it to your needs.
+1. In WP admin go to **Plugins → Add New**, search for "Tiered Pricing Table" and click **Install Now**. Or upload the plugin folder to `/wp-content/plugins/tier-pricing-table`.
+2. Activate the plugin on the **Plugins** screen.
+3. Add tiers to a product in **Product data → Tiered Pricing**, or create a rule for many products under **Pricing rules**.
+4. Choose the layout and its style in **WooCommerce → Settings → Tiered Pricing**.
 
 == Frequently Asked Questions ==
 
-= Does this plugin support variable products? =
-Yes, tiered pricing works with both simple and variable products.
+= What is free and what is Premium? =
 
-= Can I apply discounts per category? =
-Yes, you can create global pricing rules for categories.
+Quantity tiers with fixed prices or an amount off, pricing rules for categories, tags, brands, attribute values and customer roles, every layout, cart rules with amount discounts and free shipping, wholesale registration, the private store and the quick order form are free. The Premium section above lists what Premium adds.
 
-= Does it work with taxes and coupons? =
-Yes, the plugin integrates with WooCommerce taxes and coupons.
+= Does it work with variable products? =
 
-= What does the import format look like? =
+Yes. Give each variation its own tiers, or let all variations share one set.
 
-`quantity:price,quantity:price`
+= Can wholesale customers see different prices? =
 
-For example:
-"10:20,20:18" - in this case 20.00$ at 10 pieces, $18.00 at 20 pieces or more.
-The exact format is used for the percentage-based rules:
-"quantity:discount,quantity:discount"
+Yes. Create a pricing rule for the wholesale role, and only customers with that role get its prices. Premium also adds role prices on the product itself.
 
-Please note that you must use a dot as a decimal separator because a comma separates the pricing rules.
+= Can I hide prices from visitors who are not logged in? =
 
-You can change the rules separator (in case you use a comma as a decimal separator) using the "tiered_pricing_table/rules_separator" hook.
+Yes. In the Guest Users settings you can hide prices and the Add to cart button, or close the store to visitors.
 
-For example, the following code will change the separator to "&":
+= Does it work with block themes and the Cart and Checkout blocks? =
 
-add_filter('tiered_pricing_table/rules_separator', function(){
-   return '&';
-});
+Yes. Tiered prices, savings and cart rules show in classic and block themes, including the Cart and Checkout blocks.
 
-= Can I show the tiered pricing using a shortcode? =
-Yes! The plugin provides the [tiered-pricing-table] shortcode that can be customized with various attributes.
+= Will it slow down my store? =
 
-= Can I show the tiered pricing via Elementor? =
+The plugin caches the prices it shows on shop pages, so large catalogs stay fast.
 
-Yes! Look for the "Tiered Pricing Table" widget.
+= Does it work with several currencies and languages? =
 
-= Can I show the pricing table/pricing blocks/pricing options via Gutenberg block? =
+Yes. It works with WPML and WooCommerce Multilingual, Aelia Currency Switcher, WOOCS and WCCS.
 
-Yes! Look for the "Tiered Pricing" block.
+= Can I show the pricing table with a shortcode, a block or Elementor? =
 
-= Can I apply tiered pricing for manual (admin-created) orders? =
+Yes. Use the `[tiered-pricing-table]` shortcode, the "Tiered Pricing" block or the "Tiered Pricing Table" Elementor widget.
 
-Yes!
-Each order has the "recalculate with tiered pricing" button, which recalculates the cost according to the tiered pricing rules.
+= Can I use tiered prices on orders I create in WP admin? =
+
+Yes. Orders you create or edit have a "Re-calculate with tiered pricing" button that prices the items for the order's customer and role.
+
+= How do I import tiered prices? =
+
+Use the WooCommerce CSV importer or WP All Import. Tiers are written as quantity:price pairs, for example `10:20,20:18`: $20 from 10 pieces, $18 from 20 pieces. Use a dot for decimals, because a comma separates the tiers. To use another separator, return it from the `tiered_pricing_table/rules_separator` filter.
 
 == Changelog ==
+
+= 8.4.1 [2026-11-17] =
+* New: pricing and cart rules can be limited to attribute values, such as Print: Laser engraving, so one rule covers every variation with that value.
+* New: "Round percentages" shows discounts as whole numbers, such as 10% instead of 9.99%.
+* Improvement: on new stores, shop and category pages default to a compact table (Style #1, no Discount column) instead of the product page layout.
+* Improvement: Options style 6 marks the selected tier with a ring.
+* Improvement: the left border on the active tier (table styles #1, #5 and #6) is off by default.
+* Improvement: a tidier pricing rule screen: Products comes first, shorter notes, taller tabs and a status message that uses the full width.
+* Improvement: the settings previews show the same placeholder product image on every store.
+* Improvement: complete translations in all 10 languages, with corrected terms for quotes and Premium.
+* Fix: in block themes "You save" shows on its own line under the product price.
+* Fix: in block themes the shop page "Add to quote" button no longer overlaps Add to cart.
+* Fix: the wholesale registration form has styled fields and button in block themes.
+* Fix: in block themes the quantity box starts at the product's minimum, and its maximum and step follow the product's limits.
+* Fix: stricter checks on quote request uploads and the visitor's IP address.
 
 = 8.4.0 [2026-11-16] =
 * New: Quick Order Form: search by name or SKU, paste a list or upload a CSV, and add everything to the cart at once.

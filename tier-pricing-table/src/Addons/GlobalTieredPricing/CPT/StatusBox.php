@@ -50,10 +50,7 @@ class StatusBox {
 			<div class="tpt-rule-box">
 				<div class="tpt-rule-box__state tpt-rule-box__state--<?php echo esc_attr( $status['key'] ); ?>">
 					<span class="dashicons <?php echo esc_attr( $status['icon'] ); ?>"></span>
-					<div class="tpt-rule-box__text">
-						<strong><?php echo esc_html( $status['label'] ); ?></strong>
-						<div class="tpt-rule-box__detail"><?php echo esc_html( $status['detail'] ); ?></div>
-					</div>
+					<strong class="tpt-rule-box__label"><?php echo esc_html( $status['label'] ); ?></strong>
 					<?php if ( $published ) : ?>
 						<?php // a link-styled submit: saves the form and flips the state in one click ?>
 						<?php if ( $rule->isSuspended() ) : ?>
@@ -62,6 +59,8 @@ class StatusBox {
 							<button type="submit" name="tpt_suspend_action" value="suspend" class="button-link tpt-rule-box__toggle"><?php esc_html_e( 'Suspend', 'tier-pricing-table' ); ?></button>
 						<?php endif; ?>
 					<?php endif; ?>
+					<?php // under the icon, label and link, so the explanation uses the box's full width ?>
+					<div class="tpt-rule-box__detail"><?php echo esc_html( $status['detail'] ); ?></div>
 				</div>
 
 				<?php // the rule type: product prices (the default) or the order total; the tabs on the left follow it ?>
@@ -187,9 +186,10 @@ class StatusBox {
 			}
 
 			.tpt-rule-box__state {
-				display: flex;
-				gap: 8px;
-				align-items: flex-start;
+				display: grid;
+				grid-template-columns: auto minmax(0, 1fr) auto;
+				gap: 6px 8px;
+				align-items: center;
 				margin-bottom: 12px;
 				padding: 10px 12px;
 				border-radius: 4px;
@@ -197,7 +197,6 @@ class StatusBox {
 			}
 
 			.tpt-rule-box__state .dashicons {
-				flex: 0 0 auto;
 				font-size: 20px;
 				width: 20px;
 				height: 20px;
@@ -226,19 +225,11 @@ class StatusBox {
 			}
 
 			.tpt-rule-box__detail {
-				margin-top: 2px;
+				grid-column: 1 / -1;
 				font-size: 12px;
 			}
 
-			.tpt-rule-box__text {
-				flex: 1 1 auto;
-				min-width: 0;
-			}
-
 			.tpt-rule-box__toggle {
-				flex: 0 0 auto;
-				align-self: flex-start;
-				margin-top: 1px;
 				font-size: 12px;
 				line-height: 1.4;
 				text-decoration: underline;

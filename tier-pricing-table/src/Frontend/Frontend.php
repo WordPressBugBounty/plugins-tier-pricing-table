@@ -26,6 +26,7 @@ class Frontend {
 	public function __construct() {
 
 		new PricingTableShortcode();
+		new BlockQuantityLimits();
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'registerAssets' ), 10, 1 );
 	}
