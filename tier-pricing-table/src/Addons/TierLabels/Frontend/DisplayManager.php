@@ -1,5 +1,6 @@
 <?php namespace TierPricingTable\Addons\TierLabels\Frontend;
 
+use TierPricingTable\Addons\ProductCatalogLoop\ProductCatalogLoop;
 use TierPricingTable\Addons\TierLabels\TierLabel;
 use TierPricingTable\Addons\TierLabels\TierLabelsManager;
 use TierPricingTable\PricingRule;
@@ -59,6 +60,11 @@ class DisplayManager {
 
 	public function render( PricingRule $rule, $quantity, $args = array(), $layout = '' ) {
 
+		// shop and category pages show no tier labels: their pricing tables are narrow
+		if ( ProductCatalogLoop::isRenderingCatalog() ) {
+			return;
+		}
+
 		$label = $this->getLabelForQuantity( $rule, $quantity );
 
 		if ( ! $label ) {
@@ -76,7 +82,9 @@ class DisplayManager {
 		if ( 'blocks' === $layout ) {
 			// styles with a floating label above the block (5 and 7 are card styles like the default)
 			if ( in_array( $args['style'], array( 'default', '1', '2', '4', '5', '7' ) ) ) {
-				$CSS .= "#{$args['id']} { gap: 20px 10px }";
+				// the label of a block in the first row floats half above the layout: room for it, so it is not cut off
+				// and does not cover what comes before the layout
+				$CSS .= "#{$args['id']} { gap: 20px 10px; padding-top: 10px; }";
 				$CSS .= "#{$args['id']} .tiered-pricing-block { position: relative; }";
 				$CSS .= "#{$args['id']} .tiered-pricing-tier-label {margin: 0 !important;
 					position: absolute;
@@ -87,20 +95,26 @@ class DisplayManager {
 					z-index: 20;}";
 			}
 
-			if ( in_array( $args['style'], array( 'default', '2', '4', '5', '7' ) ) ) {
-				$CSS .= "#{$args['id']} .tiered-pricing-block:has(#" . $label->getId() . ") { padding-top: 12px; }";
+			// room under the floating label for the block's content. Every block of the layout gets it, not only the
+			// blocks with a label, so the prices of a row stay level. Styles 5 and 7 have that room already.
+			if ( in_array( $args['style'], array( 'default', '2', '4' ) ) ) {
+				$CSS .= "#{$args['id']} .tiered-pricing-block { padding-top: 12px; }";
 			}
 
 			if ( $args['style'] === '1' ) {
 				$CSS .= "#{$args['id']} .tiered-pricing-block:has(#" . $label->getId() . ") {overflow: unset !important;}";
-				$CSS .= "#{$args['id']} .tiered-pricing-block:has(#" . $label->getId() . ") .tiered-pricing-block__quantity {padding-top: 12px !important;}";
+				$CSS .= "#{$args['id']} .tiered-pricing-block .tiered-pricing-block__quantity {padding-top: 12px !important;}";
 			}
 		} elseif ( 'table' === $layout ) {
-			$CSS .= "#{$args['id']} tbody td:has(#" . $label->getId() . ") { display: flex; align-items: center; gap: 5px; }";
+			// the styled tables: the quantity column carries the label, so it gets a larger share and the label fits next
+			// to the quantity on a product page
+			$CSS .= "#{$args['id']} { --tpt-quantity-share: 1.8fr; }";
 		} elseif ( 'plain-text' === $layout ) {
 			// the "one line" style keeps its tiers inline
 			$display = '2' === (string) $args['style'] ? 'inline-flex' : 'flex';
-			$CSS    .= "#{$args['id']} .tiered-pricing-plain-text:has(#" . $label->getId() . ") { display: {$display}; align-items: center; gap: 5px; }";
+			// the label moves under the text when the line is full, instead of being squeezed
+			$CSS    .= "#{$args['id']} .tiered-pricing-plain-text:has(#" . $label->getId() . ") { display: {$display}; flex-wrap: wrap; align-items: center; gap: 5px; }";
+			$CSS    .= "#{$args['id']} .tiered-pricing-plain-text #" . $label->getId() . " { flex-shrink: 0; max-width: 100%; }";
 		}
 
 		if ( $CSS ) {

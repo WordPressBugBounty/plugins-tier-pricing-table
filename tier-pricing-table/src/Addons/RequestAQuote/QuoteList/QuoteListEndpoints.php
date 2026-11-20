@@ -89,20 +89,83 @@ class QuoteListEndpoints {
 		register_rest_route( 'tier-pricing-table/v1', '/quote-list/page', array(
 			'methods'             => WP_REST_Server::CREATABLE,
 			'callback'            => array( $this, 'createPage' ),
+			'permission_callback' => function ( WP_REST_Request $request ) {
+				// choosing a page only needs the settings right; making one needs the right to publish pages
+				return current_user_can( 'manage_woocommerce' ) && ( (int) $request->get_param( 'page_id' ) > 0 || current_user_can( 'publish_pages' ) );
+			},
+			'args'                => array(
+				'page_id' => array(
+					'type'              => 'integer',
+					'required'          => false,
+					'sanitize_callback' => 'absint',
+				),
+			),
+		) );
+
+		register_rest_route( 'tier-pricing-table/v1', '/quote-list/pages', array(
+			'methods'             => WP_REST_Server::READABLE,
+			'callback'            => array( $this, 'pages' ),
 			'permission_callback' => function () {
-				return current_user_can( 'manage_woocommerce' ) && current_user_can( 'publish_pages' );
+				return current_user_can( 'manage_woocommerce' );
 			},
 		) );
 	}
 
 	/**
+	 * The published pages for the page pickers, each with whether it shows the list: the list only appears on a
+	 * page that holds its shortcode.
+	 *
+	 * @return \WP_REST_Response
+	 */
+	public function pages() {
+		$pages = get_posts( array(
+			'post_type'      => 'page',
+			'post_status'    => 'publish',
+			'posts_per_page' => 200,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		) );
+
+		return rest_ensure_response( array_map( function ( $page ) {
+			return array(
+				'id'      => (int) $page->ID,
+				'title'   => html_entity_decode( get_the_title( $page ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8' ),
+				'url'     => (string) get_permalink( $page ),
+				'hasList' => self::showsList( $page ),
+			);
+		}, $pages ) );
+	}
+
+	/**
+	 * Whether a page shows the quote list (holds its shortcode, also inside a Shortcode block).
+	 *
+	 * @param  \WP_Post  $page
+	 */
+	public static function showsList( $page ): bool {
+		return $page instanceof \WP_Post && has_shortcode( (string) $page->post_content, QuoteListDisplay::SHORTCODE );
+	}
+
+	/**
 	 * A published "Quote list" page with the list shortcode, remembered in the settings. The chosen page is kept,
-	 * and a published page that already holds the shortcode is used instead of making a second one.
+	 * and a published page that already holds the shortcode is used instead of making a second one. With a
+	 * page_id, that page becomes the list page instead (it must be published and show the list).
 	 *
 	 * @return \WP_REST_Response|WP_Error
 	 */
 	public function createPage( WP_REST_Request $request ) {
-		$pageId = QuoteListSettings::getPageId();
+		$chosen = (int) $request->get_param( 'page_id' );
+
+		if ( $chosen > 0 ) {
+			$page = get_post( $chosen );
+
+			if ( ! $page || 'page' !== $page->post_type || 'publish' !== $page->post_status || ! self::showsList( $page ) ) {
+				return new WP_Error( 'page_without_list', __( 'This page does not show the quote list. Choose a page with the [tiered_pricing_quote_list] shortcode, or create the page.', 'tier-pricing-table' ), array( 'status' => 400 ) );
+			}
+
+			$pageId = $chosen;
+		} else {
+			$pageId = QuoteListSettings::getPageId();
+		}
 
 		if ( ! $pageId ) {
 			$pageId = $this->findListPage();

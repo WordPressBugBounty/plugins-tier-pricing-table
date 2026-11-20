@@ -454,7 +454,9 @@ class ProductVisibilityService {
 			return $result;
 		}
 
-		$route = (string) $request->get_route();
+		// WordPress matches a route without regard to letter case, and tries every route when the namespace itself
+		// does not match, so /wc/store/Products/12 and /WC/store/products/12 reach the product route too
+		$route = strtolower( (string) $request->get_route() );
 
 		// The Store API answers the same routes under /wc/store/v1 and /wc/store
 		if ( preg_match( '#^/wc/store(?:/v\d+)?/products/categories/(\d+)$#', $route, $m ) ) {

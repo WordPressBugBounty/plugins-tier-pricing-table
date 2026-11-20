@@ -11,7 +11,8 @@ class RegularPricingForm extends Form {
 		$salePrice = null,
 		$pricingType = 'flat',
 		$discount = null,
-		$discount_type = null
+		$discount_type = null,
+		bool $locked = false
 	) {
 		/**
 		 * Available variables
@@ -33,6 +34,8 @@ class RegularPricingForm extends Form {
 				'regular_price' => $regularPrice,
 				'sale_price'    => $salePrice,
 				'pricing_type'  => $pricingType,
+				// shown but not editable: role and customer prices in the free version
+				'locked'        => $locked,
 			) );
 	}
 	

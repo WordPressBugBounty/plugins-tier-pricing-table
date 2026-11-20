@@ -58,7 +58,7 @@
 			$val_display = $is_percentage ? $value : wc_format_localized_price( $value );
 			$placeholders = array(
 					'fixed'      => __( 'Price', 'tier-pricing-table' ),
-					'percentage' => __( 'Percentage discount', 'tier-pricing-table' ),
+					'percentage' => __( 'Discount', 'tier-pricing-table' ),
 					'amount'     => __( 'Amount off', 'tier-pricing-table' ),
 			);
 			$placeholder  = $placeholders[ $type ] ?? $placeholders['fixed'];

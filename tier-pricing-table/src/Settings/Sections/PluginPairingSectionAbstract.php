@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Settings\Sections;
 
 use TierPricingTable\Admin\PluginInstaller\PluginInstaller;
+use TierPricingTable\Admin\PluginInstaller\PromotedPlugin;
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\Settings\Settings;
 
@@ -205,26 +206,33 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 	}
 
 	/**
+	 * The U2Code plugin as the installer sees it.
+	 */
+	public function getPromotedPlugin(): PromotedPlugin {
+		return new PromotedPlugin( array(
+			'slug'         => $this->getOwnPluginWporgSlug(),
+			'name'         => $this->getOwnPluginName(),
+			'header_names' => $this->getOwnPluginHeaderNames(),
+			'is_active'    => array( $this, 'isOwnPluginActive' ),
+			'icon'         => $this->getOwnPluginIconAsset(),
+			'site_url'     => $this->getOwnPluginSiteURL(),
+			'wporg_url'    => $this->getOwnPluginWporgURL(),
+			'settings_url' => array( $this, 'getOwnPluginSettingsURL' ),
+		) );
+	}
+
+	/**
+	 * Where to set the U2Code plugin up once it is active: this settings section by default.
+	 */
+	public function getOwnPluginSettingsURL(): string {
+		return admin_url( 'admin.php?page=wc-settings&tab=' . Settings::SETTINGS_PAGE . '&section=' . $this->getSlug() );
+	}
+
+	/**
 	 * The plugin file of an installed copy of the U2Code plugin, or null when none is installed.
 	 */
 	public function findInstalledPluginFile(): ?string {
-		if ( ! function_exists( 'get_plugins' ) ) {
-			if ( ! defined( 'ABSPATH' ) ) {
-				return null;
-			}
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		$slug  = $this->getOwnPluginWporgSlug();
-		$names = $this->getOwnPluginHeaderNames();
-
-		foreach ( (array) get_plugins() as $file => $data ) {
-			if ( 0 === strpos( $file, $slug . '/' ) || in_array( (string) ( $data['Name'] ?? '' ), $names, true ) ) {
-				return (string) $file;
-			}
-		}
-
-		return null;
+		return $this->getPromotedPlugin()->findInstalledPluginFile();
 	}
 
 	/**
@@ -234,34 +242,7 @@ abstract class PluginPairingSectionAbstract extends SectionAbstract {
 	 * @return array{kind: string, url: string, label: string, external: bool}
 	 */
 	public function getInstallAction(): array {
-		$installed = $this->findInstalledPluginFile();
-
-		if ( $installed && current_user_can( 'activate_plugins' ) ) {
-			return array(
-				'kind'     => 'activate',
-				'url'      => wp_nonce_url( self_admin_url( 'plugins.php?action=activate&plugin=' . rawurlencode( $installed ) ), 'activate-plugin_' . $installed ),
-				'label'    => __( 'Activate now', 'tier-pricing-table' ),
-				'external' => false,
-			);
-		}
-
-		if ( ! $installed && current_user_can( 'install_plugins' ) ) {
-			$slug = $this->getOwnPluginWporgSlug();
-
-			return array(
-				'kind'     => 'install',
-				'url'      => wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=' . $slug ), 'install-plugin_' . $slug ),
-				'label'    => __( 'Install now, free', 'tier-pricing-table' ),
-				'external' => false,
-			);
-		}
-
-		return array(
-			'kind'     => 'wporg',
-			'url'      => $this->getOwnPluginWporgURL(),
-			'label'    => __( 'Get it free on WordPress.org', 'tier-pricing-table' ),
-			'external' => true,
-		);
+		return $this->getPromotedPlugin()->getInstallAction();
 	}
 
 	/**

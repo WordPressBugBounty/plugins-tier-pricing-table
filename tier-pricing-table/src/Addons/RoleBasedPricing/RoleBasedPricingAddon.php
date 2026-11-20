@@ -47,6 +47,8 @@ class RoleBasedPricingAddon extends AbstractAddon {
     public function run() {
         // Enable pricing service
         add_filter( 'tiered_pricing_table/services/pricing_service_enabled', '__return_true' );
+        // role tiers, quote forms and taxes are free; regular prices and quantity limits are premium (inside the service)
+        new PricingService();
         new ProductManager();
     }
 

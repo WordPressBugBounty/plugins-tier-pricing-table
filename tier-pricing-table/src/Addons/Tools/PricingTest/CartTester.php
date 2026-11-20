@@ -66,7 +66,7 @@ class CartTester {
 				'price'    => $this->formatPrice( $unitPrice ),
 				'tier'     => false !== $tierPrice,
 				'amount'   => $this->formatPrice( $line['amount'] ),
-				'source'   => RuleTester::providerLabel( (string) ( $pricingRule->provider ?? '' ) ),
+				'source'   => RuleTester::sourceLabel( $pricingRule ),
 			);
 		}
 

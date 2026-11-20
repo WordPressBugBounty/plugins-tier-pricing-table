@@ -93,6 +93,9 @@ class ProductCatalogLoop extends AbstractAddon {
      */
     const PRODUCT_TEMPLATE_BLOCKS = array('woocommerce/product-template', 'core/post-template');
 
+    /** How many shop or category page pricing tables are rendering right now. */
+    protected static $renderingCatalog = 0;
+
     /** How many product template blocks are rendering right now (nested templates count up). */
     protected static int $productBlocksDepth = 0;
 
@@ -429,11 +432,35 @@ class ProductCatalogLoop extends AbstractAddon {
         if ( $useReducedStyles ) {
             $classes .= ' tiered-pricing-shop-loop--reduced';
         }
-        $this->getContainer()->getFileManager()->includeTemplate( 'frontend/shop-loop.php', array(
-            'classes'  => $classes,
-            'product'  => $product,
-            'settings' => $this->getRenderAttributes(),
-        ) );
+        self::renderingCatalog( function () use($classes, $product) {
+            $this->getContainer()->getFileManager()->includeTemplate( 'frontend/shop-loop.php', array(
+                'classes'  => $classes,
+                'product'  => $product,
+                'settings' => $this->getRenderAttributes(),
+            ) );
+        } );
+    }
+
+    /**
+     * Whether a pricing table for a shop or category page is rendering right now. Tier labels stay off
+     * those pages: the tables there are narrow.
+     */
+    public static function isRenderingCatalog() : bool {
+        return self::$renderingCatalog > 0;
+    }
+
+    /**
+     * Run a render of a shop or category page pricing table (the real one or its preview).
+     *
+     * @return mixed what the callback returns
+     */
+    public static function renderingCatalog( callable $render ) {
+        self::$renderingCatalog++;
+        try {
+            return $render();
+        } finally {
+            self::$renderingCatalog--;
+        }
     }
 
     public function addSettingSection( $sections ) : array {

@@ -2,13 +2,13 @@
 
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Addons\GlobalTieredPricing\RuleOverlaps;
-use TierPricingTable\Addons\Tools\PricingTest\PricingTester;
 use WP_Post;
 
 /**
  * The plugin's own sidebar box in place of WordPress's Publish box: the rule's status (active, suspended,
  * scheduled, expired, not published), the suspend switch, the priority, the date window, the rules it
- * overlaps with, the Pricing test link, and the Update / Move to Trash actions.
+ * overlaps with, the team's note, and the Update / Move to Trash actions (the editor's "Test this rule" button
+ * sits next to "Add Pricing Rule").
  *
  * The classic editor's script and the save pipeline look for the hidden status inputs, the "#submitpost"
  * wrapper, the "#publish" button and the "#major-publishing-actions" bar; they keep their ids and names.
@@ -20,8 +20,35 @@ class StatusBox {
 	 */
 	const MARKER = 'tpt_status_box';
 
+	/**
+	 * The longest note a rule keeps, in characters.
+	 */
+	const NOTE_LENGTH = 1000;
+
 	public function __construct() {
 		add_action( 'add_meta_boxes_' . GlobalTieredPricingCPT::SLUG, array( $this, 'register' ) );
+		add_filter( 'wp_insert_post_data', array( $this, 'sanitizeNote' ), 10, 2 );
+	}
+
+	/**
+	 * A rule's note is the post excerpt (the rules list search finds it, Duplicate copies it): plain text only,
+	 * cut at NOTE_LENGTH characters.
+	 *
+	 * @param array $data Slashed post data about to be saved.
+	 * @param array $postarr
+	 *
+	 * @return array
+	 */
+	public function sanitizeNote( $data, $postarr ) {
+		if ( ! is_array( $data ) || GlobalTieredPricingCPT::SLUG !== ( $data['post_type'] ?? '' ) || ! isset( $data['post_excerpt'] ) ) {
+			return $data;
+		}
+
+		$note = trim( sanitize_textarea_field( wp_unslash( (string) $data['post_excerpt'] ) ) );
+
+		$data['post_excerpt'] = wp_slash( function_exists( 'mb_substr' ) ? mb_substr( $note, 0, self::NOTE_LENGTH ) : substr( $note, 0, self::NOTE_LENGTH ) );
+
+		return $data;
 	}
 
 	public function register() {
@@ -115,6 +142,21 @@ class StatusBox {
 					</div>
 				</details>
 
+				<?php // a note for the team: why the rule exists, who agreed to it, when to check it; stored as the excerpt ?>
+				<?php $note = (string) $post->post_excerpt; ?>
+				<details class="tpt-rule-box__section" <?php echo '' !== $note ? 'open' : ''; ?>>
+					<summary>
+						<span><?php esc_html_e( 'Note', 'tier-pricing-table' ); ?></span>
+						<?php if ( '' === $note ) : ?>
+							<span class="tpt-rule-box__meta"><?php esc_html_e( 'None', 'tier-pricing-table' ); ?></span>
+						<?php endif; ?>
+					</summary>
+					<div class="tpt-rule-box__body">
+						<textarea id="excerpt" name="excerpt" rows="3" maxlength="<?php echo esc_attr( self::NOTE_LENGTH ); ?>" class="tpt-rule-box__note" aria-label="<?php esc_attr_e( 'Note', 'tier-pricing-table' ); ?>" placeholder="<?php esc_attr_e( 'Why the rule exists, who agreed to it, when to check it again.', 'tier-pricing-table' ); ?>"><?php echo esc_textarea( $note ); ?></textarea>
+						<p class="description"><?php esc_html_e( 'Only your team sees it. The search in the rules list finds it.', 'tier-pricing-table' ); ?></p>
+					</div>
+				</details>
+
 				<?php if ( $overriding ) : // only when another rule takes precedence somewhere ?>
 				<details class="tpt-rule-box__section" open>
 					<summary>
@@ -143,15 +185,6 @@ class StatusBox {
 				</details>
 				<?php endif; ?>
 
-				<?php // no test link for a skipped rule: the test could only say it changes nothing ?>
-				<?php // an order rule is tested with a cart, a product rule with a product ?>
-				<?php if ( ! $isNew && PricingTester::isAvailable() && ! ( $published && 'skipped' === $rule->getEffectiveStatus() ) ) : ?>
-					<p class="tpt-rule-box__test">
-						<span class="dashicons dashicons-search"></span>
-						<a href="<?php echo esc_url( PricingTester::getUrl( $post->ID, $rule->isOrderRule() ? 'cart' : 'product' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Test this rule', 'tier-pricing-table' ); ?></a>
-						<span class="description"><?php echo esc_html( $rule->isOrderRule() ? __( 'What a cart gets, and which cart rule wins.', 'tier-pricing-table' ) : __( 'What a customer pays for a product, and which rule wins.', 'tier-pricing-table' ) ); ?></span>
-					</p>
-				<?php endif; ?>
 			</div>
 
 			<div id="major-publishing-actions">
@@ -249,6 +282,13 @@ class StatusBox {
 			.tpt-rule-box__body input[type="date"],
 			.tpt-rule-box__body input[type="number"] {
 				width: 100%;
+			}
+
+			.tpt-rule-box__note {
+				display: block;
+				width: 100%;
+				min-height: 76px;
+				resize: vertical;
 			}
 
 			.tpt-rule-box .description {
@@ -357,24 +397,6 @@ class StatusBox {
 				margin: 0;
 			}
 
-			.tpt-rule-box__test {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2px 6px;
-				align-items: center;
-				margin: 12px 0 0;
-				padding-top: 12px;
-				border-top: 1px solid #dcdcde;
-			}
-
-			.tpt-rule-box__test .dashicons {
-				color: #8c8f94;
-			}
-
-			.tpt-rule-box__test .description {
-				flex: 1 1 100%;
-				margin: 0;
-			}
 		</style>
 		<?php
 	}

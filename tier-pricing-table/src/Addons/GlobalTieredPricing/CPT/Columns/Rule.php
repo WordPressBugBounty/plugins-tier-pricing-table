@@ -52,6 +52,14 @@ class Rule {
 		<span class="tpt-rules-list__badge tpt-rules-list__badge--<?php echo esc_attr( $status['key'] ); ?>"><?php echo esc_html( $status['label'] ); ?></span>
 		<strong><a class="row-title" href="<?php echo esc_url( get_edit_post_link( $id ) ); ?>"><?php echo esc_html( $rule->getTitle() ); ?></a></strong>
 		<?php $this->renderLockInfo( $id ); ?>
+		<?php $note = trim( (string) get_post_field( 'post_excerpt', $id ) ); ?>
+		<?php if ( '' !== $note ) : // the team's note, one line; the whole note on hover ?>
+			<div class="tpt-rules-list__note" title="<?php echo esc_attr( $note ); ?>">
+				<span class="dashicons dashicons-format-aside" aria-hidden="true"></span>
+				<span class="screen-reader-text"><?php esc_html_e( 'Note:', 'tier-pricing-table' ); ?></span>
+				<?php echo esc_html( $note ); ?>
+			</div>
+		<?php endif; ?>
 		<?php if ( $meta ) : ?>
 			<div class="tpt-rules-list__meta">
 				<?php echo wp_kses_post( $meta ); // nosemgrep ?>

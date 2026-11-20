@@ -39,7 +39,7 @@ class TierPricingTablePlugin {
 	 */
 	private Freemius $licence;
 	
-	const VERSION = '8.4.1';
+	const VERSION = '8.4.2';
 	
 	/**
 	 * TierPricingTablePlugin constructor.
@@ -299,6 +299,13 @@ class TierPricingTablePlugin {
 	 */
 	public static function getCurrentUser(): WP_User {
 		
+		// a pricing scope (a product feed job priced as a visitor) is explicit: nothing changes it
+		$scoped = Core\PricingContext::current();
+
+		if ( $scoped ) {
+			return $scoped;
+		}
+
 		if ( ! empty( $GLOBALS['tpt_current_user_id'] ) ) {
 			$user = new WP_User( intval( $GLOBALS['tpt_current_user_id'] ) );
 		} else {
@@ -331,7 +338,9 @@ class TierPricingTablePlugin {
 		// a visitor who is not logged in has the guest pseudo role, so role-based rules can target visitors
 		$roles = $user->ID ? (array) $user->roles : array( RoleBasedPriceManager::GUEST_ROLE );
 
-		return apply_filters( 'tiered_pricing_table/current_user_roles', $roles, get_current_user_id() );
+		$userId = Core\PricingContext::isActive() ? $user->ID : get_current_user_id();
+
+		return apply_filters( 'tiered_pricing_table/current_user_roles', $roles, $userId );
 	}
 	
 	public function saveActivationTime() {

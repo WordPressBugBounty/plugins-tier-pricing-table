@@ -32,7 +32,7 @@ $regular_price = wc_get_price_to_display( $product, array(
     'price' => $product->get_regular_price(),
 ) );
 $price = wc_get_price_to_display( $product, array(
-    'price' => $product->get_price(),
+    'price' => $real_price,
 ) );
 if ( !function_exists( 'tptParseOptionText' ) ) {
     function tptParseOptionText(
@@ -100,7 +100,9 @@ if ( !empty( $price_rules ) ) {
     echo esc_attr( $sale_price );
     ?>"
 			 data-price="<?php 
-    echo esc_attr( $price );
+    echo esc_attr( wc_get_price_to_display( $product, array(
+        'price' => $product->get_price(),
+    ) ) );
     ?>"
 			 data-product-price-suffix="<?php 
     echo esc_attr( $product->get_price_suffix() );
@@ -114,6 +116,10 @@ if ( !empty( $price_rules ) ) {
     $discountAmount = 0;
     if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
         $discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(), $product->get_sale_price() );
+    }
+    // a table that starts at the minimum quantity: the discount of the tier that applies there
+    if ( isset( $base_discount ) && null !== $base_discount ) {
+        $discountAmount = $base_discount;
     }
     if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) {
         $quantity = esc_attr( number_format_i18n( $minimum ) . ' ' );
@@ -306,7 +312,7 @@ if ( !empty( $price_rules ) ) {
             ?>
 								<div class="tiered-pricing-option-price__original"><del><?php 
             echo wp_kses_post( wc_price( wc_get_price_to_display( $product, array(
-                'price' => ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $regular_price : $real_price ),
+                'price' => ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $regular_price : $product->get_price() ),
             ) ) ) );
             ?></del></div>
 							<?php 

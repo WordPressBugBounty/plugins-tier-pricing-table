@@ -68,15 +68,28 @@
 	.tpt-welcome__tips li { padding: 0; }
 	.tpt-welcome__tips a { font-weight: 600; display: block; margin-bottom: 2px; }
 	.tpt-welcome__tips span { color: #50575e; font-size: 13px; }
-	.tpt-welcome__plugins { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 32px; align-items: stretch; }
-	.tpt-welcome__plugins li { display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto 1fr auto; gap: 2px 12px; }
+	.tpt-welcome__pairs-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 -24px 16px; padding: 8px 16px 8px 24px; border-bottom: 1px solid #f0f0f1; }
+	.tpt-welcome__card .tpt-welcome__pairs-head h2 { margin: 0; padding: 4px 0; border: 0; }
+	.tpt-welcome__pairs-nav { display: flex; gap: 6px; }
+	.tpt-welcome__pairs.is-static .tpt-welcome__pairs-nav { display: none; }
+	.tpt-welcome__pairs-arrow { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; padding: 0; border: 1px solid #c3c4c7; border-radius: 4px; background: #fff; color: #1d2327; cursor: pointer; }
+	.tpt-welcome__pairs-arrow:hover:not(:disabled) { border-color: var(--wp-admin-theme-color, #2271b1); color: var(--wp-admin-theme-color, #2271b1); }
+	.tpt-welcome__pairs-arrow:focus-visible { outline: 2px solid var(--wp-admin-theme-color, #2271b1); outline-offset: 1px; }
+	.tpt-welcome__pairs-arrow:disabled { opacity: .4; cursor: default; }
+	.tpt-welcome__pairs-arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+	.rtl .tpt-welcome__pairs-arrow svg { transform: scaleX(-1); }
+	.tpt-welcome__plugins { list-style: none; margin: 0 0 18px; padding: 0 0 2px; display: grid; grid-auto-flow: column; grid-auto-columns: calc(50% - 16px); gap: 32px; align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain; scrollbar-width: none; }
+	.tpt-welcome__plugins::-webkit-scrollbar { display: none; }
+	.tpt-welcome__plugins:focus-visible { outline: 2px solid var(--wp-admin-theme-color, #2271b1); outline-offset: 4px; }
+	.tpt-welcome__plugins li { display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto 1fr auto; gap: 2px 12px; scroll-snap-align: start; }
 	.tpt-welcome__plugins img { grid-row: 1 / span 3; width: 36px; height: 36px; border-radius: 8px; }
 	.tpt-welcome__plugins a.tpt-welcome__plugin-name { grid-column: 2; font-weight: 600; display: block; }
 	.tpt-welcome__plugins p { grid-column: 2; margin: 0; color: #50575e; font-size: 13px; }
 	.tpt-welcome__plugin-action { grid-column: 2; align-self: end; margin-top: 10px; min-height: 40px; display: flex; align-items: center; }
 	.tpt-welcome__foot { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 4px 4px 0; color: #787c82; font-size: 13px; }
 	@media (max-width: 1100px) { .tpt-welcome__body { grid-template-columns: 1fr; } .tpt-welcome__tips { grid-template-columns: repeat(2, 1fr); gap: 16px 32px; } }
-	@media (max-width: 782px) { .tpt-welcome__step { grid-template-columns: 32px 1fr; } .tpt-welcome__action { grid-column: 2; text-align: left; } .tpt-welcome__tips { grid-template-columns: 1fr; } .tpt-welcome__plugins { grid-template-columns: 1fr; } }
+	@media (max-width: 782px) { .tpt-welcome__step { grid-template-columns: 32px 1fr; } .tpt-welcome__action { grid-column: 2; text-align: left; } .tpt-welcome__tips { grid-template-columns: 1fr; } .tpt-welcome__plugins { grid-auto-columns: 85%; gap: 20px; } }
+	@media (prefers-reduced-motion: reduce) { .tpt-welcome__plugins { scroll-behavior: auto; } }
 </style>
 
 <div class="wrap tpt-welcome">
@@ -159,9 +172,19 @@
 		</div>
 
 		<?php if ( ! empty( $plugins ) ) : ?>
-			<div class="tpt-welcome__card">
-				<h2><?php esc_html_e( 'Pairs with Tiered Pricing', 'tier-pricing-table' ); ?></h2>
-				<ul class="tpt-welcome__plugins">
+			<div class="tpt-welcome__card tpt-welcome__pairs" data-tpt-slider>
+				<div class="tpt-welcome__pairs-head">
+					<h2 id="tpt-welcome-pairs-title"><?php esc_html_e( 'Pairs with Tiered Pricing', 'tier-pricing-table' ); ?></h2>
+					<div class="tpt-welcome__pairs-nav">
+						<button type="button" class="tpt-welcome__pairs-arrow" data-tpt-slider-prev aria-label="<?php esc_attr_e( 'Previous plugins', 'tier-pricing-table' ); ?>">
+							<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3L5 8l5 5"/></svg>
+						</button>
+						<button type="button" class="tpt-welcome__pairs-arrow" data-tpt-slider-next aria-label="<?php esc_attr_e( 'Next plugins', 'tier-pricing-table' ); ?>">
+							<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3l5 5-5 5"/></svg>
+						</button>
+					</div>
+				</div>
+				<ul class="tpt-welcome__plugins" data-tpt-slider-track tabindex="0" aria-labelledby="tpt-welcome-pairs-title">
 					<?php foreach ( $plugins as $plugin ) : ?>
 						<li>
 							<img src="<?php echo esc_url( $plugin['icon'] ); ?>" width="36" height="36" alt="">
@@ -172,6 +195,10 @@
 					<?php endforeach; ?>
 				</ul>
 			</div>
+			<?php
+			// moves on by one plugin every few seconds: assets/admin/plugin-slider.js
+			PluginInstaller::enqueueSlider();
+			?>
 		<?php endif; ?>
 		</div>
 		<div class="tpt-welcome__side">

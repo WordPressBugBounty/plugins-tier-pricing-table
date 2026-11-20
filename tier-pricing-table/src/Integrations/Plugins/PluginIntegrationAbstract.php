@@ -41,6 +41,7 @@ abstract class PluginIntegrationAbstract {
 			'official'             => $this->isOfficial(),
 			'action_links'         => $this->getActionLinks(),
 			'meta_pills'           => $this->getMetaPills(),
+			'install_slug'         => $this->getPromotedPluginSlug(),
 		);
 		
 		return $integrations;
@@ -73,6 +74,14 @@ abstract class PluginIntegrationAbstract {
 		return array();
 	}
 	
+	/**
+	 * The WordPress.org slug of a U2Code plugin to offer with a one-click install button and its state
+	 * (PluginInstaller::plugins()), or '' for none.
+	 */
+	public function getPromotedPluginSlug(): string {
+		return '';
+	}
+
 	public function getIconURL(): ?string {
 		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/placeholder.png' );
 	}

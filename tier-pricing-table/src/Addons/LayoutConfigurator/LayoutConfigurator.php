@@ -74,6 +74,7 @@ class LayoutConfigurator {
 		// product page price line
 		'product_page_price_format'     => 'custom',
 		'update_price_on_product_page'  => 'yes',
+		'highlight_price_change'        => 'yes',
 		'show_tiered_price_as_discount' => 'yes',
 		'show_total_price'              => 'no',
 		'show_total_price_non_tiered'   => 'no',
@@ -309,7 +310,7 @@ class LayoutConfigurator {
 		'shop_loop_display_layout', 'shop_loop_display_pricing_table_style', 'shop_loop_display_pricing_blocks_style', 'shop_loop_display_pricing_options_style',
 		'shop_loop_display_pricing_dropdown_style', 'shop_loop_display_pricing_plain_text_style', 'shop_loop_display_quantity_type', 'shop_loop_display_tiers_order',
 		'shop_loop_display_discount_format', 'shop_loop_display_layout_settings', 'shop_loop_display_position',
-		'round_discount_percentage',
+		'round_discount_percentage', 'highlight_price_change',
 	);
 
 	/**
@@ -330,6 +331,7 @@ class LayoutConfigurator {
 			'tiers_order'                    => array( 'asc', 'desc' ),
 			'discount_format'                => array( 'percentage', 'amount', 'both' ),
 			'round_discount_percentage'      => array( 'no', 'yes' ),
+			'highlight_price_change'         => array( 'yes', 'no' ),
 			'product_page_price_format'      => array( 'custom', 'same_as_catalog' ),
 			'you_save_style'                 => array( 'text', 'pill', 'outline' ),
 			'you_save_position'              => array( 'price', 'before_add_to_cart', 'after_table' ),
@@ -495,14 +497,33 @@ class LayoutConfigurator {
 	}
 
 	/**
-	 * The product image of the previews: WooCommerce's current placeholder, bundled with the plugin so the
-	 * preview looks the same on every store, whatever placeholder the store sets or its WooCommerce version
-	 * ships (older ones have a white image that disappears in the skeleton).
+	 * The product image of the previews: a T-shirt drawn for them and bundled with the plugin, so the preview
+	 * looks the same on every store, whatever placeholder the store sets or its WooCommerce version ships
+	 * (older ones have a white image that disappears in the skeleton).
 	 */
 	public static function getPreviewPlaceholder(): string {
-		$url = ServiceContainer::getInstance()->getFileManager()->locateAsset( 'admin/images/preview-placeholder.webp' );
+		$url = ServiceContainer::getInstance()->getFileManager()->locateAsset( 'admin/images/preview-product.svg' );
 		
 		return (string) apply_filters( 'tiered_pricing_table/layout_configurator/preview_placeholder', $url );
+	}
+
+	/**
+	 * The product images of the shop preview, one per card: the main preview image, then a mug and a notebook.
+	 *
+	 * @return string[]
+	 */
+	public static function getPreviewCardImages(): array {
+		$fileManager = ServiceContainer::getInstance()->getFileManager();
+
+		$images = array(
+			self::getPreviewPlaceholder(),
+			$fileManager->locateAsset( 'admin/images/preview-product-mug.svg' ),
+			$fileManager->locateAsset( 'admin/images/preview-product-notebook.svg' ),
+		);
+
+		$images = apply_filters( 'tiered_pricing_table/layout_configurator/preview_card_images', $images );
+
+		return array_values( array_filter( array_map( 'strval', (array) $images ) ) );
 	}
 	
 	/**
@@ -813,6 +834,7 @@ class LayoutConfigurator {
 				'badge_template'                 => array( 'tp_max_discount', 'tp_lowest_price', 'tp_lowest_quantity', 'tp_max_saving' ),
 			),
 			'placeholder'   => self::getPreviewPlaceholder(),
+			'cardImages'    => self::getPreviewCardImages(),
 			'youSave'       => self::isYouSaveAvailable(),
 			'youSaveOptions' => array(
 				'styles'    => array(

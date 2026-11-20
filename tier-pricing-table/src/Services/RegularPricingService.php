@@ -178,8 +178,34 @@ class RegularPricingService {
 		}
 		
 		$newPrice = $this->getPrice( $product, 'sale' );
-		
-		return ! is_null( $newPrice ) ? (float) $newPrice : $price;
+
+		if ( ! is_null( $newPrice ) ) {
+			return (float) $newPrice;
+		}
+
+		// A rule that sets only a regular price replaces the product's own sale too: get_price() returns the rule's
+		// regular price, so the product is not on sale. Keeping WooCommerce's sale price here would advertise it
+		// (strikethrough, structured data, Google feeds) while the cart charges the rule price.
+		if ( '' !== (string) $price && TierPricingTablePlugin::isSimpleProductSupported( $product ) && $this->ruleReplacesSale( $product ) ) {
+			return '';
+		}
+
+		return $price;
+	}
+
+	/**
+	 * Whether the product's pricing rule sets a fixed regular price and no sale price.
+	 */
+	protected function ruleReplacesSale( WC_Product $product ): bool {
+		$pricingRule = PriceManager::getPricingRule( $product->get_id() );
+
+		$pricingType  = $pricingRule->pricingData['pricing_type'] ?? null;
+		$salePrice    = $pricingRule->pricingData['sale_price'] ?? null;
+		$regularPrice = $pricingRule->pricingData['regular_price'] ?? null;
+
+		$replaces = 'flat' === $pricingType && Form::isEmpty( $salePrice ) && ! Form::isEmpty( $regularPrice );
+
+		return (bool) apply_filters( 'tiered_pricing_table/services/regular_pricing/rule_replaces_sale', $replaces, $product, $pricingRule );
 	}
 	
 	public function adjustRegularPrice( $price, ?WC_Product $product ) {

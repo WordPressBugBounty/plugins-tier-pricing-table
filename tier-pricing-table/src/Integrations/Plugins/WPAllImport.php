@@ -154,7 +154,7 @@ class WPAllImport extends PluginIntegrationAbstract {
 			);
 			
 			$fields[ '_' . $role . '_tiered_price_pricing_type' ] = array(
-				'title'        => __( 'Pricing type', 'tier-pricing-table' ),
+				'title'        => __( 'Base price', 'tier-pricing-table' ),
 				'type'         => 'role_field',
 				'role'         => $role,
 				'is_sub_field' => true,

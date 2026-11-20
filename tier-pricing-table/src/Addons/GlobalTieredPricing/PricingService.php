@@ -64,6 +64,7 @@ class PricingService {
     }
 
     public function addFlexibleGlobalPricing( PricingRule $pricingRule, GlobalPricingRule $globalPricingRule ) : PricingRule {
+        $previousProvider = $pricingRule->provider;
         $updateRegularPricing = false;
         $updateTieredPricing = false;
         /**
@@ -111,8 +112,10 @@ class PricingService {
         } else {
             $updateTieredPricing = true;
         }
+        $setsBasePrice = false;
         if ( $updateRegularPricing ) {
             if ( $this->applyBasePricing( $pricingRule, $globalPricingRule ) ) {
+                $setsBasePrice = true;
                 $pricingRule->logPricingModification( '[global rule]: Regular pricing was updated by global rule' );
             }
             // the tax settings are free
@@ -128,6 +131,12 @@ class PricingService {
         }
         $pricingRule->provider = 'global-rules';
         $pricingRule->providerData['rule_id'] = $globalPricingRule->getId();
+        $this->recordDecidedParts(
+            $pricingRule,
+            $previousProvider,
+            $setsBasePrice,
+            $updateTieredPricing
+        );
         // If tiered pricing is used from global rule or if mix and match is allowed for product-level tiered pricing
         if ( $updateTieredPricing || $globalPricingRule->getSettings()->isAllowTieredPricingMixAndMatch() ) {
             $pricingRule->providerData['applying_type'] = $globalPricingRule->getApplyingType();
@@ -163,7 +172,8 @@ class PricingService {
      * @return PricingRule
      */
     public function addPricing( PricingRule $pricingRule, GlobalPricingRule $globalPricingRule ) : PricingRule {
-        $this->applyBasePricing( $pricingRule, $globalPricingRule );
+        $previousProvider = $pricingRule->provider;
+        $setsBasePrice = $this->applyBasePricing( $pricingRule, $globalPricingRule );
         // the tax settings are free
         $pricingRule->pricingData['tax_status'] = $globalPricingRule->getTaxStatus();
         $pricingRule->pricingData['tax_class'] = $globalPricingRule->getTaxClass();
@@ -172,7 +182,34 @@ class PricingService {
         $pricingRule->provider = 'global-rules';
         $pricingRule->providerData['rule_id'] = $globalPricingRule->getId();
         $pricingRule->providerData['applying_type'] = $globalPricingRule->getApplyingType();
+        $this->recordDecidedParts(
+            $pricingRule,
+            $previousProvider,
+            $setsBasePrice,
+            true
+        );
         return $pricingRule;
+    }
+
+    /**
+     * Which parts of the price the rule set. With "flexible" priority the rule can leave the base price, the
+     * tiers or both to the product's own or role pricing and still be the provider (it may set the quantity
+     * limits or join the tiers across products), so the Pricing test reads this to credit each part to its
+     * real source.
+     */
+    protected function recordDecidedParts(
+        PricingRule $pricingRule,
+        string $previousProvider,
+        bool $base,
+        bool $tiers
+    ) {
+        if ( 'global-rules' !== $previousProvider ) {
+            $pricingRule->providerData['previous_provider'] = $previousProvider;
+        }
+        $pricingRule->providerData['decided'] = array(
+            'base'  => $base,
+            'tiers' => $tiers,
+        );
     }
 
 }

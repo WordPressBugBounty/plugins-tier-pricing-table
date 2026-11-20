@@ -4,6 +4,7 @@ use TierPricingTable\Addons\AbstractAddon;
 use TierPricingTable\Addons\GlobalTieredPricing\CPT\GlobalTieredPricingCPT;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRulesRepository;
+use TierPricingTable\Core\PricingContext;
 use TierPricingTable\PriceManager;
 use TierPricingTable\Settings\Settings;
 use WC_Product;
@@ -62,6 +63,8 @@ class PricingTester {
 		add_filter( 'tiered_pricing_table/current_user', function () use ( $user ) {
 			return $user;
 		}, 999 );
+		// the scope also drops the rules already built for the administrator in this request
+		PricingContext::begin( $user );
 
 		$product = wc_get_product( $productId );
 		if ( ! $product ) {
@@ -73,8 +76,11 @@ class PricingTester {
 		$tester      = new RuleTester();
 
 		$winner = self::rulesEnabled() ? GlobalPricingRulesRepository::getInstance()->getMatchedPricingRule( $product, $user ) : null;
-		// matched, but the rule's priority settings let product-level pricing win
-		$overridden = $winner && 'global-rules' !== $provider;
+		// matched, but the rule's priority settings let product-level or role pricing set the prices: either the
+		// rule did not run at all, or it ran and left both the base price and the tiers alone
+		$parts      = RuleTester::ruleParts( $pricingRule );
+		$source     = RuleTester::sourceLabel( $pricingRule );
+		$overridden = $winner && ! $parts['base'] && ! $parts['tiers'];
 
 		$tiers   = $pricingRule->getRules();
 		$minimum = $pricingRule->getMinimum();
@@ -124,7 +130,7 @@ class PricingTester {
 				'roles' => $user->ID ? ( $user->roles ? $tester->roleNames( $user->roles ) : __( 'no role', 'tier-pricing-table' ) ) : '',
 			),
 			'rulesEnabled' => self::rulesEnabled(),
-			'rules'        => self::rulesEnabled() ? $this->rules( $tester, $product, $user, $winner, $overridden, $highlightRuleId ) : array(),
+			'rules'        => self::rulesEnabled() ? $this->rules( $tester, $product, $user, $winner, $overridden, $highlightRuleId, $parts, $source ) : array(),
 			'winner'       => array(
 				'id'         => $winner ? $winner->getId() : 0,
 				'title'      => $winner ? self::ruleTitle( $winner->getId() ) : '',
@@ -133,7 +139,7 @@ class PricingTester {
 			),
 			'pricing'      => array(
 				'provider' => $provider,
-				'source'   => RuleTester::providerLabel( $provider ),
+				'source'   => $source,
 				'type'     => $pricingRule->getType(),
 				'base'     => $this->formatPrice( $basePrice ),
 				'limits'   => $limits,
@@ -148,7 +154,7 @@ class PricingTester {
 	 * product and customer. Suspended and unpublished rules are listed too, so "why does my rule not
 	 * apply?" has an answer.
 	 */
-	protected function rules( RuleTester $tester, WC_Product $product, WP_User $user, ?GlobalPricingRule $winner, bool $overridden, int $highlightRuleId ): array {
+	protected function rules( RuleTester $tester, WC_Product $product, WP_User $user, ?GlobalPricingRule $winner, bool $overridden, int $highlightRuleId, array $parts, string $source ): array {
 		$ids = get_posts( array(
 			'numberposts' => - 1,
 			'post_type'   => GlobalTieredPricingCPT::SLUG,
@@ -184,7 +190,14 @@ class PricingTester {
 			} elseif ( $isWinner ) {
 				$verdict = $overridden ? 'overridden' : 'wins';
 				if ( $overridden ) {
-					$notes[] = __( 'Because of the rule\'s priority settings, the product\'s own pricing is applied instead. The pricing log shows the decision.', 'tier-pricing-table' );
+					/* translators: %s: where the prices come from, e.g. "a role price on the product" */
+					$notes[] = sprintf( __( 'Because of the rule\'s priority settings, %s is applied instead. The pricing log shows the decision.', 'tier-pricing-table' ), $source );
+				} elseif ( $parts['base'] && ! $parts['tiers'] ) {
+					/* translators: %s: where the tiers come from, e.g. "a role price on the product" */
+					$notes[] = sprintf( __( 'Because of the rule\'s priority settings, it sets the base price only: the tiers come from %s.', 'tier-pricing-table' ), RuleTester::providerLabel( $parts['other'] ) );
+				} elseif ( $parts['tiers'] && ! $parts['base'] ) {
+					/* translators: %s: where the base price comes from, e.g. "a role price on the product" */
+					$notes[] = sprintf( __( 'Because of the rule\'s priority settings, it sets the tiers only: the base price comes from %s.', 'tier-pricing-table' ), RuleTester::providerLabel( $parts['other'] ) );
 				}
 			} elseif ( 'active' !== $status ) {
 				$verdict = 'inactive';

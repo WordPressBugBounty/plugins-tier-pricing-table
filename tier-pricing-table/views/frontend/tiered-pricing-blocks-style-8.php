@@ -35,7 +35,7 @@
 	) );
 
 	$price = wc_get_price_to_display( $product, array(
-			'price' => $product->get_price(),
+			'price' => $real_price,
 	) );
 
 	// discount of every tier (percent), for the biggest discount
@@ -67,7 +67,7 @@
 		     data-product-name="<?php echo esc_attr( $product_name ); ?>"
 		     data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
 		     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
-		     data-price="<?php echo esc_attr( $price ); ?>"
+		     data-price="<?php echo esc_attr( wc_get_price_to_display( $product, array( 'price' => $product->get_price() ) ) ); ?>"
 		     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
 
@@ -76,6 +76,11 @@
 			$discountAmount = 0;
 			if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
 				$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(), $product->get_sale_price() );
+			}
+
+			// a table that starts at the minimum quantity: the discount of the tier that applies there
+			if ( isset( $base_discount ) && null !== $base_discount ) {
+				$discountAmount = $base_discount;
 			}
 			$baseQuantityLabel = ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] )
 				? number_format_i18n( $minimum ) . ' ' . ( $minimum > 1 ? $settings['quantity_measurement_plural'] : $settings['quantity_measurement_singular'] )
@@ -87,18 +92,18 @@
 			     data-tiered-price-exclude-taxes="<?php echo esc_attr( wc_get_price_excluding_tax( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ); ?>"
 			     data-tiered-price-include-taxes="<?php echo esc_attr( wc_get_price_including_tax( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ); ?>">
 
-				<?php
-					do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $minimum, array(
-							'id'    => $id,
-							'style' => '8',
-					) );
-				?>
 				<div class="tiered-pricing-block__price">
 					<span><?php echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array( 'price' => $real_price ) ) ) ); ?></span>
 					<?php if ( $settings['show_discount_column'] && $discountAmount > 0 ) : ?>
 						<span class="tiered-pricing-block__price-discount"><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, null, $settings, 'off' ) ); ?></span>
 					<?php endif; ?>
 				</div>
+				<?php
+					do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $minimum, array(
+							'id'    => $id,
+							'style' => '8',
+					) );
+				?>
 				<div class="tiered-pricing-block__quantity"><?php echo esc_html( $baseQuantityLabel ); ?></div>
 			</div>
 			<?php $tptTierRows[] = ob_get_clean(); ?>
@@ -147,18 +152,18 @@
 				     data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 				     data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>">
 
-					<?php
-						do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $currentQuantity, array(
-								'id'    => $id,
-								'style' => '8',
-						) );
-					?>
 					<div class="tiered-pricing-block__price">
 						<span><?php echo wp_kses_post( wc_price( PriceManager::getPriceByRules( $currentQuantity, $product_id ) ) ); ?></span>
 						<?php if ( $settings['show_discount_column'] && $discountAmount > 0 ) : ?>
 							<span class="tiered-pricing-block__price-discount"><?php echo wp_kses_post( PricingTable::formatDiscount( $discountAmount, $pricing_rule, $product, $currentQuantity, $settings, 'off' ) ); ?></span>
 						<?php endif; ?>
 					</div>
+					<?php
+						do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $currentQuantity, array(
+								'id'    => $id,
+								'style' => '8',
+						) );
+					?>
 					<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
 				</div>
 			<?php $tptTierRows[] = ob_get_clean(); endwhile; ?>

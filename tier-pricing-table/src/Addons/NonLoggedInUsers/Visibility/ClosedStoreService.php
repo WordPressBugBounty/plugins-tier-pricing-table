@@ -6,13 +6,17 @@ use WP_Error;
 /**
  * Closed store: visitors who are not logged in are sent to the login page. My Account (login,
  * registration, lost password), the wholesale registration page and the pages chosen in the settings
- * stay open. Visitors get no products from the REST APIs or the feeds either, and cannot buy.
+ * stay open. Visitors get no products from the REST APIs or the feeds either, no tiered pricing for a product
+ * they ask for, and cannot buy.
  */
 class ClosedStoreService {
 
 	public function __construct() {
 		add_action( 'template_redirect', array( $this, 'guard' ), 1 );
 		add_filter( 'rest_pre_dispatch', array( $this, 'guardStoreApi' ), 10, 3 );
+		// the tiered pricing of a product a visitor asks for by ID: the variation table request, the quote list, the
+		// shortcode and the Elementor widget
+		add_filter( 'tiered_pricing_table/product/can_view', array( $this, 'filterCanView' ) );
 		// after WooCommerce, which sets post__in on product feeds and archives (loop_shop_post_in)
 		add_action( 'pre_get_posts', array( $this, 'emptyProductQueries' ), 1000 );
 		add_filter( 'woocommerce_is_purchasable', array( $this, 'filterPurchasable' ), 20 );
@@ -74,7 +78,8 @@ class ClosedStoreService {
 			return $result;
 		}
 
-		$route = (string) $request->get_route();
+		// WordPress matches a route without regard to letter case (see ProductVisibilityService::guardStoreApi())
+		$route = strtolower( (string) $request->get_route() );
 
 		// reading the cart stays: a mini cart on an open page asks for it
 		$readsCart = 'GET' === $request->get_method() && preg_match( '#^/wc/store(?:/v\d+)?/cart/?$#', $route );
@@ -126,6 +131,17 @@ class ClosedStoreService {
 		if ( $query->is_tax( get_object_taxonomies( 'product' ) ) ) {
 			$query->set( 'post__in', array( 0 ) );
 		}
+	}
+
+	/**
+	 * A visitor sees no product's tiered pricing while the store is closed.
+	 *
+	 * @param  bool  $canView
+	 *
+	 * @return bool
+	 */
+	public function filterCanView( $canView ) {
+		return $canView && ! self::isClosedFor();
 	}
 
 	/**

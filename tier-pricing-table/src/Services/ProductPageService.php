@@ -11,6 +11,7 @@ use TierPricingTable\TierPricingTablePlugin;
 use WC_Product;
 use WC_Product_Data_Store_CPT;
 use WP_Post;
+use TierPricingTable\Addons\ProductCatalogLoop\ProductCatalogLoop;
 
 /**
  * Class ProductPageHandler
@@ -315,7 +316,16 @@ class ProductPageService {
 
 			// anyone may call this: only products the visitor may see (not drafts, private or hidden ones)
 			if ( $parentProduct && ProductAccess::canView( $product ) ) {
-				PricingTable::getInstance()->renderPricingTableHTML( $parentProduct, $product, $renderSettings );
+				$renderTable = function () use ( $parentProduct, $product, $renderSettings ) {
+					PricingTable::getInstance()->renderPricingTableHTML( $parentProduct, $product, $renderSettings );
+				};
+
+				// a variation chosen on a shop or category page: no tier labels there
+				if ( 'shop-loop' === $displayContext ) {
+					ProductCatalogLoop::renderingCatalog( $renderTable );
+				} else {
+					$renderTable();
+				}
 			}
 
 		}

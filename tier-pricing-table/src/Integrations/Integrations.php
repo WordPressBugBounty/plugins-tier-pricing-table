@@ -18,6 +18,12 @@ use TierPricingTable\Integrations\Plugins\WooPaymentsMulticurrency;
 use TierPricingTable\Integrations\Plugins\WombatProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceDeposits;
 use TierPricingTable\Integrations\Plugins\ExpressCheckout;
+use TierPricingTable\Integrations\Plugins\Feeds\CtxFeed;
+use TierPricingTable\Integrations\Plugins\Feeds\GoogleForWooCommerce;
+use TierPricingTable\Integrations\Plugins\Feeds\MetaForWooCommerce;
+use TierPricingTable\Integrations\Plugins\Feeds\PinterestForWooCommerce;
+use TierPricingTable\Integrations\Plugins\Feeds\ProductFeedPro;
+use TierPricingTable\Integrations\Plugins\Feeds\RexFeed;
 use TierPricingTable\Integrations\Plugins\WooCommerceProductAddons;
 use TierPricingTable\Integrations\Plugins\WooCommerceSubscriptions;
 use TierPricingTable\Integrations\Plugins\WOOCS;
@@ -89,6 +95,13 @@ class Integrations {
 			Yoast::class,
 			RankMath::class,
 			SEOPress::class,
+
+			GoogleForWooCommerce::class,
+			ProductFeedPro::class,
+			CtxFeed::class,
+			RexFeed::class,
+			MetaForWooCommerce::class,
+			PinterestForWooCommerce::class,
 		) );
 		
 		foreach ( $themes as $themeName => $theme ) {

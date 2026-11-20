@@ -134,6 +134,10 @@ class DiscountRulesForWooCommerce extends PluginIntegrationAbstract {
 		return isset( $cartItem['wdr_free_product'] );
 	}
 
+	public function getIconURL(): string {
+		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/discount-rules-icon.png' );
+	}
+
 	public function getAuthorURL(): string {
 		return 'https://wordpress.org/plugins/woo-discount-rules/';
 	}
@@ -143,14 +147,7 @@ class DiscountRulesForWooCommerce extends PluginIntegrationAbstract {
 	}
 
 	public function getDescription(): string {
-		return __( 'Discount Rules takes priority: while one of its rules discounts a product, the tiers of that product are switched off and the discounted price applies at every quantity. Free gift items are never re-priced.', 'tier-pricing-table' );
-	}
-
-	public function getMetaPills(): array {
-		return array(
-			__( 'Discounts take priority', 'tier-pricing-table' ),
-			__( 'Free gifts stay free', 'tier-pricing-table' ),
-		);
+		return __( 'While a Discount Rules rule discounts a product, its tiers are switched off. Free gifts keep their price.', 'tier-pricing-table' );
 	}
 
 	public function getSlug(): string {

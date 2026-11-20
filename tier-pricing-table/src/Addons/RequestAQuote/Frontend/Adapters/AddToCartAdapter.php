@@ -35,6 +35,18 @@ class AddToCartAdapter extends AbstractLayoutAdapter {
 	}
 
 	/**
+	 * Whether a product (or variation) is bought through a quote only: its quote form hides Add to cart.
+	 * Used outside the product page (product feeds), so it builds its own adapter.
+	 *
+	 * @param  int  $productId
+	 *
+	 * @return bool
+	 */
+	public static function isQuoteOnly( int $productId ): bool {
+		return null !== ( new self() )->getHidingForm( $productId );
+	}
+
+	/**
 	 * The product's quote form shows its button next to Add to cart and hides Add to cart.
 	 *
 	 * @param  int  $productId  A product or a variation.

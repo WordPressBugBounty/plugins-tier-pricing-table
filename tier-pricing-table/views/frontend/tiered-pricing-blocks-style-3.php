@@ -35,7 +35,7 @@
 	) );
 
 	$price = wc_get_price_to_display( $product, array(
-			'price' => $product->get_price(),
+			'price' => $real_price,
 	) );
 
 ?>
@@ -57,7 +57,7 @@
 		     data-product-name="<?php echo esc_attr( $product_name ); ?>"
 		     data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
 		     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
-		     data-price="<?php echo esc_attr( $price ); ?>"
+		     data-price="<?php echo esc_attr( wc_get_price_to_display( $product, array( 'price' => $product->get_price() ) ) ); ?>"
 		     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
 
@@ -93,6 +93,11 @@
 						$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
 								$product->get_sale_price() );
 					}
+
+					// a table that starts at the minimum quantity: the discount of the tier that applies there
+					if ( isset( $base_discount ) && null !== $base_discount ) {
+						$discountAmount = $base_discount;
+					}
 					?>
 					<?php if ( $discountAmount > 0 ) : ?>
 						<div class="tiered-pricing-block__discount">
@@ -106,13 +111,6 @@
 				<?php endif; ?>
 				<div class="tiered-pricing-block-inner">
 
-					<?php
-						do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $minimum, array(
-								'id'    => $id,
-								'style' => '3',
-						) );
-					?>
-
 					<div class="tiered-pricing-block__price">
 						<?php
 							echo wp_kses_post( wc_price( wc_get_price_to_display( wc_get_product( $product_id ), array(
@@ -120,6 +118,12 @@
 							) ) ) );
 						?>
 					</div>
+					<?php
+						do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $minimum, array(
+								'id'    => $id,
+								'style' => '3',
+						) );
+					?>
 					<div class="tiered-pricing-block__quantity">
 						<?php if ( 1 >= array_keys( $price_rules )[0] - $minimum || 'static' === $settings['quantity_type'] ) : ?>
 							<span><?php echo esc_attr( number_format_i18n( $minimum ) ); ?></span>
@@ -200,13 +204,6 @@
 
 					<div class="tiered-pricing-block-inner">
 
-						<?php
-							do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $currentQuantity, array(
-									'id'    => $id,
-									'style' => '3',
-							) );
-						?>
-
 						<div class="tiered-pricing-block__price">
 						<span>
 							<?php
@@ -215,6 +212,12 @@
 							?>
 						</span>
 						</div>
+						<?php
+							do_action( 'tiered_pricing_table/blocks/label', $pricing_rule, $currentQuantity, array(
+									'id'    => $id,
+									'style' => '3',
+							) );
+						?>
 						<div class="tiered-pricing-block__quantity"><?php echo esc_html( $quantity ); ?></div>
 					</div>
 

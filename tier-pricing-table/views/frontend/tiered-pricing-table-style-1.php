@@ -37,7 +37,7 @@
 	) );
 
 	$price = wc_get_price_to_display( $product, array(
-			'price' => $product->get_price(),
+			'price' => $real_price,
 	) );
 
 	$price_incl_taxes = wc_get_price_including_tax( wc_get_product( $product_id ), array(
@@ -94,10 +94,17 @@
 		     data-product-name="<?php echo esc_attr( $product_name ); ?>"
 		     data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
 		     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
-		     data-price="<?php echo esc_attr( $price ); ?>"
+		     data-price="<?php echo esc_attr( wc_get_price_to_display( $product, array( 'price' => $product->get_price() ) ) ); ?>"
 		     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
-			<div class="tiered-pricing-table-header" style="grid-template-columns: repeat(<?php echo (int) $columns; ?>, 1fr);">
+			<?php
+				// every row is a grid of its own: fixed shares (minmax(0, …)) keep the columns of all rows in line
+				// whatever a cell holds, and the quantity column, which also carries the tier label, gets the larger share
+				$tptGridColumns = $settings['quantity_column_title'] && $columns > 1
+					? 'minmax(0, var(--tpt-quantity-share, 1.3fr)) repeat(' . ( (int) $columns - 1 ) . ', minmax(0, 1fr))'
+					: 'repeat(' . max( 1, (int) $columns ) . ', minmax(0, 1fr))';
+			?>
+			<div class="tiered-pricing-table-header" style="grid-template-columns: <?php echo esc_attr( $tptGridColumns ); ?>;">
 				<?php if ( $settings['quantity_column_title'] ) : ?>
 					<div class="tiered-pricing-table-header-qty"><?php echo esc_attr( $settings['quantity_column_title'] ); ?></div>
 				<?php endif; ?>
@@ -120,7 +127,7 @@
 				     data-tiered-price="<?php echo esc_attr( $price ); ?>"
 				     data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
 				     data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>"
-				     style="grid-template-columns: repeat(<?php echo (int) $columns; ?>, 1fr);">
+				     style="grid-template-columns: <?php echo esc_attr( $tptGridColumns ); ?>;">
 
 					<?php if ( $settings['quantity_column_title'] ) : ?>
 						<div>
@@ -149,6 +156,11 @@
 						if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
 							$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
 									$product->get_sale_price() );
+						}
+
+						// a table that starts at the minimum quantity: the discount of the tier that applies there
+						if ( isset( $base_discount ) && null !== $base_discount ) {
+							$discountAmount = $base_discount;
 						}
 						?>
 						<div>
@@ -220,7 +232,7 @@
 					     data-tiered-price="<?php echo esc_attr( $currentProductPrice ); ?>"
 					     data-tiered-price-exclude-taxes="<?php echo esc_attr( $currentProductPriceExcludeTaxes ); ?>"
 					     data-tiered-price-include-taxes="<?php echo esc_attr( $currentProductPriceIncludeTaxes ); ?>"
-					     style="grid-template-columns: repeat(<?php echo (int) $columns; ?>, 1fr);">
+					     style="grid-template-columns: <?php echo esc_attr( $tptGridColumns ); ?>;">
 
 						<?php if ( $settings['quantity_column_title'] ) : ?>
 							<div>

@@ -46,9 +46,35 @@ class Admin {
 	}
 	
 	/**
-	 * Register assets on product create/update page
+	 * The screens that show the plugin's own admin UI: products, pricing rules, quote requests, wholesale
+	 * applications, the plugin's settings tab and the Getting started page. Every other admin page loads none of
+	 * the plugin's admin script and styles. The filter `tiered_pricing_table/admin/load_assets` adds a screen.
+	 */
+	public static function isPluginScreen(): bool {
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- which screen this is, nothing is saved
+		$page = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+		$tab  = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : '';
+		// phpcs:enable
+
+		// the post types the plugin adds fields, columns or screens to (as strings: a module may be off)
+		$postTypes = array( 'product', 'tpt-global-rule', 'tpt-quote-request', 'tpt-wholesale-app' );
+
+		$isPluginScreen = ( $screen && in_array( $screen->post_type, $postTypes, true ) && in_array( $screen->base, array( 'post', 'edit' ), true ) )
+			|| ( 'wc-settings' === $page && \TierPricingTable\Settings\Settings::SETTINGS_PAGE === $tab )
+			|| WelcomePage::PAGE_SLUG === $page;
+
+		return (bool) apply_filters( 'tiered_pricing_table/admin/load_assets', $isPluginScreen, $screen );
+	}
+
+	/**
+	 * The plugin's admin script and styles, only where its admin UI shows (see isPluginScreen()).
 	 */
 	public function enqueueAssets() {
+		if ( ! self::isPluginScreen() ) {
+			return;
+		}
+
 		wp_enqueue_script( 'tiered-pricing-table-admin-js',
 			$this->getContainer()->getFileManager()->locateJSAsset( 'admin/main' ), [ 'jquery' ],
 			TierPricingTablePlugin::VERSION );

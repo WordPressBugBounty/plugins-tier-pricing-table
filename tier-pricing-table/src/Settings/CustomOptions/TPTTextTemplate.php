@@ -20,6 +20,11 @@ class TPTTextTemplate {
 		add_action( 'woocommerce_admin_field_' . self::FIELD_TYPE, array( $this, 'render' ) );
 
 		add_action( 'admin_enqueue_scripts', function () {
+			// the template variables go with the settings script, on the settings tab only
+			if ( ! Settings::isSettingsTab() ) {
+				return;
+			}
+
 			$assetName = Settings::SETTINGS_PAGE . '_script';
 
 			wp_add_inline_script( $assetName,

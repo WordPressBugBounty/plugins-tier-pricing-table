@@ -52,6 +52,8 @@ class DuplicateAction {
 					
 					$newPostArgs = array(
 						'post_title'  => $originalPost->post_title . ' ' . __( '(Copy)', 'tier-pricing-table' ),
+						// the rule's note
+						'post_excerpt' => $originalPost->post_excerpt,
 						'post_status' => 'draft',
 						'post_type'   => GlobalTieredPricingCPT::SLUG,
 						'post_author' => get_current_user_id(),

@@ -417,6 +417,11 @@ class RequestQuoteForm {
 			$clean['titleFormat'] = 'hidden' === $field['titleFormat'] ? 'hidden' : 'label';
 		}
 
+		// a half-width field shares its row with the next half-width field
+		if ( array_key_exists( 'width', $field ) ) {
+			$clean['width'] = 'half' === $field['width'] ? 'half' : 'full';
+		}
+
 		if ( array_key_exists( 'maxFileSize', $field ) ) {
 			$size                 = trim( $text( $field['maxFileSize'] ) );
 			$clean['maxFileSize'] = is_numeric( $size ) && (float) $size > 0 ? $size : '';

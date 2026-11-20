@@ -1,5 +1,7 @@
 <?php namespace TierPricingTable\Integrations\Plugins;
 
+use TierPricingTable\Admin\PluginInstaller\PluginInstaller;
+
 /**
  * U2Code Product Addons — product options / extra fields with per-option pricing.
  *
@@ -39,8 +41,7 @@ class U2CodeProductAddons extends PluginIntegrationAbstract {
 	}
 
 	public function getDescription(): string {
-		return __( 'Custom product options with per-option pricing, live totals and conditional logic. Deep integration: addon prices follow the tier price.',
-			'tier-pricing-table' );
+		return PluginInstaller::getText( $this->getPromotedPluginSlug() );
 	}
 
 	public function getSlug(): string {
@@ -59,28 +60,8 @@ class U2CodeProductAddons extends PluginIntegrationAbstract {
 		return $this->getContainer()->getFileManager()->locateAsset( 'admin/integrations/u2code-product-addons-icon.svg' );
 	}
 
-	public function getMetaPills(): array {
-		return array(
-			__( '11+ field types', 'tier-pricing-table' ),
-			__( 'Per-option pricing', 'tier-pricing-table' ),
-			__( 'Conditional logic', 'tier-pricing-table' ),
-			__( 'Live totals', 'tier-pricing-table' ),
-		);
-	}
-
-	public function getActionLinks(): array {
-		return array(
-			array(
-				'url'    => 'https://wordpress.org/plugins/u2code-product-addons-for-woocommerce/',
-				'label'  => __( 'Free on WordPress.org', 'tier-pricing-table' ),
-				'target' => '_blank',
-			),
-			array(
-				'url'    => 'https://product-addons.com/?utm_source=tiered-pricing-table&utm_medium=plugin&utm_campaign=integrations-page',
-				'label'  => __( 'Learn more', 'tier-pricing-table' ),
-				'target' => '_blank',
-			),
-		);
+	public function getPromotedPluginSlug(): string {
+		return 'u2code-product-addons-for-woocommerce';
 	}
 
 	public function run() {

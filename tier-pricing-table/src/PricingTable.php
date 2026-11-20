@@ -163,8 +163,12 @@ class PricingTable {
 			$priceRule = PriceManager::getPricingRule( $product->get_id() );
 		}
 
-		// If rules are not empty
-		if ( ! empty( $priceRule->getRules() ) ) {
+		// What the layout shows: the rule as it is, or, when the minimum quantity reaches the tiers, a rule that
+		// starts at the minimum (see getTableView())
+		$tableView = ! empty( $priceRule->getRules() ) ? self::getTableView( $priceRule, $product ) : null;
+
+		// If there are tiers to show
+		if ( $tableView && ! empty( $tableView['rule']->getRules() ) ) {
 
 			$displayType        = $settings['display_type'];
 			$availableTemplates = TierPricingTablePlugin::getAvailablePricingLayouts();
@@ -220,19 +224,19 @@ class PricingTable {
 
 			do_action( 'tiered_pricing_table/before_rendering_tiered_pricing/inner', $priceRule, $product, $settings );
 
-			$this->checkForDuplicateQuantities( $priceRule );
-
 			$this->getContainer()->getFileManager()->includeTemplate( 'frontend/' . $template, array(
-					'pricing_rule' => $priceRule,
-					'price_rules'  => $priceRule->getRules(),
-					'real_price'   => $product->get_price(),
-					'product_name' => $product->get_name(),
-					'product_id'   => $product->get_id(),
-					'product'      => $product,
-					'minimum'      => $priceRule->getMinimum( true ),
-					'settings'     => $settings,
-					'pricing_type' => $priceRule->getType(),
-					'id'           => $this->getUniqueTieredPricingId(),
+					'pricing_rule'  => $tableView['rule'],
+					'price_rules'   => $tableView['rule']->getRules(),
+					// the price of the first row: the product's price, or the tier price at the minimum
+					'real_price'    => $tableView['price'],
+					'base_discount' => $tableView['discount'],
+					'product_name'  => $product->get_name(),
+					'product_id'    => $product->get_id(),
+					'product'       => $product,
+					'minimum'       => $priceRule->getMinimum( true ),
+					'settings'      => $settings,
+					'pricing_type'  => $priceRule->getType(),
+					'id'            => $this->getUniqueTieredPricingId(),
 			) );
 
 			$this->renderMoreTiersLink( $parentProduct );
@@ -240,12 +244,15 @@ class PricingTable {
 			// Provide fallback data for products without pricing rules,
 			// which allows the frontend JS (e.g. dynamic totals, you save, etc.)
 			// to function for all products via the 'tiered_price_update' event.
+			// A minimum quantity above every tier leaves one price, the last tier's: no table, but that price.
+			$fallbackPrice = $tableView ? $tableView['price'] : $product->get_price();
+
 			$price_incl_taxes = wc_get_price_including_tax( $product, array(
-					'price' => $product->get_price(),
+					'price' => $fallbackPrice,
 			) );
 
 			$price_excl_taxes = wc_get_price_excluding_tax( $product, array(
-					'price' => $product->get_price(),
+					'price' => $fallbackPrice,
 			) );
 
 			$sale_price = $product->get_sale_price();
@@ -275,7 +282,7 @@ class PricingTable {
 			     data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
 			     data-price="<?php echo esc_attr( $price ); ?>"
 			     data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
-			     data-tiered-price="<?php echo esc_attr( $price ); ?>"
+			     data-tiered-price="<?php echo esc_attr( wc_get_price_to_display( $product, array( 'price' => $fallbackPrice ) ) ); ?>"
 			     data-tiered-price-exclude-taxes="<?php echo esc_attr( $price_excl_taxes ); ?>"
 			     data-tiered-price-include-taxes="<?php echo esc_attr( $price_incl_taxes ); ?>"
 			></div>
@@ -514,6 +521,9 @@ class PricingTable {
 				'show_tiered_price_as_discount' => $this->getContainer()->getSettings()->get( 'show_tiered_price_as_discount',
 								'yes' ) === 'yes',
 				'show_total_price'              => $showTotalPrice,
+				// a new unit price lights up for a moment on the product page (setting, then the filter)
+				'highlight_price_change'        => (bool) apply_filters( 'tiered_pricing_table/frontend/highlight_price_change',
+						'no' !== $this->getContainer()->getSettings()->get( 'highlight_price_change', 'yes' ) ),
 		);
 
 		if ( $productId ) {
@@ -640,42 +650,59 @@ class PricingTable {
 		return false;
 	}
 
-	public function checkForDuplicateQuantities( PricingRule $pricingRule ) {
-		// Show notice only for admin users
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		$minimum           = $pricingRule->getMinimum( true );
-		$pricingRules      = $pricingRule->getRules();
-		$firstRuleQuantity = ! empty( $pricingRules ) ? array_keys( $pricingRules )[0] : false;
 
-		if ( $firstRuleQuantity && $firstRuleQuantity <= $minimum ) {
-			?>
+	/**
+	 * What a pricing layout shows for a rule. The layouts draw a first row from the minimum quantity up to the first
+	 * tier at the product's price, then one row per tier. When the minimum reaches the tiers (a minimum of 6 and a
+	 * first tier at 6), that first row would show a price nobody pays: the table starts at the minimum instead. The
+	 * tier that applies at the minimum becomes the first row, with its price and discount, and the tiers that end
+	 * below the minimum drop out.
+	 *
+	 * @return array{rule: PricingRule, price: float|string, discount: float|null} The rule to draw (a copy when
+	 *     it changes), the price of the first row and its discount (null: the layout works it out as before).
+	 */
+	public static function getTableView( PricingRule $pricingRule, WC_Product $product ): array {
+		$rules   = $pricingRule->getRules();
+		$minimum = (int) $pricingRule->getMinimum( true );
+		$view    = array(
+			'rule'     => $pricingRule,
+			'price'    => $product->get_price(),
+			'discount' => null,
+		);
 
-			<div style="font-size: .8em;">
-				<div class="woocommerce-error" role="alert" style="margin-bottom: 0">
-					<?php esc_html_e( 'Pricing Conflict Detected: Your Minimum Order Quantity is equal to or greater than your first pricing tier.',
-							'tier-pricing-table' ); ?>
-				</div>
-				<div style="color: #555;
-	padding: 10px 12px;
-	border: 1px solid #b32c2e;
-	background: #fff5f5;">
-					<p style="padding: 0; margin: 0 0 10px 0;">
-						<?php esc_html_e( 'To fix this, please ensure your first tiered pricing rule starts at a higher quantity than your Minimum Order Quantity.',
-								'tier-pricing-table' ); ?>
-					</p>
-					<p style="padding: 0; margin: 0">
-						<strong><?php esc_html_e( 'Why?',
-									'tier-pricing-table' ); ?></strong> <?php esc_html_e( 'The plugin automatically creates a base tier using your standard WooCommerce product price. This base tier covers any quantities ordered between the Minimum Order Quantity and your first discounted tier.',
-								'tier-pricing-table' ); ?>
-					</p>
-					<br>
-					<b><?php esc_html_e( 'This notice is only visible to store administrators.',
-								'tier-pricing-table' ); ?></b>
-				</div>
-			</div>
-			<?php
+		if ( empty( $rules ) || (int) array_keys( $rules )[0] > $minimum ) {
+			return $view;
 		}
+
+		$priceAtMinimum = $pricingRule->getTierPrice( $minimum, false );
+
+		if ( false === $priceAtMinimum ) {
+			return $view;
+		}
+
+		$reached = array_filter( array_keys( $rules ), function ( $quantity ) use ( $minimum ) {
+			return (int) $quantity <= $minimum;
+		} );
+		$tier    = max( $reached );
+
+		$table = clone $pricingRule;
+		$table->setRules( array_filter( $rules, function ( $quantity ) use ( $minimum ) {
+			return (int) $quantity > $minimum;
+		}, ARRAY_FILTER_USE_KEY ) );
+
+		// the first row's discount, worked out like the layouts do for the other rows
+		if ( $pricingRule->isPercentage() ) {
+			$discount = (float) $rules[ $tier ];
+		} else {
+			$base     = CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $product->get_regular_price() : $product->get_price();
+			$discount = PriceManager::calculateDiscount( $base, $priceAtMinimum );
+		}
+
+		return apply_filters( 'tiered_pricing_table/table/view', array(
+			'rule'     => $table,
+			'price'    => $priceAtMinimum,
+			'discount' => $discount,
+		), $pricingRule, $product );
 	}
+
 }

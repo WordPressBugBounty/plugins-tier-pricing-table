@@ -5,7 +5,7 @@ Tags: tiered pricing, bulk discount, quantity discount, wholesale, b2b
 Requires at least: 6.4
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 8.4.1
+Stable tag: 8.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,7 +27,7 @@ Bulk and quantity discounts, wholesale and B2B prices, and cart rules for WooCom
 
 = Quantity tiers on products =
 
-Give a product, or a single variation, its own tiers: a fixed price per unit or an amount off the unit price from the quantity you choose. Tiers work with simple and variable products, in the cart, and on orders you create in WP admin.
+Give a product, or a single variation, its own tiers: a fixed price per unit or an amount off the unit price from the quantity you choose. A customer role, such as Wholesale, or a single customer can get tiers of their own on the product, with their own quote form and tax settings. Tiers work with simple and variable products, in the cart, and on orders you create in WP admin.
 
 = Pricing rules for many products at once =
 
@@ -76,13 +76,13 @@ A one-page order form for bulk and repeat buyers: search by name or SKU, paste a
 Premium adds:
 
 * Percentage quantity discounts, on products and in pricing rules
-* Role and customer prices on the product itself, including base prices
+* Regular prices for a role or a customer on the product itself
 * Minimum, maximum and step quantities per product, category or rule
 * Request a Quote and a quote list for your customers (in the free version administrators can try the forms)
 * The quick order form for chosen roles only, such as your wholesale accounts
 * Cart rules with percentage discounts, a minimum order and a free shipping bar
 * Payment and shipping methods limited to roles
-* Tax options per role
+* Tax display, tax class and tax exemption per role across the store
 * Your own columns in the pricing table
 * The lowest price or a price range instead of the regular price
 * The tier price shown in the cart as a discount, and the total savings at checkout
@@ -102,6 +102,7 @@ See the plans on the [plugin website](https://tiered-pricing.com/).
 * Product Bundles, Mix and Match, and WooCommerce Deposits
 * YITH Request a Quote and Request a Quote by Addify
 * Yoast SEO and Rank Math
+* Google for WooCommerce, Meta for WooCommerce, Pinterest for WooCommerce, Product Feed PRO, CTX Feed and RexFeed
 
 == Screenshots ==
 
@@ -140,7 +141,7 @@ Yes. Give each variation its own tiers, or let all variations share one set.
 
 = Can wholesale customers see different prices? =
 
-Yes. Create a pricing rule for the wholesale role, and only customers with that role get its prices. Premium also adds role prices on the product itself.
+Yes. Create a pricing rule for the wholesale role, and only customers with that role get its prices, or give the role its own tiers on a product. Premium also adds a role's own regular price and quantity limits on the product.
 
 = Can I hide prices from visitors who are not logged in? =
 
@@ -171,6 +172,29 @@ Yes. Orders you create or edit have a "Re-calculate with tiered pricing" button 
 Use the WooCommerce CSV importer or WP All Import. Tiers are written as quantity:price pairs, for example `10:20,20:18`: $20 from 10 pieces, $18 from 20 pieces. Use a dot for decimals, because a comma separates the tiers. To use another separator, return it from the `tiered_pricing_table/rules_separator` filter.
 
 == Changelog ==
+
+= 8.4.2 [2026-11-19] =
+* New: Google for WooCommerce, Meta for WooCommerce, Pinterest for WooCommerce, Product Feed PRO, CTX Feed and RexFeed integrations: feeds and catalogs get the price a logged-out visitor pays, whoever builds them.
+* New: a "Product feeds" settings section: advertise products with a minimum quantity at the total of that quantity, leave out products visitors cannot buy, and see store settings that make Google reject prices.
+* New: "Highlight a new price": the price on the product page lights up when the quantity reaches another tier.
+* New: quote form fields can take half width, so two fields share a row.
+* New: pricing and cart rules have a note for your team, shown in the rules list.
+* Improvement: role and customer tiers on a product, with their quote form and tax settings, are now free.
+* Improvement: clearer quote form editor: a simpler field list, ready fields for new forms, and the quote list page in one click.
+* Improvement: new first screens for Request a Quote and Badges & Labels, with live examples.
+* Improvement: the rule editor has a "Test this rule" button.
+* Improvement: faster admin: the plugin's scripts and styles load only on its own screens, and the Integrations screen is compact.
+* Improvement: the customizer previews show sample products with their own prices.
+* Improvement: Orders Chat joins the U2Code plugins, which now page through on the Integrations screen.
+* Improvement: tier labels stay off shop and category pages, where the pricing tables are narrow.
+* Fix: badges in the pricing layouts no longer crowd the discount, and no field or placeholder is cut off in the product and rule editors.
+* Fix: the pricing test names the real source of the prices when a rule leaves them to role or product pricing.
+* Fix: when the minimum quantity reaches the first tier, every pricing layout starts at the minimum with that tier's price.
+* Fix: a rule that sets only a regular price no longer leaves the product's own sale price showing.
+* Fix: with a "group of" quantity the quantity field starts at the first allowed quantity.
+* Fix: prices worked out for one customer are no longer reused for another, for example in the pricing test.
+* Fix: the pricing rules list opens quickly with hundreds of rules.
+* Fix: catalog visibility by role and the closed store now hold for REST routes in any letter case, and a closed store sends visitors no pricing tables. Thanks to Nathan Cross (CyberBadger) for reporting this and the security issues fixed in 8.4.0.
 
 = 8.4.1 [2026-11-17] =
 * New: pricing and cart rules can be limited to attribute values, such as Print: Laser engraving, so one rule covers every variation with that value.

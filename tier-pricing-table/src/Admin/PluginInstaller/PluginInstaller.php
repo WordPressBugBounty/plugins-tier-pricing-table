@@ -7,8 +7,8 @@ use TierPricingTable\Settings\Sections\ProductAddons\ProductAddonsSection;
 use TierPricingTable\TierPricingTablePlugin;
 
 /**
- * One-click install and activation of the other U2Code plugins (Multicurrency, Product Addons)
- * from the getting-started page and the pairing tabs. WordPress core installs the plugin from
+ * One-click install and activation of the other U2Code plugins (Multicurrency, Product Addons, Paperwork,
+ * Bulk Price Editor) from the getting-started page, the Integrations screen and the pairing tabs. WordPress core installs the plugin from
  * WordPress.org through its own AJAX action; this class activates it through its own action, so
  * the page stays where it is. Users who may not install or activate plugins get a link instead.
  */
@@ -25,22 +25,80 @@ class PluginInstaller {
 	}
 
 	/**
-	 * The pairing sections describe the plugins: name, icon, WordPress.org slug, how to detect them.
+	 * The other U2Code plugins, keyed by WordPress.org slug. The pairing sections describe their own plugin
+	 * (Multicurrency, Product Addons); the rest have no settings section here.
 	 *
-	 * @return array<string, PluginPairingSectionAbstract> Keyed by WordPress.org slug.
+	 * @return array<string, PromotedPlugin>
 	 */
-	public static function sections(): array {
-		static $sections = null;
+	public static function plugins(): array {
+		static $plugins = null;
 
-		if ( null === $sections ) {
-			$sections = array();
+		if ( null === $plugins ) {
+			$plugins = array();
 
 			foreach ( array( new MulticurrencySection(), new ProductAddonsSection() ) as $section ) {
-				$sections[ $section->getOwnPluginWporgSlug() ] = $section;
+				$plugins[ $section->getOwnPluginWporgSlug() ] = $section->getPromotedPlugin();
 			}
+
+			$plugins['paperwork-for-woocommerce'] = new PromotedPlugin( array(
+				'slug'         => 'paperwork-for-woocommerce',
+				'name'         => 'Paperwork',
+				'header_names' => array( 'Paperwork – Invoices & Documents for WooCommerce', 'Paperwork' ),
+				'is_active'    => function () {
+					return class_exists( '\\Paperwork\\PaperworkPlugin' );
+				},
+				'icon'         => 'admin/integrations/paperwork-icon.svg',
+				'site_url'     => 'https://paperwork.u2code.com/',
+				'settings_url' => function () {
+					return admin_url( 'admin.php?page=wc-settings&tab=paperwork' );
+				},
+			) );
+
+			$plugins['bulk-price-editor-for-woocommerce'] = new PromotedPlugin( array(
+				'slug'         => 'bulk-price-editor-for-woocommerce',
+				'name'         => 'Bulk Price Editor',
+				'header_names' => array( 'Bulk Price Editor for WooCommerce', 'Bulk Price Editor' ),
+				'is_active'    => function () {
+					return class_exists( '\\BulkPriceEditor\\BulkPriceEditorPlugin' );
+				},
+				'icon'         => 'admin/integrations/bulk-price-editor-icon.svg',
+				'site_url'     => 'https://price-editor.com/',
+				'settings_url' => function () {
+					return admin_url( 'admin.php?page=bulk-price-editor' );
+				},
+			) );
+
+			$plugins['orders-chat-for-woocommerce'] = new PromotedPlugin( array(
+				'slug'         => 'orders-chat-for-woocommerce',
+				'name'         => 'Orders Chat',
+				'header_names' => array( 'Orders Chat for WooCommerce', 'Orders Chat for WooCommerce (Premium)', 'Order Messenger for WooCommerce' ),
+				'is_active'    => function () {
+					return class_exists( '\\U2Code\\OrderMessenger\\OrderMessengerPlugin' );
+				},
+				'icon'         => 'admin/integrations/orders-chat-icon.png',
+				'site_url'     => 'https://u2code.com/plugins/order-chatroom-for-woocommerce/',
+				'settings_url' => function () {
+					return admin_url( 'admin.php?page=wc-settings&tab=order_messenger_settings' );
+				},
+			) );
 		}
 
-		return $sections;
+		return $plugins;
+	}
+
+	/**
+	 * What each plugin does for a store with tiered pricing (getting-started page and Integrations screen).
+	 */
+	public static function getText( string $slug ): string {
+		$texts = array(
+			'u2code-product-multicurrency-for-woocommerce' => __( 'Sell in several currencies. Tier and role prices follow the exchange rate, and the order is placed in the shopper\'s currency.', 'tier-pricing-table' ),
+			'u2code-product-addons-for-woocommerce'        => __( 'Paid options such as engraving or gift wrap, priced on top of the tier price with live totals.', 'tier-pricing-table' ),
+			'paperwork-for-woocommerce'                    => __( 'Invoices, credit notes and packing slips with gap-free numbering and a visual template designer.', 'tier-pricing-table' ),
+			'bulk-price-editor-for-woocommerce'            => __( 'Change many prices at once by percentage, amount or formula, tier prices included, and preview before applying.', 'tier-pricing-table' ),
+			'orders-chat-for-woocommerce'                  => __( 'Buyers and your team talk about each order on the order itself, with attachments and email notifications.', 'tier-pricing-table' ),
+		);
+
+		return $texts[ $slug ] ?? '';
 	}
 
 	/**
@@ -49,33 +107,35 @@ class PluginInstaller {
 	 * @return array<int, array<string, mixed>>
 	 */
 	public static function getPlugins(): array {
-		$texts = array(
-			'u2code-product-multicurrency-for-woocommerce' => __( 'Sell in several currencies. Tier and role prices follow the exchange rate, and the order is placed in the shopper\'s currency.', 'tier-pricing-table' ),
-			'u2code-product-addons-for-woocommerce'        => __( 'Paid options such as engraving or gift wrap, priced on top of the tier price with live totals.', 'tier-pricing-table' ),
-		);
-
 		$plugins = array();
 
-		foreach ( self::sections() as $slug => $section ) {
-			$plugins[] = self::describe( $section, $texts[ $slug ] ?? '' );
+		foreach ( self::plugins() as $slug => $plugin ) {
+			$plugins[] = self::describe( $plugin, self::getText( $slug ) );
 		}
 
 		return $plugins;
 	}
 
 	/**
-	 * @return array{slug: string, name: string, text: string, icon: string, site_url: string, active: bool, action: string, fallback_url: string, fallback_label: string}
+	 * @param  PromotedPlugin|PluginPairingSectionAbstract  $plugin
+	 *
+	 * @return array{slug: string, name: string, text: string, icon: string, site_url: string, settings_url: string, active: bool, action: string, fallback_url: string, fallback_label: string}
 	 */
-	public static function describe( PluginPairingSectionAbstract $section, string $text = '' ): array {
-		$active = $section->isOwnPluginActive();
-		$action = $active ? array( 'kind' => '', 'url' => '', 'label' => '' ) : $section->getInstallAction();
+	public static function describe( $plugin, string $text = '' ): array {
+		if ( $plugin instanceof PluginPairingSectionAbstract ) {
+			$plugin = $plugin->getPromotedPlugin();
+		}
+
+		$active = $plugin->isActive();
+		$action = $active ? array( 'kind' => '', 'url' => '', 'label' => '' ) : $plugin->getInstallAction();
 
 		return array(
-			'slug'           => $section->getOwnPluginWporgSlug(),
-			'name'           => $section->getOwnPluginName(),
+			'slug'           => $plugin->getSlug(),
+			'name'           => $plugin->getName(),
 			'text'           => $text,
-			'icon'           => ServiceContainer::getInstance()->getFileManager()->locateAsset( $section->getOwnPluginIconAsset() ),
-			'site_url'       => $section->getOwnPluginSiteURL(),
+			'icon'           => ServiceContainer::getInstance()->getFileManager()->locateAsset( $plugin->getIconAsset() ),
+			'site_url'       => $plugin->getSiteURL(),
+			'settings_url'   => $plugin->getSettingsURL(),
 			'active'         => $active,
 			'action'         => (string) $action['kind'], // install | activate | wporg | '' when active
 			'fallback_url'   => (string) $action['url'],
@@ -129,6 +189,15 @@ class PluginInstaller {
 		<?php
 	}
 
+	/**
+	 * The slider of the U2Code plugins panel (getting-started page and Integrations screen).
+	 */
+	public static function enqueueSlider() {
+		wp_enqueue_script( 'tiered-pricing-table-plugin-slider',
+			ServiceContainer::getInstance()->getFileManager()->locateJSAsset( 'admin/plugin-slider' ),
+			array(), TierPricingTablePlugin::VERSION, true );
+	}
+
 	public static function enqueue() {
 		if ( wp_script_is( self::SCRIPT_HANDLE, 'enqueued' ) ) {
 			return;
@@ -163,14 +232,14 @@ class PluginInstaller {
 			wp_send_json_error( array( 'message' => __( 'You are not allowed to activate plugins.', 'tier-pricing-table' ) ), 403 );
 		}
 
-		$slug    = isset( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
-		$section = self::sections()[ $slug ] ?? null;
+		$slug   = isset( $_POST['slug'] ) ? sanitize_key( wp_unslash( $_POST['slug'] ) ) : '';
+		$plugin = self::plugins()[ $slug ] ?? null;
 
-		if ( ! $section ) {
+		if ( ! $plugin ) {
 			wp_send_json_error( array( 'message' => __( 'Unknown plugin.', 'tier-pricing-table' ) ), 400 );
 		}
 
-		$file = $section->findInstalledPluginFile();
+		$file = $plugin->findInstalledPluginFile();
 
 		if ( ! $file ) {
 			wp_send_json_error( array( 'message' => __( 'The plugin is not installed.', 'tier-pricing-table' ) ), 404 );
@@ -182,6 +251,6 @@ class PluginInstaller {
 			wp_send_json_error( array( 'message' => $result->get_error_message() ), 500 );
 		}
 
-		wp_send_json_success( array( 'name' => $section->getOwnPluginName() ) );
+		wp_send_json_success( array( 'name' => $plugin->getName() ) );
 	}
 }

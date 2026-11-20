@@ -62,6 +62,8 @@ class Settings {
 					'upgradeUrl' => esc_url_raw( $upgradeUrl ),
 					// the largest file this server accepts, for the File Upload fields
 					'maxUpload'  => size_format( wp_max_upload_size() ),
+					// the empty screen's example shows its prices in the store's currency format
+					'currency'   => $this->getCurrencyFormat(),
 			) ) . ';';
 			wp_add_inline_script( 'tiered-pricing/feature/request-a-quote', $script, 'before' );
 
@@ -70,5 +72,20 @@ class Settings {
 
 			wp_enqueue_style( 'wp-components' );
 		} );
+	}
+
+	/**
+	 * How the store writes prices, for the empty screen's example.
+	 *
+	 * @return array<string, mixed>
+	 */
+	protected function getCurrencyFormat(): array {
+		return array(
+			'symbol'            => html_entity_decode( get_woocommerce_currency_symbol(), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, 'UTF-8' ),
+			'position'          => (string) get_option( 'woocommerce_currency_pos', 'left' ),
+			'decimals'          => wc_get_price_decimals(),
+			'decimalSeparator'  => wc_get_price_decimal_separator(),
+			'thousandSeparator' => wc_get_price_thousand_separator(),
+		);
 	}
 }

@@ -126,8 +126,29 @@
 	text-align: center;
 }
 
+/* the fields sit in two columns: a half-width field takes one, every other field the whole row */
+.tpt-quote-fields-container {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: 12px;
+	container-type: inline-size;
+}
+
 .tpt-quote-field-wrapper {
+	grid-column: 1 / -1;
+	min-width: 0;
 	margin-bottom: 15px;
+}
+
+.tpt-quote-field-wrapper--half {
+	grid-column: auto;
+}
+
+/* too narrow for two columns: every field takes the whole row */
+@container (max-width: 360px) {
+	.tpt-quote-field-wrapper--half {
+		grid-column: 1 / -1;
+	}
 }
 
 .tpt-quote-field-wrapper label {

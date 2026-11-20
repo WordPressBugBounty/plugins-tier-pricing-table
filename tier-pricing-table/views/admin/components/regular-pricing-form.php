@@ -22,18 +22,23 @@ if ( ! defined( 'WPINC' ) ) {
 	// what it does and that it is premium, but its fields stay locked and it is not saved.
 	$tptPercentageAvailable = tpt_fs()->can_use_premium_code();
 
+	// a locked form (role and customer prices in the free version) shows the values without letting them change;
+	// disabled fields are not sent, so the stored values stay as they are
+	$tptLocked = ! empty( $locked );
+
 ?>
 
-<div class="tpt_regular_pricing_form <?php echo esc_attr( ! is_null( $loop ) ? 'form-row' : '' ); ?>">
+<div class="tpt_regular_pricing_form <?php echo esc_attr( ! is_null( $loop ) ? 'form-row' : '' ); ?><?php echo $tptLocked ? ' tpt_regular_pricing_form--locked' : ''; ?>">
 	
 	<p class="form-field">
 		
 		<label for="<?php echo esc_attr( Form::getFieldName( 'pricing_type', $role, $loop ) ); ?>">
-			<?php esc_attr_e( 'Pricing type', 'tier-pricing-table' ); ?>
+			<?php esc_html_e( 'Base price', 'tier-pricing-table' ); ?>
 		</label>
 		<?php if ( ! is_null( $loop ) ) : ?>
 			<select name="<?php echo esc_attr( Form::getFieldName( 'pricing_type', $role, $loop ) ); ?>"
 					id="<?php echo esc_attr( Form::getFieldName( 'pricing_type', $role, $loop ) ); ?>"
+					<?php disabled( $tptLocked ); ?>
 					data-tiered-price-pricing-type-selector>
 				<option value="flat" <?php selected( 'flat', $pricing_type ); ?>>
 					<?php esc_attr_e( 'Flat prices', 'tier-pricing-table' ); ?>
@@ -46,6 +51,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<label for="<?php echo esc_attr( Form::getFieldName( 'pricing_type', $role, $loop ) ); ?>-flat"
 				   style="padding: 0; float: none; width: auto; margin: 0;">
 				<input type="radio"
+					   <?php disabled( $tptLocked ); ?>
 					   data-tiered-price-pricing-type-selector
 					   style="margin-right: 3px;"
 					   value="flat"
@@ -59,6 +65,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<label for="<?php echo esc_attr( Form::getFieldName( 'pricing_type', $role, $loop ) ); ?>-percentage"
 				   style="padding: 0; float: none; width: auto; margin: 0 5px 0 20px;">
 				<input type="radio"
+					   <?php disabled( $tptLocked ); ?>
 					   data-tiered-price-pricing-type-selector
 					   value="percentage"
 					   style="margin-right: 3px;"
@@ -71,7 +78,7 @@ if ( ! defined( 'WPINC' ) ) {
 		<?php endif; ?>
 	</p>
 	
-	<?php if ( ! $tptPercentageAvailable ) : ?>
+	<?php if ( ! $tptPercentageAvailable && ! $tptLocked ) : ?>
 		<p class="form-field tiered_pricing_discount_premium_notice <?php echo 'flat' === $pricing_type ? 'hidden' : ''; ?>"
 		   data-tiered-price-pricing-type
 		   data-tiered-price-pricing-type-percentage>
@@ -93,7 +100,7 @@ if ( ! defined( 'WPINC' ) ) {
 			<?php esc_attr_e( 'Discount (%)', 'tier-pricing-table' ); ?>
 		</label>
 		
-		<input <?php disabled( ! $tptPercentageAvailable ); ?>
+		<input <?php disabled( ! $tptPercentageAvailable || $tptLocked ); ?>
 			type="number"
 			min="0"
 			max="100"
@@ -118,7 +125,7 @@ if ( ! defined( 'WPINC' ) ) {
 				   style="margin-right: 3px;"
 				   value="sale_price"
 				<?php checked( 'sale_price', $discount_type ); ?>
-				<?php disabled( ! $tptPercentageAvailable ); ?>
+				<?php disabled( ! $tptPercentageAvailable || $tptLocked ); ?>
 				   name="<?php echo esc_attr( Form::getFieldName( 'discount_type', $role, $loop ) ); ?>"
 				   id="<?php echo esc_attr( Form::getFieldName( 'discount_type', $role, $loop ) ); ?>-sale_price"
 			>
@@ -132,7 +139,7 @@ if ( ! defined( 'WPINC' ) ) {
 				   value="regular_price"
 				   style="margin-right: 3px;"
 				<?php checked( 'regular_price', $discount_type ); ?>
-				<?php disabled( ! $tptPercentageAvailable ); ?>
+				<?php disabled( ! $tptPercentageAvailable || $tptLocked ); ?>
 				   name="<?php echo esc_attr( Form::getFieldName( 'discount_type', $role, $loop ) ); ?>"
 				   id="<?php echo esc_attr( Form::getFieldName( 'discount_type', $role, $loop ) ); ?>-regular_price"
 			>
@@ -152,6 +159,7 @@ if ( ! defined( 'WPINC' ) ) {
 		</label>
 		
 		<input type="text"
+			<?php disabled( $tptLocked ); ?>
 			value="<?php echo esc_attr( wc_format_localized_price( $regular_price ) ); ?>"
 			placeholder="<?php esc_attr_e( 'Leave blank to keep unchanged', 'tier-pricing-table' ); ?>"
 			class="wc_input_price"
@@ -169,6 +177,7 @@ if ( ! defined( 'WPINC' ) ) {
 		</label>
 		
 		<input type="text"
+			<?php disabled( $tptLocked ); ?>
 			value="<?php echo esc_attr( wc_format_localized_price( $sale_price ) ); ?>"
 			placeholder="<?php esc_attr_e( 'Leave blank to keep unchanged', 'tier-pricing-table' ); ?>"
 			class="wc_input_price"

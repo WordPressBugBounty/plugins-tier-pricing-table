@@ -19,6 +19,9 @@ mark.tpt-quote-status.status-rejected { background: #e5e5e5; color: #777; }
 
 /* The request screen: the number first, then what the customer sent */
 .tpt-quote-heading { margin: 12px 0 16px; }
+/* a request has no title or editor: WordPress keeps their empty area with a 20px margin, which pushed the main
+   column's boxes below the sidebar's */
+.post-type-tpt-quote-request #post-body-content { margin-bottom: 0; }
 .tpt-quote-heading h2 { margin: 0 0 4px; font-size: 20px; line-height: 1.3; }
 .tpt-quote-heading p { margin: 0; color: #50575e; font-size: 13px; }
 .tpt-quote-price-field { display: inline-flex; align-items: center; gap: 6px; }

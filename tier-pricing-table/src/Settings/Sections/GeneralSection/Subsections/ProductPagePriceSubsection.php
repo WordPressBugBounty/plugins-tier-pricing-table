@@ -53,6 +53,14 @@ class ProductPagePriceSubsection extends SubsectionAbstract {
 					'tier-pricing-table' ),
 			),
 			array(
+				'title'   => __( 'Highlight a new price', 'tier-pricing-table' ),
+				'id'      => Settings::SETTINGS_PREFIX . 'highlight_price_change',
+				'type'    => TPTSwitchOption::FIELD_TYPE,
+				'default' => 'yes',
+				'desc'    => __( 'When the quantity reaches another tier, the new price lights up in the active tier color for a moment.',
+					'tier-pricing-table' ),
+			),
+			array(
 				'title'   => __( 'Show original price crossed out', 'tier-pricing-table' ),
 				'id'      => Settings::SETTINGS_PREFIX . 'show_tiered_price_as_discount',
 				'type'    => TPTSwitchOption::FIELD_TYPE,

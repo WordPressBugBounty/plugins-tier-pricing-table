@@ -95,6 +95,13 @@ class QuantityManager {
 					$args['step']      = $groupOf;
 					$args['min_value'] = max( $args['min_value'] ?? 1, $groupOf );
 					$args['value']     = max( $args['value'] ?? 1, $groupOf );
+
+					// WooCommerce starts the field at input_value: below the minimum the field would be invalid
+					// and the page would first show the price of a quantity that cannot be bought. A field that
+					// starts empty or at 0 (grouped products) stays so.
+					if ( isset( $args['input_value'] ) && (float) $args['input_value'] > 0 && (float) $args['input_value'] < $args['min_value'] ) {
+						$args['input_value'] = $args['min_value'];
+					}
 				}
 			}
 			

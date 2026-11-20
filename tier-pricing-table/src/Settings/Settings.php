@@ -73,6 +73,10 @@ class Settings {
             } );
         }
         add_action( 'admin_enqueue_scripts', function () {
+            // the settings tab's own script (modules, text templates): no other admin page loads it
+            if ( !self::isSettingsTab() ) {
+                return;
+            }
             $assetName = self::SETTINGS_PAGE . '_script';
             wp_register_script(
                 $assetName,
@@ -201,6 +205,13 @@ class Settings {
      * Whether the request is for the plugin's own WooCommerce settings tab.
      */
     protected function isOwnSettingsTab() : bool {
+        return self::isSettingsTab();
+    }
+
+    /**
+     * Whether the request is for the plugin's own WooCommerce settings tab (any of its sections).
+     */
+    public static function isSettingsTab() : bool {
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         return is_admin() && isset( $_GET['page'], $_GET['tab'] ) && 'wc-settings' === $_GET['page'] && self::SETTINGS_PAGE === $_GET['tab'];
     }

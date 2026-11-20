@@ -108,7 +108,9 @@ class QuoteRequestAdmin {
 			return;
 		}
 
-		$quote = new QuoteRequest( $post );
+		$quote   = new QuoteRequest( $post );
+		$product = $quote->isList() ? null : wc_get_product( $quote->getProductId() );
+		$subject = $quote->isList() ? $quote->getSummaryName() : ( $product ? $product->get_name() : '' );
 		?>
 		<div class="tpt-quote-heading">
 			<h2>
@@ -118,8 +120,10 @@ class QuoteRequestAdmin {
 				?>
 			</h2>
 			<p>
-				<?php echo esc_html( $quote->isList() ? $quote->getSummaryName() : (string) ( wc_get_product( $quote->getProductId() ) ? wc_get_product( $quote->getProductId() )->get_name() : '' ) ); ?>
-				&middot;
+				<?php if ( '' !== (string) $subject ) : ?>
+					<?php echo esc_html( $subject ); ?>
+					&middot;
+				<?php endif; ?>
 				<?php
 					/* translators: 1: date, 2: time */
 					echo esc_html( sprintf( __( 'received %1$s at %2$s', 'tier-pricing-table' ), get_the_date( '', $post ), get_the_time( '', $post ) ) );

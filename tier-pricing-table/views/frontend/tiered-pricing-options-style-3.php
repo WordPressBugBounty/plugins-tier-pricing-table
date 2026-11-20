@@ -32,7 +32,7 @@ $regular_price = wc_get_price_to_display( $product, array(
     'price' => $product->get_regular_price(),
 ) );
 $price = wc_get_price_to_display( $product, array(
-    'price' => $product->get_price(),
+    'price' => $real_price,
 ) );
 if ( !function_exists( 'tptParseOptionText' ) ) {
     function tptParseOptionText(
@@ -94,7 +94,9 @@ if ( !empty( $price_rules ) ) {
     echo esc_attr( $sale_price );
     ?>"
 			 data-price="<?php 
-    echo esc_attr( $price );
+    echo esc_attr( wc_get_price_to_display( $product, array(
+        'price' => $product->get_price(),
+    ) ) );
     ?>"
 			 data-product-price-suffix="<?php 
     echo esc_attr( $product->get_price_suffix() );
@@ -135,6 +137,10 @@ if ( !empty( $price_rules ) ) {
     $discountAmount = 0;
     if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
         $discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(), $product->get_sale_price() );
+    }
+    // a table that starts at the minimum quantity: the discount of the tier that applies there
+    if ( isset( $base_discount ) && null !== $base_discount ) {
+        $discountAmount = $base_discount;
     }
     ?>
 
@@ -182,9 +188,7 @@ if ( !empty( $price_rules ) ) {
 						<?php 
     }
     ?>
-					</div>
-
-					<?php 
+						<?php 
     do_action(
         'tiered_pricing_table/options/label',
         $pricing_rule,
@@ -195,6 +199,7 @@ if ( !empty( $price_rules ) ) {
         )
     );
     ?>
+					</div>
 
 					<div class="tiered-pricing-option__pricing">
 						<div class="tiered-pricing-option-price">
@@ -351,9 +356,7 @@ if ( !empty( $price_rules ) ) {
             $settings['quantity_measurement_plural']
         ) );
         ?>
-						</div>
-
-						<?php 
+							<?php 
         do_action(
             'tiered_pricing_table/options/label',
             $pricing_rule,
@@ -364,6 +367,7 @@ if ( !empty( $price_rules ) ) {
             )
         );
         ?>
+						</div>
 
 						<div class="tiered-pricing-option__pricing">
 							<div class="tiered-pricing-option-price">
@@ -371,7 +375,7 @@ if ( !empty( $price_rules ) ) {
 									<del>
 										<?php 
         echo wp_kses_post( wc_price( wc_get_price_to_display( $product, array(
-            'price' => ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $regular_price : $real_price ),
+            'price' => ( CalculationLogic::calculateDiscountBasedOnRegularPrice() ? $regular_price : $product->get_price() ),
         ) ) ) );
         ?>
 									</del>

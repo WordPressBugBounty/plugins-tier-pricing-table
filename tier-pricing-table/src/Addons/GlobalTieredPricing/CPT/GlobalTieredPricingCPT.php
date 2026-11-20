@@ -278,6 +278,27 @@ class GlobalTieredPricingCPT {
 				color: #646970;
 			}
 
+			/* the team's note: one muted line under the title */
+			.tpt-rules-list__note {
+				margin-top: 4px;
+				max-width: 52ch;
+				overflow: hidden;
+				color: #50575e;
+				font-size: 12px;
+				font-style: italic;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			.tpt-rules-list__note .dashicons {
+				width: 14px;
+				height: 14px;
+				margin-right: 2px;
+				font-size: 14px;
+				color: #8c8f94;
+				vertical-align: -2px;
+			}
+
 			.post-type-<?php 
         echo esc_attr( self::SLUG );
         ?> .wp-list-table .column-rule .row-actions {

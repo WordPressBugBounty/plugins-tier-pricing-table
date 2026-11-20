@@ -194,6 +194,15 @@ class FormsEndpoint extends WP_REST_Controller {
 		// Shop managers edit the forms; what they enter is shown to every visitor, so it is cleaned first
 		$forms = array_values( array_map( array( RequestQuoteForm::class, 'sanitize' ), array_filter( $forms, 'is_array' ) ) );
 
+		// the editor never saves a form without a name; one that still comes without (an old form, another
+		// client) gets one, so the forms list and the product's form picker can tell it apart
+		foreach ( $forms as $index => $form ) {
+			if ( '' === trim( (string) ( $form['name'] ?? '' ) ) ) {
+				/* translators: %d: the form's position in the list */
+				$forms[ $index ]['name'] = sprintf( __( 'Quote form %d', 'tier-pricing-table' ), $index + 1 );
+			}
+		}
+
 		update_option( RequestQuoteForm::OPTION, $forms );
 
 		return rest_ensure_response( $forms );

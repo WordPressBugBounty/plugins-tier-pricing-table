@@ -1,6 +1,7 @@
 <?php namespace TierPricingTable\Addons\Tools\PricingTest;
 
 use TierPricingTable\Addons\GlobalTieredPricing\GlobalPricingRule;
+use TierPricingTable\PricingRule;
 use WC_Product;
 use WP_User;
 
@@ -299,8 +300,56 @@ class RuleTester {
 				return __( 'a global pricing rule', 'tier-pricing-table' );
 			case 'product':
 				return __( 'the product\'s own pricing', 'tier-pricing-table' );
+			case 'category-rules':
+				return __( 'the category\'s tiered pricing', 'tier-pricing-table' );
 			default:
 				return $provider ? $provider : __( 'the product\'s own pricing', 'tier-pricing-table' );
 		}
+	}
+
+	/**
+	 * Which parts of the price the matched global rule set. Its priority settings can leave the base price,
+	 * the tiers or both to the product's own or role pricing while the rule is still the provider.
+	 *
+	 * @return array{base: bool, tiers: bool, other: string} other: the provider of the parts the rule left alone
+	 */
+	public static function ruleParts( PricingRule $pricingRule ): array {
+		if ( 'global-rules' !== $pricingRule->provider ) {
+			return array( 'base' => false, 'tiers' => false, 'other' => (string) $pricingRule->provider );
+		}
+
+		// pricing built before the rule recorded its parts: the rule set everything
+		$decided = $pricingRule->providerData['decided'] ?? null;
+
+		return array(
+			'base'  => ! is_array( $decided ) || ! empty( $decided['base'] ),
+			'tiers' => ! is_array( $decided ) || ! empty( $decided['tiers'] ),
+			'other' => (string) ( $pricingRule->providerData['previous_provider'] ?? 'product' ),
+		);
+	}
+
+	/**
+	 * Where the prices really come from, part by part.
+	 */
+	public static function sourceLabel( PricingRule $pricingRule ): string {
+		if ( 'global-rules' !== $pricingRule->provider ) {
+			return self::providerLabel( (string) $pricingRule->provider );
+		}
+
+		$parts = self::ruleParts( $pricingRule );
+
+		if ( $parts['base'] && $parts['tiers'] ) {
+			return self::providerLabel( 'global-rules' );
+		}
+
+		if ( ! $parts['base'] && ! $parts['tiers'] ) {
+			return self::providerLabel( $parts['other'] );
+		}
+
+		return $parts['base']
+			/* translators: %s: where the tiers come from, e.g. "a role price on the product" */
+			? sprintf( __( 'a global pricing rule for the base price and %s for the tiers', 'tier-pricing-table' ), self::providerLabel( $parts['other'] ) )
+			/* translators: %s: where the base price comes from, e.g. "a role price on the product" */
+			: sprintf( __( 'a global pricing rule for the tiers and %s for the base price', 'tier-pricing-table' ), self::providerLabel( $parts['other'] ) );
 	}
 }

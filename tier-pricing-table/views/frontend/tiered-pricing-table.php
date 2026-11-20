@@ -36,7 +36,7 @@
 	) );
 
 	$price = wc_get_price_to_display( $product, array(
-			'price' => $product->get_price(),
+			'price' => $real_price,
 	) );
 
 	$price_incl_taxes = wc_get_price_including_tax( wc_get_product( $product_id ), array(
@@ -69,7 +69,7 @@
 		       data-product-name="<?php echo esc_attr( $product_name ); ?>"
 		       data-regular-price="<?php echo esc_attr( $regular_price ); ?>"
 		       data-sale-price="<?php echo esc_attr( $sale_price ); ?>"
-		       data-price="<?php echo esc_attr( $price ); ?>"
+		       data-price="<?php echo esc_attr( wc_get_price_to_display( $product, array( 'price' => $product->get_price() ) ) ); ?>"
 		       data-product-price-suffix="<?php echo esc_attr( $product->get_price_suffix() ); ?>"
 		>
 			<thead>
@@ -145,6 +145,11 @@
 					if ( CalculationLogic::calculateDiscountBasedOnRegularPrice() && $product->is_on_sale() ) {
 						$discountAmount = PriceManager::calculateDiscount( $product->get_regular_price(),
 								$product->get_sale_price() );
+					}
+
+					// a table that starts at the minimum quantity: the discount of the tier that applies there
+					if ( isset( $base_discount ) && null !== $base_discount ) {
+						$discountAmount = $base_discount;
 					}
 					?>
 

@@ -1,11 +1,13 @@
 <?php namespace TierPricingTable\Addons\CustomColumns\Admin;
 
-use TierPricingTable\Settings\Settings as MainSettings;
 
 class CustomColumnsAdmin {
 
 	public function __construct() {
 		add_action( 'tiered_pricing_table/settings/table_columns/after_fields', function () {
+			// the app loads with its editor, so the other settings sections never carry it
+			$this->enqueueAssets();
+
 			$columnsManager = \TierPricingTable\Addons\CustomColumns\CustomColumnsManager::getInstance();
 			$hasColumns = ! empty( $columnsManager->getRawColumns() );
 
@@ -49,34 +51,34 @@ class CustomColumnsAdmin {
 			<div id="tiered-pricing__feature__custom-columns"></div>
 			<?php
 		} );
+	}
 
-		add_action( 'admin_enqueue_scripts', function () {
+	/**
+	 * The custom columns app, with its translations. Printed in the footer of the page that draws its editor.
+	 */
+	public function enqueueAssets() {
+		if ( wp_script_is( 'tiered-pricing/feature/custom-columns', 'enqueued' ) ) {
+			return;
+		}
 
-			$settingsTab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : '';
+		$buildDir = dirname( __FILE__, 2 ) . '/build';
+		
+		if ( ! file_exists( $buildDir . '/index.asset.php' ) ) {
+			return;
+		}
 
-			if ( MainSettings::SETTINGS_PAGE !== $settingsTab ) {
-				return;
-			}
+		$assetFile = include( $buildDir . '/index.asset.php' );
 
-			$buildDir = dirname( __FILE__, 2 ) . '/build';
-			
-			if ( ! file_exists( $buildDir . '/index.asset.php' ) ) {
-				return;
-			}
+		wp_enqueue_script( 'tiered-pricing/feature/custom-columns',
+				plugins_url( 'build/index.js', dirname( __FILE__ ) ), $assetFile['dependencies'],
+				$assetFile['version'], true );
 
-			$assetFile = include( $buildDir . '/index.asset.php' );
+		wp_localize_script( 'tiered-pricing/feature/custom-columns', 'tptCustomColumns', array(
+				'isPremium'  => function_exists( 'tpt_fs' ) && tpt_fs()->can_use_premium_code(),
+				'upgradeUrl' => function_exists( 'tpt_fs' ) ? tpt_fs()->get_upgrade_url() : '#',
+		) );
 
-			wp_enqueue_script( 'tiered-pricing/feature/custom-columns',
-					plugins_url( 'build/index.js', dirname( __FILE__ ) ), $assetFile['dependencies'],
-					$assetFile['version'], true );
-
-			wp_localize_script( 'tiered-pricing/feature/custom-columns', 'tptCustomColumns', array(
-					'isPremium'  => function_exists( 'tpt_fs' ) && tpt_fs()->can_use_premium_code(),
-					'upgradeUrl' => function_exists( 'tpt_fs' ) ? tpt_fs()->get_upgrade_url() : '#',
-			) );
-
-			wp_set_script_translations( 'tiered-pricing/feature/custom-columns', 'tier-pricing-table',
-					dirname( __FILE__, 5 ) . '/languages' );
-		} );
+		wp_set_script_translations( 'tiered-pricing/feature/custom-columns', 'tier-pricing-table',
+				dirname( __FILE__, 5 ) . '/languages' );
 	}
 }

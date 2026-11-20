@@ -27,7 +27,7 @@
 <?php if ( ! tpt_fs()->can_use_premium_code() ) : ?>
 	<div class="tpt-rc__premium">
 		<span class="tpt-badge tpt-badge--premium"><?php esc_html_e( 'Premium', 'tier-pricing-table' ); ?></span>
-		<span class="tpt-rc__premium-text"><?php esc_html_e( 'Customer prices are a premium feature. The fields below are read-only in the free version.', 'tier-pricing-table' ); ?></span>
+		<span class="tpt-rc__premium-text"><?php esc_html_e( 'Upgrade to unlock regular prices and quantity limits for this customer.', 'tier-pricing-table' ); ?></span>
 		<a class="button tpt-rc__premium-button" target="_blank" rel="noopener" href="<?php echo esc_url( tpt_fs_activation_url() ); ?>"><?php esc_html_e( 'Upgrade to premium', 'tier-pricing-table' ); ?></a>
 	</div>
 <?php endif; ?>
@@ -36,7 +36,7 @@
 	if ( ! $product->is_type( 'variable' ) ) {
 		RegularPricingForm::render( $roleKey, $loop, $pricing_rule->getRegularPrice(),
 				$pricing_rule->getSalePrice(), $pricing_rule->getPricingType(), $pricing_rule->getDiscount(),
-				$pricing_rule->getDiscountType() );
+				$pricing_rule->getDiscountType(), ! tpt_fs()->can_use_premium_code() );
 		?>
 		<hr style="border-color: #f5f5f5;border-top: none;">
 		<?php

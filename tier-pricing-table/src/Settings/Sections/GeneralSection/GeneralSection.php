@@ -94,6 +94,7 @@ class GeneralSection extends SectionAbstract {
 		
 		delete_option( Settings::SETTINGS_PREFIX . 'show_total_price' );
 		delete_option( Settings::SETTINGS_PREFIX . 'update_price_on_product_page' );
+		delete_option( Settings::SETTINGS_PREFIX . 'highlight_price_change' );
 		delete_option( Settings::SETTINGS_PREFIX . 'show_tiered_price_as_discount' );
 	}
 	

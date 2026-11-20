@@ -39,6 +39,20 @@ class ProductAddonsSection extends PluginPairingSectionAbstract {
 		return class_exists( '\\SimpleProductAddons\\Plugin' ) || class_exists( '\\U2Code\\ProductAddons\\Plugin' ) || class_exists( '\\BespokeProductOptions\\Plugin' );
 	}
 
+	/**
+	 * Its own options page (this section is not listed among the settings tabs); '' when the active build does not
+	 * say where that is.
+	 */
+	public function getOwnPluginSettingsURL(): string {
+		foreach ( array( '\\SimpleProductAddons\\Admin\\AddonsPage', '\\U2Code\\ProductAddons\\Admin\\AddonsPage', '\\BespokeProductOptions\\Admin\\AddonsPage' ) as $page ) {
+			if ( class_exists( $page ) && defined( $page . '::PAGE_SLUG' ) ) {
+				return admin_url( 'admin.php?page=' . constant( $page . '::PAGE_SLUG' ) );
+			}
+		}
+
+		return '';
+	}
+
 	public function getOwnPluginName(): string {
 		return 'U2Code Product Addons';
 	}

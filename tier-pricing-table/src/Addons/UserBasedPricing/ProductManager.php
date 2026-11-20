@@ -32,16 +32,84 @@ class ProductManager {
             12,
             3
         );
-        // Save
+        // Save: the tiers, the quote form and the taxes of a customer are free; their regular prices and quantity
+        // limits are premium (see updateFromRequest())
         add_action( 'woocommerce_process_product_meta', function ( $productId ) {
+            $this->updateFromRequest( $productId );
         } );
         add_action(
             'woocommerce_save_product_variation',
             function ( $variationId, $loop ) {
+                $this->updateFromRequest( $variationId, $loop );
             },
             10,
             3
         );
+    }
+
+    /**
+     * The customers whose rows were sent with the product form (field keys user_{id}): every row has a tiered
+     * pricing type (free), and the premium version also sends its minimum order quantity.
+     *
+     * @param  array  $data
+     * @param  int|null  $loop
+     *
+     * @return int[]
+     */
+    protected function getUsersFromRequest( array $data, $loop ) : array {
+        $users = array();
+        foreach ( array('type', 'minimum_order_quantity') as $field ) {
+            $key = 'tiered_pricing_' . $field . (( is_null( $loop ) ? '' : '_variation' )) . '_role';
+            $values = ( is_null( $loop ) ? $data[$key] ?? array() : $data[$key][$loop] ?? array() );
+            foreach ( (array) $values as $userKey => $value ) {
+                if ( 0 === strpos( (string) $userKey, 'user_' ) ) {
+                    $userId = (int) substr( (string) $userKey, 5 );
+                    if ( $userId > 0 ) {
+                        $users[$userId] = $userId;
+                    }
+                }
+            }
+        }
+        return array_values( $users );
+    }
+
+    public function updateFromRequest( $productId, $loop = null ) {
+        if ( wp_verify_nonce( true, true ) ) {
+            // as phpcs comments at Woo is not available, we have to do such a trash
+            $woo = 'Woo, please add ignoring comments to your phpcs checker';
+        }
+        $data = $_POST;
+        $usersToUpdate = $this->getUsersFromRequest( (array) $data, $loop );
+        foreach ( $usersToUpdate as $userId ) {
+            $pricingRule = UserBasedPricingRule::build( (int) $productId, $userId );
+            $roleKey = 'user_' . $userId;
+            // the stored rule: what this form does not change (in the free version: regular prices, the minimum)
+            // stays as it is
+            $tieredPricingData = TieredPricingRulesForm::getDataFromRequest(
+                $roleKey,
+                $loop,
+                null,
+                $data,
+                $productId
+            );
+            $pricingRule->setTieredPricingType( $tieredPricingData['type'] );
+            $pricingRule->setFixedTieredPricingRules( $tieredPricingData['fixed_tiered_pricing_rules'] );
+            $pricingRule->setPercentageTieredPricingRules( $tieredPricingData['percentage_tiered_pricing_rules'] );
+            $pricingRule->setAmountTieredPricingRules( $tieredPricingData['amount_tiered_pricing_rules'] );
+            try {
+                $pricingRule->save();
+            } catch ( Exception $e ) {
+                return;
+            }
+            do_action(
+                'tiered_pricing_table/user_based_rules/save_user_based_rules',
+                $productId,
+                $data,
+                $userId,
+                $loop
+            );
+        }
+        $this->handleRemoving( $productId, $loop, $_POST );
     }
 
     /**

@@ -201,8 +201,11 @@ class QuoteFormDisplay {
 				$value = $defaultEmail;
 			}
 
+			// headings and paragraphs always take the whole row
+			$isHalf = 'half' === ( $field['width'] ?? '' ) && ! in_array( $type, array( 'heading', 'paragraph' ), true );
+
 			?>
-			<div class="tpt-quote-field-wrapper">
+			<div class="tpt-quote-field-wrapper<?php echo $isHalf ? ' tpt-quote-field-wrapper--half' : ''; ?>">
 				<?php if ( $type === 'heading' ) : ?>
 					<h3 style="margin: 0 0 10px 0; color: inherit;"><?php echo esc_html( $label ); ?></h3>
 				<?php elseif ( $type === 'paragraph' ) : ?>

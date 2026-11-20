@@ -3,6 +3,7 @@
 use TierPricingTable\Core\ServiceContainerTrait;
 use TierPricingTable\PriceManager;
 use TierPricingTable\PricingRule;
+use TierPricingTable\Addons\ProductCatalogLoop\ProductCatalogLoop;
 use TierPricingTable\PricingTable;
 use TierPricingTable\Settings\Settings;
 use TierPricingTable\TierPricingTablePlugin;
@@ -222,7 +223,16 @@ class LayoutPreview {
 
 		ob_start();
 		try {
-			PricingTable::getInstance()->renderPricingTableHTML( $product, $product, $settings );
+			$renderTable = function () use ( $product, $settings ) {
+				PricingTable::getInstance()->renderPricingTableHTML( $product, $product, $settings );
+			};
+
+			// the shop pages preview leaves the tier labels off, as the shop pages do
+			if ( 'shop-loop' === $context ) {
+				ProductCatalogLoop::renderingCatalog( $renderTable );
+			} else {
+				$renderTable();
+			}
 		} catch ( \Throwable $e ) {
 			ob_end_clean();
 

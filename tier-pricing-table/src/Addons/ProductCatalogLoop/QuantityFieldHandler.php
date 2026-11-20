@@ -9,6 +9,8 @@ class QuantityFieldHandler {
 	
 	/** The Interactivity API module behind the box next to the Product Button block. */
 	const BLOCK_MODULE = 'tiered-pricing-table-catalog-quantity';
+
+	const HANDLER_SCRIPT = 'tpt-catalog-quantity-input-handler';
 	
 	/** Whether the wrapper around the quantity box and the add-to-cart button is open for the current loop item. */
 	protected bool $wrapperOpen = false;
@@ -98,6 +100,7 @@ class QuantityFieldHandler {
 		}
 		
 		wp_enqueue_script_module( self::BLOCK_MODULE );
+		wp_enqueue_script( self::HANDLER_SCRIPT );
 		
 		return $wrapped;
 	}
@@ -111,6 +114,9 @@ class QuantityFieldHandler {
 		$product = wc_get_product( get_the_ID() );
 		
 		if ( $this->wantsQuantityField( $product ) ) {
+			// the script that passes the quantity to the button, on pages that draw the field only (footer)
+			wp_enqueue_script( self::HANDLER_SCRIPT );
+
 			// the quantity box and the add-to-cart button share one line (a flex row, see main.css)
 			if ( apply_filters( 'tiered_pricing_table/catalog/quantity_inline', true, $product ) ) {
 				echo '<div class="tpt-loop-purchase">';
@@ -131,13 +137,16 @@ class QuantityFieldHandler {
 		}
 	}
 	
+	/**
+	 * Registers the script that passes the typed quantity to the add-to-cart button; renderQuantityField() and
+	 * the Product Button block enqueue it where a quantity field is drawn, so other pages load neither it nor
+	 * jQuery for it.
+	 */
 	public function enqueueQuantityHandlerScript() {
 		
-		$handle = 'tpt-catalog-quantity-input-handler';
+		$handle = self::HANDLER_SCRIPT;
 		
 		wp_register_script( $handle, '', array( 'jquery' ), TierPricingTablePlugin::VERSION, true );
-		
-		wp_enqueue_script( $handle );
 		
 		$inlineJs = '
 			jQuery(".type-product").on("click", ".quantity input", function() {

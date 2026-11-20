@@ -4,7 +4,42 @@ namespace TierPricingTable;
 
 use WC_Product;
 class PriceManager {
+    /**
+     * Pricing rules built in this request: [ user key ][ product ID ]. A rule depends on who it is for (roles,
+     * customer prices, rules limited to roles), so a feed job that prices as a visitor in an administrator's
+     * request must not reuse the administrator's rules.
+     *
+     * @var array
+     */
     protected static $pricingRules = array();
+
+    /**
+     * Forget the pricing rules built in this request (all users, or one product).
+     */
+    public static function flushRuntimeCache( ?int $productId = null ) : void {
+        if ( null === $productId ) {
+            self::$pricingRules = array();
+            return;
+        }
+        foreach ( array_keys( self::$pricingRules ) as $userKey ) {
+            unset(self::$pricingRules[$userKey][$productId]);
+        }
+    }
+
+    /**
+     * Who the cached rules are for: the open pricing scope, the customer an admin order is priced for, or the
+     * logged-in user. Cheap on purpose: it runs for every rule lookup.
+     */
+    protected static function getCacheUserKey() : string {
+        $scoped = Core\PricingContext::current();
+        if ( $scoped ) {
+            return 'u' . $scoped->ID;
+        }
+        if ( !empty( $GLOBALS['tpt_current_user_id'] ) ) {
+            return 'u' . intval( $GLOBALS['tpt_current_user_id'] );
+        }
+        return ( function_exists( 'get_current_user_id' ) ? 'u' . get_current_user_id() : 'u0' );
+    }
 
     public static function getFixedPriceRules( $productId, string $context = 'view' ) : array {
         return self::getPriceRules( $productId, 'fixed', $context );
@@ -307,8 +342,9 @@ class PriceManager {
          * Object cache
          *
          ****************************************/
-        if ( array_key_exists( $productId, self::$pricingRules ) && !$tieredPricingType ) {
-            return self::$pricingRules[$productId];
+        $userKey = self::getCacheUserKey();
+        if ( isset( self::$pricingRules[$userKey] ) && array_key_exists( $productId, self::$pricingRules[$userKey] ) && !$tieredPricingType ) {
+            return self::$pricingRules[$userKey][$productId];
         }
         /****************************************
          *
@@ -370,7 +406,7 @@ class PriceManager {
          *
          *****************************************/
         $pricingRule = apply_filters( 'tiered_pricing_table/price/pricing_rule', $pricingRule, $productId );
-        self::$pricingRules[$productId] = $pricingRule;
+        self::$pricingRules[$userKey][$productId] = $pricingRule;
         return $pricingRule;
     }
 

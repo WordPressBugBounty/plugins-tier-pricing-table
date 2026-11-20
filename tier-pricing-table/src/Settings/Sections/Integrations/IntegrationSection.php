@@ -1,6 +1,8 @@
 <?php namespace TierPricingTable\Settings\Sections\Integrations;
 
+use TierPricingTable\Admin\PluginInstaller\PluginInstaller;
 use TierPricingTable\Core\ServiceContainerTrait;
+use TierPricingTable\Settings\CustomOptions\TPTIntegrationOption;
 use TierPricingTable\Settings\Sections\SectionAbstract;
 use TierPricingTable\Settings\Settings;
 
@@ -13,33 +15,36 @@ class IntegrationSection extends SectionAbstract {
 		
 		$settings = array();
 		
+		// a category says what it covers only where its name does not
 		$categories = array(
 			'u2code'               => array(
 				'title'       => __( 'U2Code plugins', 'tier-pricing-table' ),
-				'description' => __( 'Plugins by the makers of Tiered Pricing Table — built to work together with deep, first-party integrations.',
+				'description' => __( 'More free plugins from the makers of Tiered Pricing Table.',
 					'tier-pricing-table' ),
 			),
 			'other'                => array(
 				'title'       => __( 'General integrations', 'tier-pricing-table' ),
-				'description' => __( 'Integrations with most popular plugins that are not related to a specific category.' ),
-				'tier-pricing-table',
+				'description' => '',
 			),
 			'multicurrency'        => array(
 				'title'       => __( 'Multicurrency integrations', 'tier-pricing-table' ),
-				'description' => __( 'Integrations with multicurrency plugins.', 'tier-pricing-table' ),
+				'description' => '',
 			),
 			'product_addons'       => array(
 				'title'       => __( 'Product Addons', 'tier-pricing-table' ),
-				'description' => __( 'Integrations with product add-ons (custom fields) plugins.',
-					'tier-pricing-table' ),
+				'description' => '',
 			),
 			'seo'                  => array(
 				'title'       => __( 'SEO', 'tier-pricing-table' ),
-				'description' => __( 'Integrations with SEO plugins.', 'tier-pricing-table' ),
+				'description' => '',
+			),
+			'feeds'                => array(
+				'title'       => __( 'Product feeds', 'tier-pricing-table' ),
+				'description' => __( 'Google, Meta and Pinterest get the price a logged-out visitor pays. While a feed plugin is active, its options are in the Product feeds section.', 'tier-pricing-table' ),
 			),
 			'custom_product_types' => array(
 				'title'       => __( 'Custom Product Types', 'tier-pricing-table' ),
-				'description' => __( 'Integrations plugins that provides custom product types.', 'tier-pricing-table' ),
+				'description' => '',
 			),
 		);
 		
@@ -63,9 +68,57 @@ class IntegrationSection extends SectionAbstract {
 			$integrations[ $categoryID ][] = $integration;
 		}
 		
+		// U2Code plugins with nothing to switch here: recommended next to the paired ones
+		$listed = array_column( $integrations['u2code'] ?? array(), 'install_slug' );
+
+		foreach ( PluginInstaller::plugins() as $slug => $plugin ) {
+			if ( in_array( $slug, $listed, true ) ) {
+				continue;
+			}
+
+			$integrations['u2code'][] = array(
+				'title'        => $plugin->getName(),
+				'desc'         => PluginInstaller::getText( $slug ),
+				'type'         => TPTIntegrationOption::FIELD_TYPE,
+				'icon_url'     => $this->getContainer()->getFileManager()->locateAsset( $plugin->getIconAsset() ),
+				'author_url'   => $plugin->getSiteURL(),
+				'official'     => true,
+				'install_slug' => $slug,
+			);
+		}
+
 		foreach ( $categories as $categoryID => $category ) {
 			
 			if ( empty( $integrations[ $categoryID ] ) ) {
+				continue;
+			}
+
+			// the U2Code plugins get a panel of their own; the switches inside it are saved as usual
+			if ( 'u2code' === $categoryID ) {
+				$settings[] = array(
+					'id'   => Settings::SETTINGS_PREFIX . $categoryID . '__integration_section',
+					'type' => 'title',
+				);
+
+				$settings[] = array(
+					'title'   => $category['title'],
+					'desc'    => $category['description'],
+					'type'    => TPTIntegrationOption::PANEL_TYPE,
+					'plugins' => $integrations[ $categoryID ],
+				);
+
+				foreach ( $integrations[ $categoryID ] as $integration ) {
+					if ( ! empty( $integration['id'] ) ) {
+						$integration['type'] = TPTIntegrationOption::PANEL_SWITCH_TYPE;
+						$settings[]          = $integration;
+					}
+				}
+
+				$settings[] = array(
+					'type' => 'sectionend',
+					'id'   => Settings::SETTINGS_PREFIX . $categoryID . '__integration_section_end',
+				);
+
 				continue;
 			}
 			
@@ -90,7 +143,16 @@ class IntegrationSection extends SectionAbstract {
 	}
 	
 	public function getSectionCSS(): string {
-		return '.form-table tbody { display: flex; flex-wrap: wrap; margin: 10px 0 20px 0; }';
+		// the cards are styled in assets/admin/style.css (.tpt-integration-*); less space above the headings and
+		// under the descriptions than WooCommerce's default, as on the Modules screen.
+		// Printed through esc_html(): no ">" and no quotes in these selectors.
+		return '#mainform h2 { margin-top: 22px; }
+		#mainform div[id$=-description] p { margin: 0 0 12px; }
+		#mainform .form-table { margin-top: 0; }
+		.form-table:has(.tpt-integration-item) tbody { display: flex; flex-wrap: wrap; margin: 4px -6px 8px; }
+		.form-table:has(.tpt-integration-item) tr { display: block; border-bottom: none; padding-bottom: 0; }
+		.form-table:has(.tpt-integration-item) th { display: none; }
+		.form-table:has(.tpt-integration-item) td { padding: 0 !important; width: 100%; }';
 	}
 	
 	public function getSlug(): string {
